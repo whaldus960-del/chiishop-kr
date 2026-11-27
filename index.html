@@ -924,7 +924,8 @@
       <g>
         <path d="M-15 -20c-2-10 6-14 9-11-1-9 14-9 13 0 4-3 12 1 10 11z" fill="#3b2f36"/>
         <path d="M-16 6 0 18 16 6 20 14 0 28 -20 14z" fill="#ff9ec7" stroke="#b93a72" stroke-width="1.8" stroke-linejoin="round"/>
-        <path d="M-4 10h8l2 14-6 5-6-5z" fill="#ffd977" stroke="#c79a1e" stroke-width="1.2"/>
+        <path d="M-16 6L0 17 16 6" fill="none" stroke="#fff5fa" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M-19 18h38v6.5h-38z" fill="#ffd977" stroke="#c79a1e" stroke-width="1.2"/>
         <g transform="translate(15 -21)">
           <path d="M0 0c-3-5 3-8 5-4 3-4 8 0 4 4 4 4 0 8-4 5-2 4-8 2-5-4z" fill="#ff5c9e" stroke="#b93a72" stroke-width="1"/>
           <circle cx="5" cy="0" r="1.5" fill="#fff3a8"/>
@@ -1123,6 +1124,7 @@
     $("#homePtsVal").textContent = won(state.points);
     const un = state.shelf.filter(i => !i.shipped).length;
     $("#homeCartN").textContent = un;
+    $("#homeCartN").hidden = un === 0;
     $("#tabBadge").textContent = un;
     $("#tabBadge").classList.toggle("zero", un === 0);
     $("#boxCnt").textContent = un + "점";
