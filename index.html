@@ -2009,6 +2009,10 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
 }
 .tk-card.plain .tk-grade{animation:gradePop .5s cubic-bezier(.2,1.5,.35,1) both}
 
+
+/* 홈 프로모 배너 — 문구가 캐릭터 아트와 겹치지 않게 */
+.promo-txt{max-width:64%}
+.promo-txt em{font-size:9px;line-height:1.35;display:block}
 </style>
 </head>
 <body>
@@ -2501,7 +2505,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
         <h2 class="wlp-ttl" id="wlpTtl">첫 유료 뽑기 시 <b>1+1</b><br>보너스 1판!</h2>
       </div>
       <div class="wlp-body">
-        <p class="wlp-sub">지금 가입하면 <b>첫 유료 뽑기 1회</b>에<br>보너스 <b>1판(6,200P 상당)</b>을 더 드려요.</p>
+        <p class="wlp-sub">지금 가입하면 <b>첫 유료 뽑기 1회</b>에<br>보너스 <b>1판(9,900P 상당)</b>을 더 드려요.</p>
         <div class="wlp-cond"><em>🎟️</em><span>첫 <b>유료</b> 뽑기(1회 이상) 결제 시 1회 · 계정당 1회<br>무료·이벤트 뽑기와 이미 뽑은 기록은 제외됩니다.</span></div>
       </div>
       <button class="wlp-cta" id="wlpJoin" type="button">회원가입하고 1+1 받기<small>가입 후 첫 유료 뽑기에서 자동 적용</small></button>
@@ -5298,7 +5302,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   scatter($("#homeFx"), 14);
   scatter($("#promoFx"), 10);
   scatter($("#stageFx"), 12);
-  const homeLedTxt = "★ POKO KUJI ARCADE ★ 4 SERIES OPEN ★ 1PLAY 6,200P~ ★ LUCKY DRAW ★ NO BLANK ★ ";
+  const homeLedTxt = "★ POKO KUJI ARCADE ★ 4 SERIES OPEN ★ 1PLAY 9,900P~ ★ LUCKY DRAW ★ NO BLANK ★ ";
   $("#homeLed").textContent = homeLedTxt + homeLedTxt;
 
   /* ============================================================
