@@ -5424,6 +5424,7 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
     if (closeBtn){ closeOverlay(closeBtn.dataset.close); return; }
 
     if (e.target.classList.contains("overlay")){
+      if (Date.now() < swallowOverlayClick){ swallowOverlayClick = 0; return; }
       closeAll();
       return;
     }
@@ -6072,7 +6073,7 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
 
   /* ---------- ① 홈 배너 캐러셀 ---------- */
   const HB_N = 4;
-  let hbIdx = 0, hbTimer = null, hbDrag = null;
+  let hbIdx = 0, hbTimer = null, hbDrag = null, swallowOverlayClick = 0;
 
   function hbGo(i, noAnim){
     hbIdx = ((i % HB_N) + HB_N) % HB_N;
@@ -6095,6 +6096,9 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
   function hbJump(i){ hbGo(i); hbPlay(); }
 
   function hbAct(act){
+    if (!act) return;
+    /* 배너 탭(pointerup)으로 시트를 열면 같은 제스처의 click 이 배경을 눠 바로 닫히므로 한 번 삼킨다 */
+    swallowOverlayClick = Date.now() + 600;
     if (act === "shipguide") openShipGuide();
     else if (act === "welcome") openEvent();
     else if (act === "attend"){ openOverlay("attendSheet"); attRender(); }
@@ -6203,7 +6207,7 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
     if (lastItem) list.push({ who: maskNick(state.profile.nick), sid: lastItem.sid, g: "last", name: lastItem.name, mine: true });
     state.feed = list.concat(state.feed).slice(0, 30);
     feedRender();
-    /* 마퀴를 처음으로 되돌리고 2.6초 잠깐 멈춰 — 방금 내 당첨을 바로 보여준다 */
+    /* 마퀴를 처음으로 되돌리고 3.4초 잠깐 멈춰 — 방금 내 당첨을 바로 보여준다 */
     const tr = $("#wfTrack");
     if (!tr) return;
     tr.style.animation = "none";
@@ -6211,7 +6215,7 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
     tr.style.animation = "wfMove 58s linear infinite";
     tr.style.animationPlayState = "paused";
     clearTimeout(feedPauseT);
-    feedPauseT = setTimeout(() => { tr.style.animationPlayState = "running"; }, 2600);
+    feedPauseT = setTimeout(() => { tr.style.animationPlayState = "running"; }, 3400);
   }
 
   /* ---------- ③ 마이페이지 ---------- */
