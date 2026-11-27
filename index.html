@@ -8,7 +8,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="포코쿠지 POKO KUJI">
 <meta property="og:title" content="포코쿠지 (POKO KUJI) · 치이카와 시리즈 4">
-<meta property="og:description" content="꽝 없는 이치방쿠지 · 시리즈별 30박스 · 1회 6,200P부터">
+<meta property="og:description" content="꽝 없는 이치방쿠지 · 시리즈별 3박스 · 1회 9,900P부터">
 <meta property="og:url" content="https://whaldus960-del.github.io/chiishop-kr/">
 <meta property="og:image" content="https://whaldus960-del.github.io/chiishop-kr/og-pokokuji.png">
 <meta property="og:image:width" content="1200">
@@ -18,7 +18,7 @@
 <meta name="twitter:image" content="https://whaldus960-del.github.io/chiishop-kr/og-pokokuji.png">
 <meta name="twitter:image:alt" content="포코쿠지 POKO KUJI · 치이카와 이치방쿠지 4 시리즈">
 <meta name="twitter:title" content="포코쿠지 (POKO KUJI) · 치이카와 시리즈 4">
-<meta name="twitter:description" content="꽝 없는 이치방쿠지 · 시리즈별 30박스 · 1회 6,200P부터">
+<meta name="twitter:description" content="꽝 없는 이치방쿠지 · 시리즈별 3박스 · 1회 9,900P부터">
 <title>포코쿠지 (POKO KUJI) · 치이카와 시리즈 4</title>
 <!--
   포코쿠지 POKO KUJI — 치이카와 4개 시리즈 · 진열대형 4열 상세 뽑기 (사업 검토용 데모)
@@ -71,6 +71,13 @@
   .hcart svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
   .hcart b{position:absolute;top:-4px;right:-5px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:#2bd07a;color:#04331d;
     font-size:10px;font-weight:900;display:grid;place-items:center;border:2px solid #ff6aa6}
+  .acct{display:none;align-items:center;gap:4px;max-width:98px;padding:6px 9px;border-radius:999px;color:#fff;font-size:11px;font-weight:900;
+    background:rgba(0,0,0,.14);border:1px solid rgba(255,255,255,.28)}
+  .acct:not([hidden]){display:inline-flex}
+  .acct b{max-width:66px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .acct i{font-style:normal;font-weight:900;opacity:.8}
+  .auth-alt{padding:0 16px calc(16px + env(safe-area-inset-bottom));flex:none}
+  .auth-alt button{width:100%;height:40px;border-radius:12px;background:#fff;border:1px solid #ecdfe7;color:#6a5c64;font-size:12px;font-weight:800}
   .home-tag{position:relative;z-index:1;margin:12px 0 0;font-size:11px;font-weight:700;opacity:.92;letter-spacing:-.2px}
 
   .notice{display:flex;align-items:center;gap:7px;width:calc(100% - 32px);margin:-14px auto 0;position:relative;z-index:2;
@@ -1808,6 +1815,50 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
 .shipbar .act.ship small{color:#ffe2d4}
 .shipbar .act.ship:disabled{background:#e6dfd5;border-color:#cfc4b8;box-shadow:none;color:#9a8f97}
 .shipbar .act.ship:disabled small{color:#a99ea4}
+
+/* ============================================================
+   v7 — 홈 표지 전체 보임 · INFO 정중앙 · 스테이지 회전 캐러셀
+   ============================================================ */
+/* ── 홈 시리즈 카드: 표지가 잘리지 않게 (4:5 크림 액자) ── */
+.sart{aspect-ratio:4 / 5;background:linear-gradient(180deg,#fff8ea 0%,#fff0dc 55%,#ffe6cb 100%)}
+.sart::after{background:linear-gradient(transparent,rgba(255,247,236,.42))}
+.sart img.ghero{
+  position:absolute;left:0;top:0;width:100%;height:100%;max-width:none;
+  object-fit:contain;object-position:center;z-index:1;transform:none;
+  padding:6px;box-sizing:border-box;filter:drop-shadow(0 4px 8px rgba(90,50,20,.16))}
+
+/* ── 주문 확인 시트 썸네일도 표지 전체가 보이게 ── */
+.rc-thumb{width:62px;height:62px;background:linear-gradient(180deg,#fff8ea,#ffe9cd)}
+.rc-thumb img{object-fit:contain;padding:3px;box-sizing:border-box}
+
+/* ── 행거형 INFO 카드: 화면 세로 정중앙 ── */
+#prizeInfo{align-items:center;justify-content:center;padding:14px 0}
+#prizeInfo .pinfo{margin:0;padding-top:50px}
+#prizeInfo .pi-x{top:54px}
+#prizeInfo .pi-top{padding-right:40px}
+
+/* ── 상단 스테이지: 3D 회전 캐러셀 ── */
+.strap{display:none}
+.stage-car{position:absolute;left:0;right:0;top:2px;height:122px;z-index:3;touch-action:pan-y}
+.car-track{position:absolute;left:50%;top:0;width:0;height:100%}
+.car-item{position:absolute;left:0;top:0;width:118px;height:116px;margin-left:-59px;
+  display:grid;place-items:center;cursor:pointer;transform-origin:50% 62%;
+  transition:transform .58s cubic-bezier(.22,.9,.24,1),opacity .45s,filter .45s;will-change:transform}
+.car-item .car-in{display:grid;place-items:center;width:100%;height:100%;
+  animation:carFloat 3.6s ease-in-out infinite}
+.car-item svg,.car-item img{width:100%;height:100%;object-fit:contain;max-width:none}
+.car-item img.gimg{filter:drop-shadow(0 10px 14px rgba(20,5,18,.45))}
+.car-item img,.car-item svg{-webkit-user-drag:none;user-select:none}
+.car-item.p0{transform:translateX(0) scale(1);z-index:6}
+.car-item.p-1{transform:translateX(-70px) scale(.68);opacity:.94;z-index:5}
+.car-item.p1{transform:translateX(70px) scale(.68);opacity:.94;z-index:5}
+.car-item.p-2{transform:translateX(-116px) scale(.45);opacity:.62;filter:blur(.6px);z-index:4}
+.car-item.p2{transform:translateX(116px) scale(.45);opacity:.62;filter:blur(.6px);z-index:4}
+.car-item.out{filter:grayscale(.5) brightness(.82)}
+.car-item.out.p0{filter:grayscale(.35) brightness(.9)}
+@keyframes carFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@media(prefers-reduced-motion:reduce){.car-item .car-in{animation:none}}
+.stage-grade{bottom:6px;font-size:34px;padding:1px 12px 3px}
 </style>
 </head>
 <body>
@@ -1820,6 +1871,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
       <div class="brand-row">
         <div class="brand"><span class="logo">포코쿠지</span><span class="logo-sub">POKO KUJI</span></div>
         <div class="head-actions">
+          <button class="acct" id="authBtn" hidden aria-label="내 계정"><i>👤</i><b id="authName">로그인</b></button>
           <button class="pts" id="homePts" aria-label="내 포인트"><i>P</i><b id="homePtsVal">240,000</b><span>+</span></button>
           <button class="hcart" id="homeCart" aria-label="진열장 열기">
             <svg viewBox="0 0 24 24"><rect x="3.4" y="8.4" width="17.2" height="7.2" rx="3.6"/><path d="M12 8.4v7.2"/><path d="M6.3 11.3h2.1"/></svg>
@@ -1849,14 +1901,14 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
       <div class="promo-txt">
         <span>POKO KUJI</span>
         <strong>4 SERIES<br>OPEN!</strong>
-        <em>시리즈별 30박스 · 1회 6,200P부터</em>
+        <em>시리즈별 3박스 · 1회 9,900P부터</em>
       </div>
       <span class="promo-badge">NEW</span>
       <div class="promo-art" id="promoArt"></div>
     </section>
 
     <section class="sec">
-      <div class="sec-head"><h2>포코쿠지 <b>시리즈</b></h2><span id="homeSeriesCount">4개 시리즈 · 120박스</span></div>
+      <div class="sec-head"><h2>포코쿠지 <b>시리즈</b></h2><span id="homeSeriesCount">4개 시리즈 · 12박스</span></div>
       <div class="sgrid" id="seriesGrid"></div>
     </section>
 
@@ -1911,7 +1963,9 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
           </button>
         </div>
       </div>
-      <div class="stage-ch" id="dArt"></div>
+      <div class="stage-car" id="dArt" aria-label="등급 상품 회전 진열">
+        <div class="car-track" id="carTrack"></div>
+      </div>
       <div class="stage-grade" id="dGrade">C상</div>
     </section>
 
@@ -1919,7 +1973,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
       <div class="ib-line">
         <span class="ib-price"><i>P</i><b class="numb" id="dPrice">6,200</b><em>/회</em></span>
         <span class="ib-swap">교체</span>
-        <span class="ib-box"><b class="numb" id="dBoxNo">28</b><span class="numb" id="dBoxTotal">/30 박스</span></span>
+        <span class="ib-box"><b class="numb" id="dBoxNo">28</b><span class="numb" id="dBoxTotal">/3 박스</span></span>
         <span class="ib-rem"><span>잔여량</span> <b class="numb" id="dRemain">98</b><span class="numb" id="dTotal">/199</span></span>
       </div>
       <div class="ib-switch">
@@ -2166,6 +2220,25 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     </div>
   </div>
 
+  <!-- 실DB 모드 전용: 로그인/가입 (config.js 가 비어 있으면 열리지 않음) -->
+  <div class="overlay" id="authSheet" role="dialog" aria-modal="true" aria-label="로그인">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head"><h3>로그인</h3><button class="x" data-close="authSheet" aria-label="닫기">×</button></div>
+      <div class="sheet-body">
+        <div class="field"><label for="authEmail">이메일</label><input id="authEmail" type="email" placeholder="you@example.com" autocomplete="email"></div>
+        <div class="field"><label for="authPw">비밀번호</label><input id="authPw" type="password" placeholder="8자 이상" autocomplete="current-password"></div>
+        <div class="field" id="authNickRow"><label for="authNick">닉네임 <span style="color:#a99;font-weight:600">(가입 시)</span></label><input id="authNick" type="text" placeholder="포코쿠지에서 보일 이름" autocomplete="nickname"></div>
+        <p class="confirm-text" id="authMsg" style="min-height:18px"></p>
+      </div>
+      <div class="sheet-actions">
+        <button class="btn-ghost" id="authSignUp">회원가입</button>
+        <button class="btn-primary" id="authSignIn">로그인<small>이메일 + 비밀번호</small></button>
+      </div>
+      <div class="auth-alt"><button id="authGuest">게스트로 바로 시작</button></div>
+    </div>
+  </div>
+
   <div class="draw-ov" id="drawOv" aria-hidden="true" data-stage="0">
     <button class="draw-skip" id="drawSkip" aria-label="뽑기 연출 건너뛰기">SKIP <b>&gt;&gt;</b></button>
     <div class="draw-stage">
@@ -2280,6 +2353,9 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </div>
 
+<!-- 실DB 연동 어댑터 · config.js 가 비어 있으면 아무 일도 하지 않습니다(데모 그대로) -->
+<script src="config.js"></script>
+<script src="supabase-client.js"></script>
 <script>
 (function(){
   "use strict";
@@ -2340,46 +2416,50 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
 
   const DEFS = [
     {
-      id:"beach", name:"치이카와 해변 바캉스 시리즈", short:"해변 바캉스", price:6200,
-      tag:"인기", hot:true, cur:28, featured:"C", seed:1103,
-      pal:["#a9ecff", "#2f8fe0"],
+      id:"pony", name:"질주하라! 미니소 포니 컬렉션", short:"미니소 포니", price:9900,
+      tag:"인기", hot:true, cur:2, featured:"A", seed:5101, pre:"미니소",
+      hero:"assets/pony-cover.jpg",
+      pal:["#d6ecff", "#2f63b8"],
       grades:[
-        { k:"last", n:"해변 한정 대형 인형",  t:1,  v:35960 },
-        { k:"A",    n:"비치볼 치이카와 인형", t:2,  v:35960 },
-        { k:"B",    n:"튜브 하치와레 쿠션",   t:2,  v:35960 },
-        { k:"C",    n:"선글라스 우사기 인형", t:2,  v:35960 },
-        { k:"D",    n:"비치 아크릴 스탠드",   t:2,  v:19560 },
-        { k:"E",    n:"써머 키링 세트",       t:2,  v:19560 },
-        { k:"F",    n:"서핑보드 키링",        t:2,  v:17400 },
-        { k:"G",    n:"파라솔 미니 피규어",   t:2,  v:17400 },
-        { k:"H",    n:"선크림 파우치",        t:2,  v:17400 },
-        { k:"I",    n:"비치 타월",            t:2,  v:13800 },
-        { k:"J",    n:"트레이딩 카드팩",      t:181, v:1100 }
+        { k:"last", n:"치이카와",       t:1,  v:40000, img:"assets/pony-last.png" },
+        { k:"A",    n:"카니",           t:1,  v:47000, img:"assets/pony-a.png" },
+        { k:"B",    n:"랏코",           t:1,  v:44000, img:"assets/pony-b.png" },
+        { k:"C",    n:"쿠리만주",       t:1,  v:43000, img:"assets/pony-c.png" },
+        { k:"D",    n:"시사",           t:1,  v:40000, img:"assets/pony-d.png" },
+        { k:"E",    n:"하치와레",       t:1,  v:34000, img:"assets/pony-e.png" },
+        { k:"F",    n:"모몽가",         t:1,  v:33000, img:"assets/pony-f.png" },
+        { k:"G",    n:"우사기",         t:1,  v:32000, img:"assets/pony-g.png" },
+        { k:"H",    n:"포니 테마 아크릴 스탠드",      t:2,  v:12000 },
+        { k:"I",    n:"스트링 뽀글이 파우치 (3종 중 랜덤)", t:2, v:16900, img:"assets/pony-i.png" },
+        { k:"J",    n:"스퀘어 미니 파우치 (3종 중 랜덤)",  t:3, v:12000, img:"assets/pony-j.png" },
+        { k:"K",    n:"반다이 애니 다이컷 스티커 (1팩)", t:85, v:2200, b:"치이카와", img:"assets/sticker-pack-k.png" }
       ],
-      curRem:[1,1,0,1,0,1,2,0,2,0,91]
+      curRem:[1,1,0,0,1,1,1,1,1,1,1,70]
     },
     {
-      id:"kyoto", name:"치이카와 교토 기모노 시리즈", short:"교토 기모노", price:13000,
-      tag:"한정", hot:false, cur:12, featured:"F", seed:2207,
-      pal:["#ffd0e6", "#c2438b"],
+      id:"snow", name:"반짝반짝! 스노우 홀리데이 컬렉션", short:"스노우 홀리데이", price:10900,
+      tag:"한정", hot:true, cur:2, featured:"A", seed:6203, pre:"미니소",
+      hero:"assets/snow-cover.jpg",
+      pal:["#e7f2ff", "#3f6aa6"],
       grades:[
-        { k:"last", n:"기모노 한정 대형 인형",  t:1,  v:89000 },
-        { k:"A",    n:"마이코 치이카와 인형",   t:1,  v:89000 },
-        { k:"B",    n:"기모노 하치와레 인형",   t:1,  v:69320 },
-        { k:"C",    n:"우사기 마이코 인형",     t:1,  v:66920 },
-        { k:"D",    n:"교토 한정 아크릴 스탠드", t:1,  v:50120 },
-        { k:"E",    n:"기모노 키링",            t:1,  v:50120 },
-        { k:"F",    n:"유카타 쿠션",            t:1,  v:50120 },
-        { k:"G",    n:"교토 한정 머그",         t:1,  v:45320 },
-        { k:"H",    n:"단청 트레이",            t:1,  v:45320 },
-        { k:"I",    n:"오비 파우치",            t:1,  v:45320 },
-        { k:"J",    n:"교토 한정 카드팩",       t:90, v:1300 }
+        { k:"last", n:"블루 & 화이트 스토리 기프트 박스 플러시 치이카와", t:1, v:63000, img:"assets/snow-last.png" },
+        { k:"A",    n:"키라메코 테디 베어 크리스마스 치이카와", t:1, v:48000, img:"assets/snow-a.png" },
+        { k:"B",    n:"키라메코 테디 베어 크리스마스 우사기",   t:1, v:44000, img:"assets/snow-b.png" },
+        { k:"C",    n:"크리스마스 요정 마스코트 하치와레",      t:1, v:36000, img:"assets/snow-c.png" },
+        { k:"D",    n:"크리스마스 요정 마스코트 우사기",        t:1, v:34000, img:"assets/snow-d.png" },
+        { k:"E",    n:"크리스마스 요정 마스코트 치이카와",      t:1, v:31000, img:"assets/snow-e.png" },
+        { k:"F",    n:"블루 & 화이트 스토리 리쓰 플러시 참 모몽가", t:1, v:28000, img:"assets/snow-f.png" },
+        { k:"G",    n:"블루 & 화이트 스토리 리쓰 플러시 참 치이카와", t:1, v:26000, img:"assets/snow-g.png" },
+        { k:"H",    n:"블루 & 화이트 스토리 리쓰 플러시 참 하치와레", t:1, v:26000, img:"assets/snow-h.png" },
+        { k:"I",    n:"블루 & 화이트 스토리 리쓰 플러시 참 우사기",  t:1, v:25000, img:"assets/snow-i.png" },
+        { k:"J",    n:"스노우 홀리데이 오너먼트 (랜덤, 6종)", t:5, v:4500 },
+        { k:"K",    n:"반다이 애니 다이컷 스티커 (1팩)",      t:85, v:2200, b:"치이카와", img:"assets/sticker-pack-k.png" }
       ],
-      curRem:[1,0,0,0,0,0,0,0,0,0,20]
+      curRem:[1,1,1,0,0,1,1,1,1,1,1,69]
     },
     {
       id:"sweets", name:"치이카와 스위츠 카페 시리즈", short:"스위츠 카페", price:12000,
-      tag:"신규", hot:true, cur:17, featured:"B", seed:3301,
+      tag:"베스트", hot:false, cur:2, featured:"B", seed:3301, pre:"치이카와",
       pal:["#ffe0ef", "#e0559a"],
       grades:[
         { k:"last", n:"스위츠 카페 한정 인형", t:1,  v:59800 },
@@ -2392,13 +2472,14 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
         { k:"G",    n:"미니 파르페 스탠드",    t:2,  v:22500 },
         { k:"H",    n:"스위츠 파우치",         t:2,  v:19800 },
         { k:"I",    n:"레시피 카드 세트",      t:2,  v:12000 },
-        { k:"J",    n:"스위츠 카드팩",         t:141, v:1100 }
+        { k:"J",    n:"스위츠 카드팩",         t:81,  v:1100 }
       ],
-      curRem:[1,1,0,0,1,0,1,0,0,0,38]
+      curRem:[1,1,1,1,1,0,0,1,1,1,37]
     },
     {
-      id:"kurimanju", name:"오직 쿠리! 밤만주 컬렉션", short:"밤만주 컬렉션", price:9900,
-      tag:"단독", hot:true, cur:22, featured:"A", seed:4409,
+      id:"kurimanju", name:"오직 쿠리! 밤만주 컬렉션", short:"밤만주 컬렉션", price:13000,
+      tag:"단독", hot:true, cur:2, featured:"A", seed:4409, pre:"쿠리만주",
+      hero:"assets/quri-cover.jpg",
       pal:["#f7e6c8", "#7d4a1e"],
       grades:[
         { k:"last", n:"돈키호테 레오파드 파자마 마스코트",      t:1,  v:145000, img:"assets/quri-last.png" },
@@ -2414,7 +2495,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
         { k:"J",    n:"포켓 도시락 마스코트 쿠리만주",          t:4,  v:30000,  img:"assets/quri-j.png" },
         { k:"K",    n:"썸머 말랑키링 (랜덤, 7종)",             t:85,  v:2500,  img:"assets/quri-k.png" }
       ],
-      curRem:[1,0,1,0,1,0,1,0,1,0,1,72]
+      curRem:[1,1,1,0,0,1,1,1,1,1,1,70]
     }
   ];
 
@@ -2427,39 +2508,41 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   function makeBoxes(def){
     const rnd = mulberry(def.seed * 977 + 13);
     const totalT = ticketTotalOf(def);
+    const NBOX = 3;
     const boxes = [];
-    for (let i = 0; i < 30; i++){
+    for (let i = 0; i < NBOX; i++){
       const no = i + 1;
       const grades = def.grades.map(g => ({ k:g.k, n:g.n, t:g.t, v:g.v, r:g.t }));
       let featured = null;
 
-      if (no === 30){                       // 30번 박스 = 새 박스(전량)
+      if (no === NBOX){                     // 마지막 박스 = 새 박스(전량)
         grades.forEach(g => g.r = g.t);
         featured = "A";
       } else if (no === 1){                 // 1번 박스 = 마감 직전(ALL 테스트용)
-        grades.forEach((g, j) => g.r = [1,0,0,0,0,0,0,0,0,0,0][j] ?? 0);
-        grades[10].r = 2;                   // J 2 + A 1 = 3장 남음
-        grades[1].r = 1;
-        featured = "J";
+        grades.forEach(g => g.r = 0);
+        grades[0].r = 1;                    // 라스트상은 아직 있음
+        grades[1].r = 1;                    // A상 1장
+        grades[grades.length - 1].r = 2;    // 최하위 소모품 2장 = 티켓 3장 남음
+        featured = grades[1].k;
       } else if (no === def.cur){
-        grades.forEach((g, j) => g.r = def.curRem[j]);
+        grades.forEach((g, j) => g.r = def.curRem[j] ?? 0);
         featured = def.featured;
       } else {
         const soldF = 0.1 + rnd() * 0.85;
         let remainTarget = Math.round(totalT * (1 - soldF));
         let used = 0;
-        for (let j = 1; j <= 9; j++){
+        for (let j = 1; j < grades.length - 1; j++){
           const g = grades[j];
           const keep = rnd() < (0.25 + (1 - soldF)) ? Math.round(g.t * (1 - soldF) * (0.15 + rnd())) : 0;
           g.r = Math.max(0, Math.min(g.t, keep));
           used += g.r;
         }
-        /* 하단 소모성 상품(카드팩·스티커 세트)은 남은 장수를 수량 비율로 나눠 담는다 */
-        const bottoms = grades.slice(10);
+        /* 맨 아래 소모성 상품(스티커 세트)은 남은 장수를 수량 비율로 나눠 담는다 */
+        const bottoms = grades.slice(-1);
         let left = Math.max(0, remainTarget - used);
         const shareSum = bottoms.reduce((a, g) => a + g.t, 0) || 1;
-        bottoms.forEach((g, i) => {
-          const take = i === bottoms.length - 1
+        bottoms.forEach((g, idx) => {
+          const take = idx === bottoms.length - 1
             ? left
             : Math.min(g.t, Math.max(0, Math.round(left * g.t / shareSum)));
           g.r = Math.max(0, Math.min(g.t, take));
@@ -2468,17 +2551,15 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
         if (used === 0 && bottoms.every(g => g.r === 0)){
           grades[0].r = 0;                  // 완판된 박스는 라스트상도 없음
         }
-        const avail = grades.slice(1, 10).filter(g => g.r > 0);
+        const avail = grades.slice(1, -1).filter(g => g.r > 0);
         const pool = avail.length ? avail : bottoms;
         featured = pool[Math.floor(rnd() * pool.length)].k;
       }
 
-      if (no !== 1 && no !== def.cur && no !== 30 && grades[0].r === 0) grades[0].r = 0;
       boxes.push({ no, grades, featured: featured || grades[grades.length - 1].k, drawn: 0, logs: null });
     }
     return boxes;
   }
-
   function buildSeriesState(){
     return DEFS.map(def => ({
       id: def.id, def, boxes: makeBoxes(def), rev: 0, sold: 0
@@ -2500,6 +2581,18 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   let shipSelection = new Set();
   let agree = false;
   let toastTimer = null;
+
+  /* ============================================================
+     실DB 모드 여부
+       config.js 에 SUPABASE_URL / ANON_KEY 를 넣으면 자동 ON,
+       비어 있으면 지금까지의 데모 그대로 동작합니다.
+       데모 강제: 주소 뒤에 ?demo=1
+     ============================================================ */
+  const LIVE = !!(window.CHII_BACKEND && window.CHII_BACKEND.enabled) &&
+               !/[?&]demo=1(&|$)/.test(location.search);
+  let liveReady = !LIVE;
+  let liveBoxPoll = null;
+  let liveHomePoll = null;
 
   const ser = () => state.series.find(s => s.id === view.sid);
   const box = () => { const s = ser(); return s ? s.boxes[view.idx] : null; };
@@ -2721,21 +2814,9 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     </svg>`;
   }
 
-  /* 실제 상품 사진이 있는 등급은 SVG 대신 사진을 쓴다 (오직 쿠리! 밤만주 컬렉션 상위상) */
-  const PRIZE_IMG = {
-    "kurimanju:last": "assets/quri-last.png",
-    "kurimanju:A": "assets/quri-a.png",
-    "kurimanju:B": "assets/quri-b.png",
-    "kurimanju:C": "assets/quri-c.png",
-    "kurimanju:D": "assets/quri-d.png",
-    "kurimanju:E": "assets/quri-e.png",
-    "kurimanju:F": "assets/quri-f.png",
-    "kurimanju:G": "assets/quri-g.png",
-    "kurimanju:H": "assets/quri-h.png",
-    "kurimanju:I": "assets/quri-i.png",
-    "kurimanju:J": "assets/quri-j.png",
-    "kurimanju:K": "assets/quri-k.png"
-  };
+  /* 실제 상품 사진이 있는 등급은 SVG 대신 사진을 쓴다 (DEFS 의 img 필드) */
+  const PRIZE_IMG = {};
+  DEFS.forEach(d => d.grades.forEach(g => { if (g.img) PRIZE_IMG[d.id + ":" + g.k] = g.img; }));
   const imgOf = (sid, k) => (k ? (PRIZE_IMG[sid + ":" + k] || "") : "");
   function artHTML(o, sid, ch){
     const k = o ? (o.k || o.g || "") : "";
@@ -2749,7 +2830,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   }
   /* 시리즈 카드 아트 — 쿠리만주는 실제 사진을 대표컷으로 */
   function seriesArt(s){
-    const hero = s.id === "kurimanju" ? "assets/quri-cover.jpg" : "";
+    const hero = s.def.hero || "";
     if (hero) return '<img class="ghero" src="' + hero + '" alt="' + s.def.name + '" loading="lazy" decoding="async">';
     return trioArt(s.id);
   }
@@ -2778,7 +2859,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   }
 
   function renderHome(){
-    $("#promoArt").innerHTML = trioArt("beach");
+    $("#promoArt").innerHTML = trioArt(state.series[0].id);
     $("#seriesGrid").innerHTML = state.series.map((s, i) => {
       const d = s.def, st = seriesStats(s);
       const pct = Math.round((1 - st.rem / st.tot) * 100);
@@ -2791,7 +2872,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
         </span>
         <span class="sinfo">
           <strong class="sname">${d.name}</strong>
-          <span class="smeta numb">30 BOX · 잔여 ${won(st.rem)}/${won(st.tot)}</span>
+          <span class="smeta numb">${s.boxes.length} BOX · 잔여 ${won(st.rem)}/${won(st.tot)}</span>
           <span class="sbar"><i style="width:${pct}%"></i></span>
           <span class="sprice"><i>P</i>${won(d.price)} <em>/회</em></span>
         </span>
@@ -2809,23 +2890,80 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     return b.grades.find(g => g.k === view.grade) || b.grades[0];
   }
 
-  function renderStage(){
-    const b = box(), d = ser().def;
-    const g = currentGrade();
-    $("#dArt").innerHTML = artHTML(g, ser().id, charOf(g.k));
-    const lab = $("#dGrade");
-    lab.textContent = GLABEL(g.k);
-    lab.style.color = GC[g.k];
-    const sg = $("#stageGlow");
-    if (sg) sg.style.background = "radial-gradient(circle," + hexA(GC[g.k], .5) + " 0%," + hexA(GC[g.k], .14) + " 44%,transparent 70%)";
+  /* 상단 스테이지 — 앞뒤 등급 상품이 줄지어 도는 3D 회전 캐러셀 */
+  let carKey = null, carSpin = null, carFreeze = 0;
+
+  function carKeys(){
+    const b = box();
+    return b ? b.grades.map(g => g.k) : [];
   }
+
+  function paintFocus(){
+    $$("#dGoods .cell").forEach(c => c.classList.toggle("focus", c.dataset.g === carKey));
+  }
+
+  function carPaint(){
+    const s = ser(), b = box();
+    if (!s || !b) return;
+    const gs = b.grades, keys = gs.map(g => g.k);
+    carKey = (view.grade && keys.indexOf(view.grade) >= 0)
+      ? view.grade
+      : (keys.indexOf(carKey) >= 0 ? carKey : keys[0]);
+    const ci = keys.indexOf(carKey), n = keys.length;
+    const track = $("#carTrack");
+    if (!track) return;
+    track.innerHTML = [-2, -1, 0, 1, 2].map(d => {
+      const g = gs[(ci + d + n * 2) % n];
+      const out = g.r === 0 && g.k !== "last";
+      return `<span class="car-item p${d}${out ? " out" : ""}" data-g="${g.k}" role="button" aria-label="${GLABEL(g.k)} ${g.n}">
+        <span class="car-in" style="animation-delay:${((d + 2) * 0.62).toFixed(2)}s">${artHTML(g, s.id, charOf(g.k))}</span>
+      </span>`;
+    }).join("");
+    const g0 = gs[ci];
+    const lab = $("#dGrade");
+    lab.textContent = GLABEL(g0.k);
+    lab.style.color = GC[g0.k];
+    lab.dataset.g = g0.k;
+    const sg = $("#stageGlow");
+    if (sg) sg.style.background = "radial-gradient(circle," + hexA(GC[g0.k], .5) + " 0%," + hexA(GC[g0.k], .14) + " 44%,transparent 70%)";
+  }
+
+  function carStep(dir, manual){
+    const keys = carKeys();
+    if (!keys.length) return;
+    const i = keys.indexOf(carKey);
+    carKey = keys[(i + dir + keys.length) % keys.length];
+    view.grade = carKey;
+    if (manual) carFreeze = Date.now() + 9000;
+    carPaint();
+    paintFocus();
+  }
+
+  function startCar(){
+    stopCar();
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    carSpin = setInterval(() => {
+      if (document.hidden || view.busy || Date.now() < carFreeze) return;
+      const scr = $("#screenDetail");
+      if (!scr || scr.hidden) return;
+      const ov = $("#drawOv");
+      if (ov && ov.classList.contains("show")) return;
+      carStep(1, false);
+    }, 3600);
+  }
+
+  function stopCar(){
+    if (carSpin){ clearInterval(carSpin); carSpin = null; }
+  }
+
+  function renderStage(){ carPaint(); }
 
   function renderInfo(){
     const s = ser(), b = box(), d = s.def;
     const rem = remainOf(b), tot = totalOf(b);
     $("#dPrice").textContent = won(d.price);
     $("#dBoxNo").textContent = b.no;
-    $("#dBoxTotal").textContent = "/30 박스";
+    $("#dBoxTotal").textContent = "/" + s.boxes.length + " 박스";
     $("#dRemain").textContent = rem;
     $("#dTotal").textContent = "/" + tot;
     $("#c1").textContent = won(d.price);
@@ -2839,7 +2977,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     $("#allSub").innerHTML = !unlocked
       ? "1회 후 열림"
       : (rem === 0 ? "완판" : `<span class="lb">총</span><i>P</i>${won(d.price * rem)}`);
-    const tk = "POKO KUJI ARCADE  ★  " + d.short + "  ★  1PLAY " + won(d.price) + "P  ★  BOX " + b.no + "/30  ★  LEFT " + rem + "/" + tot + "  ★  GOOD LUCK  ★  ";
+    const tk = "POKO KUJI ARCADE  ★  " + d.short + "  ★  1PLAY " + won(d.price) + "P  ★  BOX " + b.no + "/" + s.boxes.length + "  ★  LEFT " + rem + "/" + tot + "  ★  GOOD LUCK  ★  ";
     const tick = $("#ledTicker");
     if (tick) tick.textContent = tk + tk;
     $$("#drawBar .dome").forEach(btn => {
@@ -2861,7 +2999,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
           <span class="pct">${isLast ? `<em>증정품</em>` : `확률 ${pct.toFixed(2)}%`}</span>
           <span class="part">${artHTML(g, s.id, charOf(g.k))}</span>
           <span class="stock ${out ? "zero" : ""}">${g.r}/${g.t}</span>
-          <span class="pname">${s.id === "kurimanju" ? "쿠리만주" : "치이카와"} | ${g.n}</span>
+          <span class="pname">${g.b || d.pre || "치이카와"} | ${g.n}</span>
           ${out ? `<span class="stamp">종료</span>` : ""}
         </div>
         <span class="gbadge" style="color:${GC[g.k]}">${GLABEL(g.k)}</span>
@@ -2969,6 +3107,8 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     $("#screenAdmin").hidden = name !== "admin";
     $("#tabbar").hidden = name === "detail";
     $$("#tabbar button").forEach(b => b.classList.toggle("on", b.dataset.go === name));
+    if (name === "detail"){ startBoxPoll(); startCar(); } else { stopBoxPoll(); stopCar(); }
+    if (name === "admin" && LIVE) refreshLiveAdmin();
     window.scrollTo(0, 0);
   }
 
@@ -2976,9 +3116,10 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     const s = state.series.find(x => x.id === sid);
     if (!s) return;
     view.sid = sid;
-    view.idx = s.def.cur - 1;
+    view.idx = Math.max(0, Math.min(s.boxes.length - 1, s.def.cur - 1));
     view.tab = "goods";
     view.grade = s.boxes[view.idx].featured;
+    carKey = null;
     showScreen("detail");
     renderDetail();
   }
@@ -2988,6 +3129,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     view.idx = (view.idx + delta + s.boxes.length) % s.boxes.length;
     const b = box();
     view.grade = b.featured;
+    carKey = null;
     renderDetail();
     toast(b.no + "번 박스 · 잔여 " + remainOf(b) + "/" + totalOf(b));
   }
@@ -2996,6 +3138,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     view.idx = no - 1;
     const b = box();
     view.grade = b.featured;
+    carKey = null;
     closeOverlay("boxPicker");
     renderDetail();
     toast(b.no + "번 박스로 교체했어요");
@@ -3051,6 +3194,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
 
   function doDraw(mode){
     if (view.busy) return;
+    if (LIVE && !liveReady){ toast("상품 정보를 불러오는 중이에요 · 잠시만요"); return; }
     const s = ser(), b = box();
     const rem = remainOf(b);
     if (rem <= 0){ toast("이 박스는 완판이에요 · 다른 박스로 교체해 주세요"); return; }
@@ -3059,6 +3203,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     if (n > rem){ toast("잔여 티켓이 부족해요"); return; }
     const cost = n * s.def.price;
     if (state.points < cost){
+      if (LIVE){ toast("포인트가 부족해요 (" + won(state.points) + "P) · 충전은 결제 연동 후 가능해요"); return; }
       pendingCharge = { sid: s.id, idx: view.idx, mode };
       $("#chargeNeed").textContent = won(cost) + " P";
       $("#chargeHave").textContent = won(state.points) + " P";
@@ -3871,11 +4016,68 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   }
 
   function runDraw(n, cost, mode){
+    if (LIVE) return runDrawLive(n, cost, mode);
     const s = ser(), b = box();
     view.busy = true;
     SND.coin();
     const res = settleDraw(s, b, n, cost);
     openTear(n, res.items, res.lastItem, res.lastAwarded, mode);
+  }
+
+  /* 실DB 뽑기 — DB 함수 draw_kuji() 가 원자적으로 처리한 결과를 화면에 반영 */
+  function runDrawLive(n, cost, mode){
+    const s = ser(), b = box();
+    if (!b || !b.id){ toast("박스 정보를 불러오지 못했어요"); return; }
+    view.busy = true;
+    SND.coin();
+
+    CHII_BACKEND.draw(b.id, n).then(res => {
+      const items = (res.items || []).map(it => liveItem(it, s.id, b.no));
+      const lastItem = res.last ? liveItem(res.last, s.id, b.no) : null;
+
+      state.points = res.points;
+      (res.prizes || []).forEach(p => {
+        const g = b.grades.find(x => x.k === p.grade);
+        if (g){ g.r = p.remaining_qty; g.t = p.total_qty; g.n = p.name; g.v = p.value_p; }
+      });
+      b.drawn = totalOf(b) - remainOf(b);
+      b.status = res.box_status;
+      s.rev += res.cost;
+      s.sold += items.length;
+
+      items.forEach(it => state.shelf.push(it));
+      if (lastItem) state.shelf.push(lastItem);
+
+      const logs = ensureLogs(b);
+      items.slice().reverse().forEach(it => logs.unshift({ who:"나", g: it.g, name: it.name, time:"방금 전", mine:true }));
+      if (lastItem) logs.unshift({ who:"나", g:"last", name: lastItem.name, time:"방금 전", mine:true });
+      b.logs = logs;
+
+      const best = lastItem || items.slice().sort((x, y) => gradeRank(y.g) - gradeRank(x.g))[0];
+      view.grade = best.g;
+      openTear(n, items, lastItem, !!lastItem, mode);
+    }).catch(err => {
+      view.busy = false;
+      toast(err.message || "뽑기에 실패했어요");
+      refreshLiveBox();
+    });
+  }
+
+  function liveItem(it, sid, boxNo){
+    return {
+      id: it.shelf_id,
+      sid: sid,
+      boxNo: boxNo,
+      g: it.grade,
+      k: it.grade,
+      n: it.name,
+      ch: "chii",
+      name: it.name,
+      value: it.value_p,
+      shipped: false,
+      status: "stored",
+      at: new Date()
+    };
   }
 
   function gradeRank(k){
@@ -4010,10 +4212,11 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   }
 
   function toggleItem(id){
-    const it = state.shelf.find(x => x.id === id);
+    const key = String(id);
+    const it = state.shelf.find(x => String(x.id) === key);
     if (!it || it.shipped) return;
-    if (shipSelection.has(id)) shipSelection.delete(id);
-    else shipSelection.add(id);
+    if (shipSelection.has(it.id)) shipSelection.delete(it.id);
+    else shipSelection.add(it.id);
     renderBox();
   }
 
@@ -4041,11 +4244,38 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     if ($("#shipSubmit").disabled) return;
     const items = state.shelf.filter(i => shipSelection.has(i.id));
     if (!items.length) return;
+    const receiver = {
+      name: $("#shipName").value.trim(),
+      phone: $("#shipPhone").value.trim(),
+      address: $("#shipAddr").value.trim()
+    };
+
+    if (LIVE){
+      $("#shipSubmit").disabled = true;
+      $("#shipSubmitSub").textContent = "접수 중…";
+      CHII_BACKEND.requestShipment(items.map(i => i.id), receiver).then(res => {
+        items.forEach(i => { i.shipped = true; i.status = "ship_requested"; });
+        const now = new Date();
+        state.ships.push({
+          no: res.receipt_no, count: res.item_count,
+          date: (now.getMonth() + 1) + "/" + now.getDate(), name: receiver.name
+        });
+        shipSelection = new Set();
+        closeOverlay("shipSheet");
+        renderBox();
+        toast("배송 신청 완료 · " + res.receipt_no);
+      }).catch(err => {
+        toast(err.message || "배송 신청에 실패했어요");
+        validateShip();
+      });
+      return;
+    }
+
     items.forEach(i => i.shipped = true);
     state.receipts += 1;
     const now = new Date();
     const no = "CH-" + ymd(now) + "-" + String(state.receipts).padStart(3, "0");
-    state.ships.push({ no, count: items.length, date: (now.getMonth() + 1) + "/" + now.getDate(), name: $("#shipName").value.trim() });
+    state.ships.push({ no, count: items.length, date: (now.getMonth() + 1) + "/" + now.getDate(), name: receiver.name });
     shipSelection = new Set();
     closeOverlay("shipSheet");
     renderBox();
@@ -4065,6 +4295,14 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   }
 
   function renderAdmin(){
+    if (LIVE && !(state.me && state.me.is_admin)){
+      $("#kpis").innerHTML = `<div class="kpi" style="grid-column:1/-1"><small>사장님 전용</small><b>관리자 계정으로 로그인해 주세요</b></div>`;
+      $("#adminSeries").innerHTML = "";
+      $("#adminLogs").innerHTML = "";
+      $("#adminReset").hidden = true;
+      return;
+    }
+    $("#adminReset").hidden = false;
     const st = allStats();
     const un = state.shelf.filter(i => !i.shipped).length;
     $("#kpis").innerHTML = `
@@ -4095,6 +4333,14 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   }
 
   function resetSeries(sid){
+    if (LIVE){
+      toast("재고를 리셋하는 중…");
+      CHII_BACKEND.resetSeries(sid)
+        .then(() => loadLiveData())
+        .then(() => toast("재고를 리셋했어요"))
+        .catch(err => toast(err.message || "리셋에 실패했어요"));
+      return;
+    }
     const i = state.series.findIndex(s => s.id === sid);
     const old = state.series[i];
     state.series[i] = { id: old.id, def: old.def, boxes: makeBoxes(old.def), rev: 0, sold: 0 };
@@ -4108,6 +4354,14 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   }
 
   function resetAll(){
+    if (LIVE){
+      toast("전체 재고를 리셋하는 중…");
+      Promise.all(state.series.map(s => CHII_BACKEND.resetSeries(s.id)))
+        .then(() => loadLiveData())
+        .then(() => toast("전체 재고를 리셋했어요"))
+        .catch(err => toast(err.message || "리셋에 실패했어요"));
+      return;
+    }
     state.series = buildSeriesState();
     state.shelf = [];
     state.ships = [];
@@ -4168,7 +4422,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     if (boxRow){ selectBox(Number(boxRow.dataset.box)); return; }
 
     const item = e.target.closest("[data-item]");
-    if (item){ toggleItem(Number(item.dataset.item)); return; }
+    if (item){ toggleItem(item.dataset.item); return; }
 
     const resetB = e.target.closest("[data-reset]");
     if (resetB){
@@ -4207,9 +4461,9 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   $("#boxStrip").addEventListener("click", () => { renderBoxPicker(); openOverlay("boxPicker"); });
   $("#shelfBtn").addEventListener("click", () => { showScreen("box"); renderBox(); });
   $("#homeCart").addEventListener("click", () => { showScreen("box"); renderBox(); });
-  $("#homePts").addEventListener("click", () => toast("보유 포인트 " + won(state.points) + "P · 데모 계정"));
+  $("#homePts").addEventListener("click", () => toast("보유 포인트 " + won(state.points) + "P · " + (LIVE ? "실서비스 계정" : "데모 계정")));
 
-  $("#noticeBtn").addEventListener("click", () => toast("4개 시리즈 · 시리즈별 30박스 · 박스별 잔여 수량 실시간 공개"));
+  $("#noticeBtn").addEventListener("click", () => toast("4개 시리즈 · 시리즈별 3박스 · 박스별 잔여 수량 실시간 공개"));
 
   $$("#tabbar button").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -4221,6 +4475,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   });
 
   $("#chargeBtn").addEventListener("click", () => {
+    if (LIVE){ toast("실서비스 모드예요 · 충전은 결제 연동 후 가능합니다"); return; }
     const need = pendingCharge;
     const cost = need ? (need.mode === "all" ? remainOf(state.series.find(s => s.id === need.sid).boxes[need.idx]) : Number(need.mode)) * state.series.find(s => s.id === need.sid).def.price : 0;
     const amount = Math.max(120000, cost - state.points);
@@ -4313,7 +4568,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   /* ============================================================
      v6 — 상품 INFO 카드 · 주문 확인 시트 · 진열장 탭/선택 액션
      ============================================================ */
-  const PINFO_BRAND = { kurimanju: "쿠리만주 × 치이카와", beach: "치이카와", kyoto: "치이카와", sweets: "치이카와" };
+  const PINFO_BRAND = { kurimanju: "쿠리만주 × 치이카와", pony: "미니소 × 치이카와", snow: "미니소 × 치이카와", sweets: "치이카와" };
   const pinfo = { i: 0 };
   const piCells = () => $$("#dGoods .cell[data-g]");
 
@@ -4331,7 +4586,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     badge.style.color = GC[k] || "#f0684b";
     $("#piCount").textContent = (pinfo.i + 1) + " / " + cells.length;
     $("#piArt").innerHTML = artHTML(g, s.id, charOf(k));
-    $("#piName").textContent = g.n || "";
+    $("#piName").textContent = (g.b ? g.b + " | " : "") + (g.n || "");
     $("#piBrand").textContent = PINFO_BRAND[s.id] || "POKO KUJI";
     $("#piPrice").textContent = "P " + won(g.v || 0);
     $("#piCompose").textContent = k === "last" ? "1개 · 라스트 원 오프 증정" : "1개" + (low ? " · 미개봉" : " · 정품 박스");
@@ -4353,6 +4608,32 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     if (!cell) return;
     piOpen(cell);
   }, true);
+
+  (function(){
+    const car = $("#dArt");
+    if (!car) return;
+    let sx = null;
+    let swiped = false;
+    car.addEventListener("click", e => {
+      if (swiped){ swiped = false; return; }
+      const it = e.target.closest(".car-item");
+      if (!it || !it.dataset.g) return;
+      if (it.dataset.g === carKey) return;
+      carKey = it.dataset.g;
+      view.grade = carKey;
+      carFreeze = Date.now() + 9000;
+      carPaint();
+      paintFocus();
+    });
+    car.addEventListener("pointerdown", e => { sx = e.clientX; });
+    document.addEventListener("pointercancel", () => { sx = null; });
+    document.addEventListener("pointerup", e => {
+      if (sx === null) return;
+      const dx = e.clientX - sx;
+      sx = null;
+      if (Math.abs(dx) > 34){ swiped = true; carStep(dx < 0 ? 1 : -1, true); }
+    });
+  })();
 
   if ($("#piPrev")){
     $("#piPrev").addEventListener("click", e => { e.stopPropagation(); if (pinfo.i > 0){ pinfo.i--; piPaint(); } });
@@ -4573,11 +4854,189 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   $("#homeLed").textContent = homeLedTxt + homeLedTxt;
 
   /* ============================================================
+     live bridge — config.js 에 URL/Anon Key 가 있으면 자동 실행
+     (비어 있으면 이 블록은 한 줄도 실행되지 않습니다 → 데모 그대로)
+     ============================================================ */
+  function renderAuthChip(){
+    const btn = $("#authBtn");
+    if (!btn) return;
+    btn.hidden = !LIVE;
+    if (!LIVE) return;
+    const me = state.me;
+    $("#authName").textContent = me ? (me.nickname || "내 계정") : "로그인";
+  }
+
+  function applyCatalog(list){
+    if (!list || !list.length) return;
+    const prev = {};
+    state.series.forEach(s => { prev[s.id] = s; });
+    state.series = list.map(s => ({
+      id: s.id, def: s.def, boxes: s.boxes,
+      rev: prev[s.id] ? prev[s.id].rev : 0,
+      sold: prev[s.id] ? prev[s.id].sold : 0
+    }));
+    if (view.sid){
+      const s = state.series.find(x => x.id === view.sid);
+      if (s){
+        view.idx = Math.max(0, Math.min(s.boxes.length - 1, view.idx));
+        view.grade = s.boxes[view.idx].featured;
+      } else {
+        view.sid = null;
+      }
+    }
+    renderHome();
+    if (view.sid && !$("#screenDetail").hidden) renderDetail();
+    renderAdmin();
+  }
+
+  async function loadLiveData(){
+    applyCatalog(await CHII_BACKEND.catalog());
+
+    const me = await CHII_BACKEND.profile();
+    state.me = me || null;
+    state.points = me ? me.points : 0;
+
+    if (CHII_BACKEND.currentUser()){
+      const [sh, sp] = await Promise.all([CHII_BACKEND.shelf(), CHII_BACKEND.shipments()]);
+      state.shelf = sh;
+      state.ships = sp;
+    } else {
+      state.shelf = [];
+      state.ships = [];
+    }
+
+    renderHeader();
+    renderHome();
+    renderBox();
+    renderAdmin();
+    renderAuthChip();
+    if (view.sid && !$("#screenDetail").hidden) renderDetail();
+  }
+
+  async function authAction(kind){
+    if (!LIVE) return;
+    const email = $("#authEmail").value.trim();
+    const pw = $("#authPw").value;
+    const nick = $("#authNick").value.trim();
+    const msg = $("#authMsg");
+    msg.textContent = "처리 중…";
+    try {
+      if (kind === "guest") await CHII_BACKEND.signInAnonymous();
+      else if (kind === "signup") await CHII_BACKEND.signUp(email, pw, nick);
+      else await CHII_BACKEND.signIn(email, pw);
+      await loadLiveData();
+      closeOverlay("authSheet");
+      msg.textContent = "";
+      toast("로그인했어요");
+    } catch (e){
+      msg.textContent = e.message || "실패했어요";
+    }
+  }
+
+  async function bootLive(){
+    state.points = 0;
+    renderHeader();
+    document.querySelectorAll(".foot").forEach(f => {
+      f.innerHTML = "실서비스 모드 · 뽑기·진열장·배송 신청이 서버에 저장됩니다.";
+    });
+    const agreeTx = document.querySelector("#agreeBox span:last-child");
+    if (agreeTx) agreeTx.textContent = "개인정보 수집·이용 및 배송 유의사항에 동의합니다.";
+    try {
+      await CHII_BACKEND.init();
+      CHII_BACKEND.onAuth(() => renderAuthChip());
+      await loadLiveData();
+      liveReady = true;
+      startHomePoll();
+      if (!CHII_BACKEND.currentUser()) openOverlay("authSheet");
+    } catch (e){
+      liveReady = true;
+      toast("백엔드 연결 실패 · " + (e.message || "설정을 확인해 주세요"));
+    }
+  }
+
+  function startBoxPoll(){
+    stopBoxPoll();
+    if (!LIVE) return;
+    liveBoxPoll = setInterval(refreshLiveBox, 4000);
+  }
+  function stopBoxPoll(){
+    if (liveBoxPoll){ clearInterval(liveBoxPoll); liveBoxPoll = null; }
+  }
+
+  /* 열려 있는 박스의 잔여 수량을 4초마다 다시 읽어 다른 손님의 뽑기를 반영 */
+  function refreshLiveBox(){
+    if (!LIVE || view.busy || !view.sid || $("#screenDetail").hidden) return;
+    const b = box();
+    if (!b || !b.id) return;
+    CHII_BACKEND.refreshBox(b.id).then(fresh => {
+      if (!fresh) return;
+      b.grades.forEach(g => {
+        const p = fresh.grades.find(x => x.k === g.k);
+        if (p){ g.r = p.r; g.t = p.t; g.n = p.n; g.v = p.v; }
+      });
+      b.drawn = totalOf(b) - remainOf(b);
+      b.status = fresh.status;
+      if (!view.busy){ renderDetail(); renderHeader(); }
+    }).catch(() => {});
+  }
+
+  function startHomePoll(){
+    stopHomePoll();
+    if (!LIVE) return;
+    liveHomePoll = setInterval(refreshLiveHome, 15000);
+  }
+  function stopHomePoll(){
+    if (liveHomePoll){ clearInterval(liveHomePoll); liveHomePoll = null; }
+  }
+
+  /* 홈의 시리즈별 잔여 수량을 15초마다 새로 읽음 (다른 손님 뽑기 반영) */
+  function refreshLiveHome(){
+    if (!LIVE || view.busy) return;
+    if ($("#screenHome").hidden) return;
+    CHII_BACKEND.catalog().then(applyCatalog).catch(() => {});
+  }
+
+  function refreshLiveAdmin(){
+    if (!LIVE || !CHII_BACKEND.currentUser()) return;
+    CHII_BACKEND.stats().then(st => {
+      if (!st || !st.ok) return;
+      (st.series || []).forEach(row => {
+        const s = state.series.find(x => x.id === row.id);
+        if (s){ s.rev = row.revenue; s.sold = row.sold_tickets; }
+      });
+      renderAdmin();
+    }).catch(() => {});
+  }
+
+  $("#authSignIn").addEventListener("click", () => authAction("signin"));
+  $("#authSignUp").addEventListener("click", () => authAction("signup"));
+  $("#authGuest").addEventListener("click", () => authAction("guest"));
+  $("#authBtn").addEventListener("click", () => {
+    if (!LIVE) return;
+    if (CHII_BACKEND.currentUser()){
+      askConfirm("로그아웃", "로그아웃하면 뽑기와 진열장을 볼 수 없어요. 계속할까요?", "로그아웃", () => {
+        closeAll();
+        CHII_BACKEND.signOut().then(() => {
+          state.me = null;
+          state.shelf = [];
+          state.ships = [];
+          state.points = 0;
+          renderHeader(); renderBox(); renderAdmin(); renderAuthChip();
+          openOverlay("authSheet");
+        });
+      });
+    } else {
+      openOverlay("authSheet");
+    }
+  });
+
+  /* ============================================================
      init
      ============================================================ */
   renderHome();
   renderHeader();
   renderAdmin();
+  if (LIVE) bootLive();
 })();
 </script>
 </body>
