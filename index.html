@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FFF8F3">
-<title>치이샵 (CHII SHOP) · 치이카와 온라인 쿠지</title>
+<title>치이샵 (CHII SHOP) · 제일 복권 & 카드샵</title>
 <!--
-  치이샵 CHII SHOP — 온라인 쿠지(뽑기)샵 모바일 웹 (사업 검토용 샘플)
-  - 단일 파일 / 외부 CDN·폰트·이미지 의존 없음
+  치이샵 CHII SHOP — 다중 쿠지(이치방쿠지) · 카드샵(TCG) 모바일 웹 (사업 검토용 샘플)
+  - 단일 파일 / 외부 CDN·폰트·이미지 의존 없음 (썸네일은 전부 인라인 SVG)
   - 결제·배송은 데모로만 동작하며 실제 청구/발송은 없습니다.
-  - 모든 티켓은 꽝 없이 100% 당첨, 등급별 잔여 수량·확률 실시간 공개.
-  - 홈: 진행중 쿠지 + 오픈 예정 쿠지(준비중·알림 신청) 라인업
+  - 상품마다 독립된 티켓 풀·등급별 잔여 수량·실시간 확률·라스트원상.
+  - 뽑은 상품은 하나의 진열장(보관함)에 쌓이고 묶음 배송 신청 가능.
 -->
 <style>
   :root{
@@ -32,6 +32,7 @@
     --shadow-sm:0 3px 10px rgba(196,126,146,.10);
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  [hidden]{display:none!important}
   html,body{height:100%}
   body{
     margin:0;
@@ -71,142 +72,235 @@
   /* ---------- top bar ---------- */
   .topbar{
     flex:0 0 auto;
-    display:flex;align-items:center;gap:8px;
-    padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;
-    background:rgba(255,248,243,.92);
+    padding:calc(env(safe-area-inset-top) + 10px) 14px 9px;
+    background:rgba(255,248,243,.95);
     backdrop-filter:blur(10px);
-    border-bottom:1px solid rgba(244,229,221,.7);
+    border-bottom:1px solid rgba(244,229,221,.75);
     z-index:20;
   }
-  .brand{display:flex;align-items:center;gap:9px;min-width:0}
+  .top-row{display:flex;align-items:center;gap:8px}
+  .brand{display:flex;align-items:center;gap:8px;min-width:0;flex:0 0 auto}
   .brand-mark{
-    width:34px;height:34px;border-radius:12px;flex:0 0 auto;
+    width:31px;height:31px;border-radius:11px;flex:0 0 auto;
     background:linear-gradient(150deg,#FFB0C4,#FF7FA0 70%);
     display:grid;place-items:center;color:#fff;
     box-shadow:0 4px 10px rgba(255,127,160,.35);
   }
-  .brand-mark svg{width:20px;height:20px;fill:#fff}
-  .brand-name{font-size:16px;font-weight:800;letter-spacing:-.1px;line-height:1.1}
-  .brand-name em{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:1.2px;color:#E39BAD;vertical-align:2px;margin-left:3px}
-  .brand-sub{font-size:9.5px;color:var(--muted);font-weight:700;margin-top:3px;letter-spacing:.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:172px}
-  .top-actions{margin-left:auto;display:flex;align-items:center;gap:7px}
-  .points{
-    display:flex;align-items:center;gap:5px;
-    height:32px;padding:0 11px 0 9px;border-radius:999px;
-    background:#fff;border:1px solid #FFDCE6;
-    font-size:12px;font-weight:800;color:var(--pink-deep);
-    box-shadow:var(--shadow-sm);
+  .brand-mark svg{width:18px;height:18px;fill:#fff}
+  .brand-name{font-size:15px;font-weight:800;letter-spacing:-.2px;line-height:1.05;white-space:nowrap}
+  .brand-name em{font-style:normal;font-size:7.5px;font-weight:800;letter-spacing:1px;color:#E39BAD;vertical-align:2px;margin-left:3px}
+  .brand-sub{font-size:8.5px;color:var(--muted);font-weight:700;margin-top:2px;letter-spacing:.1px;white-space:nowrap}
+
+  .detail-head{display:flex;align-items:center;gap:7px;min-width:0;flex:1 1 auto}
+  .back-btn{
+    width:30px;height:30px;border-radius:10px;flex:0 0 auto;
+    background:#fff;border:1px solid #FFDCE6;display:grid;place-items:center;box-shadow:var(--shadow-sm);
   }
-  .points svg{width:14px;height:14px;fill:var(--gold)}
-  .points .unit{color:#C9A2AE;font-weight:700;font-size:11px}
+  .back-btn svg{width:15px;height:15px;fill:none;stroke:var(--pink-deep);stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+  .detail-title{font-size:13.5px;font-weight:800;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  .top-actions{margin-left:auto;display:flex;align-items:center;gap:6px;flex:0 0 auto}
+  .points{
+    display:flex;align-items:center;gap:4px;
+    height:30px;padding:0 10px 0 8px;border-radius:999px;
+    background:#fff;border:1px solid #FFDCE6;
+    font-size:11.5px;font-weight:800;color:var(--pink-deep);
+    box-shadow:var(--shadow-sm);font-variant-numeric:tabular-nums;
+  }
+  .points svg{width:13px;height:13px;fill:var(--gold)}
+  .points .unit{color:#C9A2AE;font-weight:700;font-size:10px}
+  .points .plus{
+    width:13px;height:13px;border-radius:50%;margin-left:1px;
+    background:linear-gradient(135deg,#FFB3C6,#FF7FA0);color:#fff;
+    font-size:10px;font-weight:800;line-height:1;display:grid;place-items:center;
+  }
   .icon-btn{
-    position:relative;width:34px;height:34px;border-radius:12px;
+    position:relative;width:31px;height:31px;border-radius:11px;
     background:#fff;border:1px solid #FFDCE6;display:grid;place-items:center;
     box-shadow:var(--shadow-sm);
   }
-  .icon-btn svg{width:17px;height:17px;fill:none;stroke:var(--pink-deep);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .icon-btn svg{width:16px;height:16px;fill:none;stroke:var(--pink-deep);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
   .cart-count{
     position:absolute;top:-5px;right:-5px;min-width:16px;height:16px;padding:0 4px;
-    border-radius:999px;background:var(--pink);color:#fff;font-size:10px;font-weight:800;
+    border-radius:999px;background:var(--pink);color:#fff;font-size:9.5px;font-weight:800;
     display:grid;place-items:center;border:2px solid var(--cream);line-height:1;
   }
   .cart-count.zero{display:none}
 
+  .search-row{margin-top:8px}
+  .search{
+    display:flex;align-items:center;gap:7px;height:36px;padding:0 11px;
+    background:#fff;border:1px solid #FFE1EA;border-radius:12px;box-shadow:var(--shadow-sm);
+  }
+  .search svg{width:15px;height:15px;fill:none;stroke:#C9A2AE;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+  .search input{
+    flex:1 1 auto;min-width:0;border:0;outline:none;background:none;
+    font-size:12px;font-weight:600;color:var(--ink);height:100%;
+  }
+  .search input::placeholder{color:#C4B2BA;font-weight:600}
+  .search input::-webkit-search-cancel-button{display:none}
+  .search .clear{
+    flex:0 0 auto;width:18px;height:18px;border-radius:50%;background:#F3E6EB;
+    color:#9A848E;font-size:12px;font-weight:800;line-height:1;display:grid;place-items:center;
+  }
+
   /* ---------- screens ---------- */
   .screen{
     flex:1 1 auto;overflow-y:auto;overflow-x:hidden;
-    padding:14px 16px 20px;
+    padding:13px 14px 22px;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
   }
   .screen::-webkit-scrollbar{display:none}
-  #screenHome{padding-bottom:26px}
-  .screen[hidden]{display:none}
 
-  /* ---------- hero ---------- */
-  .hero{
-    position:relative;overflow:hidden;
-    border-radius:24px;
-    background:linear-gradient(160deg,#FFFFFF 0%,#FFF3F7 55%,#FFEAF1 100%);
-    border:1px solid #FFE1EA;
-    box-shadow:var(--shadow);
-    padding:14px 16px 12px;
+  /* ---------- notice ---------- */
+  .notice{
+    display:flex;align-items:center;gap:7px;margin-bottom:12px;
+    padding:8px 11px;border-radius:12px;
+    background:linear-gradient(90deg,#FFF1F6,#FFF9FB);
+    border:1px solid #FFE0E9;
+    font-size:10.5px;font-weight:700;color:#9C6E7C;
+    box-shadow:0 2px 8px rgba(196,126,146,.06);
+    width:100%;text-align:left;
   }
-  .hero::after{
-    content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;
-    background:radial-gradient(circle,#FFD9E5 0%,rgba(255,217,229,0) 70%);
+  .notice .ntag{
+    flex:0 0 auto;font-size:8.5px;font-weight:800;letter-spacing:.6px;color:#fff;
+    background:linear-gradient(135deg,#FF9DB5,#F2607F);padding:3px 6px;border-radius:5px;line-height:1.2;
   }
-  .hero-top{display:flex;gap:6px;align-items:center;position:relative;z-index:2;flex-wrap:wrap}
-  .badge{
+  .notice .ntxt{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .notice .ntxt b{color:var(--pink-deep);font-weight:800}
+  .notice .narr{flex:0 0 auto;font-weight:800;color:#D0AFBA;font-size:13px;line-height:1}
+
+  /* ---------- section ---------- */
+  .sec{margin-top:16px}
+  .sec-head{display:flex;align-items:center;gap:6px;margin-bottom:9px}
+  .sec-head h2{font-size:14px;font-weight:800;letter-spacing:-.25px;white-space:nowrap}
+  .sec-head h2 em{font-style:normal;font-size:10px;font-weight:800;color:#C09AA8;letter-spacing:0;margin-left:1px}
+  .sec-head .more{
+    margin-left:auto;flex:0 0 auto;display:inline-flex;align-items:center;gap:2px;
+    font-size:10px;font-weight:800;color:#A98C99;background:#fff;border:1px solid var(--line);
+    padding:4px 9px;border-radius:999px;letter-spacing:-.2px;
+  }
+  .live-chip{
     display:inline-flex;align-items:center;gap:4px;
-    font-size:10.5px;font-weight:800;letter-spacing:.2px;
-    padding:4px 9px;border-radius:999px;line-height:1;
+    font-size:9px;font-weight:800;color:#fff;background:var(--pink);
+    padding:3px 6px;border-radius:6px;letter-spacing:.6px;
   }
-  .badge.gold{background:linear-gradient(135deg,#FFE3A8,#FFD07A);color:#8A5A0B;box-shadow:0 2px 6px rgba(239,177,67,.25)}
-  .badge.ghost{background:#fff;color:#B58C9A;border:1px solid #FFDDE7}
-  .badge.live{background:#FFF0F4;color:var(--pink-deep)}
-  .badge.live .dot{width:5px;height:5px;border-radius:50%;background:var(--pink);animation:pulse 1.6s infinite}
-  .hero-body{display:flex;gap:10px;align-items:flex-end;position:relative;z-index:2;margin-top:10px}
-  .hero-text{flex:1 1 auto;min-width:0}
-  .hero-text h1{font-size:21px;line-height:1.28;font-weight:800;letter-spacing:-.4px}
-  .hero-sub{margin-top:5px;font-size:11.5px;color:var(--ink-2);font-weight:600}
+  .live-chip i{width:4px;height:4px;border-radius:50%;background:#fff;animation:pulse 1.4s infinite}
+  .sec-note{font-size:10.5px;color:var(--muted);font-weight:600;margin:-4px 0 9px}
+
+  /* ---------- catalog grid ---------- */
+  .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px 8px}
+  .grid4.rows5{grid-template-columns:repeat(5,minmax(0,1fr));gap:11px 7px}
+  .pcard{display:flex;flex-direction:column;gap:4px;text-align:left;min-width:0;background:none}
+  .pthumb{
+    position:relative;display:block;width:100%;aspect-ratio:1/1;border-radius:13px;overflow:hidden;
+    background:#fff;border:1px solid rgba(255,255,255,.9);
+    box-shadow:0 4px 12px rgba(196,126,146,.17);
+    transition:transform .13s ease, box-shadow .18s;
+  }
+  .pcard:active .pthumb{transform:scale(.955);box-shadow:0 2px 6px rgba(196,126,146,.16)}
+  .pthumb > svg{display:block;width:100%;height:100%}
+  .pbadge{
+    position:absolute;top:5px;left:5px;z-index:2;
+    font-size:7.5px;font-weight:800;color:#fff;letter-spacing:-.3px;
+    padding:2.5px 5px;border-radius:5px;line-height:1.1;
+    box-shadow:0 2px 6px rgba(74,61,68,.18);white-space:nowrap;
+  }
+  .b-new{background:linear-gradient(135deg,#8ADDC0,#3EAE87)}
+  .b-hot{background:linear-gradient(135deg,#FFA07A,#EE5A6F)}
+  .b-inf{background:linear-gradient(135deg,#FF9DB5,#D93E71)}
+  .b-ex{background:linear-gradient(135deg,#FFC46B,#EF8A1F)}
+  .b-nl{background:linear-gradient(135deg,#A699B6,#6E6280)}
+  .sold-mask{
+    position:absolute;inset:0;display:grid;place-items:center;
+    background:rgba(74,61,68,.52);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;z-index:3;
+  }
+  .pname{
+    font-size:10.1px;font-weight:700;line-height:1.26;color:var(--ink);letter-spacing:-.3px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+    min-height:25px;word-break:keep-all;
+  }
+  .pprice{
+    font-size:11px;font-weight:800;color:var(--pink-deep);letter-spacing:-.3px;
+    font-variant-numeric:tabular-nums;line-height:1.1;
+  }
+  .pprice small{font-size:8px;font-weight:800;color:#D3A6B4;margin-left:2px}
+  .pcard.out{opacity:.72}
+
+  /* ---------- shop filter ---------- */
+  .chips{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:1px}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{
+    flex:0 0 auto;font-size:11px;font-weight:800;color:#A98C99;background:#fff;
+    border:1px solid var(--line);border-radius:999px;padding:6px 11px;letter-spacing:-.2px;
+    transition:.18s;
+  }
+  .chip.on{color:#fff;background:linear-gradient(135deg,#FF9AB3,#FF7096);border-color:transparent;box-shadow:0 4px 12px rgba(255,127,160,.28)}
+
+  /* ---------- empty ---------- */
+  .empty{
+    text-align:center;padding:30px 16px 26px;background:#fff;border:1px dashed #F0DCD4;border-radius:20px;
+  }
+  .empty svg{width:52px;height:52px;margin-bottom:6px}
+  .empty p{font-size:12px;color:var(--ink-2);font-weight:700;line-height:1.6}
+  .empty span{display:block;font-size:10.5px;color:var(--muted);font-weight:600;margin-top:4px}
+  .empty.small{padding:20px 12px}
+
+  /* ---------- detail ---------- */
+  .d-hero{
+    display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:20px;
+    padding:11px;box-shadow:var(--shadow);
+  }
+  .d-art{
+    flex:0 0 112px;width:112px;height:112px;border-radius:16px;overflow:hidden;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.85);
+  }
+  .d-art svg{display:block;width:100%;height:100%}
+  .d-info{flex:1 1 auto;min-width:0;display:flex;flex-direction:column}
+  .d-badges{display:flex;gap:4px;flex-wrap:wrap}
+  .d-badges .pbadge{position:static;box-shadow:none;font-size:8.5px;padding:3px 6px;border-radius:5px}
+  .d-tag{
+    font-size:8.5px;font-weight:800;color:#B58C9A;background:#FFF3F7;border:1px solid #FFE0E9;
+    padding:3px 6px;border-radius:5px;line-height:1.1;
+  }
+  .d-name{font-size:15.5px;font-weight:800;letter-spacing:-.45px;line-height:1.25;margin-top:6px;word-break:keep-all}
+  .d-sub{font-size:9.5px;color:var(--muted);font-weight:700;margin-top:3px}
+  .d-price{
+    margin-top:auto;display:flex;align-items:baseline;gap:4px;
+    font-size:17px;font-weight:800;color:var(--pink-deep);letter-spacing:-.5px;
+    font-variant-numeric:tabular-nums;
+  }
+  .d-price small{font-size:9.5px;color:var(--muted);font-weight:700;letter-spacing:0}
   .progress{
-    margin-top:12px;height:9px;border-radius:999px;background:#FFE3EC;overflow:hidden;
+    margin-top:7px;height:7px;border-radius:999px;background:#FFE3EC;overflow:hidden;
     box-shadow:inset 0 1px 2px rgba(196,126,146,.12);
   }
   .progress i{
     display:block;height:100%;border-radius:999px;
     background:linear-gradient(90deg,#FFB3C6,#FF7FA0);
     transition:width .45s cubic-bezier(.3,1.3,.5,1);
-    position:relative;
   }
-  .progress i::after{
-    content:"";position:absolute;inset:0;border-radius:999px;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
-    transform:translateX(-100%);animation:shine 2.6s ease-in-out infinite;
-  }
-  .progress-meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;font-size:11px;color:var(--ink-2);font-weight:600}
-  .progress-meta b{color:var(--pink-deep);font-size:13px;font-weight:800}
-  .hero-art{flex:0 0 108px;height:104px}
-  .hero-art svg{width:100%;height:100%;overflow:visible}
-  .hero-foot{
-    position:relative;z-index:2;margin-top:12px;padding-top:10px;border-top:1px dashed #FFDCE6;
-    display:flex;align-items:center;gap:6px;font-size:10.5px;color:#A9818F;font-weight:700;
-  }
-  .hero-foot .pill{width:5px;height:5px;border-radius:50%;background:var(--mint)}
-  .hero.sold-out{filter:saturate(.55)}
-  .hero.sold-out .progress i{background:linear-gradient(90deg,#DCD2D7,#BFAFB6)}
-
-  /* ---------- section ---------- */
-  .sec{margin-top:18px}
-  .sec-head{display:flex;align-items:center;gap:8px;margin-bottom:9px}
-  .sec-head h2{font-size:14.5px;font-weight:800;letter-spacing:-.2px}
-  .sec-head .aside{margin-left:auto;font-size:10.5px;color:var(--muted);font-weight:700}
-  .live-chip{
-    display:inline-flex;align-items:center;gap:4px;
-    font-size:9.5px;font-weight:800;color:#fff;background:var(--pink);
-    padding:3px 7px;border-radius:6px;letter-spacing:.6px;
-  }
-  .live-chip i{width:4px;height:4px;border-radius:50%;background:#fff;animation:pulse 1.4s infinite}
-  .sec-note{font-size:10.5px;color:var(--muted);font-weight:600;margin:-4px 0 9px}
+  .progress-meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:5px;font-size:10px;color:var(--ink-2);font-weight:700}
+  .progress-meta b{color:var(--pink-deep);font-size:11.5px;font-weight:800}
 
   /* ---------- prize list ---------- */
   .prize-list{
-    background:#fff;border-radius:20px;border:1px solid var(--line);
+    background:#fff;border-radius:18px;border:1px solid var(--line);
     box-shadow:var(--shadow-sm);overflow:hidden;
   }
   .prize-row{
-    display:flex;align-items:center;gap:10px;
-    padding:11px 13px;border-bottom:1px solid #FBF0EA;
+    display:flex;align-items:center;gap:9px;
+    padding:10px 12px;border-bottom:1px solid #FBF0EA;
     transition:background .25s;
   }
   .prize-row:last-child{border-bottom:0}
   .prize-row.flash{background:#FFF6F9}
   .thumb{
-    width:42px;height:42px;border-radius:13px;flex:0 0 auto;display:grid;place-items:center;
+    width:38px;height:38px;border-radius:12px;flex:0 0 auto;display:grid;place-items:center;
     border:1px solid rgba(255,255,255,.9);
   }
-  .thumb svg{width:23px;height:23px;fill:none;stroke:#7A6670;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .thumb svg{width:21px;height:21px;fill:none;stroke:#7A6670;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
   .thumb.tone-pink{background:linear-gradient(150deg,#FFE1EA,#FFC9D8)}
   .thumb.tone-yellow{background:linear-gradient(150deg,#FFF3D6,#FFE3AE)}
   .thumb.tone-mint{background:linear-gradient(150deg,#E1F7EF,#C3EFDF)}
@@ -216,32 +310,33 @@
   .prize-main{flex:1 1 auto;min-width:0}
   .prize-top{display:flex;align-items:center;gap:6px}
   .grade{
-    font-size:10px;font-weight:800;color:#fff;background:var(--pink);
-    width:18px;height:18px;border-radius:6px;display:grid;place-items:center;flex:0 0 auto;
+    font-size:9.5px;font-weight:800;color:#fff;background:var(--pink);
+    height:17px;min-width:17px;padding:0 4px;border-radius:5px;
+    display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;letter-spacing:-.2px;
   }
   .grade.a{background:linear-gradient(140deg,#FF9DB5,#F2607F)}
   .grade.b{background:linear-gradient(140deg,#FFC46B,#EFA028)}
   .grade.c{background:linear-gradient(140deg,#8ADDC0,#45BA92)}
   .grade.d{background:linear-gradient(140deg,#B7A4F0,#8B6FE0)}
   .grade.e{background:linear-gradient(140deg,#9BD2F2,#5FA9DC)}
-  .prize-name{font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .prize-count{margin-left:auto;font-size:10.5px;color:var(--muted);font-weight:700;flex:0 0 auto}
-  .prize-count b{color:var(--ink-2);font-size:11.5px;font-weight:800}
-  .bar{height:5px;border-radius:999px;background:#F7ECE7;margin-top:6px;overflow:hidden}
-  .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#FFC0D1,#FF8FA9);transition:width .5s ease, background .3s}
+  .prize-name{font-size:11.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .prize-count{margin-left:auto;font-size:10px;color:var(--muted);font-weight:700;flex:0 0 auto}
+  .prize-count b{color:var(--ink-2);font-size:11px;font-weight:800}
+  .bar{height:4.5px;border-radius:999px;background:#F7ECE7;margin-top:5px;overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#FFC0D1,#FF8FA9);transition:width .5s ease}
   .pct{
-    flex:0 0 46px;text-align:right;font-size:12.5px;font-weight:800;color:var(--pink-deep);
+    flex:0 0 42px;text-align:right;font-size:12px;font-weight:800;color:var(--pink-deep);
     font-variant-numeric:tabular-nums;
   }
-  .pct small{display:block;font-size:9px;color:var(--muted);font-weight:700;margin-top:1px}
+  .pct small{display:block;font-size:8.5px;color:var(--muted);font-weight:700;margin-top:1px}
   .prize-row.done{opacity:.5}
   .prize-row.done .pct{color:var(--muted)}
   .prize-row.done .thumb{filter:grayscale(.6)}
 
   .last-row{
     position:relative;overflow:hidden;
-    margin-top:10px;border-radius:18px;padding:12px 13px;
-    display:flex;align-items:center;gap:10px;
+    margin-top:9px;border-radius:16px;padding:11px 12px;
+    display:flex;align-items:center;gap:9px;
     background:linear-gradient(120deg,#FFF7E4,#FFEFD0 55%,#FFE6B8);
     border:1px solid #FFE2AC;
     box-shadow:0 6px 16px rgba(239,177,67,.16);
@@ -251,13 +346,20 @@
     background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,0) 70%);
   }
   .last-row .thumb{background:linear-gradient(150deg,#FFE8B5,#FFCE72);border-color:#fff}
-  .last-row .prize-name{font-size:12px;font-weight:800;color:#7A4E06}
-  .last-row .sub{font-size:10px;color:#A97B25;font-weight:700;margin-top:3px}
+  .last-row .prize-name{font-size:11.5px;font-weight:800;color:#7A4E06}
+  .last-row .sub{font-size:9.5px;color:#A97B25;font-weight:700;margin-top:2px}
   .last-row .flag{
-    margin-left:auto;flex:0 0 auto;font-size:10px;font-weight:800;color:#8A5A0B;
+    margin-left:auto;flex:0 0 auto;font-size:9.5px;font-weight:800;color:#8A5A0B;
     background:rgba(255,255,255,.75);padding:4px 8px;border-radius:999px;border:1px solid #FFE0A8;
   }
   .last-row.won .flag{background:#7A4E06;color:#FFE7B0;border-color:#7A4E06}
+  .last-row.none{
+    background:#FBF4F6;border:1px dashed #EBD7DE;box-shadow:none;
+  }
+  .last-row.none::after{display:none}
+  .last-row.none .thumb{background:#F2E7EB;border-color:#fff;filter:grayscale(.3)}
+  .last-row.none .prize-name{color:#8E7A83}
+  .last-row.none .sub{color:#A3939C}
 
   /* ---------- info cards ---------- */
   .info-grid{display:grid;gap:7px;margin-top:16px}
@@ -268,95 +370,19 @@
   .info .ic{width:26px;height:26px;border-radius:9px;flex:0 0 auto;display:grid;place-items:center;background:var(--pink-mist)}
   .info .ic svg{width:14px;height:14px;fill:none;stroke:var(--pink-deep);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   .info b{color:var(--ink);font-weight:800}
-  .demo-note{
-    margin:18px 2px 4px;text-align:center;font-size:9.5px;color:#B7A6AE;font-weight:600;line-height:1.6;
-  }
-
-  /* ---------- notice bar ---------- */
-  .notice{
-    display:flex;align-items:center;gap:7px;margin-bottom:12px;
-    padding:8px 11px;border-radius:12px;
-    background:linear-gradient(90deg,#FFF1F6,#FFF9FB);
-    border:1px solid #FFE0E9;
-    font-size:10.5px;font-weight:700;color:#9C6E7C;
-    box-shadow:0 2px 8px rgba(196,126,146,.06);
-  }
-  .notice .ntag{
-    flex:0 0 auto;font-size:8.5px;font-weight:800;letter-spacing:.6px;color:#fff;
-    background:linear-gradient(135deg,#FF9DB5,#F2607F);padding:3px 6px;border-radius:5px;line-height:1.2;
-  }
-  .notice .ntxt{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .notice .ntxt b{color:var(--pink-deep);font-weight:800}
-  .notice .narr{flex:0 0 auto;font-weight:800;color:#D0AFBA;font-size:13px;line-height:1}
-
-  /* ---------- lineup ---------- */
-  .lineup{
-    display:grid;grid-template-columns:1fr 1fr;gap:9px;
-  }
-  .lk{
-    position:relative;overflow:hidden;cursor:pointer;
-    border-radius:18px;border:1px solid #FFE2EA;
-    background:linear-gradient(158deg,#FFFFFF 0%,#FFF5F8 100%);
-    box-shadow:var(--shadow-sm);padding:11px 11px 10px;
-    transition:transform .12s ease,box-shadow .2s;
-  }
-  .lk:active{transform:scale(.985)}
-  .lk.tone-mint{background:linear-gradient(158deg,#FFFFFF 0%,#F1FBF6 100%);border-color:#D8F0E7}
-  .lk.tone-lav{background:linear-gradient(158deg,#FFFFFF 0%,#F7F3FF 100%);border-color:#E4DAFA}
-  .lk::after{
-    content:"";position:absolute;right:-26px;top:-26px;width:106px;height:106px;border-radius:50%;
-    background:radial-gradient(circle,rgba(255,224,234,.95),rgba(255,224,234,0) 70%);
-  }
-  .lk.tone-mint::after{background:radial-gradient(circle,rgba(210,244,231,.95),rgba(210,244,231,0) 70%)}
-  .lk-top{position:relative;z-index:2;display:flex;align-items:center;gap:5px}
-  .lk-state{font-size:9px;font-weight:800;color:#8F7A82;background:#F5EBEF;padding:3px 7px;border-radius:999px;letter-spacing:.2px}
-  .lk-dday{
-    margin-left:auto;font-size:9.5px;font-weight:800;color:var(--pink-deep);
-    background:#fff;border:1px solid #FFDCE6;padding:3px 7px;border-radius:999px;
-    font-variant-numeric:tabular-nums;
-  }
-  .lk.tone-mint .lk-dday{color:#2E8E6B;border-color:#CFEDE1}
-  .lk-name{position:relative;z-index:2;margin-top:8px;font-size:12.5px;font-weight:800;line-height:1.36;letter-spacing:-.3px;padding-right:38px;min-height:34px}
-  .lk-meta{position:relative;z-index:2;margin-top:4px;font-size:9.5px;color:var(--muted);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .lk-foot{position:relative;z-index:2;margin-top:9px;display:flex;align-items:center;gap:4px}
-  .lk-price{font-size:9.5px;font-weight:800;color:var(--ink-2);white-space:nowrap}
-  .lk-bell{
-    margin-left:auto;flex:0 0 auto;display:inline-flex;align-items:center;gap:3px;
-    font-size:9.5px;font-weight:800;color:var(--pink-deep);
-    background:#FFF0F4;border:1px solid #FFD6E2;padding:4px 7px;border-radius:999px;
-    transition:background .18s,color .18s,border-color .18s;letter-spacing:-.2px;
-  }
-  .lk-bell svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .lk-bell.on{background:var(--pink);border-color:var(--pink);color:#fff}
-  .lk.tone-mint .lk-bell{color:#2E8E6B;background:#EDFAF4;border-color:#CFEDE1}
-  .lk.tone-mint .lk-bell.on{background:#4CB995;border-color:#4CB995;color:#fff}
-  .lk-art{position:absolute;right:6px;top:33px;width:38px;height:38px;z-index:1;opacity:.9}
-  .lk-art svg{width:100%;height:100%;fill:none;stroke:#DBA9B8;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
-  .lk.tone-mint .lk-art svg{stroke:#8FC7B4}
-
-  /* ---------- notice list / footer ---------- */
-  .nlist{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm)}
-  .nrow{display:flex;align-items:center;gap:7px;padding:10px 13px;border-bottom:1px solid #FBF0EA;font-size:11px;font-weight:600;color:var(--ink-2)}
-  .nrow:last-child{border-bottom:0}
-  .nrow .ntag2{flex:0 0 auto;font-size:8.5px;font-weight:800;color:#B58C9A;background:#FFF0F4;padding:2px 5px;border-radius:5px}
-  .nrow .ntag2.hot{color:#fff;background:var(--pink)}
-  .nrow .ntx2{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .nrow time{flex:0 0 auto;font-size:9.5px;color:#C1B0B8;font-weight:700}
   .shop-foot{text-align:center;font-size:9.5px;color:#B7A6AE;font-weight:600;line-height:1.75;margin:18px 2px 6px}
   .shop-foot b{color:#8E7A83;font-weight:800}
-  .admin-sub{font-size:10.5px;color:var(--muted);font-weight:700;margin:-9px 0 12px;letter-spacing:-.1px}
 
   /* ---------- buy bar ---------- */
   .buybar{
     flex:0 0 auto;display:flex;gap:8px;
     padding:9px 14px calc(env(safe-area-inset-bottom) + 9px);
-    background:rgba(255,248,243,.96);backdrop-filter:blur(12px);
+    background:rgba(255,248,243,.97);backdrop-filter:blur(12px);
     border-top:1px solid rgba(244,229,221,.9);
     z-index:18;
   }
-  .buybar[hidden]{display:none}
   .btn-draw{
-    flex:1 1 0;border-radius:16px;padding:9px 6px;text-align:center;position:relative;
+    flex:1 1 0;border-radius:15px;padding:9px 6px;text-align:center;position:relative;
     display:flex;flex-direction:column;align-items:center;gap:1px;
     transition:transform .12s ease,box-shadow .2s,opacity .2s;
   }
@@ -369,43 +395,44 @@
     box-shadow:0 6px 16px rgba(239,177,67,.35);
   }
   .btn-draw.five .tag{
-    position:absolute;top:-7px;right:9px;font-size:8.5px;font-weight:800;color:#FFF6DE;
+    position:absolute;top:-7px;right:9px;font-size:8px;font-weight:800;color:#FFF6DE;
     background:#7A4E06;padding:2px 6px;border-radius:999px;letter-spacing:.2px;
   }
   .btn-draw:active{transform:scale(.975)}
   .btn-draw:disabled{opacity:.45;box-shadow:none;cursor:not-allowed}
   .buybar.soldout{justify-content:center}
+  .buybar.soldout .btn-draw{display:none}
   .soldout-note{
     width:100%;text-align:center;font-size:11.5px;font-weight:800;color:#A9818F;
-    padding:9px 0;border-radius:14px;background:#FFF0F4;border:1px dashed #FFCEDC;
+    padding:10px 0;border-radius:14px;background:#FFF0F4;border:1px dashed #FFCEDC;
   }
 
   /* ---------- bottom nav ---------- */
   .tabbar{
     flex:0 0 auto;display:flex;align-items:stretch;
-    padding:0 10px calc(env(safe-area-inset-bottom) + 4px);
+    padding:0 8px calc(env(safe-area-inset-bottom) + 4px);
     background:#FFF8F3;border-top:1px solid rgba(244,229,221,.9);z-index:19;
   }
   .tab{
     flex:1 1 0;display:flex;flex-direction:column;align-items:center;gap:2px;
-    padding:7px 0 6px;color:#BCAAB2;font-size:9.5px;font-weight:800;letter-spacing:.2px;
+    padding:7px 0 6px;color:#BCAAB2;font-size:9px;font-weight:800;letter-spacing:.1px;
     position:relative;transition:color .2s;
   }
-  .tab svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .tab svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   .tab.on{color:var(--pink-deep)}
   .tab.on::before{
-    content:"";position:absolute;top:0;width:26px;height:3px;border-radius:0 0 4px 4px;
+    content:"";position:absolute;top:0;width:24px;height:3px;border-radius:0 0 4px 4px;
     background:var(--pink);
   }
   .tab .tbadge{
-    position:absolute;top:1px;right:calc(50% - 22px);min-width:14px;height:14px;padding:0 3px;
-    border-radius:999px;background:var(--pink);color:#fff;font-size:9px;font-weight:800;
+    position:absolute;top:1px;right:calc(50% - 21px);min-width:14px;height:14px;padding:0 3px;
+    border-radius:999px;background:var(--pink);color:#fff;font-size:8.5px;font-weight:800;
     display:grid;place-items:center;line-height:1;
   }
   .tab .tbadge.zero{display:none}
 
   /* ---------- box tab ---------- */
-  .page-head{display:flex;align-items:flex-end;gap:8px;margin-bottom:13px}
+  .page-head{display:flex;align-items:flex-end;gap:8px;margin-bottom:12px}
   .page-head h2{font-size:19px;font-weight:800;letter-spacing:-.4px}
   .page-head .count{margin-left:auto;font-size:11px;color:var(--muted);font-weight:700}
   .box-tools{display:flex;align-items:center;justify-content:space-between;margin:0 2px 8px}
@@ -417,33 +444,26 @@
   .check .box svg{width:11px;height:11px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:.15s}
   .check.on .box{background:var(--pink);border-color:var(--pink)}
   .check.on .box svg{opacity:1}
-  .ghost-btn{
-    font-size:11px;font-weight:800;color:var(--pink-deep);padding:5px 9px;border-radius:8px;background:#FFF0F4;
-  }
   .item{
     display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);
     border-radius:16px;padding:10px 12px;margin-bottom:7px;box-shadow:0 2px 8px rgba(196,126,146,.05);
     transition:border-color .2s,background .2s;
   }
   .item.sel{border-color:#FFC8D8;background:#FFFBFD}
-  .item .thumb{width:44px;height:44px;border-radius:12px}
+  .item .thumb{width:42px;height:42px;border-radius:12px}
   .item-main{flex:1 1 auto;min-width:0}
   .item-name{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .item-meta{font-size:10px;color:var(--muted);font-weight:600;margin-top:3px;display:flex;align-items:center;gap:5px}
-  .tag-g{font-size:9px;font-weight:800;color:#fff;background:var(--pink);padding:2px 5px;border-radius:5px}
-  .tag-g.last{background:linear-gradient(135deg,#EFB143,#D89422)}
+  .item-meta{font-size:9.5px;color:var(--muted);font-weight:600;margin-top:3px;display:flex;align-items:center;gap:4px;min-width:0}
+  .item-meta .src{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tag-g{flex:0 0 auto;font-size:8.5px;font-weight:800;color:#fff;background:var(--pink);padding:2px 5px;border-radius:5px;line-height:1.2}
+  .tag-g.g-last{background:linear-gradient(135deg,#EFB143,#D89422)}
+  .tag-g.g-a{background:linear-gradient(140deg,#FF9DB5,#F2607F)}
   .tag-g.g-b{background:linear-gradient(140deg,#FFC46B,#EFA028)}
   .tag-g.g-c{background:linear-gradient(140deg,#8ADDC0,#45BA92)}
   .tag-g.g-d{background:linear-gradient(140deg,#B7A4F0,#8B6FE0)}
   .tag-g.g-e{background:linear-gradient(140deg,#9BD2F2,#5FA9DC)}
   .res-headline{font-size:13px;font-weight:800;text-align:center;margin:0 0 12px;color:var(--ink);letter-spacing:-.2px}
   .item .check{margin-left:auto}
-  .empty{
-    text-align:center;padding:34px 16px 30px;background:#fff;border:1px dashed #F0DCD4;border-radius:20px;
-  }
-  .empty svg{width:64px;height:64px;margin-bottom:8px}
-  .empty p{font-size:12px;color:var(--ink-2);font-weight:700;line-height:1.6}
-  .empty span{display:block;font-size:10.5px;color:var(--muted);font-weight:600;margin-top:4px}
   .ship-head{display:flex;align-items:center;gap:6px;margin:16px 2px 8px;font-size:12px;font-weight:800}
   .ship-card{
     background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 13px;margin-bottom:6px;
@@ -452,9 +472,6 @@
   .ship-card .row{display:flex;justify-content:space-between;gap:10px}
   .ship-card .no{font-weight:800;color:var(--ink)}
   .status{font-size:9.5px;font-weight:800;color:#2E8E6B;background:#E8F8F1;padding:3px 7px;border-radius:999px}
-  .box-foot{
-    display:none;
-  }
   .btn-primary{
     width:100%;border-radius:16px;padding:13px;text-align:center;font-size:13.5px;font-weight:800;
     color:#fff;background:linear-gradient(135deg,#FF9AB3,#FF7096);
@@ -479,19 +496,24 @@
     background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 13px;
     box-shadow:0 2px 8px rgba(196,126,146,.05);
   }
-  .kpi .k{font-size:10.5px;color:var(--muted);font-weight:700}
-  .kpi .v{font-size:19px;font-weight:800;letter-spacing:-.6px;margin-top:4px;font-variant-numeric:tabular-nums}
-  .kpi .v small{font-size:11px;font-weight:700;color:var(--muted);margin-left:2px}
+  .kpi .k{font-size:10px;color:var(--muted);font-weight:700;line-height:1.35}
+  .kpi .v{font-size:18px;font-weight:800;letter-spacing:-.6px;margin-top:4px;font-variant-numeric:tabular-nums}
+  .kpi .v small{font-size:10.5px;font-weight:700;color:var(--muted);margin-left:2px}
   .kpi.wide{grid-column:1 / -1;background:linear-gradient(135deg,#FFF6F9,#FFF0F4);border-color:#FFDDE7}
-  .kpi.wide .v{color:var(--pink-deep);font-size:23px}
+  .kpi.wide .v{color:var(--pink-deep);font-size:22px}
   .admin-list{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
-  .admin-row{display:flex;align-items:center;gap:9px;padding:10px 13px;border-bottom:1px solid #FBF0EA;font-size:11.5px;font-weight:700}
+  .admin-row{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid #FBF0EA;font-size:11px;font-weight:700}
   .admin-row:last-child{border-bottom:0}
   .admin-row .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .admin-row .rt{margin-left:auto;font-size:11px;color:var(--ink-2);font-variant-numeric:tabular-nums;flex:0 0 auto}
+  .admin-row .nm em{display:block;font-style:normal;font-size:8.5px;color:#C1B0B8;font-weight:700;margin-top:1px}
+  .admin-row .rt{margin-left:auto;font-size:10.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;flex:0 0 auto;text-align:right}
+  .admin-row .rt b{display:block;font-size:10.5px}
+  .admin-row .rt span{font-size:9px;color:var(--muted);font-weight:700}
   .log-list{background:#fff;border:1px solid var(--line);border-radius:16px;padding:4px 0}
   .log-row{display:flex;gap:8px;padding:7px 13px;font-size:10.5px;color:var(--ink-2);font-weight:600}
-  .log-row time{color:var(--muted);font-variant-numeric:tabular-nums;flex:0 0 42px}
+  .log-row time{color:var(--muted);font-variant-numeric:tabular-nums;flex:0 0 38px}
+  .log-row .lg{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .log-row .lg i{font-style:normal;color:#C1B0B8}
   .log-empty{padding:16px;text-align:center;font-size:11px;color:var(--muted);font-weight:600}
   .reset-btn{
     width:100%;margin-top:14px;padding:13px;border-radius:15px;font-size:12.5px;font-weight:800;
@@ -575,7 +597,7 @@
 
   /* ---------- result sheet ---------- */
   .result-top{
-    position:relative;padding:24px 20px 20px;text-align:center;overflow:hidden;
+    position:relative;padding:22px 20px 18px;text-align:center;overflow:hidden;
     background:linear-gradient(165deg,#FFF0F5,#FFE3EC);
   }
   .result-top.multi{padding:18px 20px 15px}
@@ -594,12 +616,13 @@
   }
   .res-grade.gold{background:linear-gradient(135deg,#FFD877,#E29B1E);box-shadow:0 8px 18px rgba(226,155,30,.35);color:#5C3A02}
   .res-glyph{
-    position:relative;width:96px;height:96px;margin:14px auto 0;border-radius:26px;
+    position:relative;width:92px;height:92px;margin:14px auto 0;border-radius:24px;
     background:#fff;display:grid;place-items:center;box-shadow:0 10px 24px rgba(196,126,146,.18);
-    animation:popIn .55s .08s cubic-bezier(.2,1.4,.4,1) both;
+    animation:popIn .55s .08s cubic-bezier(.2,1.4,.4,1) both;overflow:hidden;
   }
-  .res-glyph svg{width:52px;height:52px;fill:none;stroke:#7A6670;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-  .res-name{position:relative;margin-top:13px;font-size:14px;font-weight:800;line-height:1.4;letter-spacing:-.3px}
+  .res-glyph svg{width:100%;height:100%;display:block}
+  .res-name{position:relative;margin-top:12px;font-size:14px;font-weight:800;line-height:1.4;letter-spacing:-.3px}
+  .res-prod{position:relative;margin-top:4px;font-size:10px;font-weight:700;color:#B58C9A}
   .res-saved{
     position:relative;display:inline-flex;align-items:center;gap:5px;margin-top:9px;
     font-size:10.5px;font-weight:800;color:#2E8E6B;background:#E8F8F1;padding:5px 10px;border-radius:999px;
@@ -626,14 +649,15 @@
 
   /* ---------- charge / confirm ---------- */
   .charge-amt{text-align:center;padding:6px 0 12px}
-  .charge-amt .big{font-size:26px;font-weight:800;letter-spacing:-1px;color:var(--pink-deep)}
+  .charge-amt .big{font-size:25px;font-weight:800;letter-spacing:-1px;color:var(--pink-deep)}
   .charge-amt .sub{font-size:11px;color:var(--muted);font-weight:700;margin-top:4px}
+  .charge-amt .sub b{color:var(--ink-2)}
   .confirm-text{font-size:12px;color:var(--ink-2);font-weight:600;line-height:1.65}
   .confirm-text b{color:#C2455E}
 
   /* ---------- toast ---------- */
   .toast{
-    position:absolute;left:50%;bottom:162px;transform:translate(-50%,14px);
+    position:absolute;left:50%;bottom:152px;transform:translate(-50%,14px);
     background:rgba(74,61,68,.94);color:#fff;font-size:11.5px;font-weight:700;
     padding:10px 16px;border-radius:999px;white-space:nowrap;max-width:88%;
     overflow:hidden;text-overflow:ellipsis;
@@ -643,7 +667,6 @@
   .toast.show{opacity:1;transform:translate(-50%,0)}
 
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
-  @keyframes shine{0%{transform:translateX(-100%)}55%,100%{transform:translateX(220%)}}
   @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   @keyframes popIn{0%{opacity:0;transform:scale(.72)}100%{opacity:1;transform:scale(1)}}
   @keyframes riseIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
@@ -662,214 +685,191 @@
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   }
+  .mo{fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 </style>
 </head>
 <body>
 
 <!-- ============ icon sprite ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2.6l2.3 5.9 5.9 2.3-5.9 2.3L12 19l-2.3-5.9L3.8 10.8l5.9-2.3z"/></symbol>
   <symbol id="i-bow" viewBox="0 0 24 24"><path d="M11.3 11.1 5.6 7.8A1.9 1.9 0 003 9.4v5.2a1.9 1.9 0 002.6 1.6l5.7-3.3z"/><path d="M12.7 11.1l5.7-3.3A1.9 1.9 0 0121 9.4v5.2a1.9 1.9 0 01-2.6 1.6l-5.7-3.3z"/><circle cx="12" cy="12" r="1.9"/></symbol>
-  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9.5a6 6 0 1112 0c0 4 1.2 5.5 1.2 5.5H4.8S6 13.5 6 9.5z"/><path d="M10 18.5a2 2 0 004 0"/></symbol>
   <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9h6M9 12.5h6M12 9v7"/></symbol>
   <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11a2 2 0 01-2 1.8H8.2a2 2 0 01-2-1.8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V19a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 19z"/><path d="M9.5 20.5v-6h5v6"/></symbol>
+  <symbol id="i-shop" viewBox="0 0 24 24"><path d="M4.6 20V9.6h14.8V20"/><path d="M3 9.6l2-5.6h14l2 5.6z"/><path d="M9.6 20v-4.6h4.8V20"/></symbol>
   <symbol id="i-box" viewBox="0 0 24 24"><path d="M4 8.2L12 4l8 4.2v7.6L12 20l-8-4.2z"/><path d="M4 8.2L12 12.4l8-4.2M12 12.4V20"/></symbol>
-  <symbol id="i-shop" viewBox="0 0 24 24"><path d="M4 9.5V19a1.5 1.5 0 001.5 1.5h13A1.5 1.5 0 0020 19V9.5"/><path d="M3 9.5L5.2 4h13.6L21 9.5z"/><path d="M9 9.5a3 3 0 006 0"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4"/><path d="M4.6 20.4c0-4 3.3-6.4 7.4-6.4s7.4 2.4 7.4 6.4"/></symbol>
+  <symbol id="i-crown" viewBox="0 0 24 24"><path d="M3.5 8.5l3.8 2.6L12 5l4.7 6.1 3.8-2.6-1.6 10.4H5.1z"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 6.5h10v9H3zM13 10h4l3 3v2.5h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10" rx="2.4"/><path d="M8 10V7.6a4 4 0 018 0V10"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6h.01"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.6" cy="10.6" r="6.4"/><path d="M15.4 15.4L20 20"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M14.5 5.5L8 12l6.5 6.5"/></symbol>
   <symbol id="i-plush" viewBox="0 0 24 24"><circle cx="12" cy="14" r="6.2"/><circle cx="6.4" cy="6.6" r="2.6"/><circle cx="17.6" cy="6.6" r="2.6"/><path d="M10 13.2h.01M14 13.2h.01M10.4 16.4c1 .8 2.2.8 3.2 0"/></symbol>
   <symbol id="i-plate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.6"/></symbol>
   <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3.6"/><path d="M10.6 10.6L19 19M15.4 15.4l2-2M17.6 17.6l1.8-1.8"/></symbol>
   <symbol id="i-stand" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="12" rx="2"/><path d="M9 19.5h6M12 15.5v4"/></symbol>
   <symbol id="i-sticker" viewBox="0 0 24 24"><path d="M6 3.5h9l5 5v12a1 1 0 01-1 1H6a1 1 0 01-1-1v-16a1 1 0 011-1z"/><path d="M15 3.5v5h5"/><path d="M9.5 13.5l1.7 1.7 3.3-3.4"/></symbol>
-  <symbol id="i-crown" viewBox="0 0 24 24"><path d="M3.5 8.5l3.8 2.6L12 5l4.7 6.1 3.8-2.6-1.6 10.4H5.1z"/></symbol>
-  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 6.5h10v9H3zM13 10h4l3 3v2.5h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></symbol>
-  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10" rx="2.4"/><path d="M8 10V7.6a4 4 0 018 0V10"/></symbol>
-  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6h.01"/></symbol>
-  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></symbol>
 </svg>
 
 <div class="app" id="app">
 
   <!-- ============ top bar ============ -->
   <header class="topbar">
-    <div class="brand">
-      <span class="brand-mark"><svg><use href="#i-bow"/></svg></span>
-      <div>
-        <div class="brand-name">치이샵<em>CHII SHOP</em></div>
-        <div class="brand-sub">CHII SHOP · 치이카와 온라인 쿠지</div>
+    <div class="top-row">
+      <div class="brand" id="brandBox">
+        <span class="brand-mark"><svg><use href="#i-bow"/></svg></span>
+        <div>
+          <div class="brand-name">치이샵<em>CHII SHOP</em></div>
+          <div class="brand-sub">제일 복권 · 카드샵</div>
+        </div>
+      </div>
+      <div class="detail-head" id="detailHead" hidden>
+        <button class="back-btn" id="backBtn" aria-label="뒤로 가기"><svg><use href="#i-back"/></svg></button>
+        <div class="detail-title" id="detailTitle">상품</div>
+      </div>
+      <div class="top-actions">
+        <button class="points" id="pointsBtn" aria-label="내 포인트, 충전하기">
+          <svg><use href="#i-coin"/></svg>
+          <span id="pointsVal">240,000</span><span class="unit">P</span><span class="plus">+</span>
+        </button>
+        <button class="icon-btn" id="cartBtn" aria-label="내 진열장">
+          <svg><use href="#i-bag"/></svg>
+          <span class="cart-count zero" id="cartCount">0</span>
+        </button>
       </div>
     </div>
-    <div class="top-actions">
-      <button class="points" id="pointsBtn" aria-label="내 포인트, 충전하기">
-        <svg><use href="#i-coin"/></svg>
-        <span id="pointsVal">240,000</span><span class="unit">P</span>
-      </button>
-      <button class="icon-btn" id="cartBtn" aria-label="내 보관함">
-        <svg><use href="#i-bag"/></svg>
-        <span class="cart-count zero" id="cartCount">0</span>
-      </button>
+    <div class="search-row" id="searchRow">
+      <label class="search">
+        <svg><use href="#i-search"/></svg>
+        <input id="q" type="search" placeholder="상품명 검색 · 치이카와, 포켓몬, 원피스…" aria-label="상품 검색">
+        <button class="clear" id="qClear" type="button" aria-label="검색어 지우기" hidden>×</button>
+      </label>
     </div>
   </header>
 
   <!-- ============ home ============ -->
   <main class="screen" id="screenHome">
-    <div class="notice" id="noticeBar" role="button" tabindex="0">
+    <button class="notice" id="noticeBar">
       <span class="ntag">공지</span>
-      <span class="ntxt"><b>12.01(화) 20:00</b> 모구모구 본점 한정 쿠지 오픈 · 알림 신청 받는 중</span>
+      <span class="ntxt"><b>12.01(화) 20:00</b> 모구모구 본점 · 카드샵 신상 8종 동시 오픈</span>
       <span class="narr">›</span>
-    </div>
+    </button>
 
-    <section class="hero" id="hero">
-      <div class="hero-top">
-        <span class="badge gold" id="lastBadge"><svg style="width:10px;height:10px;fill:#8A5A0B"><use href="#i-crown"/></svg> 라스트원상 있음</span>
-        <span class="badge ghost">전 80개 한정</span>
-        <span class="badge live" id="stateBadge"><span class="dot"></span> 판매중</span>
-      </div>
-      <div class="hero-body">
-        <div class="hero-text">
-          <h1>치이카와 스위츠<br>이치방쿠지</h1>
-          <p class="hero-sub">1회 12,000원 · 꽝 없이 100% 당첨</p>
-          <div class="progress"><i id="heroBar" style="width:52.5%"></i></div>
-          <div class="progress-meta">
-            <span>남은 티켓 <b id="remainTickets">42</b> / 80</span>
-            <span id="soldPct">53% 판매</span>
-          </div>
-        </div>
-        <div class="hero-art" aria-hidden="true">
-          <svg viewBox="0 0 120 116">
-            <circle cx="16" cy="26" r="11" fill="#FFE0EA"/>
-            <circle cx="104" cy="18" r="7" fill="#DFF4EA"/>
-            <circle cx="100" cy="92" r="9" fill="#EFE7FF"/>
-            <ellipse cx="58" cy="96" rx="34" ry="5" fill="#F3DDE3" opacity=".55"/>
-            <!-- white mascot -->
-            <g>
-              <circle cx="42" cy="40" r="10" fill="#fff" stroke="#F0D9CF" stroke-width="1.6"/>
-              <circle cx="74" cy="40" r="10" fill="#fff" stroke="#F0D9CF" stroke-width="1.6"/>
-              <ellipse cx="58" cy="62" rx="30" ry="27" fill="#fff" stroke="#F0D9CF" stroke-width="1.8"/>
-              <circle cx="48" cy="60" r="2.1" fill="#5A4A50"/>
-              <circle cx="68" cy="60" r="2.1" fill="#5A4A50"/>
-              <path d="M55.5 66.5q2.5 2.4 5 0" stroke="#5A4A50" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-              <ellipse cx="40" cy="67" rx="4" ry="2.4" fill="#FFC7D5" opacity=".85"/>
-              <ellipse cx="76" cy="67" rx="4" ry="2.4" fill="#FFC7D5" opacity=".85"/>
-            </g>
-            <!-- cupcake -->
-            <g transform="translate(58 82)">
-              <path d="M-9 0h18l-2.4 9h-13.2z" fill="#F7C98B"/>
-              <path d="M-10.5 -1.5c0-6 5-9 10.5-9s10.5 3 10.5 9z" fill="#FFC2D3"/>
-              <circle cx="-3" cy="-6" r="1.6" fill="#FFF0F4"/>
-              <circle cx="4" cy="-4.5" r="1.4" fill="#FFF0F4"/>
-              <circle cx="2" cy="-11" r="2" fill="#FF6B8A"/>
-            </g>
-            <!-- yellow bunny -->
-            <g transform="translate(96 74)">
-              <ellipse cx="0" cy="4" rx="13" ry="12" fill="#FFE59B" stroke="#F2CE73" stroke-width="1.6"/>
-              <ellipse cx="-5" cy="-13" rx="3.4" ry="9" fill="#FFE59B" stroke="#F2CE73" stroke-width="1.5"/>
-              <ellipse cx="5" cy="-13" rx="3.4" ry="9" fill="#FFE59B" stroke="#F2CE73" stroke-width="1.5"/>
-              <circle cx="-4" cy="2" r="1.7" fill="#5A4A50"/>
-              <circle cx="4" cy="2" r="1.7" fill="#5A4A50"/>
-              <path d="M-2.5 7q2.5 2 5 0" stroke="#5A4A50" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-              <ellipse cx="-9" cy="7" rx="2.6" ry="1.6" fill="#FFC08A" opacity=".8"/>
-              <ellipse cx="9" cy="7" rx="2.6" ry="1.6" fill="#FFC08A" opacity=".8"/>
-            </g>
-            <!-- small blue cat -->
-            <g transform="translate(19 82)">
-              <ellipse cx="0" cy="4" rx="12" ry="11" fill="#DCEFFA" stroke="#B8DCF2" stroke-width="1.6"/>
-              <path d="M-9 -6l1-8 6 5z" fill="#DCEFFA" stroke="#B8DCF2" stroke-width="1.5"/>
-              <path d="M9 -6l-1-8-6 5z" fill="#DCEFFA" stroke="#B8DCF2" stroke-width="1.5"/>
-              <circle cx="-4" cy="2" r="1.6" fill="#5A4A50"/>
-              <circle cx="4" cy="2" r="1.6" fill="#5A4A50"/>
-              <path d="M-2 7q2 1.6 4 0" stroke="#5A4A50" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-            </g>
-            <path d="M84 34l1.7 4.3 4.3 1.7-4.3 1.7L84 46l-1.7-4.3L78 40l4.3-1.7z" fill="#FFD36E"/>
-            <path d="M26 18l1.2 3 3 1.2-3 1.2L26 26.4l-1.2-3-3-1.2 3-1.2z" fill="#FFC2D3"/>
-          </svg>
-        </div>
-      </div>
-      <div class="hero-foot"><span class="pill"></span> 등급별 잔여 수량·확률 실시간 공개 · 모든 티켓 100% 당첨</div>
-    </section>
-
-    <section class="sec" style="margin-top:15px">
+    <section class="sec" id="secKuji" style="margin-top:4px">
       <div class="sec-head">
-        <h2>오픈 예정 쿠지</h2>
-        <span class="aside">알림 신청 받는 중</span>
+        <h2>🎀 제일 복권 <em>(이치방쿠지)</em></h2>
+        <button class="more" data-more="kuji">전체보기 ›</button>
       </div>
-      <div class="lineup" id="lineup"><!-- cards injected --></div>
+      <div class="grid4" id="gridKuji"></div>
     </section>
 
-    <section class="sec">
+    <section class="sec" id="secTcg">
       <div class="sec-head">
-        <h2>실시간 경품 현황</h2>
-        <span class="live-chip"><i></i>LIVE</span>
-        <span class="aside" id="updatedAt">방금 갱신</span>
+        <h2>🃏 카드샵 <em>(TCG)</em></h2>
+        <button class="more" data-more="tcg">전체보기 ›</button>
       </div>
-      <p class="sec-note">당첨 확률은 지금 남은 티켓 기준으로 자동 계산됩니다.</p>
-      <div class="prize-list" id="prizeList"><!-- rows injected --></div>
-      <div class="last-row" id="lastRow">
-        <div class="thumb tone-gold"><svg><use href="#i-crown"/></svg></div>
-        <div style="min-width:0">
-          <div class="prize-name">라스트원상 · 한정 컬러 대형 인형</div>
-          <div class="sub">마지막 1장을 뽑은 분께 자동 지급</div>
-        </div>
-        <span class="flag" id="lastFlag">대기중</span>
-      </div>
+      <div class="grid4" id="gridTcg"></div>
     </section>
+
+    <div id="noResult" hidden></div>
 
     <div class="info-grid">
-      <div class="info"><span class="ic"><svg><use href="#i-truck"/></svg></span><span><b>실물 배송 전용</b> · 당첨 굿즈는 보관함에서 묶음 배송 신청</span></div>
+      <div class="info"><span class="ic"><svg><use href="#i-truck"/></svg></span><span><b>실물 배송 전용</b> · 당첨 굿즈는 진열장에서 묶음 배송 신청</span></div>
       <div class="info"><span class="ic"><svg><use href="#i-info"/></svg></span><span><b>환금성 없음</b> · 현금·포인트 환급, 상품 교환 불가</span></div>
-      <div class="info"><span class="ic"><svg><use href="#i-lock"/></svg></span><span><b>확률 100% 공개</b> · 잔여 수량에 따라 실시간 반영</span></div>
+      <div class="info"><span class="ic"><svg><use href="#i-lock"/></svg></span><span><b>확률 100% 공개</b> · 상품별 잔여 수량에 따라 실시간 반영</span></div>
     </div>
-
-    <section class="sec">
-      <div class="sec-head">
-        <h2>공지사항</h2>
-        <span class="aside">더보기</span>
-      </div>
-      <div class="nlist">
-        <div class="nrow"><span class="ntag2 hot">오픈</span><span class="ntx2">모구모구 본점 한정 쿠지 12/1(화) 20:00 오픈</span><time>11.24</time></div>
-        <div class="nrow"><span class="ntag2">배송</span><span class="ntx2">금요일 14시 이전 신청 건은 당일 출고됩니다</span><time>11.21</time></div>
-        <div class="nrow"><span class="ntag2">안내</span><span class="ntx2">보관함 상품 보관 기간은 당첨일로부터 30일입니다</span><time>11.18</time></div>
-      </div>
-    </section>
 
     <p class="shop-foot"><b>치이샵 · CHII SHOP</b><br>고객센터 카카오톡 @치이샵 · 평일 10:00–18:00<br>사업 검토용 샘플 화면입니다 · 실제 결제·배송은 이루어지지 않아요</p>
   </main>
 
-  <!-- ============ box tab ============ -->
-  <main class="screen" id="screenBox" hidden>
+  <!-- ============ shop ============ -->
+  <main class="screen" id="screenShop" hidden>
     <div class="page-head">
-      <h2>내 보관함</h2>
-      <span class="count" id="boxCount">0점</span>
+      <h2>상점</h2>
+      <span class="count" id="shopCount">16종</span>
+    </div>
+    <div class="chips" id="shopChips">
+      <button class="chip on" data-f="all">전체</button>
+      <button class="chip" data-f="kuji">🎀 제일 복권</button>
+      <button class="chip" data-f="tcg">🃏 카드샵</button>
+    </div>
+    <div class="grid4" id="gridShop"></div>
+    <div id="shopEmpty" hidden></div>
+    <p class="shop-foot">상품을 누르면 뽑기 화면으로 이동해요<br><b>치이샵 · CHII SHOP</b></p>
+  </main>
+
+  <!-- ============ detail ============ -->
+  <main class="screen" id="screenDetail" hidden>
+    <div class="d-hero">
+      <div class="d-art" id="dArt"></div>
+      <div class="d-info">
+        <div class="d-badges" id="dBadges"></div>
+        <h1 class="d-name" id="dName">상품명</h1>
+        <p class="d-sub" id="dSub">1회 뽑기 · 꽝 없이 100% 당첨</p>
+        <div class="d-price" id="dPrice">P 12,000<small>/ 1회</small></div>
+        <div class="progress"><i id="dBar" style="width:52%"></i></div>
+        <div class="progress-meta"><span>남은 티켓 <b id="dRemain">42</b> / <span id="dTotal">80</span></span><span id="dSoldPct">53% 판매</span></div>
+      </div>
     </div>
 
-    <div id="boxArea"></div>
+    <div class="last-row" id="dLastRow">
+      <div class="thumb tone-gold"><svg><use href="#i-crown"/></svg></div>
+      <div style="min-width:0">
+        <div class="prize-name" id="dLastName">라스트원상</div>
+        <div class="sub">마지막 1장을 뽑은 분께 자동 지급</div>
+      </div>
+      <span class="flag" id="dLastFlag">대기중</span>
+    </div>
 
+    <section class="sec">
+      <div class="sec-head">
+        <h2>등급별 잔여 · 실시간 확률</h2>
+        <span class="live-chip"><i></i>LIVE</span>
+      </div>
+      <p class="sec-note">지금 남은 티켓 기준으로 자동 계산돼요.</p>
+      <div class="prize-list" id="dGrades"></div>
+    </section>
+
+    <div class="info-grid">
+      <div class="info"><span class="ic"><svg><use href="#i-truck"/></svg></span><span><b>묶음 배송</b> · 이 상품에서 뽑은 굿즈는 진열장에 모아 한 번에 받아요</span></div>
+      <div class="info"><span class="ic"><svg><use href="#i-lock"/></svg></span><span><b>꽝 없음</b> · 모든 티켓 100% 당첨, 잔여 수량 실시간 공개</span></div>
+    </div>
+  </main>
+
+  <!-- ============ box ============ -->
+  <main class="screen" id="screenBox" hidden>
+    <div class="page-head">
+      <h2>진열장</h2>
+      <span class="count" id="boxCount">0점</span>
+    </div>
+    <div id="boxArea"></div>
     <div id="shipArea"></div>
   </main>
 
-  <!-- ============ admin tab ============ -->
+  <!-- ============ admin ============ -->
   <main class="screen" id="screenAdmin" hidden>
     <div class="page-head">
       <h2>사장님 모드</h2>
       <span class="demo-chip">데모</span>
     </div>
-    <p class="admin-sub">치이카와 스위츠 이치방쿠지 · 실시간 집계</p>
+    <p class="sec-note" style="margin:-8px 0 12px">16개 상품 · 전체 매출·재고 실시간 집계</p>
 
     <div class="kpis">
       <div class="kpi wide">
-        <div class="k">누적 매출 (판매 티켓 × 12,000원)</div>
-        <div class="v" id="kRevenue">0<small>원</small></div>
+        <div class="k">누적 매출 (판매 티켓 × 상품가)</div>
+        <div class="v" id="kRevenue">0<small>P</small></div>
       </div>
       <div class="kpi">
         <div class="k">판매 티켓</div>
-        <div class="v" id="kSold">0<small>/ 80</small></div>
+        <div class="v" id="kSold">0<small>장</small></div>
       </div>
       <div class="kpi">
         <div class="k">남은 티켓</div>
         <div class="v" id="kRemain">0<small>장</small></div>
       </div>
       <div class="kpi">
-        <div class="k">당첨 상품 대기</div>
+        <div class="k">진열장 대기</div>
         <div class="v" id="kBox">0<small>점</small></div>
       </div>
       <div class="kpi">
@@ -878,36 +878,35 @@
       </div>
     </div>
 
-    <section class="sec" style="margin-top:16px">
-      <div class="sec-head"><h2>등급별 재고</h2><span class="aside" id="adminPct">잔여율 53%</span></div>
+    <section class="sec">
+      <div class="sec-head"><h2>카테고리별 매출</h2><span class="aside"></span></div>
+      <div class="admin-list" id="adminCats"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head"><h2>상품별 재고 · 매출</h2><span class="live-chip"><i></i>LIVE</span></div>
       <div class="admin-list" id="adminStock"></div>
     </section>
 
     <section class="sec">
-      <div class="sec-head"><h2>라스트원상</h2><span class="aside" id="lastStatus">미지급</span></div>
-      <div class="admin-list">
-        <div class="admin-row"><span class="grade" style="background:linear-gradient(140deg,#FFD877,#E29B1E);width:20px;height:20px">L</span><span class="nm">한정 컬러 대형 인형</span><span class="rt" id="lastDrawInfo">마지막 1장 지급</span></div>
-      </div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head"><h2>최근 뽑기 기록</h2><span class="aside" id="logCount">0건</span></div>
+      <div class="sec-head"><h2>최근 뽑기 기록</h2><span class="aside" id="logCount" style="margin-left:auto;font-size:10.5px;color:var(--muted);font-weight:700">0건</span></div>
       <div class="log-list" id="logList"><div class="log-empty">아직 뽑기 기록이 없어요</div></div>
     </section>
 
-    <button class="reset-btn" id="resetBtn">쿠지판 리셋 (재고·매출 초기화)</button>
+    <button class="reset-btn" id="resetBtn">전체 쿠지판 리셋 (재고·매출 초기화)</button>
     <p class="admin-note">실제 서비스에서는 사장님 계정 로그인과 2차 인증이 필요합니다.<br>본 화면은 기능 확인용 데모예요.</p>
   </main>
 
   <!-- ============ buy bar ============ -->
-  <div class="buybar" id="buybar">
+  <div class="buybar" id="buybar" hidden>
     <button class="btn-draw one" id="btnOne">
-      <span class="b1">1회 뽑기</span><span class="b2">12,000원</span>
+      <span class="b1">1회 뽑기</span><span class="b2" id="btnOneSub">12,000 P</span>
     </button>
     <button class="btn-draw five" id="btnFive">
       <span class="tag">5장 한번에</span>
-      <span class="b1">5회 연속 뽑기</span><span class="b2">60,000원</span>
+      <span class="b1">5회 연속 뽑기</span><span class="b2" id="btnFiveSub">60,000 P</span>
     </button>
+    <div class="soldout-note" id="soldNote" hidden>이번 쿠지판은 모두 소진되었어요 · 다음 쿠지 준비 중</div>
   </div>
 
   <!-- ============ box action bar ============ -->
@@ -920,16 +919,10 @@
 
   <!-- ============ tab bar ============ -->
   <nav class="tabbar" id="tabbar">
-    <button class="tab on" data-tab="home">
-      <svg><use href="#i-home"/></svg>홈
-    </button>
-    <button class="tab" data-tab="box">
-      <svg><use href="#i-box"/></svg>보관함
-      <span class="tbadge zero" id="tabBadge">0</span>
-    </button>
-    <button class="tab" data-tab="admin">
-      <svg><use href="#i-shop"/></svg>사장님
-    </button>
+    <button class="tab on" data-tab="home"><svg><use href="#i-home"/></svg>홈</button>
+    <button class="tab" data-tab="shop"><svg><use href="#i-shop"/></svg>상점</button>
+    <button class="tab" data-tab="box"><svg><use href="#i-box"/></svg>진열장<span class="tbadge zero" id="tabBadge">0</span></button>
+    <button class="tab" data-tab="admin"><svg><use href="#i-user"/></svg>사장님</button>
   </nav>
 
   <!-- ============ draw overlay ============ -->
@@ -953,16 +946,17 @@
         <div class="confetti" id="confetti"></div>
         <div class="res-eyebrow" id="resEyebrow">당첨 결과</div>
         <div class="res-grade" id="resGrade">A상</div>
-        <div class="res-glyph" id="resGlyph"><svg><use href="#i-plush"/></svg></div>
+        <div class="res-glyph" id="resGlyph"></div>
         <div class="res-name" id="resName">스위츠 파티 대형 쿠션</div>
-        <div class="res-saved"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></svg> 보관함에 저장됨</div>
+        <div class="res-prod" id="resProd">치이카와 스위츠</div>
+        <div class="res-saved"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></svg> 진열장에 저장됨</div>
       </div>
       <div class="res-body" id="resBody">
         <div id="resMultiWrap"></div>
         <div id="resLastWrap"></div>
         <div class="sheet-actions">
-          <button class="btn-ghost" id="resBoxBtn">보관함 보기</button>
-          <button class="btn-primary" id="resAgainBtn">한 번 더<small id="resAgainSub">12,000원</small></button>
+          <button class="btn-ghost" id="resBoxBtn">진열장 보기</button>
+          <button class="btn-primary" id="resAgainBtn">한 번 더<small id="resAgainSub">12,000 P</small></button>
         </div>
       </div>
     </div>
@@ -973,7 +967,7 @@
     <div class="sheet">
       <div class="sheet-body">
         <div class="sheet-head"><h3>묶음 배송 신청</h3><button class="close" data-close="shipSheet" aria-label="닫기">×</button></div>
-        <div class="sheet-summary"><span>선택한 상품</span><b id="shipSummaryCount">0점</b><span style="margin-left:auto;color:#A3939C" id="shipSummaryNames"></span></div>
+        <div class="sheet-summary"><span>선택한 상품</span><b id="shipSummaryCount">0점</b><span style="margin-left:auto;color:#A3939C;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px" id="shipSummaryNames"></span></div>
         <div class="field"><label for="shipName">받는 분</label><input id="shipName" type="text" placeholder="이름" autocomplete="name"></div>
         <div class="field"><label for="shipPhone">연락처</label><input id="shipPhone" type="tel" placeholder="010-0000-0000" autocomplete="tel"></div>
         <div class="field"><label for="shipAddr">주소</label><input id="shipAddr" type="text" placeholder="도로명 주소 + 상세 주소" autocomplete="street-address"></div>
@@ -1028,109 +1022,249 @@
 (function(){
   "use strict";
 
-  /* ===================== data ===================== */
-  const PRICE = 12000;
-  const FIVE_PRICE = PRICE * 5;
-  const TOTAL_TICKETS = 80;
-
-  const PRIZE_DEFS = [
-    { id:"A", name:"스위츠 파티 대형 쿠션", total:2,  remaining:1,  glyph:"i-plush",   tone:"pink"   },
-    { id:"B", name:"스위츠 도자기 접시 세트", total:4,  remaining:2,  glyph:"i-plate",   tone:"yellow" },
-    { id:"C", name:"미니 마스코트 키링",     total:8,  remaining:4,  glyph:"i-key",     tone:"mint"   },
-    { id:"D", name:"아크릴 스탠드",          total:16, remaining:9,  glyph:"i-stand",   tone:"lav"    },
-    { id:"E", name:"스위츠 스티커 팩",        total:50, remaining:26, glyph:"i-sticker", tone:"sky"    }
-  ];
-  const LAST_PRIZE = { id:"L", name:"한정 컬러 대형 인형", glyph:"i-crown", tone:"gold" };
-
-  /* 오픈 예정 라인업 (준비중) */
-  const LINEUP = [
-    {
-      id: "mogumogu",
-      name: "치이카와 모구모구<br>본점 한정 쿠지",
-      open: "2026-12-01T20:00:00+09:00",
-      openLabel: "12.01 (화) 20:00 오픈",
-      price: "1회 13,000원",
-      total: 60,
-      tone: "pink",
-      glyph: "i-plush"
-    },
-    {
-      id: "pajama",
-      name: "하치와레 · 우사기<br>파자마 파티 쿠지",
-      open: "2026-12-05T19:00:00+09:00",
-      openLabel: "12.05 (토) 19:00 오픈",
-      price: "1회 12,000원",
-      total: 80,
-      tone: "mint",
-      glyph: "i-sticker"
-    }
-  ];
-  const notified = new Set();
-
+  /* ============================================================
+     data
+     ============================================================ */
   const START_POINTS = 240000;
-  const START_SOLD = 38;   // 이미 판매된 티켓 (80 - 42)
 
+  /* 등급 색: a(핑크) b(골드) c(민트) d(라벤더) e(스카이) */
+  const PRODUCTS = [
+    /* ---------- 🎀 제일 복권 (이치방쿠지) ---------- */
+    { id:"sweets", cat:"kuji", title:"치이카와 스위츠", price:12000, badge:"새 박스", bcls:"b-new",
+      pal:["#FFE7EF","#FFC6D9"], accent:"#F2607F", motif:"cake", sub:"1회 뽑기 · 꽝 없이 100% 당첨",
+      grades:[
+        {k:"A", n:"스위츠 파티 대형 쿠션", t:2,  r:1,  c:"a"},
+        {k:"B", n:"스위츠 도자기 접시 세트", t:4,  r:2,  c:"b"},
+        {k:"C", n:"미니 마스코트 키링", t:8,  r:4,  c:"c"},
+        {k:"D", n:"아크릴 스탠드", t:16, r:9,  c:"d"},
+        {k:"E", n:"스위츠 스티커 팩", t:50, r:26, c:"e"}],
+      last:"한정 컬러 대형 인형" },
+
+    { id:"mogumogu", cat:"kuji", title:"모구모구 본점", price:13000, badge:"마감임박", bcls:"b-hot",
+      pal:["#E6F9F1","#C2EEDD"], accent:"#3FB08A", motif:"pudding", sub:"본점 한정 · 마지막 수량",
+      grades:[
+        {k:"A", n:"모구모구 푸딩 대형 인형", t:2,  r:1, c:"a"},
+        {k:"B", n:"본점 한정 머그컵", t:4,  r:2, c:"b"},
+        {k:"C", n:"아크릴 키링", t:8,  r:3, c:"c"},
+        {k:"D", n:"미니 파우치", t:14, r:4, c:"d"},
+        {k:"E", n:"스티커 팩", t:32, r:8, c:"e"}],
+      last:"한정 푸딩 컬러 인형" },
+
+    { id:"pajama", cat:"kuji", title:"하치와레 파자마", price:12000, badge:"새 박스", bcls:"b-new",
+      pal:["#EFE9FF","#D8CBFB"], accent:"#8B6FE0", motif:"moon", sub:"파자마 파티 · 신규 라인업",
+      grades:[
+        {k:"A", n:"파자마 대형 쿠션", t:2,  r:2,  c:"a"},
+        {k:"B", n:"파자마 미니어처 세트", t:4,  r:3,  c:"b"},
+        {k:"C", n:"봉제 키링", t:8,  r:6,  c:"c"},
+        {k:"D", n:"아크릴 스탠드", t:16, r:13, c:"d"},
+        {k:"E", n:"스티커 팩", t:50, r:40, c:"e"}],
+      last:"한정 야간 네온 인형" },
+
+    { id:"kurimanju", cat:"kuji", title:"쿠리만주 카페", price:14000, badge:"새 박스", bcls:"b-new",
+      pal:["#FFF1DD","#F7D9AE"], accent:"#C98A3C", motif:"chestnut", sub:"카페 한정 · 90개 한정",
+      grades:[
+        {k:"A", n:"쿠리만주 대형 쿠션", t:2,  r:1,  c:"a"},
+        {k:"B", n:"카페 머그 세트", t:4,  r:3,  c:"b"},
+        {k:"C", n:"미니 접시", t:10, r:8,  c:"c"},
+        {k:"D", n:"아크릴 키링", t:18, r:15, c:"d"},
+        {k:"E", n:"카페 엽서 세트", t:56, r:44, c:"e"}],
+      last:"한정 카페 트레이" },
+
+    { id:"sanrio", cat:"kuji", title:"산리오 스위츠", price:17000, badge:"새 박스", bcls:"b-new",
+      pal:["#FFE3F1","#FFB9D8"], accent:"#E0437F", motif:"bow", sub:"스위츠 콜라보 · 60개 한정",
+      grades:[
+        {k:"A", n:"스위츠 파티 인형", t:2,  r:1,  c:"a"},
+        {k:"B", n:"도자기 접시 세트", t:4,  r:3,  c:"b"},
+        {k:"C", n:"리본 키링", t:8,  r:7,  c:"c"},
+        {k:"D", n:"아크릴 스탠드", t:12, r:10, c:"d"},
+        {k:"E", n:"스티커 팩", t:34, r:27, c:"e"}],
+      last:"한정 리본 쿠션" },
+
+    { id:"momonga", cat:"kuji", title:"모몬가", price:15000, badge:"새 박스", bcls:"b-new",
+      pal:["#FFEDE2","#FFD0B4"], accent:"#D9703F", motif:"momonga", sub:"모몬가 단독 라인업",
+      grades:[
+        {k:"A", n:"모몬가 대형 인형", t:2,  r:1,  c:"a"},
+        {k:"B", n:"모몬가 쿠션", t:4,  r:3,  c:"b"},
+        {k:"C", n:"아크릴 키링", t:8,  r:6,  c:"c"},
+        {k:"D", n:"아크릴 스탠드", t:16, r:13, c:"d"},
+        {k:"E", n:"스티커 팩", t:50, r:38, c:"e"}],
+      last:"한정 활공 인형" },
+
+    { id:"usagi", cat:"kuji", title:"우사기 피크닉", price:16000, badge:"마감임박", bcls:"b-hot",
+      pal:["#E6F3FF","#C4E2FA"], accent:"#4A93C4", motif:"rabbit", sub:"피크닉 시즌 한정 · 잔여 12장",
+      grades:[
+        {k:"A", n:"피크닉 대형 쿠션", t:2,  r:1,  c:"a"},
+        {k:"B", n:"피크닉 바구니 세트", t:4,  r:1,  c:"b"},
+        {k:"C", n:"아크릴 키링", t:8,  r:2,  c:"c"},
+        {k:"D", n:"아크릴 스탠드", t:14, r:3,  c:"d"},
+        {k:"E", n:"스티커 팩", t:42, r:5,  c:"e"}],
+      last:"한정 피크닉 담요" },
+
+    { id:"rakko", cat:"kuji", title:"랏코 온천", price:15000, badge:"새 박스", bcls:"b-new",
+      pal:["#E2F6F7","#BCE6E9"], accent:"#3E9AA2", motif:"otter", sub:"온천 시리즈 · 유카타 굿즈",
+      grades:[
+        {k:"A", n:"온천 대형 인형", t:2,  r:2,  c:"a"},
+        {k:"B", n:"유카타 미니어처", t:4,  r:3,  c:"b"},
+        {k:"C", n:"아크릴 키링", t:8,  r:7,  c:"c"},
+        {k:"D", n:"아크릴 스탠드", t:16, r:14, c:"d"},
+        {k:"E", n:"스티커 팩", t:50, r:42, c:"e"}],
+      last:"한정 유카타 인형" },
+
+    /* ---------- 🃏 카드샵 (TCG) ---------- */
+    { id:"op-era", cat:"tcg", title:"원피스 신의 시대", price:1400, badge:"무한 도전", bcls:"b-inf",
+      pal:["#FFE9D2","#FFC79A"], accent:"#B23A2E", motif:"anchor", sub:"OPCG · 1팩 1장",
+      grades:[
+        {k:"SAR", n:"신의 시대 SAR", t:1,  r:1,  c:"a"},
+        {k:"SR",  n:"신의 시대 SR",  t:2,  r:2,  c:"b"},
+        {k:"AR",  n:"신의 시대 AR",  t:3,  r:2,  c:"c"},
+        {k:"RR",  n:"신의 시대 RR",  t:6,  r:5,  c:"d"},
+        {k:"C",   n:"신의 시대 C",   t:18, r:16, c:"e"}],
+      last:"SAR 한정 슬리브 세트" },
+
+    { id:"ninja", cat:"tcg", title:"포켓몬 닌자 스피너", price:2100, badge:"EX 도전", bcls:"b-ex",
+      pal:["#EDE6FF","#CFC2F7"], accent:"#5B3FA8", motif:"shuriken", sub:"닌자 스피너 · 24팩 한정",
+      grades:[
+        {k:"SAR", n:"닌자 스피너 SAR", t:1,  r:1,  c:"a"},
+        {k:"SR",  n:"닌자 스피너 SR",  t:2,  r:1,  c:"b"},
+        {k:"AR",  n:"닌자 스피너 AR",  t:3,  r:3,  c:"c"},
+        {k:"RR",  n:"닌자 스피너 RR",  t:5,  r:4,  c:"d"},
+        {k:"C",   n:"닌자 스피너 C",   t:13, r:11, c:"e"}],
+      last:"SAR 한정 카드 케이스" },
+
+    { id:"tera", cat:"tcg", title:"테라스탈 페스타", price:9900, badge:"무한 도전", bcls:"b-inf",
+      pal:["#E7F6FF","#F3E2FF"], accent:"#7B61C9", motif:"gem", sub:"홀로 프리미엄 · 12팩 한정",
+      grades:[
+        {k:"SAR", n:"테라스탈 SAR", t:1,  r:1, c:"a"},
+        {k:"SR",  n:"테라스탈 SR",  t:2,  r:1, c:"b"},
+        {k:"AR",  n:"테라스탈 AR",  t:3,  r:3, c:"c"},
+        {k:"RR",  n:"테라스탈 RR",  t:2,  r:1, c:"d"},
+        {k:"C",   n:"테라스탈 C",   t:4,  r:3, c:"e"}],
+      last:"SAR 한정 플레이매트" },
+
+    { id:"dragon", cat:"tcg", title:"드래곤볼 슈퍼 카드", price:2900, badge:"NON-LAST", bcls:"b-nl",
+      pal:["#FFF0D6","#FFD08A"], accent:"#E07A16", motif:"ball", sub:"NON-LAST · 라스트원상 없음",
+      grades:[
+        {k:"UR", n:"드래곤볼 UR", t:1,  r:1,  c:"a"},
+        {k:"SR", n:"드래곤볼 SR", t:2,  r:2,  c:"b"},
+        {k:"RR", n:"드래곤볼 RR", t:5,  r:4,  c:"c"},
+        {k:"R",  n:"드래곤볼 R",  t:8,  r:7,  c:"d"},
+        {k:"C",  n:"드래곤볼 C",  t:20, r:17, c:"e"}],
+      last:null },
+
+    { id:"yugioh", cat:"tcg", title:"유희왕 오버드라이브", price:5900, badge:"EX 도전", bcls:"b-ex",
+      pal:["#F6EAE6","#DFC8C1"], accent:"#8A4B3A", motif:"card", sub:"오버드라이브 · 20팩 한정",
+      grades:[
+        {k:"UR", n:"오버드라이브 UR", t:1,  r:1, c:"a"},
+        {k:"SR", n:"오버드라이브 SR", t:2,  r:1, c:"b"},
+        {k:"RR", n:"오버드라이브 RR", t:3,  r:3, c:"c"},
+        {k:"R",  n:"오버드라이브 R",  t:4,  r:4, c:"d"},
+        {k:"C",  n:"오버드라이브 C",  t:10, r:8, c:"e"}],
+      last:"UR 한정 덱 케이스" },
+
+    { id:"p151", cat:"tcg", title:"포켓몬 151 부스터", price:2700, badge:"EX 도전", bcls:"b-ex",
+      pal:["#E4F7E6","#C3ECC8"], accent:"#3E9C55", motif:"leaf", sub:"151 부스터 · 40팩 한정",
+      grades:[
+        {k:"SAR", n:"151 SAR", t:1,  r:1,  c:"a"},
+        {k:"SR",  n:"151 SR",  t:2,  r:2,  c:"b"},
+        {k:"AR",  n:"151 AR",  t:4,  r:3,  c:"c"},
+        {k:"RR",  n:"151 RR",  t:8,  r:6,  c:"d"},
+        {k:"C",   n:"151 C",   t:25, r:22, c:"e"}],
+      last:"SAR 한정 카드 슬리브" },
+
+    { id:"op-limited", cat:"tcg", title:"원피스 카드샵 한정", price:4500, badge:"NON-LAST", bcls:"b-nl",
+      pal:["#E4ECFB","#C2D4F5"], accent:"#35569E", motif:"compass", sub:"카드샵 한정 · 라스트원상 없음",
+      grades:[
+        {k:"SAR", n:"카드샵 한정 SAR", t:1,  r:1,  c:"a"},
+        {k:"SR",  n:"카드샵 한정 SR",  t:2,  r:1,  c:"b"},
+        {k:"AR",  n:"카드샵 한정 AR",  t:3,  r:2,  c:"c"},
+        {k:"RR",  n:"카드샵 한정 RR",  t:6,  r:5,  c:"d"},
+        {k:"C",   n:"카드샵 한정 C",   t:18, r:15, c:"e"}],
+      last:null },
+
+    { id:"scarlet", cat:"tcg", title:"포켓몬 스칼렛 EX", price:3300, badge:"EX 도전", bcls:"b-ex",
+      pal:["#FFE6E6","#FFC3C3"], accent:"#C23B3B", motif:"flame", sub:"스칼렛 EX · 28팩 한정",
+      grades:[
+        {k:"SAR", n:"스칼렛 SAR", t:1,  r:1,  c:"a"},
+        {k:"SR",  n:"스칼렛 SR",  t:2,  r:2,  c:"b"},
+        {k:"AR",  n:"스칼렛 AR",  t:3,  r:2,  c:"c"},
+        {k:"RR",  n:"스칼렛 RR",  t:6,  r:5,  c:"d"},
+        {k:"C",   n:"스칼렛 C",   t:16, r:14, c:"e"}],
+      last:"SAR 한정 카드 케이스" }
+  ];
+
+  const CATS = { kuji:"🎀 제일 복권", tcg:"🃏 카드샵" };
+
+  /* ---------- thumbnail motifs (24×24 좌표) ---------- */
+  const MOTIF = {
+    cake:'<path d="M5 13h14v6a2 2 0 01-2 2H7a2 2 0 01-2-2z"/><path d="M5 13c0-2.4 2.6-3.4 7-3.4s7 1 7 3.4"/><path d="M12 9.6V6.2"/><circle cx="12" cy="4.9" r="1.3"/>',
+    pudding:'<path d="M6.4 11h11.2l-1.6 9H8z"/><path d="M5.2 11c0-2.8 3-4.2 6.8-4.2S18.8 8.2 18.8 11"/><circle cx="9.6" cy="15" r="1"/>',
+    moon:'<path d="M15.4 3.6a8.6 8.6 0 100 16.8 7 7 0 010-16.8z"/><path d="M17.8 4.2l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
+    chestnut:'<path d="M4.6 9.4h14.8L17.4 20H6.6z"/><path d="M8 9.4c0-4.2 8-4.2 8 0"/><path d="M9 4.6l1.3 1.4M15 4.6l-1.3 1.4"/>',
+    bow:'<path d="M11 12L4.4 8v8z"/><path d="M13 12l6.6-4v8z"/><circle cx="12" cy="12" r="1.8"/>',
+    momonga:'<circle cx="12" cy="11.4" r="4"/><path d="M8.2 8.8L3 5.6c-.6 5.4 1.6 9.4 5.2 10.6"/><path d="M15.8 8.8L21 5.6c.6 5.4-1.6 9.4-5.2 10.6"/>',
+    rabbit:'<ellipse cx="12" cy="14.6" rx="5" ry="4.4"/><ellipse cx="9.4" cy="6.4" rx="1.6" ry="3.6"/><ellipse cx="14.6" cy="6.4" rx="1.6" ry="3.6"/>',
+    otter:'<path d="M4 15.6c0-4 3.6-6.4 8-6.4s8 2.4 8 6.4"/><path d="M7.4 9.4c-1-1.8.8-2.8 0-4.6M12 8.6c-1-1.8.8-2.8 0-4.6M16.6 9.4c-1-1.8.8-2.8 0-4.6"/><path d="M6 18.6c2.4 1.6 9.6 1.6 12 0"/>',
+    anchor:'<circle cx="12" cy="5" r="2"/><path d="M12 7v13M6.4 12h11.2M4.6 15.4c0 3.4 3.4 5 7.4 5s7.4-1.6 7.4-5"/>',
+    shuriken:'<path d="M12 2.6l2.6 6.8L21.4 12l-6.8 2.6L12 21.4l-2.6-6.8L2.6 12l6.8-2.6z"/><circle cx="12" cy="12" r="1.5"/>',
+    gem:'<path d="M12 3.2l6.4 5.2L12 20.8 5.6 8.4z"/><path d="M5.6 8.4h12.8M12 3.2v17.6"/>',
+    ball:'<circle cx="12" cy="12" r="8.4"/><path d="M3.6 12h16.8"/><circle cx="12" cy="12" r="2.6"/>',
+    card:'<rect x="5" y="3.4" width="14" height="17.2" rx="2.4"/><path d="M9 8.6h6M9 12h6M9 15.4h3.4"/>',
+    leaf:'<path d="M19.4 4.6C9 4.6 4.6 9.2 4.6 19.4c10.2 0 14.8-4.6 14.8-14.8z"/><path d="M5.4 18.6L14.8 9.2"/>',
+    compass:'<circle cx="12" cy="12" r="8.6"/><path d="M15.8 8.2l-2.2 5.4-5.4 2.2 2.2-5.4z"/>',
+    flame:'<path d="M12 3.2c4.2 4.2 5.4 6.6 5.4 9.4a5.4 5.4 0 01-10.8 0c0-2 1-3.4 2.2-4.6 0 2.2 1 3.4 2 3.4s1.2-5.4 1.2-8.2z"/>'
+  };
+
+  /* ============================================================
+     state
+     ============================================================ */
   let state;
   let uidSeq = 1;
   let busy = false;
   let selected = new Set();
   let agreeChecked = false;
   let pendingCount = 1;
+  let pendingDraw = 0;
   let confirmAction = null;
+
+  let curScreen = "home";
+  let curId = null;
+  let prevScreen = "home";
+  let query = "";
+  let shopFilter = "all";
 
   function initialState(){
     return {
-      prizes: PRIZE_DEFS.map(p => Object.assign({}, p)),
       points: START_POINTS,
-      sold: START_SOLD,
-      box: [],        // {uid, prizeId, label, name, glyph, tone, at, shipped}
-      shipments: [],  // {no, count, at, name}
-      logs: [],       // {at, label, name}
-      lastWon: false,
-      lastWonAt: null
+      products: PRODUCTS.map(p => ({
+        id: p.id,
+        grades: p.grades.map(g => ({ k:g.k, n:g.n, t:g.t, r:g.r, c:g.c })),
+        lastWon: false,
+        lastWonAt: null
+      })),
+      box: [],
+      shipments: [],
+      logs: []
     };
   }
 
-  /* ===================== helpers ===================== */
+  /* ============================================================
+     helpers
+     ============================================================ */
   const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
   const won = n => n.toLocaleString("ko-KR");
-  const tagClass = item => item.prizeId === "L" ? "tag-g last" : "tag-g g-" + String(item.prizeId).toLowerCase();
-  const sumRemaining = () => state.prizes.reduce((a,p) => a + p.remaining, 0);
+  const P = id => PRODUCTS.find(p => p.id === id);
+  const S = id => state.products.find(p => p.id === id);
+  const remainOf = ps => ps.grades.reduce((a, g) => a + g.r, 0);
+  const totalOf = ps => ps.grades.reduce((a, g) => a + g.t, 0);
+  const soldOf = ps => totalOf(ps) - remainOf(ps);
+  const gLabel = (p, g) => p.cat === "kuji" ? g.k + "상" : g.k;
+  const gradeIcon = c => ({a:"i-crown", b:"i-plate", c:"i-key", d:"i-stand", e:"i-sticker", last:"i-crown"}[c] || "i-plush");
   const nowTime = () => {
     const d = new Date();
     return String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0");
   };
   function el(html){ const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstElementChild; }
-
-  /* 오픈까지 남은 날 (날짜 기준 D-day) */
-  function dday(iso){
-    const open = new Date(iso);
-    const now = new Date();
-    const a = new Date(open.getFullYear(), open.getMonth(), open.getDate());
-    const b = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const d = Math.round((a - b) / 86400000);
-    if (d > 0) return "D-" + d;
-    if (d === 0) return "오늘 오픈";
-    return "오픈";
-  }
-
-  function renderLineup(){
-    const wrap = $("#lineup");
-    if (!wrap) return;
-    wrap.innerHTML = LINEUP.map(c => {
-      const on = notified.has(c.id);
-      return '<article class="lk tone-' + c.tone + '" data-lineup="' + c.id + '">' +
-        '<div class="lk-top"><span class="lk-state">준비중</span><span class="lk-dday">' + dday(c.open) + '</span></div>' +
-        '<h3 class="lk-name">' + c.name + '</h3>' +
-        '<p class="lk-meta">' + c.openLabel + ' · 총 ' + c.total + '개</p>' +
-        '<div class="lk-foot"><span class="lk-price">' + c.price + '</span>' +
-          '<button class="lk-bell' + (on ? " on" : "") + '" data-notify="' + c.id + '" aria-label="' + (on ? "알림 신청 완료" : "알림 신청") + '">' +
-            '<svg viewBox="0 0 24 24"><use href="#i-bell"/></svg>' + (on ? "알림 완료" : "알림 신청") +
-          '</button></div>' +
-        '<div class="lk-art" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#' + c.glyph + '"/></svg></div>' +
-      '</article>';
-    }).join("");
-  }
 
   function toast(msg){
     const t = $("#toast");
@@ -1139,107 +1273,210 @@
     clearTimeout(t._timer);
     t._timer = setTimeout(() => t.classList.remove("show"), 2200);
   }
-
-  function openOverlay(id){ $("#" + id).classList.add("show"); }  function closeOverlay(id){ $("#" + id).classList.remove("show"); }
+  function openOverlay(id){ $("#" + id).classList.add("show"); }
+  function closeOverlay(id){ $("#" + id).classList.remove("show"); }
   function closeAll(){
     ["resultSheet","shipSheet","chargeSheet","confirmSheet"].forEach(closeOverlay);
   }
 
-  /* ===================== render ===================== */
-  function render(){
-    const remain = sumRemaining();
-    const soldPct = Math.round((TOTAL_TICKETS - remain) / TOTAL_TICKETS * 100);
+  /* ---------- thumbnail ---------- */
+  function artOf(p, suf){
+    const gid = "g-" + p.id + (suf || "");
+    const mo = (key, cx, cy, size, color) => {
+      const s = size / 24;
+      return '<g transform="translate(' + (cx - size/2) + ',' + (cy - size/2) + ') scale(' + s + ')" class="mo" style="stroke:' + color + '">' +
+        (MOTIF[key] || MOTIF.card) + '</g>';
+    };
+    const ink = "rgba(64,48,58,.76)";
+    const body = p.cat === "kuji"
+      ? '<g>' +
+          '<rect x="58" y="13" width="28" height="36" rx="5" fill="#fff" opacity=".42" transform="rotate(15 72 31)"/>' +
+          '<circle cx="72" cy="31" r="5" fill="' + p.accent + '" opacity=".34"/>' +
+          '<rect x="16" y="24" width="52" height="60" rx="9" fill="#fff" opacity=".94"/>' +
+          '<path d="M16 33a9 9 0 019-9h34a9 9 0 019 9v5H16z" fill="' + p.accent + '" opacity=".86"/>' +
+          mo(p.motif, 42, 54, 30, ink) +
+          '<rect x="26" y="70" width="32" height="3.4" rx="1.7" fill="' + p.accent + '" opacity=".34"/>' +
+          '<rect x="26" y="76.5" width="20" height="2.8" rx="1.4" fill="' + p.accent + '" opacity=".18"/>' +
+        '</g>'
+      : '<g>' +
+          '<rect x="11" y="26" width="34" height="48" rx="5" fill="#fff" opacity=".4" transform="rotate(-13 28 50)"/>' +
+          '<rect x="55" y="26" width="34" height="48" rx="5" fill="#fff" opacity=".4" transform="rotate(13 72 50)"/>' +
+          '<rect x="32" y="15" width="36" height="57" rx="6" fill="#fff" opacity=".96"/>' +
+          '<rect x="36" y="19" width="28" height="30" rx="4" fill="' + p.accent + '" opacity=".15"/>' +
+          mo(p.motif, 50, 34, 22, ink) +
+          '<rect x="37" y="56" width="26" height="3.4" rx="1.7" fill="' + p.accent + '" opacity=".48"/>' +
+          '<rect x="40" y="62" width="20" height="2.8" rx="1.4" fill="' + p.accent + '" opacity=".26"/>' +
+        '</g>';
+    return '<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
+      '<defs><linearGradient id="' + gid + '" x1="0.05" y1="0" x2="0.95" y2="1">' +
+        '<stop offset="0" stop-color="' + p.pal[0] + '"/><stop offset="1" stop-color="' + p.pal[1] + '"/>' +
+      '</linearGradient></defs>' +
+      '<rect width="100" height="100" fill="url(#' + gid + ')"/>' +
+      '<circle cx="88" cy="10" r="24" fill="#fff" opacity=".2"/>' +
+      '<circle cx="8" cy="94" r="18" fill="#fff" opacity=".16"/>' +
+      '<circle cx="22" cy="16" r="1.9" fill="#fff" opacity=".85"/>' +
+      '<circle cx="86" cy="68" r="1.6" fill="#fff" opacity=".8"/>' +
+      '<path d="M78 8l1 2.4 2.4 1-2.4 1-1 2.4-1-2.4-2.4-1 2.4-1z" fill="#fff" opacity=".7"/>' +
+      body + '</svg>';
+  }
 
-    // header
+  /* ============================================================
+     render — header / grids
+     ============================================================ */
+  function renderHeader(){
     $("#pointsVal").textContent = won(state.points);
-    const unshipped = state.box.filter(i => !i.shipped);
+    const unshipped = state.box.filter(i => !i.shipped).length;
     const badge = $("#cartCount");
-    badge.textContent = unshipped.length;
-    badge.classList.toggle("zero", unshipped.length === 0);
-    const tabBadge = $("#tabBadge");
-    tabBadge.textContent = unshipped.length;
-    tabBadge.classList.toggle("zero", unshipped.length === 0);
+    badge.textContent = unshipped;
+    badge.classList.toggle("zero", unshipped === 0);
+    const tb = $("#tabBadge");
+    tb.textContent = unshipped;
+    tb.classList.toggle("zero", unshipped === 0);
+  }
 
-    // hero
-    const soldOut = remain === 0;
-    const stateBadge = $("#stateBadge");
-    if (stateBadge) {
-      stateBadge.className = "badge " + (soldOut ? "ghost" : "live");
-      stateBadge.innerHTML = (soldOut ? "" : '<span class="dot"></span>') + (soldOut ? "판매종료" : "판매중");
+  function matches(p){
+    const q = query.trim().toLowerCase();
+    if (!q) return true;
+    return (p.title + " " + p.badge + " " + CATS[p.cat]).toLowerCase().indexOf(q) >= 0;
+  }
+
+  function cardHTML(p, suf){
+    const ps = S(p.id);
+    const out = remainOf(ps) === 0;
+    return '<button class="pcard' + (out ? " out" : "") + '" data-pid="' + p.id + '" aria-label="' + p.title + ' 뽑기 화면 열기">' +
+      '<span class="pthumb">' + artOf(p, suf) +
+        '<span class="pbadge ' + p.bcls + '">' + p.badge + '</span>' +
+        (out ? '<span class="sold-mask">매진</span>' : '') +
+      '</span>' +
+      '<span class="pname">' + p.title + '</span>' +
+      '<span class="pprice">P ' + won(p.price) + '</span>' +
+    '</button>';
+  }
+
+  function emptyHTML(){
+    return '<div class="empty">' +
+      '<svg viewBox="0 0 24 24" style="fill:none;stroke:#E2C8D2;stroke-width:1.5;stroke-linecap:round"><circle cx="10.6" cy="10.6" r="6.4"/><path d="M15.4 15.4L20 20"/></svg>' +
+      '<p>찾는 상품이 없어요</p>' +
+      '<span>' + (query ? '다른 이름으로 검색해 보세요' : '곧 새로운 쿠지가 올라와요') + '</span>' +
+    '</div>';
+  }
+
+  function renderGrids(){
+    const kuji = PRODUCTS.filter(p => p.cat === "kuji" && matches(p));
+    const tcg = PRODUCTS.filter(p => p.cat === "tcg" && matches(p));
+
+    $("#gridKuji").innerHTML = kuji.map(p => cardHTML(p, "h")).join("");
+    $("#gridTcg").innerHTML = tcg.map(p => cardHTML(p, "h")).join("");
+    $("#secKuji").hidden = kuji.length === 0;
+    $("#secTcg").hidden = tcg.length === 0;
+
+    const nr = $("#noResult");
+    if (kuji.length === 0 && tcg.length === 0){
+      nr.innerHTML = emptyHTML();
+      nr.hidden = false;
+    } else {
+      nr.hidden = true;
     }
-    $("#remainTickets").textContent = remain;
-    $("#heroBar").style.width = (remain / TOTAL_TICKETS * 100).toFixed(1) + "%";
-    $("#soldPct").textContent = soldPct + "% 판매";
-    $("#hero").classList.toggle("sold-out", soldOut);
 
-    // prize rows
-    const list = $("#prizeList");
-    const prev = {};
-    list.querySelectorAll(".prize-row").forEach(r => { prev[r.dataset.id] = r.dataset.remain; });
+    // shop grid
+    const list = PRODUCTS.filter(p => (shopFilter === "all" || p.cat === shopFilter) && matches(p));
+    $("#gridShop").innerHTML = list.map(p => cardHTML(p, "s")).join("");
+    $("#shopCount").textContent = list.length + "종";
+    $("#shopEmpty").hidden = list.length !== 0;
+    if (list.length === 0) $("#shopEmpty").innerHTML = emptyHTML();
+  }
+
+  /* ============================================================
+     render — detail
+     ============================================================ */
+  function renderDetail(){
+    if (!curId) return;
+    const p = P(curId), ps = S(curId);
+    const remain = remainOf(ps), total = totalOf(ps);
+    const soldPct = total ? Math.round((total - remain) / total * 100) : 0;
+
+    $("#dArt").innerHTML = artOf(p, "d");
+    $("#dBadges").innerHTML =
+      '<span class="pbadge ' + p.bcls + '">' + p.badge + '</span>' +
+      '<span class="d-tag">' + (p.cat === "kuji" ? "이치방쿠지" : "TCG 카드샵") + '</span>';
+    $("#dName").textContent = p.title;
+    $("#dSub").textContent = p.sub;
+    $("#dPrice").innerHTML = "P " + won(p.price) + '<small>/ 1회</small>';
+    $("#dRemain").textContent = remain;
+    $("#dTotal").textContent = total;
+    $("#dSoldPct").textContent = soldPct + "% 판매";
+    $("#dBar").style.width = (remain / total * 100).toFixed(1) + "%";
+
+    // last one prize
+    const lastRow = $("#dLastRow");
+    if (p.last){
+      lastRow.className = "last-row" + (ps.lastWon ? " won" : "");
+      lastRow.hidden = false;
+      $("#dLastName").textContent = "라스트원상 · " + p.last;
+      $("#dLastFlag").textContent = ps.lastWon ? "지급완료" : (remain <= 1 ? "임박!" : "대기중");
+    } else {
+      lastRow.className = "last-row none";
+      lastRow.hidden = false;
+      $("#dLastName").textContent = "라스트원상 없음";
+      $("#dLastFlag").textContent = "NON-LAST";
+    }
+
+    // grades
+    const list = $("#dGrades");
     list.innerHTML = "";
-    state.prizes.forEach(p => {
-      const pct = remain > 0 ? (p.remaining / remain * 100) : 0;
+    const remainNow = remain;
+    ps.grades.forEach(g => {
+      const pct = remainNow > 0 ? (g.r / remainNow * 100) : 0;
       const row = el(
-        '<div class="prize-row' + (p.remaining === 0 ? " done" : "") + '" data-id="' + p.id + '" data-remain="' + p.remaining + '">' +
-          '<div class="thumb tone-' + p.tone + '"><svg><use href="#' + p.glyph + '"/></svg></div>' +
+        '<div class="prize-row' + (g.r === 0 ? " done" : "") + '">' +
+          '<div class="thumb tone-' + (g.c === "a" ? "pink" : g.c === "b" ? "yellow" : g.c === "c" ? "mint" : g.c === "d" ? "lav" : "sky") + '">' +
+            '<svg viewBox="0 0 24 24"><use href="#' + gradeIcon(g.c) + '"/></svg></div>' +
           '<div class="prize-main">' +
             '<div class="prize-top">' +
-              '<span class="grade ' + p.id.toLowerCase() + '">' + p.id + '</span>' +
-              '<span class="prize-name">' + p.name + '</span>' +
-              '<span class="prize-count"><b>' + p.remaining + '</b> / ' + p.total + '</span>' +
+              '<span class="grade ' + g.c + '">' + g.k + '</span>' +
+              '<span class="prize-name">' + g.n + '</span>' +
+              '<span class="prize-count"><b>' + g.r + '</b> / ' + g.t + '</span>' +
             '</div>' +
-            '<div class="bar"><i style="width:' + (p.remaining / p.total * 100) + '%"></i></div>' +
+            '<div class="bar"><i style="width:' + (g.r / g.t * 100) + '%"></i></div>' +
           '</div>' +
-          '<div class="pct">' + (p.remaining === 0 ? "마감" : pct.toFixed(1) + "%") + '<small>' + (p.remaining === 0 ? "0개" : "확률") + '</small></div>' +
+          '<div class="pct">' + (g.r === 0 ? "마감" : pct.toFixed(1) + "%") + '<small>' + (g.r === 0 ? "0개" : "확률") + '</small></div>' +
         '</div>'
       );
       list.appendChild(row);
-      if (prev[p.id] !== undefined && Number(prev[p.id]) !== p.remaining) {
-        row.classList.add("flash");
-        setTimeout(() => row.classList.remove("flash"), 900);
-      }
     });
 
-    // last one row
-    const lastRow = $("#lastRow");
-    lastRow.classList.toggle("won", state.lastWon);
-    $("#lastFlag").textContent = state.lastWon ? "지급완료" : (remain <= 1 ? "임박!" : "대기중");
-    const lastBadge = $("#lastBadge");
-    if (lastBadge) {
-      lastBadge.innerHTML = '<svg style="width:10px;height:10px;fill:#8A5A0B"><use href="#i-crown"/></svg> ' +
-        (state.lastWon ? "라스트원상 지급완료" : "라스트원상 있음");
-    }
-    $("#updatedAt").textContent = nowTime() + " 갱신";
-
-    // buy buttons
-    const buybar = $("#buybar");
-    const btnOne = $("#btnOne"), btnFive = $("#btnFive");
-    if (btnOne) btnOne.disabled = soldOut || state.points < PRICE;
-    if (btnFive) btnFive.disabled = soldOut || remain < 5 || state.points < FIVE_PRICE;
-    if (soldOut) {
-      buybar.classList.add("soldout");
-      if (!$("#soldoutNote")) buybar.innerHTML = '<div class="soldout-note" id="soldoutNote">이번 쿠지판은 모두 소진되었어요 · 다음 쿠지 준비 중</div>';
-    } else if (buybar.classList.contains("soldout")) {
-      buybar.classList.remove("soldout");
-      buybar.innerHTML =
-        '<button class="btn-draw one" id="btnOne"><span class="b1">1회 뽑기</span><span class="b2">12,000원</span></button>' +
-        '<button class="btn-draw five" id="btnFive"><span class="tag">5장 한번에</span><span class="b1">5회 연속 뽑기</span><span class="b2">60,000원</span></button>';
-      bindBuyButtons();
-      $("#btnOne").disabled = state.points < PRICE;
-      $("#btnFive").disabled = remain < 5 || state.points < FIVE_PRICE;
-    }
-
-    renderBox();
-    renderAdmin();
+    renderBuybar();
   }
 
-  /* ---------- box ---------- */
+  function renderBuybar(){
+    if (curScreen !== "detail" || !curId) return;
+    const p = P(curId), ps = S(curId);
+    const remain = remainOf(ps);
+    const out = remain === 0;
+    const bar = $("#buybar");
+    bar.classList.toggle("soldout", false);
+    $("#soldNote").hidden = !out;
+    $("#btnOne").hidden = out;
+    $("#btnFive").hidden = out;
+    if (out){
+      bar.classList.add("soldout");
+      return;
+    }
+    $("#btnOneSub").textContent = won(p.price) + " P";
+    $("#btnFiveSub").textContent = won(p.price * 5) + " P";
+    $("#btnFive").disabled = remain < 5;
+    $("#btnOne").disabled = false;
+  }
+
+  /* ============================================================
+     render — box
+     ============================================================ */
   function renderBox(){
     const area = $("#boxArea");
     const items = state.box.filter(i => !i.shipped);
     $("#boxCount").textContent = items.length + "점";
 
-    if (items.length === 0) {
+    if (items.length === 0){
       area.innerHTML =
         '<div class="empty">' +
           '<svg viewBox="0 0 64 64" aria-hidden="true">' +
@@ -1249,22 +1486,26 @@
             '<circle cx="26" cy="38" r="1.8" fill="#FFB3C6"/><circle cx="38" cy="38" r="1.8" fill="#FFB3C6"/>' +
             '<path d="M29 43q3 2.6 6 0" stroke="#FFB3C6" stroke-width="2" fill="none" stroke-linecap="round"/>' +
           '</svg>' +
-          '<p>아직 담긴 상품이 없어요</p>' +
-          '<span>홈에서 티켓을 뽑으면 자동으로 보관돼요</span>' +
+          '<p>아직 진열된 상품이 없어요</p>' +
+          '<span>상품을 뽑으면 자동으로 진열돼요</span>' +
         '</div>';
     } else {
-      const allSel = items.length > 0 && items.every(i => selected.has(i.uid));
-      let html = '<div class="box-tools">' +
-        '<button class="check' + (allSel ? " on" : "") + '" id="selectAll"><span class="box"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></svg></span>전체 선택</button>' +
-        '<span style="font-size:10.5px;color:#A3939C;font-weight:700">' + items.length + '점 보관중</span>' +
-      '</div>';
+      const allSel = items.every(i => selected.has(i.uid));
+      let html =
+        '<div class="box-tools">' +
+          '<button class="check' + (allSel ? " on" : "") + '" id="selectAll"><span class="box"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></svg></span>전체 선택</button>' +
+          '<span style="font-size:10.5px;color:#A3939C;font-weight:700">' + items.length + '점 보관중</span>' +
+        '</div>';
       items.forEach(i => {
         const on = selected.has(i.uid);
         html += '<div class="item' + (on ? " sel" : "") + '" data-uid="' + i.uid + '">' +
-          '<div class="thumb tone-' + i.tone + '"><svg><use href="#' + i.glyph + '"/></svg></div>' +
+          '<div class="thumb tone-' + (i.c === "a" ? "pink" : i.c === "b" ? "yellow" : i.c === "c" ? "mint" : i.c === "d" ? "lav" : i.c === "e" ? "sky" : "gold") + '">' +
+            '<svg viewBox="0 0 24 24"><use href="#' + gradeIcon(i.c) + '"/></svg></div>' +
           '<div class="item-main">' +
             '<div class="item-name">' + i.name + '</div>' +
-            '<div class="item-meta"><span class="' + tagClass(i) + '">' + i.label + '</span>' + i.at + ' 당첨</div>' +
+            '<div class="item-meta"><span class="tag-g g-' + i.c + '">' + i.label + '</span>' +
+              '<span class="src">' + i.product + '</span>' +
+              '<span>' + i.at + '</span></div>' +
           '</div>' +
           '<button class="check' + (on ? " on" : "") + '" aria-label="선택"><span class="box"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></svg></span></button>' +
         '</div>';
@@ -1272,23 +1513,21 @@
       area.innerHTML = html;
 
       const selCount = items.filter(i => selected.has(i.uid)).length;
-      const btn = $("#shipBtn");
-      btn.disabled = selCount === 0;
+      $("#shipBtn").disabled = selCount === 0;
       $("#shipBtnSub").textContent = selCount === 0 ? "배송할 상품을 선택해 주세요" : "선택 " + selCount + "점 · 배송비 무료";
     }
 
-    if (items.length === 0) {
+    if (items.length === 0){
       $("#shipBtn").disabled = true;
       $("#shipBtnSub").textContent = "배송할 상품을 선택해 주세요";
     }
 
-    // shipments
     const shipArea = $("#shipArea");
-    if (state.shipments.length === 0) {
+    if (state.shipments.length === 0){
       shipArea.innerHTML =
         '<div class="info" style="margin-top:14px;align-items:flex-start">' +
           '<span class="ic"><svg><use href="#i-truck"/></svg></span>' +
-          '<span><b>배송 안내</b> · 보관 상품은 묶음 배송만 가능해요. 당첨 상품은 <b>실물 배송 전용</b>이며 현금·포인트 환급이나 상품 교환은 되지 않습니다. 보관 기간은 당첨일로부터 30일입니다.</span>' +
+          '<span><b>배송 안내</b> · 진열장 상품은 묶음 배송만 가능해요. 당첨 상품은 <b>실물 배송 전용</b>이며 현금·포인트 환급이나 상품 교환은 되지 않습니다. 보관 기간은 당첨일로부터 30일입니다.</span>' +
         '</div>';
     } else {
       let html = '<div class="ship-head"><svg style="width:14px;height:14px;fill:none;stroke:#7A6670" viewBox="0 0 24 24"><use href="#i-truck"/></svg>배송 신청 내역</div>';
@@ -1301,138 +1540,183 @@
     }
   }
 
-  /* ---------- admin ---------- */
+  /* ============================================================
+     render — admin
+     ============================================================ */
   function renderAdmin(){
-    const remain = sumRemaining();
-    $("#kRevenue").innerHTML = won(state.sold * PRICE) + '<small>원</small>';
-    $("#kSold").innerHTML = state.sold + '<small>/ ' + TOTAL_TICKETS + '</small>';
-    $("#kRemain").innerHTML = remain + '<small>장</small>';
+    const totalSold = state.products.reduce((a, ps) => a + soldOf(ps), 0);
+    const totalRemain = state.products.reduce((a, ps) => a + remainOf(ps), 0);
+    const revenue = PRODUCTS.reduce((a, p) => a + soldOf(S(p.id)) * p.price, 0);
+    const kujiRev = PRODUCTS.filter(p => p.cat === "kuji").reduce((a, p) => a + soldOf(S(p.id)) * p.price, 0);
+    const tcgRev = revenue - kujiRev;
+
+    $("#kRevenue").innerHTML = won(revenue) + '<small>P</small>';
+    $("#kSold").innerHTML = won(totalSold) + '<small>장</small>';
+    $("#kRemain").innerHTML = won(totalRemain) + '<small>장</small>';
     $("#kBox").innerHTML = state.box.filter(i => !i.shipped).length + '<small>점</small>';
     $("#kShip").innerHTML = state.shipments.length + '<small>건</small>';
 
+    $("#adminCats").innerHTML =
+      '<div class="admin-row"><span class="nm">🎀 제일 복권</span><span class="rt">' + won(kujiRev) + ' P</span></div>' +
+      '<div class="admin-row"><span class="nm">🃏 카드샵</span><span class="rt">' + won(tcgRev) + ' P</span></div>';
+
     const stock = $("#adminStock");
     let html = "";
-    state.prizes.forEach(p => {
-      const sold = p.total - p.remaining;
+    PRODUCTS.forEach(p => {
+      const ps = S(p.id), r = remainOf(ps), t = totalOf(ps);
+      const rev = soldOf(ps) * p.price;
       html += '<div class="admin-row">' +
-        '<span class="grade ' + p.id.toLowerCase() + '">' + p.id + '</span>' +
-        '<span class="nm">' + p.name + '</span>' +
-        '<span class="rt">' + p.remaining + ' / ' + p.total + ' · 판매 ' + sold + '</span>' +
+        '<span class="nm">' + p.title + '<em>' + (p.cat === "kuji" ? "제일 복권" : "카드샵") + ' · P ' + won(p.price) + '</em></span>' +
+        '<span class="rt"><b>' + r + ' / ' + t + '</b><span>' + won(rev) + ' P</span></span>' +
       '</div>';
     });
     stock.innerHTML = html;
-    $("#adminPct").textContent = "잔여율 " + Math.round(remain / TOTAL_TICKETS * 100) + "%";
-    $("#lastStatus").textContent = state.lastWon ? "지급완료" : "미지급";
-    $("#lastDrawInfo").textContent = state.lastWon ? (state.lastWonAt || "지급") + " 지급" : "마지막 1장 지급";
 
-    const logList = $("#logList");    $("#logCount").textContent = state.logs.length + "건";
-    if (state.logs.length === 0) {
+    $("#logCount").textContent = state.logs.length + "건";
+    const logList = $("#logList");
+    if (state.logs.length === 0){
       logList.innerHTML = '<div class="log-empty">아직 뽑기 기록이 없어요</div>';
     } else {
-      logList.innerHTML = state.logs.slice(0, 6).map(l =>
-        '<div class="log-row"><time>' + l.at + '</time><span>' + l.label + ' · ' + l.name + '</span></div>'
+      logList.innerHTML = state.logs.slice(0, 8).map(l =>
+        '<div class="log-row"><time>' + l.at + '</time><span class="lg">' + l.label + ' · ' + l.name + ' <i>' + l.product + '</i></span></div>'
       ).join("");
     }
   }
 
-  /* ===================== draw ===================== */
-  function simulate(count){
-    // temp copy so the board only changes after the animation
-    const temp = state.prizes.map(p => ({ remaining: p.remaining }));
-    const results = [];
-    for (let i = 0; i < count; i++) {
-      const pool = [];
-      temp.forEach((p, idx) => { for (let k = 0; k < p.remaining; k++) pool.push(idx); });
-      if (pool.length === 0) break;
-      const pick = pool[Math.floor(Math.random() * pool.length)];
-      temp[pick].remaining--;
-      const left = temp.reduce((a, p) => a + p.remaining, 0);
-      results.push({ prize: state.prizes[pick], isLast: left === 0 });
-    }
-    return results;
+  /* ============================================================
+     screen switching
+     ============================================================ */
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  const SCREENS = ["home","shop","detail","box","admin"];
+
+  function showScreen(name){
+    curScreen = name;
+    SCREENS.forEach(s => { $("#screen" + cap(s)).hidden = s !== name; });
+    $$(".tab").forEach(b => b.classList.toggle("on", b.dataset.tab === name));
+
+    const isDetail = name === "detail";
+    $("#brandBox").hidden = isDetail;
+    $("#detailHead").hidden = !isDetail;
+    $("#searchRow").hidden = !(name === "home" || name === "shop");
+    if (isDetail && curId) $("#detailTitle").textContent = P(curId).title;
+
+    $("#buybar").hidden = !isDetail;
+    $("#boxBar").hidden = name !== "box";
+
+    $("#screen" + cap(name)).scrollTop = 0;
+
+    if (name === "detail") renderDetail();
+    if (name === "box") renderBox();
+    if (name === "admin") renderAdmin();
   }
 
-  function commit(results){
+  function openDetail(pid){
+    if (curScreen !== "detail") prevScreen = curScreen;
+    curId = pid;
+    showScreen("detail");
+  }
+
+  function backToList(){
+    showScreen(prevScreen === "detail" ? "home" : prevScreen);
+  }
+
+  /* ============================================================
+     draw
+     ============================================================ */
+  function simulate(ps, count){
+    const temp = ps.grades.map(g => g.r);
+    const out = [];
+    for (let i = 0; i < count; i++){
+      const total = temp.reduce((a, b) => a + b, 0);
+      if (total === 0) break;
+      let pick = Math.floor(Math.random() * total);
+      let gi = 0;
+      for (; gi < temp.length; gi++){
+        if (pick < temp[gi]) break;
+        pick -= temp[gi];
+      }
+      temp[gi]--;
+      out.push({ gi: gi, last: temp.reduce((a, b) => a + b, 0) === 0 });
+    }
+    return out;
+  }
+
+  function commit(p, ps, results){
     const at = nowTime();
-    results.forEach(r => {
-      const p = state.prizes.find(x => x.id === r.prize.id);
-      p.remaining--;
-      state.sold++;
+    results.forEach(res => {
+      const g = ps.grades[res.gi];
+      g.r--;
       const uid = ++uidSeq;
       state.box.push({
-        uid: uid,
-        prizeId: p.id,
-        label: p.id + "상",
-        name: p.name,
-        glyph: p.glyph,
-        tone: p.tone,
-        at: at,
-        shipped: false
+        uid: uid, pid: p.id, product: p.title,
+        label: gLabel(p, g), name: g.n, c: g.c, at: at, shipped: false
       });
       selected.add(uid);
-      state.logs.unshift({ at: at, label: p.id + "상", name: p.name });
-      if (r.isLast) {
-        state.lastWon = true;
-        state.lastWonAt = at;
+      state.logs.unshift({ at: at, product: p.title, label: gLabel(p, g), name: g.n });
+
+      if (res.last && p.last){
+        ps.lastWon = true;
+        ps.lastWonAt = at;
         const luid = ++uidSeq;
         state.box.push({
-          uid: luid,
-          prizeId: "L",
-          label: "라스트원상",
-          name: LAST_PRIZE.name,
-          glyph: LAST_PRIZE.glyph,
-          tone: LAST_PRIZE.tone,
-          at: at,
-          shipped: false
+          uid: luid, pid: p.id, product: p.title,
+          label: "라스트원상", name: p.last, c: "last", at: at, shipped: false
         });
         selected.add(luid);
-        state.logs.unshift({ at: at, label: "라스트원상", name: LAST_PRIZE.name });
+        state.logs.unshift({ at: at, product: p.title, label: "라스트원상", name: p.last });
       }
     });
-    if (results.length) toast(results.length + "장 뽑기 완료 · 보관함에 담았어요");
   }
 
   function draw(count){
-    if (busy) return;
-    const remain = sumRemaining();
-    if (remain === 0) { toast("이번 쿠지판은 모두 소진되었어요"); return; }
-    if (count === 5 && remain < 5) { toast("남은 티켓이 " + remain + "장이라 5연속은 불가해요"); return; }
-    const cost = count === 5 ? FIVE_PRICE : PRICE;
-    if (state.points < cost) {
-      pendingCount = count;
+    if (busy || !curId) return;
+    const p = P(curId), ps = S(curId);
+    const remain = remainOf(ps);
+    if (remain === 0){ toast("이번 쿠지판은 모두 소진되었어요"); return; }
+    if (count === 5 && remain < 5){
+      toast("남은 티켓이 " + remain + "장이라 5연속은 불가해요 · 1회로 뽑아 주세요");
+      return;
+    }
+    const cost = p.price * count;
+    if (state.points < cost){
+      pendingDraw = count;
       $("#chargeNeed").textContent = won(cost - state.points) + " P 부족";
       $("#chargeHave").textContent = won(state.points) + " P";
       openOverlay("chargeSheet");
       return;
     }
+
     busy = true;
     state.points -= cost;
-    render();
+    renderHeader();
     closeAll();
 
-    const results = simulate(count);
-    $("#drawTitle").textContent = count === 5 ? "5연속 오픈!" : (count === 1 && sumRemaining() === 1 ? "마지막 1장!" : "두근두근, 티켓 오픈!");
+    const results = simulate(ps, count);
+    $("#drawTitle").textContent = count === 5 ? "5연속 오픈!" : (remain === 1 ? "마지막 1장!" : "두근두근, 티켓 오픈!");
     $("#drawSub").textContent = count === 5 ? "티켓 5장을 여는 중이에요" : "잠시만 기다려 주세요";
     openOverlay("drawOverlay");
     $("#drawOverlay").querySelector(".ticket").style.animationDuration = count === 5 ? "0.95s" : "1.15s";
 
-    const delay = count === 5 ? 1500 : 1250;
+    const delay = count === 5 ? 1450 : 1200;
     setTimeout(() => {
       closeOverlay("drawOverlay");
-      commit(results);
-      render();
+      commit(p, ps, results);
       pendingCount = count;
-      showResult(results, count);
+      renderHeader();
+      renderDetail();
+      renderAdmin();
+      showResult(p, ps, results, count);
       busy = false;
     }, delay);
   }
 
-  function showResult(results, count){
-    const lastHit = results.some(r => r.isLast);
+  function showResult(p, ps, results, count){
+    const lastHit = results.some(r => r.last && p.last);
     const top = $("#resTop");
     const grade = $("#resGrade");
     const glyph = $("#resGlyph");
     const nameEl = $("#resName");
+    const prodEl = $("#resProd");
     const multiWrap = $("#resMultiWrap");
     const lastWrap = $("#resLastWrap");
     const confetti = $("#confetti");
@@ -1443,41 +1727,46 @@
     multiWrap.innerHTML = "";
     lastWrap.innerHTML = "";
 
-    if (count === 1) {
+    if (count === 1){
       const r = results[0];
+      const g = ps.grades[r.gi];
       $("#resEyebrow").textContent = lastHit ? "라스트원상 획득" : "당첨 결과";
-      grade.textContent = r.prize.id + "상";
+      grade.textContent = gLabel(p, g);
       grade.style.display = "";
-      grade.className = "res-grade";
+      grade.className = "res-grade" + (lastHit ? " gold" : "");
       glyph.style.display = "";
-      glyph.innerHTML = '<svg><use href="#' + r.prize.glyph + '"/></svg>';
-      nameEl.textContent = r.prize.name;
+      glyph.innerHTML = artOf(p, "r");
+      nameEl.textContent = g.n;
       nameEl.style.display = "";
-      document.querySelector("#resultSheetInner .res-saved").style.display = "";    } else {
+      prodEl.textContent = p.title;
+      prodEl.style.display = "";
+      $(".res-saved").style.display = "";
+    } else {
       $("#resEyebrow").textContent = lastHit ? "라스트원상 획득 · 5연속" : "5연속 결과";
       grade.style.display = "none";
       glyph.style.display = "none";
       nameEl.style.display = "none";
-      document.querySelector("#resultSheetInner .res-saved").style.display = "none";
+      prodEl.style.display = "none";
+      $(".res-saved").style.display = "none";
       let rows = "";
       results.forEach((r, i) => {
+        const g = ps.grades[r.gi];
         rows += '<div class="res-row" style="animation-delay:' + (0.06 * i) + 's">' +
-          '<span class="' + tagClass({ prizeId: r.isLast ? "L" : r.prize.id }) + '">' + (r.isLast ? "라스트원상" : r.prize.id + "상") + '</span>' +
-          '<span class="nm">' + (r.isLast ? LAST_PRIZE.name : r.prize.name) + '</span>' +
+          '<span class="tag-g g-' + g.c + '">' + gLabel(p, g) + '</span>' +
+          '<span class="nm">' + g.n + '</span>' +
         '</div>';
       });
-      multiWrap.innerHTML = '<div class="res-headline">' + results.length + '장 모두 보관함에 담았어요</div><div class="res-multi">' + rows + '</div>';
+      multiWrap.innerHTML = '<div class="res-headline">' + results.length + '장 모두 진열장에 담았어요</div><div class="res-multi">' + rows + '</div>';
     }
 
-    if (lastHit) {
+    if (lastHit){
       lastWrap.innerHTML =
         '<div class="last-banner">' +
           '<span class="ic"><svg viewBox="0 0 24 24"><use href="#i-crown"/></svg></span>' +
-          '<span>축하해요! 마지막 티켓의 주인공<br>라스트원상 <b>한정 컬러 대형 인형</b>도 함께 담았어요.</span>' +
+          '<span>축하해요! 마지막 티켓의 주인공<br>라스트원상 <b>' + p.last + '</b>도 함께 담았어요.</span>' +
         '</div>';
-      // confetti
       const colors = ["#FF9DB5","#FFD36E","#8FDCC0","#BFA9F5","#8FC9F0"];
-      for (let i = 0; i < 26; i++) {
+      for (let i = 0; i < 26; i++){
         const s = document.createElement("i");
         s.style.left = (Math.random() * 100) + "%";
         s.style.background = colors[i % colors.length];
@@ -1488,28 +1777,31 @@
       }
     }
 
-    const remain = sumRemaining();
+    const remain = remainOf(ps);
     const again = $("#resAgainBtn");
     const againSub = $("#resAgainSub");
-    if (remain === 0) {
+    if (remain === 0){
       again.disabled = true;
       againSub.textContent = "쿠지판 소진";
-    } else if (count === 5 && remain < 5) {
+      again.dataset.forceOne = "";
+    } else if (count === 5 && remain < 5){
       again.disabled = false;
-      againSub.textContent = "1회 12,000원";
       again.dataset.forceOne = "1";
+      againSub.textContent = won(p.price) + " P";
     } else {
       again.disabled = false;
       again.dataset.forceOne = "";
-      againSub.textContent = count === 5 ? "60,000원" : "12,000원";
+      againSub.textContent = won(p.price * (count === 5 ? 5 : 1)) + " P";
     }
     openOverlay("resultSheet");
   }
 
-  /* ===================== shipping ===================== */
+  /* ============================================================
+     shipping
+     ============================================================ */
   function openShip(){
     const items = state.box.filter(i => !i.shipped && selected.has(i.uid));
-    if (items.length === 0) { toast("배송할 상품을 선택해 주세요"); return; }
+    if (items.length === 0){ toast("배송할 상품을 선택해 주세요"); return; }
     $("#shipSummaryCount").textContent = items.length + "점";
     $("#shipSummaryNames").textContent = items.length <= 2
       ? items.map(i => i.name).join(", ")
@@ -1540,7 +1832,8 @@
     const name = $("#shipName").value.trim();
     state.shipments.push({ no: no, count: items.length, at: nowTime(), name: name });
     items.forEach(i => { i.shipped = true; selected.delete(i.uid); });
-    render();
+    renderHeader();
+    renderBox();
     closeOverlay("shipSheet");
     toast(no + " 배송 신청 완료");
     $("#shipName").value = "";
@@ -1549,71 +1842,67 @@
     agreeChecked = false;
   }
 
-  /* ===================== bindings ===================== */
-  function bindBuyButtons(){
-    const one = $("#btnOne"), five = $("#btnFive");
-    if (one) one.addEventListener("click", () => draw(1));
-    if (five) five.addEventListener("click", () => draw(5));
-  }
-  bindBuyButtons();
-
-  function switchTab(name){
-    ["home","box","admin"].forEach(t => {
-      $("#screen" + t.charAt(0).toUpperCase() + t.slice(1)).hidden = t !== name;
-    });
-    document.querySelectorAll(".tab").forEach(b => b.classList.toggle("on", b.dataset.tab === name));
-    $("#buybar").hidden = name !== "home" || sumRemaining() === 0;
-    $("#boxBar").hidden = name !== "box";
-    $("#screen" + name.charAt(0).toUpperCase() + name.slice(1)).scrollTop = 0;
-  }
-  document.querySelectorAll(".tab").forEach(b => {
-    b.addEventListener("click", () => switchTab(b.dataset.tab));
-  });
-  $("#cartBtn").addEventListener("click", () => switchTab("box"));
-
-  $("#lineup").addEventListener("click", e => {
-    const bell = e.target.closest("[data-notify]");
-    if (bell) {
-      const id = bell.dataset.notify;
-      const c = LINEUP.find(x => x.id === id);
-      if (notified.has(id)) {
-        notified.delete(id);
-        toast("알림 신청을 취소했어요");
-      } else {
-        notified.add(id);
-        toast(c.openLabel + " · 오픈 30분 전에 알려드릴게요");
-      }
-      renderLineup();
+  /* ============================================================
+     bindings
+     ============================================================ */
+  document.addEventListener("click", e => {
+    const card = e.target.closest("[data-pid]");
+    if (card){ openDetail(card.dataset.pid); return; }
+    const more = e.target.closest("[data-more]");
+    if (more){
+      shopFilter = more.dataset.more;
+      $$("#shopChips .chip").forEach(c => c.classList.toggle("on", c.dataset.f === shopFilter));
+      renderGrids();
+      showScreen("shop");
       return;
     }
-    const card = e.target.closest("[data-lineup]");
-    if (card) {
-      const c = LINEUP.find(x => x.id === card.dataset.lineup);
-      if (c) toast("준비중인 쿠지예요 · " + c.openLabel);
+    const chip = e.target.closest("#shopChips .chip");
+    if (chip){
+      shopFilter = chip.dataset.f;
+      $$("#shopChips .chip").forEach(c => c.classList.toggle("on", c === chip));
+      renderGrids();
+      return;
     }
+  });
+
+  $$(".tab").forEach(b => b.addEventListener("click", () => showScreen(b.dataset.tab)));
+  $("#cartBtn").addEventListener("click", () => showScreen("box"));
+  $("#backBtn").addEventListener("click", backToList);
+
+  $("#q").addEventListener("input", e => {
+    query = e.target.value;
+    $("#qClear").hidden = query.length === 0;
+    renderGrids();
+  });
+  $("#qClear").addEventListener("click", () => {
+    query = "";
+    $("#q").value = "";
+    $("#qClear").hidden = true;
+    renderGrids();
+    $("#q").focus();
   });
 
   $("#noticeBar").addEventListener("click", () => {
-    toast("12.01(화) 20:00 모구모구 본점 한정 쿠지가 오픈해요");
+    toast("12.01(화) 20:00 · 신상 8종이 동시에 오픈해요");
   });
-  $("#noticeBar").addEventListener("keydown", e => {
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("#noticeBar").click(); }
-  });
+
+  $("#btnOne").addEventListener("click", () => draw(1));
+  $("#btnFive").addEventListener("click", () => draw(5));
 
   $("#boxArea").addEventListener("click", e => {
     const all = e.target.closest("#selectAll");
-    if (all) {
+    if (all){
       const items = state.box.filter(i => !i.shipped);
       const every = items.every(i => selected.has(i.uid));
       items.forEach(i => { if (every) selected.delete(i.uid); else selected.add(i.uid); });
-      render();
+      renderBox();
       return;
     }
     const item = e.target.closest(".item");
-    if (item) {
+    if (item){
       const uid = Number(item.dataset.uid);
       if (selected.has(uid)) selected.delete(uid); else selected.add(uid);
-      render();
+      renderBox();
     }
   });
 
@@ -1629,29 +1918,30 @@
   $("#shipSubmit").addEventListener("click", submitShip);
 
   $("#pointsBtn").addEventListener("click", () => {
-    const remain = sumRemaining();
-    const need = remain === 0 ? 0 : (state.points < PRICE ? PRICE - state.points : 0);
+    const p = curId ? P(curId) : null;
+    const need = (p && state.points < p.price) ? p.price - state.points : 0;
     $("#chargeNeed").textContent = need > 0 ? won(need) + " P 부족" : "데모 포인트";
     $("#chargeHave").textContent = won(state.points) + " P";
     openOverlay("chargeSheet");
   });
   $("#chargeBtn").addEventListener("click", () => {
     state.points += 120000;
-    render();
+    renderHeader();
+    if (curScreen === "detail") renderDetail();
     closeOverlay("chargeSheet");
     toast("샘플 포인트 120,000P 충전 완료");
   });
 
-  document.querySelectorAll("[data-close]").forEach(b => {
+  $$("[data-close]").forEach(b => {
     b.addEventListener("click", () => closeOverlay(b.dataset.close));
   });
-  document.querySelectorAll(".overlay").forEach(o => {
+  $$(".overlay").forEach(o => {
     o.addEventListener("click", e => { if (e.target === o && o.id !== "drawOverlay") closeOverlay(o.id); });
   });
 
   $("#resBoxBtn").addEventListener("click", () => {
     closeOverlay("resultSheet");
-    switchTab("box");
+    showScreen("box");
   });
   $("#resAgainBtn").addEventListener("click", function(){
     const forceOne = this.dataset.forceOne === "1";
@@ -1660,34 +1950,47 @@
   });
 
   $("#resetBtn").addEventListener("click", () => {
-    $("#confirmTitle").textContent = "쿠지판 리셋";
-    $("#confirmText").innerHTML = "지금 쿠지판을 처음 상태로 되돌립니다.<br>판매 기록·누적 매출·보관함·배송 신청이 <b>모두 초기화</b>돼요. 계속할까요?";
+    $("#confirmTitle").textContent = "전체 쿠지판 리셋";
+    $("#confirmText").innerHTML = "16개 상품을 모두 처음 상태로 되돌립니다.<br>판매 기록·누적 매출·진열장·배송 신청이 <b>모두 초기화</b>돼요. 계속할까요?";
     confirmAction = () => {
       state = initialState();
       selected = new Set();
       uidSeq = 1;
       closeOverlay("confirmSheet");
-      switchTab("home");
+      showScreen("home");
       render();
-      toast("쿠지판을 리셋했어요 (42장 · 매출 456,000원)");
+      toast("전체 쿠지판을 리셋했어요");
     };
     openOverlay("confirmSheet");
   });
   $("#confirmOk").addEventListener("click", () => { if (confirmAction) confirmAction(); });
 
-  /* ===================== boot ===================== */
+  /* ============================================================
+     render / boot
+     ============================================================ */
+  function render(){
+    renderHeader();
+    renderGrids();
+    if (curScreen === "detail") renderDetail();
+    if (curScreen === "box") renderBox();
+    if (curScreen === "admin") renderAdmin();
+  }
+
   state = initialState();
   render();
-  renderLineup();
-  switchTab("home");
+  showScreen("home");
 
-  // expose a tiny debug handle for automated checks
-  window.__kuji = {
+  // automated check handle
+  window.__shop = {
     get state(){ return state; },
-    remain: sumRemaining,
-    draw: draw,
-    lineup: LINEUP,
-    notified: notified
+    products: PRODUCTS,
+    screen: () => curScreen,
+    current: () => curId,
+    remain: id => remainOf(S(id)),
+    revenue: () => PRODUCTS.reduce((a, p) => a + soldOf(S(p.id)) * p.price, 0),
+    open: openDetail,
+    draw: (n) => { draw(n); },
+    query: (q) => { query = q; renderGrids(); }
   };
 })();
 </script>
