@@ -204,8 +204,8 @@
     background:linear-gradient(158deg,#3f3f45 0%,#2a2a2e 46%,#212124 100%)}
   .pclip::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.035) 0 2px,transparent 2px 7px)}
   .cell.focus .pcard{box-shadow:0 0 0 2px #ffd42a,0 2px 8px rgba(20,25,40,.35)}
-  .gbadge{position:absolute;top:-4px;left:-2px;z-index:4;font-size:17px;font-weight:900;font-style:italic;letter-spacing:-1.2px;line-height:1.35;
-    text-shadow:-1.4px -1.4px 0 #fff,1.4px -1.4px 0 #fff,-1.4px 1.4px 0 #fff,1.4px 1.4px 0 #fff,0 3px 3px rgba(0,0,0,.42)}
+  .gbadge{position:absolute;top:-5px;left:-2px;z-index:4;font-size:18px;font-weight:900;font-style:italic;letter-spacing:-1.3px;line-height:1.3;
+    text-shadow:-1.2px -1.2px 0 #fff,1.2px -1.2px 0 #fff,-1.2px 1.2px 0 #fff,1.2px 1.2px 0 #fff,0 3px 4px rgba(0,0,0,.5)}
   .pct{position:absolute;right:4px;top:4px;z-index:3;font-size:7.4px;font-weight:800;color:#f2eef4;letter-spacing:-.2px;text-shadow:0 1px 2px rgba(0,0,0,.6)}
   .pct em{font-style:normal;color:#c9f0b0;font-size:7px;background:rgba(120,220,120,.18);border:1px solid rgba(160,240,160,.4);padding:1px 3px;border-radius:3px}
   .part{position:absolute;left:0;right:0;top:17px;bottom:20px;display:grid;place-items:center;z-index:1}
@@ -1216,9 +1216,9 @@
           <span class="pname">치이카와 | ${g.n}</span>
           ${out ? `<span class="stamp">종료</span>` : ""}
         </div>
+        <span class="gbadge" style="color:${GC[g.k]}">${GLABEL(g.k)}</span>
       </div>
       <span class="chip"><i>P</i>${isLast ? `${won(g.v)}` : won(g.v)}</span>
-      <span class="gbadge" style="color:${GC[g.k]}">${GLABEL(g.k)}</span>
     </div>`;
   }
 
