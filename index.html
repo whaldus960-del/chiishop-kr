@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFF8F3">
+<title>치이샵 (CHII SHOP) · 치이카와 온라인 쿠지</title>
+<!--
+  치이샵 CHII SHOP — 온라인 쿠지(뽑기)샵 모바일 웹 (사업 검토용 샘플)
+  - 단일 파일 / 외부 CDN·폰트·이미지 의존 없음
+  - 결제·배송은 데모로만 동작하며 실제 청구/발송은 없습니다.
+  - 모든 티켓은 꽝 없이 100% 당첨, 등급별 잔여 수량·확률 실시간 공개.
+  - 홈: 진행중 쿠지 + 오픈 예정 쿠지(준비중·알림 신청) 라인업
+-->
+<style>
+  :root{
+    --pink:#FF7FA0;
+    --pink-deep:#F2607F;
+    --pink-soft:#FFE6EE;
+    --pink-mist:#FFF1F5;
+    --cream:#FFF8F3;
+    --ink:#4A3D44;
+    --ink-2:#6E5D66;
+    --muted:#A3939C;
+    --line:#F4E5DD;
+    --gold:#EFB143;
+    --gold-soft:#FFF3D8;
+    --mint:#7FD8B8;
+    --sky:#8FC9F0;
+    --lav:#BFA9F5;
+    --shadow:0 8px 24px rgba(196,126,146,.13);
+    --shadow-sm:0 3px 10px rgba(196,126,146,.10);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",-apple-system,BlinkMacSystemFont,"Malgun Gothic",system-ui,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(900px 600px at 12% 8%, #FFE9F0 0%, rgba(255,233,240,0) 60%),
+      radial-gradient(800px 600px at 88% 92%, #E9F7F1 0%, rgba(233,247,241,0) 60%),
+      #F6EFEA;
+    display:flex;align-items:center;justify-content:center;
+    -webkit-font-smoothing:antialiased;
+  }
+  button{font-family:inherit;border:0;background:none;padding:0;color:inherit;cursor:pointer}
+  input{font-family:inherit}
+  h1,h2,h3,p{margin:0}
+
+  /* ---------- phone frame ---------- */
+  .app{
+    position:relative;
+    width:100%;
+    max-width:420px;
+    height:100dvh;
+    max-height:920px;
+    background:var(--cream);
+    display:flex;flex-direction:column;
+    overflow:hidden;
+    box-shadow:0 30px 70px rgba(122,85,95,.20), 0 2px 0 rgba(255,255,255,.8) inset;
+  }
+  @media (min-width:460px) and (min-height:700px){
+    .app{border-radius:34px;border:1px solid #fff;height:calc(100dvh - 40px)}
+  }
+  @media (max-width:459px){
+    body{display:block;background:var(--cream)}
+    .app{height:100dvh;max-height:none;box-shadow:none}
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    flex:0 0 auto;
+    display:flex;align-items:center;gap:8px;
+    padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;
+    background:rgba(255,248,243,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(244,229,221,.7);
+    z-index:20;
+  }
+  .brand{display:flex;align-items:center;gap:9px;min-width:0}
+  .brand-mark{
+    width:34px;height:34px;border-radius:12px;flex:0 0 auto;
+    background:linear-gradient(150deg,#FFB0C4,#FF7FA0 70%);
+    display:grid;place-items:center;color:#fff;
+    box-shadow:0 4px 10px rgba(255,127,160,.35);
+  }
+  .brand-mark svg{width:20px;height:20px;fill:#fff}
+  .brand-name{font-size:16px;font-weight:800;letter-spacing:-.1px;line-height:1.1}
+  .brand-name em{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:1.2px;color:#E39BAD;vertical-align:2px;margin-left:3px}
+  .brand-sub{font-size:9.5px;color:var(--muted);font-weight:700;margin-top:3px;letter-spacing:.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:172px}
+  .top-actions{margin-left:auto;display:flex;align-items:center;gap:7px}
+  .points{
+    display:flex;align-items:center;gap:5px;
+    height:32px;padding:0 11px 0 9px;border-radius:999px;
+    background:#fff;border:1px solid #FFDCE6;
+    font-size:12px;font-weight:800;color:var(--pink-deep);
+    box-shadow:var(--shadow-sm);
+  }
+  .points svg{width:14px;height:14px;fill:var(--gold)}
+  .points .unit{color:#C9A2AE;font-weight:700;font-size:11px}
+  .icon-btn{
+    position:relative;width:34px;height:34px;border-radius:12px;
+    background:#fff;border:1px solid #FFDCE6;display:grid;place-items:center;
+    box-shadow:var(--shadow-sm);
+  }
+  .icon-btn svg{width:17px;height:17px;fill:none;stroke:var(--pink-deep);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .cart-count{
+    position:absolute;top:-5px;right:-5px;min-width:16px;height:16px;padding:0 4px;
+    border-radius:999px;background:var(--pink);color:#fff;font-size:10px;font-weight:800;
+    display:grid;place-items:center;border:2px solid var(--cream);line-height:1;
+  }
+  .cart-count.zero{display:none}
+
+  /* ---------- screens ---------- */
+  .screen{
+    flex:1 1 auto;overflow-y:auto;overflow-x:hidden;
+    padding:14px 16px 20px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .screen::-webkit-scrollbar{display:none}
+  #screenHome{padding-bottom:26px}
+  .screen[hidden]{display:none}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    border-radius:24px;
+    background:linear-gradient(160deg,#FFFFFF 0%,#FFF3F7 55%,#FFEAF1 100%);
+    border:1px solid #FFE1EA;
+    box-shadow:var(--shadow);
+    padding:14px 16px 12px;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;
+    background:radial-gradient(circle,#FFD9E5 0%,rgba(255,217,229,0) 70%);
+  }
+  .hero-top{display:flex;gap:6px;align-items:center;position:relative;z-index:2;flex-wrap:wrap}
+  .badge{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:10.5px;font-weight:800;letter-spacing:.2px;
+    padding:4px 9px;border-radius:999px;line-height:1;
+  }
+  .badge.gold{background:linear-gradient(135deg,#FFE3A8,#FFD07A);color:#8A5A0B;box-shadow:0 2px 6px rgba(239,177,67,.25)}
+  .badge.ghost{background:#fff;color:#B58C9A;border:1px solid #FFDDE7}
+  .badge.live{background:#FFF0F4;color:var(--pink-deep)}
+  .badge.live .dot{width:5px;height:5px;border-radius:50%;background:var(--pink);animation:pulse 1.6s infinite}
+  .hero-body{display:flex;gap:10px;align-items:flex-end;position:relative;z-index:2;margin-top:10px}
+  .hero-text{flex:1 1 auto;min-width:0}
+  .hero-text h1{font-size:21px;line-height:1.28;font-weight:800;letter-spacing:-.4px}
+  .hero-sub{margin-top:5px;font-size:11.5px;color:var(--ink-2);font-weight:600}
+  .progress{
+    margin-top:12px;height:9px;border-radius:999px;background:#FFE3EC;overflow:hidden;
+    box-shadow:inset 0 1px 2px rgba(196,126,146,.12);
+  }
+  .progress i{
+    display:block;height:100%;border-radius:999px;
+    background:linear-gradient(90deg,#FFB3C6,#FF7FA0);
+    transition:width .45s cubic-bezier(.3,1.3,.5,1);
+    position:relative;
+  }
+  .progress i::after{
+    content:"";position:absolute;inset:0;border-radius:999px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:translateX(-100%);animation:shine 2.6s ease-in-out infinite;
+  }
+  .progress-meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;font-size:11px;color:var(--ink-2);font-weight:600}
+  .progress-meta b{color:var(--pink-deep);font-size:13px;font-weight:800}
+  .hero-art{flex:0 0 108px;height:104px}
+  .hero-art svg{width:100%;height:100%;overflow:visible}
+  .hero-foot{
+    position:relative;z-index:2;margin-top:12px;padding-top:10px;border-top:1px dashed #FFDCE6;
+    display:flex;align-items:center;gap:6px;font-size:10.5px;color:#A9818F;font-weight:700;
+  }
+  .hero-foot .pill{width:5px;height:5px;border-radius:50%;background:var(--mint)}
+  .hero.sold-out{filter:saturate(.55)}
+  .hero.sold-out .progress i{background:linear-gradient(90deg,#DCD2D7,#BFAFB6)}
+
+  /* ---------- section ---------- */
+  .sec{margin-top:18px}
+  .sec-head{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+  .sec-head h2{font-size:14.5px;font-weight:800;letter-spacing:-.2px}
+  .sec-head .aside{margin-left:auto;font-size:10.5px;color:var(--muted);font-weight:700}
+  .live-chip{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:9.5px;font-weight:800;color:#fff;background:var(--pink);
+    padding:3px 7px;border-radius:6px;letter-spacing:.6px;
+  }
+  .live-chip i{width:4px;height:4px;border-radius:50%;background:#fff;animation:pulse 1.4s infinite}
+  .sec-note{font-size:10.5px;color:var(--muted);font-weight:600;margin:-4px 0 9px}
+
+  /* ---------- prize list ---------- */
+  .prize-list{
+    background:#fff;border-radius:20px;border:1px solid var(--line);
+    box-shadow:var(--shadow-sm);overflow:hidden;
+  }
+  .prize-row{
+    display:flex;align-items:center;gap:10px;
+    padding:11px 13px;border-bottom:1px solid #FBF0EA;
+    transition:background .25s;
+  }
+  .prize-row:last-child{border-bottom:0}
+  .prize-row.flash{background:#FFF6F9}
+  .thumb{
+    width:42px;height:42px;border-radius:13px;flex:0 0 auto;display:grid;place-items:center;
+    border:1px solid rgba(255,255,255,.9);
+  }
+  .thumb svg{width:23px;height:23px;fill:none;stroke:#7A6670;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .thumb.tone-pink{background:linear-gradient(150deg,#FFE1EA,#FFC9D8)}
+  .thumb.tone-yellow{background:linear-gradient(150deg,#FFF3D6,#FFE3AE)}
+  .thumb.tone-mint{background:linear-gradient(150deg,#E1F7EF,#C3EFDF)}
+  .thumb.tone-lav{background:linear-gradient(150deg,#EEE7FF,#DCD0FF)}
+  .thumb.tone-sky{background:linear-gradient(150deg,#E3F2FC,#C9E5F9)}
+  .thumb.tone-gold{background:linear-gradient(150deg,#FFF0CC,#FFD98C)}
+  .prize-main{flex:1 1 auto;min-width:0}
+  .prize-top{display:flex;align-items:center;gap:6px}
+  .grade{
+    font-size:10px;font-weight:800;color:#fff;background:var(--pink);
+    width:18px;height:18px;border-radius:6px;display:grid;place-items:center;flex:0 0 auto;
+  }
+  .grade.a{background:linear-gradient(140deg,#FF9DB5,#F2607F)}
+  .grade.b{background:linear-gradient(140deg,#FFC46B,#EFA028)}
+  .grade.c{background:linear-gradient(140deg,#8ADDC0,#45BA92)}
+  .grade.d{background:linear-gradient(140deg,#B7A4F0,#8B6FE0)}
+  .grade.e{background:linear-gradient(140deg,#9BD2F2,#5FA9DC)}
+  .prize-name{font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .prize-count{margin-left:auto;font-size:10.5px;color:var(--muted);font-weight:700;flex:0 0 auto}
+  .prize-count b{color:var(--ink-2);font-size:11.5px;font-weight:800}
+  .bar{height:5px;border-radius:999px;background:#F7ECE7;margin-top:6px;overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#FFC0D1,#FF8FA9);transition:width .5s ease, background .3s}
+  .pct{
+    flex:0 0 46px;text-align:right;font-size:12.5px;font-weight:800;color:var(--pink-deep);
+    font-variant-numeric:tabular-nums;
+  }
+  .pct small{display:block;font-size:9px;color:var(--muted);font-weight:700;margin-top:1px}
+  .prize-row.done{opacity:.5}
+  .prize-row.done .pct{color:var(--muted)}
+  .prize-row.done .thumb{filter:grayscale(.6)}
+
+  .last-row{
+    position:relative;overflow:hidden;
+    margin-top:10px;border-radius:18px;padding:12px 13px;
+    display:flex;align-items:center;gap:10px;
+    background:linear-gradient(120deg,#FFF7E4,#FFEFD0 55%,#FFE6B8);
+    border:1px solid #FFE2AC;
+    box-shadow:0 6px 16px rgba(239,177,67,.16);
+  }
+  .last-row::after{
+    content:"";position:absolute;right:-24px;top:-24px;width:90px;height:90px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,0) 70%);
+  }
+  .last-row .thumb{background:linear-gradient(150deg,#FFE8B5,#FFCE72);border-color:#fff}
+  .last-row .prize-name{font-size:12px;font-weight:800;color:#7A4E06}
+  .last-row .sub{font-size:10px;color:#A97B25;font-weight:700;margin-top:3px}
+  .last-row .flag{
+    margin-left:auto;flex:0 0 auto;font-size:10px;font-weight:800;color:#8A5A0B;
+    background:rgba(255,255,255,.75);padding:4px 8px;border-radius:999px;border:1px solid #FFE0A8;
+  }
+  .last-row.won .flag{background:#7A4E06;color:#FFE7B0;border-color:#7A4E06}
+
+  /* ---------- info cards ---------- */
+  .info-grid{display:grid;gap:7px;margin-top:16px}
+  .info{
+    display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);
+    border-radius:14px;padding:10px 12px;font-size:11px;color:var(--ink-2);font-weight:600;line-height:1.45;
+  }
+  .info .ic{width:26px;height:26px;border-radius:9px;flex:0 0 auto;display:grid;place-items:center;background:var(--pink-mist)}
+  .info .ic svg{width:14px;height:14px;fill:none;stroke:var(--pink-deep);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .info b{color:var(--ink);font-weight:800}
+  .demo-note{
+    margin:18px 2px 4px;text-align:center;font-size:9.5px;color:#B7A6AE;font-weight:600;line-height:1.6;
+  }
+
+  /* ---------- notice bar ---------- */
+  .notice{
+    display:flex;align-items:center;gap:7px;margin-bottom:12px;
+    padding:8px 11px;border-radius:12px;
+    background:linear-gradient(90deg,#FFF1F6,#FFF9FB);
+    border:1px solid #FFE0E9;
+    font-size:10.5px;font-weight:700;color:#9C6E7C;
+    box-shadow:0 2px 8px rgba(196,126,146,.06);
+  }
+  .notice .ntag{
+    flex:0 0 auto;font-size:8.5px;font-weight:800;letter-spacing:.6px;color:#fff;
+    background:linear-gradient(135deg,#FF9DB5,#F2607F);padding:3px 6px;border-radius:5px;line-height:1.2;
+  }
+  .notice .ntxt{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .notice .ntxt b{color:var(--pink-deep);font-weight:800}
+  .notice .narr{flex:0 0 auto;font-weight:800;color:#D0AFBA;font-size:13px;line-height:1}
+
+  /* ---------- lineup ---------- */
+  .lineup{
+    display:grid;grid-template-columns:1fr 1fr;gap:9px;
+  }
+  .lk{
+    position:relative;overflow:hidden;cursor:pointer;
+    border-radius:18px;border:1px solid #FFE2EA;
+    background:linear-gradient(158deg,#FFFFFF 0%,#FFF5F8 100%);
+    box-shadow:var(--shadow-sm);padding:11px 11px 10px;
+    transition:transform .12s ease,box-shadow .2s;
+  }
+  .lk:active{transform:scale(.985)}
+  .lk.tone-mint{background:linear-gradient(158deg,#FFFFFF 0%,#F1FBF6 100%);border-color:#D8F0E7}
+  .lk.tone-lav{background:linear-gradient(158deg,#FFFFFF 0%,#F7F3FF 100%);border-color:#E4DAFA}
+  .lk::after{
+    content:"";position:absolute;right:-26px;top:-26px;width:106px;height:106px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,224,234,.95),rgba(255,224,234,0) 70%);
+  }
+  .lk.tone-mint::after{background:radial-gradient(circle,rgba(210,244,231,.95),rgba(210,244,231,0) 70%)}
+  .lk-top{position:relative;z-index:2;display:flex;align-items:center;gap:5px}
+  .lk-state{font-size:9px;font-weight:800;color:#8F7A82;background:#F5EBEF;padding:3px 7px;border-radius:999px;letter-spacing:.2px}
+  .lk-dday{
+    margin-left:auto;font-size:9.5px;font-weight:800;color:var(--pink-deep);
+    background:#fff;border:1px solid #FFDCE6;padding:3px 7px;border-radius:999px;
+    font-variant-numeric:tabular-nums;
+  }
+  .lk.tone-mint .lk-dday{color:#2E8E6B;border-color:#CFEDE1}
+  .lk-name{position:relative;z-index:2;margin-top:8px;font-size:12.5px;font-weight:800;line-height:1.36;letter-spacing:-.3px;padding-right:38px;min-height:34px}
+  .lk-meta{position:relative;z-index:2;margin-top:4px;font-size:9.5px;color:var(--muted);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lk-foot{position:relative;z-index:2;margin-top:9px;display:flex;align-items:center;gap:4px}
+  .lk-price{font-size:9.5px;font-weight:800;color:var(--ink-2);white-space:nowrap}
+  .lk-bell{
+    margin-left:auto;flex:0 0 auto;display:inline-flex;align-items:center;gap:3px;
+    font-size:9.5px;font-weight:800;color:var(--pink-deep);
+    background:#FFF0F4;border:1px solid #FFD6E2;padding:4px 7px;border-radius:999px;
+    transition:background .18s,color .18s,border-color .18s;letter-spacing:-.2px;
+  }
+  .lk-bell svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .lk-bell.on{background:var(--pink);border-color:var(--pink);color:#fff}
+  .lk.tone-mint .lk-bell{color:#2E8E6B;background:#EDFAF4;border-color:#CFEDE1}
+  .lk.tone-mint .lk-bell.on{background:#4CB995;border-color:#4CB995;color:#fff}
+  .lk-art{position:absolute;right:6px;top:33px;width:38px;height:38px;z-index:1;opacity:.9}
+  .lk-art svg{width:100%;height:100%;fill:none;stroke:#DBA9B8;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
+  .lk.tone-mint .lk-art svg{stroke:#8FC7B4}
+
+  /* ---------- notice list / footer ---------- */
+  .nlist{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm)}
+  .nrow{display:flex;align-items:center;gap:7px;padding:10px 13px;border-bottom:1px solid #FBF0EA;font-size:11px;font-weight:600;color:var(--ink-2)}
+  .nrow:last-child{border-bottom:0}
+  .nrow .ntag2{flex:0 0 auto;font-size:8.5px;font-weight:800;color:#B58C9A;background:#FFF0F4;padding:2px 5px;border-radius:5px}
+  .nrow .ntag2.hot{color:#fff;background:var(--pink)}
+  .nrow .ntx2{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .nrow time{flex:0 0 auto;font-size:9.5px;color:#C1B0B8;font-weight:700}
+  .shop-foot{text-align:center;font-size:9.5px;color:#B7A6AE;font-weight:600;line-height:1.75;margin:18px 2px 6px}
+  .shop-foot b{color:#8E7A83;font-weight:800}
+  .admin-sub{font-size:10.5px;color:var(--muted);font-weight:700;margin:-9px 0 12px;letter-spacing:-.1px}
+
+  /* ---------- buy bar ---------- */
+  .buybar{
+    flex:0 0 auto;display:flex;gap:8px;
+    padding:9px 14px calc(env(safe-area-inset-bottom) + 9px);
+    background:rgba(255,248,243,.96);backdrop-filter:blur(12px);
+    border-top:1px solid rgba(244,229,221,.9);
+    z-index:18;
+  }
+  .buybar[hidden]{display:none}
+  .btn-draw{
+    flex:1 1 0;border-radius:16px;padding:9px 6px;text-align:center;position:relative;
+    display:flex;flex-direction:column;align-items:center;gap:1px;
+    transition:transform .12s ease,box-shadow .2s,opacity .2s;
+  }
+  .btn-draw .b1{font-size:12.5px;font-weight:800;letter-spacing:-.2px}
+  .btn-draw .b2{font-size:10.5px;font-weight:700;opacity:.85}
+  .btn-draw.one{background:#fff;color:var(--pink-deep);border:1.5px solid #FFC8D8;box-shadow:var(--shadow-sm)}
+  .btn-draw.five{
+    flex:1.25 1 0;color:#6B3E00;
+    background:linear-gradient(135deg,#FFD877,#FFC24D);
+    box-shadow:0 6px 16px rgba(239,177,67,.35);
+  }
+  .btn-draw.five .tag{
+    position:absolute;top:-7px;right:9px;font-size:8.5px;font-weight:800;color:#FFF6DE;
+    background:#7A4E06;padding:2px 6px;border-radius:999px;letter-spacing:.2px;
+  }
+  .btn-draw:active{transform:scale(.975)}
+  .btn-draw:disabled{opacity:.45;box-shadow:none;cursor:not-allowed}
+  .buybar.soldout{justify-content:center}
+  .soldout-note{
+    width:100%;text-align:center;font-size:11.5px;font-weight:800;color:#A9818F;
+    padding:9px 0;border-radius:14px;background:#FFF0F4;border:1px dashed #FFCEDC;
+  }
+
+  /* ---------- bottom nav ---------- */
+  .tabbar{
+    flex:0 0 auto;display:flex;align-items:stretch;
+    padding:0 10px calc(env(safe-area-inset-bottom) + 4px);
+    background:#FFF8F3;border-top:1px solid rgba(244,229,221,.9);z-index:19;
+  }
+  .tab{
+    flex:1 1 0;display:flex;flex-direction:column;align-items:center;gap:2px;
+    padding:7px 0 6px;color:#BCAAB2;font-size:9.5px;font-weight:800;letter-spacing:.2px;
+    position:relative;transition:color .2s;
+  }
+  .tab svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .tab.on{color:var(--pink-deep)}
+  .tab.on::before{
+    content:"";position:absolute;top:0;width:26px;height:3px;border-radius:0 0 4px 4px;
+    background:var(--pink);
+  }
+  .tab .tbadge{
+    position:absolute;top:1px;right:calc(50% - 22px);min-width:14px;height:14px;padding:0 3px;
+    border-radius:999px;background:var(--pink);color:#fff;font-size:9px;font-weight:800;
+    display:grid;place-items:center;line-height:1;
+  }
+  .tab .tbadge.zero{display:none}
+
+  /* ---------- box tab ---------- */
+  .page-head{display:flex;align-items:flex-end;gap:8px;margin-bottom:13px}
+  .page-head h2{font-size:19px;font-weight:800;letter-spacing:-.4px}
+  .page-head .count{margin-left:auto;font-size:11px;color:var(--muted);font-weight:700}
+  .box-tools{display:flex;align-items:center;justify-content:space-between;margin:0 2px 8px}
+  .check{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--ink-2);cursor:pointer;user-select:none}
+  .check .box{
+    width:18px;height:18px;border-radius:6px;border:1.6px solid #E6D2D9;background:#fff;
+    display:grid;place-items:center;transition:.15s;
+  }
+  .check .box svg{width:11px;height:11px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:.15s}
+  .check.on .box{background:var(--pink);border-color:var(--pink)}
+  .check.on .box svg{opacity:1}
+  .ghost-btn{
+    font-size:11px;font-weight:800;color:var(--pink-deep);padding:5px 9px;border-radius:8px;background:#FFF0F4;
+  }
+  .item{
+    display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);
+    border-radius:16px;padding:10px 12px;margin-bottom:7px;box-shadow:0 2px 8px rgba(196,126,146,.05);
+    transition:border-color .2s,background .2s;
+  }
+  .item.sel{border-color:#FFC8D8;background:#FFFBFD}
+  .item .thumb{width:44px;height:44px;border-radius:12px}
+  .item-main{flex:1 1 auto;min-width:0}
+  .item-name{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .item-meta{font-size:10px;color:var(--muted);font-weight:600;margin-top:3px;display:flex;align-items:center;gap:5px}
+  .tag-g{font-size:9px;font-weight:800;color:#fff;background:var(--pink);padding:2px 5px;border-radius:5px}
+  .tag-g.last{background:linear-gradient(135deg,#EFB143,#D89422)}
+  .tag-g.g-b{background:linear-gradient(140deg,#FFC46B,#EFA028)}
+  .tag-g.g-c{background:linear-gradient(140deg,#8ADDC0,#45BA92)}
+  .tag-g.g-d{background:linear-gradient(140deg,#B7A4F0,#8B6FE0)}
+  .tag-g.g-e{background:linear-gradient(140deg,#9BD2F2,#5FA9DC)}
+  .res-headline{font-size:13px;font-weight:800;text-align:center;margin:0 0 12px;color:var(--ink);letter-spacing:-.2px}
+  .item .check{margin-left:auto}
+  .empty{
+    text-align:center;padding:34px 16px 30px;background:#fff;border:1px dashed #F0DCD4;border-radius:20px;
+  }
+  .empty svg{width:64px;height:64px;margin-bottom:8px}
+  .empty p{font-size:12px;color:var(--ink-2);font-weight:700;line-height:1.6}
+  .empty span{display:block;font-size:10.5px;color:var(--muted);font-weight:600;margin-top:4px}
+  .ship-head{display:flex;align-items:center;gap:6px;margin:16px 2px 8px;font-size:12px;font-weight:800}
+  .ship-card{
+    background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 13px;margin-bottom:6px;
+    font-size:11px;color:var(--ink-2);font-weight:600;
+  }
+  .ship-card .row{display:flex;justify-content:space-between;gap:10px}
+  .ship-card .no{font-weight:800;color:var(--ink)}
+  .status{font-size:9.5px;font-weight:800;color:#2E8E6B;background:#E8F8F1;padding:3px 7px;border-radius:999px}
+  .box-foot{
+    display:none;
+  }
+  .btn-primary{
+    width:100%;border-radius:16px;padding:13px;text-align:center;font-size:13.5px;font-weight:800;
+    color:#fff;background:linear-gradient(135deg,#FF9AB3,#FF7096);
+    box-shadow:0 8px 18px rgba(255,127,160,.32);letter-spacing:-.2px;
+    transition:transform .12s,opacity .2s;
+  }
+  .btn-primary:active{transform:scale(.985)}
+  .btn-primary:disabled{opacity:.42;box-shadow:none}
+  .btn-primary small{display:block;font-size:10px;font-weight:700;opacity:.9;margin-top:2px}
+  .btn-ghost{
+    width:100%;border-radius:14px;padding:12px;font-size:12.5px;font-weight:800;
+    color:var(--ink-2);background:#fff;border:1px solid var(--line);
+  }
+
+  /* ---------- admin ---------- */
+  .demo-chip{
+    margin-left:auto;font-size:9.5px;font-weight:800;color:#8A7BD0;background:#F0EBFF;
+    padding:3px 8px;border-radius:999px;
+  }
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .kpi{
+    background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 13px;
+    box-shadow:0 2px 8px rgba(196,126,146,.05);
+  }
+  .kpi .k{font-size:10.5px;color:var(--muted);font-weight:700}
+  .kpi .v{font-size:19px;font-weight:800;letter-spacing:-.6px;margin-top:4px;font-variant-numeric:tabular-nums}
+  .kpi .v small{font-size:11px;font-weight:700;color:var(--muted);margin-left:2px}
+  .kpi.wide{grid-column:1 / -1;background:linear-gradient(135deg,#FFF6F9,#FFF0F4);border-color:#FFDDE7}
+  .kpi.wide .v{color:var(--pink-deep);font-size:23px}
+  .admin-list{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .admin-row{display:flex;align-items:center;gap:9px;padding:10px 13px;border-bottom:1px solid #FBF0EA;font-size:11.5px;font-weight:700}
+  .admin-row:last-child{border-bottom:0}
+  .admin-row .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .admin-row .rt{margin-left:auto;font-size:11px;color:var(--ink-2);font-variant-numeric:tabular-nums;flex:0 0 auto}
+  .log-list{background:#fff;border:1px solid var(--line);border-radius:16px;padding:4px 0}
+  .log-row{display:flex;gap:8px;padding:7px 13px;font-size:10.5px;color:var(--ink-2);font-weight:600}
+  .log-row time{color:var(--muted);font-variant-numeric:tabular-nums;flex:0 0 42px}
+  .log-empty{padding:16px;text-align:center;font-size:11px;color:var(--muted);font-weight:600}
+  .reset-btn{
+    width:100%;margin-top:14px;padding:13px;border-radius:15px;font-size:12.5px;font-weight:800;
+    color:#C2455E;background:#FFF4F6;border:1px solid #FFD5DF;
+  }
+  .admin-note{font-size:10px;color:var(--muted);font-weight:600;text-align:center;margin-top:10px;line-height:1.6}
+
+  /* ---------- overlays ---------- */
+  .overlay{
+    position:absolute;inset:0;z-index:60;display:none;
+    align-items:center;justify-content:center;padding:22px;
+    background:rgba(74,61,68,.42);backdrop-filter:blur(3px);
+  }
+  .overlay.show{display:flex;animation:fadeIn .18s ease both}
+  .sheet{
+    width:100%;max-width:356px;background:var(--cream);border-radius:24px;
+    box-shadow:0 24px 60px rgba(74,61,68,.28);overflow:hidden;
+    animation:popIn .32s cubic-bezier(.2,1.3,.4,1) both;
+  }
+  .sheet-body{padding:20px 20px 18px}
+  .sheet-head{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+  .sheet-head h3{font-size:15px;font-weight:800;letter-spacing:-.3px}
+  .sheet-head .close{margin-left:auto;width:26px;height:26px;border-radius:9px;background:#F6EBE6;color:#9A848E;display:grid;place-items:center;font-size:14px;font-weight:800;line-height:1}
+  .field{margin-bottom:9px}
+  .field label{display:block;font-size:10.5px;font-weight:800;color:var(--ink-2);margin-bottom:5px;letter-spacing:.1px}
+  .field input{
+    width:100%;height:40px;border-radius:11px;border:1px solid #EFDCD3;background:#fff;
+    padding:0 12px;font-size:12.5px;color:var(--ink);outline:none;transition:border-color .15s;
+  }
+  .field input:focus{border-color:#FFB4C7;box-shadow:0 0 0 3px #FFF0F4}
+  .field input::placeholder{color:#C9B8BF}
+  .agree{
+    display:flex;gap:8px;align-items:flex-start;background:#FFF4F7;border:1px solid #FFE0E9;
+    border-radius:12px;padding:10px 11px;margin:11px 0 4px;font-size:10.5px;color:var(--ink-2);
+    font-weight:600;line-height:1.5;cursor:pointer;
+  }
+  .agree .box{
+    width:17px;height:17px;border-radius:5px;border:1.6px solid #E6D2D9;background:#fff;flex:0 0 auto;margin-top:1px;
+    display:grid;place-items:center;transition:.15s;
+  }
+  .agree .box svg{width:10px;height:10px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+  .agree.on .box{background:var(--pink);border-color:var(--pink)}
+  .agree.on .box svg{opacity:1}
+  .sheet-summary{
+    display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
+    border-radius:12px;padding:10px 12px;font-size:11px;font-weight:700;color:var(--ink-2);margin-bottom:12px;
+  }
+  .sheet-summary b{color:var(--pink-deep);font-size:13px}
+  .sheet-actions{display:flex;gap:8px;margin-top:12px}
+  .sheet-actions .btn-primary,.sheet-actions .btn-ghost{flex:1 1 0;padding:12px 8px;font-size:12.5px}
+
+  /* ---------- draw overlay ---------- */
+  #drawOverlay{background:rgba(74,61,68,.5);flex-direction:column;gap:0}
+  .draw-stage{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .ticket{
+    width:196px;height:262px;border-radius:18px;position:relative;
+    background:linear-gradient(155deg,#FFFFFF,#FFF0F5 70%);
+    border:2px dashed #FFC6D7;
+    box-shadow:0 18px 40px rgba(74,61,68,.3), inset 0 0 40px rgba(255,214,226,.5);
+    display:grid;place-items:center;overflow:hidden;
+    animation:flipCard 1.15s cubic-bezier(.4,.1,.2,1) infinite;
+  }
+  .ticket::before,.ticket::after{
+    content:"";position:absolute;left:50%;transform:translateX(-50%);
+    width:22px;height:22px;border-radius:50%;background:rgba(74,61,68,.5);
+  }
+  .ticket::before{top:-12px}
+  .ticket::after{bottom:-12px}
+  .ticket .q{
+    font-size:74px;font-weight:800;color:#FFB3C6;letter-spacing:-4px;
+    text-shadow:0 4px 14px rgba(255,127,160,.35);
+  }
+  .ticket .strip{
+    position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.75) 48%,transparent 62%);
+    transform:translateX(-120%);animation:sweep 1.15s ease-in-out infinite;
+  }
+  .ticket .mini{position:absolute;top:14px;left:0;right:0;text-align:center;font-size:9.5px;font-weight:800;letter-spacing:2px;color:#D9AEB9}
+  .ticket .foot{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:9.5px;font-weight:800;letter-spacing:1px;color:#D9AEB9}
+  .draw-title{color:#fff;font-size:14.5px;font-weight:800;letter-spacing:.2px;text-shadow:0 2px 8px rgba(0,0,0,.2)}
+  .draw-sub{color:rgba(255,255,255,.8);font-size:11px;font-weight:700}
+
+  /* ---------- result sheet ---------- */
+  .result-top{
+    position:relative;padding:24px 20px 20px;text-align:center;overflow:hidden;
+    background:linear-gradient(165deg,#FFF0F5,#FFE3EC);
+  }
+  .result-top.multi{padding:18px 20px 15px}
+  .result-top.gold{background:linear-gradient(165deg,#FFF8E6,#FFE7B8)}
+  .result-top::before{
+    content:"";position:absolute;left:50%;top:-70px;width:220px;height:220px;transform:translateX(-50%);
+    border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,255,255,0) 70%);
+  }
+  .res-eyebrow{position:relative;font-size:10.5px;font-weight:800;letter-spacing:2px;color:#C98AA0}
+  .res-grade{
+    position:relative;display:inline-flex;align-items:center;justify-content:center;
+    margin:10px auto 0;padding:6px 18px;border-radius:999px;
+    font-size:15px;font-weight:800;color:#fff;letter-spacing:.5px;
+    background:linear-gradient(135deg,#FF9DB5,#F2607F);box-shadow:0 8px 18px rgba(242,96,127,.3);
+    animation:popIn .45s cubic-bezier(.2,1.5,.4,1) both;
+  }
+  .res-grade.gold{background:linear-gradient(135deg,#FFD877,#E29B1E);box-shadow:0 8px 18px rgba(226,155,30,.35);color:#5C3A02}
+  .res-glyph{
+    position:relative;width:96px;height:96px;margin:14px auto 0;border-radius:26px;
+    background:#fff;display:grid;place-items:center;box-shadow:0 10px 24px rgba(196,126,146,.18);
+    animation:popIn .55s .08s cubic-bezier(.2,1.4,.4,1) both;
+  }
+  .res-glyph svg{width:52px;height:52px;fill:none;stroke:#7A6670;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .res-name{position:relative;margin-top:13px;font-size:14px;font-weight:800;line-height:1.4;letter-spacing:-.3px}
+  .res-saved{
+    position:relative;display:inline-flex;align-items:center;gap:5px;margin-top:9px;
+    font-size:10.5px;font-weight:800;color:#2E8E6B;background:#E8F8F1;padding:5px 10px;border-radius:999px;
+  }
+  .res-saved svg{width:11px;height:11px;fill:none;stroke:#2E8E6B;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  .res-body{padding:4px 20px 18px}
+  .res-multi{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:2px}
+  .res-row{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid #FBF0EA;font-size:11.5px;font-weight:700;opacity:0;animation:riseIn .35s ease forwards}
+  .res-row:last-child{border-bottom:0}
+  .res-row .nm{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .res-row .tag-g{flex:0 0 auto}
+  .last-banner{
+    display:flex;align-items:center;gap:9px;margin-top:10px;padding:11px 13px;border-radius:13px;
+    background:linear-gradient(120deg,#FFF4D9,#FFE6B4);border:1px solid #FFD98E;
+    font-size:11px;font-weight:800;color:#7A4E06;line-height:1.45;
+  }
+  .last-banner .ic{width:28px;height:28px;border-radius:9px;background:#7A4E06;display:grid;place-items:center;flex:0 0 auto}
+  .last-banner .ic svg{width:16px;height:16px;fill:#FFE7B0}
+  .confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+  .confetti i{
+    position:absolute;top:-14px;width:8px;height:12px;border-radius:2px;opacity:0;
+    animation:fall 2.4s linear forwards;
+  }
+
+  /* ---------- charge / confirm ---------- */
+  .charge-amt{text-align:center;padding:6px 0 12px}
+  .charge-amt .big{font-size:26px;font-weight:800;letter-spacing:-1px;color:var(--pink-deep)}
+  .charge-amt .sub{font-size:11px;color:var(--muted);font-weight:700;margin-top:4px}
+  .confirm-text{font-size:12px;color:var(--ink-2);font-weight:600;line-height:1.65}
+  .confirm-text b{color:#C2455E}
+
+  /* ---------- toast ---------- */
+  .toast{
+    position:absolute;left:50%;bottom:162px;transform:translate(-50%,14px);
+    background:rgba(74,61,68,.94);color:#fff;font-size:11.5px;font-weight:700;
+    padding:10px 16px;border-radius:999px;white-space:nowrap;max-width:88%;
+    overflow:hidden;text-overflow:ellipsis;
+    opacity:0;pointer-events:none;transition:.25s;z-index:90;
+    box-shadow:0 10px 24px rgba(74,61,68,.3);
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+  @keyframes shine{0%{transform:translateX(-100%)}55%,100%{transform:translateX(220%)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes popIn{0%{opacity:0;transform:scale(.72)}100%{opacity:1;transform:scale(1)}}
+  @keyframes riseIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes sweep{0%{transform:translateX(-120%)}60%,100%{transform:translateX(120%)}}
+  @keyframes flipCard{
+    0%{transform:rotate(-3deg) scale(1)}
+    25%{transform:rotate(2deg) scale(1.03)}
+    50%{transform:rotate(-2deg) scale(1)}
+    75%{transform:rotate(3deg) scale(1.04)}
+    100%{transform:rotate(-3deg) scale(1)}
+  }
+  @keyframes fall{
+    0%{opacity:1;transform:translateY(0) rotate(0)}
+    100%{opacity:0;transform:translateY(320px) rotate(420deg)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ icon sprite ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2.6l2.3 5.9 5.9 2.3-5.9 2.3L12 19l-2.3-5.9L3.8 10.8l5.9-2.3z"/></symbol>
+  <symbol id="i-bow" viewBox="0 0 24 24"><path d="M11.3 11.1 5.6 7.8A1.9 1.9 0 003 9.4v5.2a1.9 1.9 0 002.6 1.6l5.7-3.3z"/><path d="M12.7 11.1l5.7-3.3A1.9 1.9 0 0121 9.4v5.2a1.9 1.9 0 01-2.6 1.6l-5.7-3.3z"/><circle cx="12" cy="12" r="1.9"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9.5a6 6 0 1112 0c0 4 1.2 5.5 1.2 5.5H4.8S6 13.5 6 9.5z"/><path d="M10 18.5a2 2 0 004 0"/></symbol>
+  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9h6M9 12.5h6M12 9v7"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11a2 2 0 01-2 1.8H8.2a2 2 0 01-2-1.8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V19a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 19z"/><path d="M9.5 20.5v-6h5v6"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M4 8.2L12 4l8 4.2v7.6L12 20l-8-4.2z"/><path d="M4 8.2L12 12.4l8-4.2M12 12.4V20"/></symbol>
+  <symbol id="i-shop" viewBox="0 0 24 24"><path d="M4 9.5V19a1.5 1.5 0 001.5 1.5h13A1.5 1.5 0 0020 19V9.5"/><path d="M3 9.5L5.2 4h13.6L21 9.5z"/><path d="M9 9.5a3 3 0 006 0"/></symbol>
+  <symbol id="i-plush" viewBox="0 0 24 24"><circle cx="12" cy="14" r="6.2"/><circle cx="6.4" cy="6.6" r="2.6"/><circle cx="17.6" cy="6.6" r="2.6"/><path d="M10 13.2h.01M14 13.2h.01M10.4 16.4c1 .8 2.2.8 3.2 0"/></symbol>
+  <symbol id="i-plate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.6"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3.6"/><path d="M10.6 10.6L19 19M15.4 15.4l2-2M17.6 17.6l1.8-1.8"/></symbol>
+  <symbol id="i-stand" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="12" rx="2"/><path d="M9 19.5h6M12 15.5v4"/></symbol>
+  <symbol id="i-sticker" viewBox="0 0 24 24"><path d="M6 3.5h9l5 5v12a1 1 0 01-1 1H6a1 1 0 01-1-1v-16a1 1 0 011-1z"/><path d="M15 3.5v5h5"/><path d="M9.5 13.5l1.7 1.7 3.3-3.4"/></symbol>
+  <symbol id="i-crown" viewBox="0 0 24 24"><path d="M3.5 8.5l3.8 2.6L12 5l4.7 6.1 3.8-2.6-1.6 10.4H5.1z"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 6.5h10v9H3zM13 10h4l3 3v2.5h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10" rx="2.4"/><path d="M8 10V7.6a4 4 0 018 0V10"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></symbol>
+</svg>
+
+<div class="app" id="app">
+
+  <!-- ============ top bar ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark"><svg><use href="#i-bow"/></svg></span>
+      <div>
+        <div class="brand-name">치이샵<em>CHII SHOP</em></div>
+        <div class="brand-sub">CHII SHOP · 치이카와 온라인 쿠지</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="points" id="pointsBtn" aria-label="내 포인트, 충전하기">
+        <svg><use href="#i-coin"/></svg>
+        <span id="pointsVal">240,000</span><span class="unit">P</span>
+      </button>
+      <button class="icon-btn" id="cartBtn" aria-label="내 보관함">
+        <svg><use href="#i-bag"/></svg>
+        <span class="cart-count zero" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ home ============ -->
+  <main class="screen" id="screenHome">
+    <div class="notice" id="noticeBar" role="button" tabindex="0">
+      <span class="ntag">공지</span>
+      <span class="ntxt"><b>12.01(화) 20:00</b> 모구모구 본점 한정 쿠지 오픈 · 알림 신청 받는 중</span>
+      <span class="narr">›</span>
+    </div>
+
+    <section class="hero" id="hero">
+      <div class="hero-top">
+        <span class="badge gold" id="lastBadge"><svg style="width:10px;height:10px;fill:#8A5A0B"><use href="#i-crown"/></svg> 라스트원상 있음</span>
+        <span class="badge ghost">전 80개 한정</span>
+        <span class="badge live" id="stateBadge"><span class="dot"></span> 판매중</span>
+      </div>
+      <div class="hero-body">
+        <div class="hero-text">
+          <h1>치이카와 스위츠<br>이치방쿠지</h1>
+          <p class="hero-sub">1회 12,000원 · 꽝 없이 100% 당첨</p>
+          <div class="progress"><i id="heroBar" style="width:52.5%"></i></div>
+          <div class="progress-meta">
+            <span>남은 티켓 <b id="remainTickets">42</b> / 80</span>
+            <span id="soldPct">53% 판매</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 120 116">
+            <circle cx="16" cy="26" r="11" fill="#FFE0EA"/>
+            <circle cx="104" cy="18" r="7" fill="#DFF4EA"/>
+            <circle cx="100" cy="92" r="9" fill="#EFE7FF"/>
+            <ellipse cx="58" cy="96" rx="34" ry="5" fill="#F3DDE3" opacity=".55"/>
+            <!-- white mascot -->
+            <g>
+              <circle cx="42" cy="40" r="10" fill="#fff" stroke="#F0D9CF" stroke-width="1.6"/>
+              <circle cx="74" cy="40" r="10" fill="#fff" stroke="#F0D9CF" stroke-width="1.6"/>
+              <ellipse cx="58" cy="62" rx="30" ry="27" fill="#fff" stroke="#F0D9CF" stroke-width="1.8"/>
+              <circle cx="48" cy="60" r="2.1" fill="#5A4A50"/>
+              <circle cx="68" cy="60" r="2.1" fill="#5A4A50"/>
+              <path d="M55.5 66.5q2.5 2.4 5 0" stroke="#5A4A50" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+              <ellipse cx="40" cy="67" rx="4" ry="2.4" fill="#FFC7D5" opacity=".85"/>
+              <ellipse cx="76" cy="67" rx="4" ry="2.4" fill="#FFC7D5" opacity=".85"/>
+            </g>
+            <!-- cupcake -->
+            <g transform="translate(58 82)">
+              <path d="M-9 0h18l-2.4 9h-13.2z" fill="#F7C98B"/>
+              <path d="M-10.5 -1.5c0-6 5-9 10.5-9s10.5 3 10.5 9z" fill="#FFC2D3"/>
+              <circle cx="-3" cy="-6" r="1.6" fill="#FFF0F4"/>
+              <circle cx="4" cy="-4.5" r="1.4" fill="#FFF0F4"/>
+              <circle cx="2" cy="-11" r="2" fill="#FF6B8A"/>
+            </g>
+            <!-- yellow bunny -->
+            <g transform="translate(96 74)">
+              <ellipse cx="0" cy="4" rx="13" ry="12" fill="#FFE59B" stroke="#F2CE73" stroke-width="1.6"/>
+              <ellipse cx="-5" cy="-13" rx="3.4" ry="9" fill="#FFE59B" stroke="#F2CE73" stroke-width="1.5"/>
+              <ellipse cx="5" cy="-13" rx="3.4" ry="9" fill="#FFE59B" stroke="#F2CE73" stroke-width="1.5"/>
+              <circle cx="-4" cy="2" r="1.7" fill="#5A4A50"/>
+              <circle cx="4" cy="2" r="1.7" fill="#5A4A50"/>
+              <path d="M-2.5 7q2.5 2 5 0" stroke="#5A4A50" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+              <ellipse cx="-9" cy="7" rx="2.6" ry="1.6" fill="#FFC08A" opacity=".8"/>
+              <ellipse cx="9" cy="7" rx="2.6" ry="1.6" fill="#FFC08A" opacity=".8"/>
+            </g>
+            <!-- small blue cat -->
+            <g transform="translate(19 82)">
+              <ellipse cx="0" cy="4" rx="12" ry="11" fill="#DCEFFA" stroke="#B8DCF2" stroke-width="1.6"/>
+              <path d="M-9 -6l1-8 6 5z" fill="#DCEFFA" stroke="#B8DCF2" stroke-width="1.5"/>
+              <path d="M9 -6l-1-8-6 5z" fill="#DCEFFA" stroke="#B8DCF2" stroke-width="1.5"/>
+              <circle cx="-4" cy="2" r="1.6" fill="#5A4A50"/>
+              <circle cx="4" cy="2" r="1.6" fill="#5A4A50"/>
+              <path d="M-2 7q2 1.6 4 0" stroke="#5A4A50" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+            </g>
+            <path d="M84 34l1.7 4.3 4.3 1.7-4.3 1.7L84 46l-1.7-4.3L78 40l4.3-1.7z" fill="#FFD36E"/>
+            <path d="M26 18l1.2 3 3 1.2-3 1.2L26 26.4l-1.2-3-3-1.2 3-1.2z" fill="#FFC2D3"/>
+          </svg>
+        </div>
+      </div>
+      <div class="hero-foot"><span class="pill"></span> 등급별 잔여 수량·확률 실시간 공개 · 모든 티켓 100% 당첨</div>
+    </section>
+
+    <section class="sec" style="margin-top:15px">
+      <div class="sec-head">
+        <h2>오픈 예정 쿠지</h2>
+        <span class="aside">알림 신청 받는 중</span>
+      </div>
+      <div class="lineup" id="lineup"><!-- cards injected --></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head">
+        <h2>실시간 경품 현황</h2>
+        <span class="live-chip"><i></i>LIVE</span>
+        <span class="aside" id="updatedAt">방금 갱신</span>
+      </div>
+      <p class="sec-note">당첨 확률은 지금 남은 티켓 기준으로 자동 계산됩니다.</p>
+      <div class="prize-list" id="prizeList"><!-- rows injected --></div>
+      <div class="last-row" id="lastRow">
+        <div class="thumb tone-gold"><svg><use href="#i-crown"/></svg></div>
+        <div style="min-width:0">
+          <div class="prize-name">라스트원상 · 한정 컬러 대형 인형</div>
+          <div class="sub">마지막 1장을 뽑은 분께 자동 지급</div>
+        </div>
+        <span class="flag" id="lastFlag">대기중</span>
+      </div>
+    </section>
+
+    <div class="info-grid">
+      <div class="info"><span class="ic"><svg><use href="#i-truck"/></svg></span><span><b>실물 배송 전용</b> · 당첨 굿즈는 보관함에서 묶음 배송 신청</span></div>
+      <div class="info"><span class="ic"><svg><use href="#i-info"/></svg></span><span><b>환금성 없음</b> · 현금·포인트 환급, 상품 교환 불가</span></div>
+      <div class="info"><span class="ic"><svg><use href="#i-lock"/></svg></span><span><b>확률 100% 공개</b> · 잔여 수량에 따라 실시간 반영</span></div>
+    </div>
+
+    <section class="sec">
+      <div class="sec-head">
+        <h2>공지사합</h2>
+        <span class="aside">더보기</span>
+      </div>
+      <div class="nlist">
+        <div class="nrow"><span class="ntag2 hot">오픈</span><span class="ntx2">모구모구 본점 한정 쿠지 12/1(화) 20:00 오픈</span><time>11.24</time></div>
+        <div class="nrow"><span class="ntag2">배송</span><span class="ntx2">금요일 14시 이전 신청 건은 당일 출고됩니다</span><time>11.21</time></div>
+        <div class="nrow"><span class="ntag2">안내</span><span class="ntx2">보관함 상품 보관 기간은 당천일로부터 30일입니다</span><time>11.18</time></div>
+      </div>
+    </section>
+
+    <p class="shop-foot"><b>치이샵 · CHII SHOP</b><br>고객센터 카카오톡 @치이샵 · 평일 10:00–18:00<br>사업 검토용 샘플 화면입니다 · 실제 결제·배송은 이루어지지 않아요</p>
+  </main>
+
+  <!-- ============ box tab ============ -->
+  <main class="screen" id="screenBox" hidden>
+    <div class="page-head">
+      <h2>내 보관함</h2>
+      <span class="count" id="boxCount">0점</span>
+    </div>
+
+    <div id="boxArea"></div>
+
+    <div id="shipArea"></div>
+  </main>
+
+  <!-- ============ admin tab ============ -->
+  <main class="screen" id="screenAdmin" hidden>
+    <div class="page-head">
+      <h2>사장님 모드</h2>
+      <span class="demo-chip">데모</span>
+    </div>
+    <p class="admin-sub">치이카와 스위츠 이치방쿠지 · 실시간 집계</p>
+
+    <div class="kpis">
+      <div class="kpi wide">
+        <div class="k">누적 매출 (판매 티켓 × 12,000원)</div>
+        <div class="v" id="kRevenue">0<small>원</small></div>
+      </div>
+      <div class="kpi">
+        <div class="k">판매 티켓</div>
+        <div class="v" id="kSold">0<small>/ 80</small></div>
+      </div>
+      <div class="kpi">
+        <div class="k">남은 티켓</div>
+        <div class="v" id="kRemain">0<small>장</small></div>
+      </div>
+      <div class="kpi">
+        <div class="k">당첨 상품 대기</div>
+        <div class="v" id="kBox">0<small>점</small></div>
+      </div>
+      <div class="kpi">
+        <div class="k">배송 신청</div>
+        <div class="v" id="kShip">0<small>건</small></div>
+      </div>
+    </div>
+
+    <section class="sec" style="margin-top:16px">
+      <div class="sec-head"><h2>등급별 재고</h2><span class="aside" id="adminPct">잔여율 53%</span></div>
+      <div class="admin-list" id="adminStock"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head"><h2>라스트원상</h2><span class="aside" id="lastStatus">미지급</span></div>
+      <div class="admin-list">
+        <div class="admin-row"><span class="grade" style="background:linear-gradient(140deg,#FFD877,#E29B1E);width:20px;height:20px">L</span><span class="nm">한정 컬러 대형 인형</span><span class="rt" id="lastDrawInfo">마지막 1장 지급</span></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head"><h2>최근 뽑기 기록</h2><span class="aside" id="logCount">0건</span></div>
+      <div class="log-list" id="logList"><div class="log-empty">아직 뽑기 기록이 없어요</div></div>
+    </section>
+
+    <button class="reset-btn" id="resetBtn">쿠지판 리셋 (재고·매출 초기화)</button>
+    <p class="admin-note">실제 서비스에서는 사장님 계정 로그인과 2차 인증이 필요합니다.<br>본 화면은 기능 확인용 데모예요.</p>
+  </main>
+
+  <!-- ============ buy bar ============ -->
+  <div class="buybar" id="buybar">
+    <button class="btn-draw one" id="btnOne">
+      <span class="b1">1회 뽑기</span><span class="b2">12,000원</span>
+    </button>
+    <button class="btn-draw five" id="btnFive">
+      <span class="tag">5장 한번에</span>
+      <span class="b1">5회 연속 뽑기</span><span class="b2">60,000원</span>
+    </button>
+  </div>
+
+  <!-- ============ box action bar ============ -->
+  <div class="buybar" id="boxBar" hidden>
+    <button class="btn-primary" id="shipBtn" disabled>
+      묶음 배송 신청하기
+      <small id="shipBtnSub">배송할 상품을 선택해 주세요</small>
+    </button>
+  </div>
+
+  <!-- ============ tab bar ============ -->
+  <nav class="tabbar" id="tabbar">
+    <button class="tab on" data-tab="home">
+      <svg><use href="#i-home"/></svg>홈
+    </button>
+    <button class="tab" data-tab="box">
+      <svg><use href="#i-box"/></svg>보관함
+      <span class="tbadge zero" id="tabBadge">0</span>
+    </button>
+    <button class="tab" data-tab="admin">
+      <svg><use href="#i-shop"/></svg>사장님
+    </button>
+  </nav>
+
+  <!-- ============ draw overlay ============ -->
+  <div class="overlay" id="drawOverlay" role="dialog" aria-modal="true" aria-label="뽑기 진행중">
+    <div class="draw-stage">
+      <div class="ticket">
+        <span class="mini">CHII SHOP</span>
+        <span class="strip"></span>
+        <span class="q">?</span>
+        <span class="foot">GOOD LUCK</span>
+      </div>
+      <div class="draw-title" id="drawTitle">두근두근, 티켓 오픈!</div>
+      <div class="draw-sub" id="drawSub">잠시만 기다려 주세요</div>
+    </div>
+  </div>
+
+  <!-- ============ result sheet ============ -->
+  <div class="overlay" id="resultSheet" role="dialog" aria-modal="true" aria-label="뽑기 결과">
+    <div class="sheet" id="resultSheetInner">
+      <div class="result-top" id="resTop">
+        <div class="confetti" id="confetti"></div>
+        <div class="res-eyebrow" id="resEyebrow">당첨 결과</div>
+        <div class="res-grade" id="resGrade">A상</div>
+        <div class="res-glyph" id="resGlyph"><svg><use href="#i-plush"/></svg></div>
+        <div class="res-name" id="resName">스위츠 파티 대형 쿠션</div>
+        <div class="res-saved"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></svg> 보관함에 저장됨</div>
+      </div>
+      <div class="res-body" id="resBody">
+        <div id="resMultiWrap"></div>
+        <div id="resLastWrap"></div>
+        <div class="sheet-actions">
+          <button class="btn-ghost" id="resBoxBtn">보관함 보기</button>
+          <button class="btn-primary" id="resAgainBtn">한 번 더<small id="resAgainSub">12,000원</small></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ shipping sheet ============ -->
+  <div class="overlay" id="shipSheet" role="dialog" aria-modal="true" aria-label="배송 신청">
+    <div class="sheet">
+      <div class="sheet-body">
+        <div class="sheet-head"><h3>묶음 배송 신청</h3><button class="close" data-close="shipSheet" aria-label="닫기">×</button></div>
+        <div class="sheet-summary"><span>선택한 상품</span><b id="shipSummaryCount">0점</b><span style="margin-left:auto;color:#A3939C" id="shipSummaryNames"></span></div>
+        <div class="field"><label for="shipName">받는 분</label><input id="shipName" type="text" placeholder="이름" autocomplete="name"></div>
+        <div class="field"><label for="shipPhone">연락처</label><input id="shipPhone" type="tel" placeholder="010-0000-0000" autocomplete="tel"></div>
+        <div class="field"><label for="shipAddr">주소</label><input id="shipAddr" type="text" placeholder="도로명 주소 + 상세 주소" autocomplete="street-address"></div>
+        <label class="agree" id="agreeBox">
+          <span class="box"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></svg></span>
+          <span>당첨 상품은 <b>실물 배송 전용</b>이며 현금·포인트로 환급되지 않고, 다른 상품으로 교환할 수 없음을 확인했어요.</span>
+        </label>
+        <div class="sheet-actions">
+          <button class="btn-ghost" data-close="shipSheet">취소</button>
+          <button class="btn-primary" id="shipSubmit" disabled>배송 신청 완료<small id="shipSubmitSub">주소와 동의가 필요해요</small></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ charge sheet ============ -->
+  <div class="overlay" id="chargeSheet" role="dialog" aria-modal="true" aria-label="포인트 충전">
+    <div class="sheet">
+      <div class="sheet-body">
+        <div class="sheet-head"><h3>포인트 충전</h3><button class="close" data-close="chargeSheet" aria-label="닫기">×</button></div>
+        <div class="charge-amt">
+          <div class="big" id="chargeNeed">0 P</div>
+          <div class="sub">지금 보유 포인트 <b id="chargeHave">0 P</b> · 데모 결제</div>
+        </div>
+        <div class="info" style="margin-bottom:4px"><span class="ic"><svg><use href="#i-info"/></svg></span><span>샘플에서는 실제 결제 없이 포인트가 충전돼요. 실제 서비스에서는 카드·간편결제 PG 연동이 필요합니다.</span></div>
+        <div class="sheet-actions">
+          <button class="btn-ghost" data-close="chargeSheet">닫기</button>
+          <button class="btn-primary" id="chargeBtn">+120,000P 충전<small>샘플 포인트</small></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ confirm sheet ============ -->
+  <div class="overlay" id="confirmSheet" role="dialog" aria-modal="true" aria-label="확인">
+    <div class="sheet">
+      <div class="sheet-body">
+        <div class="sheet-head"><h3 id="confirmTitle">확인</h3><button class="close" data-close="confirmSheet" aria-label="닫기">×</button></div>
+        <p class="confirm-text" id="confirmText"></p>
+        <div class="sheet-actions">
+          <button class="btn-ghost" data-close="confirmSheet">취소</button>
+          <button class="btn-primary" id="confirmOk">리셋하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ===================== data ===================== */
+  const PRICE = 12000;
+  const FIVE_PRICE = PRICE * 5;
+  const TOTAL_TICKETS = 80;
+
+  const PRIZE_DEFS = [
+    { id:"A", name:"스위츠 파티 대형 쿠션", total:2,  remaining:1,  glyph:"i-plush",   tone:"pink"   },
+    { id:"B", name:"스위츠 도자기 접시 세트", total:4,  remaining:2,  glyph:"i-plate",   tone:"yellow" },
+    { id:"C", name:"미니 마스코트 키링",     total:8,  remaining:4,  glyph:"i-key",     tone:"mint"   },
+    { id:"D", name:"아크릴 스탠드",          total:16, remaining:9,  glyph:"i-stand",   tone:"lav"    },
+    { id:"E", name:"스위츠 스티커 팩",        total:50, remaining:26, glyph:"i-sticker", tone:"sky"    }
+  ];
+  const LAST_PRIZE = { id:"L", name:"한정 컬러 대형 인형", glyph:"i-crown", tone:"gold" };
+
+  /* 오픈 예정 라인업 (준비중) */
+  const LINEUP = [
+    {
+      id: "mogumogu",
+      name: "치이카와 모구모구<br>본점 한정 쿠지",
+      open: "2026-12-01T20:00:00+09:00",
+      openLabel: "12.01 (화) 20:00 오픈",
+      price: "1회 13,000원",
+      total: 60,
+      tone: "pink",
+      glyph: "i-plush"
+    },
+    {
+      id: "pajama",
+      name: "하치와레 · 우사기<br>파자마 파티 쿠지",
+      open: "2026-12-05T19:00:00+09:00",
+      openLabel: "12.05 (토) 19:00 오픈",
+      price: "1회 12,000원",
+      total: 80,
+      tone: "mint",
+      glyph: "i-sticker"
+    }
+  ];
+  const notified = new Set();
+
+  const START_POINTS = 240000;
+  const START_SOLD = 38;   // 이미 판매된 티켓 (80 - 42)
+
+  let state;
+  let uidSeq = 1;
+  let busy = false;
+  let selected = new Set();
+  let agreeChecked = false;
+  let pendingCount = 1;
+  let confirmAction = null;
+
+  function initialState(){
+    return {
+      prizes: PRIZE_DEFS.map(p => Object.assign({}, p)),
+      points: START_POINTS,
+      sold: START_SOLD,
+      box: [],        // {uid, prizeId, label, name, glyph, tone, at, shipped}
+      shipments: [],  // {no, count, at, name}
+      logs: [],       // {at, label, name}
+      lastWon: false,
+      lastWonAt: null
+    };
+  }
+
+  /* ===================== helpers ===================== */
+  const $ = sel => document.querySelector(sel);
+  const won = n => n.toLocaleString("ko-KR");
+  const tagClass = item => item.prizeId === "L" ? "tag-g last" : "tag-g g-" + String(item.prizeId).toLowerCase();
+  const sumRemaining = () => state.prizes.reduce((a,p) => a + p.remaining, 0);
+  const nowTime = () => {
+    const d = new Date();
+    return String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0");
+  };
+  function el(html){ const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstElementChild; }
+
+  /* 오픈까지 남은 날 (날짜 기준 D-day) */
+  function dday(iso){
+    const open = new Date(iso);
+    const now = new Date();
+    const a = new Date(open.getFullYear(), open.getMonth(), open.getDate());
+    const b = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const d = Math.round((a - b) / 86400000);
+    if (d > 0) return "D-" + d;
+    if (d === 0) return "오늘 오픈";
+    return "오픈";
+  }
+
+  function renderLineup(){
+    const wrap = $("#lineup");
+    if (!wrap) return;
+    wrap.innerHTML = LINEUP.map(c => {
+      const on = notified.has(c.id);
+      return '<article class="lk tone-' + c.tone + '" data-lineup="' + c.id + '">' +
+        '<div class="lk-top"><span class="lk-state">준비중</span><span class="lk-dday">' + dday(c.open) + '</span></div>' +
+        '<h3 class="lk-name">' + c.name + '</h3>' +
+        '<p class="lk-meta">' + c.openLabel + ' · 총 ' + c.total + '개</p>' +
+        '<div class="lk-foot"><span class="lk-price">' + c.price + '</span>' +
+          '<button class="lk-bell' + (on ? " on" : "") + '" data-notify="' + c.id + '" aria-label="' + (on ? "알림 신청 완료" : "알림 신청") + '">' +
+            '<svg viewBox="0 0 24 24"><use href="#i-bell"/></svg>' + (on ? "알림 완료" : "알림 신청") +
+          '</button></div>' +
+        '<div class="lk-art" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#' + c.glyph + '"/></svg></div>' +
+      '</article>';
+    }).join("");
+  }
+
+  function toast(msg){
+    const t = $("#toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove("show"), 2200);
+  }
+
+  function openOverlay(id){ $("#" + id).classList.add("show"); }  function closeOverlay(id){ $("#" + id).classList.remove("show"); }
+  function closeAll(){
+    ["resultSheet","shipSheet","chargeSheet","confirmSheet"].forEach(closeOverlay);
+  }
+
+  /* ===================== render ===================== */
+  function render(){
+    const remain = sumRemaining();
+    const soldPct = Math.round((TOTAL_TICKETS - remain) / TOTAL_TICKETS * 100);
+
+    // header
+    $("#pointsVal").textContent = won(state.points);
+    const unshipped = state.box.filter(i => !i.shipped);
+    const badge = $("#cartCount");
+    badge.textContent = unshipped.length;
+    badge.classList.toggle("zero", unshipped.length === 0);
+    const tabBadge = $("#tabBadge");
+    tabBadge.textContent = unshipped.length;
+    tabBadge.classList.toggle("zero", unshipped.length === 0);
+
+    // hero
+    const soldOut = remain === 0;
+    const stateBadge = $("#stateBadge");
+    if (stateBadge) {
+      stateBadge.className = "badge " + (soldOut ? "ghost" : "live");
+      stateBadge.innerHTML = (soldOut ? "" : '<span class="dot"></span>') + (soldOut ? "판매종료" : "판매중");
+    }
+    $("#remainTickets").textContent = remain;
+    $("#heroBar").style.width = (remain / TOTAL_TICKETS * 100).toFixed(1) + "%";
+    $("#soldPct").textContent = soldPct + "% 판매";
+    $("#hero").classList.toggle("sold-out", soldOut);
+
+    // prize rows
+    const list = $("#prizeList");
+    const prev = {};
+    list.querySelectorAll(".prize-row").forEach(r => { prev[r.dataset.id] = r.dataset.remain; });
+    list.innerHTML = "";
+    state.prizes.forEach(p => {
+      const pct = remain > 0 ? (p.remaining / remain * 100) : 0;
+      const row = el(
+        '<div class="prize-row' + (p.remaining === 0 ? " done" : "") + '" data-id="' + p.id + '" data-remain="' + p.remaining + '">' +
+          '<div class="thumb tone-' + p.tone + '"><svg><use href="#' + p.glyph + '"/></svg></div>' +
+          '<div class="prize-main">' +
+            '<div class="prize-top">' +
+              '<span class="grade ' + p.id.toLowerCase() + '">' + p.id + '</span>' +
+              '<span class="prize-name">' + p.name + '</span>' +
+              '<span class="prize-count"><b>' + p.remaining + '</b> / ' + p.total + '</span>' +
+            '</div>' +
+            '<div class="bar"><i style="width:' + (p.remaining / p.total * 100) + '%"></i></div>' +
+          '</div>' +
+          '<div class="pct">' + (p.remaining === 0 ? "마감" : pct.toFixed(1) + "%") + '<small>' + (p.remaining === 0 ? "0개" : "확률") + '</small></div>' +
+        '</div>'
+      );
+      list.appendChild(row);
+      if (prev[p.id] !== undefined && Number(prev[p.id]) !== p.remaining) {
+        row.classList.add("flash");
+        setTimeout(() => row.classList.remove("flash"), 900);
+      }
+    });
+
+    // last one row
+    const lastRow = $("#lastRow");
+    lastRow.classList.toggle("won", state.lastWon);
+    $("#lastFlag").textContent = state.lastWon ? "지급완료" : (remain <= 1 ? "임박!" : "대기중");
+    const lastBadge = $("#lastBadge");
+    if (lastBadge) {
+      lastBadge.innerHTML = '<svg style="width:10px;height:10px;fill:#8A5A0B"><use href="#i-crown"/></svg> ' +
+        (state.lastWon ? "라스트원상 지급완료" : "라스트원상 있음");
+    }
+    $("#updatedAt").textContent = nowTime() + " 갱신";
+
+    // buy buttons
+    const buybar = $("#buybar");
+    const btnOne = $("#btnOne"), btnFive = $("#btnFive");
+    if (btnOne) btnOne.disabled = soldOut || state.points < PRICE;
+    if (btnFive) btnFive.disabled = soldOut || remain < 5 || state.points < FIVE_PRICE;
+    if (soldOut) {
+      buybar.classList.add("soldout");
+      if (!$("#soldoutNote")) buybar.innerHTML = '<div class="soldout-note" id="soldoutNote">이번 쿠지판은 모두 소진되었어요 · 다음 쿠지 준비 중</div>';
+    } else if (buybar.classList.contains("soldout")) {
+      buybar.classList.remove("soldout");
+      buybar.innerHTML =
+        '<button class="btn-draw one" id="btnOne"><span class="b1">1회 뽑기</span><span class="b2">12,000원</span></button>' +
+        '<button class="btn-draw five" id="btnFive"><span class="tag">5장 한번에</span><span class="b1">5회 연속 뽑기</span><span class="b2">60,000원</span></button>';
+      bindBuyButtons();
+      $("#btnOne").disabled = state.points < PRICE;
+      $("#btnFive").disabled = remain < 5 || state.points < FIVE_PRICE;
+    }
+
+    renderBox();
+    renderAdmin();
+  }
+
+  /* ---------- box ---------- */
+  function renderBox(){
+    const area = $("#boxArea");
+    const items = state.box.filter(i => !i.shipped);
+    $("#boxCount").textContent = items.length + "점";
+
+    if (items.length === 0) {
+      area.innerHTML =
+        '<div class="empty">' +
+          '<svg viewBox="0 0 64 64" aria-hidden="true">' +
+            '<ellipse cx="32" cy="52" rx="20" ry="3.4" fill="#F3DDE3" opacity=".6"/>' +
+            '<path d="M14 26h36l-3 24a4 4 0 01-4 3.5H21a4 4 0 01-4-3.5z" fill="#fff" stroke="#F0D9CF" stroke-width="2"/>' +
+            '<path d="M24 26v-3a8 8 0 0116 0v3" fill="none" stroke="#F0D9CF" stroke-width="2" stroke-linecap="round"/>' +
+            '<circle cx="26" cy="38" r="1.8" fill="#FFB3C6"/><circle cx="38" cy="38" r="1.8" fill="#FFB3C6"/>' +
+            '<path d="M29 43q3 2.6 6 0" stroke="#FFB3C6" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+          '</svg>' +
+          '<p>아직 담긴 상품이 없어요</p>' +
+          '<span>홈에서 티켓을 뽑으면 자동으로 보관돼요</span>' +
+        '</div>';
+    } else {
+      const allSel = items.length > 0 && items.every(i => selected.has(i.uid));
+      let html = '<div class="box-tools">' +
+        '<button class="check' + (allSel ? " on" : "") + '" id="selectAll"><span class="box"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></svg></span>전체 선택</button>' +
+        '<span style="font-size:10.5px;color:#A3939C;font-weight:700">' + items.length + '점 보관중</span>' +
+      '</div>';
+      items.forEach(i => {
+        const on = selected.has(i.uid);
+        html += '<div class="item' + (on ? " sel" : "") + '" data-uid="' + i.uid + '">' +
+          '<div class="thumb tone-' + i.tone + '"><svg><use href="#' + i.glyph + '"/></svg></div>' +
+          '<div class="item-main">' +
+            '<div class="item-name">' + i.name + '</div>' +
+            '<div class="item-meta"><span class="' + tagClass(i) + '">' + i.label + '</span>' + i.at + ' 당첨</div>' +
+          '</div>' +
+          '<button class="check' + (on ? " on" : "") + '" aria-label="선택"><span class="box"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></svg></span></button>' +
+        '</div>';
+      });
+      area.innerHTML = html;
+
+      const selCount = items.filter(i => selected.has(i.uid)).length;
+      const btn = $("#shipBtn");
+      btn.disabled = selCount === 0;
+      $("#shipBtnSub").textContent = selCount === 0 ? "배송할 상품을 선택해 주세요" : "선택 " + selCount + "점 · 배송비 무료";
+    }
+
+    if (items.length === 0) {
+      $("#shipBtn").disabled = true;
+      $("#shipBtnSub").textContent = "배송할 상품을 선택해 주세요";
+    }
+
+    // shipments
+    const shipArea = $("#shipArea");
+    if (state.shipments.length === 0) {
+      shipArea.innerHTML =
+        '<div class="info" style="margin-top:14px;align-items:flex-start">' +
+          '<span class="ic"><svg><use href="#i-truck"/></svg></span>' +
+          '<span><b>배송 안내</b> · 보관 상품은 묶음 배송만 가능해요. 당첨 상품은 <b>실물 배송 전용</b>이며 현금·포인트 환급이나 상품 교환은 되지 않습니다. 보관 기간은 당첨일로부터 30일입니다.</span>' +
+        '</div>';
+    } else {
+      let html = '<div class="ship-head"><svg style="width:14px;height:14px;fill:none;stroke:#7A6670" viewBox="0 0 24 24"><use href="#i-truck"/></svg>배송 신청 내역</div>';
+      state.shipments.slice().reverse().forEach(s => {
+        html += '<div class="ship-card"><div class="row"><span class="no">' + s.no + '</span><span class="status">배송 준비중</span></div>' +
+          '<div class="row" style="margin-top:5px;color:#A3939C"><span>' + s.at + ' 신청 · ' + s.count + '점</span><span>' + s.name + '</span></div></div>';
+      });
+      html += '<div class="info" style="margin-top:6px;align-items:flex-start"><span class="ic"><svg><use href="#i-info"/></svg></span><span>당첨 상품은 <b>실물 배송 전용</b>이며, 현금·포인트 환급이나 상품 교환은 되지 않습니다.</span></div>';
+      shipArea.innerHTML = html;
+    }
+  }
+
+  /* ---------- admin ---------- */
+  function renderAdmin(){
+    const remain = sumRemaining();
+    $("#kRevenue").innerHTML = won(state.sold * PRICE) + '<small>원</small>';
+    $("#kSold").innerHTML = state.sold + '<small>/ ' + TOTAL_TICKETS + '</small>';
+    $("#kRemain").innerHTML = remain + '<small>장</small>';
+    $("#kBox").innerHTML = state.box.filter(i => !i.shipped).length + '<small>점</small>';
+    $("#kShip").innerHTML = state.shipments.length + '<small>건</small>';
+
+    const stock = $("#adminStock");
+    let html = "";
+    state.prizes.forEach(p => {
+      const sold = p.total - p.remaining;
+      html += '<div class="admin-row">' +
+        '<span class="grade ' + p.id.toLowerCase() + '">' + p.id + '</span>' +
+        '<span class="nm">' + p.name + '</span>' +
+        '<span class="rt">' + p.remaining + ' / ' + p.total + ' · 판매 ' + sold + '</span>' +
+      '</div>';
+    });
+    stock.innerHTML = html;
+    $("#adminPct").textContent = "잔여율 " + Math.round(remain / TOTAL_TICKETS * 100) + "%";
+    $("#lastStatus").textContent = state.lastWon ? "지급완료" : "미지급";
+    $("#lastDrawInfo").textContent = state.lastWon ? (state.lastWonAt || "지급") + " 지급" : "마지막 1장 지급";
+
+    const logList = $("#logList");    $("#logCount").textContent = state.logs.length + "건";
+    if (state.logs.length === 0) {
+      logList.innerHTML = '<div class="log-empty">아직 뽑기 기록이 없어요</div>';
+    } else {
+      logList.innerHTML = state.logs.slice(0, 6).map(l =>
+        '<div class="log-row"><time>' + l.at + '</time><span>' + l.label + ' · ' + l.name + '</span></div>'
+      ).join("");
+    }
+  }
+
+  /* ===================== draw ===================== */
+  function simulate(count){
+    // temp copy so the board only changes after the animation
+    const temp = state.prizes.map(p => ({ remaining: p.remaining }));
+    const results = [];
+    for (let i = 0; i < count; i++) {
+      const pool = [];
+      temp.forEach((p, idx) => { for (let k = 0; k < p.remaining; k++) pool.push(idx); });
+      if (pool.length === 0) break;
+      const pick = pool[Math.floor(Math.random() * pool.length)];
+      temp[pick].remaining--;
+      const left = temp.reduce((a, p) => a + p.remaining, 0);
+      results.push({ prize: state.prizes[pick], isLast: left === 0 });
+    }
+    return results;
+  }
+
+  function commit(results){
+    const at = nowTime();
+    results.forEach(r => {
+      const p = state.prizes.find(x => x.id === r.prize.id);
+      p.remaining--;
+      state.sold++;
+      const uid = ++uidSeq;
+      state.box.push({
+        uid: uid,
+        prizeId: p.id,
+        label: p.id + "상",
+        name: p.name,
+        glyph: p.glyph,
+        tone: p.tone,
+        at: at,
+        shipped: false
+      });
+      selected.add(uid);
+      state.logs.unshift({ at: at, label: p.id + "상", name: p.name });
+      if (r.isLast) {
+        state.lastWon = true;
+        state.lastWonAt = at;
+        const luid = ++uidSeq;
+        state.box.push({
+          uid: luid,
+          prizeId: "L",
+          label: "라스트원상",
+          name: LAST_PRIZE.name,
+          glyph: LAST_PRIZE.glyph,
+          tone: LAST_PRIZE.tone,
+          at: at,
+          shipped: false
+        });
+        selected.add(luid);
+        state.logs.unshift({ at: at, label: "라스트원상", name: LAST_PRIZE.name });
+      }
+    });
+    if (results.length) toast(results.length + "장 뽑기 완료 · 보관함에 담았어요");
+  }
+
+  function draw(count){
+    if (busy) return;
+    const remain = sumRemaining();
+    if (remain === 0) { toast("이번 쿠지판은 모두 소진되었어요"); return; }
+    if (count === 5 && remain < 5) { toast("남은 티켓이 " + remain + "장이라 5연속은 불가해요"); return; }
+    const cost = count === 5 ? FIVE_PRICE : PRICE;
+    if (state.points < cost) {
+      pendingCount = count;
+      $("#chargeNeed").textContent = won(cost - state.points) + " P 부족";
+      $("#chargeHave").textContent = won(state.points) + " P";
+      openOverlay("chargeSheet");
+      return;
+    }
+    busy = true;
+    state.points -= cost;
+    render();
+    closeAll();
+
+    const results = simulate(count);
+    $("#drawTitle").textContent = count === 5 ? "5연속 오픈!" : (count === 1 && sumRemaining() === 1 ? "마지막 1장!" : "두근두근, 티켓 오픈!");
+    $("#drawSub").textContent = count === 5 ? "티켓 5장을 여는 중이에요" : "잠시만 기다려 주세요";
+    openOverlay("drawOverlay");
+    $("#drawOverlay").querySelector(".ticket").style.animationDuration = count === 5 ? "0.95s" : "1.15s";
+
+    const delay = count === 5 ? 1500 : 1250;
+    setTimeout(() => {
+      closeOverlay("drawOverlay");
+      commit(results);
+      render();
+      pendingCount = count;
+      showResult(results, count);
+      busy = false;
+    }, delay);
+  }
+
+  function showResult(results, count){
+    const lastHit = results.some(r => r.isLast);
+    const top = $("#resTop");
+    const grade = $("#resGrade");
+    const glyph = $("#resGlyph");
+    const nameEl = $("#resName");
+    const multiWrap = $("#resMultiWrap");
+    const lastWrap = $("#resLastWrap");
+    const confetti = $("#confetti");
+
+    top.classList.toggle("gold", lastHit);
+    top.classList.toggle("multi", count > 1);
+    confetti.innerHTML = "";
+    multiWrap.innerHTML = "";
+    lastWrap.innerHTML = "";
+
+    if (count === 1) {
+      const r = results[0];
+      $("#resEyebrow").textContent = lastHit ? "라스트원상 획득" : "당첨 결과";
+      grade.textContent = r.prize.id + "상";
+      grade.style.display = "";
+      grade.className = "res-grade";
+      glyph.style.display = "";
+      glyph.innerHTML = '<svg><use href="#' + r.prize.glyph + '"/></svg>';
+      nameEl.textContent = r.prize.name;
+      nameEl.style.display = "";
+      document.querySelector("#resultSheetInner .res-saved").style.display = "";    } else {
+      $("#resEyebrow").textContent = lastHit ? "라스트원상 획득 · 5연속" : "5연속 결과";
+      grade.style.display = "none";
+      glyph.style.display = "none";
+      nameEl.style.display = "none";
+      document.querySelector("#resultSheetInner .res-saved").style.display = "none";
+      let rows = "";
+      results.forEach((r, i) => {
+        rows += '<div class="res-row" style="animation-delay:' + (0.06 * i) + 's">' +
+          '<span class="' + tagClass({ prizeId: r.isLast ? "L" : r.prize.id }) + '">' + (r.isLast ? "라스트원상" : r.prize.id + "상") + '</span>' +
+          '<span class="nm">' + (r.isLast ? LAST_PRIZE.name : r.prize.name) + '</span>' +
+        '</div>';
+      });
+      multiWrap.innerHTML = '<div class="res-headline">' + results.length + '장 모두 보관함에 담았어요</div><div class="res-multi">' + rows + '</div>';
+    }
+
+    if (lastHit) {
+      lastWrap.innerHTML =
+        '<div class="last-banner">' +
+          '<span class="ic"><svg viewBox="0 0 24 24"><use href="#i-crown"/></svg></span>' +
+          '<span>축하해요! 마지막 티켓의 주인공<br>라스트원상 <b>한정 컬러 대형 인형</b>도 함께 담았어요.</span>' +
+        '</div>';
+      // confetti
+      const colors = ["#FF9DB5","#FFD36E","#8FDCC0","#BFA9F5","#8FC9F0"];
+      for (let i = 0; i < 26; i++) {
+        const s = document.createElement("i");
+        s.style.left = (Math.random() * 100) + "%";
+        s.style.background = colors[i % colors.length];
+        s.style.animationDelay = (Math.random() * 0.7) + "s";
+        s.style.animationDuration = (1.8 + Math.random() * 1.2) + "s";
+        s.style.transform = "rotate(" + (Math.random() * 180) + "deg)";
+        confetti.appendChild(s);
+      }
+    }
+
+    const remain = sumRemaining();
+    const again = $("#resAgainBtn");
+    const againSub = $("#resAgainSub");
+    if (remain === 0) {
+      again.disabled = true;
+      againSub.textContent = "쿠지판 소진";
+    } else if (count === 5 && remain < 5) {
+      again.disabled = false;
+      againSub.textContent = "1회 12,000원";
+      again.dataset.forceOne = "1";
+    } else {
+      again.disabled = false;
+      again.dataset.forceOne = "";
+      againSub.textContent = count === 5 ? "60,000원" : "12,000원";
+    }
+    openOverlay("resultSheet");
+  }
+
+  /* ===================== shipping ===================== */
+  function openShip(){
+    const items = state.box.filter(i => !i.shipped && selected.has(i.uid));
+    if (items.length === 0) { toast("배송할 상품을 선택해 주세요"); return; }
+    $("#shipSummaryCount").textContent = items.length + "점";
+    $("#shipSummaryNames").textContent = items.length <= 2
+      ? items.map(i => i.name).join(", ")
+      : items[0].name + " 외 " + (items.length - 1);
+    agreeChecked = false;
+    $("#agreeBox").classList.remove("on");
+    validateShip();
+    openOverlay("shipSheet");
+  }
+
+  function validateShip(){
+    const ok = $("#shipName").value.trim().length > 0 &&
+               $("#shipPhone").value.trim().length >= 8 &&
+               $("#shipAddr").value.trim().length >= 5 &&
+               agreeChecked;
+    $("#shipSubmit").disabled = !ok;
+    $("#shipSubmitSub").textContent = ok ? "선택한 상품을 한 번에 보내드려요" : "주소와 동의가 필요해요";
+  }
+
+  function submitShip(){
+    const items = state.box.filter(i => !i.shipped && selected.has(i.uid));
+    if (items.length === 0) return;
+    const now = new Date();
+    const stamp = now.getFullYear() +
+      String(now.getMonth() + 1).padStart(2, "0") +
+      String(now.getDate()).padStart(2, "0");
+    const no = "CH-" + stamp + "-" + String(state.shipments.length + 1).padStart(3, "0");
+    const name = $("#shipName").value.trim();
+    state.shipments.push({ no: no, count: items.length, at: nowTime(), name: name });
+    items.forEach(i => { i.shipped = true; selected.delete(i.uid); });
+    render();
+    closeOverlay("shipSheet");
+    toast(no + " 배송 신청 완료");
+    $("#shipName").value = "";
+    $("#shipPhone").value = "";
+    $("#shipAddr").value = "";
+    agreeChecked = false;
+  }
+
+  /* ===================== bindings ===================== */
+  function bindBuyButtons(){
+    const one = $("#btnOne"), five = $("#btnFive");
+    if (one) one.addEventListener("click", () => draw(1));
+    if (five) five.addEventListener("click", () => draw(5));
+  }
+  bindBuyButtons();
+
+  function switchTab(name){
+    ["home","box","admin"].forEach(t => {
+      $("#screen" + t.charAt(0).toUpperCase() + t.slice(1)).hidden = t !== name;
+    });
+    document.querySelectorAll(".tab").forEach(b => b.classList.toggle("on", b.dataset.tab === name));
+    $("#buybar").hidden = name !== "home" || sumRemaining() === 0;
+    $("#boxBar").hidden = name !== "box";
+    $("#screen" + name.charAt(0).toUpperCase() + name.slice(1)).scrollTop = 0;
+  }
+  document.querySelectorAll(".tab").forEach(b => {
+    b.addEventListener("click", () => switchTab(b.dataset.tab));
+  });
+  $("#cartBtn").addEventListener("click", () => switchTab("box"));
+
+  $("#lineup").addEventListener("click", e => {
+    const bell = e.target.closest("[data-notify]");
+    if (bell) {
+      const id = bell.dataset.notify;
+      const c = LINEUP.find(x => x.id === id);
+      if (notified.has(id)) {
+        notified.delete(id);
+        toast("알림 신청을 취소했어요");
+      } else {
+        notified.add(id);
+        toast(c.openLabel + " · 오픈 30분 전에 알려드릴게요");
+      }
+      renderLineup();
+      return;
+    }
+    const card = e.target.closest("[data-lineup]");
+    if (card) {
+      const c = LINEUP.find(x => x.id === card.dataset.lineup);
+      if (c) toast("준비중인 쿠지예요 · " + c.openLabel);
+    }
+  });
+
+  $("#noticeBar").addEventListener("click", () => {
+    toast("12.01(화) 20:00 모구모구 본점 한정 쿠지가 오픈해요");
+  });
+  $("#noticeBar").addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("#noticeBar").click(); }
+  });
+
+  $("#boxArea").addEventListener("click", e => {
+    const all = e.target.closest("#selectAll");
+    if (all) {
+      const items = state.box.filter(i => !i.shipped);
+      const every = items.every(i => selected.has(i.uid));
+      items.forEach(i => { if (every) selected.delete(i.uid); else selected.add(i.uid); });
+      render();
+      return;
+    }
+    const item = e.target.closest(".item");
+    if (item) {
+      const uid = Number(item.dataset.uid);
+      if (selected.has(uid)) selected.delete(uid); else selected.add(uid);
+      render();
+    }
+  });
+
+  $("#shipBtn").addEventListener("click", openShip);
+  $("#agreeBox").addEventListener("click", () => {
+    agreeChecked = !agreeChecked;
+    $("#agreeBox").classList.toggle("on", agreeChecked);
+    validateShip();
+  });
+  ["#shipName","#shipPhone","#shipAddr"].forEach(s => {
+    $(s).addEventListener("input", validateShip);
+  });
+  $("#shipSubmit").addEventListener("click", submitShip);
+
+  $("#pointsBtn").addEventListener("click", () => {
+    const remain = sumRemaining();
+    const need = remain === 0 ? 0 : (state.points < PRICE ? PRICE - state.points : 0);
+    $("#chargeNeed").textContent = need > 0 ? won(need) + " P 부족" : "데모 포인트";
+    $("#chargeHave").textContent = won(state.points) + " P";
+    openOverlay("chargeSheet");
+  });
+  $("#chargeBtn").addEventListener("click", () => {
+    state.points += 120000;
+    render();
+    closeOverlay("chargeSheet");
+    toast("샘플 포인트 120,000P 충전 완료");
+  });
+
+  document.querySelectorAll("[data-close]").forEach(b => {
+    b.addEventListener("click", () => closeOverlay(b.dataset.close));
+  });
+  document.querySelectorAll(".overlay").forEach(o => {
+    o.addEventListener("click", e => { if (e.target === o && o.id !== "drawOverlay") closeOverlay(o.id); });
+  });
+
+  $("#resBoxBtn").addEventListener("click", () => {
+    closeOverlay("resultSheet");
+    switchTab("box");
+  });
+  $("#resAgainBtn").addEventListener("click", function(){
+    const forceOne = this.dataset.forceOne === "1";
+    closeOverlay("resultSheet");
+    draw(forceOne ? 1 : pendingCount);
+  });
+
+  $("#resetBtn").addEventListener("click", () => {
+    $("#confirmTitle").textContent = "쿠지판 리셋";
+    $("#confirmText").innerHTML = "지금 쿠지판을 처음 상태로 되돌립니다.<br>판매 기록·누적 매출·보관함·배송 신청이 <b>모두 초기화</b>돼요. 계속할까요?";
+    confirmAction = () => {
+      state = initialState();
+      selected = new Set();
+      uidSeq = 1;
+      closeOverlay("confirmSheet");
+      switchTab("home");
+      render();
+      toast("쿠지판을 리셋했어요 (42장 · 매출 456,000원)");
+    };
+    openOverlay("confirmSheet");
+  });
+  $("#confirmOk").addEventListener("click", () => { if (confirmAction) confirmAction(); });
+
+  /* ===================== boot ===================== */
+  state = initialState();
+  render();
+  renderLineup();
+  switchTab("home");
+
+  // expose a tiny debug handle for automated checks
+  window.__kuji = {
+    get state(){ return state; },
+    remain: sumRemaining,
+    draw: draw,
+    lineup: LINEUP,
+    notified: notified
+  };
+})();
+</script>
+</body>
+</html>
