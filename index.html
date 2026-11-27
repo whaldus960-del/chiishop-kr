@@ -1282,85 +1282,169 @@ body{
 @keyframes auraUp{0%{opacity:0;transform:scale(.5)}55%{opacity:.28;transform:scale(.94)}100%{opacity:.4;transform:scale(1.02)}}
 @keyframes auraBoom{0%{opacity:.4;transform:scale(1)}22%{opacity:.56;transform:scale(1.1)}100%{opacity:.16;transform:scale(1.2)}}
 
-/* ── 티켓 무대 ───────────────────────────────────────────── */
-.tk-scene{position:relative;width:300px;height:392px;display:grid;place-items:center;margin:4px 0 2px}
-.tk-halo{position:absolute;width:320px;height:320px;border-radius:50%;filter:blur(20px);opacity:.26;
+/* ── 티켓 무대 : 실제 이치방쿠지 「くじ券」 — 가로형 2겹 종이 + 페리페리 필름 ──
+   종이 바탕(반치·바코드·가게 도장 인쇄) 위에 당첨 확인창이 다이컷으로 뚫려 있고,
+   그 창을 덮은 인쇄 필름(페리페리면)을 오른쪽 끝에서 잡아 뜯으면
+   안쪽 흰 종이에 찍힌 등급이 드러난다. */
+.tk-scene{position:relative;width:392px;height:272px;display:grid;place-items:center;margin:0 0 2px}
+.tk-halo{position:absolute;width:330px;height:250px;border-radius:50%;filter:blur(22px);opacity:.26;
   background:radial-gradient(circle,var(--f1,#fff3d6) 0%,var(--f2,#f0684b) 46%,transparent 70%)}
 .draw-ov.stage3 .tk-halo{animation:haloBloom .9s ease-out both}
 @keyframes haloBloom{0%{opacity:.24;transform:scale(.82)}45%{opacity:.62;transform:scale(1.08)}100%{opacity:.34;transform:scale(1)}}
 .tk-dust{position:absolute;inset:0;pointer-events:none}
 .tk-dust i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff3d6;opacity:.5;
   box-shadow:0 0 6px rgba(255,220,160,.9);animation:twinkle 2.8s ease-in-out infinite}
-.tk-stack{position:relative;z-index:2;width:288px;height:384px}
-.tk-ghost{position:absolute;inset:0;border-radius:14px;border:2px solid rgba(59,23,48,.45);
-  background:linear-gradient(180deg,#fff7ec,#ffe4c0);box-shadow:0 6px 14px rgba(0,0,0,.28)}
-.tk-ghost.a{transform:translate(6px,8px) rotate(1.8deg);opacity:.5}
-.tk-ghost.b{transform:translate(12px,16px) rotate(3.4deg);opacity:.24}
-.tk-card{position:absolute;inset:0;border-radius:14px;overflow:hidden;
-  border:2.5px solid var(--ink);background:#fff7ec;
-  box-shadow:0 9px 0 rgba(59,23,48,.34),0 20px 38px rgba(0,0,0,.5);
-  transform:rotate(-1.1deg);touch-action:none;cursor:grab;user-select:none;
-  --tp:0;--tpo:0;--gc:#f0684b;transition:transform .2s ease,box-shadow .2s ease}
-.tk-card.grabbing{cursor:grabbing;transform:rotate(-.3deg) scale(1.014);
-  box-shadow:0 5px 0 rgba(59,23,48,.34),0 14px 26px rgba(0,0,0,.44)}
-.draw-ov.stage3 .tk-card{transform:rotate(0) scale(1.02)}
-.tk-card::after{
-  content:"";position:absolute;inset:0;z-index:6;pointer-events:none;opacity:.14;
-  background-image:radial-gradient(rgba(51,37,43,.55) 1px,transparent 1px);background-size:4px 4px}
+.tk-stack{position:relative;z-index:2;width:336px;height:224px}
+.tk-ghost{position:absolute;inset:0;border-radius:9px;border:1.5px solid #cfa270;
+  background:linear-gradient(180deg,#fffdf7,#f8ead5);box-shadow:0 8px 16px rgba(0,0,0,.26)}
+.tk-ghost.a{transform:translate(8px,11px) rotate(1.7deg);opacity:.8}
+.tk-ghost.b{transform:translate(16px,22px) rotate(3.4deg);opacity:.45}
+.tk-card{position:absolute;inset:0;border-radius:9px;overflow:hidden;
+  background:radial-gradient(125% 105% at 22% 0%,#fffdf6 0%,#fdf3df 52%,#f7e5c6 100%);
+  border:1.6px solid #b8844f;
+  box-shadow:0 6px 0 rgba(94,52,24,.2),0 16px 30px rgba(0,0,0,.44);
+  transform:rotate(-.7deg);touch-action:none;cursor:grab;user-select:none;
+  --gc:#f0684b;transition:transform .2s ease,box-shadow .2s ease}
+.tk-card.grabbing{cursor:grabbing;transform:rotate(-.15deg) scale(1.02);
+  box-shadow:0 3px 0 rgba(94,52,24,.2),0 10px 20px rgba(0,0,0,.4)}
+.draw-ov.stage3 .tk-card{transform:rotate(0) scale(1.03)}
+/* 종이 결 */
+.tk-card::before{content:"";position:absolute;inset:0;z-index:9;pointer-events:none;opacity:.12;
+  background-image:radial-gradient(rgba(122,83,48,.55) .7px,transparent .7px);background-size:3.4px 3.4px}
 
-/* 안쪽(뜯긴 뒤 보이는 면) — 왼쪽 스텁 + 당첨 등급 창 */
-.tk-under{position:absolute;inset:0;z-index:1;display:flex;
-  background:radial-gradient(circle at 76% 34%,#fffdf6 0%,#fff8ea 46%,#ffe8c9 100%)}
-.tk-left{position:relative;width:104px;flex:none;display:flex;flex-direction:column;align-items:center;
-  padding:18px 6px 12px;gap:8px;
-  background:linear-gradient(180deg,#ffe0b0,#ffcf90);border-right:1.5px dashed rgba(59,23,48,.3)}
-.tk-brand{font-size:15px;font-weight:900;letter-spacing:-.7px;color:var(--coral-d);line-height:1;text-align:center}
-.tk-brand i{display:block;font-style:normal;font-size:8.5px;letter-spacing:2.6px;color:var(--plum);margin-top:3px}
-.tk-series{font-size:10.5px;font-weight:900;color:var(--plum);text-align:center;line-height:1.3}
-.tk-serial{font-family:ui-monospace,Menlo,monospace;font-size:8.5px;font-weight:700;color:#7d5c47;letter-spacing:-.2px}
-.tk-pt{font-family:ui-monospace,Menlo,monospace;font-size:11px;font-weight:900;color:var(--coral-d)}
-.tk-cutdash{flex:1;width:0;border-left:1.5px dashed rgba(59,23,48,.22);margin:2px 0}
-.tk-foot{font-size:7px;font-weight:900;letter-spacing:.9px;color:#a98a70;text-align:center;line-height:1.3}
-.tk-win{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:7px;padding:14px 8px 14px 12px;overflow:hidden}
-.tk-winlabel{font-size:8px;font-weight:900;letter-spacing:3.4px;color:#b79c87}
-.tk-seal{position:relative;display:grid;place-items:center;width:126px;height:126px;border-radius:50%;
-  background:var(--gc,#f0684b);
-  box-shadow:inset 0 0 0 5px #fffdf6,inset 0 0 0 7px rgba(59,23,48,.32),0 6px 14px rgba(120,80,60,.18);
-  opacity:var(--tpo,0);transform:scale(calc(.88 + var(--tpo,0) * .12))}
-.tk-grade{font-size:37px;font-weight:900;letter-spacing:-2px;color:#2c1e25;line-height:1;
-  text-shadow:0 2px 0 rgba(255,255,255,.6)}
+/* ── 종이 바탕 인쇄면 ─────────────────────────────────────── */
+.tk-base{position:absolute;inset:0;z-index:1}
+.tk-band{position:absolute;left:0;right:0;top:0;height:25px;display:flex;align-items:center;gap:7px;
+  padding:0 9px 0 7px;color:#fff;
+  background:linear-gradient(90deg,#e2492c 0%,#f0684b 44%,#f79a5a 78%,#ffc24b 100%)}
+.tk-logo{display:inline-flex;align-items:baseline;gap:2.5px;padding:2.5px 6px 3.5px;border-radius:4px;
+  background:#fffdf7;color:#e2492c;font-size:9.5px;font-weight:900;letter-spacing:-.3px;line-height:1;
+  box-shadow:0 1px 0 rgba(0,0,0,.16)}
+.tk-logo i{font-style:normal;font-size:6.4px;letter-spacing:1.6px;color:#b8471f}
+.tk-band .sp{flex:1}
+.tk-band em{font-style:normal;font-size:10px;font-weight:900;letter-spacing:-.3px;
+  text-shadow:0 1px 1px rgba(120,40,10,.35)}
+.tk-band b{border-left:1px solid rgba(255,255,255,.55);padding-left:7px;
+  font-family:ui-monospace,Menlo,monospace;font-size:9.5px;font-weight:900;letter-spacing:-.2px}
+/* 왼쪽 반치(가위선) */
+.tk-stub{position:absolute;left:0;top:25px;bottom:58px;width:32px;background:#fffdf7;
+  border-right:1.6px dashed #c08c58;display:flex;align-items:center;justify-content:center;
+  box-shadow:inset -6px 0 8px -7px rgba(150,105,60,.5)}
+.tk-stub em{writing-mode:vertical-rl;font-style:normal;font-size:7.4px;font-weight:900;
+  letter-spacing:2.2px;color:#ab7c4d;line-height:1}
+.tk-stub::before,.tk-stub::after{content:"";position:absolute;left:6px;width:5px;height:5px;
+  border-radius:50%;border:1px solid #d3ab7c}
+.tk-stub::before{top:4px}
+.tk-stub::after{bottom:4px}
+/* 아래 인쇄면 : 바코드 · 번호 · 각주 */
+.tk-foot{position:absolute;left:0;right:0;bottom:0;height:58px;display:flex;align-items:center;gap:9px;
+  padding:0 10px 0 40px;border-top:1.3px solid rgba(184,132,79,.55);
+  background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(214,174,128,.2))}
+.tk-bc{display:flex;flex-direction:column;gap:2px;align-items:flex-start}
+.tk-bc b{display:block;width:106px;height:21px;border:1px solid #d6b58c;border-radius:1px;background:#fff;
+  background-image:repeating-linear-gradient(90deg,#2b1d14 0 1.3px,#fff 1.3px 3.1px,#2b1d14 3.1px 4.4px,#fff 4.4px 6.6px,#2b1d14 6.6px 7.4px,#fff 7.4px 10px)}
+.tk-bc em{font-family:ui-monospace,Menlo,monospace;font-style:normal;font-size:5.4px;font-weight:700;
+  letter-spacing:.8px;color:#8a6242;white-space:nowrap}
+.tk-foot .cols{display:flex;flex-direction:column;gap:1.5px;line-height:1.1}
+.tk-serial{font-family:ui-monospace,Menlo,monospace;font-size:8.4px;font-weight:900;color:#6f4a2b;letter-spacing:.1px}
+.tk-tiny{font-size:5.7px;font-weight:800;color:#a9886a;letter-spacing:.1px;line-height:1.15}
+
+/* ── 당첨 확인창 (다이컷) ───────────────────────────────── */
+.tk-window{position:absolute;left:40px;top:30px;width:282px;height:136px;z-index:2;
+  border-radius:4px;border:1.4px solid #b8844f;overflow:hidden;
+  box-shadow:inset 0 0 0 2.2px #fffdf7,0 1px 3px rgba(120,80,40,.2)}
+/* 창 모서리 다이컷 표시 */
+.tk-window::after{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;
+  background:
+    linear-gradient(#c69463,#c69463) left 0 top 0/5px 1px no-repeat,
+    linear-gradient(#c69463,#c69463) left 0 top 0/1px 5px no-repeat,
+    linear-gradient(#c69463,#c69463) right 0 top 0/5px 1px no-repeat,
+    linear-gradient(#c69463,#c69463) right 0 top 0/1px 5px no-repeat,
+    linear-gradient(#c69463,#c69463) left 0 bottom 0/5px 1px no-repeat,
+    linear-gradient(#c69463,#c69463) left 0 bottom 0/1px 5px no-repeat,
+    linear-gradient(#c69463,#c69463) right 0 bottom 0/5px 1px no-repeat,
+    linear-gradient(#c69463,#c69463) right 0 bottom 0/1px 5px no-repeat}
+
+/* 안쪽 흰 종이 — 등급이 인쇄돼 있다 */
+.tk-under{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;
+  background:radial-gradient(circle at 50% 42%,#fffefa 0%,#fffaee 58%,#fdeecd 100%)}
+.tk-under::before{content:"";position:absolute;inset:0;opacity:.5;
+  background-image:radial-gradient(rgba(196,150,100,.3) .6px,transparent .6px);background-size:3.2px 3.2px}
+.tk-winlabel{position:absolute;top:5px;left:0;right:0;text-align:center;
+  font-size:6.6px;font-weight:900;letter-spacing:3.6px;color:#c6a983}
+.tk-grow{position:relative;display:flex;align-items:baseline;gap:1px;margin-top:2px}
+.tk-grade{font-size:41px;font-weight:900;letter-spacing:-2.6px;line-height:1;color:#33221a;
+  text-shadow:0 1.5px 0 rgba(255,255,255,.9)}
+.tk-gbar{display:block;width:84px;height:4px;border-radius:2px;margin:1px 0 1px;
+  background:var(--gc,#f0684b);box-shadow:0 1px 0 rgba(255,255,255,.8)}
 .tk-grade.pop{animation:gradePop .62s cubic-bezier(.2,1.5,.35,1) both}
-@keyframes gradePop{0%{transform:scale(.4) rotate(-9deg);opacity:0}55%{transform:scale(1.2) rotate(4deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
-.tk-gname{font-size:10.5px;font-weight:900;color:var(--plum);text-align:center;line-height:1.3;
-  opacity:var(--tpo,0);max-width:154px}
+@keyframes gradePop{0%{transform:scale(.4) rotate(-9deg);opacity:0}55%{transform:scale(1.16) rotate(4deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+.tk-gname{font-size:11.5px;font-weight:900;color:#3b1730;text-align:center;line-height:1.28;max-width:212px}
 .tk-gname.pop{animation:nameUp .5s ease-out both}
 @keyframes nameUp{0%{transform:translateY(6px);opacity:0}100%{transform:translateY(0);opacity:1}}
+.tk-winstamp{position:absolute;right:7px;bottom:5px;width:25px;height:25px;border-radius:50%;
+  display:grid;place-items:center;transform:rotate(-13deg);opacity:.72;
+  border:1.8px solid #cf3b28;color:#cf3b28;font-size:10px;font-weight:900;letter-spacing:-1px;
+  background:radial-gradient(circle,rgba(207,59,40,.09),transparent 70%)}
+.tk-winserial{position:absolute;left:8px;bottom:6px;font-family:ui-monospace,Menlo,monospace;
+  font-size:6.2px;font-weight:800;letter-spacing:.4px;color:#c0a281}
 
-/* 뜯어낼 조각 — 지그재그 절취선으로 잘린 오른쪽 종이 */
-.tk-flap{position:absolute;inset:0;z-index:4;transform-origin:left center;will-change:transform;
-  filter:drop-shadow(-1.5px 0 0 #fff7ec) drop-shadow(-5px 0 7px rgba(59,23,48,.35));
-  background:linear-gradient(180deg,#ff9674 0%,#f0684b 44%,#d8482c 100%)}
-.tk-flap::before{
-  content:"";position:absolute;inset:0;
-  background:repeating-linear-gradient(122deg,rgba(255,255,255,.17) 0 9px,transparent 9px 20px)}
-.tk-flap-face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:4px;padding:30px 10px 76px 112px}
-.tk-flap-top{font-size:8.5px;font-weight:900;letter-spacing:2.4px;color:#fff2e6;opacity:.94}
-.tk-q{font-size:64px;font-weight:900;line-height:.94;color:#fff7ec;text-shadow:0 4px 0 rgba(59,23,48,.3);
-  animation:qFloat 2.6s ease-in-out infinite}
-@keyframes qFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
-.tk-zip{position:absolute;left:104px;right:0;bottom:38px;padding:8px 0 7px;
-  background:rgba(255,247,236,.95);border-top:1.5px dashed rgba(59,23,48,.34);border-bottom:1.5px dashed rgba(59,23,48,.34);
-  font-size:11px;font-weight:900;letter-spacing:.6px;color:var(--plum);text-align:center;
-  animation:zipPulse 1.5s ease-in-out infinite}
-@keyframes zipPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,247,236,0)}55%{box-shadow:0 0 0 4px rgba(255,247,236,.28)}}
-.tk-finger{position:absolute;left:104px;right:0;bottom:9px;height:16px;display:flex;align-items:center;justify-content:center;gap:5px}
-.tk-finger i{width:8px;height:8px;border-right:2.6px solid #fff3e2;border-top:2.6px solid #fff3e2;
-  transform:rotate(45deg);opacity:.35;animation:chev 1.5s ease-in-out infinite}
-.tk-finger i:nth-child(2){animation-delay:.15s}
-.tk-finger i:nth-child(3){animation-delay:.3s}
-@keyframes chev{0%,100%{opacity:.25;transform:rotate(45deg) scale(.9)}45%{opacity:1;transform:rotate(45deg) scale(1.15)}}
+/* ── 페리페리 필름(뜯어낼 겉면) ─────────────────────────── */
+.tk-flap{position:absolute;inset:0;z-index:3;overflow:hidden;will-change:clip-path;
+  clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%)}
+.tk-film{position:absolute;inset:0;overflow:hidden;
+  background:linear-gradient(118deg,#ffb492 0%,#f0684b 34%,#ee6a45 62%,#ffab55 100%)}
+.tk-film::before{content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,250,238,.5) 1.1px,transparent 1.1px);background-size:8.5px 8.5px}
+/* 필름 겉면 미싱선(스티커 커트선) */
+.tk-film::after{content:"";position:absolute;inset:4px;border-radius:3px;pointer-events:none;
+  border:1.2px dashed rgba(255,249,235,.82)}
+/* 겉면 인쇄 : 왼쪽 색 띠 + 큰 물음표 워터마크 */
+.tk-flap-band{position:absolute;left:0;top:0;bottom:0;width:11px;
+  background:repeating-linear-gradient(135deg,rgba(255,249,235,.9) 0 4px,rgba(255,190,140,.95) 4px 9px)}
+.tk-flap-mark{position:absolute;right:64px;top:58%;transform:translateY(-50%) rotate(-7deg);
+  font-size:98px;font-weight:900;color:#fff6e6;opacity:.28;line-height:1;letter-spacing:-6px;
+  text-shadow:0 3px 0 rgba(150,50,20,.18)}
+.tk-ribbon{position:absolute;left:11px;right:0;top:0;height:19px;display:flex;align-items:center;
+  gap:5px;padding:0 8px 0 10px;background:#fffdf7;color:#c2410f;
+  font-size:8.4px;font-weight:900;letter-spacing:1.6px;
+  box-shadow:0 2px 4px rgba(120,40,10,.22)}
+.tk-ribbon b{margin-left:auto;font-size:9px;font-weight:900;letter-spacing:-.2px;
+  font-family:ui-monospace,Menlo,monospace;color:#c2410f}
+.tk-bubble{position:absolute;left:18px;top:29px;padding:6px 11px 7px;border-radius:12px;
+  background:#fffdf7;border:1.5px solid #c2410f;color:#c2410f;
+  font-size:10.4px;font-weight:900;line-height:1.2;letter-spacing:-.2px;
+  box-shadow:0 3px 0 rgba(140,45,10,.28)}
+.tk-bubble::after{content:"";position:absolute;left:13px;bottom:-6.5px;width:10px;height:10px;
+  background:#fffdf7;border-right:1.5px solid #c2410f;border-bottom:1.5px solid #c2410f;
+  transform:rotate(45deg)}
+.tk-bubble i{font-style:normal;display:block;font-size:7.8px;letter-spacing:-.1px;color:#a4552a;margin-top:2px}
+/* 뜯기 안내 띠 + 손가락 탭 */
+.tk-zip{position:absolute;left:5px;right:5px;bottom:5px;height:23px;border-radius:3px;
+  display:flex;align-items:center;justify-content:center;gap:5px;background:#fffdf7;
+  border:1.3px dashed #c2410f;color:#b8380c;
+  font-size:10px;font-weight:900;letter-spacing:.2px;
+  box-shadow:0 2px 0 rgba(140,45,10,.18)}
+.tk-zip i{font-style:normal;color:#e2492c;animation:zipArrow 1.35s ease-in-out infinite}
+.tk-zip i:nth-child(3){animation-delay:.14s}
+.tk-zip i:nth-child(5){animation-delay:.28s}
+@keyframes zipArrow{0%,100%{opacity:.35;transform:translateX(0)}50%{opacity:1;transform:translateX(2px)}}
+.tk-tab{position:absolute;right:0;top:33px;width:25px;height:64px;
+  border-radius:13px 0 0 13px;background:#fffdf7;border:1.6px dashed #c2410f;
+  border-right:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  box-shadow:-3px 0 8px rgba(120,40,10,.3)}
+.tk-tab i{width:7px;height:7px;border-right:1.8px solid #e2492c;border-top:1.8px solid #e2492c;
+  transform:rotate(45deg);opacity:.45;animation:chev 1.5s ease-in-out infinite}
+.tk-tab i:nth-child(2){animation-delay:.15s}
+.tk-tab i:nth-child(3){animation-delay:.3s}
+@keyframes chev{0%,100%{opacity:.25;transform:rotate(45deg) scale(.9)}45%{opacity:1;transform:rotate(45deg) scale(1.12)}}
+/* 벗겨지는 앞단 — 필름이 말려 올라온 단면 */
+.tk-peel{position:absolute;top:-1px;bottom:-1px;width:26px;z-index:4;pointer-events:none;opacity:0;
+  border-radius:0 46% 46% 0/0 9px 9px 0;
+  background:linear-gradient(90deg,rgba(255,250,240,0) 0%,rgba(255,250,240,.4) 24%,
+    rgba(255,252,245,.95) 50%,#fffdf7 64%,#f6e4c8 100%);
+  box-shadow:7px 0 11px rgba(59,23,48,.26),inset -2px 0 3px rgba(184,132,79,.32)}
 
 /* 뜯기는 순간 — 섬광 · 광선 · 종이 조각 */
 .tk-flash{position:absolute;inset:2px;z-index:5;background:#fff;opacity:0;pointer-events:none;border-radius:14px}
@@ -1378,7 +1462,7 @@ body{
 @keyframes tkConf{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
 
 /* 장수 표시 · 결과 칩 */
-.tk-idx{position:absolute;top:-18px;left:50%;transform:translateX(-50%);z-index:7;
+.tk-idx{position:absolute;top:6px;left:50%;transform:translateX(-50%);z-index:7;
   padding:3px 10px;border-radius:999px;background:rgba(255,247,236,.95);color:var(--plum);
   font-family:ui-monospace,Menlo,monospace;font-size:10px;font-weight:900;letter-spacing:1px;
   box-shadow:0 2px 8px rgba(0,0,0,.3)}
@@ -1787,29 +1871,47 @@ body{
           <div class="tk-ghost b" aria-hidden="true"></div>
           <div class="tk-ghost a" aria-hidden="true"></div>
           <div class="tk-card" id="tkCard" role="button" tabindex="0"
-               aria-label="이치방쿠지 티켓 — 절취선을 밀거나 눌러서 뜯기">
-            <div class="tk-under">
-              <div class="tk-left">
-                <span class="tk-brand">POKO<i>KUJI</i></span>
-                <span class="tk-series" id="tkSeries">해변 바캉스</span>
-                <span class="tk-serial" id="tkSerial">No.28-1042</span>
-                <span class="tk-pt" id="tkPt">6,200P</span>
-                <span class="tk-cutdash" aria-hidden="true"></span>
-                <span class="tk-foot">1回<br>ICHIBAN KUJI</span>
+               aria-label="이치방쿠지 쿠지권 — 당첨 확인창 필름을 잡아 뜯으면 등급이 나옵니다">
+            <!-- 종이 바탕 인쇄면 : 색 띠 · 반치 · 바코드 · 번호 -->
+            <div class="tk-base" aria-hidden="true">
+              <div class="tk-band">
+                <span class="tk-logo">POKO<i>KUJI</i></span>
+                <span class="sp"></span>
+                <em id="tkSeries">해변 바캉스</em>
+                <b id="tkPt">6,200P</b>
               </div>
-              <div class="tk-win">
-                <span class="tk-winlabel">당첨 등급</span>
-                <div class="tk-seal"><span class="tk-grade" id="tkGrade">A상</span></div>
-                <span class="tk-gname" id="tkGname">당첨 상품</span>
+              <div class="tk-stub"><em>くじ券の半券</em></div>
+              <div class="tk-foot">
+                <span class="tk-bc"><b></b><em id="tkBcNum">2026 0428</em></span>
+                <span class="cols">
+                  <span class="tk-serial" id="tkSerial">No.28-1007</span>
+                  <span class="tk-tiny">当店の店頭払は POKO KUJI です。</span>
+                  <span class="tk-tiny">1回 1枚 · © POKO KUJI / NOT FOR SALE</span>
+                </span>
               </div>
             </div>
-            <div class="tk-flap" id="tkFlap">
-              <div class="tk-flap-face">
-                <span class="tk-flap-top">당첨 확인부</span>
-                <span class="tk-q">?</span>
+            <!-- 당첨 확인창 : 안쪽 흰 종이에 등급이 인쇄돼 있다 -->
+            <div class="tk-window">
+              <div class="tk-under">
+                <span class="tk-winlabel">당첨 등급</span>
+                <div class="tk-grow"><span class="tk-grade" id="tkGrade">A상</span></div>
+                <span class="tk-gbar" aria-hidden="true"></span>
+                <span class="tk-gname" id="tkGname">당첨 상품</span>
+                <span class="tk-winstamp" aria-hidden="true">当せん</span>
+                <span class="tk-winserial" id="tkWinSerial">No.28-1007</span>
               </div>
-              <span class="tk-zip">&gt;&gt;&gt; 밀어서 뜯기 &gt;&gt;&gt;</span>
-              <span class="tk-finger" aria-hidden="true"><i></i><i></i><i></i></span>
+              <!-- 겉면 필름(페리페리면) -->
+              <div class="tk-flap" id="tkFlap">
+                <div class="tk-film">
+                  <span class="tk-flap-band" aria-hidden="true"></span>
+                  <span class="tk-ribbon">당첨 확인부<b id="tkStampPt">6,200P</b></span>
+                  <span class="tk-flap-mark" aria-hidden="true">?</span>
+                  <span class="tk-bubble">ペリペリしよ？<i>필름 끝을 잡고 쭉— 뜯어요</i></span>
+                  <span class="tk-tab" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <span class="tk-zip"><i>▶</i> 밀어서 뜯기 <i>▶</i> 쭉— <i>▶</i></span>
+                </div>
+              </div>
+              <span class="tk-peel" id="tkPeel" aria-hidden="true"></span>
             </div>
           </div>
         </div>
@@ -1819,8 +1921,8 @@ body{
         <div class="tk-idx" id="tkIdx"></div>
       </div>
       <div class="tk-marks" id="tkMarks" aria-hidden="true"></div>
-      <div class="draw-ttl" id="drawTtl">티켓을 쭉- 밀어 뜯어주세요</div>
-      <div class="draw-sub" id="drawSub">절취선을 손가락으로 밀면 종이가 갈라져요</div>
+      <div class="draw-ttl" id="drawTtl">티켓 끝을 잡고 쭉— 뜯어주세요</div>
+      <div class="draw-sub" id="drawSub">당첨 확인창의 필름을 손가락으로 밀면 벗겨져요</div>
       <div class="dw-dots" id="dwDots" aria-hidden="true"><i></i><i></i><i></i></div>
       <button class="tk-tear" id="tkTear" type="button">뜯기<small>탭·Enter 로도 뜯을 수 있어요</small></button>
       <button class="tk-all" id="tkSkipAll" type="button">한 번에 다 뜯기 <b>SKIP</b></button>
@@ -2775,8 +2877,7 @@ body{
   };
   const fxOf = k => FXR[k] || FXR.J;
 
-  const TK_SEAM = 104;          /* 절취선 x 좌표 (카드 안쪽) */
-  const TK_MAXDX = 213;         /* 조각이 완전히 빠지는 거리 */
+  const TK_MAXDX = 213;         /* 끝까지 뜯는 드래그 거리 */
   let pullTimers = [];
   let tear = null;              /* { list, i, items, lastItem, mode, torn, locked, finished, shown, p } */
 
@@ -2796,20 +2897,23 @@ body{
     }
   }
 
-  /* 종이 찢긴 결 — 뽑기마다 다른 지그재그 절취선 */
-  function seamClip(){
-    const n = 11, pts = ["100% 0%"];
+  /* 필름이 벗겨진 경계 — 뽑기마다 조금씩 다른 종이 뜯긴 결.
+     p = 0(덮여 있음) → 1(다 벗겨짐). 오른쪽부터 왼쪽으로 벗겨진다. */
+  function peelPoly(p, jit){
+    const x = Math.max(0, Math.min(1, 1 - p)) * 100;
+    const n = (jit && jit.length) ? jit.length - 1 : 9;
+    const pts = ["0% 0%"];
     for (let i = 0; i <= n; i++){
-      const edge = (i === 0 || i === n) ? 0 : (Math.random() * 2 - 1) * 9;
-      pts.push((TK_SEAM + edge).toFixed(1) + "px " + (i / n * 100).toFixed(1) + "%");
+      const e = (i === 0 || i === n) ? 0 : (jit ? jit[i] : 0);
+      pts.push((x + e).toFixed(2) + "% " + (i / n * 100).toFixed(2) + "%");
     }
-    pts.push("100% 100%");
+    pts.push("0% 100%");
     return "polygon(" + pts.join(",") + ")";
   }
 
   const PULL_TEXT = {
-    1: { t: "티켓을 쭉- 밀어 뜯어주세요", s: "«밀어서 뜯기» 를 손가락으로 밀면 종이가 갈라져요" },
-    2: { t: "쫙- 갈라지는 중…", s: "조금만 더 밀어주세요!" },
+    1: { t: "티켓 끝을 잡고 쭉— 뜯어주세요", s: "당첨 확인창의 필름을 손가락으로 밀면 벗겨져요" },
+    2: { t: "필름이 벗겨지는 중…", s: "조금만 더 밀어주세요!" },
     3: { t: "찌직! 등급 공개", s: "어떤 상이 나왔을까요?" }
   };
 
@@ -2854,21 +2958,26 @@ body{
     if (!it) return;
     const s = ser(), b = box();
     const card = $("#tkCard"), flap = $("#tkFlap"), ov = $("#drawOv");
+    /* 새 티켓 = 필름이 덮인 상태로 되돌리고, 뜯긴 결을 새로 만든다 */
+    tear.jit = Array.from({ length: 10 }, () => (Math.random() * 2 - 1) * 0.75);
     flap.style.transition = "none";
-    flap.style.transform = "translateX(0) rotate(0deg)";
+    flap.style.transform = "none";
     flap.style.opacity = "1";
-    flap.style.clipPath = seamClip();
-    card.style.setProperty("--tp", "0");
-    card.style.setProperty("--tpo", "0");
+    flap.style.clipPath = peelPoly(0, tear.jit);
+    $("#tkPeel").style.opacity = "0";
     card.style.setProperty("--gc", GC[it.g] || "#f0684b");
     card.classList.remove("torn", "grabbing");
     $("#tkGrade").textContent = GLABEL(it.g);
     $("#tkGrade").classList.remove("pop");
     $("#tkGname").textContent = it.name || "";
     $("#tkGname").classList.remove("pop");
+    const serial = "No." + pad2(b.no) + "-" + String(1000 + (Number(it.id) * 7) % 9000);
     $("#tkSeries").textContent = s.def.short;
-    $("#tkSerial").textContent = "No." + pad2(b.no) + "-" + String(1000 + (Number(it.id) * 7) % 9000);
+    $("#tkSerial").textContent = serial;
+    $("#tkWinSerial").textContent = serial;
+    $("#tkBcNum").textContent = "2026 " + pad2(b.no) + String(1000 + (Number(it.id) * 7) % 9000);
     $("#tkPt").textContent = won(s.def.price) + "P";
+    $("#tkStampPt").textContent = won(s.def.price) + "P";
     $("#tkIdx").textContent = tear.list.length > 1 ? (i + 1) + " / " + tear.list.length : "";
     $("#tkRays").style.background = "";
     $("#tkConfetti").innerHTML = "";
@@ -2883,10 +2992,14 @@ body{
     p = Math.max(0, Math.min(1, p));
     if (!tear) return;
     tear.p = p;
-    const flap = $("#tkFlap"), card = $("#tkCard");
-    flap.style.transform = "translateX(" + (p * TK_MAXDX).toFixed(1) + "px) rotate(" + (p * 3.2).toFixed(2) + "deg)";
-    card.style.setProperty("--tp", p.toFixed(3));
-    card.style.setProperty("--tpo", Math.max(0, Math.min(1, (p - 0.26) / 0.48)).toFixed(3));
+    const flap = $("#tkFlap"), peel = $("#tkPeel"), win = flap.parentElement;
+    flap.style.clipPath = peelPoly(p, tear.jit);
+    const w = win ? win.clientWidth : 280;
+    if (peel){
+      peel.style.opacity = p > 0.015 ? "1" : "0";
+      peel.style.left = ((1 - p) * w - 13).toFixed(1) + "px";
+      peel.style.transform = "skewY(" + (-p * 3.4).toFixed(1) + "deg) scaleY(" + (1 - p * 0.04).toFixed(3) + ")";
+    }
   }
 
   function fireBurst(g){
@@ -2921,7 +3034,6 @@ body{
     ov.style.setProperty("--f1", fx.f1);
     ov.style.setProperty("--f2", fx.f2);
     ov.style.setProperty("--glow", fx.glow);
-    card.style.setProperty("--tpo", "1");
     card.classList.add("torn");
     $("#tkGrade").textContent = GLABEL(it.g);
     $("#tkGname").textContent = it.name || "";
@@ -2961,8 +3073,9 @@ body{
     SND.tearNow(it.g);
     const flap = $("#tkFlap");
     flap.style.transition = "transform .42s cubic-bezier(.2,.65,.3,1), opacity .42s ease-in";
-    flap.style.transform = "translateX(" + (TK_MAXDX + 250) + "px) rotate(11deg)";
+    flap.style.transform = "translate(38px,-16px) rotate(7deg) scale(1.03)";
     flap.style.opacity = "0";
+    $("#tkPeel").style.opacity = "0";
     paintReveal(it);
     setDrawStage(3);
     view.grade = it.g;
@@ -3028,10 +3141,10 @@ body{
 
     function snapBack(){
       if (!tear) return;
-      flap.style.transition = "transform .26s cubic-bezier(.3,1.4,.6,1)";
-      flap.style.transform = "translateX(0) rotate(0deg)";
-      card.style.setProperty("--tp", "0");
-      card.style.setProperty("--tpo", "0");
+      flap.style.transition = "clip-path .3s cubic-bezier(.3,1.4,.6,1), transform .2s ease";
+      flap.style.clipPath = peelPoly(0, tear.jit);
+      flap.style.transform = "none";
+      $("#tkPeel").style.opacity = "0";
       tear.p = 0;
       setDrawStage(1);
       SND.snap();
