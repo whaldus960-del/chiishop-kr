@@ -1611,6 +1611,55 @@ body{
 .wlp-foot span{width:1px;height:9px;background:rgba(59,23,48,.18)}
 .wlp-note{margin:0 16px 12px;font-size:8.4px;font-weight:700;color:#a98a78;text-align:center;line-height:1.4}
 
+/* ---------- 데일리 출석체크 : 7일 스탬프 (100·100·200·200·300·300·1,000P) ---------- */
+.attbar{display:flex;align-items:center;gap:9px;width:calc(100% - 32px);margin:9px auto 0;
+  padding:9px 11px;border-radius:12px;cursor:pointer;text-align:left;
+  background:linear-gradient(180deg,#fffdf7,#fff3e2);border:1.6px solid #e6c9a8;
+  box-shadow:0 2px 0 rgba(150,105,60,.16);-webkit-tap-highlight-color:transparent}
+.attbar:active{transform:translateY(1px)}
+.attbar-ico{font-size:16px;line-height:1}
+.attbar-txt{flex:1;display:flex;flex-direction:column;gap:1px;min-width:0}
+.attbar-txt b{font-size:11.4px;font-weight:900;color:#3b1730;letter-spacing:-.3px}
+.attbar-txt i{font-style:normal;font-size:9.2px;font-weight:800;color:#a4846c}
+.attbar-chip{flex:none;padding:5px 9px;border-radius:999px;background:#f0684b;color:#fffdf7;
+  font-size:9.4px;font-weight:900;letter-spacing:-.2px;box-shadow:0 2px 0 rgba(150,45,20,.28)}
+.attbar.done .attbar-chip{background:#38b394;box-shadow:0 2px 0 rgba(20,110,90,.3)}
+
+.att-lead{margin:0 0 12px;font-size:11px;font-weight:800;color:#4a2b1c;line-height:1.5;text-align:center}
+.att-lead b{color:#e2492c}
+.att-board{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.att-cell{position:relative;padding:5px 1px 4px;border-radius:9px;border:1.4px dashed #e6c9a8;
+  background:#fffdf8;display:flex;flex-direction:column;align-items:center;gap:2px}
+.att-cell .ad{font-size:7.4px;font-weight:900;color:#b09a86}
+.att-cell .ar{font-size:8.4px;font-weight:900;color:#3b1730;letter-spacing:-.4px}
+.att-cell .as{width:19px;height:19px;border-radius:50%;border:1.3px dashed #ddc3ab;
+  display:grid;place-items:center;font-size:9px;font-weight:900;color:#cdb49e;background:#fffdf8}
+.att-cell.done{border-style:solid;border-color:#f0684b;background:#fff1e7}
+.att-cell.done .as{border:1.7px solid #e2492c;color:#e2492c;transform:rotate(-9deg);
+  background:rgba(226,73,44,.07)}
+.att-cell.today{border-color:#38b394;box-shadow:0 0 0 2px rgba(56,179,148,.18)}
+.att-cell.today .as{border-color:#38b394;color:#2f9c81}
+.att-cell.day7{background:linear-gradient(180deg,#fffdf8,#fff3d8)}
+.att-cell.day7 .ar{color:#c2410f;font-size:8.6px}
+.att-total{display:flex;align-items:center;justify-content:space-between;margin:9px 2px 0;
+  padding:6px 10px;border-radius:8px;background:rgba(255,199,120,.16);border:1px solid #f0d6ae;
+  font-size:9.2px;font-weight:900;color:#8a5a3a}
+.att-total b{color:#c2410f;font-size:10.2px}
+.att-msg{min-height:14px;margin:7px 0 0;text-align:center;font-size:10px;font-weight:900;color:#2f9c81}
+.att-note{margin:9px 16px 14px;text-align:center;font-size:8.4px;font-weight:700;color:#a98a78;line-height:1.4}
+#attendSheet .sheet-actions{padding-top:0}
+#attStamp.done{background:linear-gradient(180deg,#5ecdb8,#38b394);box-shadow:0 3px 0 #1f8f74}
+#attStamp.done small{color:#e9fff8}
+
+/* ---------- 실제 상품 사진 아트 (오직 쿠리! 밤만주 컬렉션) ---------- */
+img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 3px 4px rgba(90,50,30,.22))}
+.part img.gimg{width:98%;height:98%;object-fit:contain}
+.stage-ch img.gimg{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(40,20,10,.35))}
+.res-art img.gimg{width:100px;height:100px;object-fit:contain}
+.bitem .thumb img.gimg{width:92%;height:92%;object-fit:contain}
+.sart img.ghero{position:relative;z-index:1;height:90%;width:auto;max-width:92%;object-fit:contain;
+  filter:drop-shadow(0 6px 10px rgba(90,50,20,.28))}
+
 /* @@POKO-V2-CSS-END@@ */
 
 /* ---------- 마감 다듬기 ---------- */
@@ -1640,7 +1689,7 @@ body{
           </button>
         </div>
       </div>
-      <p class="home-tag">꽝 없는 이치방쿠지 · 치이카와 굿즈샵</p>
+      <p class="home-tag">꽝 없는 이치방쿠지 · 치이카와 &amp; 쿠리만주 굿즈샵</p>
       <div class="hh-led" aria-hidden="true"><b id="homeLed"></b></div>
     </header>
 
@@ -1648,6 +1697,12 @@ body{
       <span class="live">공지</span>
       <p>4개 시리즈 동시 오픈! 박스별 잔여 수량·실시간 확률 공개</p>
       <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+
+    <button class="attbar" id="attendBtn" type="button" aria-label="매일 출석체크 열기">
+      <span class="attbar-ico" aria-hidden="true">📅</span>
+      <span class="attbar-txt"><b>매일 출석체크 · 7일째 1,000P</b><i>하루 1회 도장 · 매일 100~300P</i></span>
+      <span class="attbar-chip" id="attChip">오늘 출석</span>
     </button>
 
     <section class="promo">
@@ -1663,7 +1718,7 @@ body{
     </section>
 
     <section class="sec">
-      <div class="sec-head"><h2>치이카와 <b>시리즈</b></h2><span id="homeSeriesCount">4개 시리즈 · 120박스</span></div>
+      <div class="sec-head"><h2>포코쿠지 <b>시리즈</b></h2><span id="homeSeriesCount">4개 시리즈 · 120박스</span></div>
       <div class="sgrid" id="seriesGrid"></div>
     </section>
 
@@ -1975,6 +2030,24 @@ body{
     </div>
   </div>
 
+  <!-- 데일리 출석체크 : 7일 스탬프 -->
+  <div class="overlay" id="attendSheet" role="dialog" aria-modal="true" aria-label="매일 출석체크">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head"><h3>📅 매일 출석체크</h3><button class="x" data-close="attendSheet" aria-label="닫기">×</button></div>
+      <div class="sheet-body">
+        <p class="att-lead">7일 연속 출석하면 <b>1,000P</b> 보너스!<br>하루 한 번, 자정에 새 도장이 열려요.</p>
+        <div class="att-board" id="attBoard" aria-label="7일 출석 스탬프"></div>
+        <div class="att-total"><span>7일 완주 보상</span><b>총 2,200P</b></div>
+        <p class="att-msg" id="attMsg"></p>
+      </div>
+      <div class="sheet-actions">
+        <button class="btn-primary" id="attStamp" type="button">오늘 출석 도장 찍기<small>1일 1회 · 포인트 즉시 적립</small></button>
+      </div>
+      <p class="att-note">출석 기록은 이 기기에 저장됩니다 · 데모에서는 실제 결제·지급이 없습니다.</p>
+    </div>
+  </div>
+
   <!-- 웰컴 이벤트 팝업 : 비로그인 첫 접속 · 첫 유료 뽑기 1+1 -->
   <div class="wlp" id="welcomePopup" role="dialog" aria-modal="true" aria-labelledby="wlpTtl" aria-hidden="true">
     <div class="wlp-card">
@@ -2042,7 +2115,8 @@ body{
   function kindOf(g){
     if (g.k === "last") return "crown";
     const n = g.n || "";
-    if (n.indexOf("인형") >= 0 || n.indexOf("피규어") >= 0) return "plush";
+    if (n.indexOf("인형") >= 0 || n.indexOf("피규어") >= 0 || n.indexOf("마스코트") >= 0) return "plush";
+    if (n.indexOf("코스터") >= 0) return "plate";
     if (n.indexOf("쿠션") >= 0) return "cushion";
     if (n.indexOf("키링") >= 0) return "keyring";
     if (n.indexOf("스탠드") >= 0) return "stand";
@@ -2115,21 +2189,21 @@ body{
       curRem:[1,1,0,0,1,0,1,0,0,0,38]
     },
     {
-      id:"mogumogu", name:"치이카와 모구모구 본점 시리즈", short:"모구모구 본점", price:9900,
-      tag:"본점", hot:false, cur:22, featured:"A", seed:4409,
-      pal:["#ffeec8", "#d99a3d"],
+      id:"kurimanju", name:"오직 쿠리! 밤만주 컬렉션", short:"밤만주 컬렉션", price:9900,
+      tag:"단독", hot:true, cur:22, featured:"A", seed:4409,
+      pal:["#f7e6c8", "#7d4a1e"],
       grades:[
-        { k:"last", n:"본점 한정 푸딩 인형", t:1,  v:45000 },
-        { k:"A",    n:"모구모구 점장 인형",  t:2,  v:45000 },
-        { k:"B",    n:"푸딩 대형 쿠션",      t:2,  v:39600 },
-        { k:"C",    n:"본점 키링 세트",      t:2,  v:32000 },
-        { k:"D",    n:"푸딩 접시",           t:2,  v:22000 },
-        { k:"E",    n:"모구모구 머그",       t:2,  v:19800 },
-        { k:"F",    n:"아크릴 스탠드",       t:2,  v:17600 },
-        { k:"G",    n:"파우치",              t:2,  v:15400 },
-        { k:"H",    n:"스티커 팩",           t:2,  v:11000 },
-        { k:"I",    n:"코스터 세트",         t:2,  v:9900 },
-        { k:"J",    n:"본점 카드팩",         t:111, v:1100 }
+        { k:"last", n:"클리닉 간호사 쿠리만주 마스코트",       t:1,  v:45000, img:"assets/quri-last.png" },
+        { k:"A",    n:"오타루 한정 레트로 쿠리만주 마스코트",  t:2,  v:42000, img:"assets/quri-a.png" },
+        { k:"B",    n:"천사&악마 악마 쿠리만주 마스코트",      t:2,  v:38000, img:"assets/quri-b.png" },
+        { k:"C",    n:"레스토랑 홀 담당 쿠리만주 마스코트",    t:2,  v:35000, img:"assets/quri-c.png" },
+        { k:"D",    n:"파자마 파티 미니 쿠리만주 마스코트",    t:2,  v:33000, img:"assets/quri-d.png" },
+        { k:"E",    n:"쿠리만주 아크릴 스탠드",                t:2,  v:19800 },
+        { k:"F",    n:"쿠리만주 키링",                         t:2,  v:17600 },
+        { k:"G",    n:"쿠리만주 머그",                         t:2,  v:15400 },
+        { k:"H",    n:"쿠리만주 스티커 팩",                    t:2,  v:11000 },
+        { k:"I",    n:"쿠리만주 코스터 세트",                  t:2,  v:9900 },
+        { k:"J",    n:"쿠리만주 카드팩",                       t:111, v:1100 }
       ],
       curRem:[1,0,1,0,1,0,2,0,1,0,72]
     }
@@ -2429,7 +2503,32 @@ body{
     </svg>`;
   }
 
-  const artOfItem = it => art(it.kind || kindOf(it), it.sid);
+  /* 실제 상품 사진이 있는 등급은 SVG 대신 사진을 쓴다 (오직 쿠리! 밤만주 컬렉션 상위상) */
+  const PRIZE_IMG = {
+    "kurimanju:last": "assets/quri-last.png",
+    "kurimanju:A": "assets/quri-a.png",
+    "kurimanju:B": "assets/quri-b.png",
+    "kurimanju:C": "assets/quri-c.png",
+    "kurimanju:D": "assets/quri-d.png"
+  };
+  const imgOf = (sid, k) => (k ? (PRIZE_IMG[sid + ":" + k] || "") : "");
+  function artHTML(o, sid, ch){
+    const k = o ? (o.k || o.g || "") : "";
+    const id = sid || (o && o.sid) || "";
+    const src = imgOf(id, k);
+    if (src){
+      const nm = (o && (o.n || o.name)) || "";
+      return '<img class="gimg" src="' + src + '" alt="' + nm.replace(/"/g, "") + '" loading="lazy" decoding="async">';
+    }
+    return art(kindOf(o), id, ch);
+  }
+  /* 시리즈 카드 아트 — 쿠리만주는 실제 사진을 대표컷으로 */
+  function seriesArt(s){
+    const hero = s.id === "kurimanju" ? "assets/quri-a.png" : "";
+    if (hero) return '<img class="ghero" src="' + hero + '" alt="' + s.def.name + '" loading="lazy" decoding="async">';
+    return trioArt(s.id);
+  }
+  const artOfItem = it => artHTML(it, it.sid, it.ch);
 
   /* ============================================================
      render — home
@@ -2462,7 +2561,7 @@ body{
         <span class="sart" style="--a:${d.pal[0]};--b:${d.pal[1]}">
           <span class="sflag ${d.hot ? "hot" : ""}">${d.tag}</span>
           <span class="shine" style="--sd:${(i * 0.9).toFixed(1)}s"></span>
-          ${trioArt(s.id)}
+          ${seriesArt(s)}
           <span class="sneon">★ ${GLABEL(d.featured)}</span>
         </span>
         <span class="sinfo">
@@ -2488,7 +2587,7 @@ body{
   function renderStage(){
     const b = box(), d = ser().def;
     const g = currentGrade();
-    $("#dArt").innerHTML = art(kindOf(g), ser().id, charOf(g.k));
+    $("#dArt").innerHTML = artHTML(g, ser().id, charOf(g.k));
     const lab = $("#dGrade");
     lab.textContent = GLABEL(g.k);
     lab.style.color = GC[g.k];
@@ -2535,9 +2634,9 @@ body{
       <div class="pcard ${out ? "out" : ""}">
         <div class="pclip">
           <span class="pct">${isLast ? `<em>증정품</em>` : `확률 ${pct.toFixed(2)}%`}</span>
-          <span class="part">${art(kindOf(g), s.id, charOf(g.k))}</span>
+          <span class="part">${artHTML(g, s.id, charOf(g.k))}</span>
           <span class="stock ${out ? "zero" : ""}">${g.r}/${g.t}</span>
-          <span class="pname">치이카와 | ${g.n}</span>
+          <span class="pname">${s.id === "kurimanju" ? "쿠리만주" : "치이카와"} | ${g.n}</span>
           ${out ? `<span class="stamp">종료</span>` : ""}
         </div>
         <span class="gbadge" style="color:${GC[g.k]}">${GLABEL(g.k)}</span>
@@ -3332,6 +3431,114 @@ body{
   }
   wlpInit();
 
+  /* ============================================================
+     데일리 출석체크 — 7일 스탬프 (100·100·200·200·300·300·1,000P)
+     ============================================================ */
+  const ATT_KEY = "pokoAttend";        /* { last:"YYYY-MM-DD", streak:0~7, cycles:n } */
+  const ATT_SUM = "pokoAttendTotal";   /* 이 기기에 적립된 출석 포인트 합 */
+  const ATT_REW = [100, 100, 200, 200, 300, 300, 1000];
+
+  function attD(offset){
+    const d = new Date();
+    if (offset) d.setDate(d.getDate() + offset);
+    const p = n => (n < 10 ? "0" : "") + n;
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+  }
+  function attLoad(){
+    try{
+      const o = JSON.parse(localStorage.getItem(ATT_KEY) || "{}");
+      let s = Number(o.streak) || 0;
+      if (s < 0) s = 0;
+      if (s > 7) s = 7;
+      const last = o.last || "";
+      /* 하루 이상 건너뛰었으면 연속이 끊긴다 */
+      if (last && last !== attD(0) && last !== attD(-1)) s = 0;
+      return { last: last, streak: s, cycles: Number(o.cycles) || 0 };
+    }catch(e){ return { last: "", streak: 0, cycles: 0 }; }
+  }
+  function attSave(o){ try{ localStorage.setItem(ATT_KEY, JSON.stringify(o)); }catch(e){} }
+  function attSavedPts(){ try{ return Number(localStorage.getItem(ATT_SUM) || 0) || 0; }catch(e){ return 0; } }
+  /* 데모 빌드에는 LIVE 상수가 없으므로 백엔드 존재 여부로 직접 판정한다 */
+  const ATT_LIVE = (() => {
+    try{ return !!(window.CHII_BACKEND && window.CHII_BACKEND.enabled); }catch(e){ return false; }
+  })();
+  function attNeedsLogin(){
+    try{ return !!(ATT_LIVE && window.CHII_BACKEND && !CHII_BACKEND.currentUser()); }catch(e){ return false; }
+  }
+
+  function attRender(){
+    const box = $("#attBoard");
+    if (!box) return;
+    const st = attLoad(), today = attD(0), doneToday = st.last === today, cur = st.streak;
+    box.innerHTML = "";
+    ATT_REW.forEach((r, i) => {
+      const c = document.createElement("div");
+      c.className = "att-cell" + (i === 6 ? " day7" : "");
+      if (i < cur) c.classList.add("done");
+      if (!doneToday && i === cur) c.classList.add("today");
+      c.innerHTML = '<span class="ad">' + (i + 1) + '일</span>' +
+                    '<span class="as">' + (i < cur ? "✓" : "") + '</span>' +
+                    '<span class="ar">' + won(r) + 'P</span>';
+      box.appendChild(c);
+    });
+    const btn = $("#attStamp"), msg = $("#attMsg");
+    if (btn){
+      if (doneToday){
+        /* 눌러도 적립되지 않고 '오늘 출석 완료!' 안내만 — 중복 적립 방지 */
+        btn.disabled = false;
+        btn.classList.add("done");
+        btn.innerHTML = "오늘 출석 완료!<small>내일 0시에 새 도장이 열려요</small>";
+      } else {
+        btn.disabled = false;
+        btn.classList.remove("done");
+        const next = ATT_REW[cur] || ATT_REW[0];
+        btn.innerHTML = "오늘 출석 도장 찍기<small>" + won(next) + "P 즉시 적립 · 1일 1회</small>";
+      }
+    }
+    if (msg) msg.textContent = doneToday ? ("오늘 출석 완료! · " + cur + "일째 연속") : (cur ? (cur + "일째 연속 출석 중") : "오늘부터 7일 연속 도전!");
+    const chip = $("#attChip"), bar = $("#attendBtn");
+    if (chip && bar){
+      chip.textContent = doneToday ? "출석 완료" : "오늘 출석";
+      bar.classList.toggle("done", doneToday);
+    }
+  }
+
+  function attClaim(){
+    const st = attLoad(), today = attD(0);
+    if (st.last === today){ toast("오늘 출석 완료!"); attRender(); return; }
+    if (attNeedsLogin()){
+      openOverlay("authSheet");
+      toast("로그인하면 출석 포인트가 계정에 쌓여요");
+      return;
+    }
+    let idx = (st.last === attD(-1)) ? st.streak : 0;
+    if (idx >= 7) idx = 0;
+    const r = ATT_REW[idx];
+    attSave({ last: today, streak: idx + 1, cycles: st.cycles + (idx === 6 ? 1 : 0) });
+    state.points += r;
+    try{ localStorage.setItem(ATT_SUM, String(attSavedPts() + r)); }catch(e){}
+    renderHeader();
+    attRender();
+    if (idx === 6) toast("🏆 7일 연속 완주! " + won(r) + "P 보너스 지급");
+    else toast("🎉 " + (idx + 1) + "일차 출석! " + won(r) + "P 적립");
+  }
+
+  function attInit(){
+    const bar = $("#attendBtn");
+    if (!bar || bar.dataset.wired === "1") return;
+    bar.dataset.wired = "1";
+    /* 이 기기에 적립된 출석 포인트는 새로고침 뒤에도 유지 (데모) */
+    if (!ATT_LIVE){
+      const saved = attSavedPts();
+      if (saved) state.points += saved;
+    }
+    bar.addEventListener("click", () => { attRender(); openOverlay("attendSheet"); });
+    const btn = $("#attStamp");
+    if (btn) btn.addEventListener("click", attClaim);
+    attRender();
+  }
+  attInit();
+
   /* @@POKO-V2-JS-END@@ */
 
   /* 복권 결과를 먼저 확정하고(연출 중 화면 갱신은 보류) 연출 후 모달을 연다 */
@@ -3418,7 +3625,7 @@ body{
     $("#resHero").hidden = false;
     $("#resList").hidden = single;
 
-    $("#resArt").innerHTML = art(best.kind || kindOf(best), s.id, best.ch || charOf(best.g));
+    $("#resArt").innerHTML = artHTML(best, s.id, best.ch || charOf(best.g));
     const fx = fxOf(best.g);
     $("#resArt").style.setProperty("--rg1", fx.glow);
     $("#resArt").style.setProperty("--rg2", fx.f1);
@@ -3493,7 +3700,7 @@ body{
         const sel = shipSelection.has(it.id);
         return `<button class="bitem ${sel ? "sel" : ""} ${it.shipped ? "done" : ""}" data-item="${it.id}">
           <span class="chk ${sel ? "on" : ""}" style="${it.shipped ? "opacity:0" : ""}"></span>
-          <span class="thumb">${art(it.kind || kindOf(it), it.sid, it.ch)}</span>
+          <span class="thumb">${artHTML(it, it.sid, it.ch)}</span>
           <span class="body">
             <span class="top"><span class="btag" style="color:${GC[it.g]}">${GLABEL(it.g)}</span><span class="bn">${it.name}</span></span>
             <span class="bs">${s.def.short} · ${it.boxNo}번 박스 · ${it.shipped ? "배송 신청 완료" : hhmm(it.at)}</span>
