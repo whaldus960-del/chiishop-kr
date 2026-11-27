@@ -1695,6 +1695,118 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
 }
 
 /* @@POKO-SIGNATURE-END@@ */
+
+/* ============================================================
+   v6 — 상품 INFO 카드 · 주문 확인 영수증 · 진열장 탭/액션
+   ============================================================ */
+/* ── 상품 INFO (행거형 카드) ── */
+#prizeInfo .pinfo{position:relative;width:min(92vw,386px);max-height:86vh;overflow:visible;
+  margin-top:26px;border-radius:20px;padding:30px 14px 14px;color:#33252b;
+  background:linear-gradient(180deg,#fffdf7 0%,#fdf2e2 58%,#f8e6cd 100%);
+  box-shadow:0 26px 64px rgba(20,6,18,.6),0 0 0 1px rgba(120,80,50,.16),inset 0 1px 0 #fff}
+.pi-hole{position:absolute;top:-13px;left:50%;transform:translateX(-50%);width:26px;height:26px;border-radius:50%;
+  background:#3b1730;box-shadow:0 0 0 7px #fffdf7,0 0 0 8.5px rgba(201,154,99,.75),inset 0 3px 5px rgba(0,0,0,.6)}
+.pi-hook{position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:34px;height:22px;
+  border:3.5px solid #c99a63;border-bottom:none;border-radius:22px 22px 0 0;opacity:.9}
+.pi-ribbon{position:absolute;left:0;right:0;top:0;height:44px;overflow:hidden;border-radius:20px 20px 0 0;pointer-events:none}
+.pi-ribbon::before{content:"";position:absolute;left:-14%;right:-14%;top:-16px;height:44px;transform:rotate(-3.2deg);
+  background:repeating-linear-gradient(114deg,#f0684b 0 16px,#ffc24b 16px 32px,#38b394 32px 48px)}
+.pi-ribbon::after{content:"POKO KUJI · PRIZE INFO";position:absolute;left:0;right:0;top:11px;text-align:center;
+  font-size:8.5px;font-weight:900;letter-spacing:2.6px;color:#fffdf7;text-shadow:0 1px 2px rgba(90,30,10,.5)}
+.pi-x{position:absolute;right:9px;top:52px;z-index:5;width:30px;height:30px;border-radius:50%;border:none;
+  background:rgba(59,23,48,.08);color:#6b4a5c;font-size:17px;font-weight:900;cursor:pointer}
+.pi-top{display:flex;align-items:center;justify-content:space-between;padding:0 4px 6px}
+.pi-badge{display:inline-flex;align-items:center;gap:3px;padding:3px 10px;border-radius:999px;
+  border:1.6px solid currentColor;font-size:11px;font-weight:900;letter-spacing:.4px;background:#fffdf7}
+.pi-count{font-family:ui-monospace,Menlo,monospace;font-size:10px;font-weight:900;color:#a9886a;letter-spacing:.6px}
+.pi-art{position:relative;height:214px;border-radius:14px;overflow:hidden;display:grid;place-items:center;
+  background:radial-gradient(circle at 50% 32%,#fffdf7,#f6e7cf 70%,#efd9b8 100%);
+  box-shadow:inset 0 0 0 1.5px rgba(184,132,79,.35),inset 0 12px 24px rgba(180,130,80,.1)}
+.pi-art img{width:100% !important;height:100% !important;max-height:100%;box-sizing:border-box;
+  object-fit:contain !important;padding:6px;display:block}
+.pi-art svg{width:82%;height:82%}
+.pi-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;border:none;cursor:pointer;z-index:4;
+  background:rgba(255,253,247,.94);box-shadow:0 5px 14px rgba(60,20,40,.28),0 0 0 1px rgba(184,132,79,.4)}
+.pi-nav svg{width:19px;height:19px;fill:none;stroke:#5a3a4a;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.pi-nav.prev{left:10px}.pi-nav.next{right:10px}
+.pi-nav:disabled{opacity:.32;cursor:default}
+.pi-body{padding:12px 4px 0}
+.pi-body h3{margin:0 0 10px;font-size:14.5px;font-weight:900;letter-spacing:-.4px;line-height:1.32;color:#3b1730}
+.pi-info{border-radius:13px;border:1.6px dashed rgba(184,132,79,.7);background:rgba(255,253,247,.75);padding:9px 11px 11px}
+.pi-ihead{text-align:center;font-size:9.5px;font-weight:900;letter-spacing:3.4px;color:#c1823f;margin-bottom:6px}
+.pi-info dl{margin:0;display:grid;gap:5px}
+.pi-info dl>div{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+  padding-bottom:5px;border-bottom:1px dotted rgba(184,132,79,.35)}
+.pi-info dl>div:last-child{border-bottom:none;padding-bottom:0}
+.pi-info dt{font-size:10px;font-weight:800;color:#a9886a;letter-spacing:.2px}
+.pi-info dd{margin:0;font-size:11px;font-weight:900;color:#4b2b3f;text-align:right}
+.pi-info dd.p{font-family:ui-monospace,Menlo,monospace;color:#e0357f}
+
+/* ── 주문 확인 (영수증) ── */
+#orderSheet .receipt{background:
+  linear-gradient(180deg,#fffdf7 0 44px,#fffaf0 44px 100%);
+  border-radius:18px 18px 0 0}
+#orderSheet .receipt::before{content:"";position:absolute;left:0;right:0;top:0;height:44px;border-radius:18px 18px 0 0;
+  background:repeating-linear-gradient(114deg,rgba(240,104,75,.14) 0 14px,rgba(255,194,75,.16) 14px 28px,rgba(56,179,148,.14) 28px 42px)}
+.rc-head{display:flex;align-items:center;gap:10px;padding:2px 0 12px;border-bottom:1.6px dashed rgba(184,132,79,.55)}
+.rc-thumb{flex:none;width:54px;height:54px;border-radius:12px;overflow:hidden;display:grid;place-items:center;
+  background:radial-gradient(circle at 50% 35%,#fffdf7,#f2e2c9);box-shadow:inset 0 0 0 1.4px rgba(184,132,79,.4)}
+.rc-thumb img{width:100%;height:100%;object-fit:contain;padding:3px}
+.rc-thumb svg{width:92%;height:92%}
+.rc-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.rc-meta b{font-size:13px;font-weight:900;color:#3b1730;letter-spacing:-.3px}
+.rc-meta em{font-style:normal;font-size:10px;font-weight:800;color:#a9886a}
+.rc-qty{flex:none;font-family:ui-monospace,Menlo,monospace;font-size:15px;font-weight:900;color:#e0357f}
+.rc-rows{display:grid;gap:7px;padding:12px 0}
+.rc-rows>div{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11.5px;color:#6b4a5c}
+.rc-rows b{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#3b1730}
+.rc-use b{display:flex;align-items:center;gap:7px}
+.switch{width:44px;height:25px;border-radius:999px;border:1.6px solid rgba(184,132,79,.55);background:#e9dcc8;
+  padding:0;cursor:pointer;position:relative;transition:background .18s}
+.switch i{position:absolute;left:2px;top:1.5px;width:17px;height:17px;border-radius:50%;background:#fffdf7;
+  box-shadow:0 2px 5px rgba(90,60,30,.3);transition:transform .18s}
+.switch.on{background:#38b394;border-color:#2b8f77}
+.switch.on i{transform:translateX(18px)}
+.rc-total{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;border-radius:12px;
+  background:#3b1730;color:#fff7ec}
+.rc-total span{font-size:11px;font-weight:800;letter-spacing:.4px;color:#e8c9d8}
+.rc-total b{font-family:ui-monospace,Menlo,monospace;font-size:17px;font-weight:900;color:#ffd75e}
+.rc-total b.lack{color:#ff8f6b}
+.rc-lack{margin:7px 2px 0;font-size:9.6px;font-weight:800;color:#a9886a;letter-spacing:-.1px}
+.rc-agree{display:flex;align-items:center;gap:8px;margin-top:11px;padding:10px 11px;border-radius:11px;
+  background:rgba(56,179,148,.09);box-shadow:inset 0 0 0 1.3px rgba(56,179,148,.4);
+  font-size:10.5px;font-weight:800;color:#2f6b58;cursor:pointer}
+.rc-agree input{width:16px;height:16px;accent-color:#38b394;margin:0}
+#ordConfirm:disabled{opacity:.5}
+
+/* ── 진열장 탭 · 선택 · 액션 ── */
+.shelftabs{display:flex;align-items:center;gap:6px;padding:0 16px 10px;flex-wrap:wrap}
+.shelftabs button{padding:7px 12px;border-radius:999px;border:1.5px solid rgba(59,23,48,.16);background:#fffdf7;
+  font-size:11px;font-weight:900;color:#7b6473;letter-spacing:-.2px;cursor:pointer}
+.shelftabs button b{margin-left:3px;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#b09aa6}
+.shelftabs button.on{background:#3b1730;color:#fff7ec;border-color:#3b1730}
+.shelftabs button.on b{color:#ffd75e}
+.shelftabs .selall{margin-left:auto;background:transparent;border-color:rgba(240,104,75,.5);color:#c2410f}
+.shelftabs .selall.on{background:#f0684b;border-color:#f0684b;color:#fff}
+.bitem{position:relative}
+.bitem .bchk{position:absolute;right:8px;top:8px;width:19px;height:19px;border-radius:6px;display:grid;place-items:center;
+  background:#fffdf7;box-shadow:inset 0 0 0 1.5px rgba(59,23,48,.22);font-size:11px;font-weight:900;color:#fff}
+.bitem .bchk.on{background:#38b394;box-shadow:inset 0 0 0 1.5px #2b8f77}
+.bitem .bqty{position:absolute;right:31px;top:9px;padding:1.5px 6px;border-radius:999px;background:rgba(59,23,48,.08);
+  font-family:ui-monospace,Menlo,monospace;font-size:8.6px;font-weight:900;color:#7b6473}
+.shipbar .acts{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:7px}
+.shipbar .act{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+  padding:10px 6px;border-radius:13px;border:1.6px solid rgba(59,23,48,.16);background:#fffdf7;
+  font-size:12px;font-weight:900;color:#3b1730;cursor:pointer}
+.shipbar .act b{font-size:12.5px;font-weight:900;letter-spacing:-.2px}
+.shipbar .act small{font-size:8.4px;font-weight:800;color:#a9886a;letter-spacing:-.1px}
+.shipbar .act:disabled{opacity:.45}
+.shipbar .act.ship{background:linear-gradient(180deg,#f0684b,#d94f34);border-color:#b8402a;color:#fff9f0;
+  box-shadow:0 4px 0 rgba(140,45,20,.4)}
+.shipbar .act.ship small{color:#ffe2d4}
+.shipbar .act.ship:disabled{background:#e6dfd5;border-color:#cfc4b8;box-shadow:none;color:#9a8f97}
+.shipbar .act.ship:disabled small{color:#a99ea4}
 </style>
 </head>
 <body>
@@ -1865,10 +1977,20 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
       <span id="selInfo">0점 선택</span>
       <button id="selAll">전체 선택</button>
     </div>
+    <div class="shelftabs" id="shelfTabs" role="tablist">
+      <button class="on" data-stab="all" role="tab" aria-selected="true">전체 <b id="stAll">0</b></button>
+      <button data-stab="stock" role="tab" aria-selected="false">재고 상품 <b id="stStock">0</b></button>
+      <button data-stab="stored" role="tab" aria-selected="false">보관함 <b id="stStored">0</b></button>
+      <button class="selall" id="shelfSelAll" aria-pressed="false">전체 선택</button>
+    </div>
     <div id="boxArea"></div>
     <div id="shipArea"></div>
     <div class="shipbar" id="shipBar" hidden>
-      <button id="shipBtn" disabled>묶음 배송 신청<small id="shipBtnSub">상품을 선택해 주세요</small></button>
+      <div class="acts">
+        <button class="act" id="actExchange" disabled><b>교환하기</b><small>포인트로 교환</small></button>
+        <button class="act ship" id="shipBtn" disabled><b>출고하기</b><small id="shipBtnSub">상품을 선택해 주세요</small></button>
+        <button class="act" id="actStore" disabled><b>저장하기</b><small>보관함에 담기</small></button>
+      </div>
     </div>
   </main>
 
@@ -1968,6 +2090,65 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
       </div>
       <div class="sheet-actions">
         <button class="btn-primary" id="chargeBtn">+120,000P 충전<small>샘플 포인트 · 데모 결제</small></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- v6: 상품 INFO (행거형 카드) -->
+  <div class="overlay" id="prizeInfo" role="dialog" aria-modal="true" aria-label="상품 정보">
+    <div class="pinfo" id="piCard">
+      <span class="pi-hook" aria-hidden="true"></span>
+      <span class="pi-hole" aria-hidden="true"></span>
+      <div class="pi-ribbon" aria-hidden="true"></div>
+      <button class="pi-x" data-close="prizeInfo" aria-label="닫기">×</button>
+      <div class="pi-top">
+        <span class="pi-badge" id="piGrade">A상</span>
+        <span class="pi-count" id="piCount">1 / 12</span>
+      </div>
+      <div class="pi-art" id="piArt"></div>
+      <button class="pi-nav prev" id="piPrev" aria-label="이전 상품"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="pi-nav next" id="piNext" aria-label="다음 상품"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="pi-body">
+        <h3 id="piName">상품명</h3>
+        <div class="pi-info">
+          <div class="pi-ihead">✦ INFO ✦</div>
+          <dl>
+            <div><dt>브랜드</dt><dd id="piBrand">치이카와</dd></div>
+            <div><dt>판매가</dt><dd class="p" id="piPrice">P 0</dd></div>
+            <div><dt>구성</dt><dd id="piCompose">1개</dd></div>
+            <div><dt>배송</dt><dd id="piShip">해외 배송 (7~14일)</dd></div>
+            <div><dt>이 박스 잔여</dt><dd id="piStock">-</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- v6: 주문 확인 (영수증 시트) -->
+  <div class="overlay" id="orderSheet" role="dialog" aria-modal="true" aria-label="주문 확인">
+    <div class="sheet receipt">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head"><h3>주문 확인</h3><button class="x" data-close="orderSheet" aria-label="닫기">×</button></div>
+      <div class="sheet-body">
+        <div class="rc-head">
+          <span class="rc-thumb" id="ordThumb"></span>
+          <span class="rc-meta"><b id="ordSeries">시리즈</b><em id="ordPrice">1회 P 0</em></span>
+          <span class="rc-qty" id="ordQty">×1</span>
+        </div>
+        <div class="rc-rows">
+          <div><span>구매 수량</span><b id="ordQtyTxt">1회</b></div>
+          <div><span>보유 포인트</span><b id="ordHeld">0P</b></div>
+          <div class="rc-use"><span>보유 포인트 사용</span>
+            <b><button class="switch on" id="ordUse" type="button" role="switch" aria-checked="true"><i></i></button></b>
+          </div>
+          <div><span>사용 포인트</span><b id="ordUseVal">-0P</b></div>
+        </div>
+        <div class="rc-total"><span>최종 차감</span><b id="ordTotal">0P</b></div>
+        <p class="rc-lack" id="ordLack"></p>
+        <label class="rc-agree"><input type="checkbox" id="ordAgree" checked><span>이용약관 및 개인정보 처리방침 동의</span></label>
+      </div>
+      <div class="sheet-actions">
+        <button class="btn-primary" id="ordConfirm">확인하기<small>포인트가 차감되고 티켓이 열립니다</small></button>
       </div>
     </div>
   </div>
@@ -2128,12 +2309,13 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   }
 
   /* ============================================================
-     data — 4 series × 30 boxes × (last + A~J)
+     data — 4 series × 30 boxes × (last + A~J / 밤만주는 A~K)
      ============================================================ */
   const GC = { last:"#9f87f0", A:"#ffd42a", B:"#ff5fa2", C:"#46a8f7", D:"#43d17a",
-               E:"#2fc39b", F:"#43d17a", G:"#4cc36a", H:"#43d17a", I:"#39c78f", J:"#9be15d" };
+               E:"#2fc39b", F:"#43d17a", G:"#4cc36a", H:"#43d17a", I:"#39c78f", J:"#9be15d",
+               K:"#c39bf0" };
   const KIND = { last:"crown", A:"plush", B:"cushion", C:"keyring", D:"stand",
-                 E:"mug", F:"pouch", G:"sticker", H:"towel", I:"file", J:"pack" };
+                 E:"mug", F:"pouch", G:"sticker", H:"towel", I:"file", J:"pack", K:"sticker" };
   const GLABEL = k => k === "last" ? "last상" : k + "상";
 
   /* 상품명으로 일러스트 종류 결정 (등급 글자가 아니라 실제 상품 기준) */
@@ -2218,19 +2400,20 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
       tag:"단독", hot:true, cur:22, featured:"A", seed:4409,
       pal:["#f7e6c8", "#7d4a1e"],
       grades:[
-        { k:"last", n:"클리닉 간호사 쿠리만주 마스코트",       t:1,  v:45000, img:"assets/quri-last.png" },
-        { k:"A",    n:"오타루 한정 레트로 쿠리만주 마스코트",  t:2,  v:42000, img:"assets/quri-a.png" },
-        { k:"B",    n:"천사&악마 악마 쿠리만주 마스코트",      t:2,  v:38000, img:"assets/quri-b.png" },
-        { k:"C",    n:"레스토랑 홀 담당 쿠리만주 마스코트",    t:2,  v:35000, img:"assets/quri-c.png" },
-        { k:"D",    n:"파자마 파티 미니 쿠리만주 마스코트",    t:2,  v:33000, img:"assets/quri-d.png" },
-        { k:"E",    n:"쿠리만주 아크릴 스탠드",                t:2,  v:19800 },
-        { k:"F",    n:"쿠리만주 키링",                         t:2,  v:17600 },
-        { k:"G",    n:"쿠리만주 머그",                         t:2,  v:15400 },
-        { k:"H",    n:"쿠리만주 스티커 팩",                    t:2,  v:11000 },
-        { k:"I",    n:"쿠리만주 코스터 세트",                  t:2,  v:9900 },
-        { k:"J",    n:"쿠리만주 카드팩",                       t:111, v:1100 }
+        { k:"last", n:"돈키호테 레오파드 파자마 마스코트",      t:1,  v:145000, img:"assets/quri-last.png" },
+        { k:"A",    n:"초 매지컬 파워업 마스코트 키링",         t:1,  v:47000,  img:"assets/quri-a.png" },
+        { k:"B",    n:"클리닉 간호사 쿠리만주 마스코트",        t:1,  v:45000,  img:"assets/quri-b.png" },
+        { k:"C",    n:"오타루 한정 레트로 쿠리만주 마스코트",   t:1,  v:42000,  img:"assets/quri-c.png" },
+        { k:"D",    n:"천사&악마 악마 쿠리만주 마스코트",       t:1,  v:38000,  img:"assets/quri-d.png" },
+        { k:"E",    n:"ANA 마스코트 키링 쿠리만주",             t:1,  v:37000,  img:"assets/quri-e.png" },
+        { k:"F",    n:"산리오 한교동 인형 걸이 쿠리만주",       t:1,  v:36000,  img:"assets/quri-f.png" },
+        { k:"G",    n:"레스토랑 홀 담당 쿠리만주 마스코트",     t:1,  v:35000,  img:"assets/quri-g.png" },
+        { k:"H",    n:"파자마 파티 미니 쿠리만주 마스코트",     t:1,  v:33000,  img:"assets/quri-h.png" },
+        { k:"I",    n:"미니소 릴렉스드 블루 쿠리만주",          t:2,  v:31000,  img:"assets/quri-i.png" },
+        { k:"J",    n:"포켓 도시락 마스코트 쿠리만주",          t:4,  v:30000,  img:"assets/quri-j.png" },
+        { k:"K",    n:"썸머 말랑키링 (랜덤, 7종)",             t:115, v:2500,  img:"assets/quri-k.png" }
       ],
-      curRem:[1,0,1,0,1,0,2,0,1,0,72]
+      curRem:[1,0,1,0,1,0,1,0,1,0,1,72]
     }
   ];
 
@@ -2270,18 +2453,27 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
           g.r = Math.max(0, Math.min(g.t, keep));
           used += g.r;
         }
-        const jg = grades[10];
-        jg.r = Math.max(0, Math.min(jg.t, remainTarget - used));
-        if (jg.r === 0 && used === 0){
+        /* 하단 소모성 상품(카드팩·스티커 세트)은 남은 장수를 수량 비율로 나눠 담는다 */
+        const bottoms = grades.slice(10);
+        let left = Math.max(0, remainTarget - used);
+        const shareSum = bottoms.reduce((a, g) => a + g.t, 0) || 1;
+        bottoms.forEach((g, i) => {
+          const take = i === bottoms.length - 1
+            ? left
+            : Math.min(g.t, Math.max(0, Math.round(left * g.t / shareSum)));
+          g.r = Math.max(0, Math.min(g.t, take));
+          left -= g.r;
+        });
+        if (used === 0 && bottoms.every(g => g.r === 0)){
           grades[0].r = 0;                  // 완판된 박스는 라스트상도 없음
         }
         const avail = grades.slice(1, 10).filter(g => g.r > 0);
-        const pool = avail.length ? avail : [jg];
+        const pool = avail.length ? avail : bottoms;
         featured = pool[Math.floor(rnd() * pool.length)].k;
       }
 
       if (no !== 1 && no !== def.cur && no !== 30 && grades[0].r === 0) grades[0].r = 0;
-      boxes.push({ no, grades, featured: featured || "J", drawn: 0, logs: null });
+      boxes.push({ no, grades, featured: featured || grades[grades.length - 1].k, drawn: 0, logs: null });
     }
     return boxes;
   }
@@ -2534,7 +2726,14 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     "kurimanju:A": "assets/quri-a.png",
     "kurimanju:B": "assets/quri-b.png",
     "kurimanju:C": "assets/quri-c.png",
-    "kurimanju:D": "assets/quri-d.png"
+    "kurimanju:D": "assets/quri-d.png",
+    "kurimanju:E": "assets/quri-e.png",
+    "kurimanju:F": "assets/quri-f.png",
+    "kurimanju:G": "assets/quri-g.png",
+    "kurimanju:H": "assets/quri-h.png",
+    "kurimanju:I": "assets/quri-i.png",
+    "kurimanju:J": "assets/quri-j.png",
+    "kurimanju:K": "assets/quri-k.png"
   };
   const imgOf = (sid, k) => (k ? (PRIZE_IMG[sid + ":" + k] || "") : "");
   function artHTML(o, sid, ch){
@@ -3067,7 +3266,8 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     G:{ f1:"#f9ecf6", f2:"#c377a8", glow:"#c377a8" },
     H:{ f1:"#fff6ee", f2:"#ffb899", glow:"#ffb899" },
     I:{ f1:"#fff6ee", f2:"#ffb899", glow:"#ffb899" },
-    J:{ f1:"#fff6ee", f2:"#ffb899", glow:"#ffb899" }
+    J:{ f1:"#fff6ee", f2:"#ffb899", glow:"#ffb899" },
+    K:{ f1:"#f6ecff", f2:"#c39bf0", glow:"#c39bf0" }
   };
   const fxOf = k => FXR[k] || FXR.J;
 
@@ -3804,6 +4004,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     const btn = $("#shipBtn");
     btn.disabled = !canShip;
     $("#shipBtnSub").textContent = canShip ? shipSelection.size + "점 묶음 배송" : "상품을 선택해 주세요";
+    if (typeof shelfDecorate === "function") shelfDecorate();
     renderHeader();
   }
 
@@ -4106,6 +4307,243 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     }
   });
   bindTearDrag();
+
+
+  /* ============================================================
+     v6 — 상품 INFO 카드 · 주문 확인 시트 · 진열장 탭/선택 액션
+     ============================================================ */
+  const PINFO_BRAND = { kurimanju: "쿠리만주 × 치이카와", beach: "치이카와", kyoto: "치이카와", sweets: "치이카와" };
+  const pinfo = { i: 0 };
+  const piCells = () => $$("#dGoods .cell[data-g]");
+
+  function piPaint(){
+    const cells = piCells();
+    if (!cells.length) return;
+    pinfo.i = Math.max(0, Math.min(cells.length - 1, pinfo.i));
+    const k = cells[pinfo.i].dataset.g;
+    const s = ser(), d = s.def;
+    const g = d.grades.find(x => x.k === k) || { k, n: "" };
+    const bg = box().grades.find(x => x.k === k) || {};
+    const low = k === "J" || k === "K";
+    const badge = $("#piGrade");
+    badge.textContent = GLABEL(k);
+    badge.style.color = GC[k] || "#f0684b";
+    $("#piCount").textContent = (pinfo.i + 1) + " / " + cells.length;
+    $("#piArt").innerHTML = artHTML(g, s.id, charOf(k));
+    $("#piName").textContent = g.n || "";
+    $("#piBrand").textContent = PINFO_BRAND[s.id] || "POKO KUJI";
+    $("#piPrice").textContent = "P " + won(g.v || 0);
+    $("#piCompose").textContent = k === "last" ? "1개 · 라스트 원 오프 증정" : "1개" + (low ? " · 미개봉" : " · 정품 박스");
+    $("#piShip").textContent = low ? "국내 배송 (2~3일)" : "해외 배송 (7~14일)";
+    $("#piStock").textContent = "잔여 " + (bg.r || 0) + " / " + (bg.t || 0);
+    $("#piPrev").disabled = pinfo.i === 0;
+    $("#piNext").disabled = pinfo.i === cells.length - 1;
+  }
+
+  function piOpen(cell){
+    const cells = piCells();
+    pinfo.i = Math.max(0, cells.indexOf(cell));
+    piPaint();
+    openOverlay("prizeInfo");
+  }
+
+  document.addEventListener("click", e => {
+    const cell = e.target.closest("#dGoods .cell[data-g]");
+    if (!cell) return;
+    piOpen(cell);
+  }, true);
+
+  if ($("#piPrev")){
+    $("#piPrev").addEventListener("click", e => { e.stopPropagation(); if (pinfo.i > 0){ pinfo.i--; piPaint(); } });
+    $("#piNext").addEventListener("click", e => {
+      e.stopPropagation();
+      if (pinfo.i < piCells().length - 1){ pinfo.i++; piPaint(); }
+    });
+    /* 좌우 스와이프로도 이전/다음 상품 */
+    (function(){
+      let sx = null;
+      const card = $("#piCard");
+      card.addEventListener("pointerdown", e => { sx = e.target.closest("button") ? null : e.clientX; });
+      card.addEventListener("pointerup", e => {
+        if (sx === null) return;
+        const dx = e.clientX - sx;
+        sx = null;
+        if (Math.abs(dx) < 42) return;
+        (dx < 0 ? $("#piNext") : $("#piPrev")).click();
+      });
+      card.addEventListener("pointercancel", () => { sx = null; });
+    })();
+  }
+
+  /* ── 주문 확인 ── */
+  const ord = { ok: false, mode: "1", use: true, qty: 0, total: 0 };
+
+  function ordPaint(){
+    const use = ord.use;
+    $("#ordUse").classList.toggle("on", use);
+    $("#ordUse").setAttribute("aria-checked", use ? "true" : "false");
+    $("#ordUseVal").textContent = (use ? "-" : "") + won(ord.total) + "P";
+    const bt = $("#ordTotal");
+    bt.textContent = won(ord.total) + "P";
+    const lack = state.points < ord.total;
+    bt.classList.toggle("lack", lack);
+    $("#ordLack").textContent = lack
+      ? "보유 포인트가 " + won(ord.total - state.points) + "P 부족해요 · 확인하면 충전 안내가 떠요"
+      : (use ? "보유 포인트에서 차감됩니다 · 남은 포인트 " + won(state.points - ord.total) + "P"
+             : "포인트는 그대로 두고 결제합니다 (데모)");
+    $("#ordConfirm").disabled = !$("#ordAgree").checked;
+  }
+
+  function ordOpen(mode){
+    const s = ser(), b = box(), d = s.def;
+    const qty = mode === "all" ? Math.max(0, remainOf(b)) : Number(mode);
+    if (!qty) return;
+    ord.mode = mode; ord.qty = qty; ord.use = true; ord.total = d.price * qty;
+    $("#ordThumb").innerHTML = seriesArt(s);
+    $("#ordSeries").textContent = d.name;
+    $("#ordPrice").textContent = "1회 P " + won(d.price);
+    $("#ordQty").textContent = "×" + qty;
+    $("#ordQtyTxt").textContent = mode === "all" ? "남은 " + qty + "회 (ALL)" : qty + "회";
+    $("#ordHeld").textContent = won(state.points) + "P";
+    $("#ordAgree").checked = true;
+    ordPaint();
+    openOverlay("orderSheet");
+  }
+
+  /* 뽑기 버튼 → 먼저 주문 확인 (확인 후 원래 doDraw 가 실행된다) */
+  document.addEventListener("click", e => {
+    const btn = e.target.closest("#drawBar .dome");
+    if (!btn) return;
+    if (ord.ok){ ord.ok = false; return; }
+    if (btn.classList.contains("locked")) return;      /* 완판·잠김은 원래 안내를 그대로 */
+    e.preventDefault();
+    e.stopPropagation();
+    ordOpen(btn.dataset.n);
+  }, true);
+
+  if ($("#ordConfirm")){
+    $("#ordUse").addEventListener("click", () => { ord.use = !ord.use; ordPaint(); });
+    $("#ordAgree").addEventListener("change", ordPaint);
+    $("#ordConfirm").addEventListener("click", () => {
+      if (!$("#ordAgree").checked){ toast("이용약관 및 개인정보 처리방침 동의가 필요해요"); return; }
+      const mode = ord.mode;
+      closeOverlay("orderSheet");
+      const btn = document.querySelector("#drawBar .dome[data-n='" + mode + "']");
+      if (!btn) return;
+      ord.ok = true;
+      btn.click();
+    });
+  }
+
+  /* ── 진열장 탭 · 선택 · 교환/출고/저장 ── */
+  let shelfTab = "all";
+  const isStock = it => !it.shipped && !it.stored;
+  const isStored = it => !it.shipped && !!it.stored;
+
+  function shelfList(){
+    const all = state.shelf.slice().reverse();
+    if (shelfTab === "stock") return all.filter(isStock);
+    if (shelfTab === "stored") return all.filter(isStored);
+    return all;
+  }
+
+  function shelfItemHTML(it){
+    const s = state.series.find(x => x.id === it.sid) || state.series[0];
+    const sel = shipSelection.has(it.id);
+    const where = it.shipped ? "출고 완료" : it.stored ? "보관함" : hhmm(it.at);
+    return `<button class="bitem ${sel ? "sel" : ""} ${it.shipped ? "done" : ""}" data-item="${it.id}">
+      <span class="bchk ${sel ? "on" : ""}" style="${it.shipped ? "opacity:0" : ""}">${sel ? "✓" : ""}</span>
+      <span class="bqty">X1</span>
+      <span class="thumb">${artHTML(it, it.sid, it.ch)}</span>
+      <span class="body">
+        <span class="top"><span class="btag" style="color:${GC[it.g]}">${GLABEL(it.g)}</span><span class="bn">${it.name}</span></span>
+        <span class="bs">${s.def.short} · ${it.boxNo}번 박스 · ${where}</span>
+      </span>
+      <span class="bv">P ${won(it.value)}</span>
+    </button>`;
+  }
+
+  function shelfDecorate(){
+    if (!$("#shelfTabs")) return;
+    const all = state.shelf;
+    const stock = all.filter(isStock);
+    const stored = all.filter(isStored);
+    $("#stAll").textContent = all.length;
+    $("#stStock").textContent = stock.length;
+    $("#stStored").textContent = stored.length;
+    $$("#shelfTabs button[data-stab]").forEach(b => {
+      const on = b.dataset.stab === shelfTab;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+
+    const list = shelfList();
+    if (all.length){
+      $("#boxArea").innerHTML = `<div class="boxlist">` + (list.length
+        ? list.map(shelfItemHTML).join("")
+        : `<div class="boxempty">이 탭에는 아직 상품이 없어요.<br>${shelfTab === "stored" ? "상품을 골라 <b>저장하기</b>를 누르면 보관함에 담겨요." : "다른 탭에서 상품을 골라 보세요."}</div>`) + `</div>`;
+    }
+
+    const pickable = list.filter(i => !i.shipped);
+    const allSel = pickable.length > 0 && pickable.every(i => shipSelection.has(i.id));
+    const selAll = $("#shelfSelAll");
+    selAll.classList.toggle("on", allSel);
+    selAll.setAttribute("aria-pressed", allSel ? "true" : "false");
+    selAll.textContent = allSel ? "선택 해제" : "전체 선택";
+
+    const sel = all.filter(i => shipSelection.has(i.id) && !i.shipped);
+    const ex = $("#actExchange"), st = $("#actStore");
+    if (ex){
+      ex.disabled = sel.length === 0;
+      ex.querySelector("small").textContent = sel.length
+        ? sel.length + "점 · +" + won(sel.reduce((a, i) => a + (Number(i.value) || 0), 0)) + "P"
+        : "포인트로 교환";
+    }
+    if (st) st.disabled = sel.length === 0;
+  }
+
+  if ($("#shelfTabs")){
+    $("#shelfTabs").addEventListener("click", e => {
+      const tab = e.target.closest("button[data-stab]");
+      if (tab){ shelfTab = tab.dataset.stab; renderBox(); return; }
+      if (e.target.closest("#shelfSelAll")){
+        const pickable = shelfList().filter(i => !i.shipped);
+        const allSel = pickable.length > 0 && pickable.every(i => shipSelection.has(i.id));
+        if (allSel) pickable.forEach(i => shipSelection.delete(i.id));
+        else pickable.forEach(i => shipSelection.add(i.id));
+        renderBox();
+      }
+    });
+  }
+
+  const pickedNow = () => state.shelf.filter(i => shipSelection.has(i.id) && !i.shipped);
+
+  if ($("#actExchange")){
+    $("#actExchange").addEventListener("click", () => {
+      const sel = pickedNow();
+      if (!sel.length) return;
+      const sum = sel.reduce((a, i) => a + (Number(i.value) || 0), 0);
+      askConfirm("포인트로 교환", sel.length + "점을 포인트 " + won(sum) + "P로 교환할까요? 진열장에서 빠지고 포인트로 들어옵니다.", "교환하기", () => {
+        sel.forEach(i => { const k = state.shelf.indexOf(i); if (k >= 0) state.shelf.splice(k, 1); });
+        shipSelection = new Set();
+        state.points += sum;
+        renderHeader(); renderBox(); renderAdmin();
+        toast("+" + won(sum) + "P 교환 완료");
+      });
+    });
+  }
+
+  if ($("#actStore")){
+    $("#actStore").addEventListener("click", () => {
+      const sel = pickedNow();
+      if (!sel.length) return;
+      sel.forEach(i => { i.stored = true; });
+      shipSelection = new Set();
+      shelfTab = "stored";
+      renderBox();
+      toast(sel.length + "점을 보관함에 저장했어요");
+    });
+  }
 
   /* 첫 사용자 터치에서 AudioContext unlock */
   ["pointerdown", "touchstart", "keydown"].forEach(ev =>
