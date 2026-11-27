@@ -1566,6 +1566,51 @@ body{
 .freegage.done .fg-bar i{background:repeating-linear-gradient(45deg,var(--mint) 0 5px,#5fd0b1 5px 10px)}
 .fg-msg{font-size:9.5px;font-weight:800;color:var(--ink2)}
 .freegage.done .fg-msg{color:var(--mint-d)}
+/* ---------- 웰컴 이벤트 팝업 : 비로그인 첫 접속 1+1 (2026-11-27) ---------- */
+.wlp{position:fixed;inset:0;z-index:85;display:none;align-items:center;justify-content:center;
+  padding:16px;-webkit-tap-highlight-color:transparent;
+  background:radial-gradient(circle at 50% 38%,rgba(70,20,50,.5) 0%,rgba(26,10,22,.74) 70%)}
+.wlp.show{display:flex;animation:wlpFade .22s ease-out both}
+@keyframes wlpFade{0%{opacity:0}100%{opacity:1}}
+.wlp-card{position:relative;width:100%;max-width:336px;border-radius:18px;overflow:hidden;
+  background:linear-gradient(180deg,#fffdf8 0%,#fff3e2 100%);
+  border:2px solid #3b1730;box-shadow:0 16px 38px rgba(18,6,14,.5),0 7px 0 rgba(59,23,48,.3);
+  animation:wlpPop .36s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes wlpPop{0%{transform:scale(.86) translateY(14px);opacity:0}100%{transform:scale(1) translateY(0);opacity:1}}
+.wlp-top{position:relative;padding:15px 16px 40px;color:#fff8ee;overflow:hidden;
+  background:linear-gradient(135deg,#f0684b 0%,#ef7f56 46%,#ffc24b 100%)}
+.wlp-top::after{content:"";position:absolute;left:-10px;right:-10px;bottom:-9px;height:16px;
+  background:radial-gradient(circle at 8px 0,transparent 7px,#fffdf8 7.5px) 0 0/16px 16px repeat-x}
+.wlp-dots{position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.65) 1.2px,transparent 1.2px);background-size:13px 13px}
+.wlp-badge{position:relative;display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;
+  background:#fffdf8;color:#c2410f;font-size:9.6px;font-weight:900;letter-spacing:-.2px;
+  box-shadow:0 2px 0 rgba(120,40,10,.22)}
+.wlp-ttl{position:relative;margin:9px 0 0;font-size:19px;font-weight:900;line-height:1.26;letter-spacing:-.9px;
+  text-shadow:0 2px 0 rgba(120,40,10,.28)}
+.wlp-ttl b{color:#fff;font-size:25px;letter-spacing:-1px;
+  text-shadow:0 2px 0 #c2410f,0 0 12px rgba(255,255,255,.55)}
+.wlp-body{position:relative;padding:14px 16px 0;text-align:center}
+.wlp-sub{margin:0;font-size:11.5px;font-weight:800;color:#4a2b1c;line-height:1.5}
+.wlp-sub b{color:#c2410f}
+.wlp-cond{display:flex;gap:8px;align-items:center;justify-content:center;margin:11px 0 0;
+  padding:9px 10px;border-radius:10px;border:1.4px dashed #e2a06e;background:rgba(255,247,236,.9);
+  font-size:9.4px;font-weight:800;color:#8a5a3a;line-height:1.45;text-align:left}
+.wlp-cond em{font-style:normal;font-size:15px;line-height:1}
+.wlp-cta{position:relative;display:block;width:calc(100% - 32px);margin:13px 16px 0;height:48px;
+  border-radius:14px;border:2px solid #3b1730;cursor:pointer;
+  background:linear-gradient(180deg,#ff8b62,#f0684b 62%,#e0522f);
+  color:#fffdf8;font-size:14px;font-weight:900;letter-spacing:-.3px;
+  box-shadow:0 4px 0 #b8380c,0 10px 18px rgba(120,40,10,.28)}
+.wlp-cta small{display:block;font-size:8.6px;font-weight:800;letter-spacing:.1px;color:#ffe6d8;margin-top:1px}
+.wlp-cta:active{transform:translateY(2px);box-shadow:0 2px 0 #b8380c,0 5px 12px rgba(120,40,10,.26)}
+.wlp-foot{display:flex;align-items:center;justify-content:center;gap:6px;margin:11px 14px 13px}
+.wlp-foot button{border:none;background:none;padding:6px 8px;cursor:pointer;color:#9b7a68;
+  font-size:10.4px;font-weight:900;letter-spacing:-.1px;text-decoration:underline;text-underline-offset:2px;
+  -webkit-tap-highlight-color:transparent}
+.wlp-foot span{width:1px;height:9px;background:rgba(59,23,48,.18)}
+.wlp-note{margin:0 16px 12px;font-size:8.4px;font-weight:700;color:#a98a78;text-align:center;line-height:1.4}
+
 /* @@POKO-V2-CSS-END@@ */
 
 /* ---------- 마감 다듬기 ---------- */
@@ -1927,6 +1972,28 @@ body{
       <button class="tk-tear" id="tkTear" type="button">뜯기<small>탭·Enter 로도 뜯을 수 있어요</small></button>
       <button class="tk-all" id="tkSkipAll" type="button">한 번에 다 뜯기 <b>SKIP</b></button>
       <!-- @@POKO-V2-HTML-END@@ -->
+    </div>
+  </div>
+
+  <!-- 웰컴 이벤트 팝업 : 비로그인 첫 접속 · 첫 유료 뽑기 1+1 -->
+  <div class="wlp" id="welcomePopup" role="dialog" aria-modal="true" aria-labelledby="wlpTtl" aria-hidden="true">
+    <div class="wlp-card">
+      <div class="wlp-top">
+        <span class="wlp-dots" aria-hidden="true"></span>
+        <span class="wlp-badge">🎁 신규 회원 한정 웰컴 이벤트</span>
+        <h2 class="wlp-ttl" id="wlpTtl">첫 유료 뽑기 시 <b>1+1</b><br>보너스 1판!</h2>
+      </div>
+      <div class="wlp-body">
+        <p class="wlp-sub">지금 가입하면 <b>첫 유료 뽑기 1회</b>에<br>보너스 <b>1판(6,200P 상당)</b>을 더 드려요.</p>
+        <div class="wlp-cond"><em>🎟️</em><span>첫 <b>유료</b> 뽑기(1회 이상) 결제 시 1회 · 계정당 1회<br>무료·이벤트 뽑기와 이미 뽑은 기록은 제외됩니다.</span></div>
+      </div>
+      <button class="wlp-cta" id="wlpJoin" type="button">회원가입하고 1+1 받기<small>가입 후 첫 유료 뽑기에서 자동 적용</small></button>
+      <div class="wlp-foot">
+        <button id="wlpToday" type="button">오늘 하루 보지 않기</button>
+        <span aria-hidden="true"></span>
+        <button id="wlpClose" type="button">닫기</button>
+      </div>
+      <p class="wlp-note">POKO KUJI 오픈 기념 · 데모 화면에서는 실제 결제가 이뤄지지 않습니다.</p>
     </div>
   </div>
 
@@ -3186,6 +3253,85 @@ body{
       if (e.key === "Enter" || e.key === " "){ e.preventDefault(); finishTear(); }
     });
   }
+  /* ============================================================
+     웰컴 이벤트 (1+1) — 비로그인 첫 접속 팝업
+     ============================================================ */
+  const WLP_DAY = "pokoWelcomeHideUntil";   /* '오늘 하루 보지 않기' 만료 시각 */
+  const WLP_SESS = "pokoWelcomeClosed";     /* '닫기' — 이번 세션만 */
+  const WLP_ARMED = "pokoWelcomeArmed";     /* CTA로 1+1 대기 상태 표시 */
+
+  function wlpIsMember(){
+    try{
+      return !!(window.CHII_BACKEND && window.CHII_BACKEND.enabled && window.CHII_BACKEND.currentUser());
+    }catch(e){ return false; }
+  }
+  function wlpSnoozed(){
+    try{
+      const until = Number(localStorage.getItem(WLP_DAY) || 0);
+      if (until && Date.now() < until) return true;
+    }catch(e){}
+    try{ if (sessionStorage.getItem(WLP_SESS) === "1") return true; }catch(e){}
+    return false;
+  }
+  function wlpHide(how){
+    const el = $("#welcomePopup");
+    if (el){ el.classList.remove("show"); el.setAttribute("aria-hidden", "true"); }
+    if (how === "today"){
+      try{ const d = new Date(); d.setHours(24, 0, 0, 0); localStorage.setItem(WLP_DAY, String(d.getTime())); }catch(e){}
+    } else {
+      try{ sessionStorage.setItem(WLP_SESS, "1"); }catch(e){}
+    }
+  }
+  function wlpShow(){
+    const el = $("#welcomePopup");
+    if (!el) return false;
+    el.classList.add("show");
+    el.setAttribute("aria-hidden", "false");
+    const cta = $("#wlpJoin");
+    if (cta) cta.focus({ preventScroll: true });
+    return true;
+  }
+  /* 비로그인 + 닫은 기록 없음 → 팝업.
+     실서비스 모드에서 로그인 시트가 먼저 떠 있으면 그게 닫힌 뒤에 띄운다. */
+  function wlpMaybe(){
+    let waited = 0;
+    (function tick(){
+      if (!$("#welcomePopup") || wlpIsMember() || wlpSnoozed()) return;
+      const sheet = $("#authSheet");
+      if (sheet && sheet.classList.contains("show") && waited < 12000){
+        waited += 400; setTimeout(tick, 400); return;
+      }
+      wlpShow();
+    })();
+  }
+  function wlpInit(){
+    const el = $("#welcomePopup");
+    if (!el || el.dataset.wired === "1") return;
+    el.dataset.wired = "1";
+    $("#wlpClose").addEventListener("click", () => wlpHide("close"));
+    $("#wlpToday").addEventListener("click", () => wlpHide("today"));
+    el.addEventListener("click", e => { if (e.target === el) wlpHide("close"); });
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && el.classList.contains("show")) wlpHide("close");
+    });
+    $("#wlpJoin").addEventListener("click", () => {
+      wlpHide("close");
+      /* 실서비스(백엔드 연결)에서만 로그인 시트로 연결. 데모는 안내만. */
+      const live = !!(window.CHII_BACKEND && window.CHII_BACKEND.enabled);
+      const sheet = live ? $("#authSheet") : null;
+      try{ localStorage.setItem(WLP_ARMED, sheet ? "member" : "demo"); }catch(e){}
+      if (sheet){
+        if (typeof openOverlay === "function") openOverlay("authSheet");
+        toast("가입 후 첫 유료 뽑기에서 1+1 보너스가 자동 적용돼요");
+      } else {
+        toast("🎁 웰컴 1+1 보너스가 준비됐어요 · 첫 유료 뽑기에 적용(데모)");
+      }
+    });
+    window.POKO_WELCOME = { isMember: wlpIsMember, snoozed: wlpSnoozed, show: wlpShow, hide: wlpHide, maybe: wlpMaybe };
+    setTimeout(wlpMaybe, (window.CHII_BACKEND && window.CHII_BACKEND.enabled) ? 900 : 260);
+  }
+  wlpInit();
+
   /* @@POKO-V2-JS-END@@ */
 
   /* 복권 결과를 먼저 확정하고(연출 중 화면 갱신은 보류) 연출 후 모달을 연다 */
