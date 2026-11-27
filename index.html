@@ -774,11 +774,18 @@ body{
 .hcart{background:rgba(255,252,246,.55);border:1.5px solid rgba(44,26,30,.4)}
 .hcart svg{stroke:#2c1a1e}
 .hcart b{background:var(--mint);color:#08352a;border:2px solid #ffd9b8}
+/* LED 전광판: 플렉스 중앙 정렬 + 넉넉한 높이로 글자 위아래가 잘리지 않게 */
 .hh-led{
+  display:flex;align-items:center;
+  height:20px;padding:0 8px;box-sizing:border-box;
   background:#33252b;border:1.5px solid #33252b;border-radius:6px;
   box-shadow:inset 0 0 0 1px rgba(255,194,75,.28),0 2px 0 rgba(255,255,255,.35);
+  overflow:hidden;z-index:2;pointer-events:none;
 }
-.hh-led b{color:#ffd98a;text-shadow:none;letter-spacing:1.5px}
+.hh-led b{
+  flex:none;display:block;line-height:1;font-size:8.5px;
+  color:#ffd98a;text-shadow:none;letter-spacing:1.5px;
+}
 
 /* ---------- 공지 · 배너 : 종이 티켓 ---------- */
 .notice{
@@ -860,29 +867,29 @@ body{
 .how li span strong{color:var(--ink)}
 .foot{color:var(--ink3);padding:14px 20px 6px}
 
-/* ---------- 전자상거래 사업자 푸터 ---------- */
+/* ---------- 전자상거래 사업자 푸터 (다크 · 컴팩트) ---------- */
 .bizfoot{
-  margin-top:26px;padding:18px 18px calc(88px + env(safe-area-inset-bottom));
-  background:linear-gradient(180deg,#fff3e4,#ffeedb);
-  border-top:1.6px solid var(--ink);
-  color:var(--ink2);
+  margin-top:18px;padding:9px 14px calc(68px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,#1a1617 0%,#0e0c0d 78%);
+  border-top:1px solid rgba(255,255,255,.06);
+  color:#8c8481;
 }
-.bf-mark{display:flex;align-items:center;gap:7px;margin-bottom:12px}
+.bf-mark{display:flex;align-items:center;gap:5px;margin-bottom:6px;opacity:.74}
 .bf-cap{
-  flex:none;width:21px;height:13px;border-radius:999px;
-  background:linear-gradient(90deg,#fff6e6 0 48%,var(--coral) 48% 100%);
-  border:2px solid var(--ink);transform:rotate(-14deg);
+  flex:none;width:13px;height:8px;border-radius:999px;
+  background:linear-gradient(90deg,#6f6764 0 48%,#a05a42 48% 100%);
+  border:1px solid #4c4543;transform:rotate(-14deg);
 }
-.bf-mark strong{font-size:12.5px;font-weight:900;letter-spacing:-.4px;color:var(--ink)}
-.bf-mark em{font-style:normal;font-size:7.5px;font-weight:800;letter-spacing:2.6px;color:var(--ink3)}
-.bf-grid{display:grid;grid-template-columns:1fr;gap:5px;margin:0;padding:0}
-.bf-grid>div{display:flex;gap:8px;font-size:8.8px;line-height:1.5;min-width:0}
-.bf-grid dt{flex:none;width:74px;color:var(--ink3);font-weight:800}
-.bf-grid dd{margin:0;color:var(--ink);font-weight:700;word-break:keep-all}
-.bf-grid a{color:var(--coral-d);text-decoration:none;border-bottom:1px solid rgba(178,58,36,.35)}
+.bf-mark strong{font-size:9px;font-weight:800;letter-spacing:-.2px;color:#c8bfb9}
+.bf-mark em{font-style:normal;font-size:5.6px;font-weight:800;letter-spacing:1.6px;color:#6b6461}
+.bf-grid{display:grid;grid-template-columns:1fr;gap:1px;margin:0;padding:0}
+.bf-grid>div{display:flex;gap:5px;font-size:7px;line-height:1.5;min-width:0}
+.bf-grid dt{flex:none;width:58px;color:#7d7571;font-weight:600}
+.bf-grid dd{margin:0;color:#b2a9a4;font-weight:600;word-break:keep-all}
+.bf-grid a{color:#b2a9a4;text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.2)}
 .bf-copy{
-  margin:12px 0 0;padding-top:10px;border-top:1px dashed #e3ceb6;
-  font-size:8px;font-weight:700;color:#b39d97;letter-spacing:.1px;line-height:1.6;
+  margin:6px 0 0;padding-top:5px;border-top:1px solid rgba(255,255,255,.055);
+  font-size:6.2px;font-weight:600;color:#6a635f;letter-spacing:.1px;line-height:1.45;
 }
 
 /* ---------- 상세 : 딥 플럼 스테이지 ---------- */
@@ -984,7 +991,16 @@ body{
   background:#33252b;border:1.5px solid #33252b;border-radius:6px;
   box-shadow:inset 0 0 0 1px rgba(255,194,75,.24);
 }
-.led-ticker b{color:#ffd98a;text-shadow:none;letter-spacing:1.4px}
+/* 상세 상단 LED 티커도 같은 이유로 중앙 정렬·높이 보정 */
+.led-ticker{
+  display:flex;align-items:center;
+  height:20px;padding:0 8px;box-sizing:border-box;
+  overflow:hidden;
+}
+.led-ticker b{
+  flex:none;display:block;line-height:1;font-size:8.5px;
+  color:#ffd98a;text-shadow:none;letter-spacing:1.4px;
+}
 
 /* ---------- 서브탭 : 스티커 세그먼트 ---------- */
 .subtabs{
@@ -1417,7 +1433,7 @@ body{
         <div><dt>사업자등록번호</dt><dd>396-21-01389</dd></div>
         <div><dt>주소</dt><dd>서울특별시 마포구 마포대로 73, 1714호</dd></div>
         <div><dt>이메일</dt><dd><a href="mailto:whaldus96@naver.com">whaldus96@naver.com</a></dd></div>
-        <div><dt>통신판매업신고번호</dt><dd>(발급 후 입력 예정)</dd></div>
+        <div><dt>통신판매업신고번호</dt><dd>제2026-서울마포-1412호</dd></div>
       </dl>
       <p class="bf-copy">© 2026 포코쿠지 POKO KUJI · 본 사이트는 사업 검토용 데모이며 실제 결제·배송은 이루어지지 않습니다.</p>
     </footer>
