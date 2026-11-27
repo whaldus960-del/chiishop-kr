@@ -1859,6 +1859,156 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
 @keyframes carFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 @media(prefers-reduced-motion:reduce){.car-item .car-in{animation:none}}
 .stage-grade{bottom:6px;font-size:34px;padding:1px 12px 3px}
+
+/* ============================================================
+   v8 — 먹방 컬렉션 · 상위상 빛 대폭발 · 슬림 등급 라벨 · 연속 캐러셀
+   ============================================================ */
+
+/* ── 상단 무대: 슬림 이탤릭 등급 라벨 (네모 박스 제거 · 잘리지 않게 위로) ── */
+.stage{height:200px}
+.stage-car{top:0;height:126px}
+.stage-grade{
+  background:none;border:0;box-shadow:none;padding:0 6px;
+  bottom:30px;z-index:6;font-size:38px;font-weight:900;font-style:italic;
+  letter-spacing:-2.4px;line-height:1;white-space:nowrap;
+  -webkit-text-fill-color:currentColor;
+  text-shadow:
+    -2.4px -2.4px 0 #fff, 2.4px -2.4px 0 #fff, -2.4px 2.4px 0 #fff, 2.4px 2.4px 0 #fff,
+    -2.4px 0 0 #fff, 2.4px 0 0 #fff, 0 -2.4px 0 #fff, 0 2.4px 0 #fff,
+    0 6px 14px rgba(24,6,20,.45);
+  filter:drop-shadow(0 0 10px var(--gc,#ffd42a)) drop-shadow(0 0 22px rgba(255,255,255,.45));
+}
+.stage-grade.swap{animation:gradeSwap .42s cubic-bezier(.2,.9,.25,1) both}
+@keyframes gradeSwap{
+  0%{opacity:0;transform:translateX(-50%) translateY(8px) scale(.82) rotate(-3deg)}
+  100%{opacity:1;transform:translateX(-50%) translateY(0) scale(1) rotate(0)}
+}
+
+/* ── 연속 컨베이어 캐러셀 : 프레임마다 transform 을 직접 계산 ── */
+.stage-car{cursor:grab;touch-action:pan-y}
+.stage-car:active{cursor:grabbing}
+.car-track{position:absolute;left:50%;top:0;width:0;height:100%}
+.stage-car .car-item{transition:none!important;will-change:transform,opacity,filter}
+.car-item.p0{z-index:120}
+.car-item.out{filter:grayscale(.45) brightness(.85)}
+
+/* ── 상위상 빛 대폭발 ───────────────────────────────────── */
+.fx-mega,.fx-top{position:fixed;inset:0;pointer-events:none;display:none;overflow:hidden}
+.fx-mega{z-index:0}
+.fx-top{z-index:6}
+.fx-mega.on,.fx-top.on{display:block}
+
+.fx-mega .fm-aura{
+  position:absolute;left:50%;top:46%;width:820px;height:820px;margin:-410px 0 0 -410px;border-radius:50%;
+  background:radial-gradient(circle,var(--mx-glow,#ffd54a) 0%,var(--mx-glow,#ffd54a) 16%,transparent 64%);
+  opacity:0;filter:blur(16px);mix-blend-mode:screen
+}
+.fx-mega.on .fm-aura{animation:fmAura 1.7s ease-out both}
+@keyframes fmAura{
+  0%{opacity:0;transform:scale(.18)}
+  14%{opacity:.95;transform:scale(.78)}
+  40%{opacity:.66;transform:scale(1)}
+  100%{opacity:0;transform:scale(1.42)}
+}
+.fx-mega .fm-sun{
+  position:absolute;left:50%;top:46%;width:1080px;height:1080px;margin:-540px 0 0 -540px;border-radius:50%;
+  opacity:0;mix-blend-mode:screen;
+  -webkit-mask:radial-gradient(circle,#000 0%,#000 40%,rgba(0,0,0,.5) 58%,transparent 74%);
+  mask:radial-gradient(circle,#000 0%,#000 40%,rgba(0,0,0,.5) 58%,transparent 74%)
+}
+.fx-mega .fm-sun.s1{
+  background:repeating-conic-gradient(from 0deg,var(--mx-1,#fff2b0) 0deg 2.6deg,rgba(255,255,255,0) 2.6deg 10deg);
+  filter:drop-shadow(0 0 6px var(--mx-glow,#ffd54a))
+}
+.fx-mega .fm-sun.s2{
+  background:conic-gradient(from 0deg,var(--mx-2,#ffb52e),var(--mx-1,#fff2b0),var(--mx-2,#ffb52e),var(--mx-1,#fff2b0),var(--mx-2,#ffb52e));
+  filter:blur(3px)
+}
+.fx-mega.mega-rain .fm-sun.s2, .draw-ov.mega-rain .fm-sun.s2{
+  background:conic-gradient(from 0deg,#ff9ad6,#ffd75e,#b6ff9a,#9ad7ff,#c9a0ff,#ff9ad6,#ffd75e,#b6ff9a,#9ad7ff,#c9a0ff,#ff9ad6)
+}
+.fx-mega.on .fm-sun.s1{animation:fmSun1 1.9s cubic-bezier(.15,.85,.28,1) both}
+.fx-mega.on .fm-sun.s2{animation:fmSun2 2.2s ease-out both}
+@keyframes fmSun1{
+  0%{opacity:0;transform:scale(.28) rotate(-30deg)}
+  18%{opacity:1}
+  62%{opacity:.65}
+  100%{opacity:0;transform:scale(1.55) rotate(58deg)}
+}
+@keyframes fmSun2{
+  0%{opacity:0;transform:scale(.34) rotate(14deg)}
+  22%{opacity:.55}
+  100%{opacity:0;transform:scale(1.42) rotate(-46deg)}
+}
+.fx-mega .fm-ring{
+  position:absolute;left:50%;top:46%;width:210px;height:210px;margin:-105px 0 0 -105px;border-radius:50%;
+  border:3px solid var(--mx-glow,#ffd54a);opacity:0;
+  box-shadow:0 0 26px var(--mx-glow,#ffd54a),inset 0 0 22px var(--mx-glow,#ffd54a)
+}
+.fx-mega.on .fm-ring.r1{animation:fmRing 1.15s ease-out .02s both}
+.fx-mega.on .fm-ring.r2{animation:fmRing 1.15s ease-out .2s both}
+@keyframes fmRing{
+  0%{opacity:0;transform:scale(.26)}
+  12%{opacity:.95}
+  100%{opacity:0;transform:scale(3.3)}
+}
+.fx-mega .fm-stars i{
+  position:absolute;left:50%;top:46%;width:var(--sz,8px);height:var(--sz,8px);opacity:0;
+  background:currentColor;transform:translate(-50%,-50%);
+  clip-path:polygon(50% 0%,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0% 50%,39% 38%);
+  filter:drop-shadow(0 0 6px currentColor)
+}
+.fx-mega .fm-stars i.dot{
+  border-radius:50%;clip-path:none;box-shadow:0 0 10px 2px currentColor
+}
+.fx-mega.on .fm-stars i{animation:fmStar 1.25s cubic-bezier(.2,.8,.3,1) both}
+@keyframes fmStar{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(0)}
+  18%{opacity:1;transform:translate(calc(-50% + var(--dx) * .45),calc(-50% + var(--dy) * .45)) scale(1.15) rotate(70deg)}
+  100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.35) rotate(200deg)}
+}
+.fx-top .fm-flash{
+  position:absolute;inset:0;opacity:0;mix-blend-mode:screen;
+  background:radial-gradient(circle at 50% 46%,#fff 0%,var(--mx-1,#fff2b0) 26%,rgba(255,255,255,0) 68%)
+}
+.fx-top.on .fm-flash{animation:fmFlash .5s ease-out both}
+@keyframes fmFlash{0%{opacity:0}8%{opacity:.62}30%{opacity:.3}100%{opacity:0}}
+
+.fx-mega .fm-streaks{
+  position:absolute;inset:0;opacity:0;mix-blend-mode:screen;
+  background:
+    repeating-conic-gradient(from 0deg at 50% 46%,rgba(255,255,255,.5) 0deg .7deg,rgba(255,255,255,0) .7deg 6.8deg),
+    repeating-conic-gradient(from 0deg at 50% 46%,var(--mx-glow,#ffd54a) 0deg 2.1deg,rgba(255,255,255,0) 2.1deg 12deg);
+  -webkit-mask:radial-gradient(circle at 50% 46%,transparent 8%,#000 26%,#000 52%,transparent 78%);
+  mask:radial-gradient(circle at 50% 46%,transparent 8%,#000 26%,#000 52%,transparent 78%)
+}
+.fx-mega.on .fm-streaks{animation:fmStreaks 1.25s ease-out both}
+@keyframes fmStreaks{
+  0%{opacity:0;transform:scale(.45) rotate(0)}
+  16%{opacity:.85}
+  55%{opacity:.42}
+  100%{opacity:0;transform:scale(1.5) rotate(26deg)}
+}
+.fx-top .fm-booms i{
+  position:absolute;width:7px;height:7px;border-radius:50%;background:currentColor;opacity:0;
+  box-shadow:0 0 10px 2px currentColor
+}
+.fx-top.on .fm-booms i{animation:fmBoom 1.15s cubic-bezier(.2,.8,.35,1) both}
+@keyframes fmBoom{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}
+  10%{opacity:1}
+  100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.55)}
+}
+
+/* 최하위상(K/L)은 담백하게 — 작은 도장만 톡 */
+.tk-card.plain .tk-winstamp{animation:stampIn .55s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes stampIn{
+  0%{opacity:0;transform:rotate(-13deg) scale(2.2)}
+  60%{opacity:.85;transform:rotate(-13deg) scale(.94)}
+  100%{opacity:.72;transform:rotate(-13deg) scale(1)}
+}
+.tk-card.plain .tk-grade{animation:gradePop .5s cubic-bezier(.2,1.5,.35,1) both}
+
 </style>
 </head>
 <body>
@@ -2277,7 +2427,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
                 <div class="tk-grow"><span class="tk-grade" id="tkGrade">A상</span></div>
                 <span class="tk-gbar" aria-hidden="true"></span>
                 <span class="tk-gname" id="tkGname">당첨 상품</span>
-                <span class="tk-winstamp" aria-hidden="true">当せん</span>
+                <span class="tk-winstamp" id="tkStamp" aria-hidden="true">当せん</span>
                 <span class="tk-winserial" id="tkWinSerial">No.28-1007</span>
               </div>
               <!-- 겉면 필름(페리페리면) -->
@@ -2307,6 +2457,20 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
       <button class="tk-tear" id="tkTear" type="button">뜯기<small>탭·Enter 로도 뜯을 수 있어요</small></button>
       <button class="tk-all" id="tkSkipAll" type="button">한 번에 다 뜯기 <b>SKIP</b></button>
       <!-- @@POKO-V2-HTML-END@@ -->
+    </div>
+    <!-- 상위상 빛 대폭발 : 티켓 뒤쪽(빛줄기·아우라) + 화면 전체(폭죽·섬광) -->
+    <div class="fx-mega" id="fxMega" aria-hidden="true">
+      <span class="fm-aura"></span>
+      <span class="fm-sun s2"></span>
+      <span class="fm-sun s1"></span>
+      <span class="fm-ring r1"></span>
+      <span class="fm-ring r2"></span>
+      <span class="fm-streaks"></span>
+      <span class="fm-stars" id="fmStars"></span>
+    </div>
+    <div class="fx-top" id="fxTop" aria-hidden="true">
+      <span class="fm-flash"></span>
+      <span class="fm-booms" id="fmBooms"></span>
     </div>
   </div>
 
@@ -2390,9 +2554,10 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
      ============================================================ */
   const GC = { last:"#9f87f0", A:"#ffd42a", B:"#ff5fa2", C:"#46a8f7", D:"#43d17a",
                E:"#2fc39b", F:"#43d17a", G:"#4cc36a", H:"#43d17a", I:"#39c78f", J:"#9be15d",
-               K:"#c39bf0" };
+               K:"#c39bf0", L:"#a9b8d8" };
   const KIND = { last:"crown", A:"plush", B:"cushion", C:"keyring", D:"stand",
-                 E:"mug", F:"pouch", G:"sticker", H:"towel", I:"file", J:"pack", K:"sticker" };
+                 E:"mug", F:"pouch", G:"sticker", H:"towel", I:"file", J:"pack", K:"sticker",
+                 L:"sticker" };
   const GLABEL = k => k === "last" ? "last상" : k + "상";
 
   /* 상품명으로 일러스트 종류 결정 (등급 글자가 아니라 실제 상품 기준) */
@@ -2458,23 +2623,26 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
       curRem:[1,1,1,0,0,1,1,1,1,1,1,69]
     },
     {
-      id:"sweets", name:"치이카와 스위츠 카페 시리즈", short:"스위츠 카페", price:12000,
-      tag:"베스트", hot:false, cur:2, featured:"B", seed:3301, pre:"치이카와",
-      pal:["#ffe0ef", "#e0559a"],
+      id:"hangbang", name:"배고파! 치이카와 먹방 컬렉션", short:"먹방 컬렉션", price:10900,
+      tag:"신상", hot:true, cur:2, featured:"C", seed:7307, pre:"치이카와",
+      hero:"assets/mukbang-cover.jpg",
+      pal:["#ffe7c8", "#d9702f"],
       grades:[
-        { k:"last", n:"스위츠 카페 한정 인형", t:1,  v:59800 },
-        { k:"A",    n:"케이크 치이카와 인형",  t:2,  v:59800 },
-        { k:"B",    n:"푸딩 하치와레 쿠션",    t:2,  v:49500 },
-        { k:"C",    n:"마카롱 우사기 인형",    t:2,  v:45000 },
-        { k:"D",    n:"케이크 접시 세트",      t:2,  v:26900 },
-        { k:"E",    n:"스위츠 키링",           t:2,  v:24800 },
-        { k:"F",    n:"카페 머그",             t:2,  v:22500 },
-        { k:"G",    n:"미니 파르페 스탠드",    t:2,  v:22500 },
-        { k:"H",    n:"스위츠 파우치",         t:2,  v:19800 },
-        { k:"I",    n:"레시피 카드 세트",      t:2,  v:12000 },
-        { k:"J",    n:"스위츠 카드팩",         t:81,  v:1100 }
+        { k:"last", n:"치이카와 포켓 도시락 마스코트 시사",          t:1,  v:70000, img:"assets/hang-last.png" },
+        { k:"A",    n:"치이카와 포켓 도시락 마스코트 우사기",        t:1,  v:47000, img:"assets/hang-a.png" },
+        { k:"B",    n:"치이카와 타코 오징어 마스코트 치이카와",      t:2,  v:40000, img:"assets/hang-b.png" },
+        { k:"C",    n:"치이카와 타코 오징어 마스코트 쿠리만주",      t:2,  v:33000, img:"assets/hang-c.png" },
+        { k:"D",    n:"치이카와 포켓 도시락 마스코트 쿠리만주",      t:2,  v:30000, img:"assets/hang-d.png" },
+        { k:"E",    n:"치이카와 베이커리 샌드위치 마스코트 우사기",  t:2,  v:30000, img:"assets/hang-e.png" },
+        { k:"F",    n:"치이카와 포켓 도시락 마스코트 치이카와",      t:2,  v:29000, img:"assets/hang-f.png" },
+        { k:"G",    n:"치이카와 포켓 도시락 마스코트 랏코",          t:2,  v:29000, img:"assets/hang-g.png" },
+        { k:"H",    n:"치이카와 포켓 도시락 마스코트 하치와레",      t:2,  v:28000, img:"assets/hang-h.png" },
+        { k:"I",    n:"치이카와 타코 오징어 마스코트 시사",          t:2,  v:28000, img:"assets/hang-i.png" },
+        { k:"J",    n:"치이카와 포켓 도시락 마스코트 모몽가",        t:2,  v:27000, img:"assets/hang-j.png" },
+        { k:"K",    n:"치이카와 타코 오징어 마스코트 하치와레",      t:2,  v:27000, img:"assets/hang-k.png" },
+        { k:"L",    n:"반다이 애니 다이컷 스티커 (1팩)",             t:78, v:2200, b:"치이카와", img:"assets/sticker-pack-k.png" }
       ],
-      curRem:[1,1,1,1,1,0,0,1,1,1,37]
+      curRem:[1,1,0,1,0,1,1,1,1,1,1,1,69]
     },
     {
       id:"kurimanju", name:"오직 쿠리! 밤만주 컬렉션", short:"밤만주 컬렉션", price:13000,
@@ -2817,6 +2985,13 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   /* 실제 상품 사진이 있는 등급은 SVG 대신 사진을 쓴다 (DEFS 의 img 필드) */
   const PRIZE_IMG = {};
   DEFS.forEach(d => d.grades.forEach(g => { if (g.img) PRIZE_IMG[d.id + ":" + g.k] = g.img; }));
+  /* 카드 상품명 — 브랜드 접두어가 상품명에 이미 들어 있으면 붙이지 않는다 */
+  function pnameOf(g, d){
+    const brand = (g && g.b) || (d && d.pre) || "치이카와";
+    const nm = (g && g.n) || "";
+    return (brand && nm.indexOf(brand) === 0) ? nm : brand + " | " + nm;
+  }
+
   const imgOf = (sid, k) => (k ? (PRIZE_IMG[sid + ":" + k] || "") : "");
   function artHTML(o, sid, ch){
     const k = o ? (o.k || o.g || "") : "";
@@ -2890,8 +3065,13 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     return b.grades.find(g => g.k === view.grade) || b.grades[0];
   }
 
-  /* 상단 스테이지 — 앞뒤 등급 상품이 줄지어 도는 3D 회전 캐러셀 */
-  let carKey = null, carSpin = null, carFreeze = 0;
+  /* 상단 스테이지 — 멈추지 않고 계속 흐르는 연속 컨베이어 캐러셀.
+     상품이 왼쪽으로 스르륵 흐르고, 가운데(x=0)에 가까울수록 커지고 멀수록 작아진다.
+     가운데를 지나는 상품에 맞춰 등급 라벨이 실시간으로 바뀐다. */
+  const CAR_SP = 78;            /* 상품 한 칸 간격(px) */
+  const CAR_SPD = 0.30;         /* 초당 흐르는 칸 수 */
+  let carKey = null, carPos = 0, carRaf = null, carLast = 0, carVel = 0;
+  let carDrag = null, carGo = null, carSig = "", carOn = false;
 
   function carKeys(){
     const b = box();
@@ -2902,61 +3082,163 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     $$("#dGoods .cell").forEach(c => c.classList.toggle("focus", c.dataset.g === carKey));
   }
 
-  function carPaint(){
-    const s = ser(), b = box();
-    if (!s || !b) return;
-    const gs = b.grades, keys = gs.map(g => g.k);
-    carKey = (view.grade && keys.indexOf(view.grade) >= 0)
-      ? view.grade
-      : (keys.indexOf(carKey) >= 0 ? carKey : keys[0]);
-    const ci = keys.indexOf(carKey), n = keys.length;
-    const track = $("#carTrack");
-    if (!track) return;
-    track.innerHTML = [-2, -1, 0, 1, 2].map(d => {
-      const g = gs[(ci + d + n * 2) % n];
-      const out = g.r === 0 && g.k !== "last";
-      return `<span class="car-item p${d}${out ? " out" : ""}" data-g="${g.k}" role="button" aria-label="${GLABEL(g.k)} ${g.n}">
-        <span class="car-in" style="animation-delay:${((d + 2) * 0.62).toFixed(2)}s">${artHTML(g, s.id, charOf(g.k))}</span>
-      </span>`;
-    }).join("");
-    const g0 = gs[ci];
-    const lab = $("#dGrade");
-    lab.textContent = GLABEL(g0.k);
-    lab.style.color = GC[g0.k];
-    lab.dataset.g = g0.k;
-    const sg = $("#stageGlow");
-    if (sg) sg.style.background = "radial-gradient(circle," + hexA(GC[g0.k], .5) + " 0%," + hexA(GC[g0.k], .14) + " 44%,transparent 70%)";
+  function carGrade(){
+    const b = box();
+    if (!b) return null;
+    const n = b.grades.length;
+    return b.grades[((Math.round(carPos) % n) + n) % n];
   }
 
-  function carStep(dir, manual){
-    const keys = carKeys();
-    if (!keys.length) return;
-    const i = keys.indexOf(carKey);
-    carKey = keys[(i + dir + keys.length) % keys.length];
-    view.grade = carKey;
-    if (manual) carFreeze = Date.now() + 9000;
+  function paintGradeLabel(g, animate){
+    const lab = $("#dGrade");
+    if (!lab || !g) return;
+    lab.textContent = GLABEL(g.k);
+    lab.style.color = GC[g.k] || "#ffd42a";
+    lab.style.setProperty("--gc", GC[g.k] || "#ffd42a");
+    lab.dataset.g = g.k;
+    if (animate){
+      lab.classList.remove("swap");
+      void lab.offsetWidth;
+      lab.classList.add("swap");
+    }
+    const sg = $("#stageGlow");
+    if (sg) sg.style.background = "radial-gradient(circle," + hexA(GC[g.k], .5) + " 0%," + hexA(GC[g.k], .14) + " 44%,transparent 70%)";
+  }
+
+  /* 상품 배치 — 등급 목록이 바뀔 때만 다시 깐다 */
+  function carBuild(keepKey){
+    const s = ser(), b = box();
+    if (!s || !b) return;
+    const gs = b.grades;
+    const sig = s.id + "|" + b.no + "|" + gs.map(g => g.k + g.r).join(",");
+    const track = $("#carTrack");
+    if (!track) return;
+    if (sig !== carSig){
+      const keep = keepKey || carKey;
+      track.innerHTML = gs.map((g, i) => {
+        const out = g.r === 0 && g.k !== "last";
+        return `<span class="car-item${out ? " out" : ""}" data-g="${g.k}" data-i="${i}" role="button" aria-label="${GLABEL(g.k)} ${g.n}">
+          <span class="car-in">${artHTML(g, s.id, charOf(g.k))}</span>
+        </span>`;
+      }).join("");
+      carSig = sig;
+      const ki = keep ? gs.findIndex(g => g.k === keep) : -1;
+      carPos = ki >= 0 ? ki : 0;
+    }
+    carGo = null;
+    carVel = 0;
+    carPaint(true);
+  }
+
+  /* 매 프레임 — 가운데에서의 거리로 크기·투명도·흐림을 계산한다 */
+  function carPaint(silent){
+    const track = $("#carTrack");
+    if (!track) return;
+    const items = track.children, n = items.length;
+    if (!n) return;
+    const center = ((Math.round(carPos) % n) + n) % n;
+    for (let i = 0; i < n; i++){
+      const el = items[i];
+      let off = (i - carPos) % n;
+      if (off < 0) off += n;
+      let d = off > n / 2 ? off - n : off;
+      const ad = Math.abs(d);
+      if (ad > 2.75){
+        if (el.style.visibility !== "hidden"){ el.style.visibility = "hidden"; el.style.opacity = "0"; }
+        el.classList.remove("p0", "p-1", "p1", "p-2", "p2");
+        continue;
+      }
+      el.style.visibility = "visible";
+      const x = d * CAR_SP;
+      const sc = ad <= 1 ? 1.05 - 0.40 * ad : Math.max(0.42, 0.65 - 0.235 * (ad - 1));
+      const op = ad <= 1 ? 1 - 0.12 * ad : Math.max(0, 0.88 - 0.32 * (ad - 1));
+      el.style.transform = "translateX(" + x.toFixed(2) + "px) scale(" + sc.toFixed(3) + ")";
+      el.style.opacity = op.toFixed(3);
+      el.style.zIndex = String(120 - Math.round(ad * 10));
+      el.style.filter = ad >= 1.7 ? "blur(" + ((ad - 1.7) * 1.2).toFixed(2) + "px)" : "none";
+      const r = Math.round(d);
+      el.classList.toggle("p0", i === center);
+      el.classList.toggle("p-1", r === -1 && i !== center);
+      el.classList.toggle("p1", r === 1 && i !== center);
+      el.classList.toggle("p-2", r === -2);
+      el.classList.toggle("p2", r === 2);
+    }
+    const g = carGrade();
+    if (g && g.k !== carKey){
+      carKey = g.k;
+      view.grade = carKey;
+      paintGradeLabel(g, !silent);
+      paintFocus();
+    } else if (g && !carKey){
+      carKey = g.k;
+      paintGradeLabel(g, false);
+      paintFocus();
+    }
+  }
+
+  function carFlowOn(){
+    const scr = $("#screenDetail");
+    if (!scr || scr.hidden) return false;
+    if (document.hidden || view.busy) return false;
+    const ov = $("#drawOv");
+    if (ov && ov.classList.contains("show")) return false;
+    if (carDrag || carGo !== null) return false;
+    return true;
+  }
+
+  function carLoop(ts){
+    if (!carOn) return;
+    const dt = Math.min(0.05, ((ts || 0) - (carLast || ts || 0)) / 1000) || 0;
+    carLast = ts;
+    if (carGo !== null){
+      /* 탭으로 고른 상품까지 부드럽게 이동 */
+      const diff = carGo - carPos;
+      if (Math.abs(diff) < 0.002){ carPos = carGo; carGo = null; }
+      else carPos += diff * Math.min(1, dt * 9.5);
+    } else if (carFlowOn()){
+      carPos += (CAR_SPD + carVel) * dt;
+      carVel *= Math.exp(-2.4 * dt);
+      if (Math.abs(carVel) < 0.004) carVel = 0;
+    }
     carPaint();
-    paintFocus();
+    carRaf = requestAnimationFrame(carLoop);
   }
 
   function startCar(){
-    stopCar();
+    if (carOn) return;
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    carSpin = setInterval(() => {
-      if (document.hidden || view.busy || Date.now() < carFreeze) return;
-      const scr = $("#screenDetail");
-      if (!scr || scr.hidden) return;
-      const ov = $("#drawOv");
-      if (ov && ov.classList.contains("show")) return;
-      carStep(1, false);
-    }, 3600);
+    carOn = true;
+    carLast = 0;
+    carRaf = requestAnimationFrame(carLoop);
   }
 
   function stopCar(){
-    if (carSpin){ clearInterval(carSpin); carSpin = null; }
+    carOn = false;
+    if (carRaf){ cancelAnimationFrame(carRaf); carRaf = null; }
   }
 
-  function renderStage(){ carPaint(); }
+  /* 옆 상품으로 한 칸 — 스와이프/키 이동 */
+  function carStep(dir){
+    const n = carKeys().length;
+    if (!n) return;
+    carGo = Math.round(carPos) + dir;
+  }
+
+  function renderStage(focusKey){
+    const b = box();
+    if (!b) return;
+    const key = focusKey || view.grade || carKey || b.featured;
+    carBuild(key);
+    if (focusKey){
+      const gs = b.grades, n = gs.length, i = gs.findIndex(g => g.k === focusKey);
+      if (i >= 0){
+        let diff = i - carPos;
+        diff = ((diff + n / 2) % n + n) % n - n / 2;
+        carGo = carPos + diff;
+      }
+    }
+    startCar();
+  }
 
   function renderInfo(){
     const s = ser(), b = box(), d = s.def;
@@ -2999,7 +3281,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
           <span class="pct">${isLast ? `<em>증정품</em>` : `확률 ${pct.toFixed(2)}%`}</span>
           <span class="part">${artHTML(g, s.id, charOf(g.k))}</span>
           <span class="stock ${out ? "zero" : ""}">${g.r}/${g.t}</span>
-          <span class="pname">${g.b || d.pre || "치이카와"} | ${g.n}</span>
+          <span class="pname">${pnameOf(g, d)}</span>
           ${out ? `<span class="stamp">종료</span>` : ""}
         </div>
         <span class="gbadge" style="color:${GC[g.k]}">${GLABEL(g.k)}</span>
@@ -3120,6 +3402,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     view.tab = "goods";
     view.grade = s.boxes[view.idx].featured;
     carKey = null;
+    carSig = "";
     showScreen("detail");
     renderDetail();
   }
@@ -3130,6 +3413,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     const b = box();
     view.grade = b.featured;
     carKey = null;
+    carSig = "";
     renderDetail();
     toast(b.no + "번 박스 · 잔여 " + remainOf(b) + "/" + totalOf(b));
   }
@@ -3139,6 +3423,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     const b = box();
     view.grade = b.featured;
     carKey = null;
+    carSig = "";
     closeOverlay("boxPicker");
     renderDetail();
     toast(b.no + "번 박스로 교체했어요");
@@ -3385,8 +3670,26 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
       notes.forEach((f, i) => tone(f, 0.16, "triangle", 0.06, i * 0.085));
       if (k === "last") noise(0.5, 0.05, 5000, 0.05);
     }
+    /* 상위상 빛 대폭발 — 뜯긴 순간 울리는 웅장한 팡파레 (등급이 높을수록 더 크게) */
+    function bigWin(k, tier){
+      const c = ready(); if (!c) return;
+      tier = tier || 1;
+      noise(0.42, 0.10, 5200, 0, "highpass");            /* 팡— */
+      noise(0.55, 0.09, 900, 0.01, "lowpass");           /* 웅장한 저역 */
+      tone(62, 0.55, "sine", 0.10, 0, 42);
+      const notes = tier >= 3 ? [523, 659, 784, 1047, 1319, 1568]
+                  : tier === 2 ? [523, 659, 784, 1047]
+                  : [523, 659, 784];
+      notes.forEach((f, i) => tone(f, 0.22, "triangle", 0.062, i * 0.072));
+      if (tier >= 2){
+        for (let i = 0; i < 6; i++) tone(2093 + i * 197, 0.13, "sine", 0.028, 0.16 + i * 0.05);
+      }
+      if (k === "last"){
+        [0, 0.11, 0.22, 0.33].forEach((d, i) => tone(880 * Math.pow(2, i / 4), 0.26, "triangle", 0.05, 0.34 + d));
+      }
+    }
     return {
-      press, coin, spinStart, spinStop, burst, fanfare, pullStart, chute, stopAll,
+      press, coin, spinStart, spinStop, burst, fanfare, bigWin, pullStart, chute, stopAll,
       ticketIn, ripStart, ripStop, tearNow, tearLong, snap,
       isOn: () => on,
       set(v){ on = !!v; if (!on){ spinStop(); if (ctx && ctx.state === "running") { try { ctx.suspend(); } catch(e){} } } else { ready(); } return on; },
@@ -3413,7 +3716,8 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     H:{ f1:"#fff6ee", f2:"#ffb899", glow:"#ffb899" },
     I:{ f1:"#fff6ee", f2:"#ffb899", glow:"#ffb899" },
     J:{ f1:"#fff6ee", f2:"#ffb899", glow:"#ffb899" },
-    K:{ f1:"#f6ecff", f2:"#c39bf0", glow:"#c39bf0" }
+    K:{ f1:"#f6ecff", f2:"#c39bf0", glow:"#c39bf0" },
+    L:{ f1:"#eef3fc", f2:"#a9b8d8", glow:"#a9b8d8" }
   };
   const fxOf = k => FXR[k] || FXR.J;
 
@@ -3525,6 +3829,12 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     $("#tkIdx").textContent = tear.list.length > 1 ? (i + 1) + " / " + tear.list.length : "";
     $("#tkRays").style.background = "";
     $("#tkConfetti").innerHTML = "";
+    /* 뜯기 전에는 빛이 새어 나오면 안 된다 — 연출 초기화 */
+    const megaEl = $("#fxMega"), topEl = $("#fxTop");
+    if (megaEl){ megaEl.classList.remove("on"); const sb = $("#fmStars"), bb = $("#fmBooms"); if (sb) sb.innerHTML = ""; if (bb) bb.innerHTML = ""; }
+    if (topEl) topEl.classList.remove("on");
+    ov.classList.remove("mega-rain");
+    ov.dataset.mega = "0";
     ov.style.setProperty("--f1", "#fff3d6");
     ov.style.setProperty("--f2", "#f0684b");
     ov.style.setProperty("--glow", "#ffc24b");
@@ -3573,8 +3883,28 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     if (fl){ fl.classList.remove("go"); void fl.offsetWidth; fl.classList.add("go"); }
   }
 
+  /* 등급별 빛 세기 — LAST·A·B는 최대, C~E도 화려하게, 나머지 상위상도 확실하게 */
+  function megaTier(k){
+    if (k === "last" || k === "A" || k === "B") return 3;
+    if (k === "C" || k === "D" || k === "E") return 2;
+    return 1;
+  }
+
+  /* 하단 등급 라벨·티켓을 담백하게 (최하위상 K/L 전용) */
+  function plainReveal(it){
+    const card = $("#tkCard");
+    if (card){
+      card.classList.add("plain");
+      setTimeout(() => card.classList.remove("plain"), 700);
+    }
+    const st = $("#tkStamp");
+    if (st){ st.classList.remove("go"); void st.offsetWidth; st.classList.add("go"); }
+    SND.snap && SND.snap();
+  }
+
   function paintReveal(it){
-    const card = $("#tkCard"), ov = $("#drawOv"), fx = fxOf(it.g);
+    const card = $("#tkCard"), ov = $("#drawOv"), fx = fxOf(it.g), s = ser();
+    const low = lowGradeOf(s.def) === it.g;          /* K상 / L상 = 담백 */
     ov.style.setProperty("--f1", fx.f1);
     ov.style.setProperty("--f2", fx.f2);
     ov.style.setProperty("--glow", fx.glow);
@@ -3587,7 +3917,81 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
       void e.offsetWidth;
       e.classList.add("pop");
     });
+    if (low){
+      plainReveal(it);
+      return;
+    }
     fireBurst(it.g);
+    fireMega(it);
+    SND.bigWin(it.g, megaTier(it.g));
+  }
+
+  /* ── 상위상 빛 대폭발 ─────────────────────────────────────
+     티켓 뒤쪽과 화면 전체로 회전하는 빛줄기(conic sunburst) + 글로우 아우라 +
+     별·스파클 + 대형 폭죽이 한꺼번에 터진다. (뜯겨 공개되는 순간에만 발동) */
+  function fireMega(it){
+    const ov = $("#drawOv");
+    const tier = megaTier(it.g), fx = fxOf(it.g);
+    const st = $("#fxMega"), top = $("#fxTop");
+    if (!st || !top) return;
+    ov.dataset.mega = String(tier);
+    ov.classList.toggle("mega-rain", tier >= 3 && !!fx.rainbow);
+    ov.style.setProperty("--mx-1", fx.f1);
+    ov.style.setProperty("--mx-2", fx.f2);
+    ov.style.setProperty("--mx-glow", fx.glow);
+
+    /* 별·스파클 */
+    const stars = $("#fmStars");
+    if (stars){
+      stars.innerHTML = "";
+      const nStar = tier >= 3 ? 30 : tier === 2 ? 22 : 16;
+      for (let i = 0; i < nStar; i++){
+        const el = document.createElement("i");
+        const a = Math.random() * Math.PI * 2, d = 70 + Math.random() * 250;
+        el.style.setProperty("--dx", (Math.cos(a) * d).toFixed(0) + "px");
+        el.style.setProperty("--dy", (Math.sin(a) * d * 0.82).toFixed(0) + "px");
+        el.style.setProperty("--sz", (5 + Math.random() * 11).toFixed(1) + "px");
+        el.style.animationDelay = (Math.random() * 0.26).toFixed(2) + "s";
+        el.style.color = Math.random() < 0.4 ? "#fffdf2" : fx.glow;
+        if (Math.random() < 0.45) el.className = "dot";
+        stars.appendChild(el);
+      }
+    }
+
+    /* 대형 폭죽 — 화면 곳곳에서 팡팡 */
+    const booms = $("#fmBooms");
+    if (booms){
+      booms.innerHTML = "";
+      const cols = fx.rainbow
+        ? ["#ff9ad6", "#ffd75e", "#b6ff9a", "#9ad7ff", "#c9a0ff", "#fff7ec"]
+        : [fx.glow, fx.f1, "#fffbe8", "#f0684b", "#ffc24b"];
+      const nBoom = tier >= 3 ? 5 : tier === 2 ? 3 : 2;
+      const per = tier >= 3 ? 22 : tier === 2 ? 18 : 14;
+      for (let b = 0; b < nBoom; b++){
+        const ox = 14 + Math.random() * 72, oy = 14 + Math.random() * 60;
+        for (let i = 0; i < per; i++){
+          const el = document.createElement("i");
+          const a = (i / per) * Math.PI * 2 + Math.random() * 0.4;
+          const d = 46 + Math.random() * 132;
+          el.style.left = ox.toFixed(1) + "%";
+          el.style.top = oy.toFixed(1) + "%";
+          el.style.color = cols[(b + i) % cols.length];
+          el.style.setProperty("--dx", (Math.cos(a) * d).toFixed(0) + "px");
+          el.style.setProperty("--dy", (Math.sin(a) * d).toFixed(0) + "px");
+          el.style.animationDelay = (b * 0.11 + Math.random() * 0.07).toFixed(2) + "s";
+          booms.appendChild(el);
+        }
+      }
+    }
+
+    /* 애니메이션 다시 시작 */
+    [st, top].forEach(el => { el.classList.remove("on"); void el.offsetWidth; el.classList.add("on"); });
+    clearTimeout(fireMega._t);
+    fireMega._t = setTimeout(() => {
+      st.classList.remove("on");
+      top.classList.remove("on");
+      ov.classList.remove("mega-rain");
+    }, 2600);
   }
 
   function renderMark(it){
@@ -3653,7 +4057,11 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     view.grade = it.g;
     tear.torn.push(it);
     renderMark(it);
-    pullTimers.push(setTimeout(nextTicket, tear.list.length > 1 ? 900 : 1500));
+    /* 상위상 빛 대폭발은 조금 더 길게 즐길 수 있게, 최하위상은 담백하게 빠르게 */
+    const lowNow = lowGradeOf(ser().def) === it.g;
+    const hold = lowNow ? (tear.list.length > 1 ? 900 : 1500)
+                        : (tear.list.length > 1 ? 1900 : 2100);
+    pullTimers.push(setTimeout(nextTicket, hold));
   }
 
   function nextTicket(){
@@ -3665,7 +4073,10 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
 
   function endPullFx(){
     const ov = $("#drawOv");
-    ov.classList.remove("show", "stage1", "stage2", "stage3");
+    const megaEl = $("#fxMega"), topEl = $("#fxTop");
+    if (megaEl) megaEl.classList.remove("on");
+    if (topEl) topEl.classList.remove("on");
+    if (ov){ ov.classList.remove("show", "stage1", "stage2", "stage3", "mega-rain"); ov.dataset.mega = "0"; }
     ov.dataset.stage = "0";
     ov.setAttribute("aria-hidden", "true");
     SND.ripStop();
@@ -4082,7 +4493,14 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
 
   function gradeRank(k){
     if (k === "last") return 99;
-    return 10 - k.charCodeAt(0) + 65;
+    return 90 - (k.charCodeAt(0) - 65);          /* A=90 … L=79 */
+  }
+
+  /* 시리즈의 최하위상(마지막 등급) — 먹방은 L상, 나머지는 K상.
+     이 등급만 뜯기 연출을 담백하게(빛·폭죽 없이) 보여준다. */
+  function lowGradeOf(def){
+    const gs = (def || {}).grades || [];
+    return gs.length ? gs[gs.length - 1].k : "K";
   }
 
   function showResult(items, lastItem, lastAwarded, mode){
@@ -4413,7 +4831,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
     const gcell = e.target.closest(".cell[data-g]");
     if (gcell){
       view.grade = gcell.dataset.g;
-      renderStage();
+      renderStage(gcell.dataset.g);
       $$(".cell").forEach(c => c.classList.toggle("focus", c.dataset.g === view.grade));
       return;
     }
@@ -4568,7 +4986,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   /* ============================================================
      v6 — 상품 INFO 카드 · 주문 확인 시트 · 진열장 탭/선택 액션
      ============================================================ */
-  const PINFO_BRAND = { kurimanju: "쿠리만주 × 치이카와", pony: "미니소 × 치이카와", snow: "미니소 × 치이카와", sweets: "치이카와" };
+  const PINFO_BRAND = { kurimanju: "쿠리만주 × 치이카와", pony: "미니소 × 치이카와", snow: "미니소 × 치이카와", hangbang: "치이카와 먹방" };
   const pinfo = { i: 0 };
   const piCells = () => $$("#dGoods .cell[data-g]");
 
@@ -4612,27 +5030,57 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   (function(){
     const car = $("#dArt");
     if (!car) return;
-    let sx = null;
-    let swiped = false;
+    let sx = null, moved = false, lastX = 0, lastT = 0;
     car.addEventListener("click", e => {
-      if (swiped){ swiped = false; return; }
+      if (moved){ moved = false; return; }
       const it = e.target.closest(".car-item");
       if (!it || !it.dataset.g) return;
-      if (it.dataset.g === carKey) return;
-      carKey = it.dataset.g;
-      view.grade = carKey;
-      carFreeze = Date.now() + 9000;
+      const idx = Number(it.dataset.i);
+      const n = carKeys().length;
+      if (!n || !Number.isFinite(idx) || !Number.isFinite(carPos)) return;
+      let diff = idx - carPos;
+      diff = ((diff + n / 2) % n + n) % n - n / 2;      /* 가장 가까운 방향 */
+      carGo = carPos + diff;
+      carVel = 0;
       carPaint();
-      paintFocus();
     });
-    car.addEventListener("pointerdown", e => { sx = e.clientX; });
-    document.addEventListener("pointercancel", () => { sx = null; });
+    car.addEventListener("pointerdown", e => {
+      sx = e.clientX;
+      lastX = e.clientX;
+      lastT = performance.now();
+      moved = false;
+      carVel = 0;
+      carDrag = true;
+    });
+    const endDrag = () => {
+      if (sx === null) return;
+      const dx = lastX - sx;
+      sx = null;
+      carDrag = null;
+      if (moved) carVel = Math.max(-3, Math.min(3, dx * 0.02));
+      carGo = null;
+    };
+    car.addEventListener("pointercancel", () => { sx = null; carDrag = null; });
     document.addEventListener("pointerup", e => {
       if (sx === null) return;
-      const dx = e.clientX - sx;
-      sx = null;
-      if (Math.abs(dx) > 34){ swiped = true; carStep(dx < 0 ? 1 : -1, true); }
+      lastX = e.clientX;
+      endDrag();
     });
+    car.addEventListener("pointermove", e => {
+      if (sx === null) return;
+      const dx = e.clientX - lastX;
+      lastX = e.clientX;
+      lastT = performance.now();
+      if (Math.abs(e.clientX - sx) > 6) moved = true;
+      carPos -= dx / CAR_SP;
+      carVel = 0;
+      carPaint();
+    });
+    car.addEventListener("wheel", e => {
+      if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
+      carPos += e.deltaX / CAR_SP;
+      carPaint();
+    }, { passive: true });
   })();
 
   if ($("#piPrev")){
