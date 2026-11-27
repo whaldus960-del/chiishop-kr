@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FF4F93">
-<title>치이샵 (CHII SHOP) · 치이카와 시리즈 4</title>
+<title>포코쿠지 (POKO KUJI) · 치이카와 시리즈 4</title>
 <!--
-  치이샵 CHII SHOP — 치이카와 4개 시리즈 · 진열대형 4열 상세 뽑기 (사업 검토용 데모)
+  포코쿠지 POKO KUJI — 치이카와 4개 시리즈 · 진열대형 4열 상세 뽑기 (사업 검토용 데모)
   - 단일 파일 / 외부 CDN·폰트·이미지 의존 없음 (모든 일러스트는 인라인 SVG)
   - 시리즈마다 30개 박스, 박스마다 독립된 등급별 잔여 수량·실시간 확률·라스트상
   - 결제·배송은 데모로만 동작하며 실제 청구/발송은 없습니다.
@@ -662,7 +662,7 @@
     <header class="home-head">
       <div class="hh-fx" id="homeFx" aria-hidden="true"><span class="hh-ray"></span><span class="hh-glow"></span></div>
       <div class="brand-row">
-        <div class="brand"><span class="logo">치이샵</span><span class="logo-sub">CHII SHOP</span></div>
+        <div class="brand"><span class="logo">포코쿠지</span><span class="logo-sub">POKO KUJI</span></div>
         <div class="head-actions">
           <button class="pts" id="homePts" aria-label="내 포인트"><i>P</i><b id="homePtsVal">240,000</b><span>+</span></button>
           <button class="hcart" id="homeCart" aria-label="진열장 열기">
@@ -685,7 +685,7 @@
       <span class="promo-ring" aria-hidden="true"></span>
       <div class="promo-fx" id="promoFx" aria-hidden="true"><span class="promo-sweep"></span></div>
       <div class="promo-txt">
-        <span>CHIIKAWA KUJI</span>
+        <span>POKO KUJI</span>
         <strong>4 SERIES<br>OPEN!</strong>
         <em>시리즈별 30박스 · 1회 6,200P부터</em>
       </div>
@@ -917,7 +917,7 @@
 
   <div class="draw-ov" id="drawOv" aria-hidden="true">
     <div class="arcade-cab" aria-hidden="true">
-      <div class="ac-marquee"><span>CHII ARCADE</span></div>
+      <div class="ac-marquee"><span>POKO KUJI ARCADE</span></div>
       <div class="ac-glass">
         <div class="ac-lights"><i></i><i></i><i></i><i></i><i></i></div>
         <div class="ac-scan"></div>
@@ -1073,7 +1073,7 @@
     }
   ];
 
-  const NICKS = ["치이러", "하치와", "우사기", "모구모", "쿠리만", "뽀글이", "냠냠", "치이샵"];
+  const NICKS = ["치이러", "하치와", "우사기", "모구모", "쿠리만", "뽀글이", "냠냠", "포코쿠지"];
 
   function ticketTotalOf(def){
     return def.grades.reduce((a,g) => a + (g.k === "last" ? 0 : g.t), 0);
@@ -1451,7 +1451,7 @@
     $("#allSub").innerHTML = !unlocked
       ? "1회 후 열림"
       : (rem === 0 ? "완판" : `<i>P</i>${won(d.price * rem)}`);
-    const tk = "CHII ARCADE  ★  " + d.short + "  ★  1PLAY " + won(d.price) + "P  ★  BOX " + b.no + "/30  ★  LEFT " + rem + "/" + tot + "  ★  GOOD LUCK  ★  ";
+    const tk = "POKO KUJI ARCADE  ★  " + d.short + "  ★  1PLAY " + won(d.price) + "P  ★  BOX " + b.no + "/30  ★  LEFT " + rem + "/" + tot + "  ★  GOOD LUCK  ★  ";
     const tick = $("#ledTicker");
     if (tick) tick.textContent = tk + tk;
     $$("#drawBar .dome").forEach(btn => {
@@ -2335,7 +2335,7 @@
   scatter($("#homeFx"), 14);
   scatter($("#promoFx"), 10);
   scatter($("#stageFx"), 12);
-  const homeLedTxt = "★ CHII SHOP ARCADE ★ 4 SERIES OPEN ★ 1PLAY 6,200P~ ★ LUCKY DRAW ★ NO BLANK ★ ";
+  const homeLedTxt = "★ POKO KUJI ARCADE ★ 4 SERIES OPEN ★ 1PLAY 6,200P~ ★ LUCKY DRAW ★ NO BLANK ★ ";
   $("#homeLed").textContent = homeLedTxt + homeLedTxt;
 
   /* ============================================================
