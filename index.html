@@ -1682,7 +1682,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
 .stage-ch img.gimg{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(40,20,10,.35))}
 .res-art img.gimg{width:100px;height:100px;object-fit:contain}
 .bitem .thumb img.gimg{width:92%;height:92%;object-fit:contain}
-.sart img.ghero{position:relative;z-index:1;height:90%;width:auto;max-width:92%;object-fit:contain;
+.sart img.ghero{position:relative;z-index:1;height:100%;width:100%;max-width:none;object-fit:cover;
   filter:drop-shadow(0 6px 10px rgba(90,50,20,.28))}
 
 /* @@POKO-V2-CSS-END@@ */
@@ -1752,7 +1752,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
 .rc-head{display:flex;align-items:center;gap:10px;padding:2px 0 12px;border-bottom:1.6px dashed rgba(184,132,79,.55)}
 .rc-thumb{flex:none;width:54px;height:54px;border-radius:12px;overflow:hidden;display:grid;place-items:center;
   background:radial-gradient(circle at 50% 35%,#fffdf7,#f2e2c9);box-shadow:inset 0 0 0 1.4px rgba(184,132,79,.4)}
-.rc-thumb img{width:100%;height:100%;object-fit:contain;padding:3px}
+.rc-thumb img{width:100%;height:100%;object-fit:cover;padding:0}
 .rc-thumb svg{width:92%;height:92%}
 .rc-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
 .rc-meta b{font-size:13px;font-weight:900;color:#3b1730;letter-spacing:-.3px}
@@ -2411,7 +2411,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
         { k:"H",    n:"파자마 파티 미니 쿠리만주 마스코트",     t:1,  v:33000,  img:"assets/quri-h.png" },
         { k:"I",    n:"미니소 릴렉스드 블루 쿠리만주",          t:2,  v:31000,  img:"assets/quri-i.png" },
         { k:"J",    n:"포켓 도시락 마스코트 쿠리만주",          t:4,  v:30000,  img:"assets/quri-j.png" },
-        { k:"K",    n:"썸머 말랑키링 (랜덤, 7종)",             t:115, v:2500,  img:"assets/quri-k.png" }
+        { k:"K",    n:"썸머 말랑키링 (랜덤, 7종)",             t:85,  v:2500,  img:"assets/quri-k.png" }
       ],
       curRem:[1,0,1,0,1,0,1,0,1,0,1,72]
     }
@@ -2748,7 +2748,7 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
   }
   /* 시리즈 카드 아트 — 쿠리만주는 실제 사진을 대표컷으로 */
   function seriesArt(s){
-    const hero = s.id === "kurimanju" ? "assets/quri-a.png" : "";
+    const hero = s.id === "kurimanju" ? "assets/quri-cover.jpg" : "";
     if (hero) return '<img class="ghero" src="' + hero + '" alt="' + s.def.name + '" loading="lazy" decoding="async">';
     return trioArt(s.id);
   }
