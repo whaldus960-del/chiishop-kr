@@ -123,7 +123,7 @@
   .tabbar .tbadge.zero{display:none}
 
   /* ============ DETAIL ============ */
-  .detail{padding-bottom:118px;min-height:100vh;background:var(--paper)}
+  .detail{padding-bottom:126px;min-height:100vh;background:var(--paper)}
   .stage{position:relative;height:188px;overflow:hidden;
     background:radial-gradient(120% 90% at 50% 108%,#2f7ef2 0%,#123a90 44%,#071a45 100%)}
   .stage::before{content:"";position:absolute;inset:-20% -20% -10%;transform-origin:50% 100%;
@@ -383,17 +383,79 @@
   .confetti i{position:absolute;top:-10px;width:6px;height:9px;border-radius:1px;animation:fall 2.2s linear infinite}
   @keyframes fall{to{transform:translateY(340px) rotate(300deg);opacity:.9}}
 
-  /* draw animation */
-  .draw-ov{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px;
-    background:radial-gradient(circle at 50% 42%,rgba(30,70,180,.96),rgba(6,14,40,.98))}
+  /* draw animation — 오락실 캡슐 뽑기 */
+  .draw-ov{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;
+    background:radial-gradient(circle at 50% 40%,rgba(38,20,90,.97),rgba(4,6,18,.99) 70%);overflow:hidden}
+  .draw-ov::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(180deg,rgba(140,190,255,.07) 0 1px,transparent 1px 3px);opacity:.5}
   .draw-ov.show{display:flex}
-  .draw-coin{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;
-    background:radial-gradient(ellipse at 50% 20%,#ffb2dd,#f21f8e 45%,#a9005f);border:3px solid rgba(255,255,255,.5);
-    box-shadow:0 0 50px rgba(255,60,160,.55);animation:pop .8s ease-in-out infinite alternate}
-  .draw-coin svg{width:66px;height:66px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
-  @keyframes pop{to{transform:scale(1.07) rotate(6deg)}}
-  .draw-ttl{color:#fff;font-size:15px;font-weight:900;letter-spacing:-.4px}
-  .draw-sub{color:#a9c8ff;font-size:10.5px;font-weight:700}
+  .arcade-cab{position:relative;width:240px;padding:7px 7px 0;border-radius:18px 18px 12px 12px;
+    background:linear-gradient(180deg,#2b1d52,#150e2c 62%,#0d0819);
+    border:2px solid #6f4bd8;box-shadow:0 0 34px rgba(140,90,255,.55),inset 0 0 18px rgba(0,0,0,.7)}
+  .ac-marquee{font-size:9px;font-weight:900;letter-spacing:3.2px;text-align:center;color:#ffd75e;
+    text-shadow:0 0 10px rgba(255,180,0,.95),0 0 20px rgba(255,120,0,.6);animation:neonPulse 1.5s ease-in-out infinite}
+  .ac-glass{position:relative;height:168px;margin-top:6px;border-radius:10px;overflow:hidden;
+    background:radial-gradient(circle at 50% 26%,#1d3673,#0a1229 66%,#050b17);
+    border:1px solid #3f6fd8;box-shadow:inset 0 0 22px rgba(60,130,255,.45)}
+  .ac-glass::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(115deg,rgba(255,255,255,.16) 0 18%,transparent 34%)}
+  .ac-scan{position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(120,190,255,.10) 0 2px,transparent 2px 4px);opacity:.7}
+  .ac-pile{position:absolute;left:0;right:0;bottom:-8px;height:52px;z-index:1;pointer-events:none}
+  .ac-pile i{position:absolute;bottom:0;width:28px;height:28px;border-radius:50%;opacity:.9;
+    background:linear-gradient(180deg,#fff 0 48%,var(--pc,#ff4f93) 48% 100%);
+    box-shadow:inset 0 -4px 6px rgba(120,0,60,.35),inset 0 3px 6px rgba(255,255,255,.85),0 0 10px rgba(255,120,190,.3)}
+  .ac-pile i:nth-child(1){left:6px;bottom:2px;--pc:#ff4f93}
+  .ac-pile i:nth-child(2){left:34px;bottom:-4px;--pc:#8b3df5}
+  .ac-pile i:nth-child(3){left:62px;bottom:3px;--pc:#2f8ef5}
+  .ac-pile i:nth-child(4){left:90px;bottom:-6px;--pc:#ffc02e}
+  .ac-pile i:nth-child(5){left:118px;bottom:1px;--pc:#43d17a}
+  .ac-pile i:nth-child(6){left:146px;bottom:-3px;--pc:#ff4f93}
+  .ac-pile i:nth-child(7){left:174px;bottom:2px;--pc:#8b3df5}
+  .ac-lights{position:absolute;top:3px;left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:3}
+  .ac-lights i{width:5px;height:5px;border-radius:50%;background:#ffe066;box-shadow:0 0 8px #ffcc33;animation:neonPulse 1.1s ease-in-out infinite}
+  .ac-lights i:nth-child(2){animation-delay:.2s;background:#ff7bd0;box-shadow:0 0 8px #ff5cae}
+  .ac-lights i:nth-child(3){animation-delay:.4s;background:#7fd6ff;box-shadow:0 0 8px #4fb8ff}
+  .ac-lights i:nth-child(4){animation-delay:.6s;background:#9dffb0;box-shadow:0 0 8px #4be07a}
+  .ac-lights i:nth-child(5){animation-delay:.8s;background:#ffe066;box-shadow:0 0 8px #ffcc33}
+  .ac-rays{position:absolute;left:50%;top:50%;width:320px;height:320px;margin:-160px 0 0 -160px;border-radius:50%;opacity:0;z-index:3;
+    background:repeating-conic-gradient(from 0deg,var(--f1,#fff) 0deg 5deg,transparent 5deg 18deg,var(--f2,#7fd6ff) 18deg 23deg,transparent 23deg 40deg);
+    mix-blend-mode:screen;filter:blur(.6px)}
+  .ac-burst{position:absolute;left:50%;top:50%;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;opacity:0;z-index:2;
+    background:radial-gradient(circle,#fff 0%,var(--f1,#fff) 30%,var(--f2,#7fd6ff) 55%,transparent 74%)}
+  .ac-capsule{position:absolute;left:50%;top:50%;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:50%;z-index:4;
+    background:linear-gradient(180deg,#fff 0 48%,#ff4f93 48% 100%);
+    box-shadow:inset 0 -8px 12px rgba(120,0,60,.35),inset 0 6px 10px rgba(255,255,255,.9),0 6px 14px rgba(0,0,0,.45),0 0 22px rgba(255,120,190,.75)}
+  .ac-capsule .ac-gl{position:absolute;left:18%;top:14%;width:34%;height:20%;border-radius:50%;background:rgba(255,255,255,.85);filter:blur(1px)}
+  .ac-trail{position:absolute;left:50%;top:0;width:26px;height:100%;margin-left:-13px;z-index:2;opacity:0;pointer-events:none;
+    background:linear-gradient(180deg,transparent,rgba(255,140,200,.6),rgba(255,255,255,.35),transparent);filter:blur(6px)}
+  .draw-ov.show .ac-trail{animation:trailPulse .62s ease-out forwards}
+  .draw-ov.show .ac-capsule{animation:capsuleDrop .62s cubic-bezier(.36,.07,.19,.97) forwards}
+  .draw-ov.burst .ac-capsule{display:none}
+  .draw-ov.burst .ac-glass{animation:cabShake .34s ease-in-out}
+  .draw-ov.burst .ac-rays{animation:raysPop .6s ease-out forwards}
+  .draw-ov.burst .ac-burst{animation:burstPop .55s cubic-bezier(.2,.9,.3,1) forwards}
+  .ac-flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:5;pointer-events:none}
+  .draw-ov.burst .ac-flash{animation:flashPop .3s ease-out}
+  .ac-tray{display:flex;justify-content:center;gap:8px;padding:6px 0 9px;margin-top:4px;border-top:1px solid rgba(140,110,230,.45)}
+  .ac-tray i{width:9px;height:9px;border-radius:50%;background:linear-gradient(180deg,#ff9ed6,#c0006e);box-shadow:0 0 8px rgba(255,90,170,.8)}
+  @keyframes capsuleDrop{
+    0%{transform:translateY(-140px) rotate(-24deg);opacity:0}
+    16%{opacity:1}
+    58%{transform:translateY(9px) rotate(200deg)}
+    72%{transform:translateY(-16px) rotate(268deg)}
+    86%{transform:translateY(4px) rotate(334deg)}
+    100%{transform:translateY(0) rotate(360deg)}
+  }
+  @keyframes cabShake{0%,100%{transform:translate(0)}25%{transform:translate(-3px,1px)}50%{transform:translate(3px,-1px)}75%{transform:translate(-2px,-1px)}}
+  @keyframes burstPop{0%{transform:scale(.2);opacity:1}55%{transform:scale(6.5);opacity:.92}100%{transform:scale(12);opacity:0}}
+  @keyframes raysPop{0%{transform:scale(.25) rotate(0);opacity:0}18%{opacity:1}70%{opacity:.9}100%{transform:scale(1.35) rotate(80deg);opacity:0}}
+  @keyframes flashPop{0%{opacity:0}22%{opacity:.85}100%{opacity:0}}
+  @keyframes trailPulse{0%{opacity:0}22%{opacity:.85}70%{opacity:.45}100%{opacity:0}}
+  .draw-ttl{position:relative;color:#fff;font-size:15px;font-weight:900;letter-spacing:-.4px;text-shadow:0 0 14px rgba(140,200,255,.8)}
+  .draw-sub{position:relative;color:#a9c8ff;font-size:10.5px;font-weight:700}
+  .draw-skip{position:relative;margin-top:4px;color:#9db4e0;font-size:10px;font-weight:800;padding:7px 16px;border-radius:999px;
+    border:1px solid rgba(140,180,255,.35);background:rgba(20,30,60,.6)}
+  .draw-skip:active{transform:translateY(1px)}
 
   /* box picker */
   .bp-list{display:grid;gap:7px;padding:4px 0 10px}
@@ -425,6 +487,164 @@
     font-size:10.5px;font-weight:800;padding:9px 14px;border-radius:999px;opacity:0;pointer-events:none;transition:.22s;white-space:nowrap;max-width:86vw;overflow:hidden;text-overflow:ellipsis}
   .toast.show{opacity:1;transform:translateX(-50%)}
 
+  /* ============================================================
+     ARCADE UPGRADE — 네온 · 파티클 · 뽑기 손맛
+     (정보 가독성은 그대로: 확률·잔여·종료 도장·상품명은 선명하게 유지)
+     ============================================================ */
+  @property --holo{syntax:"<angle>";inherits:false;initial-value:0deg}
+  @keyframes holoSpin{to{--holo:360deg}}
+  @keyframes shineSweep{0%{transform:translateX(-160%) skewX(-16deg)}52%,100%{transform:translateX(280%) skewX(-16deg)}}
+  @keyframes twinkle{0%,100%{opacity:0;transform:scale(.4)}45%{opacity:1;transform:scale(1)}}
+  @keyframes neonPulse{0%,100%{opacity:.5}50%{opacity:1}}
+  @keyframes raySpin{to{transform:rotate(360deg)}}
+  @keyframes jackpot{0%,100%{opacity:.55;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
+  @keyframes beamSwing{from{transform:rotate(-15deg) scaleY(.96)}to{transform:rotate(15deg) scaleY(1.04)}}
+  @keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes badgePop{0%,100%{transform:rotate(4deg) scale(1)}50%{transform:rotate(4deg) scale(1.09)}}
+
+  /* --- 홈 히어로: 네온 잭팟 글로우 + 회전 하이라이트 --- */
+  .hh-fx{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .home-head{padding-bottom:48px}
+  .hh-ray{position:absolute;left:50%;top:-60%;width:520px;height:420px;margin-left:-260px;
+    background:repeating-conic-gradient(from 0deg at 50% 42%,rgba(255,255,255,.24) 0deg 5deg,transparent 5deg 20deg);
+    animation:raySpin 34s linear infinite;opacity:.7}
+  .hh-glow{position:absolute;left:50%;top:-46%;width:400px;height:320px;margin-left:-200px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,240,170,.9),rgba(255,140,205,.34) 46%,transparent 70%);
+    filter:blur(8px);animation:jackpot 3.6s ease-in-out infinite}
+  .spark{position:absolute;border-radius:50%;background:#fff;pointer-events:none;
+    box-shadow:0 0 6px #fff,0 0 14px rgba(255,226,150,.95);animation:twinkle 2.6s ease-in-out infinite}
+  .logo{text-shadow:0 3px 0 rgba(150,0,60,.22),0 0 16px rgba(255,240,190,.6)}
+  .hh-led{position:absolute;left:16px;right:16px;bottom:22px;z-index:1;height:16px;overflow:hidden;border-radius:3px;
+    background:rgba(32,2,20,.62);border:1px solid rgba(255,225,160,.45);box-shadow:inset 0 0 8px rgba(0,0,0,.45)}
+  .hh-led b{display:inline-block;white-space:nowrap;line-height:14px;font-size:8px;font-weight:900;letter-spacing:1.1px;color:#ffe9a8;
+    text-shadow:0 0 6px rgba(255,205,90,.95),0 0 12px rgba(255,150,0,.7);animation:tickerMove 22s linear infinite}
+
+  /* --- 히어로 배너: 네온 테두리 · 흐르는 하이라이트 --- */  .promo{box-shadow:0 8px 20px rgba(16,58,150,.25),0 0 0 1px rgba(150,215,255,.5),0 0 26px rgba(80,170,255,.4)}
+  .promo-ring{position:absolute;inset:1px;border-radius:17px;z-index:3;pointer-events:none;
+    border:1.5px solid rgba(160,220,255,.6);box-shadow:inset 0 0 20px rgba(120,200,255,.35);animation:neonPulse 2.8s ease-in-out infinite}
+  .promo-fx{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .promo-sweep{position:absolute;top:-30%;bottom:-30%;left:0;width:70px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:translateX(-160%) skewX(-16deg);animation:shineSweep 4.6s ease-in-out infinite;mix-blend-mode:screen}
+  .promo-badge{z-index:4;animation:badgePop 2.4s ease-in-out infinite}
+
+  /* --- 시리즈 카드: shimmer + 등급 네온 --- */
+  .scard{position:relative;box-shadow:0 5px 16px rgba(60,40,60,.11),0 0 0 1px rgba(255,255,255,.7),0 0 18px -6px var(--neon,#ff8ec0)}
+  .sart .shine{position:absolute;top:-40%;bottom:-40%;left:0;width:46%;z-index:3;pointer-events:none;mix-blend-mode:screen;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+    transform:translateX(-160%) skewX(-16deg);animation:shineSweep 5.4s ease-in-out infinite;animation-delay:var(--sd,0s)}
+  .sart::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(125deg,rgba(255,255,255,.42) 0 10%,rgba(255,255,255,0) 32%,rgba(255,255,255,0) 76%,rgba(255,255,255,.2) 100%)}
+  .sneon{position:absolute;right:6px;bottom:6px;z-index:4;font-size:8.5px;font-weight:900;letter-spacing:.2px;
+    color:var(--neon,#ff8ec0);text-shadow:0 0 8px var(--neon,#ff8ec0);
+    padding:3px 8px;border-radius:999px;background:rgba(8,12,24,.78);border:1px solid var(--neon,#ff8ec0);
+    box-shadow:0 0 12px var(--neon,#ff8ec0),inset 0 0 8px rgba(255,255,255,.18)}
+
+  /* --- 상세 상단: 회전 스포트라이트 빔 --- */
+  .stage{box-shadow:inset 0 -34px 44px rgba(4,10,30,.55)}
+  .stage-fx{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .stage-tri{z-index:0}
+  .stage-ch{z-index:3}
+  .stage-grade{z-index:4}
+  .stage-beam{position:absolute;left:50%;bottom:-10%;width:190px;height:160%;margin-left:-95px;transform-origin:50% 100%;
+    clip-path:polygon(47% 100%,53% 100%,100% 0,0 0);mix-blend-mode:screen;opacity:.8;filter:blur(1.5px);
+    animation:beamSwing 7s ease-in-out infinite alternate}
+  .stage-beam.b1{background:linear-gradient(to top,rgba(255,60,160,.9),rgba(255,60,160,.42) 52%,rgba(255,60,160,0) 92%);animation-duration:6.4s}
+  .stage-beam.b2{background:linear-gradient(to top,rgba(70,200,255,.85),rgba(70,200,255,.38) 52%,rgba(70,200,255,0) 92%);animation-duration:8.2s;animation-delay:-2.4s}
+  .stage-beam.b3{background:linear-gradient(to top,rgba(255,214,90,.75),rgba(255,214,90,.3) 52%,rgba(255,214,90,0) 92%);animation-duration:9.4s;animation-delay:-4.6s}
+  .stage-ring{position:absolute;left:50%;top:96px;width:250px;height:250px;margin:-125px 0 0 -125px;border-radius:50%;
+    background:conic-gradient(from 0deg,rgba(255,90,180,.65),transparent 20%,rgba(90,195,255,.65) 44%,transparent 66%,rgba(255,215,90,.6));
+    filter:blur(18px);opacity:.7;animation:raySpin 18s linear infinite}
+
+  /* --- LED 전광판 정보 바 --- */
+  .infobar{background:linear-gradient(180deg,rgba(120,200,255,.12),rgba(10,16,30,0) 42%),linear-gradient(180deg,#16223a,#0b1322 62%,#080e1a);
+    border-top:2px solid rgba(120,200,255,.35);
+    box-shadow:0 -6px 18px rgba(5,15,40,.4),inset 0 1px 0 rgba(150,215,255,.3),inset 0 -1px 0 rgba(120,200,255,.15)}
+  .infobar::before{content:"";position:absolute;inset:0;border-radius:20px 20px 0 0;pointer-events:none;
+    background-image:radial-gradient(rgba(130,200,255,.16) 1px,transparent 1px);background-size:4px 4px;opacity:.5;
+    -webkit-mask-image:linear-gradient(#000,transparent 72%);mask-image:linear-gradient(#000,transparent 72%)}
+  .ib-line{position:relative;z-index:1}
+  .ib-price{color:#cfeaff}
+  .ib-price b{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#8dffb4;
+    text-shadow:0 0 6px rgba(120,255,170,.9),0 0 16px rgba(60,255,140,.5)}
+  .ib-price em{color:#5f9fc0}
+  .ib-swap{background:#08130c;color:#7df06a;border:1px solid rgba(125,240,106,.45);
+    box-shadow:0 0 10px rgba(125,240,106,.45),inset 0 0 6px rgba(125,240,106,.2)}
+  .ib-swap::after{border-top-color:#08130c}
+  .ib-box{color:#a9c7e2}
+  .ib-box b{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#7fd6ff;text-shadow:0 0 8px rgba(120,200,255,.8)}
+  .ib-box span{color:#5e86a6}
+  .ib-rem{color:#a9c7e2}
+  .ib-rem span{color:#5e86a6}
+  .ib-rem b{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#ffd75e;text-shadow:0 0 8px rgba(255,200,60,.8)}
+  .led-ticker{position:relative;z-index:1;margin-top:9px;height:17px;border-radius:4px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.35));border:1px solid rgba(125,240,106,.22);box-shadow:inset 0 0 8px rgba(0,0,0,.6)}
+  .led-ticker b{display:inline-block;white-space:nowrap;line-height:15px;font-size:8.5px;font-weight:900;letter-spacing:1.1px;
+    color:#7df06a;text-shadow:0 0 6px rgba(125,240,106,.85);animation:tickerMove 18s linear infinite}
+
+  /* --- 서브탭: 아케이드 콘솔 톤 --- */
+  .subtabs{background:linear-gradient(180deg,#16223a,#0d1729);border:1px solid rgba(120,190,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+  .subtabs button{color:#8ba3c0}
+  .subtabs button.on{background:linear-gradient(180deg,#2f7ef2,#1a4fb0);color:#fff;box-shadow:0 0 12px rgba(80,170,255,.5),inset 0 1px 0 rgba(255,255,255,.3)}
+
+  /* --- A상 · last상 카드: 골드/홀로그램 쉬머 테두리 --- */
+  .cell[data-g="A"] .pcard::after,
+  .cell[data-g="last"] .pcard::after{content:"";position:absolute;inset:-2.6px;border-radius:7.5px;z-index:5;pointer-events:none;padding:2.6px;
+    background:conic-gradient(from var(--holo,0deg),#ffe9a0,#fffbe6,#ffc93a,#ff8ad8,#9ad7ff,#ffe9a0);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+    mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
+    animation:holoSpin 4.5s linear infinite;filter:drop-shadow(0 0 4px rgba(255,205,70,.85))}
+  .cell[data-g="A"] .pcard,
+  .cell[data-g="last"] .pcard{box-shadow:0 2px 5px rgba(20,25,40,.28),0 0 12px rgba(255,205,70,.45),inset 0 0 0 1px rgba(255,240,180,.35)}
+  .cell[data-g="A"] .pclip::after,
+  .cell[data-g="last"] .pclip::after{content:"";position:absolute;top:-40%;bottom:-40%;left:0;width:38%;z-index:2;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(255,248,210,.55),transparent);mix-blend-mode:screen;
+    transform:translateX(-160%) skewX(-16deg);animation:shineSweep 3.8s ease-in-out infinite}
+
+  /* --- 하단 뽑기 버튼: 3D 아케이드 푸시버튼 --- */
+  .drawbar{background:linear-gradient(180deg,rgba(10,16,30,0) 0%,rgba(12,19,36,.86) 34%,#0a1224 100%);padding-top:14px}
+  .dome .cap{position:relative;height:60px;border-radius:50% 50% 44% 44%/64% 64% 36% 36%;overflow:hidden;
+    background:radial-gradient(ellipse at 50% 14%,rgba(255,255,255,.9) 0%,rgba(255,255,255,0) 34%),
+               radial-gradient(ellipse at 50% 34%,var(--c1,#ff9ed6) 0%,var(--c2,#f52a9b) 52%,var(--c3,#c0006e) 100%);
+    border:1px solid rgba(255,255,255,.5);
+    box-shadow:inset 0 -10px 16px rgba(40,0,25,.42),inset 0 6px 12px rgba(255,255,255,.42),inset 0 0 0 2px rgba(255,255,255,.12),
+               0 7px 0 var(--c4,#7d0044),0 11px 18px rgba(0,0,0,.4),0 0 22px -2px var(--c3,#c0006e);
+    transition:transform .09s cubic-bezier(.34,1.56,.64,1),box-shadow .09s ease}
+  .dome .cap::before{content:"";position:absolute;left:12%;right:12%;top:7%;height:44%;border-radius:50%;
+    background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,0));opacity:.85}
+  .dome .cap::after{content:"";position:absolute;left:50%;bottom:8%;transform:translateX(-50%);width:46%;height:9%;
+    border-radius:50%;background:rgba(255,255,255,.22);filter:blur(1px)}
+  .dome[data-n="1"]{--c1:#ffb3d9;--c2:#ff3d94;--c3:#b3005e;--c4:#7d0044}
+  .dome[data-n="5"]{--c1:#d7b6ff;--c2:#8b3df5;--c3:#4a12a8;--c4:#2f0a70}
+  .dome[data-n="10"]{--c1:#a9e2ff;--c2:#2f8ef5;--c3:#11459f;--c4:#0a2c68}
+  .dome[data-n="all"]{--c1:#fff0b8;--c2:#ffc02e;--c3:#b06f00;--c4:#7a4a00}
+  .dome:active .cap,.dome.press .cap{transform:translateY(6px) scale(.97);
+    box-shadow:inset 0 -6px 10px rgba(40,0,25,.45),inset 0 4px 8px rgba(255,255,255,.3),inset 0 0 0 2px rgba(255,255,255,.1),
+               0 1px 0 var(--c4,#7d0044),0 3px 8px rgba(0,0,0,.35),0 0 26px -2px var(--c3,#c0006e)}
+  .dome b{font-size:20px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.35),0 0 10px rgba(255,255,255,.55);
+    -webkit-text-stroke:.6px rgba(255,255,255,.85)}
+  .dome .pr{color:#a9c2dd}
+  .dome .pr i{box-shadow:0 0 8px rgba(255,210,90,.8)}
+  .dome.locked .cap{background:linear-gradient(180deg,#3a4256,#20283a);border-color:rgba(255,255,255,.18);
+    box-shadow:inset 0 -6px 10px rgba(0,0,0,.4),inset 0 4px 8px rgba(255,255,255,.12),0 4px 0 #151b29,0 6px 12px rgba(0,0,0,.35)}
+  .dome.locked .cap::before{opacity:.25}
+  .dome.locked b{color:#9aa8bf;-webkit-text-stroke:0;text-shadow:none}
+  .dome.locked .pr{color:#7d8ba3}
+  .dome.locked:active .cap{transform:none;box-shadow:inset 0 -6px 10px rgba(0,0,0,.4),inset 0 4px 8px rgba(255,255,255,.12),0 4px 0 #151b29}
+  .dome .cap{will-change:transform}
+
+  /* --- 결과 모달: 등급별 네온 글로우 --- */
+  .res-art{background:radial-gradient(circle at 50% 35%,#fff 0%,#fff 30%,var(--rg2,#ffe1ef) 74%);
+    box-shadow:0 0 0 3px rgba(255,255,255,.8),0 0 32px 4px var(--rg1,#ffd0e4)}
+
+  /* --- 사운드 토글 --- */
+  .snd-btn{position:relative}
+  .snd-btn.off svg{opacity:.35}
+  .snd-btn .snd-dot{position:absolute;right:3px;bottom:3px;width:6px;height:6px;border-radius:50%;background:#7df06a;box-shadow:0 0 6px #7df06a}
+  .snd-btn.off .snd-dot{background:#ff5c7a;box-shadow:0 0 6px #ff5c7a}
+  .snd-btn.off .snd-slash{display:block}
+  .snd-btn .snd-slash{display:none;position:absolute;left:50%;top:50%;width:26px;height:2px;margin:-1px 0 0 -13px;background:#fff;transform:rotate(-45deg);border-radius:2px}
+
   @media(max-width:374px){
     .stage-grade{font-size:44px}
     .gbadge{font-size:13px}
@@ -439,6 +659,7 @@
   <!-- ================= HOME ================= -->
   <main class="screen" id="screenHome">
     <header class="home-head">
+      <div class="hh-fx" id="homeFx" aria-hidden="true"><span class="hh-ray"></span><span class="hh-glow"></span></div>
       <div class="brand-row">
         <div class="brand"><span class="logo">치이샵</span><span class="logo-sub">CHII SHOP</span></div>
         <div class="head-actions">
@@ -450,6 +671,7 @@
         </div>
       </div>
       <p class="home-tag">꽝 없는 이치방쿠지 · 치이카와 굿즈샵</p>
+      <div class="hh-led" aria-hidden="true"><b id="homeLed"></b></div>
     </header>
 
     <button class="notice" id="noticeBtn">
@@ -459,6 +681,8 @@
     </button>
 
     <section class="promo">
+      <span class="promo-ring" aria-hidden="true"></span>
+      <div class="promo-fx" id="promoFx" aria-hidden="true"><span class="promo-sweep"></span></div>
       <div class="promo-txt">
         <span>CHIIKAWA KUJI</span>
         <strong>4 SERIES<br>OPEN!</strong>
@@ -488,15 +712,21 @@
   <!-- ================= DETAIL ================= -->
   <main class="screen detail" id="screenDetail" hidden>
     <section class="stage" id="stage">
+      <div class="stage-fx" id="stageFx" aria-hidden="true">
+        <span class="stage-beam b1"></span>
+        <span class="stage-beam b2"></span>
+        <span class="stage-beam b3"></span>
+        <span class="stage-ring"></span>
+      </div>
       <div class="stage-tri"></div>
-      <div class="stage-glow"></div>
+      <div class="stage-glow" id="stageGlow"></div>
       <div class="strap"></div>
       <div class="stage-top">
         <button class="circ" id="backBtn" aria-label="뒤로 가기">
           <svg viewBox="0 0 24 24"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg>
         </button>
         <div class="stage-tools">
-          <button class="circ sm" aria-label="배경 음악"><svg viewBox="0 0 24 24"><path d="M9 18V6l9-2v12"/><circle cx="7" cy="18" r="2.4"/><circle cx="16" cy="16" r="2.4"/></svg></button>
+          <button class="circ sm snd-btn" id="sndBtn" aria-label="사운드 끄기" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M9 18V6l9-2v12"/><circle cx="7" cy="18" r="2.4"/><circle cx="16" cy="16" r="2.4"/></svg><span class="snd-slash"></span><span class="snd-dot"></span></button>
           <button class="circ sm" aria-label="즐겨찾기"><svg viewBox="0 0 24 24"><path d="M12 4l2.5 5.3 5.5.8-4 4 1 5.7-5-2.9-5 2.9 1-5.7-4-4 5.5-.8z"/></svg></button>
           <button class="shelf-btn" id="shelfBtn">
             <svg viewBox="0 0 24 24"><path d="M4 8.2L12 4l8 4.2v7.6L12 20l-8-4.2z"/><path d="M4 8.2L12 12.4l8-4.2M12 12.4V20"/></svg>
@@ -532,6 +762,7 @@
         </button>
         <button class="navbtn" id="nextBox" aria-label="다음 박스"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
+      <div class="led-ticker" aria-hidden="true"><b id="ledTicker"></b></div>
     </section>
 
     <div class="subtabs" id="subtabs" role="tablist">
@@ -684,9 +915,23 @@
   </div>
 
   <div class="draw-ov" id="drawOv" aria-hidden="true">
-    <div class="draw-coin" id="drawCoin"></div>
+    <div class="arcade-cab" aria-hidden="true">
+      <div class="ac-marquee"><span>CHII ARCADE</span></div>
+      <div class="ac-glass">
+        <div class="ac-lights"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="ac-scan"></div>
+        <div class="ac-pile"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="ac-trail"></div>
+        <div class="ac-rays" id="acRays"></div>
+        <div class="ac-burst" id="acBurst"></div>
+        <div class="ac-capsule" id="acCapsule"><span class="ac-gl"></span></div>
+        <div class="ac-flash" id="acFlash"></div>
+      </div>
+      <div class="ac-tray"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
     <div class="draw-ttl" id="drawTtl">두근두근, 뽑는 중!</div>
-    <div class="draw-sub" id="drawSub">잠시만 기다려 주세요</div>
+    <div class="draw-sub" id="drawSub">캡슐이 떨어지고 있어요</div>
+    <button class="draw-skip" id="drawSkip">건너뛰기 ›</button>
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -714,6 +959,12 @@
   function pad2(n){ return String(n).padStart(2, "0"); }
   function ymd(d){ return d.getFullYear() + pad2(d.getMonth()+1) + pad2(d.getDate()); }
   function hhmm(d){ return pad2(d.getHours()) + ":" + pad2(d.getMinutes()); }
+  function hexA(hex, a){
+    const h = String(hex || "#ffffff").replace("#", "");
+    const s = h.length === 3 ? h.split("").map(c => c + c).join("") : h;
+    const n = parseInt(s, 16) || 0;
+    return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + a + ")";
+  }
 
   /* ============================================================
      data — 4 series × 30 boxes × (last + A~J)
@@ -1141,13 +1392,15 @@
 
   function renderHome(){
     $("#promoArt").innerHTML = trioArt("beach");
-    $("#seriesGrid").innerHTML = state.series.map(s => {
+    $("#seriesGrid").innerHTML = state.series.map((s, i) => {
       const d = s.def, st = seriesStats(s);
       const pct = Math.round((1 - st.rem / st.tot) * 100);
-      return `<button class="scard" data-sid="${s.id}" aria-label="${d.name} 열기">
+      return `<button class="scard" data-sid="${s.id}" style="--neon:${GC[d.featured]}" aria-label="${d.name} 열기">
         <span class="sart" style="--a:${d.pal[0]};--b:${d.pal[1]}">
           <span class="sflag ${d.hot ? "hot" : ""}">${d.tag}</span>
+          <span class="shine" style="--sd:${(i * 0.9).toFixed(1)}s"></span>
           ${trioArt(s.id)}
+          <span class="sneon">★ ${GLABEL(d.featured)}</span>
         </span>
         <span class="sinfo">
           <strong class="sname">${d.name}</strong>
@@ -1176,6 +1429,8 @@
     const lab = $("#dGrade");
     lab.textContent = GLABEL(g.k);
     lab.style.color = GC[g.k];
+    const sg = $("#stageGlow");
+    if (sg) sg.style.background = "radial-gradient(circle," + hexA(GC[g.k], .5) + " 0%," + hexA(GC[g.k], .14) + " 44%,transparent 70%)";
   }
 
   function renderInfo(){
@@ -1195,6 +1450,9 @@
     $("#allSub").innerHTML = !unlocked
       ? "1회 후 열림"
       : (rem === 0 ? "완판" : `<i>P</i>${won(d.price * rem)}`);
+    const tk = "CHII ARCADE  ★  " + d.short + "  ★  1PLAY " + won(d.price) + "P  ★  BOX " + b.no + "/30  ★  LEFT " + rem + "/" + tot + "  ★  GOOD LUCK  ★  ";
+    const tick = $("#ledTicker");
+    if (tick) tick.textContent = tk + tk;
     $$("#drawBar .dome").forEach(btn => {
       const n = btn.dataset.n;
       if (n === "all") return;
@@ -1401,80 +1659,252 @@
     runDraw(n, cost, mode);
   }
 
+  /* ============================================================
+     arcade sound — Web Audio 신스 (기본 ON · 첫 터치에서 unlock)
+     ============================================================ */
+  const SND = (function(){
+    let ctx = null, master = null, on = true, noiseBuf = null, spinTimer = null;
+
+    function ac(){
+      if (ctx) return ctx;
+      try {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        ctx = new AC();
+        master = ctx.createGain();
+        master.gain.value = 0.5;
+        master.connect(ctx.destination);
+      } catch (e){ ctx = null; }
+      return ctx;
+    }
+    function ready(){
+      if (!on) return null;
+      const c = ac();
+      if (!c) return null;
+      if (c.state === "suspended"){ try { c.resume(); } catch (e){} }
+      return c;
+    }
+    function tone(f, dur, type, vol, delay, f2){
+      const c = ready(); if (!c) return;
+      try {
+        const t0 = c.currentTime + (delay || 0);
+        const o = c.createOscillator();
+        const g = c.createGain();
+        o.type = type || "square";
+        o.frequency.setValueAtTime(Math.max(20, f), t0);
+        if (f2) o.frequency.exponentialRampToValueAtTime(Math.max(20, f2), t0 + dur);
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(vol == null ? 0.06 : vol, t0 + 0.008);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+        o.connect(g); g.connect(master);
+        o.start(t0); o.stop(t0 + dur + 0.03);
+      } catch (e){}
+    }
+    function noise(dur, vol, freq, delay, type){
+      const c = ready(); if (!c) return;
+      try {
+        if (!noiseBuf){
+          const len = Math.floor(c.sampleRate * 0.4);
+          noiseBuf = c.createBuffer(1, len, c.sampleRate);
+          const d = noiseBuf.getChannelData(0);
+          for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+        }
+        const t0 = c.currentTime + (delay || 0);
+        const src = c.createBufferSource(); src.buffer = noiseBuf;
+        const bp = c.createBiquadFilter(); bp.type = type || "bandpass"; bp.frequency.value = freq || 1400; bp.Q.value = 1.1;
+        const g = c.createGain();
+        g.gain.setValueAtTime(vol == null ? 0.05 : vol, t0);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+        src.connect(bp); bp.connect(g); g.connect(master);
+        src.start(t0); src.stop(t0 + dur + 0.03);
+      } catch (e){}
+    }
+
+    function press(){ tone(520, 0.05, "square", 0.035, 0, 300); }
+    function coin(){
+      tone(988, 0.055, "square", 0.05);
+      tone(1319, 0.07, "square", 0.045, 0.06);
+    }
+    function spinStart(){
+      spinStop();
+      spinTimer = setInterval(() => noise(0.035, 0.028, 2400), 68);
+    }
+    function spinStop(){ if (spinTimer){ clearInterval(spinTimer); spinTimer = null; } }
+    function burst(k){
+      const high = (k === "A" || k === "B" || k === "C" || k === "last");
+      noise(0.28, 0.09, high ? 2600 : 1800);
+      tone(high ? 784 : 523, 0.16, "sawtooth", 0.05, 0, high ? 1568 : 1046);
+      if (k === "last"){
+        [0, 0.07, 0.14, 0.22].forEach((d, i) => tone(880 * Math.pow(2, i / 4), 0.18, "triangle", 0.055, d));
+      }
+    }
+    function fanfare(k){
+      let notes;
+      if (k === "last") notes = [523, 659, 784, 1047, 1319];
+      else if (k === "A" || k === "B" || k === "C") notes = [523, 659, 784, 1047];
+      else if (k === "E" || k === "F" || k === "G" || k === "D") notes = [392, 523, 659];
+      else notes = [523, 659];
+      notes.forEach((f, i) => tone(f, 0.16, "triangle", 0.06, i * 0.085));
+      if (k === "last") noise(0.5, 0.05, 5000, 0.05);
+    }
+    return {
+      press, coin, spinStart, spinStop, burst, fanfare,
+      isOn: () => on,
+      set(v){ on = !!v; if (!on){ spinStop(); if (ctx && ctx.state === "running") { try { ctx.suspend(); } catch(e){} } } else { ready(); } return on; },
+      toggle(){ return this.set(!on); },
+      unlock(){ ready(); }
+    };
+  })();
+
+  /* ============================================================
+     pull fx — 캡슐 낙하 → 등급별 빛 폭발
+     ============================================================ */
+  const FXR = {
+    last:{ f1:"#fff3c4", f2:"#ff8bd6", glow:"#ffcf3f", rainbow:true },
+    A:{ f1:"#fff6c9", f2:"#ffc93a", glow:"#ffd42a" },
+    B:{ f1:"#fff6c9", f2:"#ffc93a", glow:"#ffd42a" },
+    C:{ f1:"#fff6c9", f2:"#ffc93a", glow:"#ffd42a" },
+    D:{ f1:"#efe0ff", f2:"#a97bff", glow:"#a97bff" },
+    E:{ f1:"#efe0ff", f2:"#a97bff", glow:"#a97bff" },
+    F:{ f1:"#efe0ff", f2:"#a97bff", glow:"#a97bff" },
+    G:{ f1:"#efe0ff", f2:"#a97bff", glow:"#a97bff" },
+    H:{ f1:"#e6f7ff", f2:"#7fd6ff", glow:"#7fd6ff" },
+    I:{ f1:"#e6f7ff", f2:"#6fb2ff", glow:"#6fb2ff" },
+    J:{ f1:"#eaf9ff", f2:"#8fdcff", glow:"#9fe6ff" }
+  };
+  const fxOf = k => FXR[k] || FXR.J;
+  let pullFinish = null, pullTimers = [];
+
+  function scatter(host, n){
+    if (!host) return;
+    for (let i = 0; i < n; i++){
+      const sp = document.createElement("i");
+      sp.className = "spark";
+      sp.style.left = (Math.random() * 100).toFixed(2) + "%";
+      sp.style.top = (Math.random() * 100).toFixed(2) + "%";
+      sp.style.animationDelay = (Math.random() * 3.2).toFixed(2) + "s";
+      sp.style.animationDuration = (2 + Math.random() * 2.2).toFixed(2) + "s";
+      const sz = 2.6 + Math.random() * 3.6;
+      sp.style.width = sz.toFixed(1) + "px";
+      sp.style.height = sz.toFixed(1) + "px";
+      host.appendChild(sp);
+    }
+  }
+
+  function startPullFx(n, grade){
+    const ov = $("#drawOv"), burst = $("#acBurst"), rays = $("#acRays");
+    const fx = fxOf(grade);
+    ov.style.setProperty("--f1", fx.f1);
+    ov.style.setProperty("--f2", fx.f2);
+    ov.classList.remove("burst");
+    if (fx.rainbow){
+      burst.style.background = "radial-gradient(circle,#fff 0%,#ffe89a 24%,#ff9ad6 44%,#9ad7ff 62%,#b6ff9a 78%,transparent 90%)";
+      rays.style.background = "conic-gradient(from 0deg,#ff9ad6,#ffd75e,#b6ff9a,#9ad7ff,#c9a0ff,#ff9ad6)";
+    } else {
+      burst.style.background = "";
+      rays.style.background = "";
+    }
+    $("#drawTtl").textContent = n === 1 ? "두근두근, 뽑는 중!" : n + "장 한 번에 오픈!";
+    $("#drawSub").textContent = n === 1 ? "캡슐이 떨어지고 있어요" : "캡슐 " + n + "개를 여는 중이에요";
+    ov.classList.add("show");
+    ov.setAttribute("aria-hidden", "false");
+    SND.spinStart();
+    pullTimers.push(setTimeout(() => {
+      ov.classList.add("burst");
+      SND.spinStop();
+      SND.burst(grade);
+    }, 620));
+  }
+
+  function endPullFx(){
+    const ov = $("#drawOv");
+    ov.classList.remove("show", "burst");
+    ov.setAttribute("aria-hidden", "true");
+    SND.spinStop();
+  }
+
+  /* 복권 결과를 먼저 확정하고(연출 중 화면 갱신은 보류) 연출 후 모달을 연다 */
+  function settleDraw(s, b, n, cost){
+    state.points -= cost;
+    s.rev += cost;
+    s.sold += n;
+
+    const items = [];
+    for (let i = 0; i < n; i++){
+      const g = pickGrade(b);
+      g.r -= 1;
+      b.drawn += 1;
+      const it = {
+        id: state.seq++,
+        sid: s.id,
+        boxNo: b.no,
+        g: g.k,
+        kind: kindOf(g),
+        ch: charOf(g.k),
+        name: g.n,
+        value: g.v,
+        shipped: false,
+        at: new Date()
+      };
+      items.push(it);
+      state.shelf.push(it);
+    }
+
+    const lastG = b.grades[0];
+    let lastItem = null;
+    let lastAwarded = false;
+    if (remainOf(b) === 0 && lastG.r > 0){
+      lastG.r = 0;
+      lastAwarded = true;
+      lastItem = {
+        id: state.seq++,
+        sid: s.id,
+        boxNo: b.no,
+        g: "last",
+        kind: "crown",
+        ch: "chii",
+        name: lastG.n,
+        value: lastG.v,
+        shipped: false,
+        at: new Date()
+      };
+      state.shelf.push(lastItem);
+    }
+
+    const logs = ensureLogs(b);
+    const best = lastItem || items.slice().sort((x, y) => gradeRank(y.g) - gradeRank(x.g))[0] || items[0];
+    view.grade = best.g;
+    items.slice().reverse().forEach(it => {
+      logs.unshift({ who: "나", g: it.g, name: it.name, time: "방금 전", mine: true });
+    });
+    if (lastItem) logs.unshift({ who: "나", g: "last", name: lastItem.name, time: "방금 전", mine: true });
+    b.logs = logs;
+
+    return { items, lastItem, lastAwarded, best, bestG: best.g };
+  }
+
   function runDraw(n, cost, mode){
     const s = ser(), b = box();
     view.busy = true;
-    $("#drawCoin").innerHTML = art(kindOf(b.grades.find(g => g.k === b.featured) || b.grades[1]), s.id, charOf(b.featured));
-    $("#drawTtl").textContent = n === 1 ? "두근두근, 뽑는 중!" : n + "장 한 번에 오픈!";
-    $("#drawSub").textContent = n === 1 ? "잠시만 기다려 주세요" : "티켓 " + n + "장을 여는 중이에요";
-    $("#drawOv").classList.add("show");
-    $("#drawOv").setAttribute("aria-hidden", "false");
+    SND.coin();
+    const res = settleDraw(s, b, n, cost);
+    startPullFx(n, res.bestG);
 
-    setTimeout(() => {
-      state.points -= cost;
-      s.rev += cost;
-      s.sold += n;
-
-      const items = [];
-      for (let i = 0; i < n; i++){
-        const g = pickGrade(b);
-        g.r -= 1;
-        b.drawn += 1;
-        const it = {
-          id: state.seq++,
-          sid: s.id,
-          boxNo: b.no,
-          g: g.k,
-          kind: kindOf(g),
-          ch: charOf(g.k),
-          name: g.n,
-          value: g.v,
-          shipped: false,
-          at: new Date()
-        };
-        items.push(it);
-        state.shelf.push(it);
-      }
-
-      const lastG = b.grades[0];
-      let lastItem = null;
-      let lastAwarded = false;
-      if (remainOf(b) === 0 && lastG.r > 0){
-        lastG.r = 0;
-        lastAwarded = true;
-        lastItem = {
-          id: state.seq++,
-          sid: s.id,
-          boxNo: b.no,
-          g: "last",
-          kind: "crown",
-          ch: "chii",
-          name: lastG.n,
-          value: lastG.v,
-          shipped: false,
-          at: new Date()
-        };
-        state.shelf.push(lastItem);
-      }
-
-      const logs = ensureLogs(b);
-      const best = items.slice().sort((x, y) => gradeRank(y.g) - gradeRank(x.g))[0] || items[0];
-      view.grade = best.g;
-      items.slice().reverse().forEach(it => {
-        logs.unshift({ who: "나", g: it.g, name: it.name, time: "방금 전", mine: true });
-      });
-      if (lastItem) logs.unshift({ who: "나", g: "last", name: lastItem.name, time: "방금 전", mine: true });
-      b.logs = logs;
-
-      $("#drawOv").classList.remove("show");
-      $("#drawOv").setAttribute("aria-hidden", "true");
+    const finish = () => {
+      if (!view.busy) return;
       view.busy = false;
-
+      pullFinish = null;
+      pullTimers.forEach(clearTimeout);
+      pullTimers = [];
+      endPullFx();
       renderHeader();
       renderDetail();
       renderAdmin();
-      showResult(items, lastItem, lastAwarded, mode);
-    }, 900);
+      showResult(res.items, res.lastItem, res.lastAwarded, mode);
+      SND.fanfare(res.bestG);
+    };
+    pullFinish = finish;
+    pullTimers.push(setTimeout(finish, 880));   /* 결과 모달 1.2초 이내 */
   }
 
   function gradeRank(k){
@@ -1494,6 +1924,9 @@
     $("#resList").hidden = single;
 
     $("#resArt").innerHTML = art(best.kind || kindOf(best), s.id, best.ch || charOf(best.g));
+    const fx = fxOf(best.g);
+    $("#resArt").style.setProperty("--rg1", fx.glow);
+    $("#resArt").style.setProperty("--rg2", fx.f1);
     const gr = $("#resGrade");
     gr.textContent = GLABEL(best.g);
     gr.style.color = GC[best.g];
@@ -1518,9 +1951,13 @@
 
     const conf = $("#confetti");
     conf.innerHTML = "";
-    if (lastAwarded){
-      const colors = ["#FF9DB5", "#FFD36E", "#8FDCC0", "#BFA9F5", "#8FC9F0"];
-      for (let i = 0; i < 24; i++){
+    const tier = lastAwarded ? 2 : (best.g === "A" || best.g === "B" || best.g === "C" ? 1 : 0);
+    if (tier){
+      const colors = tier === 2
+        ? ["#FF9DB5", "#FFD36E", "#8FDCC0", "#BFA9F5", "#8FC9F0"]
+        : ["#FFE9A0", "#FFD42A", "#FFB347", "#FFF6C9"];
+      const cnt = tier === 2 ? 24 : 16;
+      for (let i = 0; i < cnt; i++){
         const sp = document.createElement("i");
         sp.style.left = (Math.random() * 100) + "%";
         sp.style.background = colors[i % colors.length];
@@ -1856,6 +2293,49 @@
   $("#adminReset").addEventListener("click", () => {
     askConfirm("전체 초기화", "모든 시리즈의 재고·매출과 진열장·배송 내역을 처음 상태로 되돌릴까요? 되돌릴 수 없어요.", "전체 초기화", resetAll);
   });
+
+  /* ============================================================
+     arcade: 사운드 토글 · 스킵 · 파티클 · 버튼 손맛
+     ============================================================ */
+  $("#sndBtn").addEventListener("click", e => {
+    e.stopPropagation();
+    const on = SND.toggle();
+    $("#sndBtn").classList.toggle("off", !on);
+    $("#sndBtn").setAttribute("aria-pressed", on ? "true" : "false");
+    $("#sndBtn").setAttribute("aria-label", on ? "사운드 끄기" : "사운드 켜기");
+    toast(on ? "아케이드 사운드 ON" : "아케이드 사운드 OFF");
+  });
+
+  const skipPull = () => { if (typeof pullFinish === "function") pullFinish(); };
+  $("#drawOv").addEventListener("click", skipPull);
+  $("#drawSkip").addEventListener("click", e => { e.stopPropagation(); skipPull(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") skipPull(); });
+
+  /* 첫 사용자 터치에서 AudioContext unlock */
+  ["pointerdown", "touchstart", "keydown"].forEach(ev =>
+    window.addEventListener(ev, () => SND.unlock(), { once:true, passive:true }));
+
+  /* 뽑기 버튼 3D 눌림 손맛 */
+  $$("#drawBar .dome").forEach(btn => {
+    btn.addEventListener("pointerdown", () => {
+      btn.classList.add("press");
+      setTimeout(() => btn.classList.remove("press"), 150);
+    });
+  });
+
+  /* 일반 버튼 눌림음 (뽑기 버튼·사운드 토글 제외) */
+  document.addEventListener("click", e => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    if (b.closest("#drawBar") || b.id === "sndBtn" || b.id === "drawSkip") return;
+    SND.press();
+  }, true);
+
+  scatter($("#homeFx"), 14);
+  scatter($("#promoFx"), 10);
+  scatter($("#stageFx"), 12);
+  const homeLedTxt = "★ CHII SHOP ARCADE ★ 4 SERIES OPEN ★ 1PLAY 6,200P~ ★ LUCKY DRAW ★ NO BLANK ★ ";
+  $("#homeLed").textContent = homeLedTxt + homeLedTxt;
 
   /* ============================================================
      init
