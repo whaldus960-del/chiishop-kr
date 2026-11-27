@@ -1573,6 +1573,13 @@ body{
 .dw-dots i:nth-child(2).on{background:var(--coral);box-shadow:0 0 10px rgba(240,104,75,.9)}
 .dw-dots i:nth-child(3).on{background:var(--mint);box-shadow:0 0 10px rgba(56,179,148,.9)}
 
+/* 넓은 화면에서는 캐비닛을 조금 키워 시원하게 */
+@media(min-width:620px){
+  .draw-stage{transform:scale(1.24)}
+  .draw-ttl{font-size:19px}
+  .draw-sub{font-size:12px}
+}
+
 /* SKIP >> — 연출이 뜨는 순간부터 우측 상단에서 바로 누를 수 있다 */
 .draw-skip{
   position:absolute;top:calc(14px + env(safe-area-inset-top));right:14px;z-index:12;
