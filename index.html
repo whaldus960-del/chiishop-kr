@@ -718,7 +718,7 @@
   /* ============================================================
      data — 4 series × 30 boxes × (last + A~J)
      ============================================================ */
-  const GC = { last:"#cabdf7", A:"#ffd42a", B:"#ff5fa2", C:"#46a8f7", D:"#43d17a",
+  const GC = { last:"#9f87f0", A:"#ffd42a", B:"#ff5fa2", C:"#46a8f7", D:"#43d17a",
                E:"#2fc39b", F:"#43d17a", G:"#4cc36a", H:"#43d17a", I:"#39c78f", J:"#9be15d" };
   const KIND = { last:"crown", A:"plush", B:"cushion", C:"keyring", D:"stand",
                  E:"mug", F:"pouch", G:"sticker", H:"towel", I:"file", J:"pack" };
@@ -1482,7 +1482,7 @@
 
   function showResult(items, lastItem, lastAwarded, mode){
     const b = box(), s = ser();
-    const best = items.slice().sort((x, y) => gradeRank(y.g) - gradeRank(x.g))[0];
+    const best = lastItem || items.slice().sort((x, y) => gradeRank(y.g) - gradeRank(x.g))[0];
     const single = items.length === 1 && !lastItem;
     $("#resEyebrow").textContent = lastAwarded ? "LAST GET!" : (items.length === 1 ? "당첨 결과" : items.length + "연속 결과");
     $("#resCount").textContent = lastAwarded
@@ -1496,9 +1496,10 @@
     gr.textContent = GLABEL(best.g);
     gr.style.color = GC[best.g];
     $("#resName").textContent = best.name;
-    $("#resSub").textContent = single
-      ? (s.def.short + " · " + b.no + "번 박스")
-      : ("최고 등급 · " + s.def.short + " " + b.no + "번 박스");
+    $("#resSub").textContent = lastAwarded
+      ? ("라스트상 · " + s.def.short + " " + b.no + "번 박스")
+      : (single ? (s.def.short + " · " + b.no + "번 박스")
+                : ("최고 등급 · " + s.def.short + " " + b.no + "번 박스"));
 
     if (!single){
       const rows = items.slice().reverse().map(it =>
