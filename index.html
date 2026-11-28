@@ -4398,6 +4398,129 @@ body{background:#05050A;color:var(--tx)}
   color:#9A92A8;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14)}
 .pccc-now .pn-st.ok{color:#9BF0FF;background:rgba(94,224,255,.10);border-color:rgba(94,224,255,.34)}
 /* @@POKO-V20-END@@ */
+
+/* @@POKO-V21-BEGIN@@ ==========================================
+   v21 — ① 상세 인포 바 : 크고 직설적인 한 줄 + < 박스 교체 >
+         ② 박스 선택하기 시트 — 살아있는 박스 펼침 · 매진 박스 접힘 + 매진 도장
+         ③ 기록 · 랭킹 행 진화 아바타(등급 테두리 32~36px) · 닉네임 말줄임
+   ============================================================ */
+
+/* ---------- ① 인포 바 : 가격 · 박스 · 잔여량 한 줄 ---------- */
+.infobar .ib-line{justify-content:space-between;align-items:center;gap:4px;
+  font-feature-settings:"tnum";letter-spacing:-.4px}
+.infobar .ib-price{font-size:11.5px;gap:4px;letter-spacing:-.2px}
+.infobar .ib-price b{font-size:19px;font-weight:900;line-height:1;letter-spacing:-1px}
+.infobar .ib-price i{width:18px;height:18px;font-size:10px;font-weight:900;
+  box-shadow:0 2px 4px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.6)}
+.infobar .ib-price em{font-size:10px;font-weight:900;letter-spacing:-.2px}
+.infobar .ib-box{margin-left:0;font-size:13px;font-weight:900;letter-spacing:-.4px}
+.infobar .ib-box b{font-size:16.5px;font-weight:900;letter-spacing:-.6px}
+.infobar .ib-box span{font-size:11px;font-weight:900}
+.infobar .ib-rem{font-size:12.5px;font-weight:900;letter-spacing:-.3px;display:flex;align-items:center;gap:3px}
+.infobar .ib-rem span{font-size:10px;font-weight:900}
+.infobar .ib-rem b{font-size:17px;font-weight:900;letter-spacing:-.6px}
+.infobar .ib-rem span.numb{font-size:11px}
+
+/* < 박스 교체 > 3분할 바 */
+.ib-switch{gap:6px;margin-top:10px}
+.ib-switch .navbtn{flex:0 0 46px;height:46px;border-radius:14px}
+.ib-switch .navbtn svg{width:18px;height:18px;stroke-width:3}
+.boxswap{flex:1;min-width:0;position:relative;height:46px;border-radius:999px;display:flex;align-items:center;
+  justify-content:center;gap:7px;overflow:hidden;
+  background:linear-gradient(180deg,#FF9E74,#F0431F);color:#1A0803;
+  box-shadow:0 10px 22px -12px rgba(255,90,54,1),inset 0 1px 0 rgba(255,255,255,.48)}
+.boxswap::after{content:"";position:absolute;left:0;right:0;top:0;height:50%;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0))}
+.boxswap svg{width:19px;height:17px;fill:none;stroke:#1A0803;stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round}
+.boxswap b{font-size:13.5px;font-weight:900;letter-spacing:-.4px;color:#1A0803}
+.boxswap .bsw-chev{display:flex;flex-direction:column;gap:1px}
+.boxswap .bsw-chev svg{width:9px;height:6px;stroke-width:2.6}
+.boxswap:active{transform:translateY(1px);box-shadow:0 4px 12px -8px rgba(255,90,54,1),inset 0 1px 0 rgba(255,255,255,.4)}
+
+/* ---------- ② 박스 선택하기 시트 ---------- */
+#boxPicker .sheet{max-height:92vh}
+.bxs-head{position:relative;display:flex;align-items:center;gap:9px;padding:12px 15px 9px;flex:none}
+.bxs-ic{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
+  background:linear-gradient(180deg,#FFC07F,#F07A2E);box-shadow:0 7px 16px -9px #f07a2e,inset 0 1px 0 rgba(255,255,255,.5)}
+.bxs-ic svg{width:22px;height:20px;fill:none;stroke:#2A1204;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.bxs-head h3{margin:0;flex:1;min-width:0;font-size:17px;font-weight:900;letter-spacing:-.7px;color:#F7F3FF}
+.bxs-head .x{flex:none;width:32px;height:32px;border-radius:50%;background:#241E33;color:#B9B0C8;
+  font-size:18px;display:grid;place-items:center;line-height:1}
+.bxs-range{padding:1px 3px 9px;font-size:12px;font-weight:900;letter-spacing:-.2px;color:#B7AEC6}
+.bxs-list{display:grid;gap:8px;padding:0 0 calc(12px + env(safe-area-inset-bottom))}
+.bx-card{display:block;width:100%;padding:0;text-align:left;border-radius:14px;overflow:hidden;
+  background:linear-gradient(180deg,#1D1729,#150F21);border:1px solid #2A2340;color:#F5F1F9}
+.bx-card .bx-hd{display:flex;align-items:center;gap:7px;padding:13px 13px}
+.bx-card .bx-no{font-size:15px;font-weight:900;letter-spacing:-.5px;color:#F5F1F9;white-space:nowrap}
+.bx-card .bx-cur{flex:none;font-size:8.2px;font-weight:900;letter-spacing:-.1px;padding:2px 6px;border-radius:999px;
+  color:#1A0803;background:linear-gradient(180deg,#FFB083,#FF6A3D)}
+.bx-card .bx-rem{margin-left:auto;flex:none;display:flex;align-items:center;gap:7px;
+  font-size:11.5px;font-weight:900;letter-spacing:-.3px;color:#B7AEC6}
+.bx-card .bx-rem b{font-weight:900}
+.bx-card .bx-chev{width:8px;height:8px;border-right:1.8px solid #8E869C;border-bottom:1.8px solid #8E869C;
+  transform:rotate(45deg) translateY(-2px);transition:transform .18s;margin-right:1px}
+.bx-card.open .bx-chev{transform:rotate(-135deg) translateY(-2px)}
+.bx-card.cur{border-color:rgba(255,90,54,.75);box-shadow:inset 0 0 0 1px rgba(255,90,54,.22)}
+.bx-body{display:none}
+.bx-card.open .bx-body{display:block}
+.bx-grid{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;
+  padding:3px 7px 9px;border-top:1px solid #241E33}
+.bx-g{display:flex;align-items:center;justify-content:space-between;gap:4px;
+  padding:6px 5px;font-size:11.5px;font-weight:900;color:#EFEAF6;letter-spacing:-.2px}
+.bx-g em{font-style:normal;font-size:10.5px;font-weight:900;color:#9A92A8;letter-spacing:0}
+.bx-g b{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;font-weight:900;color:#EFEAF6}
+.bx-g.out em,.bx-g.out b{color:#FF6A52}
+.bx-card.sold{background:#211F29;border-color:#33303C}
+.bx-card.sold .bx-no{color:#A9A2B6}
+.bx-card.sold .bx-rem{color:#8E869C}
+.bx-card.sold.open{background:#1D1B24}
+.bx-card.sold .bx-grid{background:#2A2833;border-top:1px solid #35323F}
+.bx-card.sold .bx-g em,.bx-card.sold .bx-g b{color:#FF7F6B}
+.bx-stamp{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-9deg);
+  padding:3px 18px 4px;border-radius:6px;background:#E5342A;color:#fff;
+  font-size:21px;font-weight:900;letter-spacing:5px;text-indent:5px;line-height:1.25;
+  box-shadow:0 8px 20px rgba(229,52,42,.55),inset 0 0 0 2px rgba(255,255,255,.62);
+  text-shadow:0 1px 0 rgba(0,0,0,.35);pointer-events:none}
+
+/* ---------- ③ 기록 · 랭킹 진화 아바타 ---------- */
+.rkava{width:34px;height:34px;border:1.6px solid rgba(255,255,255,.14)}
+.lava{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(circle at 50% 30%,#2A2340,#151120);border:1.5px solid rgba(255,255,255,.14)}
+.lava img{width:100%;height:100%;object-fit:contain}
+.rkava.lv1,.lava.lv1{border-color:rgba(255,138,98,.85);box-shadow:0 0 10px -4px rgba(255,138,98,.9)}
+.rkava.lv2,.lava.lv2{border-color:rgba(207,146,96,.92);box-shadow:0 0 10px -4px rgba(207,146,96,.95)}
+.rkava.lv3,.lava.lv3{border-color:rgba(210,224,238,.92);box-shadow:0 0 10px -4px rgba(210,224,238,.9)}
+.rkava.lv4,.lava.lv4{border-color:rgba(255,194,74,.95);box-shadow:0 0 11px -3px rgba(255,194,74,.95)}
+.rkava.lv5,.lava.lv5{border:0;padding:1.6px;
+  background:conic-gradient(from 210deg,#FF8A62,#FFD75E,#5EE0FF,#C79BFF,#FF8A62);
+  box-shadow:0 0 12px -3px rgba(160,200,255,.85)}
+.rkava.lv5 img,.lava.lv5 img{border-radius:50%;background:#151120}
+
+#dLog .lrow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px dashed #241E33}
+.lno{flex:none;width:15px;text-align:right;font-size:9px;font-weight:900;font-style:italic;color:#5F5870;letter-spacing:-.4px}
+.lmid{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+#dLog .lnk{display:block;max-width:100%;font-size:11px;font-weight:800;color:#DCD4EA;letter-spacing:-.2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#dLog .ltime{display:block;font-size:8px;font-weight:700;color:#6C647A}
+.lright{flex:none;max-width:120px;display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.lright .ltag{width:auto;min-width:0;flex:none;font-size:9.5px;padding:1px 5px}
+#dLog .lright .lname{flex:none;display:block;max-width:120px;font-size:8.4px;font-weight:700;color:#A49CB0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
+#dLog .lrow.mine .lnk{color:#FFB09A}
+@media (max-width:340px){
+  .infobar .ib-price b{font-size:17px}
+  .infobar .ib-rem b{font-size:15.5px}
+  .infobar .ib-box{font-size:11.5px}
+  .infobar .ib-box b{font-size:15px}
+  .ib-switch .navbtn{flex:0 0 40px;height:44px}
+  .boxswap{height:44px}
+  .lright{max-width:104px}
+  #dLog .lright .lname{max-width:104px}
+  .bx-g{font-size:10.5px;padding:6px 3px}
+  .bx-g b{font-size:10.5px}
+  .bx-g em{font-size:9.8px}
+}
+/* @@POKO-V21-END@@ */
 </style>
 </head>
 <body>
@@ -4746,11 +4869,28 @@ body{background:#05050A;color:var(--tx)}
     </section>
 
     <section class="infobar">
+      <!-- v21: 가격 · 박스 · 잔여량을 크고 직설적인 한 줄로 -->
       <div class="ib-line">
         <span class="ib-price"><i>P</i><b class="numb" id="dPrice">6,200</b><em>/회</em></span>
-        <span class="ib-swap">교체</span>
-        <span class="ib-box"><b class="numb" id="dBoxNo">28</b><span class="numb" id="dBoxTotal">/3 박스</span></span>
-        <span class="ib-rem"><span>잔여량</span> <b class="numb" id="dRemain">98</b><span class="numb" id="dTotal">/199</span></span>
+        <span class="ib-box"><b class="numb" id="dBoxNo">1</b><span class="numb" id="dBoxTotal">/3 박스</span></span>
+        <span class="ib-rem"><span>잔여량</span> <b class="numb" id="dRemain">98</b><span class="numb" id="dTotal">/99</span></span>
+      </div>
+      <!-- v21: < 박스 교체 > 3분할 바 — 가운데를 누르면 박스 선택하기 시트 -->
+      <div class="ib-switch">
+        <button class="navbtn" id="prevBox" aria-label="이전 박스"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="boxswap" id="boxStrip" type="button" aria-haspopup="dialog" aria-label="박스 선택하기 열기">
+          <svg viewBox="0 0 24 22" aria-hidden="true">
+            <path d="M3 7.5l9-4.5 9 4.5-9 4.5z"/>
+            <path d="M3 7.5V17l9 4.5V12z"/>
+            <path d="M21 7.5V17L12 21.5V12z"/>
+          </svg>
+          <b>박스 교체</b>
+          <span class="bsw-chev" aria-hidden="true">
+            <svg viewBox="0 0 12 8"><path d="M2 6.5l4-4 4 4"/></svg>
+            <svg viewBox="0 0 12 8"><path d="M2 1.5l4 4 4-4"/></svg>
+          </span>
+        </button>
+        <button class="navbtn" id="nextBox" aria-label="다음 박스"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
       <!-- v17: 공정성 봉인 배지 → 쉬운 말 안내 시트 -->
       <div class="ib-seal">
@@ -4760,23 +4900,6 @@ body{background:#05050A;color:var(--tx)}
           <em>오픈 전 잠금 · 완판 후 공개</em>
           <span class="seal-go" aria-hidden="true">›</span>
         </button>
-      </div>
-      <div class="ib-switch">
-        <button class="navbtn" id="prevBox" aria-label="이전 박스"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <button class="boxstrip" id="boxStrip" aria-label="박스 목록 열기">
-          <svg viewBox="0 0 60 48" aria-hidden="true">
-            <path d="M6 14l12-7 12 7-12 7z" fill="#ffb347" stroke="#e08b1e" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M6 14v20l12 7V21z" fill="#ffcf7a" stroke="#e08b1e" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M30 14v20l-12 7V21z" fill="#ff9d2e" stroke="#e08b1e" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M6 14l-1 3M18 7l1 3" stroke="#fff" stroke-width="3" opacity=".5"/>
-          </svg>
-          <span class="bs-arrows">
-            <svg viewBox="0 0 12 10"><path d="M2 7l4-4 4 4"/></svg>
-            <svg viewBox="0 0 12 10"><path d="M2 3l4 4 4-4"/></svg>
-          </span>
-          <span class="bs-label">BOX<br>교체</span>
-        </button>
-        <button class="navbtn" id="nextBox" aria-label="다음 박스"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
       <div class="led-ticker" aria-hidden="true"><b id="ledTicker"></b></div>
     </section>
@@ -5096,11 +5219,21 @@ body{background:#05050A;color:var(--tx)}
     </div>
   </div>
 
-  <div class="overlay" id="boxPicker" role="dialog" aria-modal="true" aria-label="박스 선택">
+  <!-- v21: 박스 선택하기 — 살아있는 박스는 펼침 · 매진 박스는 접힘(누르면 등급 현황 + 매진 도장) -->
+  <div class="overlay" id="boxPicker" role="dialog" aria-modal="true" aria-label="박스 선택하기">
     <div class="sheet">
       <div class="sheet-handle"></div>
-      <div class="sheet-head"><h3>박스 교체</h3><button class="x" data-close="boxPicker" aria-label="닫기">×</button></div>
-      <div class="sheet-body"><p class="bp-legend">박스마다 <b>총 잔여</b> · <b>상위상(A·B)</b> · <b>라스트까지</b>를 한눈에 비교하고 골라 보세요.</p><div class="bp-list" id="bpList"></div></div>
+      <div class="bxs-head">
+        <span class="bxs-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 22"><path d="M3 7.5l9-4.5 9 4.5-9 4.5z"/><path d="M3 7.5V17l9 4.5V12z"/><path d="M21 7.5V17L12 21.5V12z"/></svg>
+        </span>
+        <h3>박스 선택하기</h3>
+        <button class="x" data-close="boxPicker" aria-label="닫기">×</button>
+      </div>
+      <div class="sheet-body">
+        <div class="bxs-range" id="bxsRange">1–3 박스</div>
+        <div class="bxs-list" id="bpList"></div>
+      </div>
     </div>
   </div>
 
@@ -6722,7 +6855,8 @@ body{background:#05050A;color:var(--tx)}
     return {
       nick: r.nick || "손님…",
       starter: RANK_ASSET[r.starter] || "poko",
-      lv: Math.max(1, Math.min(5, Number(r.lv) || rankLvOf(total))),
+      /* evo_lv = 계정의 실제 진화 단계(누적 구매 기준) · lv = 이 박스 획득 가치 기준(하위 호환) */
+      lv: Math.max(1, Math.min(5, Number(r.evo_lv) || Number(r.lv) || rankLvOf(total))),
       draws: Number(r.draws) || 0,
       bestGrade: r.best_grade || null,
       bestValue: Number(r.best_value) || 0,
@@ -6828,7 +6962,9 @@ body{background:#05050A;color:var(--tx)}
         g: r.grade,
         name: r.prize_name,
         time: relTime(r.at),
-        mine: !!r.is_me
+        mine: !!r.is_me,
+        starter: RANK_ASSET[r.starter] || "poko",
+        lv: Math.max(1, Math.min(5, Number(r.evo_lv) || Number(r.lv) || 1))
       }));
     }).catch(() => { if (!b.logs) b.logs = []; })
       .then(() => {
@@ -6842,6 +6978,7 @@ body{background:#05050A;color:var(--tx)}
     if (LIVE){ loadLogs(b); return []; }
     const rnd = mulberry(b.no * 7717 + 31);
     const sold = b.grades.slice(1).filter(g => g.r < g.t);
+    const keys = ["poko", "boy", "pet"];
     const logs = [];
     for (let i = 0; i < 4 && sold.length; i++){
       const g = sold[Math.floor(rnd() * sold.length)];
@@ -6849,7 +6986,9 @@ body{background:#05050A;color:var(--tx)}
         who: NICKS[Math.floor(rnd() * NICKS.length)],
         g: g.k, name: g.n,
         time: i === 0 ? "방금 전" : (i * 2 + 1) + "분 전",
-        mine: false
+        mine: false,
+        starter: keys[Math.floor(rnd() * keys.length)],
+        lv: 1 + Math.floor(rnd() * 4)
       });
     }
     b.logs = logs;
@@ -6873,12 +7012,14 @@ body{background:#05050A;color:var(--tx)}
         cta: "상품 보고 첫 티켓 뜯기", act: "tab-goods"
       });
     } else {
-      logs.forEach(l => {
-        html += `<div class="lrow ${l.mine ? "mine" : ""}">
-          <span class="lwho">${l.who}</span>
-          <span class="ltag" style="color:${GC[l.g]}">${GLABEL(l.g)}</span>
-          <span class="lname">${l.name}</span>
-          <span class="ltime">${l.time}</span>
+      logs.forEach((l, i) => {
+        const lv = Math.max(1, Math.min(5, Number(l.lv) || 1));
+        const st = RANK_ASSET[l.starter] || l.starter || "poko";
+        html += `<div class="lrow ${l.mine ? "mine" : ""}" data-log="${i}">
+          <span class="lno">${logs.length - i}</span>
+          <span class="lava lv${lv}"><img src="assets/${st}-lv${lv}.png" alt="" loading="lazy" decoding="async"></span>
+          <span class="lmid"><span class="lnk" title="${l.who}">${l.who}</span><span class="ltime">${l.time}</span></span>
+          <span class="lright"><span class="ltag" style="color:${GC[l.g] || "#fff"}">${GLABEL(l.g)}</span><span class="lname" title="${l.name}">${l.name}</span></span>
         </div>`;
       });
     }
@@ -6907,7 +7048,8 @@ body{background:#05050A;color:var(--tx)}
   }
   /* 검증·디버깅용 얇은 핸들 (기존 POKO_BGM·POKO_WELCOME 과 동일한 방식) */
   window.POKO_DETAIL = { render: renderDetail, log: renderLog, rank: renderRank, shelf: renderBox,
-    box: box, view: view, fit: () => fitPmBars($("#dGoods")), seal: openSeal,
+    box: box, ser: () => ser(), view: view, fit: () => fitPmBars($("#dGoods")), seal: openSeal,
+    picker: () => { renderBoxPicker(); openOverlay("boxPicker"); }, renderPicker: renderBoxPicker,
     setRankTab: k => { view.rankTab = k === "lucky" ? "lucky" : "draws"; renderRank(); },
     rankData: () => { const b = box(); return b && b.rank ? b.rank : null; } };
   /* 홈 정렬·판 상태 얇은 핸들 (검증용) */
@@ -6978,32 +7120,47 @@ body{background:#05050A;color:var(--tx)}
     return b.grades.reduce((a, g) => a + ((g.k === "A" || g.k === "B") ? g.r : 0), 0);
   }
 
+  /* ── 박스 선택하기 시트 (v21)
+       · 살아있는 박스(잔여 ≥ 1) = 기본 펼침 + 등급별 잔여 3열 그리드, 누르면 바로 전환
+       · 매진 박스(잔여 0)      = 기본 접힘(0장 남음 ⌄), 누르면 회색 판 + 빨간 매진 도장 */
+  function bxGradeCells(b){
+    return b.grades.map(g => {
+      const lab = g.k === "last" ? "LAST" : g.k;
+      const out = g.r <= 0;
+      return `<span class="bx-g${out ? " out" : ""}" data-g="${g.k}"><em>${lab}</em><b class="numb">${g.r}/${g.t}</b></span>`;
+    }).join("");
+  }
+
   function renderBoxPicker(){
     const s = ser();
-    /* 상위상(A·B) 잔여가 가장 많은 박스 = 전략픽 */
-    let pickNo = 0, pickVal = -1;
-    s.boxes.forEach(b => {
-      if (remainOf(b) <= 0) return;
-      const v = abOf(b);
-      if (v > pickVal){ pickVal = v; pickNo = b.no; }
-    });
+    const curNo = box() ? box().no : 0;
+    const range = $("#bxsRange");
+    if (range) range.textContent = "1–" + s.boxes.length + " 박스";
     $("#bpList").innerHTML = s.boxes.map(b => {
       const rem = remainOf(b), tot = totalOf(b);
-      const sold = rem === 0;
-      const ab = abOf(b);
-      const lastLeft = !!(b.grades[0] && b.grades[0].r > 0);
-      return `<button class="bp-row ${b.no === box().no ? "cur" : ""}" data-box="${b.no}">
-        <span class="bp-line1">
-          <span class="no">${b.no}번</span>
-          <span class="bar"><i style="width:${Math.round((1 - rem / tot) * 100)}%"></i></span>
-          <span class="rr numb">${sold ? "완판" : "총 " + rem + "/" + tot + "장"}</span>
-          <span class="st ${sold ? "" : "live"}">${sold ? "완판" : "판매중"}</span>
+      if (rem <= 0){
+        return `<button class="bp-row bx-card sold" type="button" data-bxtoggle="${b.no}"
+            data-box-sold="${b.no}" aria-expanded="false"
+            aria-label="${b.no} 박스 · 매진 · 눌러서 등급 현황 보기">
+          <span class="bx-hd">
+            <span class="bx-no">${b.no} 박스</span>
+            ${b.no === curNo ? `<span class="bx-cur">지금 박스</span>` : ""}
+            <span class="bx-rem"><b>0장 남음</b><i class="bx-chev" aria-hidden="true"></i></span>
+          </span>
+          <span class="bx-body">
+            <span class="bx-grid">${bxGradeCells(b)}<span class="bx-stamp" aria-hidden="true">매진</span></span>
+          </span>
+        </button>`;
+      }
+      return `<button class="bp-row bx-card live open${b.no === curNo ? " cur" : ""}" type="button" data-box="${b.no}"
+          data-rem="${rem}" data-tot="${tot}" aria-expanded="true"
+          aria-label="${b.no} 박스 · ${rem}장 남음 · 누르면 이 박스로 전환">
+        <span class="bx-hd">
+          <span class="bx-no">${b.no} 박스</span>
+          ${b.no === curNo ? `<span class="bx-cur">지금 박스</span>` : ""}
+          <span class="bx-rem"><b>${rem}장 남음</b></span>
         </span>
-        <span class="bp-chips">
-          <span class="bp-chip ab">상위 A·B <b>${ab}</b>장</span>
-          <span class="bp-chip last">${lastLeft ? "라스트까지 <b>" + rem + "장</b>" : "라스트 <b>지급완료</b>"}</span>
-          ${(pickNo === b.no && !sold) ? "<span class=\"bp-chip pick\">전략픽</span>" : ""}
-        </span>
+        <span class="bx-body"><span class="bx-grid">${bxGradeCells(b)}</span></span>
       </button>`;
     }).join("");
   }
@@ -9232,6 +9389,14 @@ body{background:#05050A;color:var(--tx)}
   $("#prevBox").addEventListener("click", () => moveBox(-1));
   $("#nextBox").addEventListener("click", () => moveBox(1));
   $("#boxStrip").addEventListener("click", () => { renderBoxPicker(); openOverlay("boxPicker"); });
+  /* 매진 박스 카드 — 누를 때마다 등급 현황 펼침/접힘 (전환되지 않는다) */
+  $("#bpList").addEventListener("click", e => {
+    const t = e.target.closest("[data-bxtoggle]");
+    if (!t) return;
+    const on = !t.classList.contains("open");
+    t.classList.toggle("open", on);
+    t.setAttribute("aria-expanded", on ? "true" : "false");
+  });
   /* 진열장은 '어디서 열었는지' 기억했다가 ✕ 닫기로 그 화면에 돌려보낸다 (2026-11-28) */
   let shelfFrom = "home";
   const SHELF_BACK = { detail: "detail", my: "my", admin: "admin", home: "home" };
