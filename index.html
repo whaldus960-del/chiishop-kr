@@ -1793,8 +1793,8 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
 .pi-info dd.p{font-family:ui-monospace,Menlo,monospace;color:#e0357f}
 
 /* ── 주문 확인 (영수증 · 다크) ── */
-#orderSheet .receipt{background:linear-gradient(180deg,#1A1428 0 44px,#141020 44px 100%);border-radius:18px 18px 0 0}
-#orderSheet .receipt::before{content:"";position:absolute;left:0;right:0;top:0;height:44px;border-radius:18px 18px 0 0;
+#orderSheet .receipt{position:relative;overflow:hidden;background:linear-gradient(180deg,#1A1428 0 44px,#141020 44px 100%);border-radius:18px 18px 0 0}
+#orderSheet .receipt::before{content:"";position:absolute;left:0;right:0;top:0;height:44px;border-radius:18px 18px 0 0;pointer-events:none;z-index:0;
   background:repeating-linear-gradient(114deg,rgba(255,90,54,.18) 0 14px,rgba(255,194,74,.14) 14px 28px,rgba(169,139,255,.14) 28px 42px)}
 .rc-head{display:flex;align-items:center;gap:10px;padding:2px 0 12px;border-bottom:1.6px dashed rgba(255,255,255,.12)}
 .rc-thumb{flex:none;width:54px;height:54px;border-radius:12px;overflow:hidden;display:grid;place-items:center;
@@ -4085,7 +4085,7 @@ body{background:#05050A;color:var(--tx)}
 
 /* ---------- ④ 상단 헤더 : 브랜드 로고 확대 ---------- */
 .home-head{padding:11px 12px 12px}
-.home-head .brand{padding:4px 13px 4px 5px;gap:0}
+.home-head .brand{padding:4px 13px 4px 5px;gap:0;flex-shrink:0}
 .home-head .logo{font-size:17px;letter-spacing:-.7px;gap:7px}
 .home-head .logo-img{width:30px;height:30px;border-radius:9px;
   box-shadow:0 0 12px -2px rgba(255,90,54,.9),inset 0 0 0 1px rgba(255,255,255,.14)}
@@ -4104,8 +4104,6 @@ body{background:#05050A;color:var(--tx)}
   .home-head .pts{font-size:10px;padding:3px 8px 3px 3px}
   .home-head .pts i{width:16px;height:16px;font-size:8.5px}
   .home-head .hicon,.home-head .hcart{width:29px;height:29px}
-  .home-head .acct b{display:none}
-  .home-head .acct{padding:4px 7px}
 }
 
 /* ---------- ④ 실시간 당첨 바 : 큼지막한 썸네일 + 2줄 ---------- */
@@ -4157,6 +4155,109 @@ body{background:#05050A;color:var(--tx)}
 .smeta{font-size:7.4px;margin-top:0}
 .sbar{height:3px;margin-top:3px}
 
+/* ---------- ⑦ v19 : 헤더 계정칩 제거 → 마이페이지 맨 아래 계정/로그아웃 ---------- */
+/* 홈 상단 헤더에는 계정 칩을 두지 않는다 (로고 + 포인트 + 알림 + 출석 + 진열장만) */
+.home-head .acct,#screenHome .acct{display:none !important}
+/* 시리즈 포스터 = 원본 4:5 그대로 · 단 1px도 잘리지 않게 (contain + 중앙 정렬) */
+.sart{aspect-ratio:4 / 5}
+.sart img.ghero{object-fit:contain;object-position:50% 50%;padding:0;filter:none}
+/* 마이페이지 맨 아래 — 계정 관리 · 로그아웃 */
+#screenMy{padding-bottom:0}   /* .my-body 가 이미 96px 하단 여백을 준다 (이중 여백 제거) */
+.myacct .ma-box{display:flex;align-items:center;gap:10px;padding:10px 12px 12px}
+.myacct .ma-ic{flex:none;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-size:15px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.myacct .ma-tx{flex:1 1 auto;min-width:0}
+.myacct .ma-tx b{display:block;font-size:11.5px;font-weight:900;letter-spacing:-.3px;color:#F5F1F9;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.myacct .ma-tx small{display:block;margin-top:2px;font-size:8.6px;font-weight:700;letter-spacing:-.2px;color:#8E869C;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.myacct .ma-btn{flex:none;height:32px;padding:0 14px;border-radius:10px;font-size:10.5px;font-weight:900;letter-spacing:-.2px;
+  color:#FFD9CD;background:rgba(255,90,54,.10);border:1px solid rgba(255,90,54,.42)}
+.myacct .ma-btn:active{transform:scale(.97)}
+.myacct .ma-btn[data-mode="in"]{color:#fff;border-color:transparent;
+  background:linear-gradient(180deg,#FF8A62,#F0431F);box-shadow:0 8px 18px -10px rgba(255,90,54,1),inset 0 1px 0 rgba(255,255,255,.4)}
+
+/* ---------- ⑧ v19-b : 상단 배너 ↑ · 실시간 당첨 바 ↓ · 경계 정리 ---------- */
+/* 배너 — 쿠지맨처럼 시원한 높이(155~165px)로, 가운데 빈 공간 없이 글자·일러스트를 키워 균형 */
+.hcar .hc-slide{min-height:158px;padding:10px 13px 27px}
+.hcar .hc-slide .hs-kicker{font-size:8.6px;padding:3px 8px}
+.hcar .hc-slide .hs-title{margin:8px 0 0;font-size:19.6px;line-height:1.14;letter-spacing:-1px}
+.hcar .hc-slide .hs-list{margin:9px 0 0;gap:4px 9px}
+.hcar .hc-slide .hs-list li{font-size:10px;line-height:1.34}
+.hcar .hc-slide .hs-art{width:90px}
+.hcar .hc-slide .hs-art svg{overflow:visible}   /* 일러스트 장식이 SVG 박스 밖으로 나가도 잘리지 않게 */
+.hcar .hc-slide .hb-chip{font-size:8.2px}
+.hcar .hc-slide .hs-note{font-size:9.1px;padding:3.5px 9px}
+.hcar .hc-slide .hb-more{font-size:8.6px}
+.hcar .hc-slide .hs-foot{margin:10px 0 0}
+@media(max-width:374px){
+  .hcar .hc-slide{min-height:158px;padding:9px 12px 26px}
+  .hcar .hc-slide .hs-title{font-size:18px}
+  .hcar .hc-slide .hs-list li{font-size:9.3px}
+  .hcar .hc-slide .hs-art{width:74px}
+  .hcar .hc-slide .hs-kicker{font-size:8.2px}
+}
+/* 실시간 당첨 바 — 51px 슬롭 · 썸네일 선명하게 · 좌측 라벨 경계는 마스크로 부드럽게 분리 */
+.wfeed{height:51px}
+.wf-head{font-size:9.2px;padding:0 10px;border-right:1px solid rgba(0,0,0,.34)}
+.wf-head .dot{width:5px;height:5px}
+.wf-view{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 15px,#000 calc(100% - 18px),transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 15px,#000 calc(100% - 18px),transparent 100%)}
+.wf-view::after{display:none}
+.wf-it{gap:7px;padding:0 10px;font-size:8.8px;border:0;border-right:1px solid rgba(255,255,255,.07);
+  background:transparent;font-family:inherit;color:#C6CAD6;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.wf-it:active{background:rgba(255,255,255,.06)}
+.wf-track{animation:none !important;transition:transform .55s cubic-bezier(.3,.8,.3,1);will-change:transform}
+.wf-view:hover .wf-track{animation-play-state:running}
+.pwa-mn .mr{border-top:1px solid #241E33}
+.wf-nm{font-size:8.8px}
+.wf-g{font-size:12px}
+.wfeed .wf-th{width:38px;height:38px;border-radius:9px}
+.wfeed .wf-th img{border-radius:8px}
+.wf-me{font-size:6.6px;padding:1px 4px}
+/* 뽑기 결과 목록 — 크림 배경 위 흰 글자·배경=글자색 배지 버그 수정 (다크 카드 + 등급색 배지) */
+#resultSheet .rrow2{background:#191424;border:1px solid #2E2740}
+#resultSheet .rrow2 .rn{color:#F5F1F9}
+#resultSheet .rrow2 .rv{color:#B7AEC6}
+#resultSheet .rrow2 .rt{background:currentColor;-webkit-text-fill-color:#14101C;border:1px solid rgba(0,0,0,.45);
+  text-shadow:none;font-style:normal}
+/* 상위상 배지 — 실제로 남은 가장 높은 등급 */
+.sneon.out{color:#B9B0C9;background:rgba(255,255,255,.06)}
+
+/* 모달 계층 — 로그인·확인 시트는 어떤 시트보다 위에 뜬다 */
+#authSheet{z-index:130}
+#confirmSheet{z-index:140}
+#pwaSheet{z-index:100}
+/* ---------- ⑨ v19-c : 마이페이지 5단 다이어트 ---------- */
+/* 캐릭터 · 도감 시트 */
+.evo-edit{position:absolute;right:6px;top:6px;z-index:8;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(20,16,28,.78);border:1px solid rgba(255,90,54,.55);box-shadow:0 6px 16px -8px rgba(255,90,54,1)}
+.evo-edit svg{width:16px;height:16px;fill:none;stroke:#FFB09A;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.evo-edit:active{transform:scale(.94)}
+#dexSheet .evo-pick{position:static;margin:0 4px 8px;padding:0;background:none;border:0}
+#dexSheet .dex-h{margin:2px 4px 6px;font-size:9.4px;font-weight:900;letter-spacing:.2px;color:#8E869C}
+#dexSheet .sheet-actions{padding:6px 14px calc(10px + env(safe-area-inset-bottom,0px))}
+.evo-dex{display:inline-flex;align-items:center;gap:4px;margin-top:7px;padding:5px 10px;border-radius:9px;
+  font-size:9.6px;font-weight:900;letter-spacing:-.2px;color:#FFD9CD;background:rgba(255,90,54,.10);
+  border:1px solid rgba(255,90,54,.40)}
+.evo-dex:active{transform:scale(.97)}
+#dexSheet .dex-wrap{padding:2px 12px 6px}
+#dexSheet .dex-wrap .pn{margin:0 4px;background:transparent;border:0;box-shadow:none}
+#dexSheet .dex-wrap .pn .ph{padding-left:0;padding-right:0}
+#dexSheet .dex-tip{margin:8px 4px 0;font-size:9px;font-weight:800;color:#8E869C;line-height:1.4}
+/* 배송지·통관부호 미등록 강조 */
+.care .rw .tx b em.warn{font-style:normal;margin-left:4px;padding:1px 5px;border-radius:5px;font-size:7.6px;font-weight:900;
+  color:#FFD9CD;background:rgba(255,90,54,.18);border:1px solid rgba(255,90,54,.5)}
+.care .rw.unset{background:linear-gradient(90deg,rgba(255,90,54,.10),rgba(255,90,54,.02))}
+.care .rw.unset .tx b{color:#FFB7A2}
+.care .rw.unset .ac{color:#2A0803;background:linear-gradient(180deg,#FFD9A8,#FF8A62);border:0}
+.care .at{padding:2px 12px 8px}
+.care .rows{padding:0 0 4px}
+.pwa-row .t{color:#E6E0EE}
+.cpnbox .ph h3 small{font-size:8.4px;font-weight:800;color:#8E869C;margin-left:2px}
+.adm-login-btn{margin-top:8px;padding:8px 14px;border-radius:10px;font-size:10.5px;font-weight:900;color:#2A0803;
+  background:linear-gradient(180deg,#FFD9A8,#FF8A62);border:0;box-shadow:0 8px 18px -10px rgba(255,90,54,1)}
+
 /* @@POKO-V18-END@@ */
 </style>
 </head>
@@ -4170,7 +4271,6 @@ body{background:#05050A;color:var(--tx)}
       <div class="hh-bar">
         <div class="brand"><span class="logo"><img class="logo-img" src="assets/poko-mascot.png" alt="" width="22" height="22" decoding="async">포코쿠지</span><span class="logo-sub">POKO KUJI</span></div>
         <div class="head-actions">
-          <button class="acct" id="authBtn" hidden aria-label="내 계정"><i>👤</i><b id="authName">로그인</b></button>
           <button class="pts" id="homePts" aria-label="내 포인트"><i>P</i><b id="homePtsVal">240,000</b><span>+</span></button>
           <button class="hicon" id="noticeBtn" type="button" aria-label="공지 · 구매 안내 열기">
             <svg viewBox="0 0 24 24"><path d="M12 3.2a6 6 0 00-6 6v4.3L4.4 17h15.2L18 13.5V9.2a6 6 0 00-6-6z"/><path d="M10 19.6a2 2 0 004 0"/></svg>
@@ -4211,7 +4311,7 @@ body{background:#05050A;color:var(--tx)}
                 <li>첫 유료 뽑기 <b>1판</b>이 반값</li>
                 <li>동일 번호 <b>1인 1회</b> 한정</li>
               </ul>
-              <div class="hs-foot"><p class="hs-note"><b>웰컴 혜택</b> 안내</p><span class="hb-more">혜택 보기 ›</span></div>
+              <div class="hs-foot"><span class="hb-more">혜택 보기 ›</span></div>
             </div>
             <div class="hs-art">
               
@@ -4258,7 +4358,7 @@ body{background:#05050A;color:var(--tx)}
                 <li>유료 결제는 <b>만 19세 이상</b>만</li>
                 <li>본 상품은 <b>랜덤 상품</b>입니다</li>
               </ul>
-              <div class="hs-foot"><p class="hs-note">5개 이상 적립 시 <b>무료배송</b></p><span class="hb-more">규정 보기 ›</span></div>
+              <div class="hs-foot"><p class="hs-note">5점 이상 적립 시 <b>무료배송</b></p><span class="hb-more">규정 보기 ›</span></div>
             </div>
             <div class="hs-art">
               
@@ -4291,7 +4391,7 @@ body{background:#05050A;color:var(--tx)}
               <h3 class="hs-title">출고 · 교환/반품 <b>꼭 확인</b></h3>
               <ul class="hs-list">
                 <li>영업일 <b>3~5일</b> 이내 출고</li>
-                <li>파손·누락 시 <b>무편집 개봉 영상</b></li>
+                <li>파손·누락 시 <b>송장부터 찍은 무편집 개봉 영상 필수</b></li>
               </ul>
               <div class="hs-foot"><p class="hs-note">단순 변심은 <b>왕복 배송비</b> 부담</p><span class="hb-more">규정 보기 ›</span></div>
             </div>
@@ -4373,11 +4473,11 @@ body{background:#05050A;color:var(--tx)}
           <!-- 5) 보관 30일 · 묶음배송 -->
           <article class="hc-slide hs-dark" data-slide="4" data-hb-act="store" role="group" aria-label="보관 30일 및 묶음배송 안내">
             <div class="hs-txt">
-              <div class="hs-top"><span class="hs-kicker">STORAGE · SHIPPING</span><span class="hb-chip lime">5개 이상 무료</span></div>
-              <h3 class="hs-title"><b>30일 보관</b> · 5개 이상 <b>무료배송</b></h3>
+              <div class="hs-top"><span class="hs-kicker">STORAGE · SHIPPING</span><span class="hb-chip lime">5점 이상 무료</span></div>
+              <h3 class="hs-title"><b>30일 보관</b> · 5점 이상 <b>무료배송</b></h3>
               <ul class="hs-list">
-                <li>30일 지나면 <b>포인트 자동 전환</b></li>
-                <li>5개 미만은 배송비 <b>3,500원</b></li>
+                <li>원치 않는 굿즈는 <b>포인트 환급</b></li>
+                <li><b>5점 모으면 무료배송</b> (미만 3,500원)</li>
               </ul>
               <div class="hs-foot"><p class="hs-note">모은 굿즈는 <b>묶음배송</b> 한 번에</p><span class="hb-more">규정 보기 ›</span></div>
             </div>
@@ -4579,13 +4679,13 @@ body{background:#05050A;color:var(--tx)}
     <div class="freegage" id="freeGauge">
       <div class="fg-top">
         <span class="fg-t"><i>⚡</i>POWER <b>CHARGE</b></span>
-        <span class="fg-free">5개 이상 무료</span>
+        <span class="fg-free">5점 이상 무료</span>
       </div>
       <div class="pw-row">
         <div class="fg-bar"><i id="fgFill"></i></div>
         <span class="fg-n" id="fgNow">현재 0/5개</span>
       </div>
-      <div class="fg-msg" id="fgMsg">5개를 모으면 묶음배송이 무료예요</div>
+      <div class="fg-msg" id="fgMsg">출고할 굿즈를 5점 이상 고르면 배송비가 무료예요</div>
     </div>
 
     <!-- 상태 탭 -->
@@ -4641,13 +4741,10 @@ body{background:#05050A;color:var(--tx)}
 
       <!-- 5단계 진화 카드 : 프레임 5개를 미리 그려두고 화면에 1개만 보여준다 -->
       <div class="evo-hero" id="evoHero" data-lv="1" data-starter="poko">
-        <!-- 스타팅 선택 : 고른 스타팅이 카드·로드맵에 바로 반영되고 브라우저에 저장된다 -->
-        <div class="evo-pick" id="evoPick" role="tablist" aria-label="스타팅 선택">
-          <button class="ep-btn on" type="button" role="tab" data-starter="poko" aria-selected="true"><i>🌸</i><b>포코링</b></button>
-          <button class="ep-btn" type="button" role="tab" data-starter="boy" aria-selected="false"><i>⚡</i><b>레오</b></button>
-          <button class="ep-btn" type="button" role="tab" data-starter="pet" aria-selected="false"><i>🦊</i><b>별여우</b></button>
-        </div>
         <div class="evo-stage" id="myAva">
+          <button class="evo-edit" id="evoEditBtn" type="button" aria-label="캐릭터 · 도감 열기" title="캐릭터 · 도감">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4.2-1 10-10a2.4 2.4 0 0 0-3.4-3.4l-10 10L4 20z"/><path d="M13.8 6.2l4 4"/></svg>
+          </button>
       <div class="evo-frame" data-evolv="1" data-name="포코에그" data-tier="루키" aria-hidden="true"><div class="pfr lv1" style=""><div class="paura phalo1"></div><div class="pband" style="--ir1:.450;--ir2:.5;background:conic-gradient(from 0deg,#FF6B45,#FFB79C 55deg,#FF8E6A 110deg,#FFE2D4 170deg,#FF9A76 232deg,#FFC7AE 296deg,#FF6B45)"></div><div class="pband pbevel" style="--ir1:.450;--ir2:.5;background:radial-gradient(circle at 30% 18%,rgba(255,255,255,.85),transparent 40%),radial-gradient(circle at 50% 92%,rgba(0,0,0,.5),transparent 44%)"></div><div class="pface" style="--rim:0.05;background:radial-gradient(circle at 50% 44%,#3A1626 0%,#2A1022 60%,#1A0A16 100%)"><img loading="lazy" decoding="async" src="assets/poko-lv1.png" alt=""></div><div class="phair"></div><div class="primout"></div></div></div>
       <div class="evo-frame" data-evolv="2" data-name="포코링" data-tier="브론즈" aria-hidden="true"><div class="pfr lv2" style=""><div class="paura phalo2"></div><div class="pband" style="--ir1:.420;--ir2:.5;background:conic-gradient(from 0deg,#3A2414,#8C5A2E 28deg,#F7C795 55deg,#B87A3C 80deg,#4E3018 105deg,#9A6435 138deg,#FFDDB0 168deg,#C99055 196deg,#6B4423 224deg,#A87141 252deg,#F7CD9C 282deg,#B57C40 312deg,#4A2E18 338deg,#3A2414)"></div><div class="pband pbevel" style="--ir1:.420;--ir2:.5;background:radial-gradient(circle at 30% 18%,rgba(255,255,255,.8),transparent 40%),radial-gradient(circle at 50% 94%,rgba(0,0,0,.6),transparent 44%)"></div><div class="pface" style="--rim:0.08;background:radial-gradient(circle at 50% 44%,#3A2412 0%,#28180C 60%,#150C06 100%)"><img loading="lazy" decoding="async" src="assets/poko-lv2.png" alt=""></div><div class="phair"></div><div class="primout"></div><div class="pstuds"><i class="pgem pbronze" style="left:50.00%;top:4.00%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:82.53%;top:17.47%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:96.00%;top:50.00%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:82.53%;top:82.53%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:50.00%;top:96.00%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:17.47%;top:82.53%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:4.00%;top:50.00%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:17.47%;top:17.47%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i></div><svg class="psparks" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><filter id="sg2x2" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="0" stdDeviation="2.6" flood-color="#FFD9A8" flood-opacity=".95"/></filter></defs><g filter="url(#sg2x2)"><path d="M33.8,150.6 Q35.1,155.3 39.8,156.6 Q35.1,157.9 33.8,162.6 Q32.4,157.9 27.7,156.6 Q32.4,155.3 33.8,150.6 Z" fill="#FFD9A8" opacity="0.66"/><path d="M157.7,38.1 Q159.2,43.7 164.8,45.3 Q159.2,46.8 157.7,52.4 Q156.1,46.8 150.5,45.3 Q156.1,43.7 157.7,38.1 Z" fill="#FFD9A8" opacity="0.73"/><path d="M19.6,104.1 Q20.3,106.4 22.6,107.0 Q20.3,107.7 19.6,109.9 Q19.0,107.7 16.7,107.0 Q19.0,106.4 19.6,104.1 Z" fill="#FFD9A8" opacity="0.85"/><path d="M82.7,41.0 Q83.9,45.2 88.1,46.4 Q83.9,47.6 82.7,51.8 Q81.5,47.6 77.2,46.4 Q81.5,45.2 82.7,41.0 Z" fill="#FFD9A8" opacity="0.99"/><path d="M38.8,44.5 Q40.1,49.0 44.5,50.2 Q40.1,51.5 38.8,55.9 Q37.5,51.5 33.1,50.2 Q37.5,49.0 38.8,44.5 Z" fill="#FFD9A8" opacity="0.68"/><path d="M166.2,177.7 Q167.1,180.7 170.0,181.5 Q167.1,182.3 166.2,185.3 Q165.4,182.3 162.5,181.5 Q165.4,180.7 166.2,177.7 Z" fill="#FFD9A8" opacity="0.53"/></g></svg></div></div>
       <div class="evo-frame" data-evolv="3" data-name="포코나이트" data-tier="실버" aria-hidden="true"><div class="pfr lv3" style="--ww:36.67%;--wh:34.38%;--wt:29.92%;--wrx:90.21%;--wlx:-26.88%"><div class="paura phalo3"></div><div class="prays prays3"></div><div class="pwing pwl"><svg viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="wg3x3" x1="0" y1="1" x2=".7" y2="0"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".38" stop-color="#EDF6FF"/><stop offset=".70" stop-color="#A9C0DE"/><stop offset="1" stop-color="#58789F"/></linearGradient><filter id="wgl3x3" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#57E3FF" flood-opacity=".95"/></filter></defs><g filter="url(#wgl3x3)"><path d="M0,0 C0.26,-0.15 0.70,-0.138 1,0 C0.70,0.12 0.26,0.15 0,0 Z" transform="translate(10.0,140.0) rotate(-98.0) scale(112.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.148 0.70,-0.13616 1,0 C0.70,0.1184 0.26,0.148 0,0 Z" transform="translate(23.8,122.6) rotate(-76.0) scale(130.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.14 0.70,-0.12880000000000003 1,0 C0.70,0.11200000000000002 0.26,0.14 0,0 Z" transform="translate(36.7,106.4) rotate(-54.0) scale(118.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.132 0.70,-0.12144 1,0 C0.70,0.10560000000000001 0.26,0.132 0,0 Z" transform="translate(48.6,91.3) rotate(-32.0) scale(92.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.12 0.70,-0.1104 1,0 C0.70,0.096 0.26,0.12 0,0 Z" transform="translate(10.0,140.0) rotate(-104.0) scale(73.9)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /><path d="M0,0 C0.26,-0.1184 0.70,-0.10892800000000001 1,0 C0.70,0.09472000000000001 0.26,0.1184 0,0 Z" transform="translate(23.8,122.6) rotate(-82.0) scale(85.8)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /><path d="M0,0 C0.26,-0.11200000000000002 0.70,-0.10304000000000002 1,0 C0.70,0.08960000000000001 0.26,0.11200000000000002 0,0 Z" transform="translate(36.7,106.4) rotate(-60.0) scale(77.9)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /><path d="M0,0 C0.26,-0.10560000000000001 0.70,-0.09715200000000002 1,0 C0.70,0.08448000000000001 0.26,0.10560000000000001 0,0 Z" transform="translate(48.6,91.3) rotate(-38.0) scale(60.7)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /></g></svg></div><div class="pwing pwr"><svg viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="wg3x3" x1="0" y1="1" x2=".7" y2="0"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".38" stop-color="#EDF6FF"/><stop offset=".70" stop-color="#A9C0DE"/><stop offset="1" stop-color="#58789F"/></linearGradient><filter id="wgl3x3" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#57E3FF" flood-opacity=".95"/></filter></defs><g filter="url(#wgl3x3)"><path d="M0,0 C0.26,-0.15 0.70,-0.138 1,0 C0.70,0.12 0.26,0.15 0,0 Z" transform="translate(10.0,140.0) rotate(-98.0) scale(112.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.148 0.70,-0.13616 1,0 C0.70,0.1184 0.26,0.148 0,0 Z" transform="translate(23.8,122.6) rotate(-76.0) scale(130.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.14 0.70,-0.12880000000000003 1,0 C0.70,0.11200000000000002 0.26,0.14 0,0 Z" transform="translate(36.7,106.4) rotate(-54.0) scale(118.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.132 0.70,-0.12144 1,0 C0.70,0.10560000000000001 0.26,0.132 0,0 Z" transform="translate(48.6,91.3) rotate(-32.0) scale(92.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.12 0.70,-0.1104 1,0 C0.70,0.096 0.26,0.12 0,0 Z" transform="translate(10.0,140.0) rotate(-104.0) scale(73.9)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /><path d="M0,0 C0.26,-0.1184 0.70,-0.10892800000000001 1,0 C0.70,0.09472000000000001 0.26,0.1184 0,0 Z" transform="translate(23.8,122.6) rotate(-82.0) scale(85.8)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /><path d="M0,0 C0.26,-0.11200000000000002 0.70,-0.10304000000000002 1,0 C0.70,0.08960000000000001 0.26,0.11200000000000002 0,0 Z" transform="translate(36.7,106.4) rotate(-60.0) scale(77.9)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /><path d="M0,0 C0.26,-0.10560000000000001 0.70,-0.09715200000000002 1,0 C0.70,0.08448000000000001 0.26,0.10560000000000001 0,0 Z" transform="translate(48.6,91.3) rotate(-38.0) scale(60.7)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /></g></svg></div><div class="pband pneon" style="--ir1:.440;--ir2:.5;background:conic-gradient(from 195deg,#2B3240,#8E9BB0 40deg,#FFFFFF 64deg,#C9D4E6 84deg,#6D788B 112deg,#EAF0FA 142deg,#FFFFFF 160deg,#93A0B4 192deg,#55606F 222deg,#DCE6F5 256deg,#FFFFFF 278deg,#8D9AB0 306deg,#3A424F 342deg,#2B3240)"></div><div class="pband pbevel" style="--ir1:.440;--ir2:.5;background:radial-gradient(circle at 28% 14%,rgba(255,255,255,.95),transparent 38%),radial-gradient(circle at 50% 94%,rgba(0,16,36,.65),transparent 44%)"></div><div class="pface" style="--rim:0.06;background:radial-gradient(circle at 50% 44%,#122A3E 0%,#0C1B2C 60%,#060E18 100%)"><img loading="lazy" decoding="async" src="assets/poko-lv3.png" alt=""></div><div class="phair"></div><div class="primout"></div><div class="pstuds"><i class="pgem pchrome" style="left:50.00%;top:3.00%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:73.50%;top:9.30%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:90.70%;top:26.50%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:97.00%;top:50.00%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:90.70%;top:73.50%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:73.50%;top:90.70%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:50.00%;top:97.00%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:26.50%;top:90.70%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:9.30%;top:73.50%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:3.00%;top:50.00%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:9.30%;top:26.50%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:26.50%;top:9.30%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i></div><svg class="psparks" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><filter id="sg3x3" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="0" stdDeviation="2.6" flood-color="#C8F6FF" flood-opacity=".95"/></filter></defs><g filter="url(#sg3x3)"><path d="M154.6,174.7 Q156.0,179.4 160.7,180.8 Q156.0,182.1 154.6,186.9 Q153.3,182.1 148.5,180.8 Q153.3,179.4 154.6,174.7 Z" fill="#C8F6FF" opacity="0.78"/><path d="M138.0,114.2 Q138.6,116.3 140.7,116.9 Q138.6,117.5 138.0,119.5 Q137.4,117.5 135.4,116.9 Q137.4,116.3 138.0,114.2 Z" fill="#C8F6FF" opacity="0.85"/><path d="M148.3,133.1 Q149.2,136.1 152.2,137.0 Q149.2,137.9 148.3,140.9 Q147.4,137.9 144.4,137.0 Q147.4,136.1 148.3,133.1 Z" fill="#C8F6FF" opacity="0.87"/><path d="M177.0,180.1 Q178.5,185.3 183.7,186.8 Q178.5,188.3 177.0,193.5 Q175.5,188.3 170.3,186.8 Q175.5,185.3 177.0,180.1 Z" fill="#C8F6FF" opacity="0.59"/><path d="M37.2,120.9 Q38.6,125.9 43.6,127.3 Q38.6,128.7 37.2,133.7 Q35.8,128.7 30.8,127.3 Q35.8,125.9 37.2,120.9 Z" fill="#C8F6FF" opacity="0.58"/><path d="M8.0,62.2 Q9.0,65.9 12.7,67.0 Q9.0,68.0 8.0,71.8 Q6.9,68.0 3.2,67.0 Q6.9,65.9 8.0,62.2 Z" fill="#C8F6FF" opacity="0.84"/><path d="M21.0,102.1 Q22.3,106.8 27.0,108.1 Q22.3,109.4 21.0,114.2 Q19.6,109.4 14.9,108.1 Q19.6,106.8 21.0,102.1 Z" fill="#C8F6FF" opacity="0.72"/><path d="M140.3,26.6 Q141.8,31.9 147.0,33.4 Q141.8,34.8 140.3,40.1 Q138.8,34.8 133.5,33.4 Q138.8,31.9 140.3,26.6 Z" fill="#C8F6FF" opacity="0.74"/><path d="M44.4,163.2 Q45.1,165.7 47.7,166.5 Q45.1,167.2 44.4,169.8 Q43.7,167.2 41.1,166.5 Q43.7,165.7 44.4,163.2 Z" fill="#C8F6FF" opacity="0.67"/></g></svg></div></div>
@@ -4663,7 +4760,7 @@ body{background:#05050A;color:var(--tx)}
           <div class="my-nickrow"><b id="myNick">미연</b><button id="myNickEdit" type="button">수정</button></div>
           <p class="my-phone" id="myPhone">010-****-9720</p>
           <p class="my-member" id="myMember" hidden style="margin-top:6px;font-size:11.5px;font-weight:800;color:#2d9c6b"></p>
-          <button class="my-join" id="myJoin" type="button" hidden style="margin-top:8px;padding:9px 14px;border:0;border-radius:12px;background:linear-gradient(135deg,#ff5fa2,#e0357f);color:#fff;font-size:12px;font-weight:900;box-shadow:0 6px 14px rgba(224,53,127,.28)">정식 회원 가입하고 첫 판 50% 할인 🎁</button>
+          <button class="my-join" id="myJoin" type="button" hidden style="margin-top:8px;padding:9px 14px;border:0;border-radius:12px;background:linear-gradient(135deg,#ff5fa2,#e0357f);color:#fff;font-size:12px;font-weight:900;box-shadow:0 6px 14px rgba(224,53,127,.28)">정식 회원 가입 · 첫 판 50%</button>
           <button class="evo-back" id="evoBack" type="button" hidden>내 등급으로 돌아가기</button>
         </div>
       </div>
@@ -4677,7 +4774,7 @@ body{background:#05050A;color:var(--tx)}
         <div class="eb"><i id="myExpBar"></i></div>
         <div class="ep-nums">
           <span id="evoSpenTxt">누적 구매 <b>0원</b></span>
-          <span class="ep-coin"><small>COIN</small><b id="myCoin">0<s>P</s></b></span>
+          <span class="ep-coin"><small>포인트</small><b id="myCoin">0<s>P</s></b></span>
         </div>
         <div class="ep-reward" id="epReward">🎁 다음 진화 달성 보상 <b id="epRewardTxt">무료배송 쿠폰</b></div>
         <div class="ep-benefits" id="epBenefits">
@@ -4693,6 +4790,29 @@ body{background:#05050A;color:var(--tx)}
 
     <div class="my-body">
 
+      <!-- ② 포인트 · 쿠폰 -->
+      <!-- 코인 지갑 (포인트) -->
+      <section class="pn coral wa">
+        <div class="ph"><h3><i></i>포인트</h3><button data-my="ledger" type="button">충전·사용 내역 →</button></div>
+        <div class="big"><span class="b" id="myWallet"><span id="myPts">240,000</span><s>P</s><small id="myHeldNote">사용 가능</small></span><button id="myCharge" type="button">충전하기</button></div>
+        <div class="bars">
+          <div class="ln g"><span>일반 포인트</span><i><b id="myGenBar"></b></i><em id="myGen">0</em></div>
+          <div class="ln e"><span>이벤트 포인트</span><i><b id="myEvtBar"></b></i><em id="myEvt">0</em></div>
+        </div>
+      </section>
+
+      <!-- 내 쿠폰함 -->
+      <section class="pn cpnbox" id="cpnPanel">
+        <div class="ph"><h3><i></i>내 쿠폰함 <em id="myCouponN">1</em><small>장 사용 가능</small></h3><button data-my="coupons" type="button">전체 보기 →</button></div>
+        <div class="cp-list" id="myCouponList"></div>
+        <div class="cp-foot">
+          <button class="solid" id="myCouponCode" type="button">쿠폰 코드 등록</button>
+          <button class="ghost" id="myCouponHow" data-my="coupons" type="button">쿠폰 안내</button>
+        </div>
+        <p class="cp-tip">첫 판 50% 쿠폰은 첫 유료 결제 때 자동 적용 · 앱 설치 보너스는 앱으로 열면 1회 지급돼요.</p>
+      </section>
+
+      <!-- ③ 주문·출고 현황 (출고 신청 통합) -->
       <!-- 주문·출고 상태 배지 3단 (탭하면 진열장 해당 탭으로) -->
       <section class="pn mystat" id="myStat">
         <div class="ph"><h3><i></i>주문·출고 현황</h3><button type="button" data-shelf="keep">진열장 →</button></div>
@@ -4707,103 +4827,55 @@ body{background:#05050A;color:var(--tx)}
             <span class="ms-ic" aria-hidden="true">✅</span><b id="myStatDone">0</b><small>배송 완료</small><span class="ms-go">보기 ›</span>
           </button>
         </div>
-      </section>
-
-      <!-- @@EVO-ROAD-BEGIN@@ -->
-      <!-- 포코 진화 로드맵 (단계를 누르면 위 카드가 미리보기로 바뀐다) -->
-      <section class="pn evo-road" id="evoRoadPanel">
-        <div class="ph">
-          <h3><i></i>포코 진화 5단계</h3>
-          <button id="evoBack2" type="button" hidden>내 등급으로</button>
-        </div>
-        <div class="evo-rail" id="evoRail" role="group" aria-label="포코 진화 단계">
-          <button class="evo-n" type="button" data-evolv="1" aria-pressed="true">
-            <span class="en-pic"><img src="assets/poko-lv1.png" alt="포코에그" loading="lazy" decoding="async"></span>
-            <b class="en-lv">LV.1</b><span class="en-nm">포코에그</span><em class="en-need">0원</em>
-          </button>
-          <button class="evo-n" type="button" data-evolv="2" aria-pressed="false">
-            <span class="en-pic"><img src="assets/poko-lv2.png" alt="포코링" loading="lazy" decoding="async"></span>
-            <b class="en-lv">LV.2</b><span class="en-nm">포코링</span><em class="en-need">5만원+</em>
-          </button>
-          <button class="evo-n" type="button" data-evolv="3" aria-pressed="false">
-            <span class="en-pic"><img src="assets/poko-lv3.png" alt="포코나이트" loading="lazy" decoding="async"></span>
-            <b class="en-lv">LV.3</b><span class="en-nm">포코나이트</span><em class="en-need">30만원+</em>
-          </button>
-          <button class="evo-n" type="button" data-evolv="4" aria-pressed="false">
-            <span class="en-pic"><img src="assets/poko-lv4.png" alt="포코로드" loading="lazy" decoding="async"></span>
-            <b class="en-lv">LV.4</b><span class="en-nm">포코로드</span><em class="en-need">70만원+</em>
-          </button>
-          <button class="evo-n" type="button" data-evolv="5" aria-pressed="false">
-            <span class="en-pic"><img src="assets/poko-lv5.png" alt="포코제니스" loading="lazy" decoding="async"></span>
-            <b class="en-lv">LV.5</b><span class="en-nm">포코제니스</span><em class="en-need">150만원+</em>
-          </button>
-        </div>
-        <p class="evo-tip">단계를 누르면 위 카드가 그 모습으로 바뀌어요 · 내 등급 <b id="evoMyLvTxt">LV.1 포코에그</b></p>
-      </section>
-      <!-- @@EVO-ROAD-END@@ -->
-
-      <!-- 코인 지갑 (포인트) -->
-      <section class="pn coral wa">
-        <div class="ph"><h3><i></i>포인트</h3><button data-my="ledger" type="button">충전·사용 내역 →</button></div>
-        <div class="big"><span class="b" id="myWallet"><span id="myPts">240,000</span><s>P</s><small id="myHeldNote">사용 가능</small></span><button id="myCharge" type="button">충전하기</button></div>
-        <div class="bars">
-          <div class="ln g"><span>일반 포인트</span><i><b id="myGenBar"></b></i><em id="myGen">0</em></div>
-          <div class="ln e"><span>이벤트 포인트</span><i><b id="myEvtBar"></b></i><em id="myEvt">0</em></div>
+        <div class="rows" style="padding:0 0 4px">
+          <div class="rw">
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M3.5 8.5h17v10h-17z"/><path d="M3.5 8.5 7 4.5h10l3.5 4"/><path d="M12 8.5v10"/></svg></span>
+            <div class="tx"><b>출고 신청 <em id="myWaitCnt">0</em>건</b><span id="myWaitSub">아직 출고 신청이 없어요</span></div>
+            <button class="ac out" data-shelf="wait" type="button">조회</button>
+          </div>
         </div>
       </section>
 
-      <!-- 내 쿠폰함 -->
-      <section class="pn cpnbox" id="cpnPanel">
-        <div class="ph"><h3><i></i>내 쿠폰함 <em id="myCouponN">1</em></h3><button data-my="coupons" type="button">전체 보기 →</button></div>
-        <div class="cp-list" id="myCouponList"></div>
-        <div class="cp-foot">
-          <button class="solid" id="myCouponCode" type="button">쿠폰 코드 등록</button>
-          <button class="ghost" id="myCouponHow" data-my="coupons" type="button">쿠폰 안내</button>
-        </div>
-        <p class="cp-tip">첫 판 50% 쿠폰은 첫 유료 결제 때 자동 적용 · 앱 설치 보너스는 앱으로 열면 1회 지급돼요.</p>
-      </section>
-
-      <!-- 바로 처리 (ONE TAP) -->
-      <section class="pn coral bt">
-        <div class="ph"><h3><i></i>바로 처리</h3><button data-my="shiphist" type="button">전체 →</button></div>
+      <!-- ④ 출석 · 배송 정보 — 오늘 출석 + 7일 연속 출석을 한 카드로, 미등록 배송지/PCCC 는 강조 -->
+      <section class="pn coral care" id="carePanel">
+        <div class="ph"><h3><i></i>출석 · 배송 정보</h3><button id="myAttOpen" type="button">오늘 찍기 →</button></div>
+        <div class="at"><div class="r" id="myAttStrip"></div></div>
         <div class="rows">
           <div class="rw hot">
             <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg></span>
             <div class="tx"><b>오늘 출석</b><span id="myAttTxt">1일째 · 7일 채우면 <b>1,000P</b></span></div>
             <button class="ac go" id="myAttBtn" type="button">찍기 +100P</button>
           </div>
-          <div class="rw">
-            <span class="ic"><svg viewBox="0 0 24 24"><path d="M3.5 8.5h17v10h-17z"/><path d="M3.5 8.5 7 4.5h10l3.5 4"/><path d="M12 8.5v10"/></svg></span>
-            <div class="tx"><b>출고 대기 <em id="myWaitCnt">0</em>건</b><span id="myWaitSub">아직 출고 신청이 없어요</span></div>
-            <button class="ac out" data-my="shiphist" type="button">조회</button>
-          </div>
-          <div class="rw">
+          <div class="rw unset" id="myAddrRow">
             <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-9.4A4.6 4.6 0 0 1 12 8a4.6 4.6 0 0 1 7 3.6C19 16.5 12 21 12 21z"/><path d="M12 8V5"/></svg></span>
-            <div class="tx"><b>기본 배송지</b><span id="myAddrTxt">등록된 배송지가 없어요</span></div>
-            <button class="ac out" data-my="addrs" type="button">변경</button>
+            <div class="tx"><b>기본 배송지 <em class="warn" id="myAddrWarn">미등록</em></b><span id="myAddrTxt">등록된 배송지가 없어요</span></div>
+            <button class="ac out" id="myAddrBtn" data-my="addrs" type="button">등록</button>
           </div>
-          <div class="rw">
+          <div class="rw unset" id="myPcccRow">
             <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 12h10"/></svg></span>
-            <div class="tx"><b>통관부호 PCCC</b><span id="myPcccTxt">미등록 · 출고 시 필요해요</span></div>
-            <button class="ac out" id="myPcccBtn" type="button">관리</button>
+            <div class="tx"><b>통관부호 PCCC <em class="warn" id="myPcccWarn">미등록</em></b><span id="myPcccTxt">미등록 · 출고 시 필요해요</span></div>
+            <button class="ac out" id="myPcccBtn" type="button">등록</button>
           </div>
         </div>
       </section>
 
-      <!-- 📱 앱 설치 (홈 화면에 추가) — standalone 실행 중이면 자동 숨김 -->
-      <section class="pn pwa-pn" id="pwaPanelMy" data-pwa-panel hidden>
-        <div class="ph"><h3><i></i>앱으로 쓰기</h3><button type="button" data-pwa="open">설치 방법 →</button></div>
-        <button class="pwa-cta" id="pwaBtnMy" type="button" data-pwa="open">
-          <span class="pi" aria-hidden="true">📲</span>
-          <span class="pt"><b>앱으로 바로가기 (홈 화면 추가)</b><small>홈 화면에 추가하면 <b>+1,000P 보너스</b> · 전체화면으로 열려요</small></span>
-          <span class="pg" data-pwa-tag>설치 방법</span>
-        </button>
-      </section>
-
-      <!-- 7일 연속 출석 -->
+      <!-- ⑤ 내 기록 · 이용안내 -->
+      <!-- 내 기록 -->
       <section class="pn">
-        <div class="ph"><h3><i></i>7일 연속 출석</h3><button id="myAttOpen" type="button">오늘 찍기 →</button></div>
-        <div class="at"><div class="r" id="myAttStrip"></div></div>
+        <div class="ph"><h3><i></i>내 기록</h3></div>
+        <div class="mn">
+          <button class="mr" data-my="noti" type="button"><span class="t">알림</span><span class="v"><em id="myNotiN">0</em></span><span class="ch"></span></button>
+          <button class="mr" data-my="ledger" type="button"><span class="t">충전·사용 내역</span><span class="ch"></span></button>
+          <button class="mr" data-my="shiphist" type="button"><span class="t">배송 내역 (출고 신청)</span><span class="v"><em id="myShipN" hidden>0</em>출고 완료 <b id="myDone">0</b></span><span class="ch"></span></button>
+          <button class="mr" data-my="exch" type="button"><span class="t">회수(포인트 교환) 기록</span><span class="v"><em id="myExN" hidden>0</em></span><span class="ch"></span></button>
+          <button class="mr" data-my="favs" type="button"><span class="t">찜한 시리즈</span><span class="v"><em id="myFavN">0</em></span><span class="ch"></span></button>
+          <button class="mr" data-my="addrs" type="button"><span class="t">배송지 주소 관리</span><span class="v"><em id="myAddrN">0</em></span><span class="ch"></span></button>
+        </div>
+                <div class="mn pwa-mn" id="pwaPanelMy" data-pwa-panel hidden>
+            <button class="mr pwa-row" id="pwaBtnMy" type="button" data-pwa="open">
+              <span class="t">앱으로 쓰기 (홈 화면 추가)</span><span class="v pill">+1,000P</span><span class="ch"></span>
+            </button>
+          </div>
       </section>
 
       <!-- 규정 · 안내 -->
@@ -4816,18 +4888,19 @@ body{background:#05050A;color:var(--tx)}
         </div>
       </section>
 
-      <!-- 내 기록 -->
-      <section class="pn">
-        <div class="ph"><h3><i></i>내 기록</h3></div>
-        <div class="mn">
-          <button class="mr" data-my="noti" type="button"><span class="t">알림</span><span class="v"><em id="myNotiN">0</em></span><span class="ch"></span></button>
-          <button class="mr" data-my="ledger" type="button"><span class="t">충전·사용 내역</span><span class="ch"></span></button>
-          <button class="mr" data-my="shiphist" type="button"><span class="t">배송 내역 (출고 신청)</span><span class="v"><em id="myShipN" hidden>0</em>출고 완료 <b id="myDone">0</b></span><span class="ch"></span></button>
-          <button class="mr" data-my="exch" type="button"><span class="t">회수(포인트 교환) 기록</span><span class="v"><em id="myExN" hidden>0</em></span><span class="ch"></span></button>
-          <button class="mr" data-my="favs" type="button"><span class="t">찜한 시리즈</span><span class="v"><em id="myFavN">0</em></span><span class="ch"></span></button>
-          <button class="mr" data-my="addrs" type="button"><span class="t">배송지 주소 관리</span><span class="v"><em id="myAddrN">0</em></span><span class="ch"></span></button>
+      <!-- v19: 헤더의 계정 칩을 이 자리(마이페이지 맨 아래)로 이동 — 로그아웃 확인 시트는 그대로 연결 -->
+      <section class="pn myacct" id="myAcctPanel">
+        <div class="ph"><h3><i></i>계정 관리</h3></div>
+        <div class="ma-box">
+          <span class="ma-ic" aria-hidden="true">👤</span>
+          <div class="ma-tx">
+            <b id="authName">로그인 전</b>
+            <small id="authSub">로그인하고 뽑기·진열장을 이용해요</small>
+          </div>
+          <button class="ma-btn" id="authBtn" type="button" data-mode="in" aria-label="로그인 또는 로그아웃">로그인</button>
         </div>
       </section>
+
       <p class="foot" style="padding:10px 20px 24px">데모 계정입니다 · 실제 결제·배송은 이루어지지 않아요</p>
     </div>
   </main>
@@ -4926,7 +4999,7 @@ body{background:#05050A;color:var(--tx)}
         </div>
       </div>
       <div class="sheet-actions shipfoot">
-        <div class="sf-sum"><span>총 금액</span><b id="shipFee">3,500원</b><em id="shipFeeNote">5개 이상 무료배송</em></div>
+        <div class="sf-sum"><span>총 금액</span><b id="shipFee">3,500원</b><em id="shipFeeNote">5점 이상 무료배송</em></div>
         <button class="sf-guide" id="shipGuideBtn" type="button"><b aria-hidden="true">i</b> <span>배송 안내</span></button>
         <button class="btn-primary" id="shipSubmit" disabled>배송 확인<small id="shipSubmitSub">주소를 선택해 주세요</small></button>
       </div>
@@ -5044,9 +5117,9 @@ body{background:#05050A;color:var(--tx)}
           <div class="pi-ihead">✦ INFO ✦</div>
           <dl>
             <div><dt>브랜드</dt><dd id="piBrand">치이카와</dd></div>
-            <div><dt>판매가</dt><dd class="p" id="piPrice">P 0</dd></div>
+            <div><dt>판매가</dt><dd class="p" id="piPrice">0원</dd></div>
             <div><dt>구성</dt><dd id="piCompose">1개</dd></div>
-            <div><dt>배송</dt><dd id="piShip">해외 배송 (7~14일)</dd></div>
+            <div><dt>배송</dt><dd id="piShip">영업일 3~5일 이내 순차 출고</dd></div>
             <div><dt>이 박스 잔여</dt><dd id="piStock">-</dd></div>
           </dl>
         </div>
@@ -5069,7 +5142,7 @@ body{background:#05050A;color:var(--tx)}
         <div class="ord-amt">
           <div class="oa-row"><span>총 상품 금액 <em id="ordQtyTxt">1회</em></span><b id="ordGross">0원</b></div>
           <div class="oa-row disc" id="ordDiscRow" hidden><span>🎉 첫 판 50% 웰컴 할인</span><b id="ordDisc">-0원</b></div>
-          <div class="oa-row"><span>보유 포인트 사용 <em id="ordHeld">0P</em></span>
+          <div class="oa-row"><span>보유 포인트 <em id="ordHeld">0P</em></span>
             <b><button class="switch on" id="ordUse" type="button" role="switch" aria-checked="true"><i></i></button></b>
           </div>
           <div class="oa-row"><span>사용 포인트</span><b id="ordUseVal">-0원</b></div>
@@ -5086,6 +5159,59 @@ body{background:#05050A;color:var(--tx)}
       </div>
       <div class="sheet-actions">
         <button class="btn-primary" id="ordConfirm" disabled>동의하고 뜯으러 가기<small>포인트가 차감되고 티켓이 열립니다</small></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- v19: 포코 도감(5단계) — 마이페이지 중간 섹션을 시트로 이동 -->
+  <div class="overlay" id="dexSheet" role="dialog" aria-modal="true" aria-label="포코 도감 5단계">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head"><h3>캐릭터 · 포코 도감</h3><button class="x" data-close="dexSheet" aria-label="닫기">×</button></div>
+      <div class="sheet-body">
+        <div class="dex-wrap">
+          <p class="dex-h">시작 캐릭터</p>
+        <div class="evo-pick" id="evoPick" role="tablist" aria-label="스타팅 선택">
+          <button class="ep-btn on" type="button" role="tab" data-starter="poko" aria-selected="true"><i>🌸</i><b>포코링</b></button>
+          <button class="ep-btn" type="button" role="tab" data-starter="boy" aria-selected="false"><i>⚡</i><b>레오</b></button>
+          <button class="ep-btn" type="button" role="tab" data-starter="pet" aria-selected="false"><i>🦊</i><b>별여우</b></button>
+        </div>
+      <!-- @@EVO-ROAD-BEGIN@@ -->
+      <!-- 포코 진화 로드맵 (단계를 누르면 위 카드가 미리보기로 바뀐다) -->
+      <section class="pn evo-road" id="evoRoadPanel">
+        <div class="ph">
+          <h3><i></i>포코 진화 5단계</h3>
+          <button id="evoBack2" type="button" hidden>내 등급으로</button>
+        </div>
+        <div class="evo-rail" id="evoRail" role="group" aria-label="포코 진화 단계">
+          <button class="evo-n" type="button" data-evolv="1" aria-pressed="true">
+            <span class="en-pic"><img src="assets/poko-lv1.png" alt="포코에그" loading="lazy" decoding="async"></span>
+            <b class="en-lv">LV.1</b><span class="en-nm">포코에그</span><em class="en-need">0원</em>
+          </button>
+          <button class="evo-n" type="button" data-evolv="2" aria-pressed="false">
+            <span class="en-pic"><img src="assets/poko-lv2.png" alt="포코링" loading="lazy" decoding="async"></span>
+            <b class="en-lv">LV.2</b><span class="en-nm">포코링</span><em class="en-need">5만원+</em>
+          </button>
+          <button class="evo-n" type="button" data-evolv="3" aria-pressed="false">
+            <span class="en-pic"><img src="assets/poko-lv3.png" alt="포코나이트" loading="lazy" decoding="async"></span>
+            <b class="en-lv">LV.3</b><span class="en-nm">포코나이트</span><em class="en-need">30만원+</em>
+          </button>
+          <button class="evo-n" type="button" data-evolv="4" aria-pressed="false">
+            <span class="en-pic"><img src="assets/poko-lv4.png" alt="포코로드" loading="lazy" decoding="async"></span>
+            <b class="en-lv">LV.4</b><span class="en-nm">포코로드</span><em class="en-need">70만원+</em>
+          </button>
+          <button class="evo-n" type="button" data-evolv="5" aria-pressed="false">
+            <span class="en-pic"><img src="assets/poko-lv5.png" alt="포코제니스" loading="lazy" decoding="async"></span>
+            <b class="en-lv">LV.5</b><span class="en-nm">포코제니스</span><em class="en-need">150만원+</em>
+          </button>
+        </div>
+      </section>
+      <!-- @@EVO-ROAD-END@@ -->
+        </div>
+        <p class="dex-tip">단계를 누르면 위 카드가 그 모습으로 미리 보여요 · 내 등급 <b id="evoMyLvTxt">LV.1 포코에그</b></p>
+      </div>
+      <div class="sheet-actions">
+        <button class="btn-primary" id="dexApply" type="button">선택하기<small>고른 캐릭터로 카드가 바뀌어요</small></button>
       </div>
     </div>
   </div>
@@ -5563,8 +5689,7 @@ body{background:#05050A;color:var(--tx)}
     customs: { name: "", pccc: "" },
     coupons: [
       { id: "w11", t: "회원가입 첫 판 50% 할인", sub: "웰컴 쿠폰 · 첫 유료 뽑기 1판 반값", tag: "웰컴", ic: "🎟️", use: false, exp: "2026-12-31" },
-      { id: "app1", t: "앱 설치 보너스 +1,000P", sub: "홈 화면에 추가 후 앱으로 열면 1회 지급", tag: "앱", ic: "📲", use: false, exp: "상시" },
-      { id: "ship0", t: "오픈 기념 무료배송", sub: "5개 미만 출고 시 배송비 3,500원 면제", tag: "오픈", ic: "📦", use: true, exp: "2026-11-30" }
+      { id: "app1", t: "앱 설치 보너스 +1,000P", sub: "홈 화면에 추가 후 앱으로 열면 1회 지급", tag: "앱", ic: "📲", use: false, exp: "상시" }
     ]
   };
 
@@ -5886,6 +6011,18 @@ body{background:#05050A;color:var(--tx)}
       rem: remainOf(b), no: b.no
     };
   }
+  /* v19 — 카드 우하단 ★배지 : 고정 featured 가 아니라 '지금 박스에 실제로 남은 가장 높은 등급' */
+  function bestPrizeOf(s){
+    const b = activeBoxOf(s);
+    if (!b || !b.grades) return "";
+    const order = (s.def.grades || []).map(g => g.k).filter(k => k !== "last");
+    for (let i = 0; i < order.length; i++){
+      const g = b.grades.find(x => x.k === order[i]);
+      if (g && g.r > 0) return order[i];
+    }
+    const last = b.grades.find(x => x.k === "last");
+    return (last && last.r > 0) ? "last" : "";
+  }
   function topChance(s){
     const t = topOf(s);
     return t.rem > 0 ? (t.aR + t.bR) / t.rem : 0;
@@ -5928,12 +6065,12 @@ body{background:#05050A;color:var(--tx)}
         <span class="sart" style="--a:${d.pal[0]};--b:${d.pal[1]}">
           <span class="sflag ${d.hot ? "hot" : ""}">${d.tag}</span>
           ${seriesArt(s)}
-          <span class="sneon">★ ${GLABEL(d.featured)}</span>
+          <span class="sneon${bestPrizeOf(s) ? "" : " out"}">★ ${bestPrizeOf(s) ? GLABEL(bestPrizeOf(s)) : "완판"}</span>
           ${topBadge(s)}
         </span>
         <span class="sinfo">
           <strong class="sname">${d.name}</strong>
-          <span class="sprice"><i>P</i>${won(d.price)} <em>/회</em></span>
+          <span class="sprice"><i>₩</i>${won(d.price)} <em>/회</em></span>
           <span class="smeta numb">${s.boxes.length} BOX · 잔여 <b>${won(st.rem)}</b>/${won(st.tot)}</span>
           <span class="sbar"><i style="width:${pct}%"></i></span>
         </span>
@@ -8342,6 +8479,18 @@ body{background:#05050A;color:var(--tx)}
     applyEvoStarter();
     evoWarmup();
   })();
+
+  /* v19 — 마이페이지 중간 '포코 진화 5단계' 섹션을 도감 시트로 이동 */
+  (function wireDex(){
+    const btn = $("#evoEditBtn");
+    if (btn) btn.addEventListener("click", () => { closeAll(); openOverlay("dexSheet"); });
+    const done = $("#dexApply");
+    if (done) done.addEventListener("click", () => closeOverlay("dexSheet"));
+    /* 도감 시트에서 단계를 누르면 시트를 닫고 위 카드에 미리보기를 보여준다 */
+    $$("#evoRail .evo-n").forEach(b => b.addEventListener("click", () => {
+      setTimeout(() => { try { closeOverlay("dexSheet"); } catch (e){} }, 200);
+    }));
+  })();
   /* @@EVO-JS-END@@ */
 
   /* 복권 결과를 먼저 확정하고(연출 중 화면 갱신은 보류) 연출 후 모달을 연다 */
@@ -8527,7 +8676,7 @@ body{background:#05050A;color:var(--tx)}
 
     if (!single){
       const rows = items.slice().reverse().map(it =>
-        `<div class="rrow2"><span class="rt" style="color:${GC[it.g]}">${GLABEL(it.g)}</span><span class="rn">${it.name}</span><span class="rv">P ${won(it.value)}</span></div>`
+        `<div class="rrow2"><span class="rt" style="color:${GC[it.g]}">${GLABEL(it.g)}</span><span class="rn">${it.name}</span><span class="rv">${won(it.value)}원</span></div>`
       ).join("");
       $("#resList").innerHTML = rows;
     }
@@ -8557,13 +8706,13 @@ body{background:#05050A;color:var(--tx)}
     }
 
     const againN = mode === "all" ? 1 : Number(mode);
-    $("#resAgainSub").textContent = won(againN * s.def.price) + " P";
+    $("#resAgainSub").textContent = won(againN * s.def.price) + "원";
     $("#resAgainLabel").textContent = againN > 1 ? againN + "연속 한 번 더" : "한 번 더";
     $("#resAgainBtn").dataset.mode = String(againN);
     const soldout = remainOf(box()) === 0;
     $("#resAgainBtn").disabled = soldout;
     $("#resAgainLabel").textContent = soldout ? "박스 완판" : (againN > 1 ? againN + "연속 한 번 더" : "한 번 더");
-    $("#resAgainSub").textContent = soldout ? "다른 박스로 교체해 주세요" : won(againN * s.def.price) + " P";
+    $("#resAgainSub").textContent = soldout ? "다른 박스로 교체해 주세요" : won(againN * s.def.price) + "원";
     openOverlay("resultSheet");
   }
 
@@ -8600,14 +8749,16 @@ body{background:#05050A;color:var(--tx)}
 
     const fg = $("#freeGauge");
     if (fg){
-      const FREE = 5, have = un.length;
+      /* v19 — 진열장 전체 개수가 아니라 '출고 신청하려고 고른 개수' 기준 (출고 시트 배송비와 동일) */
+      const FREE = 5, have = shipSelection.size;
       fg.hidden = false;
       fg.classList.toggle("done", have >= FREE);
-      $("#fgNow").textContent = "현재 " + have + "/" + FREE + "개";
+      $("#fgNow").textContent = "선택 " + have + "/" + FREE + "점";
       $("#fgFill").style.width = Math.min(100, Math.round(have / FREE * 100)) + "%";
       $("#fgMsg").textContent = have >= FREE
-        ? "무료배송 조건 달성! 모은 점을 골라 한 번에 받아요"
-        : (FREE - have) + "개만 더 모으면 묶음배송이 무료예요";
+        ? "무료배송 조건 달성! 고른 " + have + "점을 한 번에 받아요"
+        : have ? (FREE - have) + "점만 더 고르면 묶음배송이 무료예요"
+               : "출고할 굿즈를 " + FREE + "점 이상 고르면 배송비가 무료예요";
     }
 
     const canShip = shipSelection.size > 0;
@@ -8735,7 +8886,9 @@ body{background:#05050A;color:var(--tx)}
 
   function renderAdmin(){
     if (LIVE && !(state.me && state.me.is_admin)){
-      $("#kpis").innerHTML = `<div class="kpi" style="grid-column:1/-1"><small>사장님 전용</small><b>관리자 계정으로 로그인해 주세요</b></div>`;
+      $("#kpis").innerHTML = `<div class="kpi adm-login" style="grid-column:1/-1"><small>사장님 전용</small>`
+        + `<b>관리자 계정으로 확인해 주세요</b>`
+        + `<button type="button" data-adm="login" class="adm-login-btn">사장님 로그인</button></div>`;
       $("#adminSeries").innerHTML = "";
       $("#adminLogs").innerHTML = "";
       $("#adminReset").hidden = true;
@@ -8758,7 +8911,7 @@ body{background:#05050A;color:var(--tx)}
       s.boxes.forEach(b => { rem += remainOf(b); tot += totalOf(b); });
       const pct = Math.round((1 - rem / tot) * 100);
       return `<div class="arow">
-        <div class="t"><span class="nm">${d.name}</span><span class="pr">P ${won(d.price)}/회</span></div>
+        <div class="t"><span class="nm">${d.name}</span><span class="pr">${won(d.price)}원/회</span></div>
         <div class="m"><span>매출 <b>${won(s.rev)}P</b> · 판매 <b>${won(s.sold)}장</b></span><span>잔여 <b>${won(rem)}/${won(tot)}</b></span></div>
         <div class="bar" style="height:4px;border-radius:2px;background:#f0e9ee;margin-top:6px;overflow:hidden"><i style="display:block;height:100%;width:${pct}%;background:linear-gradient(90deg,#ff9ec9,#f0357f)"></i></div>
         <button class="resetb" data-reset="${s.id}">이 시리즈 재고·매출 리셋</button>
@@ -8822,6 +8975,7 @@ body{background:#05050A;color:var(--tx)}
      overlays
      ============================================================ */
   function openOverlay(id){
+    try { if (typeof hbStop === "function") hbStop(); } catch (e){}
     const o = $("#" + id);
     o.classList.add("show");
     $("#toast").classList.remove("show");
@@ -8830,6 +8984,9 @@ body{background:#05050A;color:var(--tx)}
     const o = $("#" + id);
     if (o) o.classList.remove("show");
     if (id === "orderSheet") ordTimerStop();
+    try {
+      if (typeof hbPlay === "function" && !document.querySelector(".overlay.show")) hbPlay();
+    } catch (e){}
   }
   function closeAll(){
     $$(".overlay.show").forEach(o => o.classList.remove("show"));
@@ -8847,6 +9004,9 @@ body{background:#05050A;color:var(--tx)}
      events
      ============================================================ */
   document.addEventListener("click", e => {
+    const admLogin = e.target.closest("[data-adm='login']");
+    if (admLogin){ paintAuthSheet(); openOverlay("authSheet"); return; }
+
     const stChip = e.target.closest("#stateChips [data-st]");
     if (stChip){ setHomeState(stChip.dataset.st); return; }
 
@@ -9090,10 +9250,10 @@ body{background:#05050A;color:var(--tx)}
     $("#piArt").innerHTML = artHTML(g, s.id, charOf(k));
     $("#piName").textContent = (g.b ? g.b + " | " : "") + (g.n || "");
     $("#piBrand").textContent = PINFO_BRAND[s.id] || "POKO KUJI";
-    $("#piPrice").textContent = "P " + won(g.v || 0);
+    $("#piPrice").textContent = won(g.v || 0) + "원";
     $("#piCompose").textContent = k === "last" ? "1개 · 라스트 원 오프 증정" : "1개" + (low ? " · 미개봉" : " · 정품 박스");
-    $("#piShip").textContent = low ? "국내 배송 (2~3일)" : "해외 배송 (7~14일)";
-    $("#piStock").textContent = "잔여 " + (bg.r || 0) + " / " + (bg.t || 0);
+    $("#piShip").textContent = "영업일 3~5일 이내 순차 출고";
+    $("#piStock").textContent = (bg.r || 0) + " / " + (bg.t || 0);
     $("#piPrev").disabled = pinfo.i === 0;
     $("#piNext").disabled = pinfo.i === cells.length - 1;
   }
@@ -9243,8 +9403,8 @@ body{background:#05050A;color:var(--tx)}
     ord.pay = ord.total > 0 ? "card" : "points";
 
     $("#ordGross").textContent = ordMoney(ord.gross);
-    $("#ordHeld").textContent = "보유 " + won(held) + "P";
-    $("#ordUseVal").textContent = "-" + ordMoney(ord.used);
+    $("#ordHeld").textContent = won(held) + "P";
+    $("#ordUseVal").textContent = "-" + won(ord.used) + "P";
     const dr = $("#ordDiscRow"), dv = $("#ordDisc");
     if (dr && dv){ dr.hidden = !(ord.discount > 0); dv.textContent = "-" + ordMoney(ord.discount); }
 
@@ -9539,14 +9699,22 @@ body{background:#05050A;color:var(--tx)}
      (비어 있으면 이 블록은 한 줄도 실행되지 않습니다 → 데모 그대로)
      ============================================================ */
   function renderAuthChip(){
+    /* v19 — 계정 칩은 마이페이지 맨 아래(#myAcctPanel)에 있다. 헤더에는 두지 않는다. */
     const btn = $("#authBtn");
-    if (!btn) return;
-    btn.hidden = !LIVE;
-    if (!LIVE) return;
+    const nameEl = $("#authName");
+    const subEl = $("#authSub");
     const me = state.me;
     const guest = !!(window.CHII_BACKEND && CHII_BACKEND.currentUser() && CHII_BACKEND.isGuest && CHII_BACKEND.isGuest());
-    $("#authName").textContent = me ? (me.nickname || "내 계정") : "로그인";
-    btn.classList.toggle("guest", !!me && guest);
+    if (btn){
+      btn.hidden = false;
+      btn.textContent = me ? "로그아웃" : "로그인";
+      btn.setAttribute("data-mode", me ? "out" : "in");
+      btn.classList.toggle("guest", !!me && guest);
+    }
+    if (nameEl) nameEl.textContent = me ? (me.nickname || "내 계정") : "로그인 전";
+    if (subEl) subEl.textContent = me
+      ? (guest ? "게스트로 둘러보는 중 · 가입하면 진열장이 그대로 이어집니다" : "로그인 중 · 뽑기·진열장이 서버에 저장돼요")
+      : "로그인하고 뽑기·진열장을 이용해요";
     if (typeof paintAuthSheet === "function") paintAuthSheet();
   }
 
@@ -9834,7 +10002,12 @@ body{background:#05050A;color:var(--tx)}
     toast("이메일·비밀번호만 정하면 지금 포인트·진열장 그대로 회원이 돼요");
   });
   $("#authBtn").addEventListener("click", () => {
-    if (!LIVE) return;
+    if (!LIVE){
+      /* 데모: 계정 시트만 열어 흐름을 보여준다 (로그인·차감 없음) */
+      paintAuthSheet();
+      openOverlay("authSheet");
+      return;
+    }
     if (CHII_BACKEND.currentUser()){
       askConfirm("로그아웃", "로그아웃하면 뽑기와 진열장을 볼 수 없어요. 계속할까요?", "로그아웃", () => {
         closeAll();
@@ -10014,20 +10187,50 @@ body{background:#05050A;color:var(--tx)}
     const thumb = src
       ? '<img src="' + src + '" alt="" decoding="async">'
       : artHTML({ k: f.g, n: f.name }, f.sid, charOf(f.g));
-    return '<span class="wf-it' + (f.mine ? " mine" : "") + '">'
+    /* v19 — 탭하면 그 시리즈 상세로 바로 이동 (data-sid 는 전역 클릭 핸들러가 받는다) */
+    return '<button type="button" class="wf-it' + (f.mine ? " mine" : "") + '" data-sid="' + f.sid + '"'
+      + ' aria-label="' + f.who + ' 님 획득 ' + (f.name || GLABEL(f.g)) + ' · 시리즈 열기">'
       + '<span class="wf-th">' + thumb + '</span>'
       + '<span class="wf-tx"><span class="wf-nm"><b>' + f.who + '</b> 님 획득</span>'
       + '<span class="wf-g" style="--g:' + GC[f.g] + '">' + GLABEL(f.g) + '</span></span>'
       + (f.mine ? '<span class="wf-me">내 당첨</span>' : '')
-      + '</span>';
+      + '</button>';
   }
   function feedRender(){
     const host = $("#wfTrack");
     if (!host) return;
     const one = state.feed.map(feedHTML).join("");
     host.innerHTML = one + one;
+    feedRestart();
+    feedTickerStart();
   }
-  let feedPauseT = null;
+  /* v19 — 끝없이 흐르는 대신 '한 칸씩' 이동한다.
+     항목 경계에서만 멈추므로 좌측 주황 라벨 옆에서 글씨·썸네일이 잘리지 않는다. */
+  let feedIdx = 0, feedTickerT = null, feedPauseT = null;
+  function feedRestart(){
+    const tr = $("#wfTrack");
+    if (!tr) return;
+    tr.style.transition = "none";
+    tr.style.transform = "translate3d(0,0,0)";
+    feedIdx = 0;
+    void tr.offsetWidth;
+    tr.style.transition = "";
+  }
+  function feedStep(){
+    const tr = $("#wfTrack");
+    if (!tr) return;
+    const items = tr.children;
+    const half = Math.floor(items.length / 2);
+    if (half < 1) return;
+    feedIdx += 1;
+    if (feedIdx >= half){ feedRestart(); return; }
+    tr.style.transform = "translate3d(-" + items[feedIdx].offsetLeft + "px,0,0)";
+  }
+  function feedTickerStart(){
+    feedTickerStop();
+    feedTickerT = setInterval(feedStep, 3800);
+  }
+  function feedTickerStop(){ if (feedTickerT){ clearInterval(feedTickerT); feedTickerT = null; } }
   function feedAdd(items, lastItem){
     const list = [];
     (items || []).forEach(it => list.push({
@@ -10036,15 +10239,10 @@ body{background:#05050A;color:var(--tx)}
     if (lastItem) list.push({ who: maskNick(state.profile.nick), sid: lastItem.sid, g: "last", name: lastItem.name, mine: true });
     state.feed = list.concat(state.feed).slice(0, 30);
     feedRender();
-    /* 마퀴를 처음으로 되돌리고 3.4초 잠깐 멈춰 — 방금 내 당첨을 바로 보여준다 */
-    const tr = $("#wfTrack");
-    if (!tr) return;
-    tr.style.animation = "none";
-    void tr.offsetWidth;
-    tr.style.animation = "wfMove 84s linear infinite";
-    tr.style.animationPlayState = "paused";
+    /* 내 당첨이 맨 앞에 오도록 처음으로 되돌리고 3.4초 잠깐 멈춘다 */
+    feedTickerStop();
     clearTimeout(feedPauseT);
-    feedPauseT = setTimeout(() => { tr.style.animationPlayState = "running"; }, 3400);
+    feedPauseT = setTimeout(feedTickerStart, 3400);
   }
 
   /* ---------- ③ 마이페이지 (PLAYER CARD · 코인 지갑 · 바로 처리) ---------- */
@@ -10073,7 +10271,7 @@ body{background:#05050A;color:var(--tx)}
       if (member){
         const fresh = state.me && state.me.welcome_discount_used === false;
         memberRow.innerHTML = "✅ 정식 회원 · 누적 구매 <b>" + won(evoSpent()) + "원</b>"
-          + (fresh ? " · 🎁 첫 판 50% 할인 대기" : "");
+          + (fresh ? " · 첫 판 50% 사용 가능" : "");
       }
     }
 
@@ -10149,15 +10347,25 @@ body{background:#05050A;color:var(--tx)}
     const attOpen = $("#myAttOpen");
     if (attOpen) attOpen.textContent = doneToday ? "출석 완료 →" : "오늘 찍기 →";
 
+    /* v19 — 배송지·통관부호는 미등록일 때만 카드에서 눈에 띄게 강조한다 */
     const addrTxt = $("#myAddrTxt");
+    const addrRow = $("#myAddrRow"), addrWarnEl = $("#myAddrWarn"), addrBtn = $("#myAddrBtn");
     if (addrTxt){
       const a = state.addrs.find(x => x.def) || state.addrs[0];
-      addrTxt.textContent = a ? (a.name + " · " + a.addr) : "등록된 배송지가 없어요";
+      addrTxt.textContent = a ? (a.name + " · " + a.addr) : "등록된 배송지가 없어요 · 출고 신청 전에 등록해 주세요";
+      if (addrRow) addrRow.classList.toggle("unset", !a);
+      if (addrWarnEl) addrWarnEl.hidden = !!a;
+      if (addrBtn) addrBtn.textContent = a ? "변경" : "등록";
     }
     const pcccTxt = $("#myPcccTxt");
+    const pcccRow = $("#myPcccRow"), pcccWarnEl = $("#myPcccWarn"), pcccBtn = $("#myPcccBtn");
     if (pcccTxt){
       const pc = (state.customs.pccc || "").toUpperCase();
-      pcccTxt.textContent = /^P\d{12}$/.test(pc) ? (pc.slice(0, 5) + "****" + pc.slice(-4) + " · 등록 완료") : "미등록 · 출고 시 필요해요";
+      const ok = /^P\d{12}$/.test(pc);
+      pcccTxt.textContent = ok ? (pc.slice(0, 5) + "****" + pc.slice(-4) + " · 등록 완료") : "미등록 · 출고 시 필요해요";
+      if (pcccRow) pcccRow.classList.toggle("unset", !ok);
+      if (pcccWarnEl) pcccWarnEl.hidden = ok;
+      if (pcccBtn) pcccBtn.textContent = ok ? "수정" : "등록";
     }
   }
 
@@ -10361,19 +10569,19 @@ body{background:#05050A;color:var(--tx)}
       '<div class="info-tip hot">'
       + '<b class="hot-ttl">미성년자는 구매 NO! NO!</b><br>'
       + '본 상품은 <b>랜덤 상품</b>이며 합리적인 소비를 부탁드립니다!</div>'
-      + '<p class="info-p" style="margin-top:9px"><b>진열장에 5개 이상 적립 시 무료 배송</b><br>'
-      + '5개 미만은 묶음배송비 3,500원이에요.</p>'
+      + '<p class="info-p" style="margin-top:9px"><b>한 번에 5점 이상 출고 신청하면 무료 배송</b><br>'
+      + '5점 미만은 묶음배송비 3,500원이에요.</p>'
       + '<p class="info-p">뽑기는 결과를 미리 알 수 없는 <b>확률형 랜덤 상품</b>이에요. 원하는 등급이 나오지 않을 수 있으니'
       + ' 구매 전 박스별 잔여 수량과 확률을 꼭 확인해 주세요.</p>'
-      + '<p class="info-p">출고 신청 후 <b>7~14일 이내</b> 순차 배송 · 교환·반품은 수령 후 <b>3일 이내 개봉 풀영상(무편집)</b>이 필요해요.</p>');
+      + '<p class="info-p">출고 신청 후 <b>영업일 3~5일 이내</b> 순차 출고 · 교환·반품은 수령 후 <b>3일 이내 개봉 풀영상(무편집)</b>이 필요해요.</p>');
   }
 
   function openShipGuide(){
     openInfo("배송 · 교환/반품 안내",
-      '<p class="info-p"><b>출고 신청</b> 후 <b>7~14일 이내</b> 순차 배송돼요. 해외·일본 직수입 상품은 통관 후 국내 배송으로 이어져요.</p>'
+      '<p class="info-p"><b>출고 신청</b> 후 <b>영업일 3~5일 이내</b> 순차 출고돼요. 해외·일본 직수입 상품은 통관 후 국내 배송으로 이어져요.</p>'
       + '<div class="info-tip">수령 후 <b>3일 이내 개봉 풀영상(무편집)</b>이 있어야 교환·반품 접수가 가능해요.<br>단순 변심·해외 왕복 배송비는 고객 부담입니다.</div>'
       + '<div class="info-tip" style="margin-top:2px"><b>미성년자는 구매 NO! NO!</b> · 본 상품은 랜덤 상품이며 합리적인 소비를 부탁드립니다!</div>'
-      + '<p class="info-p" style="margin-top:8px"><b>묶음배송</b> · 진열장 5개 이상 무료, 5개 미만은 배송비 <b>3,500원</b>이에요.</p>'
+      + '<p class="info-p" style="margin-top:8px"><b>묶음배송</b> · 한 번에 5점 이상 출고하면 무료, 5점 미만은 배송비 <b>3,500원</b>이에요.</p>'
       + '<p class="info-p"><b>통관 정보</b> · 해외배송 상품은 신분증과 동일한 이름과 개인통관고유부호(PCCC)가 필요해요.</p>');
   }
 
@@ -10559,7 +10767,7 @@ body{background:#05050A;color:var(--tx)}
     const fe = $("#shipFee");
     fe.textContent = fee ? won(fee) + "원" : "무료";
     fe.classList.toggle("free", !fee);
-    $("#shipFeeNote").textContent = fee ? ((5 - n) + "개 더 모으면 무료배송") : "5개 이상 무료배송 달성";
+    $("#shipFeeNote").textContent = fee ? ((5 - n) + "점 더 고르면 무료배송") : "5점 이상 무료배송 달성";
     validateShip();
   }
 
