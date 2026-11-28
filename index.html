@@ -2764,6 +2764,14 @@ body{background:#05050A;color:var(--tx)}
 .arc-cnt{font-size:9.5px;font-weight:800;color:#B7AEC6;padding-bottom:2px}
 .arc-cnt b{color:var(--lime);font-size:12px}
 .arc-sub{margin:4px 0 0;font-size:9.5px;color:#8B8399;font-weight:700}
+/* 2026-11-28: 진열장 우측 상단 ✕ 닫기 버튼 */
+.arc-top{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:32px}
+.arc-x{width:32px;height:32px;flex:none;border-radius:50%;display:grid;place-items:center;
+  background:#1B1626;border:1px solid #332B45;color:#F2ECFA;
+  box-shadow:0 6px 16px -10px #000,inset 0 1px 0 rgba(255,255,255,.10)}
+.arc-x svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+.arc-x:active{transform:scale(.94);background:#251C36}
+@media (prefers-reduced-motion:reduce){.arc-x:active{transform:none}}
 
 /* ================= ② POWER CHARGE ================= */
 .freegage{position:relative;margin:9px 14px 0;padding:10px 12px 9px;border-radius:15px;overflow:hidden;
@@ -3589,7 +3597,22 @@ body{background:#05050A;color:var(--tx)}
   body{background:#0E0E14}
   .app{padding-top:env(safe-area-inset-top,0px)}
 }
-.pwa-home{padding:0 14px;margin-top:8px}
+/* 2026-11-28: 홈 설치 바 — 상단 헤더 바로 아래(배너 위) 슬림 1줄 */
+.pwa-home{padding:6px 14px 8px;margin-top:0;background:#fff}
+.pwa-home .pwa-cta{width:100%;display:flex;align-items:center;gap:7px;text-align:left;
+  height:34px;padding:0 8px;border-radius:10px;overflow:hidden;
+  background:linear-gradient(135deg,#FFF4EE 0%,#FFEADC 100%);
+  border:1px solid rgba(255,90,54,.28);box-shadow:none;color:#2A1208}
+.pwa-home .pwa-cta:active{transform:scale(.995)}
+.pwa-home .pwa-cta .pi{width:22px;height:22px;flex:none;border-radius:7px;display:grid;place-items:center;
+  font-size:12px;background:linear-gradient(180deg,#FF8A62,#F0431F);box-shadow:none}
+.pwa-home .pwa-cta .pt{flex:1;min-width:0;flex-direction:row;align-items:center;gap:0}
+.pwa-home .pwa-cta .pt b{font-size:10.5px;font-weight:900;letter-spacing:-.4px;line-height:1;color:#2A1208;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pwa-home .pwa-cta .pt small{display:none}
+.pwa-home .pwa-cta .pg{flex:none;font-size:8px;font-weight:900;letter-spacing:-.2px;color:#C2410F;
+  padding:3px 6px;border-radius:6px;background:#fff;border:1px solid rgba(255,90,54,.32);white-space:nowrap}
+@media(max-width:374px){.pwa-home .pwa-cta .pt b{font-size:9.8px}.pwa-home .pwa-cta .pg{font-size:7.4px}}
 .pwa-pn{padding:0 10px 10px}
 .pwa-cta{width:100%;display:flex;align-items:center;gap:10px;text-align:left;position:relative;overflow:hidden;
   padding:11px 12px;border-radius:14px;
@@ -3648,6 +3671,15 @@ body{background:#05050A;color:var(--tx)}
       </div>
       <div class="hh-led" aria-hidden="true" hidden><b id="homeLed"></b></div>
     </header>
+
+    <!-- 📱 앱 설치 — 상단 헤더 바로 아래 · 배너 위 슬림 1줄 바 (standalone 실행 중이면 자동 숨김) -->
+    <section class="pwa-home" id="pwaPanelHome" data-pwa-panel hidden>
+      <button class="pwa-cta" id="pwaBtnHome" type="button" data-pwa="open">
+        <span class="pi" aria-hidden="true">📲</span>
+        <span class="pt"><b>포코쿠지를 홈 화면에 추가</b></span>
+        <span class="pg" data-pwa-tag>설치 방법</span>
+      </button>
+    </section>
 
     <!-- v9: 풀블리드 대형 배너 캐러셀 (스와이프 · 자동 4.6초 · 도트) -->
     <section class="hcar" id="homeBanner" aria-roledescription="carousel" aria-label="포코쿠지 홈 배너">
@@ -3891,15 +3923,6 @@ body{background:#05050A;color:var(--tx)}
       <div class="sgrid" id="seriesGrid"></div>
     </section>
 
-    <!-- 📱 앱 설치 — 홈 하단 푸터 근처 (standalone 실행 중이면 자동 숨김) -->
-    <section class="pwa-home" id="pwaPanelHome" data-pwa-panel hidden>
-      <button class="pwa-cta" id="pwaBtnHome" type="button" data-pwa="open">
-        <span class="pi" aria-hidden="true">📲</span>
-        <span class="pt"><b>포코쿠지를 홈 화면에 추가</b><small>주소창 없는 전체화면 앱으로 열려요</small></span>
-        <span class="pg" data-pwa-tag>설치 방법</span>
-      </button>
-    </section>
-
     <!-- v10: 홈 본문은 시리즈 카드 → 사업자 푸터로 바로 이어진다 (규정은 상단 배너·푸터 링크 모달) -->
     <!-- @@POKO-BIZFOOT-BEGIN@@ -->
     <footer class="bizfoot" id="bizFoot">
@@ -4002,7 +4025,12 @@ body{background:#05050A;color:var(--tx)}
   <!-- ================= SHELF (진열장) ================= -->
   <main class="screen subscreen" id="screenBox" hidden>
     <header class="arc-head">
-      <div class="arc-wm">POKO KUJI <i>포코쿠지</i></div>
+      <div class="arc-top">
+        <div class="arc-wm">POKO KUJI <i>포코쿠지</i></div>
+        <button class="arc-x" id="shelfClose" type="button" aria-label="진열장 닫기">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 6.4l11.2 11.2M17.6 6.4L6.4 17.6"/></svg>
+        </button>
+      </div>
       <div class="arc-hdrow"><h1>진열장<b>.</b></h1><span class="arc-cnt">보관 중 <b id="boxCnt">0점</b></span></div>
       <p class="arc-sub">뽑은 경품을 모아 한 번에 받아요</p>
     </header>
@@ -7474,8 +7502,21 @@ body{background:#05050A;color:var(--tx)}
   $("#prevBox").addEventListener("click", () => moveBox(-1));
   $("#nextBox").addEventListener("click", () => moveBox(1));
   $("#boxStrip").addEventListener("click", () => { renderBoxPicker(); openOverlay("boxPicker"); });
-  $("#shelfBtn").addEventListener("click", () => { showScreen("box"); renderBox(); });
-  $("#homeCart").addEventListener("click", () => { showScreen("box"); renderBox(); });
+  /* 진열장은 '어디서 열었는지' 기억했다가 ✕ 닫기로 그 화면에 돌려보낸다 (2026-11-28) */
+  let shelfFrom = "home";
+  function openShelf(from){
+    shelfFrom = from === "detail" ? "detail" : "home";
+    showScreen("box");
+    renderBox();
+  }
+  $("#shelfBtn").addEventListener("click", () => openShelf("detail"));
+  $("#homeCart").addEventListener("click", () => openShelf("home"));
+  const shelfCloseBtn = $("#shelfClose");
+  if (shelfCloseBtn) shelfCloseBtn.addEventListener("click", () => {
+    if (shelfFrom === "detail"){ showScreen("detail"); return; }
+    showScreen("home");
+    renderHome();
+  });
   $("#homePts").addEventListener("click", () => toast("보유 포인트 " + won(state.points) + "P · " + (LIVE ? "실서비스 계정" : "데모 계정")));
 
   $("#noticeBtn").addEventListener("click", openNotice);
@@ -7486,7 +7527,7 @@ body{background:#05050A;color:var(--tx)}
     btn.addEventListener("click", () => {
       const go = btn.dataset.go;
       if (go === "home"){ showScreen("home"); renderHome(); }
-      else if (go === "box"){ showScreen("box"); renderBox(); }
+      else if (go === "box"){ openShelf("home"); }
       else if (go === "my"){ showScreen("my"); renderMy(); }
       else { showScreen("admin"); renderAdmin(); }
     });
@@ -7517,8 +7558,7 @@ body{background:#05050A;color:var(--tx)}
   });
   $("#resBoxBtn").addEventListener("click", () => {
     closeOverlay("resultSheet");
-    showScreen("box");
-    renderBox();
+    openShelf("detail");
   });
 
   const _selAllBtn = $("#selAll");

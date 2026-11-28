@@ -11,6 +11,20 @@
 - 상태는 메모리에만 있고 새로고침하면 초기화됩니다.
 - 사이트 아이콘(헤더·푸터 로고·파비콘)만 `assets/poko-mascot.png` · `favicon.png` · PNG를 씁니다. (`apple-touch-icon` 은 `assets/icon-180.png`)
 
+## 2026-11-28 10차 — 설치 바 상단 이동 · 진열장 ✕ 닫기 (v15)
+
+아이폰 실기기에서 확인한 두 가지 불편을 그대로 고쳤습니다.
+
+- **`#pwaPanelHome`(홈 화면에 추가)를 홈 하단 → 상단 배너 바로 위로 이동**: 헤더(1줄 화이트 바) 바로 아래, `#homeBanner` 위에 **높이 34px 슬림 1줄 바**로 배치(아이콘 22px · 문구 10.5px 한 줄 · 오른쪽 `설치 방법` 배지). 배너가 첫 화면에서 밀리지 않고, 하단은 다시 **시리즈 카드 → 사업자 푸터**로 바로 이어집니다. `standalone` 앱 모드 자동 숨김은 그대로.
+- **진열장 우측 상단 `✕` 닫기 버튼(`#shelfClose`)**: `#screenBox` 헤더 오른쪽에 32px 원형 버튼. 누르면 **연 곳으로 되돌아갑니다** — 상세 화면에서 열었으면 상세로, 홈 헤더 알약(`#homeCart`)·하단 진열장 탭으로 열었으면 홈으로.
+- **검증**: `run_verify_offline.sh` 308+88 · `verify_evo.py` 69/69 · `verify_pwa.py` 로컬/라이브 54/54.
+
+```bash
+bash run_verify_offline.sh                 # 308 + 88
+python3 verify_pwa.py                      # 로컬(데모 사본) 54
+python3 verify_pwa.py https://pokokuji.kr/ # 라이브 54
+```
+
 ## 2026-11-28 9차 — 📲 PWA '홈 화면에 추가' · 전체화면 앱 + 기기별 설치 안내 (v14)
 
 포코쿠지를 **홈 화면 앱**으로 설치할 수 있게 했습니다. 설치하면 주소창 없이 전체화면(`standalone`)으로 열립니다.
@@ -18,9 +32,9 @@
 - **`manifest.json`**: `name` 포코쿠지 - 꽝 없는 온라인 이치방쿠지 · `short_name` 포코쿠지 · `start_url` `./` · `display` `standalone` · `background_color`/`theme_color` `#0e0f17` · 아이콘 192/512(`any maskable`).
 - **아이콘 3종**(`assets/icon-180/192/512.png`): `poko-mascot.png` 를 `#0e0f17` 풀블리드에 88%로 앉혀 마스코트가 마스커블 안전영역 안에 들어가게 생성(`make_pwa_icons.py`).
 - **head 메타**: `manifest` · `apple-touch-icon(180)` · `apple-mobile-web-app-capable=yes` · `apple-mobile-web-app-status-bar-style=black-translucent` · `apple-mobile-web-app-title=포코쿠지`. standalone 실행 시 상단 `env(safe-area-inset-top)` 만큼 `.app` 이 비켜 상태바 아래로 들어갑니다.
-- **설치 버튼 2곳**: 홈 하단(시리즈 카드 → 사업자 푸터 사이)과 마이페이지 '바로 처리' 아래 '앱으로 쓰기' 패널. 이미 `standalone`(또는 iOS `navigator.standalone`)이면 자동으로 숨습니다.
+- **설치 버튼 2곳**: 홈 상단(헤더 바로 아래 · 배너 위, 2026-11-28 10차에서 하단 → 상단 이동)과 마이페이지 '바로 처리' 아래 '앱으로 쓰기' 패널. 이미 `standalone`(또는 iOS `navigator.standalone`)이면 자동으로 숨습니다.
 - **기기별 동작**: `beforeinstallprompt` 를 잡아 두었다가 **안드로이드 크롬/삼성인터넷은 버튼 1탭으로 네이티브 설치창**(배지 '1탭 설치'), **iOS는 공유 ↑ → 홈 화면에 추가 → 추가 3단계**, **카카오톡 인앱은 '··· → 다른 브라우저로 열기' 3단계**, PC는 주소창 설치 아이콘 안내를 띄웁니다. 설치 후 `appinstalled` 토스트.
-- **검증**: `verify_pwa.py` 로컬 50/50(manifest·아이콘 200/규격·메타태그·버튼 노출·iOS/카톡/안드/PC 시트·standalone 숨김·390px 넘침 없음·콘솔 0) · `run_verify_offline.sh` 293+88 · `verify_evo.py` 69/69.
+- **검증**: `verify_pwa.py` 로컬 54/54(manifest·아이콘 200/규격·메타태그·버튼 노출·상단 배너 위 위치·iOS/카톡/안드/PC 시트·standalone 숨김·390px 넘침 없음·콘솔 0) · `run_verify_offline.sh` 308+88 · `verify_evo.py` 69/69.
 
 ```bash
 python3 verify_pwa.py                      # 로컬(데모 사본)
