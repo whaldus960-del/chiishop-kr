@@ -4259,6 +4259,143 @@ body{background:#05050A;color:var(--tx)}
   background:linear-gradient(180deg,#FFD9A8,#FF8A62);border:0;box-shadow:0 8px 18px -10px rgba(255,90,54,1)}
 
 /* @@POKO-V18-END@@ */
+
+/* ============================================================
+   v20 — ① 풀스크린 서브페이지 (바텀시트 → 전체 화면 · ← 뒤로)
+        ② 포인트·골드 통합 카드 + 쿠폰 2분할 바
+        ③ 쿠폰함 3탭(미사용/사용 완료/만료) · 내역 페이지 탭
+   ============================================================ */
+/* 아이폰 상태바·다이나믹아일랜드와 마이페이지 상단이 닿지 않게 */
+.myscreen .my-head{padding-top:calc(14px + env(safe-area-inset-top,0px))}
+@media all and (display-mode:standalone){
+  /* standalone 은 .app 이 이미 인셋만큼 패딩을 준다 → 마이페이지만 중복 제거 */
+  .myscreen{margin-top:calc(-1 * env(safe-area-inset-top,0px))}
+}
+
+/* ---------- ① 풀스크린 서브페이지 ---------- */
+.overlay.fullpage{align-items:stretch;justify-content:center;background:#0B0A12;backdrop-filter:none}
+.overlay.fullpage .sheet{
+  width:min(460px,100%);height:100vh;height:100dvh;max-height:100dvh;
+  border-radius:0;border:0;border-bottom:0;box-shadow:none;
+  padding-top:env(safe-area-inset-top,0px);
+  animation:pgIn .24s cubic-bezier(.2,.9,.3,1)}
+@keyframes pgIn{from{transform:translateX(18px);opacity:.55}to{transform:none;opacity:1}}
+.overlay.fullpage .sheet-handle{display:none}
+.overlay.fullpage .sheet-head{justify-content:flex-start;gap:8px;min-height:52px;
+  padding:6px 12px 8px;border-bottom:1px solid rgba(255,255,255,.07)}
+.overlay.fullpage .sheet-head h3{flex:1 1 auto;min-width:0;margin:0;font-size:15.5px;font-weight:900;letter-spacing:-.5px;color:#F7F3FF;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.overlay.fullpage .sheet-body{padding:10px 14px 18px}
+.overlay.fullpage .sheet-actions{padding:10px 14px calc(12px + env(safe-area-inset-bottom,0px))}
+.mp-back{flex:none;width:36px;height:36px;border-radius:12px;display:grid;place-items:center;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#F5F1F9}
+.mp-back svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.mp-back:active{transform:scale(.94)}
+.overlay.fullpage .sheet-head .x{flex:none;width:36px;height:36px;border-radius:12px;font-size:18px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#B9B0C8}
+
+/* ---------- 페이지 상단 탭 ---------- */
+.mp-tabs{display:flex;gap:5px;padding:10px 14px 4px;flex:none}
+.mp-tabs[hidden]{display:none}
+.mp-tabs button{flex:1;height:36px;border-radius:11px;font-size:11.5px;font-weight:900;letter-spacing:-.3px;
+  color:#9A92A8;background:#171322;border:1px solid #241E33;transition:background .16s,color .16s}
+.mp-tabs button em{font-style:normal;font-size:9px;font-weight:900;opacity:.85;margin-left:3px}
+.mp-tabs button.on{color:#12200A;background:linear-gradient(180deg,#E6FF9E,#B9F53E);border-color:transparent;
+  box-shadow:0 8px 18px -12px rgba(185,245,62,.95)}
+.mp-tabs button.on em{opacity:1}
+
+/* ---------- 빈 상태 ---------- */
+.rempty{display:flex;flex-direction:column;align-items:center;gap:9px;padding:56px 18px 34px;text-align:center}
+.rempty .re-ic{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;font-size:36px;
+  background:radial-gradient(circle at 50% 38%,#26203A,#141020 72%);border:1px solid #2C2542;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 18px 34px -24px rgba(255,90,54,.9)}
+.rempty b{font-size:12.5px;font-weight:900;letter-spacing:-.2px;color:#E9E3F2}
+.rempty p{font-size:10.5px;font-weight:700;line-height:1.6;color:#8E869C}
+.rempty .re-cta{margin-top:4px;height:38px;padding:0 16px;border-radius:11px;font-size:11px;font-weight:900;
+  color:#12200A;background:linear-gradient(180deg,#E6FF9E,#B9F53E);box-shadow:0 10px 20px -14px rgba(185,245,62,.95)}
+
+/* ---------- 내역 페이지 행 ---------- */
+.relist{display:flex;flex-direction:column;gap:7px}
+.rerow{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:13px;
+  background:linear-gradient(180deg,#1A1526,#131020);border:1px solid #262038;text-align:left;width:100%}
+.rerow .rt{flex:1;min-width:0}
+.rerow .rt b{display:block;font-size:11.5px;font-weight:900;letter-spacing:-.3px;color:#F2EDF8;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rerow .rt span{display:block;margin-top:2px;font-size:9px;font-weight:700;color:#8A819A;line-height:1.45;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rerow .rv{flex:none;font-size:11.5px;font-weight:900;letter-spacing:-.3px;color:#E6E0EE;text-align:right}
+.rerow .rv.up{color:#CDF96A}
+.rerow .rv.dn{color:#FF9E84}
+.rerow .rst{flex:none;font-size:8.4px;font-weight:900;padding:3px 8px;border-radius:999px;
+  color:#CDF96A;background:rgba(185,245,62,.12);border:1px solid rgba(185,245,62,.38)}
+.rerow .rst.gray{color:#9A92A8;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)}
+.rerow .rst.blue{color:#9BF0FF;background:rgba(94,224,255,.10);border-color:rgba(94,224,255,.34)}
+.rerow .th{flex:none;width:38px;height:38px;border-radius:9px;background:#241E33;border:1px solid #322A48;
+  display:grid;place-items:center;overflow:hidden}
+.rerow .th img,.rerow .th svg{width:92%;height:92%;object-fit:contain}
+.rerow button.rt{background:none;border:0;padding:0;text-align:left;font-family:inherit}
+
+/* ---------- ② 포인트 · 골드 통합 카드 ---------- */
+.walcard .wal-main{display:flex;align-items:center;gap:10px;padding:8px 12px 12px}
+.walcard .wal-rows{flex:1;min-width:0;display:flex;flex-direction:column}
+.wal-row{display:flex;align-items:center;gap:6px;width:100%;padding:5px 0;text-align:left}
+.wal-row .wl{flex:none;width:42px;font-size:10.5px;font-weight:800;letter-spacing:-.2px;color:#9A92A8}
+.wal-row b{font-size:20px;font-weight:900;letter-spacing:-1px;color:#fff;line-height:1.1}
+.wal-row em{font-style:normal;font-size:9.5px;font-weight:900;color:#FFC24A}
+.wal-row::after{content:"";width:7px;height:7px;margin-left:auto;margin-right:2px;border-right:1.7px solid #6C647A;border-top:1.7px solid #6C647A;transform:rotate(45deg)}
+.wal-row:active{opacity:.75}
+.wal-chg{flex:none;height:52px;padding:0 17px;border-radius:15px;font-size:12.5px;font-weight:900;letter-spacing:-.3px;
+  color:#2A0803;background:linear-gradient(180deg,#FF9C70,#F0431F);
+  box-shadow:0 12px 24px -14px rgba(255,90,54,1),inset 0 1px 0 rgba(255,255,255,.5)}
+.wal-chg:active{transform:scale(.97)}
+.wal-bar{display:flex;border-top:1px solid #2A2342;background:rgba(255,255,255,.035)}
+.wal-bar .wb{flex:1;height:46px;display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:11.5px;font-weight:900;letter-spacing:-.2px;color:#E6E0EE}
+.wal-bar .wb + .wb{border-left:1px solid #2A2342}
+.wal-bar .wb span{font-size:13px}
+.wal-bar .wb em{font-style:normal;font-size:9px;font-weight:900;padding:2px 7px;border-radius:999px;
+  color:#CDF96A;background:rgba(185,245,62,.14);border:1px solid rgba(185,245,62,.42)}
+.wal-bar .wb:active{background:rgba(255,255,255,.05)}
+
+/* ---------- 마이페이지 한 줄 행 (출석 · 배송지 · 통관) ---------- */
+.care .mr{padding:11px 12px}
+.mr .ic{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:13px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+.mr .ic svg{width:14px;height:14px;fill:none;stroke:#C9C0DA;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.mr .t em{font-style:normal;margin-left:6px;font-size:8.4px;font-weight:800;color:#8A819A}
+.mr .t em.warn{color:#FF9E84}
+
+/* ---------- ③ 쿠폰함 페이지 ---------- */
+.cpc{display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;margin-bottom:8px;
+  background:linear-gradient(180deg,#1D1729,#141020);border:1.3px dashed rgba(255,194,74,.45)}
+.cpc .ic{flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:18px;
+  background:rgba(255,194,74,.12);border:1px solid rgba(255,194,74,.3)}
+.cpc .tx{flex:1;min-width:0}
+.cpc .tx b{display:block;font-size:11.5px;font-weight:900;letter-spacing:-.3px;color:#F5F1F9;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cpc .tx span{display:block;margin-top:2px;font-size:9px;font-weight:700;color:#8A819A;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cpc .tx em{display:block;margin-top:4px;font-style:normal;font-size:8.4px;font-weight:800;color:#6F6880}
+.cpc .st{flex:none;font-size:8.4px;font-weight:900;padding:3px 8px;border-radius:999px;
+  color:#CDF96A;background:rgba(185,245,62,.12);border:1px solid rgba(185,245,62,.4)}
+.cpc.used{opacity:.62;border-style:solid;border-color:#2A2342}
+.cpc.used .st,.cpc.expired .st{color:#9A92A8;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)}
+.cpc.expired{opacity:.62;border-style:solid;border-color:#2A2342}
+.cpc-tip{margin:10px 2px 0;font-size:9.5px;font-weight:700;line-height:1.6;color:#6F6880}
+
+/* ---------- 출석 페이지 ---------- */
+#attendSheet .att-board{margin-top:2px}
+/* ---------- 통관부호 페이지 ---------- */
+.pccc-now{display:flex;align-items:center;gap:10px;padding:12px;border-radius:13px;margin-bottom:10px;
+  background:linear-gradient(180deg,#1A1526,#131020);border:1px solid #262038}
+.pccc-now .pn-ic{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:16px;
+  background:rgba(94,224,255,.10);border:1px solid rgba(94,224,255,.3)}
+.pccc-now .pn-tx b{display:block;font-size:11.5px;font-weight:900;color:#F5F1F9}
+.pccc-now .pn-tx span{display:block;margin-top:2px;font-size:9px;font-weight:700;color:#8A819A}
+.pccc-now .pn-st{margin-left:auto;font-size:8.6px;font-weight:900;padding:3px 8px;border-radius:999px;
+  color:#9A92A8;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14)}
+.pccc-now .pn-st.ok{color:#9BF0FF;background:rgba(94,224,255,.10);border-color:rgba(94,224,255,.34)}
+/* @@POKO-V20-END@@ */
 </style>
 </head>
 <body>
@@ -4774,7 +4911,6 @@ body{background:#05050A;color:var(--tx)}
         <div class="eb"><i id="myExpBar"></i></div>
         <div class="ep-nums">
           <span id="evoSpenTxt">누적 구매 <b>0원</b></span>
-          <span class="ep-coin"><small>포인트</small><b id="myCoin">0<s>P</s></b></span>
         </div>
         <div class="ep-reward" id="epReward">🎁 다음 진화 달성 보상 <b id="epRewardTxt">무료배송 쿠폰</b></div>
         <div class="ep-benefits" id="epBenefits">
@@ -4790,26 +4926,24 @@ body{background:#05050A;color:var(--tx)}
 
     <div class="my-body">
 
-      <!-- ② 포인트 · 쿠폰 -->
-      <!-- 코인 지갑 (포인트) -->
-      <section class="pn coral wa">
-        <div class="ph"><h3><i></i>포인트</h3><button data-my="ledger" type="button">충전·사용 내역 →</button></div>
-        <div class="big"><span class="b" id="myWallet"><span id="myPts">240,000</span><s>P</s><small id="myHeldNote">사용 가능</small></span><button id="myCharge" type="button">충전하기</button></div>
-        <div class="bars">
-          <div class="ln g"><span>일반 포인트</span><i><b id="myGenBar"></b></i><em id="myGen">0</em></div>
-          <div class="ln e"><span>이벤트 포인트</span><i><b id="myEvtBar"></b></i><em id="myEvt">0</em></div>
+      <!-- ② 포인트 · 골드 (쿠지맨식 슬림 통합 카드) — 쿠폰은 하단 2분할 바로 -->
+      <section class="pn coral walcard" id="walletCard">
+        <div class="ph"><h3><i></i>포인트 · 골드</h3><button data-my="ledger" type="button">충전·사용 내역 →</button></div>
+        <div class="wal-main">
+          <div class="wal-rows">
+            <button class="wal-row" id="myWallet" type="button" data-my="ledger" data-wk="point" aria-label="포인트 · 충전·사용 내역 보기">
+              <span class="wl">포인트</span><b id="myPts">240,000</b><em>P</em>
+            </button>
+            <button class="wal-row" id="myGoldRow" type="button" data-my="ledger" data-wk="gold" aria-label="골드(보너스) · 적립 내역 보기">
+              <span class="wl">골드</span><b id="myGold">0</b><em>G</em>
+            </button>
+          </div>
+          <button class="wal-chg" id="myCharge" type="button">충전하기</button>
         </div>
-      </section>
-
-      <!-- 내 쿠폰함 -->
-      <section class="pn cpnbox" id="cpnPanel">
-        <div class="ph"><h3><i></i>내 쿠폰함 <em id="myCouponN">1</em><small>장 사용 가능</small></h3><button data-my="coupons" type="button">전체 보기 →</button></div>
-        <div class="cp-list" id="myCouponList"></div>
-        <div class="cp-foot">
-          <button class="solid" id="myCouponCode" type="button">쿠폰 코드 등록</button>
-          <button class="ghost" id="myCouponHow" data-my="coupons" type="button">쿠폰 안내</button>
+        <div class="wal-bar">
+          <button class="wb" id="myCouponCode" type="button"><span aria-hidden="true">🎟️</span>쿠폰 등록</button>
+          <button class="wb" id="myCouponBox" type="button" aria-label="쿠폰함 · 사용 가능 쿠폰 보기"><span aria-hidden="true">🎫</span>쿠폰함<em id="myCouponN">0</em></button>
         </div>
-        <p class="cp-tip">첫 판 50% 쿠폰은 첫 유료 결제 때 자동 적용 · 앱 설치 보너스는 앱으로 열면 1회 지급돼요.</p>
       </section>
 
       <!-- ③ 주문·출고 현황 (출고 신청 통합) -->
@@ -4827,35 +4961,26 @@ body{background:#05050A;color:var(--tx)}
             <span class="ms-ic" aria-hidden="true">✅</span><b id="myStatDone">0</b><small>배송 완료</small><span class="ms-go">보기 ›</span>
           </button>
         </div>
-        <div class="rows" style="padding:0 0 4px">
-          <div class="rw">
-            <span class="ic"><svg viewBox="0 0 24 24"><path d="M3.5 8.5h17v10h-17z"/><path d="M3.5 8.5 7 4.5h10l3.5 4"/><path d="M12 8.5v10"/></svg></span>
-            <div class="tx"><b>출고 신청 <em id="myWaitCnt">0</em>건</b><span id="myWaitSub">아직 출고 신청이 없어요</span></div>
-            <button class="ac out" data-shelf="wait" type="button">조회</button>
-          </div>
-        </div>
       </section>
 
-      <!-- ④ 출석 · 배송 정보 — 오늘 출석 + 7일 연속 출석을 한 카드로, 미등록 배송지/PCCC 는 강조 -->
-      <section class="pn coral care" id="carePanel">
-        <div class="ph"><h3><i></i>출석 · 배송 정보</h3><button id="myAttOpen" type="button">오늘 찍기 →</button></div>
-        <div class="at"><div class="r" id="myAttStrip"></div></div>
-        <div class="rows">
-          <div class="rw hot">
-            <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg></span>
-            <div class="tx"><b>오늘 출석</b><span id="myAttTxt">1일째 · 7일 채우면 <b>1,000P</b></span></div>
-            <button class="ac go" id="myAttBtn" type="button">찍기 +100P</button>
-          </div>
-          <div class="rw unset" id="myAddrRow">
-            <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-9.4A4.6 4.6 0 0 1 12 8a4.6 4.6 0 0 1 7 3.6C19 16.5 12 21 12 21z"/><path d="M12 8V5"/></svg></span>
-            <div class="tx"><b>기본 배송지 <em class="warn" id="myAddrWarn">미등록</em></b><span id="myAddrTxt">등록된 배송지가 없어요</span></div>
-            <button class="ac out" id="myAddrBtn" data-my="addrs" type="button">등록</button>
-          </div>
-          <div class="rw unset" id="myPcccRow">
-            <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 12h10"/></svg></span>
-            <div class="tx"><b>통관부호 PCCC <em class="warn" id="myPcccWarn">미등록</em></b><span id="myPcccTxt">미등록 · 출고 시 필요해요</span></div>
-            <button class="ac out" id="myPcccBtn" type="button">등록</button>
-          </div>
+      <!-- ④ 출석 · 배송 정보 — 7일 스트립은 접고 '한 줄'만 (누르면 풀스크린 출석 페이지) -->
+      <section class="pn care" id="carePanel">
+        <div class="mn">
+          <button class="mr" id="myAttOpen" type="button" data-my="attend">
+            <span class="ic" aria-hidden="true">📅</span>
+            <span class="t">오늘 출석 <em id="myAttTxt">7일 채우면 3,400P</em></span>
+            <span class="v pill" id="myAttPill">찍기</span><span class="ch"></span>
+          </button>
+          <button class="mr" id="myAddrRow" type="button" data-my="addrs">
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-9.4A4.6 4.6 0 0 1 12 8a4.6 4.6 0 0 1 7 3.6C19 16.5 12 21 12 21z"/><path d="M12 8V5"/></svg></span>
+            <span class="t">배송지 <em class="warn" id="myAddrWarn">미등록</em></span>
+            <span class="v" id="myAddrTxt">등록하기</span><span class="ch"></span>
+          </button>
+          <button class="mr" id="myPcccRow" type="button" data-my="pccc">
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 12h10"/></svg></span>
+            <span class="t">통관부호 PCCC <em class="warn" id="myPcccWarn">미등록</em></span>
+            <span class="v" id="myPcccTxt">미등록</span><span class="ch"></span>
+          </button>
         </div>
       </section>
 
@@ -5007,7 +5132,7 @@ body{background:#05050A;color:var(--tx)}
   </div>
 
   <!-- v8: 배송지 입력·선택 -->
-  <div class="overlay" id="addrSheet" role="dialog" aria-modal="true" aria-label="배송지 선택">
+  <div class="overlay fullpage" id="addrSheet" role="dialog" aria-modal="true" aria-label="배송지 선택">
     <div class="sheet">
       <div class="sheet-handle"></div>
       <div class="sheet-head"><h3>배송지</h3><button class="x" data-close="addrSheet" aria-label="닫기">×</button></div>
@@ -5029,17 +5154,18 @@ body{background:#05050A;color:var(--tx)}
   </div>
 
   <!-- v8: 공용 안내 시트 (배송 안내 · 쿠폰 · 내역 · 충전 · 문의) -->
-  <div class="overlay" id="infoSheet" role="dialog" aria-modal="true" aria-label="안내">
+  <div class="overlay fullpage" id="infoSheet" role="dialog" aria-modal="true" aria-label="안내">
     <div class="sheet">
       <div class="sheet-handle"></div>
       <div class="sheet-head"><h3 id="infoTtl">안내</h3><button class="x" data-close="infoSheet" aria-label="닫기">×</button></div>
+      <div class="mp-tabs" id="infoTabs" role="tablist" aria-label="내역 필터" hidden></div>
       <div class="sheet-body" id="infoBody"></div>
       <div class="sheet-actions" id="infoActs" hidden></div>
     </div>
   </div>
 
   <!-- v10: 이용안내 · 규정 상세 모달 (푸터 링크 · 상단 배너 탭 · 마이페이지 공용) -->
-  <div class="overlay" id="rulesSheet" role="dialog" aria-modal="true" aria-label="이용안내와 규정 상세">
+  <div class="overlay fullpage" id="rulesSheet" role="dialog" aria-modal="true" aria-label="이용안내와 규정 상세">
     <div class="sheet">
       <div class="sheet-handle"></div>
       <div class="sheet-head"><h3>📋 이용안내 · 규정</h3><button class="x" data-close="rulesSheet" aria-label="닫기">×</button></div>
@@ -5164,7 +5290,7 @@ body{background:#05050A;color:var(--tx)}
   </div>
 
   <!-- v19: 포코 도감(5단계) — 마이페이지 중간 섹션을 시트로 이동 -->
-  <div class="overlay" id="dexSheet" role="dialog" aria-modal="true" aria-label="포코 도감 5단계">
+  <div class="overlay fullpage" id="dexSheet" role="dialog" aria-modal="true" aria-label="포코 도감 5단계">
     <div class="sheet">
       <div class="sheet-handle"></div>
       <div class="sheet-head"><h3>캐릭터 · 포코 도감</h3><button class="x" data-close="dexSheet" aria-label="닫기">×</button></div>
@@ -5216,8 +5342,23 @@ body{background:#05050A;color:var(--tx)}
     </div>
   </div>
 
+  <!-- v20: 쿠폰함 — 풀스크린 페이지 (미사용 · 사용 완료 · 만료 3탭) -->
+  <div class="overlay fullpage" id="couponBox" role="dialog" aria-modal="true" aria-label="쿠폰함">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head"><h3>쿠폰함</h3><button class="x" data-close="couponBox" aria-label="닫기">×</button></div>
+      <div class="mp-tabs" id="cbTabs" role="tablist" aria-label="쿠폰 상태">
+        <button type="button" role="tab" data-cbt="unused" class="on" aria-selected="true">미사용 <em id="cbN-unused">0</em></button>
+        <button type="button" role="tab" data-cbt="used" aria-selected="false">사용 완료 <em id="cbN-used">0</em></button>
+        <button type="button" role="tab" data-cbt="expired" aria-selected="false">만료 <em id="cbN-expired">0</em></button>
+      </div>
+      <div class="sheet-body" id="cbBody"></div>
+      <div class="sheet-actions"><button class="btn-primary" id="cbCode" type="button">🎟️ 쿠폰 코드 등록<small>이벤트·앱 설치·제휴 코드</small></button></div>
+    </div>
+  </div>
+
   <!-- v18: 쿠폰 코드 등록 -->
-  <div class="overlay" id="couponSheet" role="dialog" aria-modal="true" aria-label="쿠폰 코드 등록">
+  <div class="overlay fullpage" id="couponSheet" role="dialog" aria-modal="true" aria-label="쿠폰 코드 등록">
     <div class="sheet">
       <div class="sheet-handle"></div>
       <div class="sheet-head"><h3>쿠폰 코드 등록</h3><button class="x" data-close="couponSheet" aria-label="닫기">×</button></div>
@@ -5358,7 +5499,7 @@ body{background:#05050A;color:var(--tx)}
   </div>
 
   <!-- 데일리 출석체크 : 7일 스탬프 -->
-  <div class="overlay" id="attendSheet" role="dialog" aria-modal="true" aria-label="매일 출석체크">
+  <div class="overlay fullpage" id="attendSheet" role="dialog" aria-modal="true" aria-label="매일 출석체크">
     <div class="sheet">
       <div class="sheet-handle"></div>
       <div class="sheet-head"><h3>📅 매일 출석체크</h3><button class="x" data-close="attendSheet" aria-label="닫기">×</button></div>
@@ -8212,15 +8353,7 @@ body{background:#05050A;color:var(--tx)}
   }
   attInit();
 
-  /* 마이페이지 — 바로 처리 원탭 연결 */
-  (function wireMyOneTap(){
-    const claim = $("#myAttBtn");
-    if (claim) claim.addEventListener("click", () => { attClaim(); renderMy(); });
-    const open = $("#myAttOpen");
-    if (open) open.addEventListener("click", () => { attRender(); openOverlay("attendSheet"); });
-    const pccc = $("#myPcccBtn");
-    if (pccc) pccc.addEventListener("click", () => { if (typeof openPccc === "function") openPccc(); });
-  })();
+  /* 마이페이지 — v20: 출석·PCCC 행은 data-my 페이지 라우팅으로 통합 */
 
   /* @@POKO-V2-JS-END@@ */
 
@@ -8394,7 +8527,7 @@ body{background:#05050A;color:var(--tx)}
     else pct = 100;                                          /* 내 등급이 최종 */
 
     const txt = $("#myExpTxt"), nx = $("#evoNext"), bar = $("#myExpBar"),
-          spn = $("#evoSpenTxt"), coin = $("#myCoin");
+          spn = $("#evoSpenTxt");
     if (isPrev){
       if (txt) txt.innerHTML = "미리보기 · 해금 <b>" + st.short + "</b>";
       if (nx){
@@ -8410,7 +8543,6 @@ body{background:#05050A;color:var(--tx)}
     }
     if (bar) bar.style.width = pct + "%";
     if (spn) spn.innerHTML = "누적 구매 <b>" + won(spent) + "원</b>";
-    if (coin) coin.innerHTML = won(Math.max(0, Number(state.points) || 0)) + "<s>P</s>";
 
     /* v18 — 등급별 혜택 배지 + 다음 진화 보상 */
     const rwTxt = $("#epRewardTxt");
@@ -8977,7 +9109,14 @@ body{background:#05050A;color:var(--tx)}
   function openOverlay(id){
     try { if (typeof hbStop === "function") hbStop(); } catch (e){}
     const o = $("#" + id);
+    if (!o) return;
     o.classList.add("show");
+    /* v20 — 풀스크린 페이지는 좌상단 ‘← 뒤로’ 버튼을 자동으로 달고, 본문 스크롤을 처음으로 */
+    if (o.classList.contains("fullpage")){
+      if (typeof pageBackBtn === "function") pageBackBtn(o);
+      const b = o.querySelector(".sheet-body");
+      if (b) b.scrollTop = 0;
+    }
     $("#toast").classList.remove("show");
   }
   function closeOverlay(id){
@@ -10254,7 +10393,9 @@ body{background:#05050A;color:var(--tx)}
     const evt = Math.max(0, Math.min(P, attSavedPts()));
     const gen = Math.max(0, P - evt);
 
-    pts.textContent = won(P);
+    pts.textContent = won(gen);
+    const goldEl = $("#myGold");
+    if (goldEl) goldEl.textContent = won(evt);
     $("#myNick").textContent = state.profile.nick;
     $("#myPhone").textContent = maskPhone(state.profile.phone);
 
@@ -10276,14 +10417,6 @@ body{background:#05050A;color:var(--tx)}
     }
 
     renderEvo();   /* 5단계 진화 카드 · 누적 구매액 기준 */
-    const coin = $("#myCoin");
-    if (coin) coin.innerHTML = won(P) + "<s>P</s>";
-    const genEl = $("#myGen"), evtEl = $("#myEvt");
-    if (genEl) genEl.textContent = won(gen);
-    if (evtEl) evtEl.textContent = won(evt);
-    const gb = $("#myGenBar"), eb = $("#myEvtBar");
-    if (gb) gb.style.width = (P ? Math.round(gen / P * 100) : 0) + "%";
-    if (eb) eb.style.width = (P ? Math.round(evt / P * 100) : 0) + "%";
 
     const keepN = state.shelf.filter(i => !i.shipped).length;
     const waitN = state.shelf.filter(i => i.shipped && i.status !== "delivered").length;
@@ -10292,13 +10425,6 @@ body{background:#05050A;color:var(--tx)}
     setN("#myStatKeep", keepN);
     setN("#myStatWait", waitN);
     setN("#myStatDone", doneN);
-    const waitCnt = $("#myWaitCnt");
-    if (waitCnt) waitCnt.textContent = state.ships.length;
-    const waitSub = $("#myWaitSub");
-    if (waitSub){
-      const last = state.ships[state.ships.length - 1];
-      waitSub.textContent = last ? (last.no + " · " + last.count + "점 · " + (last.status === "ready" ? "배송 준비중" : "출고 완료")) : "아직 출고 신청이 없어요";
-    }
     $("#myAs").textContent = state.inquiries.length;
     $("#myNotiN").textContent = state.notis.filter(n => n.unread).length;
     $("#myFavN").textContent = state.favs.length;
@@ -10310,15 +10436,8 @@ body{background:#05050A;color:var(--tx)}
     const usable = cpnRows.filter(c => c.st === "사용 가능").length;
     const cn = $("#myCouponN");
     if (cn) cn.textContent = usable;
-    const cpnList = $("#myCouponList");
-    if (cpnList){
-      cpnList.innerHTML = cpnRows.slice(0, 3).map(c =>
-        '<div class="cp-row' + (c.st === "사용 가능" ? "" : " used") + '">'
-        + '<span class="cp-ic" aria-hidden="true">' + c.ic + '</span>'
-        + '<span class="cp-tx"><b>' + c.t + '</b><span>' + c.sub
-        + (c.exp && c.exp !== "상시" ? " · " + c.exp + "까지" : "") + '</span></span>'
-        + '<span class="cp-st">' + c.st + '</span></div>').join("");
-    }
+    const cbBtn = $("#myCouponBox");
+    if (cbBtn) cbBtn.setAttribute("aria-label", "쿠폰함 · 사용 가능 " + usable + "장");
     const sn = $("#myShipN");
     if (sn){ sn.hidden = state.ships.length === 0; sn.textContent = state.ships.length; }
     const en = $("#myExN");
@@ -10328,44 +10447,33 @@ body{background:#05050A;color:var(--tx)}
     const att = attLoad();
     const doneToday = att.last === attD(0);
     const cur = att.streak;
-    const strip = $("#myAttStrip");
-    if (strip){
-      strip.innerHTML = ATT_REW.map((r, i) => {
-        const cls = i < cur ? "on" : (!doneToday && i === cur ? "td" : "");
-        return "<div class=\"" + cls + "\"><em>D" + (i + 1) + "</em><b>" + (i === 6 ? "1K" : won(r)) + "</b></div>";
-      }).join("");
-    }
     const attTxt = $("#myAttTxt");
     if (attTxt) attTxt.innerHTML = doneToday
-      ? "오늘 출석 완료 · <b>" + cur + "일째 연속</b>"
-      : (cur ? cur + "일째 연속 · 7일 채우면 <b>1,000P</b>" : "아직 시작 전 · 7일 채우면 <b>1,000P</b>");
-    const attBtn = $("#myAttBtn");
-    if (attBtn){
-      attBtn.classList.toggle("done", doneToday);
-      attBtn.textContent = doneToday ? "완료" : "찍기 +" + won(ATT_REW[Math.min(cur, 6)] || 0) + "P";
+      ? cur + "일째 연속 · 오늘 완료"
+      : (cur ? cur + "일째 · 7일 채우면 <b>1,000P</b>" : "7일 채우면 <b>1,000P</b>");
+    const attPill = $("#myAttPill");
+    if (attPill){
+      attPill.textContent = doneToday ? "완료" : "찍기 +" + won(ATT_REW[Math.min(cur, 6)] || 0) + "P";
+      attPill.classList.toggle("done", doneToday);
     }
-    const attOpen = $("#myAttOpen");
-    if (attOpen) attOpen.textContent = doneToday ? "출석 완료 →" : "오늘 찍기 →";
 
-    /* v19 — 배송지·통관부호는 미등록일 때만 카드에서 눈에 띄게 강조한다 */
+    /* v20 — 배송지·통관부호는 한 줄 행: 값은 오른쪽에만 짧게 */
     const addrTxt = $("#myAddrTxt");
-    const addrRow = $("#myAddrRow"), addrWarnEl = $("#myAddrWarn"), addrBtn = $("#myAddrBtn");
+    const addrRow = $("#myAddrRow"), addrWarnEl = $("#myAddrWarn");
     if (addrTxt){
       const a = state.addrs.find(x => x.def) || state.addrs[0];
-      addrTxt.textContent = a ? (a.name + " · " + a.addr) : "등록된 배송지가 없어요 · 출고 신청 전에 등록해 주세요";
+      addrTxt.textContent = a ? (a.name + " · " + String(a.addr).slice(0, 10)) : "등록하기";
       if (addrRow) addrRow.classList.toggle("unset", !a);
       if (addrWarnEl) addrWarnEl.hidden = !!a;
-      if (addrBtn) addrBtn.textContent = a ? "변경" : "등록";
     }
     const pcccTxt = $("#myPcccTxt");
-    const pcccRow = $("#myPcccRow"), pcccWarnEl = $("#myPcccWarn"), pcccBtn = $("#myPcccBtn");
+    const pcccRow = $("#myPcccRow"), pcccWarnEl = $("#myPcccWarn");
     if (pcccTxt){
       const pc = (state.customs.pccc || "").toUpperCase();
       const ok = /^P\d{12}$/.test(pc);
-      pcccTxt.textContent = ok ? (pc.slice(0, 5) + "****" + pc.slice(-4) + " · 등록 완료") : "미등록 · 출고 시 필요해요";
+      pcccTxt.textContent = ok ? (pc.slice(0, 5) + "****" + pc.slice(-4)) : "등록하기";
       if (pcccRow) pcccRow.classList.toggle("unset", !ok);
       if (pcccWarnEl) pcccWarnEl.hidden = ok;
-      if (pcccBtn) pcccBtn.textContent = ok ? "수정" : "등록";
     }
   }
 
@@ -10417,87 +10525,255 @@ body{background:#05050A;color:var(--tx)}
     state.coupons.unshift({ id: "c_" + code, code, t: def.t, sub: def.sub, tag: "코드", ic: def.ic, use: false, exp: def.exp });
     cpnSaveCode(code);
     closeOverlay("couponSheet");
+    cbTab = "unused";
+    if ($("#couponBox").classList.contains("show")) renderCouponBox();
     renderMy();
     toast("🎟️ 쿠폰이 담겼어요 · " + def.t);
   }
 
-  function openInfo(title, body, acts, onMount){
+  /* ============================================================
+     v20 — 내 서브 화면 = 풀스크린 페이지 (바텀시트 ✕)
+       좌상단 ← 뒤로 · 우상단 ✕ · 상단 탭 필터 · 빈 상태 카드
+     ============================================================ */
+  const PAGE_BACK_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
+  function pageBackBtn(o){
+    if (!o || o.dataset.pgback === "1") return;
+    const head = o.querySelector(".sheet-head");
+    if (!head) return;
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "mp-back";
+    b.setAttribute("aria-label", "뒤로 가기");
+    b.innerHTML = PAGE_BACK_SVG;
+    b.addEventListener("click", () => closeOverlay(o.id));
+    head.insertBefore(b, head.firstChild);
+    o.dataset.pgback = "1";
+  }
+
+  let infoTabPick = null;
+  function setInfoTabs(cfg){
+    const box = $("#infoTabs");
+    if (!box) return;
+    if (!cfg || !cfg.items || !cfg.items.length){
+      box.hidden = true; box.innerHTML = ""; box.onclick = null; infoTabPick = null; return;
+    }
+    box.hidden = false;
+    infoTabPick = cfg.pick;
+    box.innerHTML = cfg.items.map(t =>
+      '<button type="button" role="tab" data-it="' + t.k + '" aria-selected="' + (t.k === cfg.cur ? "true" : "false") + '"'
+      + (t.k === cfg.cur ? ' class="on"' : '') + '>' + t.l
+      + (t.n != null ? ' <em>' + t.n + '</em>' : '') + '</button>').join("");
+    box.onclick = e => {
+      const b = e.target.closest("[data-it]");
+      if (b && infoTabPick) infoTabPick(b.dataset.it);
+    };
+  }
+
+  function openInfo(title, body, acts, onMount, tabs){
     $("#infoTtl").textContent = title;
     $("#infoBody").innerHTML = body;
     const a = $("#infoActs");
     if (acts){ a.innerHTML = acts; a.hidden = false; } else { a.innerHTML = ""; a.hidden = true; }
+    setInfoTabs(tabs || null);
     openOverlay("infoSheet");
     if (onMount) onMount();
   }
 
-  function myOpen(key){
-    if (key === "addrs"){ openAddr(); return; }
+  /* ---------- 내역 페이지 공통 ---------- */
+  const REC_TITLE = { noti: "알림", ledger: "충전·사용 내역", shiphist: "배송 내역", exch: "회수 기록", favs: "찜한 시리즈" };
+  const LEDGER_CAT = { charge: "charge", draw: "use", exchange: "earn", attend: "earn" };
+  const LEDGER_LABEL = { charge: "충전", draw: "사용", exchange: "회수 교환", attend: "출석 적립" };
+  const SHIP_CAT = st => st === "ready" ? "wait" : (st === "shipping" || st === "transit" || st === "sent") ? "ship" : "done";
+  const SHIP_LABEL = { wait: "출고 대기", ship: "배송 중", done: "배송 완료" };
+  const SHIP_CLS = { wait: "", ship: "blue", done: "gray" };
+
+  function recEmpty(ic, title, sub, cta, go){
+    return '<div class="rempty"><span class="re-ic" aria-hidden="true">' + ic + '</span><b>' + title + '</b><p>' + sub + '</p>'
+      + (cta ? '<button class="re-cta" type="button" data-rec="' + go + '">' + cta + '</button>' : '') + '</div>';
+  }
+
+  function openRec(kind, pick){
+    recDraw(kind, pick);
+    if (!$("#infoSheet").classList.contains("show")) openOverlay("infoSheet");
+    if (kind === "noti"){
+      state.notis.forEach(n => { n.unread = false; });
+      renderMy();
+    }
+  }
+
+  function recDraw(kind, pick){
+    const body = $("#infoBody"), head = $("#infoTtl"), acts = $("#infoActs");
+    if (head) head.textContent = REC_TITLE[kind] || "내역";
+    if (acts){ acts.innerHTML = ""; acts.hidden = true; }
+    if (!body) return;
+
+    if (kind === "ledger"){
+      const rows = state.ledger.slice();
+      const cnt = c => c === "all" ? rows.length : rows.filter(l => LEDGER_CAT[l.kind] === c).length;
+      const items = [
+        { k: "all", l: "전체", n: cnt("all") },
+        { k: "charge", l: "충전", n: cnt("charge") },
+        { k: "use", l: "사용", n: cnt("use") },
+        { k: "earn", l: "적립", n: cnt("earn") }
+      ];
+      const cur = items.some(i => i.k === pick) ? pick : "all";
+      const list = cur === "all" ? rows : rows.filter(l => LEDGER_CAT[l.kind] === cur);
+      setInfoTabs({ items, cur, pick: k => recDraw("ledger", k) });
+      body.innerHTML = list.length
+        ? '<div class="relist">' + list.map(l =>
+            '<div class="rerow"><span class="rt"><b>' + l.t + '</b><span>' + l.at + ' · '
+            + (LEDGER_LABEL[l.kind] || "사용") + '</span></span><span class="rv ' + (l.amt > 0 ? "up" : "dn") + '">'
+            + (l.amt > 0 ? "+" : "") + won(l.amt) + 'P</span></div>').join("") + '</div>'
+        : recEmpty("💳", "아직 내역이 없어요", "충전하거나 뽑기를 하면<br>이곳에 한 줄씩 쌓여요.", "포인트 충전하기", "charge");
+      return;
+    }
+
+    if (kind === "shiphist"){
+      const rows = state.ships.slice().reverse();
+      const cnt = c => c === "all" ? rows.length : rows.filter(s => SHIP_CAT(s.status) === c).length;
+      const items = [
+        { k: "all", l: "전체", n: cnt("all") },
+        { k: "wait", l: "출고 대기", n: cnt("wait") },
+        { k: "ship", l: "배송 중", n: cnt("ship") },
+        { k: "done", l: "완료", n: cnt("done") }
+      ];
+      const cur = items.some(i => i.k === pick) ? pick : "all";
+      const list = cur === "all" ? rows : rows.filter(s => SHIP_CAT(s.status) === cur);
+      setInfoTabs({ items, cur, pick: k => recDraw("shiphist", k) });
+      body.innerHTML = list.length
+        ? '<div class="relist">' + list.map(sh => {
+            const c = SHIP_CAT(sh.status);
+            const desc = [sh.date + " · " + sh.count + "점"]
+              .concat(sh.items && sh.items.length ? [sh.items.slice(0, 2).join(", ") + (sh.items.length > 2 ? " 외 " + (sh.items.length - 2) : "")] : [])
+              .concat(sh.addr ? [sh.addr] : []);
+            return '<div class="rerow"><span class="rt"><b>' + sh.no + '</b><span>' + desc.join(" · ") + '</span></span>'
+              + '<span class="rst ' + (SHIP_CLS[c] || "") + '">' + SHIP_LABEL[c] + '</span></div>';
+          }).join("") + '</div>'
+        : recEmpty("📦", "아직 출고 신청 내역이 없어요", "진열장에서 상품을 골라 <b>출고하기</b>를 누르면<br>배송 내역이 여기에 쌓여요.", "진열장 보기", "shelf");
+      return;
+    }
+
+    if (kind === "exch"){
+      setInfoTabs(null);
+      const rows = state.exchanges.slice().reverse();
+      body.innerHTML = rows.length
+        ? '<div class="relist">' + rows.map(x =>
+            '<div class="rerow"><span class="rt"><b>' + x.no + '</b><span>' + x.at + ' · ' + x.count + '점 · '
+            + x.items.slice(0, 2).join(", ") + '</span></span><span class="rv up">+' + won(x.sum) + 'P</span></div>').join("") + '</div>'
+        : recEmpty("♻️", "회수 기록이 없어요", "진열장에서 상품을 골라 <b>교환하기</b>를 누르면<br>포인트로 바뀌어 여기에 기록돼요.", "진열장 보기", "shelf");
+      return;
+    }
+
+    if (kind === "favs"){
+      setInfoTabs(null);
+      const rows = state.favs.map(sid => state.series.find(x => x.id === sid)).filter(Boolean);
+      body.innerHTML = rows.length
+        ? '<div class="relist">' + rows.map(s =>
+            '<button class="rerow" type="button" data-favgo="' + s.id + '"><span class="th">' + seriesArt(s)
+            + '</span><span class="rt"><b>' + s.def.name + '</b><span>' + s.def.short + ' · 1회 ' + won(s.def.price)
+            + 'P</span></span><span class="rv">보기 ›</span></button>').join("") + '</div>'
+        : recEmpty("💗", "찜한 시리즈가 없어요", "시리즈 상세에서 ♡를 누르면<br>이곳에 모아 둘 수 있어요.", "시리즈 보기", "home");
+      return;
+    }
+
+    /* 알림 */
+    setInfoTabs(null);
+    const rows = state.notis;
+    body.innerHTML = rows.length
+      ? '<div class="relist">' + rows.map(n =>
+          '<div class="rerow"><span class="rt"><b>' + n.t + '</b><span>' + n.b + ' · ' + n.at + '</span></span></div>').join("") + '</div>'
+      : recEmpty("🔔", "새 알림이 없어요", "쿠폰 · 출고 · 이벤트 소식이 오면<br>여기에 차곡차곡 쌓여요.", "", "");
+  }
+
+  /* ---------- 쿠폰함 (미사용 · 사용 완료 · 만료) ---------- */
+  const CB_TABS = [
+    { k: "unused", l: "미사용", ic: "🎟️", t: "사용할 수 있는 쿠폰이 없어요", s: "쿠폰 코드를 등록하면<br>이곳에 담겨요.", cta: "쿠폰 코드 등록" },
+    { k: "used", l: "사용 완료", ic: "✅", t: "사용한 쿠폰이 없어요", s: "뽑기에 쓴 쿠폰이<br>이곳에 남아요." },
+    { k: "expired", l: "만료", ic: "🕰️", t: "만료된 쿠폰이 없어요", s: "기간이 지난 쿠폰은<br>자동으로 이 탭으로 옮겨져요." }
+  ];
+  let cbTab = "unused";
+  const cbGroupOf = c => c.st === "사용 가능" ? "unused" : (c.st === "사용 완료" ? "used" : "expired");
+
+  function openCouponBox(tab){
+    cbTab = (tab === "used" || tab === "expired") ? tab : "unused";
+    renderCouponBox();
+    openOverlay("couponBox");
+  }
+
+  function renderCouponBox(){
+    const rows = myCouponRows();
+    const g = { unused: [], used: [], expired: [] };
+    rows.forEach(c => g[cbGroupOf(c)].push(c));
+    g.unused.sort((a, b) => String(a.exp || "9999").localeCompare(String(b.exp || "9999")));
+    CB_TABS.forEach(t => {
+      const el = $("#cbN-" + t.k);
+      if (el) el.textContent = g[t.k].length;
+      const btn = document.querySelector('#cbTabs [data-cbt="' + t.k + '"]');
+      if (btn){
+        const on = t.k === cbTab;
+        btn.classList.toggle("on", on);
+        btn.setAttribute("aria-selected", on ? "true" : "false");
+      }
+    });
+    const cur = CB_TABS.find(t => t.k === cbTab) || CB_TABS[0];
+    const list = g[cbTab];
+    const body = $("#cbBody");
+    if (!body) return;
+    if (!list.length){
+      body.innerHTML = '<div class="rempty"><span class="re-ic" aria-hidden="true">' + cur.ic + '</span><b>' + cur.t
+        + '</b><p>' + cur.s + '</p>'
+        + (cur.cta ? '<button class="re-cta" type="button" data-rec="code">' + cur.cta + '</button>' : '')
+        + '</div>';
+      return;
+    }
+    body.innerHTML = list.map(c => {
+      const cls = cbGroupOf(c) === "unused" ? "" : (" " + cbGroupOf(c));
+      const exp = c.exp && c.exp !== "상시" ? c.exp + "까지" : "상시 사용";
+      return '<div class="cpc' + cls + '"><span class="ic" aria-hidden="true">' + (c.ic || "🎟️") + '</span>'
+        + '<span class="tx"><b>' + c.t + '</b><span>' + c.sub + '</span><em>' + exp + '</em></span>'
+        + '<span class="st">' + (c.st === "사용 가능" ? "사용 가능" : c.st) + '</span></div>';
+    }).join("")
+      + (cbTab === "unused" ? '<p class="cpc-tip">회원가입 첫 판 50% 할인 쿠폰은 첫 <b>유료 결제</b> 때 자동 적용돼요. 앱 설치 보너스는 앱으로 열면 1회 지급돼요.</p>' : "");
+  }
+
+  /* 검증용 핸들 — 쿠폰함 상태·탭·열기 */
+  window.POKO_COUPON = {
+    open: t => openCouponBox(t),
+    tab: () => cbTab,
+    counts: () => {
+      const g = { unused: 0, used: 0, expired: 0 };
+      myCouponRows().forEach(c => { g[cbGroupOf(c)] += 1; });
+      return g;
+    }
+  };
+  /* 검증용 핸들 — 내역 페이지 */
+  window.POKO_REC = { open: (k, p) => openRec(k, p), tab: () => (infoTabPick ? true : false) };
+
+  function myOpen(key, arg){
+    if (key === "addrs"){ openAddr(); return; }    if (key === "pccc"){ openPccc(); return; }
+    if (key === "attend"){ attRender(); openOverlay("attendSheet"); return; }
+    if (key === "coupons"){ openCouponBox(arg); return; }
     if (key === "shipguide"){ openShipGuide(); return; }
     if (key === "rules"){ openRules(0); return; }
     if (key === "rule"){ openRules(2); return; }
-    const titles = { noti: "알림", ledger: "충전·사용 내역", shiphist: "배송 내역",
-      exch: "회수(포인트 교환) 기록", favs: "찜한 시리즈", coupons: "쿠폰함", as: "A/S·문의" };
-    let body = "", acts = "", onMount = null;
+    if (key === "as"){ openAs(); return; }
+    if (key === "ledger"){ openRec("ledger", arg === "gold" ? "earn" : "all"); return; }
+    if (key === "noti" || key === "shiphist" || key === "exch" || key === "favs"){ openRec(key); return; }
+  }
 
-    if (key === "noti"){
-      body = state.notis.length
-        ? '<div class="info-list">' + state.notis.map(n => '<div class="info-row"><span class="nm">'
-            + n.t + '<span>' + n.b + ' · ' + n.at + '</span></span></div>').join("") + '</div>'
-        : '<p class="info-empty">새 알림이 없어요.</p>';
-      onMount = () => { state.notis.forEach(n => { n.unread = false; }); renderMy(); };
-    } else if (key === "ledger"){
-      const label = k => k === "charge" ? "충전" : k === "exchange" ? "교환" : k === "attend" ? "적립" : "사용";
-      body = state.ledger.length
-        ? '<div class="info-list">' + state.ledger.map(l => '<div class="info-row"><span class="nm">'
-            + l.t + '<span>' + l.at + ' · ' + label(l.kind) + '</span></span><span class="vl' + (l.amt > 0 ? ' up' : '') + '">'
-            + (l.amt > 0 ? "+" : "") + won(l.amt) + 'P</span></div>').join("") + '</div>'
-        : '<p class="info-empty">아직 내역이 없어요.</p>';
-    } else if (key === "shiphist"){
-      body = state.ships.length
-        ? '<div class="info-list">' + state.ships.slice().reverse().map(sh => '<div class="info-row"><span class="nm">'
-            + sh.no + '<span>' + sh.date + ' · ' + sh.count + '점'
-            + (sh.items && sh.items.length ? ' · ' + sh.items.slice(0, 2).join(', ') + (sh.items.length > 2 ? ' 외 ' + (sh.items.length - 2) : '') : '')
-            + (sh.addr ? '<br>' + sh.addr : '') + '</span></span><span class="vl">'
-            + (sh.status === "ready" ? "출고 대기" : "출고 완료") + '</span></div>').join("") + '</div>'
-        : '<p class="info-empty">아직 출고 신청 내역이 없어요.<br>진열장에서 상품을 골라 <b>출고하기</b>를 눞러 보세요.</p>';
-    } else if (key === "exch"){
-      body = state.exchanges.length
-        ? '<div class="info-list">' + state.exchanges.slice().reverse().map(x => '<div class="info-row"><span class="nm">'
-            + x.no + '<span>' + x.at + ' · ' + x.count + '점 · ' + x.items.slice(0, 2).join(', ') + '</span></span><span class="vl up">+'
-            + won(x.sum) + 'P</span></div>').join("") + '</div>'
-        : '<p class="info-empty">회수 기록이 없어요.<br>진열장에서 상품을 골라 <b>교환하기</b>를 누르면 포인트로 바뀌어요.</p>';
-    } else if (key === "favs"){
-      body = state.favs.length
-        ? '<div class="info-list">' + state.favs.map(sid => {
-            const s = state.series.find(x => x.id === sid);
-            if (!s) return "";
-            return '<button class="info-row" type="button" data-favgo="' + sid + '"><span class="th">' + seriesArt(s)
-              + '</span><span class="nm">' + s.def.name + '<span>' + s.def.short + ' · P ' + won(s.def.price)
-              + '/회</span></span><span class="vl">보기 &gt;</span></button>';
-          }).join("") + '</div>'
-        : '<p class="info-empty">찜한 시리즈가 없어요.<br>시리즈 상세에서 ♡를 누르면 이곳에 모아둘 수 있어요.</p>';
-      onMount = () => {
-        $$('#infoBody [data-favgo]').forEach(b => b.addEventListener("click", () => {
-          closeOverlay("infoSheet");
-          openSeries(b.dataset.favgo);
-        }));
-      };
-    } else if (key === "coupons"){
-      body = state.coupons.map(c => '<div class="cpn-card' + (c.use ? ' used' : '') + '"><div class="ct">'
-        + c.t + '<em>' + (c.use ? "사용완료" : c.tag) + '</em></div><div class="cs">' + c.sub
-        + ' · ' + c.exp + '까지</div></div>').join("")
-        + '<p class="info-p" style="margin-top:8px">회원가입 첫 판 50% 할인 쿠폰은 첫 유료 결제 시 자동 적용돼요.</p>';
-    } else if (key === "as"){
-      body = (state.inquiries.length
-          ? '<div class="info-list" style="margin-bottom:8px">' + state.inquiries.map(q => '<div class="info-row"><span class="nm">'
-            + q.no + ' · ' + q.t + '<span>' + q.b + '</span></span><span class="vl' + (q.done ? ' up' : '') + '">'
-            + (q.done ? "답변완료" : "접수") + '</span></div>').join("") + '</div>'
-          : '')
-        + '<p class="info-p">출고·상품·교환/반품 문의를 남겨 주세요. 접수 후 영업일 기준 1~2일 안에 <b>pokokuji.kr@gmail.com</b> 으로 답변드려요.</p>'
-        + '<div class="field"><label for="asType">문의 유형</label><input id="asType" type="text" value="상품 문의" readonly></div>'
-        + '<div class="field"><label for="asText">문의 내용</label><input id="asText" type="text" placeholder="문의 내용을 5자 이상 적어주세요"></div>';
-      acts = '<button class="btn-primary" id="asSend" disabled>문의 접수<small>작성 후 접수할 수 있어요</small></button>';
-      onMount = () => {
+  /* 1:1 문의 — 풀스크린 페이지 */
+  function openAs(){
+    const body = (state.inquiries.length
+        ? '<div class="relist" style="margin-bottom:10px">' + state.inquiries.map(q =>
+            '<div class="rerow"><span class="rt"><b>' + q.no + ' · ' + q.t + '</b><span>' + q.b + '</span></span>'
+            + '<span class="rst ' + (q.done ? "" : "gray") + '">' + (q.done ? "답변완료" : "접수") + '</span></div>').join("") + '</div>'
+        : '')
+      + '<p class="info-p">출고·상품·교환/반품 문의를 남겨 주세요. 접수 후 영업일 기준 1~2일 안에 <b>pokokuji.kr@gmail.com</b> 으로 답변드려요.</p>'
+      + '<div class="field"><label for="asType">문의 유형</label><input id="asType" type="text" value="상품 문의" readonly></div>'
+      + '<div class="field"><label for="asText">문의 내용</label><input id="asText" type="text" placeholder="문의 내용을 5자 이상 적어주세요"></div>';
+    openInfo("1:1 문의", body,
+      '<button class="btn-primary" id="asSend" type="button" disabled>문의 접수<small>작성 후 접수할 수 있어요</small></button>',
+      () => {
         const t = $("#asText"), btn = $("#asSend");
         t.addEventListener("input", () => { btn.disabled = t.value.trim().length < 5; });
         btn.addEventListener("click", () => {
@@ -10509,9 +10785,7 @@ body{background:#05050A;color:var(--tx)}
           closeOverlay("infoSheet");
           toast("문의가 접수됐어요 · " + q.no);
         });
-      };
-    }
-    openInfo(titles[key] || "안내", body, acts, onMount);
+      });
   }
 
   function openCharge(){
@@ -10772,10 +11046,40 @@ body{background:#05050A;color:var(--tx)}
   }
 
   function openPccc(){
-    openInfo("개인통관고유부호(PCCC) 안내",
-      '<p class="info-p">해외에서 들어오는 상품을 받으려면 <b>관세청 개인통관고유부호</b>가 필요해요.</p>'
-      + '<div class="info-tip">· <b>P로 시작하는 13자리</b> (예: P123456789012)<br>· 관세청 유니패스(unipass.customs.go.kr)에서 발급·조회<br>· 신분증과 <b>동일한 이름</b>으로 신청해야 통관돼요</div>'
-      + '<p class="info-p" style="margin-top:8px">데모에서는 입력값을 <b>저장하지 않아요.</b> 실제 서비스에서는 출고 접수에만 쓰고 통관 후 폐기합니다.</p>');
+    const pc = (state.customs.pccc || "").toUpperCase();
+    const ok = /^P\d{12}$/.test(pc);
+    const masked = ok ? pc.slice(0, 5) + "****" + pc.slice(-4) : "";
+    openInfo("통관부호 PCCC",
+      '<div class="pccc-now"><span class="pn-ic" aria-hidden="true">🛃</span>'
+      + '<span class="pn-tx"><b>' + (ok ? "등록 완료" : "아직 등록 전") + '</b><span>'
+      + (ok ? masked + " · 출고 신청에 자동으로 채워져요" : "출고 신청 전에 등록해 주세요") + '</span></span>'
+      + '<span class="pn-st' + (ok ? " ok" : "") + '">' + (ok ? "등록됨" : "미등록") + '</span></div>'
+      + '<div class="field"><label for="pcccInput">개인통관고유부호 (P + 12자리)</label>'
+      + '<input id="pcccInput" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" maxlength="13" placeholder="P123456789012" value="' + (ok ? pc : "") + '"></div>'
+      + '<p class="sh-msg" id="pcccMsg"></p>'
+      + '<div class="info-tip">· <b>P로 시작하는 13자리</b> — 관세청 유니패스(unipass.customs.go.kr)에서 발급·조회<br>· 신분증과 <b>동일한 이름</b>으로 신청해야 통관돼요<br>· 출고 접수에만 쓰고 통관 후 폐기합니다</div>',
+      '<button class="btn-primary" id="pcccSave" type="button" disabled>저장하기<small>출고 신청 때 자동으로 채워져요</small></button>',
+      () => {
+        const inp = $("#pcccInput"), msg = $("#pcccMsg"), btn = $("#pcccSave");
+        const chk = () => {
+          const v = inp.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+          if (inp.value !== v) inp.value = v;
+          const good = /^P\d{12}$/.test(v);
+          if (btn) btn.disabled = !good;
+          if (msg) msg.textContent = !v.length ? "" : (good ? "확인 완료 · 저장할 수 있어요" : "P로 시작하는 13자리를 입력해 주세요");
+          return good;
+        };
+        if (inp) inp.addEventListener("input", chk);
+        if (btn) btn.addEventListener("click", () => {
+          if (!chk()) return;
+          state.customs.pccc = inp.value.toUpperCase();
+          const cus = $("#cusPccc"); if (cus) cus.value = state.customs.pccc;
+          renderMy();
+          closeOverlay("infoSheet");
+          toast("통관부호를 저장했어요");
+        });
+        if (inp) chk();
+      });
   }
 
   function v8Init(){
@@ -10788,11 +11092,40 @@ body{background:#05050A;color:var(--tx)}
 
     $("#myNickEdit").addEventListener("click", openNick);
     $("#myCharge").addEventListener("click", openCharge);
-    $$("#screenMy [data-my]").forEach(b => b.addEventListener("click", () => myOpen(b.dataset.my)));
+    $$("#screenMy [data-my]").forEach(b => b.addEventListener("click", () => myOpen(b.dataset.my, b.dataset.wk)));
     /* v18 — 주문·출고 상태 카드 → 진열장 해당 탭 / 쿠폰 코드 등록 */
     $$("#screenMy [data-shelf]").forEach(b => b.addEventListener("click", () => gotoShelf(b.dataset.shelf)));
     const cpnBtn = $("#myCouponCode");
     if (cpnBtn) cpnBtn.addEventListener("click", openCouponCode);
+    /* v20 — 쿠폰함 페이지 · 3탭 · 코드 등록 연결 */
+    const cboxBtn = $("#myCouponBox");
+    if (cboxBtn) cboxBtn.addEventListener("click", () => openCouponBox("unused"));
+    const cbTabsEl = $("#cbTabs");
+    if (cbTabsEl) cbTabsEl.addEventListener("click", e => {
+      const b = e.target.closest("[data-cbt]");
+      if (!b) return;
+      cbTab = b.dataset.cbt;
+      renderCouponBox();
+    });
+    const cbCodeBtn = $("#cbCode");
+    if (cbCodeBtn) cbCodeBtn.addEventListener("click", openCouponCode);
+    /* v20 — 페이지 안 CTA · 찜한 시리즈 바로가기 */
+    const infoBodyEl = $("#infoBody");
+    if (infoBodyEl) infoBodyEl.addEventListener("click", e => {
+      const fav = e.target.closest("[data-favgo]");
+      if (fav){
+        closeOverlay("infoSheet");
+        openSeries(fav.dataset.favgo);
+        return;
+      }
+      const go = e.target.closest("[data-rec]");
+      if (!go) return;
+      const k = go.dataset.rec;
+      if (k === "charge"){ closeOverlay("infoSheet"); openCharge(); }
+      else if (k === "shelf"){ closeOverlay("infoSheet"); showScreen("box"); renderBox(); }
+      else if (k === "home"){ closeOverlay("infoSheet"); showScreen("home"); }
+      else if (k === "code"){ closeOverlay("infoSheet"); openCouponCode(); }
+    });
     const cpnApply = $("#cpnApply");
     if (cpnApply) cpnApply.addEventListener("click", applyCouponCode);
     const cpnInput = $("#cpnCode");
