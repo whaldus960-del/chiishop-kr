@@ -4281,6 +4281,8 @@ body{background:#05050A;color:var(--tx)}
   animation:pgIn .24s cubic-bezier(.2,.9,.3,1)}
 @keyframes pgIn{from{transform:translateX(18px);opacity:.55}to{transform:none;opacity:1}}
 .overlay.fullpage .sheet-handle{display:none}
+/* 개별 시트의 max-height 규칙(id 선택자)보다 우선 — 항상 화면 전체 */
+.overlay.fullpage .sheet,#rulesSheet .sheet{height:100vh;height:100dvh;max-height:100dvh;border-radius:0}
 .overlay.fullpage .sheet-head{justify-content:flex-start;gap:8px;min-height:52px;
   padding:6px 12px 8px;border-bottom:1px solid rgba(255,255,255,.07)}
 .overlay.fullpage .sheet-head h3{flex:1 1 auto;min-width:0;margin:0;font-size:15.5px;font-weight:900;letter-spacing:-.5px;color:#F7F3FF;
@@ -10621,8 +10623,8 @@ body{background:#05050A;color:var(--tx)}
       setInfoTabs({ items, cur, pick: k => recDraw("ledger", k) });
       body.innerHTML = list.length
         ? '<div class="relist">' + list.map(l =>
-            '<div class="rerow"><span class="rt"><b>' + l.t + '</b><span>' + l.at + ' · '
-            + (LEDGER_LABEL[l.kind] || "사용") + '</span></span><span class="rv ' + (l.amt > 0 ? "up" : "dn") + '">'
+            '<div class="rerow"><span class="rt"><b>' + l.t + '</b><span>'
+            + (l.at && l.at !== "-" ? l.at + ' · ' : '') + (LEDGER_LABEL[l.kind] || "사용") + '</span></span><span class="rv ' + (l.amt > 0 ? "up" : "dn") + '">'
             + (l.amt > 0 ? "+" : "") + won(l.amt) + 'P</span></div>').join("") + '</div>'
         : recEmpty("💳", "아직 내역이 없어요", "충전하거나 뽑기를 하면<br>이곳에 한 줄씩 쌓여요.", "포인트 충전하기", "charge");
       return;
