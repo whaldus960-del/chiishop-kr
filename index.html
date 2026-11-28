@@ -1294,9 +1294,9 @@ body{
 @keyframes auraUp{0%{opacity:0;transform:scale(.5)}55%{opacity:.28;transform:scale(.94)}100%{opacity:.4;transform:scale(1.02)}}
 @keyframes auraBoom{0%{opacity:.4;transform:scale(1)}22%{opacity:.56;transform:scale(1.1)}100%{opacity:.16;transform:scale(1.2)}}
 
-/* ── 티켓 무대 : 실제 이치방쿠지 「くじ券」 — 가로형 2겹 종이 + 페리페리 필름 ──
+/* ── 티켓 무대 : 실제 이치방쿠지 「くじ券」 — 가로형 2겹 종이 + 뜯어내는 겉종이 ──
    종이 바탕(반치·바코드·가게 도장 인쇄) 위에 당첨 확인창이 다이컷으로 뚫려 있고,
-   그 창을 덮은 인쇄 필름(페리페리면)을 오른쪽 끝에서 잡아 뜯으면
+   그 창을 덮은 두꺼운 겉종이(절취면)를 오른쪽 끝에서 잡아 뜯으면
    안쪽 흰 종이에 찍힌 등급이 드러난다. */
 .tk-scene{position:relative;width:392px;height:272px;display:grid;place-items:center;margin:0 0 2px}
 .tk-halo{position:absolute;width:390px;height:280px;border-radius:50%;filter:blur(26px);opacity:.17;
@@ -1323,7 +1323,7 @@ body{
 /* 종이 결 — 실제 두꺼운 이치방쿠지 종이 섬유 */
 .tk-card::before{content:"";position:absolute;inset:0;z-index:9;pointer-events:none;opacity:.12;
   background-image:radial-gradient(rgba(122,83,48,.55) .7px,transparent .7px);background-size:3.4px 3.4px}
-/* 종이 섬유 그레인 (SVG feTurbulence) — 티켓·필름 전체에 결을 입힌다 */
+/* 종이 섬유 그레인 (SVG feTurbulence) — 티켓·겉종이 전체에 결을 입힌다 */
 .tk-card::after{content:"";position:absolute;inset:0;z-index:11;pointer-events:none;
   opacity:.58;mix-blend-mode:multiply;
   background-image:repeating-linear-gradient(88deg,rgba(150,110,70,.05) 0 1px,rgba(150,110,70,0) 1px 6px),
@@ -1409,18 +1409,18 @@ body{
 .tk-winserial{position:absolute;left:8px;bottom:6px;font-family:ui-monospace,Menlo,monospace;
   font-size:6.2px;font-weight:800;letter-spacing:.4px;color:#c0a281}
 
-/* ── 페리페리 필름(뜯어낼 겉면) ─────────────────────────── */
+/* ── 뜯어낼 겉종이(절취면) ─────────────────────────────── */
 .tk-flap{position:absolute;inset:0;z-index:3;overflow:hidden;will-change:clip-path;
   clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%)}
 .tk-film{position:absolute;inset:0;overflow:hidden;
   background:linear-gradient(118deg,#ffb492 0%,#f0684b 34%,#ee6a45 62%,#ffab55 100%)}
 .tk-film::before{content:"";position:absolute;inset:0;
-  /* 필름도 종이처럼 : 가로 섬유질 + 미세 그레인 */
+  /* 겉종이도 종이처럼 : 가로 섬유질 + 미세 그레인 */
   background-image:repeating-linear-gradient(91deg,rgba(255,255,255,.16) 0 1px,rgba(255,255,255,0) 1px 4.5px),
     repeating-linear-gradient(89deg,rgba(130,45,15,.06) 0 2px,rgba(130,45,15,0) 2px 8px),
     radial-gradient(rgba(255,250,238,.5) 1.1px,transparent 1.1px);
   background-size:auto,auto,8.5px 8.5px}
-/* 필름 겉면 미싱선(스티커 커트선) */
+/* 겉종이 미싱선(절취선) */
 .tk-film::after{content:"";position:absolute;inset:4px;border-radius:3px;pointer-events:none;
   border:1.2px dashed rgba(255,249,235,.82)}
 /* 겉면 인쇄 : 왼쪽 색 띠 + 큰 물음표 워터마크 */
@@ -1464,7 +1464,7 @@ body{
 .tk-tab i:nth-child(2){animation-delay:.15s}
 .tk-tab i:nth-child(3){animation-delay:.3s}
 @keyframes chev{0%,100%{opacity:.22;transform:scale(.9)}45%{opacity:.95;transform:scale(1.14)}}
-/* 벗겨지는 앞단 — 필름이 왼쪽으로 말려 올라온 단면 */
+/* 뜯겨 나가는 앞단 — 겉종이가 왼쪽으로 말려 올라온 단면 */
 .tk-peel{position:absolute;top:-1px;bottom:-1px;width:30px;z-index:4;pointer-events:none;opacity:0;
   border-radius:46% 0 0 46%/9px 0 0 9px;
   background:linear-gradient(270deg,rgba(255,250,240,0) 0%,rgba(255,250,240,.42) 22%,
@@ -3969,7 +3969,7 @@ body{background:#05050A;color:var(--tx)}
           <div class="tk-ghost b" aria-hidden="true"></div>
           <div class="tk-ghost a" aria-hidden="true"></div>
           <div class="tk-card" id="tkCard" role="button" tabindex="0"
-               aria-label="이치방쿠지 쿠지권 — 당첨 확인창 필름을 잡아 뜯으면 등급이 나옵니다">
+               aria-label="이치방쿠지 쿠지권 — 당첨 확인창의 겉종이를 잡아 뜯으면 등급이 나옵니다">
             <!-- 종이 바탕 인쇄면 : 색 띠 · 반치 · 바코드 · 번호 -->
             <div class="tk-base" aria-hidden="true">
               <div class="tk-band">
@@ -3998,13 +3998,13 @@ body{background:#05050A;color:var(--tx)}
                 <span class="tk-winstamp" id="tkStamp" aria-hidden="true">当せん</span>
                 <span class="tk-winserial" id="tkWinSerial">No.28-1007</span>
               </div>
-              <!-- 겉면 필름(페리페리면) -->
+              <!-- 겉면 종이(뜯어낼 절취면) -->
               <div class="tk-flap" id="tkFlap">
                 <div class="tk-film">
                   <span class="tk-flap-band" aria-hidden="true"></span>
                   <span class="tk-ribbon">당첨 확인부<b id="tkStampPt">6,200P</b></span>
                   <span class="tk-flap-mark" aria-hidden="true">?</span>
-                  <span class="tk-bubble">ペリペリしよ？<i>오른쪽 끝을 잡고 왼쪽으로 당겨요</i></span>
+                  <span class="tk-bubble">ビリビリしよ？<i>오른쪽 끝을 잡고 왼쪽으로 뜯어요</i></span>
                   <span class="tk-tab" aria-hidden="true"><i></i><i></i><i></i></span>
                   <span class="tk-zip"><i>◀</i> 왼쪽으로 당겨서 뜯기 <i>◀</i></span>
                 </div>
@@ -4019,8 +4019,8 @@ body{background:#05050A;color:var(--tx)}
         <div class="tk-idx" id="tkIdx"></div>
       </div>
       <div class="tk-marks" id="tkMarks" aria-hidden="true"></div>
-      <div class="draw-ttl" id="drawTtl">오른쪽 끝을 잡고 왼쪽으로 쭉—</div>
-      <div class="draw-sub" id="drawSub">당첨 확인창 오른쪽 탭을 왼쪽으로 당기면 벗겨져요</div>
+      <div class="draw-ttl" id="drawTtl">오른쪽 끝을 잡아 종이를 뜯어 주세요</div>
+      <div class="draw-sub" id="drawSub">당첨 확인창 겉종이의 오른쪽 탭을 잡고 왼쪽으로 뜯어요</div>
       <div class="dw-dots" id="dwDots" aria-hidden="true"><i></i><i></i><i></i></div>
       <button class="tk-tear" id="tkTear" type="button">뜯기<small>탭·Enter 로도 뜯을 수 있어요</small></button>
       <button class="tk-all" id="tkSkipAll" type="button">한 번에 다 뜯기 <b>SKIP</b></button>
@@ -5121,7 +5121,7 @@ body{background:#05050A;color:var(--tx)}
      arcade sound — Web Audio 신스 (기본 ON · 첫 터치에서 unlock)
      ============================================================ */
   const SND = (function(){
-    let ctx = null, master = null, on = true, noiseBuf = null, spinTimer = null, live = [];
+    let ctx = null, master = null, on = true, noiseBuf = null, live = [];
 
     function ac(){
       if (ctx) return ctx;
@@ -5158,18 +5158,22 @@ body{background:#05050A;color:var(--tx)}
         o.start(t0); o.stop(t0 + dur + 0.03); reg(o);
       } catch (e){}
     }
-    function noise(dur, vol, freq, delay, type){
+    /* 종이 마찰용 노이즈 버퍼 — 뜯기는 소리가 끊기지 않게 1.4초 */
+    function ensureNoise(c){
+      if (noiseBuf) return noiseBuf;
+      const len = Math.floor(c.sampleRate * 1.4);
+      noiseBuf = c.createBuffer(1, len, c.sampleRate);
+      const d = noiseBuf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      return noiseBuf;
+    }
+    function noise(dur, vol, freq, delay, type, q){
       const c = ready(); if (!c) return;
       try {
-        if (!noiseBuf){
-          const len = Math.floor(c.sampleRate * 0.4);
-          noiseBuf = c.createBuffer(1, len, c.sampleRate);
-          const d = noiseBuf.getChannelData(0);
-          for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
-        }
+        ensureNoise(c);
         const t0 = c.currentTime + (delay || 0);
         const src = c.createBufferSource(); src.buffer = noiseBuf;
-        const bp = c.createBiquadFilter(); bp.type = type || "bandpass"; bp.frequency.value = freq || 1400; bp.Q.value = 1.1;
+        const bp = c.createBiquadFilter(); bp.type = type || "bandpass"; bp.frequency.value = freq || 1400; bp.Q.value = q || 1.1;
         const g = c.createGain();
         g.gain.setValueAtTime(vol == null ? 0.05 : vol, t0);
         g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
@@ -5178,7 +5182,34 @@ body{background:#05050A;color:var(--tx)}
       } catch (e){}
     }
 
-    /* 연출 사운드 — 레버·상승음·드럼롤·심장박동 (SKIP 시 stopAll 로 한 번에 정리) */
+    /* ── 실제 종이 뜯기 — 대역을 훑는 마찰음(paper sweep) ──
+       두꺼운 종이 절취선이 갈라질 때의 '쫙-' 질감. 반복되는 톡톡 끊김을
+       게인 딥으로 만들어 섬유가 뜯기는 결을 낸다. */
+    function paperSweep(dur, vol, f0, f1, delay, q){
+      const c = ready(); if (!c) return;
+      try {
+        ensureNoise(c);
+        const t0 = c.currentTime + (delay || 0);
+        const src = c.createBufferSource(); src.buffer = noiseBuf; src.loop = true;
+        const bp = c.createBiquadFilter(); bp.type = "bandpass"; bp.Q.value = q || 0.75;
+        bp.frequency.setValueAtTime(Math.max(80, f0), t0);
+        bp.frequency.exponentialRampToValueAtTime(Math.max(80, f1), t0 + dur * 0.94);
+        const g = c.createGain();
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(vol, t0 + 0.01);
+        const steps = Math.max(4, Math.round(dur / 0.026));
+        for (let i = 1; i <= steps; i++){
+          const tt = t0 + (dur * 0.94 * i) / steps;
+          const left = 1 - i / (steps + 1);
+          g.gain.setValueAtTime(Math.max(0.0004, vol * left * (0.35 + Math.random() * 0.8)), tt);
+        }
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+        src.connect(bp); bp.connect(g); g.connect(master);
+        src.start(t0); src.stop(t0 + dur + 0.03); reg(src);
+      } catch (e){}
+    }
+
+    /* 연출 사운드 정리 (SKIP 시 stopAll 로 한 번에) */
     function reg(n){
       live.push(n);
       n.onended = () => { const i = live.indexOf(n); if (i >= 0) live.splice(i, 1); };
@@ -5188,77 +5219,53 @@ body{background:#05050A;color:var(--tx)}
       live.slice().forEach(n => { try { n.stop(0); } catch (e){} });
       live.length = 0;
     }
-    function lever(){
-      noise(0.07, 0.055, 1600, 0, "highpass");
-      tone(190, 0.08, "square", 0.05, 0, 110);
-      tone(120, 0.07, "square", 0.045, 0.06, 78);
-    }
-    function riser(dur){
-      const c = ready(); if (!c) return;
-      try {
-        const t0 = c.currentTime;
-        const o = c.createOscillator(), g = c.createGain(), lp = c.createBiquadFilter();
-        o.type = "sawtooth";
-        o.frequency.setValueAtTime(110, t0);
-        o.frequency.exponentialRampToValueAtTime(880, t0 + dur * 0.94);
-        lp.type = "lowpass";
-        lp.frequency.setValueAtTime(520, t0);
-        lp.frequency.exponentialRampToValueAtTime(4200, t0 + dur * 0.94);
-        g.gain.setValueAtTime(0.0001, t0);
-        g.gain.exponentialRampToValueAtTime(0.038, t0 + dur * 0.82);
-        g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
-        o.connect(lp); lp.connect(g); g.connect(master);
-        o.start(t0); o.stop(t0 + dur + 0.02); reg(o);
-      } catch (e){}
-    }
-    function drumroll(dur){
-      let t = 0, i = 0;
-      while (t < dur - 0.04){
-        noise(0.028, 0.016 + Math.min(0.026, i * 0.0016), 1500 + i * 55, t);
-        t += Math.max(0.026, 0.086 - i * 0.0042);
-        i++;
-      }
-    }
-    function heartbeat(delay){
-      tone(74, 0.14, "sine", 0.085, delay || 0, 48);
-      tone(62, 0.12, "sine", 0.06, (delay || 0) + 0.15, 40);
-    }
-    function pullStart(){
-      spinStop();
-      lever(); riser(1.02); drumroll(1.0);
-    }
-    function chute(){
-      noise(0.5, 0.045, 900, 0, "lowpass");
-      [0.04, 0.32, 0.6, 0.92].forEach(d => heartbeat(d));
-    }
 
-    /* 종이 티켓 뜯기 — 지직거리는 마찰 + 찌직- */
-    let ripTimer = null;
+    /* ── 뜯는 소리 : 두꺼운 종이 절취선 '드르륵-탁!' ───────────────
+       점선 한 칸마다 짧은 bandpass 노이즈를 터뜨려 '드르' 마찰과
+       '륵-탁' 파열을 번갈아 낸다. (합성 전기음 없음) */
+    let ripTimer = null, ripN = 0;
+    function ripTick(){
+      const i = ripN++;
+      noise(0.045, 0.105 + Math.random() * 0.03, 1700 + Math.random() * 900, 0, "bandpass", 1.2);  /* 드르 */
+      noise(0.020, 0.090, 3000 + Math.random() * 1200, 0.022, "bandpass", 2.6);                   /* 륵-탁 */
+      if (i % 3 === 2) noise(0.05, 0.045, 5200, 0.01, "highpass");                               /* 종이 사각 */
+    }
     function ripStart(){
       ripStop();
-      ripTimer = setInterval(() => noise(0.05, 0.013 + Math.random() * 0.01, 2600 + Math.random() * 2400, 0, "highpass"), 58);
+      ripN = 0;
+      ripTick();
+      ripTimer = setInterval(ripTick, 55);
     }
     function ripStop(){ if (ripTimer){ clearInterval(ripTimer); ripTimer = null; } }
-    function snap(){ noise(0.05, 0.022, 1500, 0, "bandpass"); tone(320, 0.06, "triangle", 0.02, 0, 240); }
+
+    /* 짧은 종이 '톡' — 티켓이 제자리로 돌아갈 때 */
+    function snap(){
+      noise(0.03, 0.090, 1500, 0, "bandpass", 1.2);
+      noise(0.02, 0.050, 4200, 0.005, "highpass");
+    }
+    /* 티켓이 미끄러져 나오는 소리 — 종이 갈리는 마찰 + 짧은 차임 */
     function ticketIn(){
-      noise(0.09, 0.03, 3200, 0, "highpass");
-      tone(880, 0.09, "triangle", 0.035, 0.02);
-      tone(1175, 0.11, "triangle", 0.03, 0.09);
+      noise(0.10, 0.045, 2500, 0, "highpass");
+      noise(0.06, 0.034, 900, 0.03, "bandpass", 1.6);
+      tone(880, 0.08, "triangle", 0.030, 0.04);
+      tone(1319, 0.10, "triangle", 0.024, 0.11);
     }
-    function tearNow(k){
+    /* 마지막 '쫙!' — 남은 절취선을 한 번에 갈라뜨린다 */
+    function tearNow(){
       ripStop();
-      noise(0.12, 0.085, 5200, 0, "highpass");     /* 찌- */
-      noise(0.26, 0.06, 2000, 0.04, "bandpass");   /* 지직 */
-      noise(0.32, 0.04, 700, 0.1, "lowpass");      /* 종이 뭉개지는 저역 */
-      tone(140, 0.1, "sine", 0.05, 0, 90);
+      paperSweep(0.24, 0.090, 5200, 850, 0, 0.7);   /* 쫙- */
+      noise(0.10, 0.050, 480, 0, "lowpass");        /* 종이 뭉개지는 저역 */
+      tone(118, 0.09, "sine", 0.045, 0, 78);        /* 손끝에 남는 둔탁함 */
     }
-    /* 쫀득한 뜯기 — 0.82초 벗겨지는 동안 이어지는 찌지지직- */
+    /* 쫀득한 뜯기 — 0.82초 동안 이어지는 '드르르르륵—' */
     function tearLong(){
       ripStop();
-      noise(0.34, 0.075, 5200, 0, "highpass");     /* 찌- */
-      noise(0.62, 0.05, 2100, 0.05, "bandpass");   /* 지지직 */
-      noise(0.74, 0.032, 760, 0.12, "lowpass");    /* 종이 뭉개지는 저역 */
-      tone(132, 0.26, "sine", 0.05, 0, 82);
+      paperSweep(0.70, 0.048, 3600, 1050, 0, 0.6);  /* 길게 갈라지는 종이 */
+      paperSweep(0.30, 0.070, 5400, 2200, 0.10, 0.9);
+      noise(0.12, 0.030, 500, 0.55, "lowpass");     /* 뜯긴 끝의 종이 울림 */
+      /* 점선이 톡톡 끊기는 잔결 */
+      for (let i = 0; i < 5; i++)
+        noise(0.018, 0.032, 1900 + Math.random() * 1200, 0.05 + i * 0.09, "bandpass", 4.5);
     }
 
     function press(){ tone(520, 0.05, "square", 0.035, 0, 300); }
@@ -5266,51 +5273,105 @@ body{background:#05050A;color:var(--tx)}
       tone(988, 0.055, "square", 0.05);
       tone(1319, 0.07, "square", 0.045, 0.06);
     }
-    function spinStart(){
-      spinStop();
-      spinTimer = setInterval(() => noise(0.035, 0.028, 2400), 68);
+
+    /* ── 결과음 ① 하위상 F~L : 고무도장 '탁!' + 아케이드 코인 '띠링~' ── */
+    function stamp(){
+      tone(160, 0.10, "sine", 0.075, 0, 66);          /* 도장 내리치는 둔탁한 저역 */
+      noise(0.055, 0.075, 380, 0, "lowpass");          /* 종이에 눌린 소리 */
+      noise(0.014, 0.048, 2300, 0.004, "bandpass", 3.2); /* 도장면이 닿는 '탁' */
     }
-    function spinStop(){ if (spinTimer){ clearInterval(spinTimer); spinTimer = null; } }
-    function burst(k){
-      const high = (k === "A" || k === "B" || k === "C" || k === "last");
-      noise(0.28, 0.09, high ? 2600 : 1800);
-      tone(high ? 784 : 523, 0.16, "sawtooth", 0.05, 0, high ? 1568 : 1046);
-      if (k === "last"){
-        [0, 0.07, 0.14, 0.22].forEach((d, i) => tone(880 * Math.pow(2, i / 4), 0.18, "triangle", 0.055, d));
+    function coinRing(delay){
+      const d = delay || 0;
+      tone(1046, 0.055, "square", 0.030, d);
+      tone(1568, 0.05, "square", 0.024, d + 0.05);
+      tone(2093, 0.16, "sine", 0.030, d + 0.07);     /* 띠이잉~ */
+      tone(2637, 0.11, "sine", 0.013, d + 0.09);
+    }
+    function gradeLow(){ stamp(); coinRing(0.14); }
+
+    /* ── 결과음 ② 중위상 C~E : 오락실 3연타 + 밝은 팡파레 ── */
+    function arcadeHit(f, delay, vol){
+      tone(f, 0.075, "square", vol || 0.042, delay);
+      tone(f * 2, 0.05, "square", (vol || 0.042) * 0.35, delay);
+      noise(0.012, 0.030, 3200, delay, "highpass");
+    }
+    function gradeMid(){
+      arcadeHit(659, 0);
+      arcadeHit(880, 0.085);
+      arcadeHit(1319, 0.17);
+      [523, 659, 784, 1047].forEach((f, i) => {
+        tone(f, 0.14, "triangle", 0.044, 0.30 + i * 0.075);
+        tone(f * 2, 0.09, "sine", 0.015, 0.30 + i * 0.075);
+      });
+    }
+
+    /* ── 결과음 ③ 상위상 B·A·LAST : 폭죽 '펑!' + 잭팟 화음 + 코인 샤워 ── */
+    function firework(delay){
+      const d = delay || 0;
+      noise(0.02, 0.09, 900, d, "bandpass", 0.9);          /* 발사 '픽' */
+      noise(0.24, 0.105, 260, d + 0.02, "lowpass");         /* 펑! 저역 */
+      noise(0.10, 0.070, 1600, d + 0.02, "bandpass", 0.7);  /* 파열 */
+      tone(64, 0.26, "sine", 0.105, d + 0.02, 38);          /* 배꼽 울림 */
+      for (let i = 0; i < 7; i++)                            /* 터진 뒤 지글지글 */
+        noise(0.03, 0.018, 2600 + Math.random() * 3200, d + 0.12 + i * 0.045 + Math.random() * 0.02, "highpass");
+    }
+    function coinShower(delay){
+      const d = delay || 0;
+      for (let i = 0; i < 18; i++){
+        const t = d + i * 0.042 + Math.random() * 0.03;
+        tone(1760 + Math.random() * 1500, 0.08, "sine", 0.016 + Math.random() * 0.014, t);   /* 촤르르 */
+        if (i % 4 === 0) tone(2637 + Math.random() * 700, 0.06, "triangle", 0.012, t + 0.02);
       }
     }
+    function jackpot(tier){
+      /* 웅장하고 신나는 아케이드 잭팟 화음 — 마지막에 큰 화음으로 착지 */
+      const chords = tier >= 3
+        ? [[392, 523, 659, 784], [440, 587, 740, 880], [523, 659, 784, 1047], [587, 740, 880, 1175], [784, 988, 1319, 1568]]
+        : [[392, 523, 659], [440, 587, 740], [523, 659, 784], [587, 740, 880], [784, 988, 1175]];
+      chords.forEach((ch, i) => {
+        const d = 0.16 + i * 0.13;
+        ch.forEach(f => {
+          tone(f, 0.30, "triangle", 0.046, d);
+          tone(f * 2, 0.22, "sine", 0.017, d);
+        });
+      });
+      if (tier >= 3){
+        [1047, 1319, 1568, 2093].forEach((f, i) => tone(f, 0.5, "triangle", 0.034, 0.86 + i * 0.02));
+        tone(131, 0.6, "sine", 0.05, 0.84, 65);        /* 마지막 저역 울림 */
+      }
+    }
+    function gradeHigh(tier){
+      firework(0);
+      jackpot(tier || 3);
+      coinShower(tier >= 3 ? 0.30 : 0.45);
+    }
+
+    /* 결과 모달 팡파레 — 등급이 높을수록 화음이 두터워진다 */
     function fanfare(k){
       let notes;
       if (k === "last") notes = [523, 659, 784, 1047, 1319];
       else if (k === "A" || k === "B" || k === "C") notes = [523, 659, 784, 1047];
       else if (k === "E" || k === "F" || k === "G" || k === "D") notes = [392, 523, 659];
       else notes = [523, 659];
-      notes.forEach((f, i) => tone(f, 0.16, "triangle", 0.06, i * 0.085));
-      if (k === "last") noise(0.5, 0.05, 5000, 0.05);
+      notes.forEach((f, i) => {
+        tone(f, 0.16, "triangle", 0.052, i * 0.085);
+        tone(f * 2, 0.10, "sine", 0.016, i * 0.085);
+      });
+      if (k === "last" || k === "A" || k === "B") coinShower(0.12);
     }
-    /* 상위상 빛 대폭발 — 뜯긴 순간 울리는 웅장한 팡파레 (등급이 높을수록 더 크게) */
+
+    /* 뜯긴 순간의 결과음 — 등급대에 따라 완전히 다른 사운드 */
     function bigWin(k, tier){
-      const c = ready(); if (!c) return;
       tier = tier || 1;
-      noise(0.42, 0.10, 5200, 0, "highpass");            /* 팡— */
-      noise(0.55, 0.09, 900, 0.01, "lowpass");           /* 웅장한 저역 */
-      tone(62, 0.55, "sine", 0.10, 0, 42);
-      const notes = tier >= 3 ? [523, 659, 784, 1047, 1319, 1568]
-                  : tier === 2 ? [523, 659, 784, 1047]
-                  : [523, 659, 784];
-      notes.forEach((f, i) => tone(f, 0.22, "triangle", 0.062, i * 0.072));
-      if (tier >= 2){
-        for (let i = 0; i < 6; i++) tone(2093 + i * 197, 0.13, "sine", 0.028, 0.16 + i * 0.05);
-      }
-      if (k === "last"){
-        [0, 0.11, 0.22, 0.33].forEach((d, i) => tone(880 * Math.pow(2, i / 4), 0.26, "triangle", 0.05, 0.34 + d));
-      }
+      if (tier >= 3) return gradeHigh(3);   /* B·A·LAST — 폭죽 + 잭팟 */
+      if (tier === 2) return gradeMid();    /* C~E — 3연타 + 팡파레 */
+      return gradeLow();                    /* F~J — 도장 + 코인 */
     }
     return {
-      press, coin, spinStart, spinStop, burst, fanfare, bigWin, pullStart, chute, stopAll,
-      ticketIn, ripStart, ripStop, tearNow, tearLong, snap,
+      press, coin, fanfare, bigWin, gradeLow, gradeMid, gradeHigh, stopAll,
+      ticketIn, ripStart, ripStop, tearNow, tearLong, snap, stamp, coinRing,
       isOn: () => on,
-      set(v){ on = !!v; if (!on){ spinStop(); if (ctx && ctx.state === "running") { try { ctx.suspend(); } catch(e){} } } else { ready(); } return on; },
+      set(v){ on = !!v; if (!on){ ripStop(); if (ctx && ctx.state === "running") { try { ctx.suspend(); } catch(e){} } } else { ready(); } return on; },
       toggle(){ return this.set(!on); },
       unlock(){ ready(); }
     };
@@ -5318,7 +5379,7 @@ body{background:#05050A;color:var(--tx)}
 
 /* @@POKO-V2-JS-BEGIN@@ */
   /* ============================================================
-     pull fx — 이치방쿠지 종이 티켓 뜯기 (찌직-)
+     pull fx — 이치방쿠지 종이 티켓 뜯기 (드르륵-탁!)
      ============================================================ */
   /* 등급별 예고 빛 — 크림 캔디 팔레트: last 무지개 · A 황금 · B 민트 · C 하늘
      · D~G 플럼 로즈 · H~J 복숭아 크림 (뜯긴 순간의 아우라·광선 색) */
@@ -5340,7 +5401,7 @@ body{background:#05050A;color:var(--tx)}
   const fxOf = k => FXR[k] || FXR.J;
 
   const TK_MAXDX = 258;         /* 끝까지 뜯는 드래그 거리 (쫀득하게 조금 더 길게) */
-  /* 손가락 이동량 → 벗겨짐 : 초반에 잘 안 벗겨지는 미세한 저항감 */
+  /* 손가락 이동량 → 뜯김 : 초반에 잘 안 뜯기는 미세한 저항감 */
   const tearResist = r => Math.pow(Math.max(0, Math.min(1, r)), 1.22) * 0.985;
   let pullTimers = [];
   let tear = null;              /* { list, i, items, lastItem, mode, torn, locked, finished, shown, p } */
@@ -5361,8 +5422,8 @@ body{background:#05050A;color:var(--tx)}
     }
   }
 
-  /* 필름이 벗겨진 경계 — 뽑기마다 조금씩 다른 종이 뜯긴 결.
-     p = 0(덮여 있음) → 1(다 벗겨짐). 오른쪽부터 왼쪽으로 벗겨진다. */
+  /* 겉종이가 뜯긴 경계 — 뽑기마다 조금씩 다른 종이 뜯긴 결.
+     p = 0(덮여 있음) → 1(다 뜯김). 오른쪽부터 왼쪽으로 뜯긴다. */
   function peelPoly(p, jit){
     const x = Math.max(0, Math.min(1, 1 - p)) * 100;
     const n = (jit && jit.length) ? jit.length - 1 : 9;
@@ -5376,9 +5437,9 @@ body{background:#05050A;color:var(--tx)}
   }
 
   const PULL_TEXT = {
-    1: { t: "오른쪽 끝을 잡고 왼쪽으로 쭉— 당겨주세요", s: "당첨 확인창 오른쪽 탭을 왼쪽으로 당기면 벗겨져요" },
-    2: { t: "필름이 찌직— 벗겨지는 중…", s: "조금만 더 왼쪽으로 당겨주세요!" },
-    3: { t: "찌직! 등급 공개", s: "어떤 상이 나왔을까요?" }
+    1: { t: "오른쪽 끝을 잡아 종이를 뜯어 주세요", s: "당첨 확인창 겉종이의 오른쪽 탭을 잡고 왼쪽으로 뜯어요" },
+    2: { t: "종이 절취선이 드르륵— 뜯기는 중…", s: "조금만 더 왼쪽으로 뜯어 주세요!" },
+    3: { t: "종이 티켓 개봉 완료!", s: "어떤 상이 나왔을까요?" }
   };
 
   function setDrawStage(k){
@@ -5424,7 +5485,7 @@ body{background:#05050A;color:var(--tx)}
     const card = $("#tkCard"), flap = $("#tkFlap"), ov = $("#drawOv");
     /* 테스트·검증 스크립트가 같은 드래그 거리를 쓰도록 노출 */
     card.dataset.maxdx = String(TK_MAXDX);
-    /* 새 티켓 = 필름이 덮인 상태로 되돌리고, 뜯긴 결을 새로 만든다 */
+    /* 새 티켓 = 겉종이가 덮인 상태로 되돌리고, 뜯긴 결을 새로 만든다 */
     tear.jit = Array.from({ length: 22 }, () => (Math.random() * 2 - 1) * 0.95);
     flap.style.transition = "none";
     flap.style.transform = "none";
@@ -5518,7 +5579,8 @@ body{background:#05050A;color:var(--tx)}
     }
     const st = $("#tkStamp");
     if (st){ st.classList.remove("go"); void st.offsetWidth; st.classList.add("go"); }
-    SND.snap && SND.snap();
+    /* 하위상 — 고무도장 탁! + 아케이드 코인 띠링~ */
+    SND.gradeLow && SND.gradeLow();
   }
 
   function paintReveal(it){
@@ -5630,11 +5692,12 @@ body{background:#05050A;color:var(--tx)}
     host.appendChild(n);
   }
 
-  /* 한 장 뜯기 — 남은 필름을 쫀득하게 천천히 끝까지 벗긴다 (당첨 확정은 이미 끝나 있음) */
+  /* 한 장 뜯기 — 남은 절취선을 쫀득하게 천천히 끝까지 뜯어낸다 (당첨 확정은 이미 끝나 있음) */
   function finishTear(){
     if (!tear || tear.locked || tear.finished) return;
     const it = tear.list[tear.i];
     if (!it) return;
+    SND.unlock();            /* iOS Safari — 이 터치 안에서 AudioContext resume 확정 */
     tear.locked = true;
     setDrawStage(2);
     SND.tearLong();
@@ -5642,7 +5705,7 @@ body{background:#05050A;color:var(--tx)}
     chewTear(it);
   }
 
-  /* 쫀득— 뜯기 : 약 0.82초에 걸쳐 찌직- 하고 천천히 끝까지 벗겨진다 */
+  /* 쫀득— 뜯기 : 약 0.82초에 걸쳐 드르륵-탁! 하고 천천히 끝까지 뜯어낸다 */
   function chewTear(it){
     const flap = $("#tkFlap");
     if (!tear || !flap) return;
@@ -5661,10 +5724,11 @@ body{background:#05050A;color:var(--tx)}
     requestAnimationFrame(step);
   }
 
-  /* 필름이 끝까지 벗겨진 뒤 — 종이가 왼쪽으로 날아가고 등급 공개 */
+  /* 겉종이가 끝까지 뜯긴 뒤 — 종이가 왼쪽으로 날아가고 등급 공개 */
   function revealTear(it){
     if (!tear || tear.finished || tear.shown) return;
     SND.ripStop();
+    SND.tearNow();           /* 마지막 '쫙!' */
     paintTear(1);
     const flap = $("#tkFlap");
     flap.style.transition = "transform .3s cubic-bezier(.2,.65,.3,1), opacity .3s ease-in";
@@ -5754,6 +5818,7 @@ body{background:#05050A;color:var(--tx)}
 
     card.addEventListener("pointerdown", e => {
       if (!tear || tear.finished || tear.locked) return;
+      SND.unlock();          /* 드래그 시작 터치에서 사운드 잠금 해제 (iOS Safari) */
       flap.style.transition = "none";
       drag = { id: e.pointerId, x0: e.clientX, dx: 0, off: 0, moved: false };
       card.classList.add("grabbing");
@@ -5761,7 +5826,7 @@ body{background:#05050A;color:var(--tx)}
     });
     card.addEventListener("pointermove", e => {
       if (!drag || !tear || tear.finished || tear.locked) return;
-      /* 오른쪽 → 왼쪽 : 오른쪽 끝을 잡고 왼쪽으로 당긴 만큼(dx < 0) 벗겨진다 */
+      /* 오른쪽 → 왼쪽 : 오른쪽 끝을 잡고 왼쪽으로 뜯은 만큼(dx < 0) 뜯긴다 */
       const dx = Math.max(0, drag.x0 - e.clientX);
       drag.off = Math.max(drag.off, Math.abs(e.clientX - drag.x0));
       drag.dx = dx;
