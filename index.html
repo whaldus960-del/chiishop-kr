@@ -2260,6 +2260,245 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
 .info-row .nm>span{display:block}
 #infoSheet .sheet-actions a.btn-primary{display:grid;place-items:center}
 /* @@POKO-V8-CSS-END@@ */
+/* @@POKO-V9-HOME-CSS-BEGIN@@ */
+/* ============================================================
+   v9 — HOME SIGNATURE REMODEL
+   고대비 · 펀치감 : 비비드 코랄/오렌지 + 딥 차콜 + 클린 화이트
+   (기능·정보구조는 그대로, 홈의 시각 언어만 교체)
+   ============================================================ */
+:root{
+  --v9-bg:#F5F6FA;
+  --v9-card:#FFFFFF;
+  --v9-ink:#14161D;
+  --v9-ink2:#4A4F5C;
+  --v9-ink3:#8B91A0;
+  --v9-line:#E8EAF1;
+  --v9-coral:#FF4A1E;
+  --v9-coral2:#FF7E2E;
+  --v9-coral-d:#DE3208;
+  --v9-char:#1E212B;
+  --v9-char2:#12141A;
+  --v9-gold:#FFD24A;
+}
+body{background:#0C0E14}
+.app{
+  background:var(--v9-bg);
+  background-image:none;
+}
+@media(min-width:520px){
+  .app{box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.07)}
+}
+
+/* ---------- ① 상단 1줄 화이트 바 ---------- */
+.home-head{
+  padding:9px 14px 10px;color:var(--v9-ink);border-radius:0;
+  background:#fff;box-shadow:0 1px 0 var(--v9-line);overflow:visible;
+}
+.home-head::before,.home-head::after{display:none!important}
+.home-head .hh-fx{display:none}
+.hh-bar{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.brand{flex-direction:row;align-items:center;gap:0;min-width:0;line-height:1}
+.logo{font-size:20px;font-weight:900;letter-spacing:-1.2px;color:var(--v9-ink);text-shadow:none;gap:7px}
+.logo::before{
+  width:21px;height:13px;border:2px solid var(--v9-ink);border-radius:999px;box-shadow:none;
+  background:linear-gradient(90deg,#fff 0 46%,var(--v9-coral) 46% 100%);transform:rotate(-11deg)
+}
+.logo-sub{display:none}
+.home-tag{display:none}
+.hh-led{display:none!important}
+.head-actions{gap:6px}
+.acct{background:#F1F3F8;border:1px solid var(--v9-line);color:var(--v9-ink);font-size:10.5px;padding:5px 8px;border-radius:10px}
+.pts{
+  background:var(--v9-char);color:#fff;border:1px solid var(--v9-char);border-radius:999px;
+  padding:7px 11px 7px 7px;font-size:11.5px;font-weight:900;letter-spacing:-.3px;
+  box-shadow:0 4px 12px -6px rgba(20,22,29,.7)
+}
+.pts i{background:var(--v9-gold);color:#3A2800;width:16px;height:16px;font-size:9px;box-shadow:none}
+.pts span{opacity:.55;font-weight:900}
+.hicon{
+  position:relative;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:#F1F3F8;border:1px solid var(--v9-line);color:var(--v9-ink)
+}
+.hicon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.hicon:active{background:#E7EAF2}
+.hicon .hdot{position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--v9-coral);border:1.5px solid #fff}
+.hicon.att.done .hdot{background:#12B886}
+.hcart{width:34px;height:34px;border-radius:11px;background:#F1F3F8;border:1px solid var(--v9-line)}
+.hcart svg{width:18px;height:18px;stroke:var(--v9-ink);stroke-width:1.9}
+.hcart b{background:var(--v9-coral);color:#fff;border:2px solid #fff;top:-5px;right:-5px;min-width:17px;height:17px;font-size:9px}
+
+/* 서브 화면(진열장·마이·사장님)은 기존 크림 테마 유지 */
+.detail,.subscreen{background:var(--paper)}
+
+/* ---------- ② 풀블리드 대형 배너 ---------- */
+.hcar{margin:0;border:0;border-radius:0;background:#fff;box-shadow:none;overflow:hidden}
+.hc-view{height:206px}
+.hcar .hc-slide{
+  padding:14px 18px 34px;gap:10px;align-items:center;overflow:hidden;
+  background:#fff;color:var(--v9-ink)
+}
+.hcar .hc-slide.hs-dark{background:linear-gradient(145deg,#252935 0%,#171A22 55%,#0E1015 100%);color:#fff}
+.hcar .hc-slide.hs-coral{background:linear-gradient(145deg,#FF7C2F 0%,#FF4A1E 48%,#E2320A 100%);color:#fff}
+.hcar .hc-slide.hs-light{background:linear-gradient(150deg,#FFFFFF 0%,#FFF1EA 52%,#F2F4FA 100%);color:var(--v9-ink);box-shadow:inset 7px 0 0 var(--v9-coral)}
+.hcar .hc-slide::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.55;
+  background-image:radial-gradient(rgba(255,255,255,.18) 1px,transparent 1.3px);background-size:10px 10px;
+  -webkit-mask-image:linear-gradient(205deg,#000 0%,transparent 58%);mask-image:linear-gradient(205deg,#000 0%,transparent 58%)
+}
+.hcar .hc-slide.hs-light::before{background-image:radial-gradient(rgba(20,22,29,.1) 1px,transparent 1.3px)}
+.hs-txt{position:relative;z-index:2;flex:1 1 auto;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.hs-kicker{
+  align-self:flex-start;padding:3px 8px;border-radius:6px;font-size:8.4px;font-weight:900;letter-spacing:1.3px;
+  background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.28)
+}
+.hs-light .hs-kicker{background:var(--v9-ink);color:#fff;border-color:var(--v9-ink)}
+.hs-coral .hs-kicker{background:#14161D;color:#fff;border-color:#14161D}
+.hs-title{margin:9px 0 0;font-size:26px;line-height:1.08;font-weight:900;letter-spacing:-1.7px;color:inherit;text-shadow:none}
+.hs-title b{color:var(--v9-gold)}
+.hs-light .hs-title b{color:var(--v9-coral)}
+.hs-coral .hs-title b{color:#fff;text-decoration:underline;text-decoration-thickness:4px;text-underline-offset:3px}
+.hs-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:3px}
+.hs-list li{position:relative;padding-left:9px;font-size:9.7px;font-weight:800;line-height:1.38;color:rgba(255,255,255,.8);word-break:keep-all}
+.hs-list li::before{content:"";position:absolute;left:0;top:4px;width:4px;height:4px;border-radius:50%;background:var(--v9-gold)}
+.hs-list li b{color:#fff;font-weight:900}
+.hs-light .hs-list li{color:var(--v9-ink2)}
+.hs-light .hs-list li b{color:var(--v9-ink)}
+.hs-light .hs-list li::before{background:var(--v9-coral)}
+.hs-note{
+  align-self:flex-start;margin:9px 0 0;padding:5px 9px;border-radius:6px;
+  background:rgba(255,255,255,.15);border:0;border-left:3px solid var(--v9-gold);
+  font-size:9.3px;font-weight:900;line-height:1.34;color:#fff
+}
+.hs-note b{color:#fff;text-decoration:underline;text-underline-offset:2px}
+.hs-light .hs-note{background:#FFECE4;border-left-color:var(--v9-coral);color:var(--v9-coral-d)}
+.hs-light .hs-note b{color:var(--v9-coral-d)}
+.hs-coral .hs-note{background:#14161D;border-left-color:var(--v9-gold);color:#fff}
+.hs-coral .hs-note.hs-note-dark b{color:var(--v9-gold)}
+.hs-art{position:relative;z-index:1;flex:none;width:96px;align-self:center;margin-bottom:0}
+.hs-art svg{width:100%;height:auto;display:block}
+.hs-big{display:flex;align-items:baseline;gap:5px;margin-top:4px;font-size:34px;font-weight:900;line-height:1;letter-spacing:-2.5px;color:#fff}
+.hs-big em{font-style:normal;font-size:10.5px;letter-spacing:-.2px;color:rgba(255,255,255,.85);font-weight:900}
+.hs-stamps{display:flex;gap:3px;margin-top:7px}
+.hs-stamps i{width:15px;height:15px;border-radius:50%;border:1.3px dashed rgba(255,255,255,.45);background:rgba(255,255,255,.06);
+  display:grid;place-items:center;font-style:normal;font-size:6.4px;font-weight:900;color:rgba(255,255,255,.7)}
+.hs-stamps i.on{border:1.4px solid var(--v9-gold);color:var(--v9-gold);background:rgba(255,210,74,.14)}
+.hs-mail{margin:6px 0 0;font-size:8.6px;font-weight:900;color:var(--v9-ink);word-break:break-all}
+.hs-chips{display:flex;gap:3px;margin-top:5px;flex-wrap:wrap}
+.hs-chips span{padding:2px 5px;border-radius:5px;background:#fff;border:1.1px solid var(--v9-line);font-size:7.4px;font-weight:900;color:var(--v9-ink2)}
+.hc-nav{
+  position:absolute;left:0;right:0;bottom:8px;z-index:5;display:flex;align-items:center;justify-content:center;gap:6px;
+  width:max-content;margin:0 auto;padding:3px 8px;border-radius:999px;
+  background:rgba(12,14,20,.46);backdrop-filter:blur(6px)
+}
+.hc-nav .hb-a{width:18px;height:18px;border:0;border-radius:50%;background:transparent;color:#fff;font-size:12px;font-weight:900;line-height:1;display:grid;place-items:center}
+.hc-dots{display:flex;align-items:center;gap:4px}
+.hc-dots button{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.4);transition:width .22s,background .22s}
+.hc-dots button.on{width:15px;border-radius:3px;background:#fff}
+.hc-count{position:absolute;right:10px;bottom:11px;z-index:5;padding:2px 7px;border-radius:999px;
+  background:rgba(12,14,20,.5);color:#fff;font-size:7.6px;font-weight:900;letter-spacing:.4px}
+@media(max-width:374px){
+  .hc-view{height:214px}
+  .hs-title{font-size:23px}
+  .hs-art{width:80px}
+  .hs-list li{font-size:9.2px}
+}
+
+/* ---------- ③ 다크 실시간 당첨 피드 ---------- */
+.wfeed{
+  display:flex;align-items:center;gap:0;margin:0;border:0;border-radius:0;
+  background:var(--v9-char);box-shadow:inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden;height:46px
+}
+.wf-head{
+  flex:none;display:flex;align-items:center;gap:5px;height:100%;padding:0 11px 0 12px;border:0;
+  background:linear-gradient(120deg,var(--v9-coral) 0%,#FF6A22 100%);
+  color:#fff;font-size:9px;font-weight:900;letter-spacing:.2px;white-space:nowrap
+}
+.wf-head .dot{width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.28);animation:wfPulse 1.4s ease-in-out infinite}
+.wf-head em{display:none}
+.wf-view{position:relative;flex:1;min-width:0;height:100%;overflow:hidden}
+.wf-view::after{content:"";position:absolute;top:0;right:0;width:24px;height:100%;pointer-events:none;
+  background:linear-gradient(90deg,rgba(30,33,43,0),var(--v9-char))}
+.wf-track{position:absolute;left:0;top:0;height:100%;display:flex;align-items:center;width:max-content;animation:wfMove 58s linear infinite}
+.wf-it{display:inline-flex;align-items:center;gap:5px;height:100%;padding:0 11px;border-right:1px solid rgba(255,255,255,.09);
+  font-size:9.4px;font-weight:800;color:#C6CAD6;white-space:nowrap}
+.wf-it b{color:#fff;font-weight:900;letter-spacing:-.2px}
+.wf-th{flex:none;width:21px;height:21px;border-radius:6px;background:#2A2E3A;border:1px solid rgba(255,255,255,.14);display:grid;place-items:center;overflow:hidden}
+.wf-g{
+  flex:none;padding:1px 5px;border-radius:5px;border:1.6px solid var(--g,#FFD24A);
+  font-size:7.8px;font-weight:900;font-style:italic;letter-spacing:-.2px;
+  color:var(--g,#FFD24A);background:rgba(255,255,255,.05);
+  box-shadow:0 0 8px -1px var(--g,#FFD24A),inset 0 0 6px -3px var(--g,#FFD24A);text-shadow:none
+}
+.wf-me{flex:none;padding:1px 5px;border-radius:999px;background:var(--v9-coral);color:#fff;font-size:7px;font-weight:900}
+.wf-it.mine{background:linear-gradient(90deg,rgba(255,74,30,.22),rgba(255,74,30,.04))}
+
+/* ---------- ④ 시리즈 카드 · 섹션 ---------- */
+.sec{margin-top:18px}
+.sec-head{display:flex;align-items:center;justify-content:space-between;padding:0 14px 10px}
+.sec-head h2{margin:0;font-size:18px;font-weight:900;letter-spacing:-.8px;color:var(--v9-ink)}
+.sec-head h2::before{content:"";display:inline-block;width:5px;height:18px;border-radius:3px;background:var(--v9-coral);margin-right:7px}
+.sec-head h2 b{color:var(--v9-coral)}
+.sec-head span{font-size:10px;font-weight:800;color:var(--v9-ink3)}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px}
+.scard{
+  display:flex;flex-direction:column;text-align:left;background:#fff;border:0;border-radius:16px;overflow:hidden;
+  box-shadow:0 1px 2px rgba(15,17,25,.06),0 10px 24px -16px rgba(15,17,25,.45);
+  transition:transform .15s
+}
+.scard:active{transform:translateY(1px) scale(.99)}
+.sart{background:linear-gradient(180deg,#F7F8FC 0%,#EEF0F6 100%);box-shadow:inset 0 -1px 0 var(--v9-line)}
+.sart::before{background:none}
+.sart::after{background:linear-gradient(transparent,rgba(245,246,250,.35))}
+.sart .shine{display:none}
+.sart img.ghero{padding:5px;filter:drop-shadow(0 5px 10px rgba(20,22,29,.14))}
+.sflag{
+  left:8px;top:8px;z-index:5;padding:4px 8px;border:0;border-radius:7px;font-size:9.5px;font-weight:900;letter-spacing:-.2px;
+  background:var(--v9-char);color:#fff;box-shadow:0 3px 10px -3px rgba(15,17,25,.7)
+}
+.sflag.hot{background:var(--v9-coral);color:#fff}
+.sneon{
+  right:7px;bottom:7px;z-index:5;padding:3px 8px;border-radius:7px;background:rgba(16,18,25,.9);
+  border:1.4px solid var(--v9-gold);color:var(--v9-gold);font-size:8.6px;font-weight:900;
+  box-shadow:0 0 10px -2px rgba(255,210,74,.85);text-shadow:none;letter-spacing:-.1px
+}
+.sinfo{padding:9px 10px 11px;display:flex;flex-direction:column}
+.sname{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12.4px;font-weight:900;letter-spacing:-.5px;line-height:1.3;color:var(--v9-ink);min-height:2.6em}
+.sprice{order:2;display:flex;align-items:center;gap:3px;margin-top:5px;font-size:16px;font-weight:900;letter-spacing:-.7px;color:var(--v9-coral-d)}
+.sprice i{width:15px;height:15px;background:var(--v9-ink);color:var(--v9-gold);font-size:8.5px;box-shadow:none}
+.sprice em{font-style:normal;font-size:8.6px;color:var(--v9-ink3);font-weight:800;letter-spacing:0}
+.smeta{order:3;margin-top:3px;font-size:8.8px;font-weight:700;color:var(--v9-ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sbar{order:4;display:block;height:3px;border-radius:2px;background:#EDEFF5;margin-top:6px;overflow:hidden}
+.sbar i{background:linear-gradient(90deg,var(--v9-coral2),var(--v9-coral));border-radius:2px}
+
+/* ---------- 이용 방법 · 푸터 ---------- */
+.how{
+  margin:20px 14px 0;padding:15px 16px 16px;background:#fff;border-radius:16px;
+  box-shadow:0 1px 2px rgba(15,17,25,.05),0 10px 24px -18px rgba(15,17,25,.4)
+}
+.how h3{margin:0 0 11px;font-size:13px;font-weight:900;color:var(--v9-ink);letter-spacing:-.3px}
+.how li b{background:var(--v9-coral);color:#fff}
+.how li span{font-size:10.8px;color:var(--v9-ink2)}
+.how li span strong{color:var(--v9-ink)}
+.foot{color:var(--v9-ink3)}
+
+/* ---------- ⑤ 진한 하단 탭바 ---------- */
+.tabbar{
+  background:linear-gradient(180deg,#242833 0%,#15171E 100%);border-top:0;
+  box-shadow:0 -10px 28px rgba(10,12,18,.32);backdrop-filter:none;
+  padding:8px 0 calc(9px + env(safe-area-inset-bottom))
+}
+.tabbar button{color:rgba(255,255,255,.5);font-size:9.5px;font-weight:800;letter-spacing:-.1px;gap:4px}
+.tabbar button svg{width:22px;height:22px;stroke-width:2}
+.tabbar button.on{color:#fff}
+.tabbar button.on svg{stroke:var(--v9-coral2)}
+.tabbar button.on::before{
+  content:"";position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+  width:26px;height:3px;border-radius:0 0 4px 4px;
+  background:linear-gradient(90deg,var(--v9-coral),var(--v9-coral2));
+  box-shadow:0 0 12px rgba(255,90,40,.8)
+}
+.tabbar .tbadge{background:var(--v9-coral);color:#fff;border:2px solid #1A1D25}
+/* @@POKO-V9-HOME-CSS-END@@ */
 </style>
 </head>
 <body>
@@ -2269,144 +2508,149 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
   <main class="screen" id="screenHome">
     <header class="home-head">
       <div class="hh-fx" id="homeFx" aria-hidden="true"><span class="hh-ray"></span><span class="hh-glow"></span></div>
-      <div class="brand-row">
+      <div class="hh-bar">
         <div class="brand"><span class="logo">포코쿠지</span><span class="logo-sub">POKO KUJI</span></div>
         <div class="head-actions">
           <button class="acct" id="authBtn" hidden aria-label="내 계정"><i>👤</i><b id="authName">로그인</b></button>
           <button class="pts" id="homePts" aria-label="내 포인트"><i>P</i><b id="homePtsVal">240,000</b><span>+</span></button>
+          <button class="hicon" id="noticeBtn" type="button" aria-label="공지 · 구매 안내 열기">
+            <svg viewBox="0 0 24 24"><path d="M12 3.2a6 6 0 00-6 6v4.3L4.4 17h15.2L18 13.5V9.2a6 6 0 00-6-6z"/><path d="M10 19.6a2 2 0 004 0"/></svg>
+          </button>
+          <button class="hicon att" id="attendBtn" type="button" aria-label="매일 출석체크 열기">
+            <svg viewBox="0 0 24 24"><rect x="3.6" y="5.4" width="16.8" height="15" rx="3.2"/><path d="M3.6 10.2h16.8M8.2 3.4v4M15.8 3.4v4"/><path d="M8 14.4h2.4M13.6 14.4H16M8 17.4h2.4"/></svg>
+            <i class="hdot" aria-hidden="true"></i>
+            <span id="attChip" hidden>오늘 출석</span>
+          </button>
           <button class="hcart" id="homeCart" aria-label="진열장 열기">
             <svg viewBox="0 0 24 24"><rect x="3.4" y="8.4" width="17.2" height="7.2" rx="3.6"/><path d="M12 8.4v7.2"/><path d="M6.3 11.3h2.1"/></svg>
             <b id="homeCartN">0</b>
           </button>
         </div>
       </div>
-      <p class="home-tag">꽝 없는 이치방쿠지 · 치이카와 &amp; 쿠리만주 굿즈샵</p>
-      <div class="hh-led" aria-hidden="true"><b id="homeLed"></b></div>
+      <div class="hh-led" aria-hidden="true" hidden><b id="homeLed"></b></div>
     </header>
 
-    <button class="notice" id="noticeBtn">
-      <span class="live">공지</span>
-      <p>4개 시리즈 동시 오픈! 박스별 잔여 수량·실시간 확률 공개</p>
-      <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-    </button>
-
-    <button class="attbar" id="attendBtn" type="button" aria-label="매일 출석체크 열기">
-      <span class="attbar-ico" aria-hidden="true">📅</span>
-      <span class="attbar-txt"><b>매일 출석체크 · 7일째 1,000P</b><i>하루 1회 도장 · 매일 100~300P</i></span>
-      <span class="attbar-chip" id="attChip">오늘 출석</span>
-    </button>
-
-    <!-- v8: 홈 상단 다중 슬라이드 배너 (스와이프 · 자동 4.6초 · 도트) -->
+    <!-- v9: 풀블리드 대형 배너 캐러셀 (스와이프 · 자동 4.6초 · 도트) -->
     <section class="hcar" id="homeBanner" aria-roledescription="carousel" aria-label="포코쿠지 홈 배너">
       <div class="hc-view" id="hbView">
         <div class="hc-track" id="hbTrack">
-          <article class="hc-slide" data-slide="0" data-hb-act="shipguide" role="group" aria-label="출고 및 교환·반품 주의사항">
+          <article class="hc-slide hs-dark" data-slide="0" data-hb-act="minor" role="group" aria-label="미성년자 구매 제한 및 랜덤 상품 안내">
             <div class="hs-txt">
-              <span class="hs-kicker">출고 안내</span>
-              <h3 class="hs-title">받기 전에 <b>꼭 확인</b>해 주세요</h3>
+              <span class="hs-kicker">BUY NOTICE</span>
+              <h3 class="hs-title">미성년자는<br>구매 <b>NO! NO!</b></h3>
               <ul class="hs-list">
-                <li>출고 신청 상품은 <b>7~14일 이내</b> 순차 배송</li>
-                <li>해외·일본 직수입 상품은 <b>박스 미세 구겨짐·초기 공정 하자</b> 양해 부탁드려요</li>
-                <li>교환·반품은 수령 후 <b>3일 이내 개봉 풀영상(무편집)</b> 필수</li>
+                <li>본 상품은 <b>랜덤 상품</b>이며 합리적인 소비를 부탁드립니다.</li>
               </ul>
-              <p class="hs-note">단순 변심·해외 왕복 배송비는 <b>고객 부담</b>이에요</p>
+              <p class="hs-note">진열장 <b>5개 이상</b> 적립 시 무료 배송</p>
             </div>
             <div class="hs-art" aria-hidden="true">
-              <svg viewBox="0 0 120 122">
-                <ellipse cx="60" cy="112" rx="35" ry="5.5" fill="rgba(51,37,43,.13)"/>
-                <g transform="translate(60 44)">
-                  <ellipse cx="0" cy="2" rx="21" ry="19" fill="#fff8ee" stroke="#33252b" stroke-width="2.6"/>
-                  <circle cx="-7.5" cy="0" r="2.5" fill="#33252b"/><circle cx="7.5" cy="0" r="2.5" fill="#33252b"/>
-                  <path d="M-3.5 7c2 2.2 5 2.2 7 0" fill="none" stroke="#33252b" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M-15 -12c0-6 30-6 30 0z" fill="#f0684b" stroke="#33252b" stroke-width="2.4" stroke-linejoin="round"/>
-                  <circle cx="-14" cy="-9" r="2.4" fill="#fff8ee"/>
-                </g>
-                <g>
-                  <path d="M38 76h46v33H38z" fill="#e9cda9" stroke="#33252b" stroke-width="2.6" stroke-linejoin="round"/>
-                  <path d="M38 76l7-10h46l-7 10z" fill="#f7e2c4" stroke="#33252b" stroke-width="2.6" stroke-linejoin="round"/>
-                  <path d="M84 76l7-10v33l-7 10z" fill="#d6b28a" stroke="#33252b" stroke-width="2.6" stroke-linejoin="round"/>
-                  <path d="M61 66v10" stroke="#33252b" stroke-width="2.6"/>
-                  <path d="M46 88h14M46 96h9" stroke="#b99a76" stroke-width="2.2" stroke-linecap="round"/>
-                </g>
+              <svg viewBox="0 0 120 130">
+                <circle cx="60" cy="64" r="46" fill="#FF4A1E"/>
+                <circle cx="60" cy="64" r="27" fill="none" stroke="#14161D" stroke-width="10"/>
+                <path d="M40 84l40-40" stroke="#14161D" stroke-width="10" stroke-linecap="round"/>
+
               </svg>
             </div>
           </article>
 
-          <article class="hc-slide" data-slide="1" data-hb-act="welcome" role="group" aria-label="오픈 기념 첫 유료 뽑기 1+1">
+          <article class="hc-slide hs-light" data-slide="1" data-hb-act="shipguide" role="group" aria-label="출고 및 교환·반품 주의사항">
+            <div class="hs-txt">
+              <span class="hs-kicker">출고 · 교환 안내</span>
+              <h3 class="hs-title">받기 전에 <b>꼭 확인</b></h3>
+              <ul class="hs-list">
+                <li>출고 신청은 <b>7~14일 이내</b> 순차 배송</li>
+                <li>일본 직수입은 <b>미세 구겨짐·초기 공정 하자</b> 양해</li>
+                <li>교환·반품은 <b>3일 이내 개봉 풀영상(무편집)</b></li>
+              </ul>
+              <p class="hs-note">단순 변심·<b>왕복 배송비</b>는 고객 부담</p>
+            </div>
+            <div class="hs-art" aria-hidden="true">
+              <svg viewBox="0 0 120 130">
+                <ellipse cx="60" cy="117" rx="34" ry="6" fill="rgba(20,22,29,.09)"/>
+                <path d="M39 60h42v46H39z" fill="#FFE0D4" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
+                <path d="M34 44h52v16H34z" fill="#FF4A1E" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
+                <path d="M60 44v62" stroke="#14161D" stroke-width="2.6"/>
+                <path d="M60 44c-11 0-17-5-14-10 3-5 10 0 14 10z" fill="#FF4A1E" stroke="#14161D" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M60 44c11 0 17-5 14-10-3-5-10 0-14 10z" fill="#FF4A1E" stroke="#14161D" stroke-width="2.2" stroke-linejoin="round"/>
+                <circle cx="86" cy="96" r="15" fill="#fff" stroke="#14161D" stroke-width="2.4"/>
+                <path d="M79 96.5l5 5.5 10-11" fill="none" stroke="#FF4A1E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </article>
+
+          <article class="hc-slide hs-coral" data-slide="2" data-hb-act="welcome" role="group" aria-label="오픈 기념 첫 유료 뽑기 1+1">
             <div class="hs-txt">
               <span class="hs-kicker">OPEN EVENT</span>
-              <h3 class="hs-title">오픈 기념 첫 뽑기 <b>1+1</b></h3>
+              <h3 class="hs-title">오픈 기념 <b>첫 뽑기</b></h3>
               <div class="hs-big">1+1<em>보너스 1판</em></div>
               <ul class="hs-list">
-                <li>첫 유료 뽑기 1회에 <b>보너스 1판</b>을 더 드려요</li>
-                <li>계정당 1회 · 무료·이벤트 뽑기 제외</li>
+                <li>첫 유료 뽑기 1회에 <b>보너스 1판</b> 추가</li>
+                <li>계정당 1회 · 무료·이벤트 제외</li>
               </ul>
-              <p class="hs-note">탭해서 <b>웰컴 쿠폰</b> 확인하기</p>
+              <p class="hs-note hs-note-dark">탭해서 <b>웰컴 쿠폰</b> 확인</p>
             </div>
             <div class="hs-art" aria-hidden="true">
-              <svg viewBox="0 0 120 122">
-                <ellipse cx="60" cy="112" rx="33" ry="5.5" fill="rgba(51,37,43,.13)"/>
-                <path d="M32 60h56v46H32z" fill="#ffd08a" stroke="#33252b" stroke-width="2.6" stroke-linejoin="round"/>
-                <path d="M28 44h64v18H28z" fill="#ffc24b" stroke="#33252b" stroke-width="2.6" stroke-linejoin="round"/>
-                <path d="M60 44v62" stroke="#33252b" stroke-width="2.6"/>
-                <path d="M60 44c-14 0-22-6-18-13 4-6 13 0 18 13z" fill="#f0684b" stroke="#33252b" stroke-width="2.4" stroke-linejoin="round"/>
-                <path d="M60 44c14 0 22-6 18-13-4-6-13 0-18 13z" fill="#f0684b" stroke="#33252b" stroke-width="2.4" stroke-linejoin="round"/>
-                <circle cx="42" cy="80" r="3" fill="#fff8ee" stroke="#33252b" stroke-width="1.6"/>
-                <circle cx="78" cy="80" r="3" fill="#fff8ee" stroke="#33252b" stroke-width="1.6"/>
+              <svg viewBox="0 0 120 130">
+                <ellipse cx="60" cy="117" rx="32" ry="6" fill="rgba(90,20,0,.18)"/>
+                <path d="M34 62h52v46H34z" fill="#fff" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
+                <path d="M29 46h62v17H29z" fill="#FFD24A" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
+                <path d="M60 46v62" stroke="#14161D" stroke-width="3"/>
+                <path d="M60 46c-12 0-19-5-16-11 3-5 12 0 16 11z" fill="#14161D" stroke="#14161D" stroke-width="2.4" stroke-linejoin="round"/>
+                <path d="M60 46c12 0 19-5 16-11-3-5-12 0-16 11z" fill="#14161D" stroke="#14161D" stroke-width="2.4" stroke-linejoin="round"/>
+                <circle cx="46" cy="82" r="3" fill="#FF4A1E"/><circle cx="74" cy="82" r="3" fill="#FF4A1E"/>
               </svg>
             </div>
           </article>
 
-          <article class="hc-slide" data-slide="2" data-hb-act="attend" role="group" aria-label="7일 연속 출석 스탬프">
+          <article class="hc-slide hs-dark" data-slide="3" data-hb-act="attend" role="group" aria-label="7일 연속 출석 스탬프">
             <div class="hs-txt">
               <span class="hs-kicker">DAILY BONUS</span>
               <h3 class="hs-title">7일 연속 출석 <b>1,000P</b></h3>
               <div class="hs-stamps" aria-hidden="true"><i class="on">1</i><i class="on">2</i><i class="on">3</i><i>4</i><i>5</i><i>6</i><i>7</i></div>
               <ul class="hs-list">
                 <li>매일 <b>100~300P</b>, 7일 완주 <b>1,000P</b></li>
-                <li>하루 1회 · 하루 건너뛰면 1일차부터 다시</li>
+                <li>하루 1회 · 건너뛰면 1일차부터</li>
               </ul>
-              <p class="hs-note">탭하면 오늘 <b>출석 도장</b>을 찍을 수 있어요</p>
+              <p class="hs-note">탭하면 오늘 <b>출석 도장</b>을 찍어요</p>
             </div>
             <div class="hs-art" aria-hidden="true">
-              <svg viewBox="0 0 120 122">
-                <ellipse cx="60" cy="112" rx="31" ry="5.5" fill="rgba(51,37,43,.13)"/>
-                <path d="M34 34h52v72H34z" fill="#fffdf6" stroke="#33252b" stroke-width="2.6" stroke-linejoin="round"/>
-                <path d="M34 34h52v16H34z" fill="#38b394" stroke="#33252b" stroke-width="2.6" stroke-linejoin="round"/>
-                <circle cx="46" cy="42" r="3" fill="#fffdf6" stroke="#33252b" stroke-width="1.6"/>
-                <circle cx="74" cy="42" r="3" fill="#fffdf6" stroke="#33252b" stroke-width="1.6"/>
-                <g fill="#ffd9c4" stroke="#e0a98c" stroke-width="1.6">
-                  <circle cx="47" cy="63" r="6"/><circle cx="60" cy="63" r="6"/><circle cx="73" cy="63" r="6"/>
-                  <circle cx="47" cy="80" r="6"/><circle cx="60" cy="80" r="6"/><circle cx="73" cy="80" r="6"/>
+              <svg viewBox="0 0 120 130">
+                <ellipse cx="60" cy="117" rx="32" ry="6" fill="rgba(0,0,0,.4)"/>
+                <path d="M35 36h50v74H35z" fill="#fff" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
+                <path d="M35 36h50v17H35z" fill="#FF4A1E" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
+                <circle cx="46" cy="44" r="3" fill="#fff"/><circle cx="74" cy="44" r="3" fill="#fff"/>
+                <g fill="#FFE0D4" stroke="#C88A6E" stroke-width="1.6">
+                  <circle cx="47" cy="66" r="6"/><circle cx="60" cy="66" r="6"/><circle cx="73" cy="66" r="6"/>
+                  <circle cx="47" cy="82" r="6"/><circle cx="60" cy="82" r="6"/>
                 </g>
-                <circle cx="60" cy="96" r="8" fill="none" stroke="#f0684b" stroke-width="2.6"/>
-                <path d="M56 96l3 3 5-6" fill="none" stroke="#f0684b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="73" cy="82" r="8.5" fill="#FFD24A" stroke="#14161D" stroke-width="2.2"/>
+                <path d="M69 82l3 3.4 5.6-6" fill="none" stroke="#14161D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
           </article>
 
-          <article class="hc-slide" data-slide="3" data-hb-act="contact" role="group" aria-label="포코쿠지 신상 및 공식 문의">
+          <article class="hc-slide hs-light" data-slide="4" data-hb-act="contact" role="group" aria-label="포코쿠지 신상 및 공식 문의">
             <div class="hs-txt">
-              <span class="hs-kicker">NEW &amp; CONTACT</span>
+              <span class="hs-kicker">NEW · CONTACT</span>
               <h3 class="hs-title">포코쿠지 <b>신상</b> 소식</h3>
               <ul class="hs-list">
                 <li>4개 시리즈 · 12박스 동시 오픈</li>
-                <li>신상 시리즈는 매주 업데이트돼요</li>
+                <li>신상 시리즈는 매주 업데이트</li>
               </ul>
               <p class="hs-mail">pokokuji.kr@gmail.com</p>
               <div class="hs-chips"><span>인스타그램</span><span>유튜브 룸리</span><span>카카오채널 준비중</span></div>
               <p class="hs-note">탭하면 <b>문의 채널</b>을 안내해 드려요</p>
             </div>
             <div class="hs-art" aria-hidden="true">
-              <svg viewBox="0 0 120 122">
-                <ellipse cx="60" cy="112" rx="31" ry="5.5" fill="rgba(51,37,43,.13)"/>
-                <path d="M30 56h60v42H30z" fill="#fffdf6" stroke="#33252b" stroke-width="2.6" stroke-linejoin="round"/>
-                <path d="M30 56l30 24 30-24" fill="none" stroke="#33252b" stroke-width="2.6" stroke-linejoin="round"/>
-                <path d="M30 98l24-24M90 98l-24-24" fill="none" stroke="#d8bda6" stroke-width="2.2"/>
-                <g transform="translate(84 40)">
-                  <circle cx="0" cy="0" r="16" fill="#f0684b" stroke="#33252b" stroke-width="2.6"/>
-                  <path d="M0 -7v9" stroke="#fff8ee" stroke-width="2.6" stroke-linecap="round"/>
-                  <circle cx="0" cy="6.5" r="1.9" fill="#fff8ee"/>
+              <svg viewBox="0 0 120 130">
+                <ellipse cx="60" cy="117" rx="32" ry="6" fill="rgba(20,22,29,.09)"/>
+                <path d="M31 54h58v44H31z" fill="#fff" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
+                <path d="M31 54l29 25 29-25" fill="none" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
+                <path d="M31 98l24-24M89 98L65 74" fill="none" stroke="#E7B9A8" stroke-width="2.2"/>
+                <g transform="translate(86 40)">
+                  <circle cx="0" cy="0" r="16" fill="#FF4A1E" stroke="#14161D" stroke-width="2.6"/>
+                  <path d="M0 -7v9" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/>
+                  <circle cx="0" cy="6.5" r="2" fill="#fff"/>
                 </g>
               </svg>
             </div>
@@ -2420,10 +2664,11 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
           <button data-hb="1" type="button" role="tab" aria-selected="false" aria-label="2번 배너"></button>
           <button data-hb="2" type="button" role="tab" aria-selected="false" aria-label="3번 배너"></button>
           <button data-hb="3" type="button" role="tab" aria-selected="false" aria-label="4번 배너"></button>
+          <button data-hb="4" type="button" role="tab" aria-selected="false" aria-label="5번 배너"></button>
         </div>
         <button class="hb-a" id="hbNext" type="button" aria-label="다음 배너">›</button>
       </div>
-      <span class="hc-count" id="hbCount">1/4</span>
+      <span class="hc-count" id="hbCount">1/5</span>
     </section>
 
     <!-- v8: 실시간 당첨 피드 (마퀴) -->
@@ -2549,9 +2794,9 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
       </div>
     </header>
     <div class="freegage" id="freeGauge">
-      <div class="fg-top"><span class="fg-t">묶음배송 <b>3점 이상 무료</b></span><span class="fg-n" id="fgNow">현재 0/3점</span></div>
+      <div class="fg-top"><span class="fg-t">묶음배송 <b>5개 이상 무료</b></span><span class="fg-n" id="fgNow">현재 0/5개</span></div>
       <div class="fg-bar"><i id="fgFill"></i></div>
-      <div class="fg-msg" id="fgMsg">3점을 모으면 묶음배송이 무료예요</div>
+      <div class="fg-msg" id="fgMsg">5개를 모으면 묶음배송이 무료예요</div>
     </div>
     <div class="selrow" id="selRow" hidden>
       <span id="selInfo">0점 선택</span>
@@ -2745,7 +2990,7 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
         </div>
       </div>
       <div class="sheet-actions shipfoot">
-        <div class="sf-sum"><span>총 금액</span><b id="shipFee">3,500원</b><em id="shipFeeNote">3점 이상 무료배송</em></div>
+        <div class="sf-sum"><span>총 금액</span><b id="shipFee">3,500원</b><em id="shipFeeNote">5개 이상 무료배송</em></div>
         <button class="sf-guide" id="shipGuideBtn" type="button"><b aria-hidden="true">i</b> <span>배송 안내</span></button>
         <button class="btn-primary" id="shipSubmit" disabled>배송 확인<small id="shipSubmitSub">주소를 선택해 주세요</small></button>
       </div>
@@ -3259,7 +3504,7 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
     customs: { name: "", pccc: "" },
     coupons: [
       { id: "w11", t: "첫 유료 뽑기 1+1", sub: "웰컴 쿠폰 · 보너스 1판 증정", tag: "웰컴", use: false, exp: "2026-12-31" },
-      { id: "ship0", t: "오픈 기념 무료배송", sub: "3점 미만 출고 시 배송비 3,500원 면제", tag: "오픈", use: true, exp: "2026-11-30" }
+      { id: "ship0", t: "오픈 기념 무료배송", sub: "5개 미만 출고 시 배송비 3,500원 면제", tag: "오픈", use: true, exp: "2026-11-30" }
     ]
   };
 
@@ -5149,14 +5394,14 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
 
     const fg = $("#freeGauge");
     if (fg){
-      const FREE = 3, have = un.length;
+      const FREE = 5, have = un.length;
       fg.hidden = false;
       fg.classList.toggle("done", have >= FREE);
-      $("#fgNow").textContent = "현재 " + have + "/" + FREE + "점";
+      $("#fgNow").textContent = "현재 " + have + "/" + FREE + "개";
       $("#fgFill").style.width = Math.min(100, Math.round(have / FREE * 100)) + "%";
       $("#fgMsg").textContent = have >= FREE
         ? "무료배송 조건 달성! 모은 점을 골라 한 번에 받아요"
-        : (FREE - have) + "점만 더 모으면 묶음배송이 무료예요";
+        : (FREE - have) + "개만 더 모으면 묶음배송이 무료예요";
     }
 
     const canShip = shipSelection.size > 0;
@@ -5452,7 +5697,7 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
   $("#homeCart").addEventListener("click", () => { showScreen("box"); renderBox(); });
   $("#homePts").addEventListener("click", () => toast("보유 포인트 " + won(state.points) + "P · " + (LIVE ? "실서비스 계정" : "데모 계정")));
 
-  $("#noticeBtn").addEventListener("click", () => toast("4개 시리즈 · 시리즈별 3박스 · 박스별 잔여 수량 실시간 공개"));
+  $("#noticeBtn").addEventListener("click", openNotice);
 
   $$("#tabbar button").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -6072,7 +6317,7 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
   }
 
   /* ---------- ① 홈 배너 캐러셀 ---------- */
-  const HB_N = 4;
+  const HB_N = 5;
   let hbIdx = 0, hbTimer = null, hbDrag = null, swallowOverlayClick = 0;
 
   function hbGo(i, noAnim){
@@ -6102,6 +6347,7 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
     if (act === "shipguide") openShipGuide();
     else if (act === "welcome") openEvent();
     else if (act === "attend"){ openOverlay("attendSheet"); attRender(); }
+    else if (act === "minor") openNotice();
     else if (act === "contact") openContact();
   }
 
@@ -6374,11 +6620,24 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
       });
   }
 
+  function openNotice(){
+    openInfo("공지 · 구매 전 확인",
+      '<div class="info-tip" style="background:#fff2ec;border-color:#ffcdb8;color:#a3310f">'
+      + '<b style="color:#de3208;font-size:11px">미성년자는 구매 NO! NO!</b><br>'
+      + '본 상품은 <b>랜덤 상품</b>이며 합리적인 소비를 부탁드립니다.</div>'
+      + '<p class="info-p" style="margin-top:9px"><b>진열장 5개 이상 적립 시 무료 배송</b><br>'
+      + '5개 미만은 묶음배송비 3,500원이에요.</p>'
+      + '<p class="info-p">뽑기는 결과를 미리 알 수 없는 <b>확률형 랜덤 상품</b>이에요. 원하는 등급이 나오지 않을 수 있으니'
+      + ' 구매 전 박스별 잔여 수량과 확률을 꼭 확인해 주세요.</p>'
+      + '<p class="info-p">출고 신청 후 <b>7~14일 이내</b> 순차 배송 · 교환·반품은 수령 후 <b>3일 이내 개봉 풀영상(무편집)</b>이 필요해요.</p>');
+  }
+
   function openShipGuide(){
     openInfo("배송 · 교환/반품 안내",
       '<p class="info-p"><b>출고 신청</b> 후 <b>7~14일 이내</b> 순차 배송돼요. 해외·일본 직수입 상품은 통관 후 국내 배송으로 이어져요.</p>'
       + '<div class="info-tip">수령 후 <b>3일 이내 개봉 풀영상(무편집)</b>이 있어야 교환·반품 접수가 가능해요.<br>단순 변심·해외 왕복 배송비는 고객 부담입니다.</div>'
-      + '<p class="info-p" style="margin-top:8px"><b>묶음배송</b> · 3점 이상 무료, 3점 미만은 배송비 <b>3,500원</b>이에요.</p>'
+      + '<div class="info-tip" style="margin-top:2px"><b>미성년자는 구매 NO! NO!</b> · 본 상품은 랜덤 상품이며 합리적인 소비를 부탁드립니다.</div>'
+      + '<p class="info-p" style="margin-top:8px"><b>묶음배송</b> · 진열장 5개 이상 무료, 5개 미만은 배송비 <b>3,500원</b>이에요.</p>'
       + '<p class="info-p"><b>통관 정보</b> · 해외배송 상품은 신분증과 동일한 이름과 개인통관고유부호(PCCC)가 필요해요.</p>');
   }
 
@@ -6524,7 +6783,7 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
     });
     return Array.from(map.values());
   }
-  function shipFeeOf(n){ return n >= 3 ? 0 : 3500; }
+  function shipFeeOf(n){ return n >= 5 ? 0 : 3500; }
   function spareOf(key){
     return state.shelf.find(i => !i.shipped && !shipSelection.has(i.id) && (i.sid + "|" + i.g + "|" + i.name) === key);
   }
@@ -6563,7 +6822,7 @@ button.info-row{width:100%;text-align:left;font-family:inherit}
     const fe = $("#shipFee");
     fe.textContent = fee ? won(fee) + "원" : "무료";
     fe.classList.toggle("free", !fee);
-    $("#shipFeeNote").textContent = fee ? ((3 - n) + "점 더 모으면 무료배송") : "3점 이상 무료배송 달성";
+    $("#shipFeeNote").textContent = fee ? ((5 - n) + "개 더 모으면 무료배송") : "5개 이상 무료배송 달성";
     validateShip();
   }
 
