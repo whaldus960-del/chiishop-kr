@@ -10,6 +10,27 @@
 - 상태는 메모리에만 있고 새로고침하면 초기화됩니다.
 - 사이트 아이콘(헤더·푸터 로고·파비콘)만 `assets/poko-mascot.png` · `favicon.png` · `apple-touch-icon.png` PNG를 씁니다.
 
+## 2026-11-28 8차 — 정식 이메일 회원 · 첫 판 50% 할인 실차감 · 진화/스타팅 DB 저장 (v13)
+
+게스트 체험에서 **정식 회원**으로 넘어가는 단계를 열었습니다. 이제 로그인한 계정에 포인트·누적 구매액·스타팅·진열장이 서버(Supabase)에 남습니다.
+
+- **회원가입/로그인 시트(`#authSheet`)**: 이메일 · 비밀번호(6자+) · 닉네임 · 연락처(선택) 입력. 가입 즉시 세션 발급(`mailer_autoconfirm`)이라 메일 인증 없이 바로 로그인 상태가 되고, 오류는 전부 한국어로 안내합니다(`authErrMsg`).
+- **게스트 → 정식 회원 전환**: 이미 게스트로 체험 중이면 같은 `user.id` 에 이메일·비밀번호만 붙입니다(`PUT /auth/v1/user`). 포인트·진열장·뽑기 기록이 그대로 유지되고, 시트에 전환 안내(`#authConv`)와 마이페이지 버튼(`#myJoin`)이 뜹니다.
+- **첫 판 50% 웰컴 할인**: 서버 `draw_kuji()` 가 `is_anonymous = false` + `welcome_discount_used = false` 를 확인해 **첫 1판 가격의 50%** 를 자동 차감하고 사용 처리합니다. 뽑기 화면 스트립(`#welcomeStrip`, `9,900P → 4,950P`)과 주문 확인 모달 할인 행(`#ordDiscRow`)이 같은 금액을 보여주고, x5/x10/ALL 도 첫 1판만 반값입니다. 게스트는 대상이 아니고 기존 웰컴 팝업을 그대로 봅니다.
+- **누적 구매액(`profiles.total_spent`)**: 실제 차감한 포인트만큼 `draw_kuji()` 안에서 누적되고, 마이페이지 진화 등급·게이지가 이 값을 씁니다(게스트·데모는 기존처럼 `localStorage.pokoEvoSpent`).
+- **스타팅(`profiles.starter_id`)**: 정식 회원이 스타팅 탭을 고르면 `set_starter` RPC 로 저장되고, 다른 기기에서 로그인해도 같은 캐릭터가 뜨립니다. 게스트는 브라우저 저장 유지.
+- **보안**: `profiles` 의 `is_admin`·`points`·`total_spent`·`welcome_discount_used` 는 컬럼 GRANT 회수 + `BEFORE UPDATE` 트리거(`profiles_guard_privileged`, SECURITY INVOKER)로 이중 차단. 일반 회원이 REST 로 직접 바꾸면 42501.
+- **UI 다듬기**: 스타팅 탭에서 `여자/남자/동물` 보조 텍스트 제거(🌸 포코링 · ⚡ 레오 · 🦊 별여우), 진화 로드맵 카드 하단 여백을 늘려 `30만원+`·`150만원+` 라벨이 잘리지 않게 수정, LV.1 그림을 손그림 알에서 **최초 진화 시안**(`avatar-candidates/evolution/circle/poko_lv1_circle.png` → 384² 최적화)으로 교체(손그림 알은 상단 로고·파비콘 `poko-mascot.png` 로만 유지).
+- **OG 이미지 v4**: 좌상단 알약 캡슐 → 새 알 마스코트, 우측 아이폰 2대 화면 → 최신 라이브 홈(웰컴 배너·실시간 당첨바) · LV.5 초호화 진화 마이페이지. `og:image`/`twitter:image` 는 `?v=4`.
+- **검증**: `verify_member_live.py`(가입→할인→서버 누적→스타팅 유지→보안 차단, 24체크) 라이브 24/24 · `verify_evo.py` 로컬/라이브 69/69 · `run_verify_offline.sh` 291+88 통과.
+
+```bash
+python3 verify_member_live.py                      # 로컬 서버 + 실DB
+python3 verify_member_live.py https://pokokuji.kr/ # 라이브
+python3 ../chiishop-backend/tests/member_e2e.py --run     # DB 단독 E2E(32체크)
+python3 ../chiishop-backend/tests/cleanup_member_test.py  # 테스트 계정·뽑기·박스 원상복구
+```
+
 ## 2026-11-28 7차 — 마이페이지 '포코 5단계 진화 + 초호화 테두리' (v12)
 
 마이페이지 상단을 **디지몬식 5단계 진화 카드**로 바꿨습니다. 누적 구매액이 쌓이면 포코가 진화하고, 테두리도 등급별 초호화 파츠로 함께 올라갑니다.
