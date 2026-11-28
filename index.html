@@ -15,12 +15,12 @@
 <meta property="og:description" content="꽝 없는 이치방쿠지 · 시리즈별 3박스 · 1회 9,900P부터">
 <link rel="canonical" href="https://pokokuji.kr/">
 <meta property="og:url" content="https://pokokuji.kr/">
-<meta property="og:image" content="https://pokokuji.kr/og-pokokuji.png?v=3">
+<meta property="og:image" content="https://pokokuji.kr/og-pokokuji.png?v=4">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="포코쿠지 POKO KUJI · 치이카와 이치방쿠지 4 시리즈">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pokokuji.kr/og-pokokuji.png?v=3">
+<meta name="twitter:image" content="https://pokokuji.kr/og-pokokuji.png?v=4">
 <meta name="twitter:image:alt" content="포코쿠지 POKO KUJI · 치이카와 이치방쿠지 4 시리즈">
 <meta name="twitter:title" content="포코쿠지 (POKO KUJI) · 치이카와 시리즈 4">
 <meta name="twitter:description" content="꽝 없는 이치방쿠지 · 시리즈별 3박스 · 1회 9,900P부터">
@@ -1563,6 +1563,16 @@ body{
   font-size:8.8px;font-weight:800;color:var(--ink2);white-space:nowrap;letter-spacing:-.1px}
 .drawcost b{color:var(--coral-d);font-weight:900;font-family:ui-monospace,Menlo,monospace;font-size:9.4px}
 .drawcost .sep{width:1px;height:8px;background:rgba(51,37,43,.22)}
+.drawcost .wc{color:#d81f74;font-weight:900;letter-spacing:-.2px}
+.welcome-strip{grid-column:1/-1;justify-self:center;display:flex;align-items:center;justify-content:center;gap:4px;
+  margin:0 0 4px;padding:4px 12px;border-radius:999px;max-width:calc(100% - 16px);
+  background:linear-gradient(135deg,#ff5fa2,#e0357f);color:#fff;
+  font-size:9.2px;font-weight:900;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  box-shadow:0 3px 10px rgba(224,53,127,.35)}
+.welcome-strip b{color:#fff6c9}
+.welcome-strip[hidden]{display:none}
+.dome .pr em s{font-size:8px;font-weight:700;opacity:.5;text-decoration:line-through;margin-right:1px}
+.dome .pr em s + *{margin-left:0}
 .dome .pr .lb{font-size:8.4px;font-weight:900;color:var(--ink3);letter-spacing:-.2px;margin-right:1px}
 .dome.short .pr{color:var(--coral-d)}
 .dome.short .pr .lb{color:var(--coral-d)}
@@ -3457,14 +3467,14 @@ body{background:#05050A;color:var(--tx)}
 /* 스타팅 선택 (🌸 포코링 · ⚡ 레오 · 🦊 별여우) */
 .evo-pick{position:relative;z-index:3;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
   gap:4px;padding:9px 9px 0}
-.ep-btn{display:flex;align-items:center;justify-content:center;gap:3px;min-width:0;
-  padding:7px 4px 7px;border-radius:11px;border:1px solid rgba(255,255,255,.13);
+.ep-btn{display:flex;align-items:center;justify-content:center;gap:4px;min-width:0;
+  padding:8px 4px 8px;border-radius:11px;border:1px solid rgba(255,255,255,.13);
   background:linear-gradient(180deg,rgba(40,34,58,.96),rgba(26,22,38,.96));
-  color:#B9B2C9;font-size:9.5px;font-weight:900;letter-spacing:-.4px;line-height:1;
+  color:#B9B2C9;font-size:10px;font-weight:900;letter-spacing:-.4px;line-height:1;
   transition:border-color .16s ease,background .16s ease,color .16s ease,box-shadow .16s ease}
-.ep-btn i{font-style:normal;font-size:11px;line-height:1;filter:grayscale(.9) opacity(.8)}
+.ep-btn i{font-style:normal;font-size:11.5px;line-height:1;filter:grayscale(.9) opacity(.8)}
 .ep-btn b{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ep-btn em{font-style:normal;font-size:7px;font-weight:900;letter-spacing:.02em;color:#7E7791}
+.ep-btn em{display:none}
 .ep-btn.on{color:#101708;border-color:rgba(200,247,81,.9);
   background:linear-gradient(165deg,#EAFFB4,#C8F751 58%,#9EE22F);
   box-shadow:0 0 16px -4px rgba(200,247,81,.95),inset 0 1px 0 rgba(255,255,255,.65)}
@@ -3521,10 +3531,10 @@ body{background:#05050A;color:var(--tx)}
 .ep-coin b{font-size:11.5px;letter-spacing:-.4px;color:#fff;text-shadow:0 0 12px rgba(255,194,74,.5)}
 .ep-coin b s{text-decoration:none;font-size:7.5px;color:var(--gold2);margin-left:1px}
 
-/* 진화 로드맵 */
-.evo-rail{display:flex;gap:3px;padding:9px 7px 2px}
+/* 진화 로드맵 — 카드 하단 글자가 1px도 잘리지 않게 여백을 넉넉히 */
+.evo-rail{display:flex;align-items:stretch;gap:3px;padding:9px 7px 13px}
 .evo-n{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;
-  background:none;border:0;padding:4px 0 7px;border-radius:11px;opacity:.86;
+  background:none;border:0;padding:4px 0 10px;border-radius:11px;opacity:.86;
   -webkit-tap-highlight-color:transparent}
 .evo-n.is-lock{opacity:.66}
 .evo-n.is-mine,.evo-n.is-prev{opacity:1}
@@ -3544,7 +3554,8 @@ body{background:#05050A;color:var(--tx)}
 .evo-n.is-mine .en-lv{color:#C8F751}
 .en-nm{font-size:8.5px;font-weight:900;color:#E7E0F2;letter-spacing:-.3px;white-space:nowrap;
   max-width:100%;overflow:hidden;text-overflow:ellipsis}
-.en-need{font-style:normal;font-size:7px;font-weight:800;color:#7E7590;letter-spacing:-.1px}
+.en-need{font-style:normal;display:block;font-size:7px;font-weight:800;color:#7E7590;letter-spacing:-.1px;
+  line-height:1.5;padding-bottom:1px}
 .evo-tip{margin:0 12px 10px;font-size:7.5px;font-weight:700;color:#7E7590;text-align:center;letter-spacing:-.1px}
 .evo-tip b{color:#E7E0F2;font-weight:900}
 
@@ -3930,6 +3941,7 @@ body{background:#05050A;color:var(--tx)}
     <div class="dcontent" id="dLog" hidden></div>
 
     <div class="drawbar" id="drawBar">
+      <div class="welcome-strip" id="welcomeStrip" hidden></div>
       <div class="drawcost" id="drawCost">보유 <b>P 240,000</b></div>
       <button class="dome" data-n="1"><span class="cap"><b>x1</b></span><span class="pr"><span class="lb">총</span><i>P</i><em class="numb" id="c1">6,200</em></span></button>
       <button class="dome" data-n="5"><span class="cap"><b>x5</b></span><span class="pr"><span class="lb">총</span><i>P</i><em class="numb" id="c5">31,000</em></span></button>
@@ -4014,9 +4026,9 @@ body{background:#05050A;color:var(--tx)}
       <div class="evo-hero" id="evoHero" data-lv="1" data-starter="poko">
         <!-- 스타팅 선택 : 고른 스타팅이 카드·로드맵에 바로 반영되고 브라우저에 저장된다 -->
         <div class="evo-pick" id="evoPick" role="tablist" aria-label="스타팅 선택">
-          <button class="ep-btn on" type="button" role="tab" data-starter="poko" aria-selected="true"><i>🌸</i><b>포코링</b><em>여자</em></button>
-          <button class="ep-btn" type="button" role="tab" data-starter="boy" aria-selected="false"><i>⚡</i><b>레오</b><em>남자</em></button>
-          <button class="ep-btn" type="button" role="tab" data-starter="pet" aria-selected="false"><i>🦊</i><b>별여우</b><em>동물</em></button>
+          <button class="ep-btn on" type="button" role="tab" data-starter="poko" aria-selected="true"><i>🌸</i><b>포코링</b></button>
+          <button class="ep-btn" type="button" role="tab" data-starter="boy" aria-selected="false"><i>⚡</i><b>레오</b></button>
+          <button class="ep-btn" type="button" role="tab" data-starter="pet" aria-selected="false"><i>🦊</i><b>별여우</b></button>
         </div>
         <div class="evo-stage" id="myAva">
       <div class="evo-frame" data-evolv="1" data-name="포코에그" data-tier="루키" aria-hidden="true"><div class="pfr lv1" style=""><div class="paura phalo1"></div><div class="pband" style="--ir1:.450;--ir2:.5;background:conic-gradient(from 0deg,#FF6B45,#FFB79C 55deg,#FF8E6A 110deg,#FFE2D4 170deg,#FF9A76 232deg,#FFC7AE 296deg,#FF6B45)"></div><div class="pband pbevel" style="--ir1:.450;--ir2:.5;background:radial-gradient(circle at 30% 18%,rgba(255,255,255,.85),transparent 40%),radial-gradient(circle at 50% 92%,rgba(0,0,0,.5),transparent 44%)"></div><div class="pface" style="--rim:0.05;background:radial-gradient(circle at 50% 44%,#3A1626 0%,#2A1022 60%,#1A0A16 100%)"><img loading="lazy" decoding="async" src="assets/poko-lv1.png" alt=""></div><div class="phair"></div><div class="primout"></div></div></div>
@@ -4033,6 +4045,8 @@ body{background:#05050A;color:var(--tx)}
           <b class="evo-name" id="evoName">포코에그</b>
           <div class="my-nickrow"><b id="myNick">미연</b><button id="myNickEdit" type="button">수정</button></div>
           <p class="my-phone" id="myPhone">010-****-9720</p>
+          <p class="my-member" id="myMember" hidden style="margin-top:6px;font-size:11.5px;font-weight:800;color:#2d9c6b"></p>
+          <button class="my-join" id="myJoin" type="button" hidden style="margin-top:8px;padding:9px 14px;border:0;border-radius:12px;background:linear-gradient(135deg,#ff5fa2,#e0357f);color:#fff;font-size:12px;font-weight:900;box-shadow:0 6px 14px rgba(224,53,127,.28)">정식 회원 가입하고 첫 판 50% 할인 🎁</button>
           <button class="evo-back" id="evoBack" type="button" hidden>내 등급으로 돌아가기</button>
         </div>
       </div>
@@ -4388,6 +4402,7 @@ body{background:#05050A;color:var(--tx)}
             <b><button class="switch on" id="ordUse" type="button" role="switch" aria-checked="true"><i></i></button></b>
           </div>
           <div><span>사용 포인트</span><b id="ordUseVal">-0P</b></div>
+          <div id="ordDiscRow" hidden style="color:#d81f74"><span>🎉 첫 판 50% 웰컴 할인</span><b id="ordDisc">-0P</b></div>
         </div>
         <div class="rc-total"><span>최종 차감</span><b id="ordTotal">0P</b></div>
         <p class="rc-lack" id="ordLack"></p>
@@ -4417,9 +4432,15 @@ body{background:#05050A;color:var(--tx)}
       <div class="sheet-handle"></div>
       <div class="sheet-head"><h3>로그인</h3><button class="x" data-close="authSheet" aria-label="닫기">×</button></div>
       <div class="sheet-body">
-        <div class="field"><label for="authEmail">이메일</label><input id="authEmail" type="email" placeholder="you@example.com" autocomplete="email"></div>
-        <div class="field"><label for="authPw">비밀번호</label><input id="authPw" type="password" placeholder="8자 이상" autocomplete="current-password"></div>
-        <div class="field" id="authNickRow"><label for="authNick">닉네임 <span style="color:#a99;font-weight:600">(가입 시)</span></label><input id="authNick" type="text" placeholder="포코쿠지에서 보일 이름" autocomplete="nickname"></div>
+        <div class="auth-hero" id="authHero" style="margin:0 0 12px;padding:11px 13px;border-radius:14px;background:linear-gradient(135deg,#fff1f7,#ffe1ef);border:1px solid #ffcfe3;display:flex;flex-direction:column;gap:3px">
+          <b style="font-size:13px;color:#d81f74">🎁 첫 판 50% 웰컴 할인</b>
+          <span id="authHeroSub" style="font-size:11.5px;color:#8a6b7a;line-height:1.35">이메일로 가입하면 첫 유료 뽑기 <b>1판이 반값</b>! (게스트는 할인 대상이 아니에요)</span>
+        </div>
+        <div class="field"><label for="authEmail">이메일</label><input id="authEmail" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email"></div>
+        <div class="field"><label for="authPw">비밀번호</label><input id="authPw" type="password" placeholder="6자 이상" autocomplete="current-password"></div>
+        <div class="field" id="authNickRow"><label for="authNick">닉네임 <span style="color:#a99;font-weight:600">(가입 시)</span></label><input id="authNick" type="text" maxlength="12" placeholder="포코쿠지에서 보일 이름" autocomplete="nickname"></div>
+        <div class="field" id="authPhoneRow"><label for="authPhone">연락처 <span style="color:#a99;font-weight:600">(가입 시)</span></label><input id="authPhone" type="tel" placeholder="010-0000-0000" autocomplete="tel" inputmode="tel"></div>
+        <p class="confirm-text" id="authConv" hidden style="color:#8a6b7a">지금 쓰는 <b>게스트 계정에 이메일·비밀번호만</b> 붙이면 포인트·진열장 그대로 정식 회원이 돼요.</p>
         <p class="confirm-text" id="authMsg" style="min-height:18px"></p>
       </div>
       <div class="sheet-actions">
@@ -4792,6 +4813,7 @@ body{background:#05050A;color:var(--tx)}
 
   const state = {
     points: 240000,
+    me: null,                 /* 실DB 회원 프로필 (points·total_spent·starter_id·welcome_discount_used) */
     series: buildSeriesState(),
     shelf: [],
     ships: [],
@@ -5330,25 +5352,34 @@ body{background:#05050A;color:var(--tx)}
     $("#dBoxTotal").textContent = "/" + s.boxes.length + " 박스";
     $("#dRemain").textContent = rem;
     $("#dTotal").textContent = "/" + tot;
-    $("#c1").textContent = won(d.price);
-    $("#c5").textContent = won(d.price * 5);
-    $("#c10").textContent = won(d.price * 10);
+    const half = welcomeDiscount(d.price);
+    const p1 = priceAfterWelcome(d.price, 1);
+    const p5 = priceAfterWelcome(d.price, 5);
+    const p10 = priceAfterWelcome(d.price, 10);
+    $("#c1").textContent = won(p1);
+    $("#c5").textContent = won(p5);
+    $("#c10").textContent = won(p10);
+    const strip = $("#welcomeStrip");
+    if (strip){
+      strip.hidden = !(half > 0);
+      if (half > 0) strip.innerHTML = "🎉 첫 판 50% 웰컴 할인 적용! <b>" + won(d.price) + "P → " + won(p1) + "P</b>";
+    }
     const costEl = $("#drawCost");
-    if (costEl) costEl.innerHTML = "보유 <b>P " + won(state.points) + "</b><span class=\"sep\"></span>x1 <b>" + won(d.price) + "P</b><span class=\"sep\"></span>x5 <b>" + won(d.price * 5) + "P</b><span class=\"sep\"></span>x10 <b>" + won(d.price * 10) + "P</b>";
+    if (costEl) costEl.innerHTML = "보유 <b>P " + won(state.points) + "</b><span class=\"sep\"></span>x1 <b>" + won(p1) + "P</b><span class=\"sep\"></span>x5 <b>" + won(p5) + "P</b><span class=\"sep\"></span>x10 <b>" + won(p10) + "P</b>";
     const all = $("#btnAll");
     const unlocked = b.drawn > 0;
     all.classList.toggle("locked", !unlocked || rem === 0);
     $("#allSub").innerHTML = !unlocked
       ? "1회 후 열림"
-      : (rem === 0 ? "완판" : `<span class="lb">총</span><i>P</i>${won(d.price * rem)}`);
+      : (rem === 0 ? "완판" : `<span class="lb">총</span><i>P</i>${won(priceAfterWelcome(d.price, rem))}`);
     const tk = "POKO KUJI ARCADE  ★  " + d.short + "  ★  1PLAY " + won(d.price) + "P  ★  BOX " + b.no + "/" + s.boxes.length + "  ★  LEFT " + rem + "/" + tot + "  ★  GOOD LUCK  ★  ";
     const tick = $("#ledTicker");
     if (tick) tick.textContent = tk + tk;
     $$("#drawBar .dome").forEach(btn => {
       const n = btn.dataset.n;
-      if (n === "all"){ btn.classList.toggle("short", unlocked && rem > 0 && state.points < d.price * rem); return; }
+      if (n === "all"){ btn.classList.toggle("short", unlocked && rem > 0 && state.points < priceAfterWelcome(d.price, rem)); return; }
       btn.classList.toggle("locked", rem === 0 || rem < Number(n));
-      btn.classList.toggle("short", state.points < d.price * Number(n));
+      btn.classList.toggle("short", state.points < priceAfterWelcome(d.price, Number(n)));
     });
   }
 
@@ -5577,7 +5608,7 @@ body{background:#05050A;color:var(--tx)}
     if (mode === "all" && !b.drawn){ toast("ALL은 1회 뽑기 후에 열려요"); return; }
     const n = mode === "all" ? rem : Number(mode);
     if (n > rem){ toast("잔여 티켓이 부족해요"); return; }
-    const cost = n * s.def.price;
+    const cost = priceAfterWelcome(s.def.price, n);
     if (state.points < cost){
       if (LIVE){ toast("포인트가 부족해요 (" + won(state.points) + "P) · 충전은 결제 연동 후 가능해요"); return; }
       pendingCharge = { sid: s.id, idx: view.idx, mode };
@@ -6594,6 +6625,9 @@ body{background:#05050A;color:var(--tx)}
             names: ["별여우알", "아기별여우", "별여우", "별빛성수", "천공 궁극신수"] }
   };
   const STARTER_KEY = "pokoStarter";
+  /* 화면 키(boy) ↔ DB 값(leo) 매핑 — DB check 제약은 poko · leo · pet */
+  const EVO_DB_OF = { poko: "poko", boy: "leo", pet: "pet" };
+  const EVO_KEY_OF_DB = { poko: "poko", leo: "boy", pet: "pet" };
   let evoStarter = "poko";                   /* 고른 스타팅 (브라우저에 저장) */
   try {
     const saved = localStorage.getItem(STARTER_KEY);
@@ -6606,8 +6640,13 @@ body{background:#05050A;color:var(--tx)}
   let evoPreview = 0;                        /* 0 = 미리보기 아님(내 등급) */
   const evoWarmed = {};
 
-  /* 누적 구매액 = 이번 세션 뽑기 결제 합계 vs 브라우저에 남긴 합계 중 큰 값 */
+  /* 누적 구매액 = 실DB 정식 회원은 서버 total_spent, 그 외(게스트·데모)는 이번 세션/브라우저 합계 */
   function evoSpent(){
+    try{
+      if (LIVE && state.me && window.CHII_BACKEND && CHII_BACKEND.isMember && CHII_BACKEND.isMember()){
+        return Math.max(0, Number(state.me.total_spent) || 0);
+      }
+    }catch(e){}
     const sum = state.series.reduce((a, s) => a + (Number(s.rev) || 0), 0);
     let saved = 0;
     try { saved = Number(localStorage.getItem(EVO_KEY) || 0) || 0; } catch (e){}
@@ -6766,7 +6805,7 @@ body{background:#05050A;color:var(--tx)}
     }
   }
 
-  /* 스타팅 선택 — 고른 스타팅을 브라우저에 남겨 새로고침해도 유지 */
+  /* 스타팅 선택 — 브라우저에 남기고, 정식 회원은 계정(DB)에도 저장 */
   function evoSetStarter(key){
     if (!EVO_STARTERS[key]) return;
     evoStarter = key;
@@ -6774,6 +6813,19 @@ body{background:#05050A;color:var(--tx)}
     evoWarmup();
     renderEvo();
     evoPop();
+    try{
+      if (LIVE && state.me && window.CHII_BACKEND && CHII_BACKEND.isMember && CHII_BACKEND.isMember()){
+        const dbKey = EVO_DB_OF[key] || key;
+        const prev = state.me.starter_id;
+        state.me.starter_id = dbKey;
+        CHII_BACKEND.setStarter(dbKey).then(res => {
+          if (res && res.ok) toast("스타팅 저장 · " + EVO_STARTERS[key].tab);
+        }).catch(err => {
+          state.me.starter_id = prev;
+          toast("스타팅 저장 실패 · " + (err.message || "잠시 후 다시 시도해 주세요"));
+        });
+      }
+    }catch(e){}
   }
 
   (function wireEvo(){
@@ -6876,6 +6928,12 @@ body{background:#05050A;color:var(--tx)}
       const lastItem = res.last ? liveItem(res.last, s.id, b.no) : null;
 
       state.points = res.points;
+      /* 서버가 계산한 웰컴 할인·누적 구매액을 화면 상태에 반영 */
+      if (state.me){
+        if (typeof res.total_spent === "number") state.me.total_spent = Number(res.total_spent);
+        if (typeof res.welcome_discount_used === "boolean") state.me.welcome_discount_used = res.welcome_discount_used;
+      }
+      if (res.welcome_discount_applied) toast("🎉 첫 판 50% 웰컴 할인 " + won(res.discount) + "P 적용!");
       evoAddSpend(res.cost);
       (res.prizes || []).forEach(p => {
         const g = b.grades.find(x => x.k === p.grade);
@@ -6896,8 +6954,10 @@ body{background:#05050A;color:var(--tx)}
 
       const best = lastItem || items.slice().sort((x, y) => gradeRank(y.g) - gradeRank(x.g))[0];
       view.grade = best.g;
-      ledgerAdd("draw", s.def.short + " " + n + "회 뽑기", -cost);
+      ledgerAdd("draw", s.def.short + " " + n + "회 뽑기", -(res.cost != null ? res.cost : cost));
       feedAdd(items, lastItem);
+      try { renderInfo(); } catch (e){}
+      try { renderMy(); } catch (e){}
       openTear(n, items, lastItem, !!lastItem, mode);
     }).catch(err => {
       view.busy = false;
@@ -7575,21 +7635,28 @@ body{background:#05050A;color:var(--tx)}
   }
 
   /* ── 주문 확인 ── */
-  const ord = { ok: false, mode: "1", use: true, qty: 0, total: 0 };
+  const ord = { ok: false, mode: "1", use: true, qty: 0, total: 0, gross: 0, discount: 0 };
 
   function ordPaint(){
     const use = ord.use;
     $("#ordUse").classList.toggle("on", use);
     $("#ordUse").setAttribute("aria-checked", use ? "true" : "false");
     $("#ordUseVal").textContent = (use ? "-" : "") + won(ord.total) + "P";
+    const dr = $("#ordDiscRow"), dv = $("#ordDisc");
+    if (dr && dv){
+      dr.hidden = !(ord.discount > 0);
+      dv.textContent = "-" + won(ord.discount) + "P";
+    }
     const bt = $("#ordTotal");
     bt.textContent = won(ord.total) + "P";
     const lack = state.points < ord.total;
     bt.classList.toggle("lack", lack);
     $("#ordLack").textContent = lack
       ? "보유 포인트가 " + won(ord.total - state.points) + "P 부족해요 · 확인하면 충전 안내가 떠요"
-      : (use ? "보유 포인트에서 차감됩니다 · 남은 포인트 " + won(state.points - ord.total) + "P"
-             : "포인트는 그대로 두고 결제합니다 (데모)");
+      : (ord.discount > 0
+          ? "🎉 첫 판 50% 할인 적용! 정가 " + won(ord.gross) + "P → " + won(ord.total) + "P · 남은 포인트 " + won(state.points - ord.total) + "P"
+          : (use ? "보유 포인트에서 차감됩니다 · 남은 포인트 " + won(state.points - ord.total) + "P"
+                 : "포인트는 그대로 두고 결제합니다 (데모)"));
     $("#ordConfirm").disabled = !$("#ordAgree").checked;
   }
 
@@ -7597,7 +7664,10 @@ body{background:#05050A;color:var(--tx)}
     const s = ser(), b = box(), d = s.def;
     const qty = mode === "all" ? Math.max(0, remainOf(b)) : Number(mode);
     if (!qty) return;
-    ord.mode = mode; ord.qty = qty; ord.use = true; ord.total = d.price * qty;
+    ord.mode = mode; ord.qty = qty; ord.use = true;
+    ord.gross = d.price * qty;
+    ord.discount = welcomeDiscount(d.price);
+    ord.total = ord.gross - ord.discount;
     $("#ordThumb").innerHTML = seriesArt(s);
     $("#ordSeries").textContent = d.name;
     $("#ordPrice").textContent = "1회 P " + won(d.price);
@@ -7850,7 +7920,10 @@ body{background:#05050A;color:var(--tx)}
     btn.hidden = !LIVE;
     if (!LIVE) return;
     const me = state.me;
+    const guest = !!(window.CHII_BACKEND && CHII_BACKEND.currentUser() && CHII_BACKEND.isGuest && CHII_BACKEND.isGuest());
     $("#authName").textContent = me ? (me.nickname || "내 계정") : "로그인";
+    btn.classList.toggle("guest", !!me && guest);
+    if (typeof paintAuthSheet === "function") paintAuthSheet();
   }
 
   function applyCatalog(list){
@@ -7897,6 +7970,14 @@ body{background:#05050A;color:var(--tx)}
       if (me.nickname) state.profile.nick = me.nickname;
       if (me.phone) state.profile.phone = me.phone;
     }
+    /* 스타팅은 계정에 저장된 값이 우선 (다른 기기에서도 같은 캐릭터) */
+    if (me && me.starter_id){
+      const sk = EVO_KEY_OF_DB[me.starter_id];
+      if (sk && EVO_STARTERS[sk]){
+        evoStarter = sk;
+        try { localStorage.setItem(STARTER_KEY, sk); } catch (e){}
+      }
+    }
 
     if (CHII_BACKEND.currentUser()){
       const [sh, sp] = await Promise.all([CHII_BACKEND.shelf(), CHII_BACKEND.shipments()]);
@@ -7920,21 +8001,111 @@ body{background:#05050A;color:var(--tx)}
     const email = $("#authEmail").value.trim();
     const pw = $("#authPw").value;
     const nick = $("#authNick").value.trim();
+    const phoneEl = $("#authPhone");
+    const phone = phoneEl ? phoneEl.value.trim() : "";
     const msg = $("#authMsg");
+    const signup = kind === "signup";
+    const guest = !!(window.CHII_BACKEND.isGuest && CHII_BACKEND.isGuest());
+
+    if (kind !== "guest"){
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){
+        msg.textContent = "이메일 주소를 정확히 입력해 주세요.";
+        $("#authEmail").focus(); return;
+      }
+      if (!pw || pw.length < 6){
+        msg.textContent = "비밀번호는 6자 이상이어야 해요.";
+        $("#authPw").focus(); return;
+      }
+    }
+    if (signup){
+      if (nick.length < 2){
+        msg.textContent = "닉네임은 2자 이상으로 정해 주세요.";
+        $("#authNick").focus(); return;
+      }
+      const digits = phone.replace(/[^0-9]/g, "");
+      if (digits && digits.length < 10){
+        msg.textContent = "연락처를 정확히 입력해 주세요. (예: 010-1234-5678)";
+        if (phoneEl) phoneEl.focus(); return;
+      }
+    }
+
     msg.textContent = "처리 중…";
     try {
       if (kind === "guest") await CHII_BACKEND.signInAnonymous();
-      else if (kind === "signup") await CHII_BACKEND.signUp(email, pw, nick);
-      else await CHII_BACKEND.signIn(email, pw);
+      else if (signup){
+        /* 게스트 체험이면 같은 계정에 이메일·비밀번호를 붙여 정식 회원으로 전환 (포인트·진열장 유지) */
+        if (guest) await CHII_BACKEND.convertGuest(email, pw, nick, phone);
+        else await CHII_BACKEND.signUp(email, pw, nick, phone);
+      } else await CHII_BACKEND.signIn(email, pw);
       await loadLiveData();
       closeOverlay("authSheet");
       msg.textContent = "";
-      toast("로그인했어요");
-      /* 게스트로 들어간 직후 → 회원가입 50% 할인 이벤트 팝업 */
-      if (kind === "guest" && typeof wlpMaybe === "function") wlpMaybe(560);
+      if (kind === "guest"){
+        toast("게스트로 입장했어요 · 회원가입하면 첫 판 50% 할인!");
+        if (typeof wlpMaybe === "function") wlpMaybe(560);
+      } else if (signup){
+        if (typeof wlpHide === "function") wlpHide("close");
+        toast(guest ? "정식 회원 전환 완료! 🎉 첫 판 50% 할인이 켜졌어요" : "가입 완료! 🎉 첫 판 50% 할인이 켜졌어요");
+      } else {
+        toast("로그인했어요");
+        if (typeof wlpHide === "function") wlpHide("close");
+      }
+      paintAuthSheet();
+      try { renderInfo(); } catch (e){}
+      try { renderMy(); } catch (e){}
     } catch (e){
-      msg.textContent = e.message || "실패했어요";
+      msg.textContent = authErrMsg(e);
     }
+  }
+
+  /* 인증 오류 → 한국어 안내 */
+  const AUTH_ERR = [
+    [/invalid login credentials/i, "이메일 또는 비밀번호가 맞지 않아요."],
+    [/email not confirmed/i, "이메일 인증이 아직 안 됐어요. 메일함의 인증 링크를 눌러 주세요."],
+    [/already registered|already been registered/i, "이미 가입된 이메일이에요. 로그인해 주세요."],
+    [/password should be at least|password is too short|weak password/i, "비밀번호는 6자 이상으로 정해 주세요."],
+    [/invalid format|invalid email/i, "이메일 형식이 올바르지 않아요."],
+    [/signups not allowed|signup is disabled/i, "지금은 신규 가입을 받지 않고 있어요."],
+    [/rate limit|too many|only request this after/i, "요청이 너무 잦아요. 잠시 후 다시 시도해 주세요."],
+    [/email address.*not authorized|domain/i, "이 이메일로는 가입할 수 없어요. 다른 이메일을 써 주세요."],
+    [/for security purposes/i, "보안을 위해 잠시 후 다시 시도해 주세요."]
+  ];
+  function authErrMsg(e){
+    const raw = (e && (e.message || e.error_description || "")) || "";
+    for (let i = 0; i < AUTH_ERR.length; i++){
+      if (AUTH_ERR[i][0].test(raw)) return AUTH_ERR[i][1];
+    }
+    return raw || "실패했어요. 잠시 후 다시 시도해 주세요.";
+  }
+
+  /* 로그인 시트 — 게스트면 '전환 안내'를 보여준다 */
+  function paintAuthSheet(){
+    const conv = $("#authConv");
+    if (!conv) return;
+    let guest = false;
+    try { guest = !!(LIVE && window.CHII_BACKEND && CHII_BACKEND.currentUser() && CHII_BACKEND.isGuest()); } catch (e){}
+    conv.hidden = !guest;
+    const sub = $("#authHeroSub");
+    if (sub) sub.innerHTML = guest
+      ? "지금 게스트예요 · 가입하면 <b>포인트·진열장 그대로</b> 첫 판 50% 할인!"
+      : "이메일로 가입하면 첫 유료 뽑기 <b>1판이 반값</b>! (게스트는 할인 대상이 아니에요)";
+    const up = $("#authSignUp");
+    if (up) up.textContent = guest ? "회원으로 전환" : "회원가입";
+  }
+
+  /* ── 첫 판 50% 웰컴 할인 ──
+     서버 draw_kuji() 와 같은 규칙: 정식 회원(is_anonymous=false) + welcome_discount_used=false */
+  function isMemberNow(){
+    try { return !!(LIVE && window.CHII_BACKEND && CHII_BACKEND.isMember && CHII_BACKEND.isMember()); } catch (e){ return false; }
+  }
+  function welcomeDiscount(price){
+    if (!isMemberNow()) return 0;
+    if (!state.me || state.me.welcome_discount_used) return 0;
+    return Math.floor(Number(price || 0) / 2);
+  }
+  function priceAfterWelcome(price, n){
+    const q = Number(n) || 0;
+    return Number(price) * q - (q > 0 ? welcomeDiscount(price) : 0);
   }
 
   async function bootLive(){
@@ -8016,6 +8187,14 @@ body{background:#05050A;color:var(--tx)}
   $("#authSignIn").addEventListener("click", () => authAction("signin"));
   $("#authSignUp").addEventListener("click", () => authAction("signup"));
   $("#authGuest").addEventListener("click", () => authAction("guest"));
+
+  /* 마이페이지 — 게스트에게 정식 회원 가입(전환) 유도 */
+  const myJoinBtn = $("#myJoin");
+  if (myJoinBtn) myJoinBtn.addEventListener("click", () => {
+    paintAuthSheet();
+    openOverlay("authSheet");
+    toast("이메일·비밀번호만 정하면 지금 포인트·진열장 그대로 회원이 돼요");
+  });
   $("#authBtn").addEventListener("click", () => {
     if (!LIVE) return;
     if (CHII_BACKEND.currentUser()){
@@ -8031,6 +8210,7 @@ body{background:#05050A;color:var(--tx)}
         });
       });
     } else {
+      paintAuthSheet();
       openOverlay("authSheet");
     }
   });
@@ -8242,6 +8422,23 @@ body{background:#05050A;color:var(--tx)}
     $("#myNick").textContent = state.profile.nick;
     $("#myPhone").textContent = maskPhone(state.profile.phone);
 
+    /* 정식 회원 / 게스트 상태 + 회원가입 유도 */
+    const joinBtn = $("#myJoin"), memberRow = $("#myMember");
+    if (joinBtn && memberRow){
+      let guest = false, member = false;
+      try{
+        guest = !!(LIVE && window.CHII_BACKEND && CHII_BACKEND.currentUser() && CHII_BACKEND.isGuest());
+        member = !!(LIVE && window.CHII_BACKEND && CHII_BACKEND.isMember && CHII_BACKEND.isMember());
+      }catch(e){}
+      memberRow.hidden = !member;
+      joinBtn.hidden = !guest;
+      if (member){
+        const fresh = state.me && state.me.welcome_discount_used === false;
+        memberRow.innerHTML = "✅ 정식 회원 · 누적 구매 <b>" + won(evoSpent()) + "원</b>"
+          + (fresh ? " · 🎁 첫 판 50% 할인 대기" : "");
+      }
+    }
+
     renderEvo();   /* 5단계 진화 카드 · 누적 구매액 기준 */
     const coin = $("#myCoin");
     if (coin) coin.innerHTML = won(P) + "<s>P</s>";
@@ -8447,6 +8644,14 @@ body{background:#05050A;color:var(--tx)}
           renderMy();
           closeOverlay("infoSheet");
           toast("닉네임을 바꿨어요 · " + v);
+          try{
+            if (LIVE && state.me && window.CHII_BACKEND && CHII_BACKEND.updateProfile){
+              state.me.nickname = v;
+              CHII_BACKEND.updateProfile({ nickname: v }).catch(() => {
+                toast("닉네임을 서버에 저장하지 못했어요 · 잠시 후 다시 시도해 주세요");
+              });
+            }
+          }catch(e){}
         });
       });
   }

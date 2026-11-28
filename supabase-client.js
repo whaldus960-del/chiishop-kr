@@ -11,7 +11,10 @@
  * 쓰는 법
  *   CHII_BACKEND.enabled        실DB 모드인가
  *   await CHII_BACKEND.init()   세션 복원
- *   CHII_BACKEND.signIn / signUp / signInAnonymous / signOut / currentUser
+ *   CHII_BACKEND.signIn / signUp / convertGuest / signInAnonymous / signOut / currentUser
+ *   CHII_BACKEND.isGuest() / isMember()
+ *   await CHII_BACKEND.updateProfile({nickname, phone})  내 닉네임·연락처 저장
+ *   await CHII_BACKEND.setStarter('poko'|'leo'|'pet')   스타팅 DB 저장
  *   await CHII_BACKEND.catalog()          시리즈·박스·등급 (index.html 의 state.series 모양)
  *   await CHII_BACKEND.draw(boxId, n)     원자적 뽑기 RPC
  *   await CHII_BACKEND.shelf()            내 진열장
@@ -73,6 +76,17 @@
 
   function currentUser() {
     return session && session.user ? session.user : null;
+  }
+
+  /* 익명(게스트) 세션인가 — app_metadata.provider === 'anonymous' 또는 is_anonymous */
+  function isGuest() {
+    var u = currentUser();
+    if (!u) return false;
+    return !!(u.is_anonymous || u.isAnonymous ||
+              (u.app_metadata && u.app_metadata.provider === "anonymous"));
+  }
+  function isMember() {
+    return !!currentUser() && !isGuest();
   }
 
   /* ---------------------------------------------------------------- HTTP */
@@ -160,14 +174,57 @@
       });
   }
 
-  function signUp(email, password, nickname) {
+  function signUp(email, password, nickname, phone) {
     return authPost("/auth/v1/signup", {
       email: email,
       password: password,
-      data: { nickname: nickname || "" }
+      data: { nickname: nickname || "", phone: phone || "" }
     }).then(function (data) {
       if (data && data.access_token) { saveAuth(data); return currentUser(); }
       throw ApiError("가입 확인 메일을 보냈어요. 메일의 링크를 누른 뒤 로그인해 주세요.", "email_confirm", 200);
+    });
+  }
+
+  /* 게스트(익명) 계정 → 정식 이메일 회원으로 전환.
+     같은 user.id 를 그대로 쓰기 때문에 포인트·진열장·뽑기 기록이 유지된다. */
+  function convertGuest(email, password, nickname, phone) {
+    if (!session || !session.access_token) {
+      return Promise.reject(ApiError("게스트 세션이 없어요. 새로고침 후 다시 시도해 주세요.", "no_session", 401));
+    }
+    return fetch(URL_BASE + "/auth/v1/user", {
+      method: "PUT",
+      headers: headers(),
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        data: { nickname: nickname || "", phone: phone || "" }
+      })
+    }).then(function (res) {
+      return res.text().then(function (text) {
+        var data = null;
+        if (text) { try { data = JSON.parse(text); } catch (e) { data = text; } }
+        if (!res.ok) throw parseError(res, data);
+        return data;
+      });
+    }).then(function (data) {
+      if (data && data.id) {
+        if (session) {
+          session.user = Object.assign({}, session.user || {}, data);
+          session.expires_at = 0;          /* 토큰 claim(is_anonymous)을 새로 받는다 */
+          writeStore(session);
+        }
+        return refreshIfNeeded().catch(function () { return session; })
+          .then(function () {
+            /* 전환된 계정의 프로필(닉네임·연락처)도 맞춰 둔다 */
+            var body = {};
+            if (nickname) body.nickname = nickname;
+            if (phone) body.phone = phone;
+            if (!Object.keys(body).length) return null;
+            return updateProfile(body).catch(function () { return null; });
+          })
+          .then(function () { emit(); return currentUser(); });
+      }
+      throw ApiError("회원 전환에 실패했어요.", "convert_failed", 200);
     });
   }
 
@@ -300,8 +357,26 @@
   function profile() {
     var u = currentUser();
     if (!u) return Promise.resolve(null);
-    return request("/rest/v1/profiles?select=id,nickname,points,is_admin&id=eq." + u.id)
+    return request("/rest/v1/profiles?select=id,nickname,points,is_admin," +
+      "total_spent,starter_id,welcome_discount_used,phone&id=eq." + u.id)
       .then(function (rows) { return rows && rows[0] ? rows[0] : null; });
+  }
+
+  function updateProfile(patch) {
+    var u = currentUser();
+    if (!u) return Promise.reject(ApiError("로그인이 필요합니다.", "28000", 401));
+    var body = {};
+    if (patch && typeof patch.nickname === "string") body.nickname = patch.nickname;
+    if (patch && typeof patch.phone === "string") body.phone = patch.phone;
+    if (!Object.keys(body).length) return Promise.resolve(null);
+    return request("/rest/v1/profiles?id=eq." + u.id, { method: "PATCH", body: body });
+  }
+
+  function setStarter(key) {
+    return request("/rest/v1/rpc/set_starter", {
+      method: "POST",
+      body: { p_starter: key }
+    });
   }
 
   function refreshBox(boxId) {
@@ -410,9 +485,14 @@
     init: init,
     signIn: signIn,
     signUp: signUp,
+    convertGuest: convertGuest,
     signInAnonymous: signInAnonymous,
     signOut: signOut,
     currentUser: currentUser,
+    isGuest: isGuest,
+    isMember: isMember,
+    updateProfile: updateProfile,
+    setStarter: setStarter,
     refresh: function () { return refreshIfNeeded(); },
     onAuth: function (fn) { listeners.push(fn); return function () { listeners = listeners.filter(function (x) { return x !== fn; }); }; },
     catalog: catalog,
