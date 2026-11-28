@@ -1613,12 +1613,18 @@ body{
 .wlp-top{position:relative;padding:15px 16px 40px;color:#fff8ee;overflow:hidden;
   background:linear-gradient(135deg,#f0684b 0%,#ef7f56 46%,#ffc24b 100%)}
 .wlp-top::after{content:"";position:absolute;left:-10px;right:-10px;bottom:-9px;height:16px;
-  background:radial-gradient(circle at 8px 0,transparent 7px,#fffdf8 7.5px) 0 0/16px 16px repeat-x}
-.wlp-dots{position:absolute;inset:0;opacity:.5;pointer-events:none;
-  background-image:radial-gradient(rgba(255,255,255,.65) 1.2px,transparent 1.2px);background-size:13px 13px}
+  background:radial-gradient(circle at 8px 0,transparent 7px,#1A1428 7.5px) 0 0/16px 16px repeat-x}
+.wlp-dots{position:absolute;inset:0;opacity:.22;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.55) 1.2px,transparent 1.2px);background-size:13px 13px}
 .wlp-badge{position:relative;display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;
-  background:#fffdf8;color:#c2410f;font-size:9.6px;font-weight:900;letter-spacing:-.2px;
-  box-shadow:0 2px 0 rgba(120,40,10,.22)}
+  background:rgba(255,255,255,.08);color:#FFD9CD;border:1px solid rgba(255,140,110,.45);
+  font-size:9.6px;font-weight:900;letter-spacing:-.2px;box-shadow:0 0 16px -6px rgba(255,90,54,.9)}
+.wlp-cta{border:0;outline:none;
+  background:linear-gradient(180deg,#FF8A62,#F0431F);
+  box-shadow:0 8px 20px -10px rgba(255,90,54,1),inset 0 1px 0 rgba(255,255,255,.4)}
+.wlp-cta:focus-visible{outline:2px solid rgba(255,255,255,.5);outline-offset:2px}
+.wlp:focus{outline:none}
+.wlp-cond{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#B7AEC6}
 .wlp-ttl{position:relative;margin:9px 0 0;font-size:19px;font-weight:900;line-height:1.26;letter-spacing:-.9px;
   text-shadow:0 2px 0 rgba(120,40,10,.28)}
 .wlp-ttl b{color:#fff;font-size:25px;letter-spacing:-1px;
@@ -1751,41 +1757,39 @@ img.gimg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-sha
 .pi-info dd{margin:0;font-size:11px;font-weight:900;color:#4b2b3f;text-align:right}
 .pi-info dd.p{font-family:ui-monospace,Menlo,monospace;color:#e0357f}
 
-/* ── 주문 확인 (영수증) ── */
-#orderSheet .receipt{background:
-  linear-gradient(180deg,#fffdf7 0 44px,#fffaf0 44px 100%);
-  border-radius:18px 18px 0 0}
+/* ── 주문 확인 (영수증 · 다크) ── */
+#orderSheet .receipt{background:linear-gradient(180deg,#1A1428 0 44px,#141020 44px 100%);border-radius:18px 18px 0 0}
 #orderSheet .receipt::before{content:"";position:absolute;left:0;right:0;top:0;height:44px;border-radius:18px 18px 0 0;
-  background:repeating-linear-gradient(114deg,rgba(240,104,75,.14) 0 14px,rgba(255,194,75,.16) 14px 28px,rgba(56,179,148,.14) 28px 42px)}
-.rc-head{display:flex;align-items:center;gap:10px;padding:2px 0 12px;border-bottom:1.6px dashed rgba(184,132,79,.55)}
+  background:repeating-linear-gradient(114deg,rgba(255,90,54,.18) 0 14px,rgba(255,194,74,.14) 14px 28px,rgba(169,139,255,.14) 28px 42px)}
+.rc-head{display:flex;align-items:center;gap:10px;padding:2px 0 12px;border-bottom:1.6px dashed rgba(255,255,255,.12)}
 .rc-thumb{flex:none;width:54px;height:54px;border-radius:12px;overflow:hidden;display:grid;place-items:center;
-  background:radial-gradient(circle at 50% 35%,#fffdf7,#f2e2c9);box-shadow:inset 0 0 0 1.4px rgba(184,132,79,.4)}
+  background:radial-gradient(circle at 50% 35%,#241E33,#191424);box-shadow:inset 0 0 0 1px rgba(255,255,255,.10)}
 .rc-thumb img{width:100%;height:100%;object-fit:cover;padding:0}
 .rc-thumb svg{width:92%;height:92%}
 .rc-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
-.rc-meta b{font-size:13px;font-weight:900;color:#3b1730;letter-spacing:-.3px}
-.rc-meta em{font-style:normal;font-size:10px;font-weight:800;color:#a9886a}
-.rc-qty{flex:none;font-family:ui-monospace,Menlo,monospace;font-size:15px;font-weight:900;color:#e0357f}
+.rc-meta b{font-size:13px;font-weight:900;color:#F5F1F9;letter-spacing:-.3px}
+.rc-meta em{font-style:normal;font-size:10px;font-weight:800;color:#8E869C}
+.rc-qty{flex:none;font-family:ui-monospace,Menlo,monospace;font-size:15px;font-weight:900;color:#FFB09A}
 .rc-rows{display:grid;gap:7px;padding:12px 0}
-.rc-rows>div{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11.5px;color:#6b4a5c}
-.rc-rows b{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#3b1730}
+.rc-rows>div{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11.5px;color:#A49CB0}
+.rc-rows b{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#F5F1F9}
 .rc-use b{display:flex;align-items:center;gap:7px}
-.switch{width:44px;height:25px;border-radius:999px;border:1.6px solid rgba(184,132,79,.55);background:#e9dcc8;
+.switch{width:44px;height:25px;border-radius:999px;border:1.6px solid rgba(255,255,255,.14);background:#241E33;
   padding:0;cursor:pointer;position:relative;transition:background .18s}
-.switch i{position:absolute;left:2px;top:1.5px;width:17px;height:17px;border-radius:50%;background:#fffdf7;
-  box-shadow:0 2px 5px rgba(90,60,30,.3);transition:transform .18s}
-.switch.on{background:#38b394;border-color:#2b8f77}
-.switch.on i{transform:translateX(18px)}
+.switch i{position:absolute;left:2px;top:1.5px;width:17px;height:17px;border-radius:50%;background:#DCD4EA;
+  box-shadow:0 2px 5px rgba(0,0,0,.4);transition:transform .18s}
+.switch.on{background:linear-gradient(180deg,#E6FF9E,#B9F53E);border-color:#C9FF57}
+.switch.on i{transform:translateX(18px);background:#16200A}
 .rc-total{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;border-radius:12px;
-  background:#3b1730;color:#fff7ec}
-.rc-total span{font-size:11px;font-weight:800;letter-spacing:.4px;color:#e8c9d8}
-.rc-total b{font-family:ui-monospace,Menlo,monospace;font-size:17px;font-weight:900;color:#ffd75e}
-.rc-total b.lack{color:#ff8f6b}
-.rc-lack{margin:7px 2px 0;font-size:9.6px;font-weight:800;color:#a9886a;letter-spacing:-.1px}
+  background:linear-gradient(180deg,#2A1420,#1E0F18);color:#FFF7EC;border:1px solid rgba(255,90,54,.35)}
+.rc-total span{font-size:11px;font-weight:800;letter-spacing:.4px;color:#FFD9CD}
+.rc-total b{font-family:ui-monospace,Menlo,monospace;font-size:17px;font-weight:900;color:#FFD98A}
+.rc-total b.lack{color:#FF8E6E}
+.rc-lack{margin:7px 2px 0;font-size:9.6px;font-weight:800;color:#8E869C;letter-spacing:-.1px}
 .rc-agree{display:flex;align-items:center;gap:8px;margin-top:11px;padding:10px 11px;border-radius:11px;
-  background:rgba(56,179,148,.09);box-shadow:inset 0 0 0 1.3px rgba(56,179,148,.4);
-  font-size:10.5px;font-weight:800;color:#2f6b58;cursor:pointer}
-.rc-agree input{width:16px;height:16px;accent-color:#38b394;margin:0}
+  background:rgba(201,255,87,.06);box-shadow:inset 0 0 0 1px rgba(201,255,87,.22);
+  font-size:10.5px;font-weight:800;color:#DFFF9C;cursor:pointer}
+.rc-agree input{width:16px;height:16px;accent-color:#C9FF57;margin:0}
 #ordConfirm:disabled{opacity:.5}
 
 /* ── 진열장 탭 · 선택 · 액션 ── */
@@ -2500,6 +2504,740 @@ body{background:#0C0E14}
 }
 .tabbar .tbadge{background:var(--v9-coral);color:#fff;border:2px solid #1A1D25}
 /* @@POKO-V9-HOME-CSS-END@@ */
+/* @@POKO-ARCADE-BEGIN@@ */
+/* ============================================================
+   POKO KUJI · DARK ARCADE 통일형 (ARCADE V2)
+   홈 · 진열장 · 마이페이지를 하나의 다크 아케이드 팔레트로 통일하고,
+   상세·모달·푸터도 같은 토큰 위에서 어우러지게 한다.
+   기능·정보 구조(실DB·박스 교체·x1/x5/x10/ALL·티켓 뜯기·출고·출석)는 그대로.
+   ============================================================ */
+:root{
+  --bg:#0E0E14; --bg-d:#0A0A10; --pnl:#16121F; --pnl2:#1E1930; --ln:#2B2540;
+  --coral:#FF5A36; --coral2:#FF8E6E; --gold2:#FFC24A; --ppl:#A98BFF; --cy:#5EE0FF;
+  --lime:#C9FF57; --tx:#F5F1F9; --mut:#8E869C; --mut2:#6C647A;
+  /* v9 홈 레이어 토큰 재매핑 */
+  --v9-bg:#0E0E14; --v9-ink:#F5F1F9; --v9-ink2:#B7AEC6; --v9-ink3:#8E869C;
+  --v9-line:rgba(255,255,255,.09); --v9-coral:#FF5A36; --v9-coral2:#FF8E6E;
+  --v9-char:#171320; --v9-char2:#0F0C16; --v9-gold:#FFC24A;
+  /* SIGNATURE(크림) 토큰도 다크로 */
+  --paper:#0E0E14; --paper2:#0B0810; --card:#16121F; --ink:#F5F1F9; --ink2:#B7AEC6;
+  --ink3:#8E869C; --line:#2B2540; --line2:#241E33; --coral-d:#FF7A58;
+  --plum:#16121F; --plum2:#0E0E14; --mint:#5EE0FF; --butter:#FFC24A;
+  --gold:#FFC24A; --sub:#8E869C; --mint-d:#9BF0FF; --coral-d:#FF7A58;
+}
+body{background:#05050A;color:var(--tx)}
+.app{
+  background:#0E0E14;color:var(--tx);
+  background-image:
+    radial-gradient(70% 30% at 16% -4%,rgba(255,90,54,.20),rgba(255,90,54,0) 62%),
+    radial-gradient(60% 26% at 98% 16%,rgba(169,139,255,.14),rgba(169,139,255,0) 64%),
+    radial-gradient(90% 34% at 50% 104%,rgba(169,139,255,.12),rgba(169,139,255,0) 70%);
+  background-attachment:fixed;
+}
+.detail,.subscreen,.myscreen{background:transparent;color:var(--tx)}
+
+/* ================= 공통: 섹션 헤드 ================= */
+.sec-head h2,.sh h2{color:#fff}
+.sec-head h2 b{color:var(--coral)}
+.sec-head span{color:var(--mut)}
+
+/* ================= ① HOME 헤더 (슬림 알약) ================= */
+.home-head{padding:8px 12px 9px;background:transparent;box-shadow:none;border-radius:0}
+.home-head .hh-fx{display:none}
+.hh-bar{gap:8px}
+.home-head .brand{
+  flex-direction:row;align-items:center;gap:0;padding:3px 11px 3px 4px;border-radius:999px;
+  background:linear-gradient(180deg,#221B30,#15111F);border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 0 20px -8px rgba(255,90,54,.9),inset 0 1px 0 rgba(255,255,255,.09)
+}
+.home-head .logo{font-size:12.5px;font-weight:900;letter-spacing:-.4px;color:#fff;display:flex;align-items:center;gap:7px}
+.home-head .logo::before{
+  content:"";width:20px;height:20px;border:0;border-radius:50%;transform:none;
+  background:radial-gradient(circle at 50% 38%,#FF9E7E,#FF4A22 68%);
+  box-shadow:0 0 10px rgba(255,90,54,.85),inset 0 1px 0 rgba(255,255,255,.5)
+}
+.home-head .logo-sub{display:none}
+.head-actions{gap:5px}
+.acct{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#DCD4EA;font-size:9.5px;padding:5px 9px;border-radius:999px}
+.acct b{color:#fff}
+.pts{background:linear-gradient(180deg,#2A1A22,#1A1220);border:1px solid rgba(255,90,54,.45);border-radius:999px;
+  padding:3px 9px 3px 3px;box-shadow:0 0 16px -6px rgba(255,90,54,.95);font-size:10.5px;color:#fff}
+.pts i{width:16px;height:16px;font-size:8.5px;background:linear-gradient(180deg,#FFD98A,#FFB020);color:#2A0F05;box-shadow:none}
+.pts span{color:var(--coral2);opacity:1}
+.hicon,.hcart{width:31px;height:31px;border-radius:10px;background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.10);color:#CFC7DA}
+.hicon svg,.hcart svg{width:16px;height:16px;stroke:#CFC7DA}
+.hicon.att.done{background:rgba(201,255,87,.10);border-color:rgba(201,255,87,.4);color:var(--lime)}
+.hicon .hdot{background:var(--coral);border-color:#0E0E14}
+.hcart b{background:var(--coral);color:#160A05;border-color:#0E0E14}
+
+/* ================= ① 배너 캐러셀 (다크 아케이드) ================= */
+.hcar{
+  margin:6px 12px 0;border-radius:18px;overflow:hidden;background:#141020;
+  border:1px solid rgba(255,90,54,.30);
+  box-shadow:0 0 28px -14px rgba(255,90,54,.95),inset 0 1px 0 rgba(255,255,255,.06)
+}
+.hc-view{height:156px}
+.hcar .hc-slide{
+  padding:12px 14px 30px;gap:9px;align-items:center;overflow:hidden;color:#F5F1F9;
+  background:linear-gradient(118deg,#1B1220 0%,#120E18 46%,#191227 100%)
+}
+.hcar .hc-slide.hs-dark{background:linear-gradient(118deg,#1B1220 0%,#120E18 46%,#191227 100%);color:#F5F1F9}
+.hcar .hc-slide.hs-coral{background:linear-gradient(125deg,#2A1020 0%,#1A0C16 52%,#2A1526 100%);color:#F5F1F9}
+.hcar .hc-slide.hs-light{background:linear-gradient(125deg,#171326 0%,#110E1A 55%,#1B1330 100%);color:#F5F1F9;box-shadow:none}
+.hcar .hc-slide::before{
+  opacity:.5;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1.2px);background-size:12px 12px;
+  -webkit-mask-image:linear-gradient(205deg,#000 0%,transparent 60%);mask-image:linear-gradient(205deg,#000 0%,transparent 60%)
+}
+.hcar .hc-slide.hs-coral::after{
+  content:"";position:absolute;right:-38px;top:-50px;width:150px;height:150px;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,90,54,.40),rgba(255,90,54,0) 68%)
+}
+.hs-kicker{background:rgba(255,90,54,.16);border:1px solid rgba(255,140,110,.5);color:#FFD9CD;
+  font-size:8px;letter-spacing:1.6px;padding:2.5px 7px;box-shadow:0 0 14px -5px rgba(255,90,54,.9)}
+.hs-light .hs-kicker,.hs-coral .hs-kicker{background:rgba(255,90,54,.16);border-color:rgba(255,140,110,.5);color:#FFD9CD}
+.hs-title{margin:6px 0 0;font-size:18.5px;line-height:1.16;letter-spacing:-.9px;color:#FFF7F3}
+.hs-title b{color:var(--coral);text-shadow:0 0 18px rgba(255,90,54,.85)}
+.hs-light .hs-title b,.hs-coral .hs-title b{color:var(--coral);text-decoration:none;text-shadow:0 0 18px rgba(255,90,54,.85)}
+.hs-list{margin:6px 0 0;gap:2px}
+.hs-list li{font-size:8.6px;line-height:1.34;color:#B7AEC6}
+.hs-list li::before{background:var(--coral);top:3.5px;width:3px;height:3px}
+.hs-list li b{color:#fff}
+.hs-light .hs-list li,.hs-coral .hs-list li{color:#B7AEC6}
+.hs-light .hs-list li b,.hs-coral .hs-list li b{color:#fff}
+.hs-note{margin:6px 0 0;padding:3.5px 7px;font-size:8.4px;border-radius:7px;
+  background:rgba(255,255,255,.07);border:0;border-left:2px solid var(--coral);color:#FFF2EC}
+.hs-light .hs-note,.hs-coral .hs-note{background:rgba(255,255,255,.07);color:#FFF2EC;border-left-color:var(--lime)}
+.hs-light .hs-note b,.hs-coral .hs-note b,.hs-note b{color:var(--lime);text-decoration:none}
+.hs-big{font-size:26px;color:#fff;margin-top:2px;text-shadow:0 0 22px rgba(255,90,54,.8)}
+.hs-big em{font-size:9.5px;color:#FFB09A}
+.hs-stamps{margin-top:5px}
+.hs-stamps i{width:13px;height:13px;font-size:6px;border-color:rgba(255,90,54,.5);color:#FFB09A;background:rgba(255,90,54,.10)}
+.hs-stamps i.on{border-color:var(--coral);color:#fff;background:rgba(255,90,54,.35)}
+.hs-art{width:82px;filter:drop-shadow(0 0 18px rgba(255,90,54,.55))}
+.hs-mail{color:#FFD9CD;font-size:8px}
+.hs-chips span{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:#DCD4EA}
+.hc-nav{background:rgba(10,8,16,.62);border:1px solid rgba(255,255,255,.08)}
+.hc-nav .hb-a{color:#CFC7DA}
+.hc-dots button{background:rgba(255,255,255,.22)}
+.hc-dots button.on{background:linear-gradient(90deg,#FF7A58,#FF4A28);box-shadow:0 0 10px rgba(255,90,54,.95)}
+.hc-count{background:rgba(10,8,16,.6);color:#B9B0C8;border:1px solid rgba(255,255,255,.1)}
+@media(max-width:374px){.hc-view{height:162px}.hs-title{font-size:17px}.hs-art{width:72px}.hs-list li{font-size:8.2px}}
+
+/* ================= ① 실시간 당첨 바 ================= */
+.wfeed{height:32px;margin:8px 12px 0;border-radius:10px;overflow:hidden;
+  background:linear-gradient(90deg,rgba(255,90,54,.16),rgba(20,16,28,.9) 30%);
+  border:1px solid rgba(255,90,54,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.wf-head{padding:0 9px 0 8px;background:linear-gradient(90deg,#FF5A36,#FF7042);font-size:9px;
+  box-shadow:0 0 18px -4px rgba(255,90,54,.95)}
+.wf-head .dot{width:5px;height:5px;box-shadow:0 0 8px #fff,0 0 0 3px rgba(255,255,255,.24)}
+.wf-view::after{background:linear-gradient(90deg,rgba(20,16,28,0),rgba(20,16,28,.95))}
+.wf-it{font-size:9px;color:#CFC6DD;border-right:1px solid rgba(255,255,255,.06)}
+.wf-it b{color:#fff}
+.wf-th{width:18px;height:18px;border-radius:5px;background:#241E33;border-color:rgba(255,255,255,.12)}
+.wf-it.mine{background:linear-gradient(90deg,rgba(255,90,54,.22),rgba(255,90,54,.04))}
+.wf-g{border-width:1.2px;font-size:7.2px;background:rgba(255,255,255,.05)}
+
+/* ================= ① 시리즈 2×2 네온 카드 ================= */
+.sec{margin-top:14px}
+.sec-head{padding:0 14px 8px}
+.sec-head h2{font-size:15.5px;letter-spacing:-.7px}
+.sec-head h2::before{width:4px;height:14px;border-radius:2px;background:linear-gradient(180deg,#FF7A58,#FF3A18);
+  box-shadow:0 0 10px rgba(255,90,54,.95);margin-right:7px}
+.sgrid{gap:9px;padding:0 12px}
+.scard{
+  background:linear-gradient(180deg,#1A1526,#120F1B);border:1px solid var(--nc-l,rgba(255,255,255,.10));
+  border-radius:14px;box-shadow:0 0 20px -9px var(--nc,rgba(255,90,54,.9)),inset 0 1px 0 rgba(255,255,255,.06)
+}
+.sart{aspect-ratio:4/5;background:#0B0910;box-shadow:none;overflow:hidden}
+.sart img.ghero{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;
+  object-position:50% 50%;padding:0;filter:none}
+.sart::after{background:linear-gradient(180deg,rgba(10,8,16,.30) 0%,rgba(10,8,16,0) 34%,rgba(10,8,16,.55) 100%)}
+.sart .shine{display:none}
+.sflag{left:6px;top:6px;z-index:6;padding:2.5px 6px;border-radius:5px;font-size:8.4px;
+  background:linear-gradient(180deg,#FF8A62,#FF4A22);color:#1A0803;box-shadow:0 0 12px -2px rgba(255,90,54,1)}
+.sflag.hot{background:linear-gradient(180deg,#FFE08A,#FFB627);color:#2A1B02;box-shadow:0 0 12px -2px rgba(255,194,74,1)}
+.sneon{right:6px;bottom:6px;z-index:6;padding:2px 6px;border-radius:5px;font-size:7.8px;
+  background:rgba(18,12,8,.78);border:1px solid rgba(255,194,74,.55);color:#FFD98A;
+  box-shadow:0 0 12px -2px rgba(255,194,74,.9)}
+.sinfo{padding:8px 9px 9px}
+.sname{color:#F3EEFA;font-size:11px;line-height:1.27;letter-spacing:-.5px;min-height:2.54em;font-weight:800}
+.sprice{color:#fff;font-size:13.5px;margin-top:3px;gap:3px}
+.sprice i{width:13px;height:13px;background:linear-gradient(180deg,#FFD98A,#FFB020);color:#2A0F05;font-size:7.5px;
+  box-shadow:0 0 7px rgba(255,194,74,.65)}
+.sprice em{color:#8E869C;font-size:8px}
+.smeta{color:#8B8399;font-size:8px;margin-top:2px}
+.smeta b{color:#DCD4EA}
+.sbar{height:4px;background:#241E33;margin-top:5px;position:relative;overflow:hidden}
+.sbar i{background:linear-gradient(90deg,var(--nc,#FF5A36),var(--nc2,#FF9E84));box-shadow:0 0 8px var(--nc,#FF5A36)}
+.sbar::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(90deg,rgba(0,0,0,.25) 0 1px,transparent 1px 5px)}
+
+/* ================= ① 필독 이용안내 & 규정 (아코디언) ================= */
+.rules{margin:16px 12px 0}
+.rule-head{display:flex;align-items:center;justify-content:space-between;padding:0 2px 6px}
+.rule-head h2{display:flex;align-items:center;gap:6px;margin:0;font-size:14.5px;font-weight:900;letter-spacing:-.6px;color:#fff}
+.rule-head h2 i{display:block;width:4px;height:14px;border-radius:2px;background:linear-gradient(180deg,#FF7A58,#FF3A18);
+  box-shadow:0 0 10px rgba(255,90,54,.95)}
+.rule-head h2 em{font-style:normal;font-size:13px}
+.rule-head h2 b{color:var(--coral)}
+.rule-head span{font-size:8.5px;font-weight:800;color:#8E869C}
+.rule-lead{margin:0 2px 8px;font-size:9px;font-weight:700;color:#8B8399;letter-spacing:-.2px}
+.rule-card{border-radius:12px;overflow:hidden;margin-bottom:6px;
+  background:linear-gradient(180deg,#191424,#120F1B);border:1px solid #2A2340;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);transition:border-color .18s,box-shadow .18s}
+.rule-card.open{border-color:rgba(255,90,54,.42);box-shadow:0 0 22px -14px rgba(255,90,54,1),inset 0 1px 0 rgba(255,255,255,.06)}
+.rule-h{display:flex;align-items:center;gap:8px;width:100%;padding:10px 12px;text-align:left}
+.rule-h .em{flex:none;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;font-size:12px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+.rule-card.open .rule-h .em{background:rgba(255,90,54,.14);border-color:rgba(255,90,54,.45)}
+.rule-h .tt{flex:1;font-size:10.5px;font-weight:900;color:#EFEAF6;letter-spacing:-.3px}
+.rule-h .pill{flex:none;font-size:7px;font-weight:900;letter-spacing:.2px;color:#DFFF9C;
+  background:rgba(201,255,87,.12);border:1px solid rgba(201,255,87,.34);padding:1px 5px;border-radius:5px}
+.rule-h .ch{flex:none;width:6px;height:6px;border-right:1.5px solid #7E7590;border-bottom:1.5px solid #7E7590;
+  transform:rotate(45deg);transition:transform .2s;margin-right:2px}
+.rule-card.open .rule-h .ch{transform:rotate(-135deg);border-color:#FFB09A}
+.rule-b{max-height:0;overflow:hidden;transition:max-height .26s ease}
+.rule-card.open .rule-b{max-height:260px}
+.rule-b p{margin:0;padding:0 12px 11px 44px;font-size:9.2px;font-weight:700;line-height:1.62;color:#A49CB0;letter-spacing:-.2px;word-break:keep-all}
+.rule-b p b{color:#E6E0EE;font-weight:900}
+
+/* ================= ① 이용 방법 · 푸터 ================= */
+.how{margin:18px 12px 0;background:linear-gradient(180deg,#171222,#120F1B);border:1px solid #241E33;
+  border-radius:14px;box-shadow:none}
+.how h3{color:#F5F1F9}
+.how li b{background:rgba(255,90,54,.16);color:#FFB09A;border:1px solid rgba(255,90,54,.35)}
+.how li span{color:#A49CB0}
+.how li span strong{color:#E6E0EE}
+.foot{color:#6C647A}
+.bizfoot{background:transparent;color:#8E869C;border-top:1px solid #241E33}
+.bizfoot .bf-mark strong,.bizfoot .bf-mark em{color:#DCD4EA}
+.bizfoot dt{color:#6C647A}
+.bizfoot dd{color:#B7AEC6}
+.bizfoot a{color:#FFB09A}
+
+/* ================= 하단 네온 탭바 ================= */
+.tabbar{
+  background:linear-gradient(180deg,rgba(14,14,20,.72),rgba(10,10,16,.99) 55%);
+  border-top:1px solid rgba(255,90,54,.18);
+  box-shadow:0 -14px 30px -18px rgba(255,90,54,.55),inset 0 1px 0 rgba(255,255,255,.045);
+  backdrop-filter:blur(10px);padding:7px 0 calc(8px + env(safe-area-inset-bottom))
+}
+.tabbar::before{content:"";position:absolute;left:8%;right:8%;top:-1px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,90,54,.85),rgba(169,139,255,.7),transparent)}
+.tabbar button{color:#6E6680;font-size:9.5px;gap:3px}
+.tabbar button.on{color:var(--coral)}
+.tabbar button.on svg{stroke:var(--coral);filter:drop-shadow(0 0 6px rgba(255,90,54,.95))}
+.tabbar button.on::before{width:20px;height:2px;border-radius:2px;top:-7px;
+  background:var(--coral);box-shadow:0 0 10px 1px rgba(255,90,54,.95)}
+.tabbar .tbadge{background:var(--coral);color:#160A05;border:2px solid #0E0E14;box-shadow:0 0 9px rgba(255,90,54,.9)}
+
+/* ================= ② 진열장 헤더 ================= */
+.arc-head{padding:12px 16px 0}
+.arc-wm{display:flex;align-items:baseline;gap:6px;font-size:8.6px;font-weight:900;letter-spacing:2.4px;
+  color:var(--coral);text-shadow:0 0 14px rgba(255,90,54,.75)}
+.arc-wm i{font-style:normal;font-size:8px;letter-spacing:.4px;color:#6E6680;font-weight:700}
+.arc-hdrow{display:flex;align-items:flex-end;justify-content:space-between;margin-top:5px}
+.arc-hdrow h1{margin:0;font-size:23px;font-weight:900;letter-spacing:-1.1px;line-height:1;color:#fff}
+.arc-hdrow h1 b{color:var(--coral);text-shadow:0 0 16px rgba(255,90,54,.9)}
+.arc-cnt{font-size:9.5px;font-weight:800;color:#B7AEC6;padding-bottom:2px}
+.arc-cnt b{color:var(--lime);font-size:12px}
+.arc-sub{margin:4px 0 0;font-size:9.5px;color:#8B8399;font-weight:700}
+
+/* ================= ② POWER CHARGE ================= */
+.freegage{position:relative;margin:9px 14px 0;padding:10px 12px 9px;border-radius:15px;overflow:hidden;
+  background:linear-gradient(120deg,#241521 0%,#17121F 52%,#1D1430 100%);
+  border:1px solid rgba(255,90,54,.34);box-shadow:0 0 26px -14px rgba(255,90,54,1),inset 0 1px 0 rgba(255,255,255,.07)}
+.freegage::before{content:"";position:absolute;right:-34px;top:-44px;width:130px;height:130px;
+  background:radial-gradient(circle,rgba(255,90,54,.40),rgba(255,90,54,0) 68%)}
+.freegage::after{content:"";position:absolute;left:-20px;bottom:-46px;width:120px;height:96px;
+  background:radial-gradient(circle,rgba(169,139,255,.34),rgba(169,139,255,0) 70%)}
+.fg-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:6px}
+.fg-t{display:flex;align-items:center;gap:4px;font-size:10.5px;font-weight:900;letter-spacing:.5px;color:#fff}
+.fg-t i{font-style:normal;color:var(--gold2);filter:drop-shadow(0 0 7px rgba(255,194,74,.95))}
+.fg-t b{color:var(--coral)}
+.fg-free{font-size:7.5px;font-weight:900;color:#16200A;padding:1.5px 5px;border-radius:5px;
+  background:linear-gradient(180deg,#E6FF9E,#B9F53E);box-shadow:0 0 10px -2px rgba(201,255,87,.95)}
+.fg-n{font-size:9px;font-weight:900;color:#E4DCEF;white-space:nowrap}
+.fg-n b{color:#fff;font-size:13px}
+.freegage .pw-row{position:relative;z-index:2;display:flex;align-items:center;gap:8px;margin-top:7px}
+.fg-bar{position:relative;flex:1;height:11px;border-radius:3px;background:#2A2138;overflow:hidden;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.fg-bar i{display:block;height:100%;width:0;border-radius:3px;
+  background:linear-gradient(180deg,#FF8A62,#FF3F1C);box-shadow:0 0 12px rgba(255,90,54,.85);transition:width .3s}
+.fg-bar::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(90deg,transparent 0 calc(20% - 3px),#17121F calc(20% - 3px) 20%)}
+.fg-msg{position:relative;z-index:2;margin-top:6px;font-size:8.5px;font-weight:700;color:#9A92A8;letter-spacing:-.2px}
+.freegage.done .fg-msg{color:var(--lime);font-weight:900}
+
+/* ================= ② 상태 탭 · 필터 칩 ================= */
+.arc-tabs{display:flex;gap:5px;margin:9px 14px 0}
+.arc-tabs button{flex:1;padding:6px 0;border-radius:9px;font-size:9.5px;font-weight:900;letter-spacing:-.3px;
+  color:#9A92A8;background:#191425;border:1px solid #2A2340}
+.arc-tabs button b{font-size:8.5px;margin-left:2px;color:#6E6680}
+.arc-tabs button.on{color:#1A0803;border-color:transparent;
+  background:linear-gradient(180deg,#FF8A62,#FF4A22);box-shadow:0 6px 18px -6px rgba(255,90,54,1)}
+.arc-tabs button.on b{color:rgba(26,8,3,.6)}
+.arc-chips{display:flex;align-items:center;gap:4px;margin:8px 14px 0}
+.arc-chips button{font-size:8.5px;font-weight:900;padding:3.5px 8px;border-radius:7px;
+  background:#171222;border:1px solid #2A2340;color:#8E869C;letter-spacing:-.2px}
+.arc-chips button b{font-size:8px;margin-left:1px;color:#6C647A}
+.arc-chips button.on{background:#2C2340;border-color:#453A5E;color:#F5F1F9;box-shadow:0 0 12px -6px rgba(169,139,255,.9)}
+.arc-chips .selall{margin-left:auto;background:transparent;border:1px solid rgba(255,90,54,.4);color:#FFB09A}
+.arc-chips .selall.on{background:rgba(255,90,54,.16);color:#FFD9CD}
+
+/* ================= ② 3열 경품 그리드 ================= */
+#screenBox{padding-bottom:132px}
+#boxArea .boxlist{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 14px 0;padding:0}
+.bitem{position:relative;display:flex;flex-direction:column;align-items:stretch;gap:0;text-align:left;cursor:pointer;
+  border-radius:12px;padding:6px 6px 7px;overflow:hidden;background:linear-gradient(180deg,#1B1526,#120F1B);
+  border:1px solid var(--gl,rgba(255,255,255,.10));
+  box-shadow:0 0 16px -10px var(--gc,rgba(255,90,54,.9)),inset 0 1px 0 rgba(255,255,255,.05)}
+.bitem.sel{outline:0;background:linear-gradient(180deg,#251A38,#191125);
+  box-shadow:0 0 0 1.5px var(--gc,rgba(255,90,54,.95)),0 0 26px -6px var(--gc,rgba(255,90,54,1))}
+.bitem.sel .nm{color:#fff}
+.bitem.sel .pv b{color:#fff}
+.bitem.done{opacity:.62}
+.bitem .art{position:relative;display:block;width:100%;height:92px}
+.bitem .art .halo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:86px;height:86px;border-radius:50%;
+  background:radial-gradient(circle,var(--hc,rgba(255,90,54,.28)),transparent 70%)}
+.bitem .art img.gimg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:88px;height:88px;
+  object-fit:contain;filter:drop-shadow(0 5px 8px rgba(0,0,0,.65))}
+.bitem .art img.gimg.tr{clip-path:inset(2px 0 0 0)}
+.bitem .art svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:88px;height:88px;
+  filter:drop-shadow(0 5px 8px rgba(0,0,0,.65))}
+.bitem .g{position:absolute;left:0;top:0;font-size:7.5px;font-weight:900;letter-spacing:.4px;padding:1.5px 4px;border-radius:4px;z-index:2}
+.bitem .bm{position:absolute;right:0;top:0;width:17px;height:17px;border-radius:5px;display:grid;place-items:center;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);z-index:3;cursor:pointer}
+.bitem .bm svg{width:9px;height:9px;fill:none;stroke:#9A92A8;stroke-width:1.9;stroke-linejoin:round}
+.bitem .bm.on{background:rgba(255,194,74,.16);border-color:rgba(255,194,74,.65);box-shadow:0 0 10px -3px rgba(255,194,74,.95)}
+.bitem .bm.on svg{stroke:#FFD98A;fill:rgba(255,194,74,.35)}
+.bitem .chk{position:absolute;right:2px;bottom:2px;width:15px;height:15px;border-radius:4px;
+  border:1.3px solid #3D3450;background:#120F1B;z-index:3}
+.bitem.sel .chk{background:linear-gradient(180deg,#FF8A62,#FF4A22);border-color:#FF6A42;box-shadow:0 0 10px -1px rgba(255,90,54,.95)}
+.bitem.sel .chk::after{content:"";position:absolute;left:4px;top:1.6px;width:3.2px;height:6.6px;
+  border:1.6px solid #1A0803;border-top:0;border-left:0;transform:rotate(42deg)}
+.bitem.done .chk{display:none}
+.bitem .nm{display:block;font-size:9px;font-weight:800;line-height:1.3;letter-spacing:-.4px;color:#EFEAF6;
+  height:24px;overflow:hidden;margin-top:4px;word-break:keep-all}
+.bitem .pv{display:flex;align-items:baseline;gap:2px;margin-top:3px;height:14px}
+.bitem .pv b{font-size:10.5px;font-weight:900;color:#fff;letter-spacing:-.3px}
+.bitem .pv em{font-size:6.5px;color:#8E869C;font-weight:900;font-style:normal}
+.bitem .sh1{display:flex;align-items:center;justify-content:center;gap:3px;width:100%;height:23px;margin-top:6px;
+  border-radius:7px;font-size:8.5px;font-weight:900;letter-spacing:-.1px;color:#FFD9CD;cursor:pointer;
+  background:rgba(255,90,54,.14);border:1px solid rgba(255,90,54,.55);box-shadow:0 0 12px -6px rgba(255,90,54,1)}
+.bitem .sh1 svg{width:9px;height:9px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round}
+.bitem.done .sh1{color:#8E869C;background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.09);cursor:default}
+/* 등급 네온 */
+.bitem.g-last{--gc:rgba(255,194,74,.95);--gl:rgba(255,194,74,.52);--hc:rgba(255,194,74,.30)}
+.bitem.g-last .halo{background:radial-gradient(circle at 50% 52%,rgba(255,194,74,.52),rgba(169,139,255,.30) 52%,rgba(169,139,255,0) 72%)}
+.bitem.g-last .g{color:#FFD98A;background:linear-gradient(180deg,#3A2A10,#2A1D0A);border:1px solid rgba(255,194,74,.7);box-shadow:0 0 12px -3px rgba(255,194,74,.95)}
+.bitem.g-a{--gc:rgba(255,90,54,.95);--gl:rgba(255,90,54,.58);--hc:rgba(255,90,54,.30)}
+.bitem.g-a .g{color:#FFB09A;background:rgba(255,90,54,.18);border:1px solid rgba(255,90,54,.65)}
+.bitem.g-b{--gc:rgba(94,224,255,.9);--gl:rgba(94,224,255,.50);--hc:rgba(94,224,255,.24)}
+.bitem.g-b .g{color:#9BF0FF;background:rgba(94,224,255,.14);border:1px solid rgba(94,224,255,.55)}
+.bitem.g-c{--gc:rgba(169,139,255,.9);--gl:rgba(169,139,255,.50);--hc:rgba(169,139,255,.24)}
+.bitem.g-c .g{color:#CBB6FF;background:rgba(169,139,255,.15);border:1px solid rgba(169,139,255,.55)}
+.bitem.g-k{--gc:rgba(201,255,87,.85);--gl:rgba(201,255,87,.46);--hc:rgba(201,255,87,.20)}
+.bitem.g-k .g{color:#DFFF9C;background:rgba(201,255,87,.13);border:1px solid rgba(201,255,87,.5)}
+.bitem.g-x{--gc:rgba(169,139,255,.70);--gl:rgba(169,139,255,.38);--hc:rgba(169,139,255,.18)}
+.bitem.g-x .g{color:#CBB6FF;background:rgba(169,139,255,.12);border:1px solid rgba(169,139,255,.4)}
+.morecard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:150px;
+  border-radius:12px;border:1px dashed #3A3350;background:rgba(255,255,255,.02);cursor:pointer}
+.morecard .plus{width:24px;height:24px;border-radius:50%;border:1.5px dashed #4A4160;display:grid;place-items:center;
+  color:#7E7590;font-size:14px;font-weight:700}
+.morecard .mtx{font-size:8px;font-weight:800;color:#7E7590;letter-spacing:-.2px}
+.boxempty{margin:26px 14px;padding:26px 16px;border-radius:14px;text-align:center;font-size:10px;font-weight:700;
+  color:#8E869C;line-height:1.7;background:rgba(255,255,255,.02);border:1px dashed #2E2740}
+.boxempty svg{width:34px;height:34px;margin:0 auto 10px;fill:none;stroke:#4A4160;stroke-width:1.6}
+.boxempty b{color:#DCD4EA}
+
+/* ================= ② 출고 대기 안내 · 보관 안내 ================= */
+#shipArea .shiphist{margin:9px 14px 0;padding:8px 10px;border-radius:11px;
+  background:linear-gradient(90deg,rgba(94,224,255,.10),rgba(23,18,34,.9));border:1px solid rgba(94,224,255,.22)}
+#shipArea .shiphist h3{margin:0 0 5px;font-size:8.5px;font-weight:900;color:#9BF0FF;letter-spacing:.2px}
+#shipArea .hrow{display:flex;align-items:center;gap:7px;font-size:8.5px;font-weight:700;color:#B7AEC6;padding:2px 0}
+#shipArea .hno{font-weight:900;color:#fff}
+#shipArea .hst{margin-left:auto;font-weight:900;color:#9BF0FF;background:rgba(94,224,255,.12);
+  border:1px solid rgba(94,224,255,.3);padding:1px 6px;border-radius:5px;font-size:7.6px}
+.shelfnote{margin:8px 16px 0;font-size:8px;font-weight:700;color:#7E7590;letter-spacing:-.2px}
+.shelfnote b{color:#FFB09A;font-weight:900}
+
+/* ================= ② 하단 고정 네온 액션 바 ================= */
+.shipbar{left:50%;transform:translateX(-50%);width:min(460px,100%);bottom:0;z-index:35;
+  padding:6px 12px calc(9px + 58px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(12,12,18,.72) 0%,rgba(12,12,18,.97) 18%,#0C0C12 100%);
+  backdrop-filter:blur(10px);
+  border-top:1px solid rgba(255,90,54,.16);box-shadow:0 -16px 30px -20px rgba(255,90,54,.7);
+  display:block}
+.shipbar .ab-info{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 3px 5px;
+  font-size:8.5px;font-weight:800;color:#9A92A8;letter-spacing:-.2px}
+.shipbar .ab-info b{color:var(--lime);font-weight:900}
+.shipbar .ab-info .d{color:#FF9E84;font-weight:900}
+.shipbar .acts{display:flex;gap:5px}
+.shipbar .act{border-radius:10px;font-weight:900;letter-spacing:-.3px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:1px;width:auto;height:38px;background:#1B1526;
+  border:1px solid #3A3350;color:#DCD4EA;box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
+.shipbar .act b{font-size:9.5px}
+.shipbar .act small{font-size:7px;font-weight:800;opacity:.72}
+.shipbar .act#actStore{width:52px}
+.shipbar .act#actExchange{width:98px;color:#FFC3B2;background:rgba(255,90,54,.12);border-color:rgba(255,90,54,.75);
+  box-shadow:0 0 16px -8px rgba(255,90,54,1),inset 0 0 14px -8px rgba(255,90,54,.9)}
+.shipbar .act.ship{flex:1;color:#1A0803;background:linear-gradient(180deg,#FF8A62,#F0431F);border-color:transparent;
+  box-shadow:0 10px 24px -10px rgba(255,90,54,1),inset 0 1px 0 rgba(255,255,255,.4)}
+.shipbar .act.ship small{color:#3A1207;opacity:.8}
+.shipbar .act:disabled{background:#191425;border-color:#2A2340;color:#5F5772;box-shadow:none}
+.shipbar .act:disabled small{opacity:.5}
+.shipbar .acts .act.ship:disabled{background:#241E33;color:#6C647A}
+.shipbar .acts .act.ship:disabled small{color:#6C647A;opacity:.7}
+
+/* ================= ② 마이페이지 ================= */
+.my-head{background:transparent;border-radius:0;overflow:visible;padding:12px 16px 0;color:var(--tx)}
+.my-head::after{display:none}
+.mh-top,.my-top{display:flex;align-items:center;justify-content:space-between}
+.my-head .my-top h1{display:none}
+.arc-lv,.my-head .my-top .arc-lv{font-size:8.5px;font-weight:900;letter-spacing:1.6px;color:#8E869C;padding:0;background:none;border:0;border-radius:0}
+.arc-lv b,.my-head .my-top .arc-lv b{color:var(--lime)}
+.arc-date,.my-head .my-top .arc-date{font-size:8px;font-weight:900;letter-spacing:.8px;color:#FF9E84;padding:0;background:none;border:0;border-radius:0}
+.my-prof{display:flex;flex-direction:row;align-items:center;gap:11px;margin-top:8px;color:var(--tx)}
+.my-ava{position:relative;width:60px;height:60px;flex:none;border:0;border-radius:50%;padding:2.5px;display:grid;place-items:center;overflow:visible;
+  background:conic-gradient(from 205deg,#FF5A36 0 var(--expd,20%),#3A3350 var(--expd,20%) 100%);
+  box-shadow:0 0 20px -4px rgba(255,90,54,.9)}
+.my-ava::before{content:"";position:absolute;inset:2.5px;border-radius:50%;background:#120E18;border:1px solid rgba(255,255,255,.14)}
+.my-ava svg{position:relative;z-index:1;width:46px;height:46px;border-radius:50%;overflow:hidden}
+.my-ava .lvn{position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);white-space:nowrap;z-index:4;
+  background:linear-gradient(180deg,#FF8A62,#F0431F);color:#1A0803;font-size:7.5px;font-weight:900;
+  padding:1px 5px;border-radius:5px;letter-spacing:.3px;box-shadow:0 0 10px -2px rgba(255,90,54,1)}
+.my-prof .mid{flex:1;min-width:0}
+.my-nickrow{display:flex;align-items:baseline;gap:5px;margin:0}.my-nickrow b{font-size:18px;font-weight:900;letter-spacing:-.7px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.my-nickrow button{flex:none;font-size:7.5px;font-weight:800;color:#9A92A8;border:1px solid rgba(255,255,255,.14);
+  border-radius:6px;padding:1px 5px}
+.my-phone{margin:3px 0 0;font-size:8.5px;font-weight:800;color:#8E869C;letter-spacing:-.1px}
+.my-prof .exp{margin-top:4px;font-size:8.5px;font-weight:800;color:#8E869C;letter-spacing:-.2px}
+.my-prof .exp b{color:#FFB09A;font-weight:900}
+.my-prof .exp u{text-decoration:none;color:var(--lime);font-weight:900}
+.my-prof .eb{width:100%;max-width:150px;height:5px;border-radius:3px;background:#241E33;margin-top:4px;overflow:hidden}
+.my-prof .eb i{display:block;height:100%;width:0;border-radius:3px;
+  background:linear-gradient(90deg,#FF5A36,#FFB199);box-shadow:0 0 10px rgba(255,90,54,.9);transition:width .3s}
+.my-prof .coin{flex:none;text-align:right}
+.my-prof .coin small{display:block;font-size:7.5px;font-weight:900;letter-spacing:1px;color:#8E869C}
+.my-prof .coin b{font-size:14px;font-weight:900;letter-spacing:-.6px;color:#fff;white-space:nowrap;
+  text-shadow:0 0 14px rgba(255,194,74,.55)}
+.my-prof .coin b s{text-decoration:none;font-size:8px;color:var(--gold2);font-weight:900}
+.my-head .tl{display:flex;gap:6px;margin:10px 0 0}
+.my-head .tl div{flex:1;border-radius:11px;padding:8px 9px;background:linear-gradient(180deg,#191424,#131020);
+  border:1px solid #2A2340;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.my-head .tl small{display:block;font-size:8px;color:#8E869C;font-weight:800;letter-spacing:-.1px}
+.my-head .tl b{display:block;font-size:14px;font-weight:900;margin-top:3px;letter-spacing:-.5px;color:#fff}
+.my-head .tl b em{font-style:normal;font-size:7.5px;color:#8E869C;margin-left:1px}
+
+.my-body{margin-top:0;padding:0 0 96px}
+.pn{margin:9px 16px 0;border-radius:13px;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#1A1526,#131020);border:1px solid #2C2542;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.pn.coral{border-color:rgba(255,90,54,.34);box-shadow:0 0 22px -14px rgba(255,90,54,1),inset 0 1px 0 rgba(255,255,255,.06)}
+.pn .ph{display:flex;align-items:center;justify-content:space-between;padding:9px 12px 0}
+.pn .ph h3{display:flex;align-items:center;gap:6px;margin:0;font-size:11px;font-weight:900;letter-spacing:-.1px;color:#F5F1F9}
+.pn .ph h3 i{display:block;width:3.5px;height:11px;border-radius:2px;
+  background:linear-gradient(180deg,#FF7A58,#FF3A18);box-shadow:0 0 8px rgba(255,90,54,.95)}
+.pn .ph button{font-size:8.5px;font-weight:800;color:#8E869C;letter-spacing:-.2px}
+/* 코인 지갑 */
+.wa .big{display:flex;align-items:flex-end;justify-content:space-between;padding:8px 12px 0}
+.wa .big .b{font-size:23px;font-weight:900;letter-spacing:-1px;color:#fff;line-height:1}
+.wa .big .b s{text-decoration:none;font-size:10px;color:var(--gold2);margin-left:2px;font-weight:900}
+.wa .big button{background:linear-gradient(180deg,#FF8A62,#F0431F);color:#1A0803;font-size:9.5px;font-weight:900;
+  padding:8px 12px;border-radius:9px;letter-spacing:-.2px;box-shadow:0 8px 18px -9px rgba(255,90,54,1),inset 0 1px 0 rgba(255,255,255,.4)}
+.wa .bars{padding:9px 12px 10px;display:flex;flex-direction:column;gap:7px}
+.wa .ln{display:flex;align-items:center;gap:7px;font-size:8.5px;font-weight:800;color:#A49CB0}
+.wa .ln span{width:60px;flex:none;letter-spacing:-.3px}
+.wa .ln i{flex:1;height:6px;border-radius:3px;background:#241E33;overflow:hidden;display:block}
+.wa .ln i b{display:block;height:100%;border-radius:3px;transition:width .3s}
+.wa .ln em{font-style:normal;color:#E6E0EE;font-size:9px;width:58px;text-align:right;
+  font-variant-numeric:tabular-nums;font-weight:900}
+.wa .g i b{background:linear-gradient(90deg,#FF5A36,#FF9E84);box-shadow:0 0 8px rgba(255,90,54,.9)}
+.wa .e i b{background:linear-gradient(90deg,#A98BFF,#C9FF57);box-shadow:0 0 8px rgba(169,139,255,.9)}
+.wa .cpn{display:flex;gap:6px;padding:0 12px 11px}
+.wa .cpn button{flex:1;height:26px;border-radius:8px;font-size:8.5px;font-weight:900;color:#DCD4EA;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10)}
+.wa .cpn button em{font-style:normal;margin-left:3px;color:var(--lime);font-weight:900}
+/* 바로 처리 */
+.bt .rows{padding:4px 0 3px}
+.rw{display:flex;align-items:center;gap:9px;padding:8px 12px;border-top:1px solid #241E33}
+.rw:first-child{border-top:0}
+.rw .ic{width:31px;height:31px;border-radius:10px;flex:none;display:grid;place-items:center;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+.rw .ic svg{width:16px;height:16px;fill:none;stroke:#B9B0C8;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.rw.hot .ic{background:rgba(255,90,54,.14);border-color:rgba(255,90,54,.45);box-shadow:0 0 14px -6px rgba(255,90,54,1)}
+.rw.hot .ic svg{stroke:#FFB09A}
+.rw .tx{flex:1;min-width:0}
+.rw .tx b{display:block;font-size:10.5px;font-weight:900;letter-spacing:-.3px;color:#F2EDF8}
+.rw .tx span{display:block;font-size:8.5px;color:#8A819A;margin-top:2px;font-weight:700;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.2px}
+.rw .tx span b{display:inline;font-size:8.5px;color:#DCD4EA;font-weight:900}
+.rw .ac{flex:none;height:27px;padding:0 10px;border-radius:9px;font-size:8.5px;font-weight:900;letter-spacing:-.2px;
+  display:flex;align-items:center;gap:3px;white-space:nowrap}
+.rw .ac.go{color:#1A0803;background:linear-gradient(180deg,#E6FF9E,#B9F53E);
+  box-shadow:0 0 16px -5px rgba(201,255,87,1),inset 0 1px 0 rgba(255,255,255,.5)}
+.rw .ac.out{color:#E4DCEF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16)}
+.rw .ac.done{color:#7E7590;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09)}
+.rw .ac svg{width:9px;height:9px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+/* 7일 출석 */
+.at{padding:9px 11px 11px}
+.at .r{display:flex;gap:4px}
+.at .r div{flex:1;text-align:center;border-radius:8px;padding:6px 0 5px;background:#221B30;border:1px solid #2E2740}
+.at .r div em{display:block;font-style:normal;font-size:7.5px;color:#7E7590;font-weight:900;letter-spacing:.2px}
+.at .r div b{display:block;font-size:9px;font-weight:900;color:#9A92A8;margin-top:2px}
+.at .r div.on{background:rgba(255,90,54,.14);border-color:rgba(255,90,54,.45)}
+.at .r div.on b{color:#FFB09A}
+.at .r div.td{background:linear-gradient(180deg,#E6FF9E,#B9F53E);border-color:#C9FF57;box-shadow:0 0 16px -5px rgba(201,255,87,1)}
+.at .r div.td em,.at .r div.td b{color:#16200A}
+/* 메뉴 */
+.mn{padding:3px 0 3px}
+.mr{display:flex;align-items:center;gap:9px;padding:10px 12px;border-top:1px solid #241E33;width:100%;text-align:left}
+.mr:first-child{border-top:0}
+.mr .t{flex:1;font-size:10px;font-weight:800;color:#E6E0EE;letter-spacing:-.3px}
+.mr .v{font-size:8.5px;font-weight:800;color:#8A819A}
+.mr .v b{color:#DCD4EA;font-weight:900}
+.mr .v em{font-style:normal;font-weight:900;color:#DCD4EA}
+.mr .v.pill{color:#DFFF9C;background:rgba(201,255,87,.12);border:1px solid rgba(201,255,87,.34);
+  padding:1px 5px;border-radius:5px}
+.mr .ch{width:4px;height:4px;border-top:1.4px solid #5A5170;border-right:1.4px solid #5A5170;transform:rotate(45deg)}
+
+/* ================= ④ 상세 화면 ================= */
+.detail{padding-bottom:136px}
+.circ{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);color:#F5F1F9;backdrop-filter:blur(4px)}
+.circ svg{stroke:#F5F1F9}
+.circ.sm{background:rgba(255,255,255,.06)}
+.shelf-btn{background:linear-gradient(180deg,#FF8A62,#F0431F);color:#1A0803;border:0;border-radius:11px;
+  box-shadow:0 8px 20px -10px rgba(255,90,54,1),inset 0 1px 0 rgba(255,255,255,.4)}
+.shelf-btn span{color:#1A0803}
+.shelf-btn svg{stroke:#1A0803;stroke-width:2.2}
+.ib-swap{background:rgba(255,255,255,.06);color:#9A92A8;border:1px solid rgba(255,255,255,.14);border-radius:5px;
+  box-shadow:none;transform:none}
+.navbtn{background:rgba(255,255,255,.05);color:#E6E0EE;border:1px solid rgba(255,255,255,.10);border-radius:12px;box-shadow:none}
+.navbtn svg{stroke:#E6E0EE}
+.pclip{background:linear-gradient(158deg,#2B2238 0%,#1C1528 46%,#141020 100%)}
+.pclip::before{background:repeating-linear-gradient(115deg,rgba(255,255,255,.03) 0 2px,transparent 2px 7px)}
+.pcard{box-shadow:0 2px 6px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.06)}
+.drawcost{color:#8E869C;background:rgba(24,18,36,.92);border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.drawcost b{color:#fff}
+.drawcost .sep{background:rgba(255,255,255,.14)}
+.boxstrip .bs-arrows svg{stroke:#FFB09A}
+.boxstrip .bs-label{color:#FFD9CD;opacity:1}
+.stage{background:linear-gradient(180deg,#2A1020 0%,#150C1A 52%,#0B0810 100%)}
+.stage-tri{border-bottom-color:rgba(255,90,54,.10)}
+.infobar{margin-top:-16px;border-radius:20px 20px 0 0;padding:12px 12px 10px;
+  background:linear-gradient(180deg,#1A1526,#120F1B);border-top:1px solid rgba(255,255,255,.06);
+  box-shadow:0 -12px 30px -18px rgba(0,0,0,.9)}
+.ib-price{color:#fff}
+.ib-price i{background:linear-gradient(180deg,#FFD98A,#FFB020);color:#2A0F05}
+.ib-price em{color:#8E869C}
+.ib-box{color:#E6E0EE}
+.ib-box b{color:#FFB09A}
+.ib-box span,.ib-rem span{color:#8E869C}
+.ib-rem{color:#E6E0EE}
+.ib-rem b{color:#CBB6FF}
+.navbtn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);border-radius:12px;color:#E6E0EE}
+.boxstrip{background:linear-gradient(180deg,#2A2036,#1A1426);border:1px solid rgba(255,90,54,.35);
+  box-shadow:0 0 18px -8px rgba(255,90,54,.9)}
+.subtabs{background:#171222;border:1px solid #2A2340;padding:3px;border-radius:999px}
+.subtabs button{color:#8E869C}
+.subtabs button.on{background:linear-gradient(180deg,#FF8A62,#FF4A22);color:#1A0803;
+  box-shadow:0 6px 16px -8px rgba(255,90,54,1)}
+.srow::after{background:linear-gradient(180deg,#2A2436 0%,#1A1526 42%,#0D0A14 100%);
+  box-shadow:0 3px 5px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.06)}
+.pcard{background:linear-gradient(158deg,#33283F 0%,#221A30 46%,#181223 100%)}
+.shelf-tip{background:#171222;border:1px solid #241E33;color:#A49CB0}
+.shelf-tip b{color:#DCD4EA}
+.rank{padding-top:10px}
+.rrow{border-bottom:1px solid #241E33}
+.rno{color:#6C647A}
+.rno.top{color:var(--coral)}
+.rname{color:#EFEAF6}
+.rbar{background:#241E33}
+.rbar i{background:linear-gradient(90deg,#FF8A62,#FF4A22)}
+.rmeta{color:#8E869C}
+.rmeta b{color:#B7AEC6}
+.rval{color:#DCD4EA}
+.log-head{color:#8E869C}
+.lrow{border-bottom:1px dashed #241E33}
+.lwho{color:#B7AEC6}
+.lname{color:#A49CB0}
+.ltime{color:#6C647A}
+.lrow.mine{background:rgba(255,90,54,.10)}
+.lrow.mine .lwho{color:#FFB09A}
+.empty{color:#7E7590}
+.drawbar{background:linear-gradient(180deg,rgba(14,14,20,0) 0%,rgba(12,12,18,.94) 34%,#0C0C12 100%)}
+.drawcost{color:#8E869C}
+.dome .cap{background:radial-gradient(ellipse at 50% 16%,#FF9E7E 0%,#FF4A22 44%,#C9300A 100%);
+  box-shadow:inset 0 -9px 14px rgba(90,20,0,.42),inset 0 4px 8px rgba(255,255,255,.38),0 6px 12px rgba(180,40,0,.32)}
+.dome b{text-shadow:0 2px 0 #8F2000,0 0 8px rgba(255,255,255,.3)}
+.dome .pr{color:#B7AEC6}
+.dome .pr i{background:linear-gradient(180deg,#FFD98A,#FFB020);color:#2A0F05}
+.dome.locked .cap{background:linear-gradient(180deg,#2A2436,#171222);box-shadow:inset 0 -6px 10px rgba(0,0,0,.35)}
+.dome.locked b{color:#6C647A;text-shadow:none}
+/* 상세 등급 라벨 */
+.stage-grade{color:#FFD9CD;text-shadow:0 0 24px rgba(255,90,54,.9),0 4px 0 rgba(0,0,0,.35)}
+
+/* ================= ④ 시트 · 모달 ================= */
+.overlay{background:rgba(5,5,10,.72)}
+.sheet{background:#141020;color:#F5F1F9;border:1px solid rgba(255,255,255,.08);border-bottom:0;
+  box-shadow:0 -20px 50px -20px rgba(0,0,0,.9)}
+.sheet-handle{background:#3A3350}
+.sheet-head h3{color:#F7F3FF}
+.sheet-head .x{background:#241E33;color:#B9B0C8}
+.sheet-actions{border-top:1px solid #241E33}
+.btn-ghost{background:#1B1526;border:1px solid #3A3350;color:#DCD4EA}
+.btn-primary{background:linear-gradient(180deg,#FF8A62,#F0431F);color:#1A0803;border:0;
+  box-shadow:0 10px 24px -12px rgba(255,90,54,1)}
+.btn-primary small{color:#571A08;opacity:.75}
+.btn-primary:disabled{background:#241E33;color:#6C647A;border:0;box-shadow:none}
+.btn-primary:disabled small{color:#6C647A}
+.field label{color:#9A92A8}
+.field input{background:#191425;border-color:#2E2740;color:#F5F1F9}
+.field input::placeholder{color:#5F5772}
+.field input:focus{border-color:rgba(255,90,54,.75);background:#1B1526}
+.agree{color:#8E869C}
+.agree .box{border-color:#3D3450;background:#191425}
+.agree .box.on{background:linear-gradient(180deg,#FF8A62,#FF4A22);border-color:#FF6A42}
+.info-p{color:#B7AEC6}
+.info-p b{color:#fff}
+.info-list{background:transparent}
+.info-row{background:#191424;border-color:#2E2740;color:#E6E0EE}
+.info-row .nm{color:#E6E0EE}
+.info-row .nm span{color:#8E869C}
+.info-row .vl{color:#DCD4EA}
+.info-row .vl.up{color:var(--lime)}
+.info-empty{color:#7E7590}
+.info-tip{background:rgba(255,90,54,.10);border-color:rgba(255,90,54,.35);color:#FFD9CD}
+.info-tip b{color:#FFB09A}
+.info-tip.hot{background:rgba(255,90,54,.12);border-color:rgba(255,90,54,.45);color:#FFD9CD}
+.info-tip.hot .hot-ttl{color:#FF8E6E;font-size:11px;font-weight:900}
+.opt-grid button{background:#191425;border-color:#2E2740;color:#E6E0EE}
+.cpn-card{background:#191424;border-color:rgba(255,194,74,.35)}
+.cpn-card .ct{color:#F5F1F9}
+.cpn-card .cs{color:#8E869C}
+.bp-legend{color:#B7AEC6}
+.bp-legend b{color:#FFB09A}
+.bp-row{background:#191424;border:1px solid #2E2740;color:#E6E0EE}
+.bp-row.cur{background:rgba(255,90,54,.12);outline:1.5px solid rgba(255,90,54,.7)}
+.bp-row .no{color:#FFB09A}
+.bp-row .bar{background:#241E33}
+.bp-row .rr{color:#8E869C}
+.need-box{background:#191424;border:1px solid #2E2740}
+.need-box .big{color:#FFB09A}
+.need-box .s{color:#8E869C}
+.need-box .s b{color:#E6E0EE}
+.confirm-text{color:#B7AEC6}
+.confirm-text b{color:#fff}
+.sh-addr{background:#191424;border:1px solid #2E2740}
+.sh-addr .pin{background:#241E33;border-color:#3A3350}
+.sh-addr .pin svg{stroke:#FFB09A}
+.shp-th{background:#241E33;border-color:#3A3350}
+.shp-nm{color:#F2EDF8}
+.shp-pr{color:#8E869C}
+.shp-pr b{color:#DCD4EA}
+.shp-ctl button{background:#241E33;border-color:#3A3350;color:#DCD4EA}
+.shp-ctl b{color:#F5F1F9}
+.shp-del{color:#8E869C}
+.ovb{background:rgba(255,90,54,.14);border-color:rgba(255,90,54,.45);color:#FFB09A}
+.sh-help{background:#241E33;border-color:#3A3350;color:#DCD4EA}
+.addr-row{background:#191424;border-color:#2E2740}
+.addr-row.on{background:rgba(255,90,54,.12);border-color:rgba(255,90,54,.6)}
+.addr-row .ab b{color:#F5F1F9}
+.addr-row .ab b em{color:#8E869C}
+.addr-row .ab span{color:#8E869C}
+.addr-row .rb{background:#191425;border-color:#3D3450}
+.addr-row.on .rb{border-color:var(--coral)}
+.addr-row .df{background:rgba(94,224,255,.12);color:#9BF0FF}
+.addr-row .del{color:#8E869C}
+.sh-addr .ab b{color:#fff}
+.sh-addr .ab span{color:#8E869C}
+.sh-addr .pick{color:#FFB09A}
+.sh-sec{color:#9A92A8}
+.shp-row{background:#191424;border:1px solid #2E2740}
+.sh-cus{background:#191424;border:1px dashed #3A3350}
+.sh-msg{color:#FF9E84}
+.sh-msg.ok{color:var(--lime)}
+.rc-head{border-bottom-color:rgba(255,255,255,.12)}
+.rc-rows>div{border-color:#241E33}
+.rc-total{border-top-color:rgba(255,90,54,.4)}
+.res-count{color:#F5F1F9}
+.res-eyebrow{color:#FFB09A}
+.res-name{color:#fff}
+.res-sub{color:#8E869C}
+#resultSheet .res-art{background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.10) 0%,rgba(255,255,255,.04) 34%,var(--rg2,rgba(255,90,54,.16)) 74%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.14),0 0 34px 4px var(--rg1,rgba(255,90,54,.35))}
+.last-banner{background:rgba(255,194,74,.10);border:1px solid rgba(255,194,74,.35)}
+.last-banner .ic{background:rgba(255,255,255,.06)}
+.last-banner .tx{color:#FFE6A8}
+.last-banner .tx b{color:#FFD98A}
+/* 출석 시트 */
+.att-lead{color:#B7AEC6}
+.att-lead b{color:#fff}
+.att-cell{border-color:#3A3350;background:#191424}
+.att-cell .ad{color:#7E7590}
+.att-cell .ar{color:#B7AEC6}
+.att-cell .as{border-color:#3D3450;color:#6C647A;background:rgba(255,255,255,.04);filter:grayscale(1) brightness(1.6)}
+.att-cell.done .as{filter:none}
+.att-cell.today .as{filter:none}
+.att-cell.done{border-color:rgba(255,90,54,.6);background:rgba(255,90,54,.12)}
+.att-cell.done .as{border-color:#FF8A62;color:#FFB09A}
+.att-cell.today{border-color:var(--lime);box-shadow:0 0 0 2px rgba(201,255,87,.16)}
+.att-cell.today .as{border-color:var(--lime);color:var(--lime)}
+.att-cell.day7{background:rgba(255,194,74,.10)}
+.att-cell.day7 .ar{color:#FFD98A}
+.att-total{color:#B7AEC6;background:rgba(255,194,74,.08);border:1px solid rgba(255,194,74,.28)}
+.att-total b{color:#fff}
+.att-msg{color:#FFB09A}
+.att-note{color:#6C647A}
+/* 웰컴 팝업 */
+.wlp{background:rgba(5,5,10,.8)}
+.wlp-card{background:linear-gradient(180deg,#1E1730,#120F1B);border:1px solid rgba(255,90,54,.35);
+  max-height:90vh;overflow-y:auto;
+  box-shadow:0 30px 70px -30px rgba(255,90,54,.7)}
+.wlp-top{background:linear-gradient(160deg,#2A1420,#1A1226)}
+.wlp-ttl{color:#fff}
+.wlp-ttl b{color:var(--coral2)}
+.wlp-sub{color:#B7AEC6}
+.wlp-sub b{color:#fff}
+.wlp-cond{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#B7AEC6}
+.wlp-cond b{color:#fff}
+.wlp-cta{background:linear-gradient(180deg,#FF8A62,#F0431F);color:#1A0803}
+.wlp-cta small{color:#571A08}
+.wlp-foot button{color:#8E869C}
+.wlp-note{color:#6C647A}
+.wlp-terms{margin:11px 16px 0;padding:9px 11px 10px;border-radius:10px;
+  background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}
+.wlp-terms>b{display:block;font-size:8.4px;font-weight:900;letter-spacing:.4px;color:#FFB09A;margin-bottom:5px}
+.wlp-terms ul{margin:0;padding:0;list-style:none;display:grid;gap:3px}
+.wlp-terms li{position:relative;padding-left:8px;font-size:7.9px;font-weight:700;color:#8E869C;line-height:1.45;letter-spacing:-.2px}
+.wlp-terms li::before{content:"";position:absolute;left:0;top:5px;width:3px;height:3px;border-radius:50%;background:#5A5170}
+.wlp-terms li em{font-style:normal;color:#DCD4EA;font-weight:900}
+.toast{background:rgba(24,18,32,.96);border:1px solid rgba(255,90,54,.35);color:#fff}
+/* 상품 INFO 카드 */
+#prizeInfo .pinfo{background:linear-gradient(180deg,#1E1730,#120F1B);border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 30px 70px -25px rgba(0,0,0,.9)}
+.pi-body h3,.pi-name{color:#fff}
+.pi-info{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.pi-ihead{color:#FFB09A}
+.pi-info dt{color:#8E869C}
+.pi-info dd{color:#E6E0EE}
+.pi-info dd.p{color:#FFD98A}
+.pi-x{background:rgba(255,255,255,.08);color:#DCD4EA}
+.pi-nav{background:rgba(10,8,16,.7);border:1px solid rgba(255,255,255,.12);color:#E6E0EE}
+/* 사장님 모드 */
+.admin-head{background:linear-gradient(160deg,#2A1420,#1A1226);color:#fff;border-radius:0 0 20px 20px}
+.admin-head h1{color:#fff}
+.admin-head p{color:#B7AEC6}
+.kpi{background:#191424;border:1px solid #2E2740}
+.kpi small{color:#8E869C}
+.kpi b{color:#F5F1F9}
+.adminlogs .lr,.alist .arow{background:#191424;border:1px solid #2E2740;color:#E6E0EE}
+.admin-reset{background:#191424;border:1px solid #3A3350;color:#DCD4EA}
+/* @@POKO-ARCADE-END@@ */
 </style>
 </head>
 <body>
@@ -2579,16 +3317,16 @@ body{background:#0C0E14}
             </div>
           </article>
 
-          <article class="hc-slide hs-coral" data-slide="2" data-hb-act="welcome" role="group" aria-label="오픈 기념 첫 유료 뽑기 1+1">
+          <article class="hc-slide hs-coral" data-slide="2" data-hb-act="welcome" role="group" aria-label="회원가입 시 첫 판 50% 할인">
             <div class="hs-txt">
-              <span class="hs-kicker">OPEN EVENT</span>
-              <h3 class="hs-title">오픈 기념 <b>첫 뽑기</b></h3>
-              <div class="hs-big">1+1<em>보너스 1판</em></div>
+              <span class="hs-kicker">WELCOME EVENT</span>
+              <h3 class="hs-title">회원가입 시 <b>첫 판</b></h3>
+              <div class="hs-big">50%<em>할인</em></div>
               <ul class="hs-list">
-                <li>첫 유료 뽑기 1회에 <b>보너스 1판</b> 추가</li>
-                <li>계정당 1회 · 무료·이벤트 제외</li>
+                <li>첫 유료 뽑기 <b>1판</b>을 반값으로</li>
+                <li>1인 1회 · 무료·이벤트 포인트 제외</li>
               </ul>
-              <p class="hs-note hs-note-dark">탭해서 <b>웰컴 쿠폰</b> 확인</p>
+              <p class="hs-note hs-note-dark">탭해서 <b>웰컴 할인</b> 확인</p>
             </div>
             <div class="hs-art" aria-hidden="true">
               <svg viewBox="0 0 120 130">
@@ -2681,6 +3419,43 @@ body{background:#0C0E14}
     <section class="sec">
       <div class="sec-head"><h2>포코쿠지 <b>시리즈</b></h2><span id="homeSeriesCount">4개 시리즈 · 12박스</span></div>
       <div class="sgrid" id="seriesGrid"></div>
+    </section>
+
+    <!-- ===== 필독 이용안내 & 규정 (4개 핵심 아코디언) ===== -->
+    <section class="rules" id="ruleSec" aria-label="필독 이용안내와 규정">
+      <div class="rule-head">
+        <h2><i></i><em>📋</em>필독 이용안내 <b>&amp; 규정</b></h2>
+        <span>4가지 핵심</span>
+      </div>
+      <p class="rule-lead">랜덤 상품·배송·보관·이벤트 기준이에요. 항목을 누르면 펼쳐져요.</p>
+
+      <article class="rule-card" id="rule-1">
+        <button class="rule-h" type="button" data-rule="1" aria-expanded="false" aria-controls="rule-b-1">
+          <span class="em">🎟️</span><span class="tt">뽑기 · 청약철회</span><span class="pill">필수</span><span class="ch"></span>
+        </button>
+        <div class="rule-b" id="rule-b-1"><p>확률형 랜덤 상품 특성상 <b>결과 확인 후 단순 변심 취소·환불 불가</b>(전자상거래법 제17조 제2항). 단, <b>표시·광고와 다르거나 중대한 하자</b> 시 수령일로부터 <b>3개월</b>(안 날로부터 <b>30일</b>) 내 교환·환불 가능(제17조 제3항).</p></div>
+      </article>
+
+      <article class="rule-card" id="rule-2">
+        <button class="rule-h" type="button" data-rule="2" aria-expanded="false" aria-controls="rule-b-2">
+          <span class="em">🎥</span><span class="tt">개봉 풀영상 필수</span><span class="pill">필수</span><span class="ch"></span>
+        </button>
+        <div class="rule-b" id="rule-b-2"><p>오배송·파손·누락 보상 신청 시 <b>택배 송장이 보이는 상태부터 끊김 없는 무편집 개봉 풀영상</b> 제출 필수. 대량 생산 공산품 특성상 <b>미세한 도색·봉제·마감 차이 및 촬영 조명 차이</b>는 하자로 보지 않아요.</p></div>
+      </article>
+
+      <article class="rule-card" id="rule-3">
+        <button class="rule-h" type="button" data-rule="3" aria-expanded="false" aria-controls="rule-b-3">
+          <span class="em">📦</span><span class="tt">보관 30일 · 배송 · 포인트</span><span class="ch"></span>
+        </button>
+        <div class="rule-b" id="rule-b-3"><p>진열장 보관 기간은 당첨일로부터 <b>30일</b>(기한 경과 시 안내 후 <b>포인트 자동 전환</b>). <b>5개 이상</b> 묶음배송 무료(5개 미만 <b>3,500원</b>). 당첨 상품 및 이벤트·전환 포인트는 <b>현금 환급 불가</b>.</p></div>
+      </article>
+
+      <article class="rule-card" id="rule-4">
+        <button class="rule-h" type="button" data-rule="4" aria-expanded="false" aria-controls="rule-b-4">
+          <span class="em">🛡️</span><span class="tt">이용 연령 · 50% 이벤트</span><span class="ch"></span>
+        </button>
+        <div class="rule-b" id="rule-b-4"><p>구경은 누구나 가능하나 <b>유료 결제는 만 19세 이상(성인)</b>부터 가능. 첫 판 <b>50% 할인</b>은 동일 휴대폰 번호·동일 배송지 <b>1인 1회</b> 한정이며 중복·부정 이용 시 <b>혜택 회수 및 주문 취소</b> 가능.</p></div>
+      </article>
     </section>
 
     <section class="how">
@@ -2788,34 +3563,50 @@ body{background:#0C0E14}
 
   <!-- ================= SHELF (진열장) ================= -->
   <main class="screen subscreen" id="screenBox" hidden>
-    <header class="subhead">
-      <div class="row1">
-        <div><h1>진열장</h1><p>뽑은 굿즈를 모아서 한 번에 배송받아요</p></div>
-        <span class="cnt" id="boxCnt">0점</span>
-      </div>
+    <header class="arc-head">
+      <div class="arc-wm">POKO KUJI <i>포코쿠지</i></div>
+      <div class="arc-hdrow"><h1>진열장<b>.</b></h1><span class="arc-cnt">보관 중 <b id="boxCnt">0점</b></span></div>
+      <p class="arc-sub">뽑은 경품을 모아 한 번에 받아요</p>
     </header>
+
+    <!-- POWER CHARGE : 5점 이상 무료배송 네온 게이지 -->
     <div class="freegage" id="freeGauge">
-      <div class="fg-top"><span class="fg-t">묶음배송 <b>5개 이상 무료</b></span><span class="fg-n" id="fgNow">현재 0/5개</span></div>
-      <div class="fg-bar"><i id="fgFill"></i></div>
+      <div class="fg-top">
+        <span class="fg-t"><i>⚡</i>POWER <b>CHARGE</b></span>
+        <span class="fg-free">5개 이상 무료</span>
+      </div>
+      <div class="pw-row">
+        <div class="fg-bar"><i id="fgFill"></i></div>
+        <span class="fg-n" id="fgNow">현재 0/5개</span>
+      </div>
       <div class="fg-msg" id="fgMsg">5개를 모으면 묶음배송이 무료예요</div>
     </div>
-    <div class="selrow" id="selRow" hidden>
-      <span id="selInfo">0점 선택</span>
-      <button id="selAll">전체 선택</button>
+
+    <!-- 상태 탭 -->
+    <div class="arc-tabs" id="shelfStatus" role="tablist" aria-label="보관 상태">
+      <button class="on" data-status="keep" role="tab" aria-selected="true">보관 중 <b id="scKeep">0</b></button>
+      <button data-status="wait" role="tab" aria-selected="false">출고 대기 <b id="scWait">0</b></button>
+      <button data-status="done" role="tab" aria-selected="false">배송 완료 <b id="scDone">0</b></button>
     </div>
-    <div class="shelftabs" id="shelfTabs" role="tablist">
+
+    <!-- 2차 필터 칩 -->
+    <div class="arc-chips" id="shelfTabs" role="tablist" aria-label="상품 필터">
       <button class="on" data-stab="all" role="tab" aria-selected="true">전체 <b id="stAll">0</b></button>
-      <button data-stab="stock" role="tab" aria-selected="false">재고 상품 <b id="stStock">0</b></button>
+      <button data-stab="stock" role="tab" aria-selected="false">재고 <b id="stStock">0</b></button>
       <button data-stab="stored" role="tab" aria-selected="false">보관함 <b id="stStored">0</b></button>
       <button class="selall" id="shelfSelAll" aria-pressed="false">전체 선택</button>
     </div>
+
     <div id="boxArea"></div>
     <div id="shipArea"></div>
+    <p class="shelfnote" id="shelfNote"><b>보관 30일</b> · 기한이 지난 상품은 자동으로 포인트 전환돼요</p>
+
     <div class="shipbar" id="shipBar" hidden>
+      <div class="ab-info"><span id="selInfo">0점 선택</span><span class="ab-note" id="abNote"></span></div>
       <div class="acts">
-        <button class="act" id="actExchange" disabled><b>교환하기</b><small>포인트로 교환</small></button>
-        <button class="act ship" id="shipBtn" disabled><b>출고하기</b><small id="shipBtnSub">상품을 선택해 주세요</small></button>
-        <button class="act" id="actStore" disabled><b>저장하기</b><small>보관함에 담기</small></button>
+        <button class="act" id="actStore" disabled><b>저장</b><small>보관함</small></button>
+        <button class="act" id="actExchange" disabled><b>포인트 전환</b><small>포인트로 교환</small></button>
+        <button class="act ship" id="shipBtn" disabled><b>묶음배송 신청</b><small id="shipBtnSub">상품을 선택해 주세요</small></button>
       </div>
     </div>
   </main>
@@ -2836,82 +3627,107 @@ body{background:#0C0E14}
   <!-- ================= MY (마이) ================= -->
   <main class="screen subscreen myscreen" id="screenMy" hidden>
     <header class="my-head">
-      <div class="my-top"><h1>마이</h1><span>POKO MEMBER</span></div>
+      <div class="my-top">
+        <span class="arc-lv">PLAYER CARD <b id="myLvTop">· LV.1</b></span>
+        <span class="arc-date" id="myDate">2026.11.28 SAT</span>
+      </div>
       <div class="my-prof">
         <span class="my-ava" id="myAva" aria-hidden="true">
           <svg viewBox="0 0 64 64">
-            <circle cx="32" cy="34" r="21" fill="#fff8ee" stroke="#33252b" stroke-width="2.4"/>
-            <path d="M17 22c0-6 30-6 30 0z" fill="#f0684b" stroke="#33252b" stroke-width="2.2" stroke-linejoin="round"/>
-            <circle cx="25" cy="33" r="2.6" fill="#33252b"/><circle cx="39" cy="33" r="2.6" fill="#33252b"/>
-            <path d="M28 41c2 2.2 6 2.2 8 0" fill="none" stroke="#33252b" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="20" cy="37" r="2.6" fill="#ffc4ae" opacity=".8"/><circle cx="44" cy="37" r="2.6" fill="#ffc4ae" opacity=".8"/>
+            <circle cx="32" cy="34" r="21" fill="#FFF3E2" stroke="#120E18" stroke-width="2.4"/>
+            <path d="M17 22c0-6 30-6 30 0z" fill="#FF5A36" stroke="#120E18" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle cx="25" cy="33" r="2.6" fill="#120E18"/><circle cx="39" cy="33" r="2.6" fill="#120E18"/>
+            <path d="M28 41c2 2.2 6 2.2 8 0" fill="none" stroke="#120E18" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="20" cy="37" r="2.6" fill="#FFB199"/><circle cx="44" cy="37" r="2.6" fill="#FFB199"/>
           </svg>
+          <span class="lvn" id="myLv">LV.1</span>
         </span>
-        <div class="my-nickrow"><b id="myNick">미연</b><button id="myNickEdit" type="button">닉네임 수정</button></div>
-        <p class="my-phone" id="myPhone">010-****-9720</p>
+        <div class="mid">
+          <div class="my-nickrow"><b id="myNick">미연</b><button id="myNickEdit" type="button">수정</button></div>
+          <p class="my-phone" id="myPhone">010-****-9720</p>
+          <div class="exp"><span id="myExpTxt">다음 등급까지 <b>20,000P</b></span>
+            <div class="eb"><i id="myExpBar"></i></div>
+          </div>
+        </div>
+        <div class="coin"><small>COIN</small><b id="myCoin">0<s>P</s></b></div>
+      </div>
+      <div class="tl">
+        <div><small>보유 포인트</small><b><span id="myPts">240,000</span><em>P</em></b></div>
+        <div><small>보관 굿즈</small><b><span id="myWait">0</span><em>점</em></b></div>
+        <div><small>진행 중 배송</small><b><span id="myShipCnt">0</span><em>건</em></b></div>
       </div>
     </header>
 
     <div class="my-body">
-      <section class="my-card">
-        <div class="mp-top">
-          <div>
-            <span class="mp-lbl">보유 포인트</span>
-            <div class="mp-pts"><i>P</i><b id="myPts">240,000</b></div>
-          </div>
-          <button class="mp-charge" id="myCharge" type="button">충전하기</button>
+      <!-- 코인 지갑 -->
+      <section class="pn coral wa">
+        <div class="ph"><h3><i></i>코인 지갑</h3><button data-my="ledger" type="button">충전·사용 내역 →</button></div>
+        <div class="big"><span class="b" id="myWallet">240,000<s>P</s></span><button id="myCharge" type="button">충전하기</button></div>
+        <div class="bars">
+          <div class="ln g"><span>일반 포인트</span><i><b id="myGenBar"></b></i><em id="myGen">0</em></div>
+          <div class="ln e"><span>이벤트 포인트</span><i><b id="myEvtBar"></b></i><em id="myEvt">0</em></div>
         </div>
-        <div class="mp-cpn">
+        <div class="cpn">
           <button data-my="coupons" type="button">쿠폰 센터 <em id="myCouponN">2</em></button>
-          <button data-my="coupons" type="button">쿠폰함 <em id="myCouponMain">1+1</em></button>
+          <button data-my="coupons" type="button">쿠폰함 <em id="myCouponMain">50%</em></button>
         </div>
       </section>
 
-      <section class="my-card">
-        <div class="mc-head"><b>주문 내역</b><button data-my="shiphist" type="button">전체 &gt;</button></div>
-        <div class="mc-orders">
-          <button data-my="shiphist" type="button">
-            <span class="ico"><svg viewBox="0 0 24 24"><path d="M3.5 8.5h17v10h-17z"/><path d="M3.5 8.5L7 4.5h10l3.5 4"/><path d="M12 8.5v10"/></svg></span>
-            <b id="myWait">0</b><em>출고 대기</em>
-          </button>
-          <button data-my="shiphist" type="button">
-            <span class="ico"><svg viewBox="0 0 24 24"><path d="M2.5 7h10v9h-10z"/><path d="M12.5 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/></svg></span>
-            <b id="myDone">0</b><em>출고 완료</em>
-          </button>
-          <button data-my="as" type="button">
-            <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path d="M9.6 9.4c.4-1.3 1.5-2 2.6-2 1.5 0 2.5.9 2.5 2 0 1.6-2.2 1.7-2.5 3"/><circle cx="12" cy="16.4" r=".9" fill="currentColor" stroke="none"/></svg></span>
-            <b id="myAs">0</b><em>A/S·문의</em>
-          </button>
+      <!-- 바로 처리 (ONE TAP) -->
+      <section class="pn coral bt">
+        <div class="ph"><h3><i></i>바로 처리</h3><button data-my="shiphist" type="button">전체 →</button></div>
+        <div class="rows">
+          <div class="rw hot">
+            <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg></span>
+            <div class="tx"><b>오늘 출석</b><span id="myAttTxt">1일째 · 7일 채우면 <b>1,000P</b></span></div>
+            <button class="ac go" id="myAttBtn" type="button">찍기 +100P</button>
+          </div>
+          <div class="rw">
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M3.5 8.5h17v10h-17z"/><path d="M3.5 8.5 7 4.5h10l3.5 4"/><path d="M12 8.5v10"/></svg></span>
+            <div class="tx"><b>출고 대기 <em id="myWaitCnt">0</em>건</b><span id="myWaitSub">아직 출고 신청이 없어요</span></div>
+            <button class="ac out" data-my="shiphist" type="button">조회</button>
+          </div>
+          <div class="rw">
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-9.4A4.6 4.6 0 0 1 12 8a4.6 4.6 0 0 1 7 3.6C19 16.5 12 21 12 21z"/><path d="M12 8V5"/></svg></span>
+            <div class="tx"><b>기본 배송지</b><span id="myAddrTxt">등록된 배송지가 없어요</span></div>
+            <button class="ac out" data-my="addrs" type="button">변경</button>
+          </div>
+          <div class="rw">
+            <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 12h10"/></svg></span>
+            <div class="tx"><b>통관부호 PCCC</b><span id="myPcccTxt">미등록 · 출고 시 필요해요</span></div>
+            <button class="ac out" id="myPcccBtn" type="button">관리</button>
+          </div>
         </div>
       </section>
 
-      <section class="my-card my-menu">
-        <button data-my="noti" type="button">
-          <svg viewBox="0 0 24 24"><path d="M6 10a6 6 0 0112 0c0 4 1.4 5.5 1.4 5.5H4.6S6 14 6 10z"/><path d="M10 19a2 2 0 004 0"/></svg>
-          <span>알림</span><span class="mr"><em id="myNotiN">0</em><svg class="ar" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
-        </button>
-        <button data-my="ledger" type="button">
-          <svg viewBox="0 0 24 24"><path d="M6 3.5h12v17l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>
-          <span>충전·사용 내역</span><span class="mr"><svg class="ar" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
-        </button>
-        <button data-my="shiphist" type="button">
-          <svg viewBox="0 0 24 24"><path d="M2.5 7h10v9h-10z"/><path d="M12.5 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/></svg>
-          <span>배송 내역 (출고 신청)</span><span class="mr"><em id="myShipN" hidden>0</em><svg class="ar" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
-        </button>
-        <button data-my="exch" type="button">
-          <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0113.7-5.6L20 8"/><path d="M20 4v4h-4"/><path d="M20 12a8 8 0 01-13.7 5.6L4 16"/><path d="M4 20v-4h4"/></svg>
-          <span>회수(포인트 교환) 기록</span><span class="mr"><em id="myExN" hidden>0</em><svg class="ar" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
-        </button>
-        <button data-my="favs" type="button">
-          <svg viewBox="0 0 24 24"><path d="M12 4.5l2.4 5 5.4.8-3.9 3.8.9 5.5-4.8-2.8-4.8 2.8.9-5.5L4.2 10.3l5.4-.8z"/></svg>
-          <span>찜한 시리즈</span><span class="mr"><em id="myFavN">0</em><svg class="ar" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
-        </button>
-        <button data-my="addrs" type="button">
-          <svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 10-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
-          <span>배송지 주소 관리</span><span class="mr"><em id="myAddrN">0</em><svg class="ar" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
-        </button>
+      <!-- 7일 연속 출석 -->
+      <section class="pn">
+        <div class="ph"><h3><i></i>7일 연속 출석</h3><button id="myAttOpen" type="button">오늘 찍기 →</button></div>
+        <div class="at"><div class="r" id="myAttStrip"></div></div>
       </section>
-      <p class="foot" style="padding:6px 4px 14px">데모 계정입니다 · 실제 결제·배송은 이루어지지 않아요</p>
+
+      <!-- 규정 · 안내 -->
+      <section class="pn">
+        <div class="mn">
+          <button class="mr" data-my="rule" type="button"><span class="t">개봉 풀영상 규정</span><span class="v pill">필수</span><span class="ch"></span></button>
+          <button class="mr" data-my="shipguide" type="button"><span class="t">출고·통관 안내</span><span class="v">영업일 3~5일</span><span class="ch"></span></button>
+          <button class="mr" data-my="as" type="button"><span class="t">1:1 문의</span><span class="v">접수 <em id="myAs">0</em></span><span class="ch"></span></button>
+        </div>
+      </section>
+
+      <!-- 내 기록 -->
+      <section class="pn">
+        <div class="ph"><h3><i></i>내 기록</h3></div>
+        <div class="mn">
+          <button class="mr" data-my="noti" type="button"><span class="t">알림</span><span class="v"><em id="myNotiN">0</em></span><span class="ch"></span></button>
+          <button class="mr" data-my="ledger" type="button"><span class="t">충전·사용 내역</span><span class="ch"></span></button>
+          <button class="mr" data-my="shiphist" type="button"><span class="t">배송 내역 (출고 신청)</span><span class="v"><em id="myShipN" hidden>0</em>출고 완료 <b id="myDone">0</b></span><span class="ch"></span></button>
+          <button class="mr" data-my="exch" type="button"><span class="t">회수(포인트 교환) 기록</span><span class="v"><em id="myExN" hidden>0</em></span><span class="ch"></span></button>
+          <button class="mr" data-my="favs" type="button"><span class="t">찜한 시리즈</span><span class="v"><em id="myFavN">0</em></span><span class="ch"></span></button>
+          <button class="mr" data-my="addrs" type="button"><span class="t">배송지 주소 관리</span><span class="v"><em id="myAddrN">0</em></span><span class="ch"></span></button>
+        </div>
+      </section>
+      <p class="foot" style="padding:10px 20px 24px">데모 계정입니다 · 실제 결제·배송은 이루어지지 않아요</p>
     </div>
   </main>
 
@@ -3240,19 +4056,25 @@ body{background:#0C0E14}
     </div>
   </div>
 
-  <!-- 웰컴 이벤트 팝업 : 비로그인 첫 접속 · 첫 유료 뽑기 1+1 -->
+  <!-- 웰컴 이벤트 팝업 : 게스트 로그인 직후 · 회원가입 시 첫 판 50% 할인 -->
   <div class="wlp" id="welcomePopup" role="dialog" aria-modal="true" aria-labelledby="wlpTtl" aria-hidden="true">
     <div class="wlp-card">
       <div class="wlp-top">
         <span class="wlp-dots" aria-hidden="true"></span>
         <span class="wlp-badge">🎁 신규 회원 한정 웰컴 이벤트</span>
-        <h2 class="wlp-ttl" id="wlpTtl">첫 유료 뽑기 시 <b>1+1</b><br>보너스 1판!</h2>
+        <h2 class="wlp-ttl" id="wlpTtl">회원가입 시<br><b>첫 판 50% 할인</b></h2>
       </div>
       <div class="wlp-body">
-        <p class="wlp-sub">지금 가입하면 <b>첫 유료 뽑기 1회</b>에<br>보너스 <b>1판(9,900P 상당)</b>을 더 드려요.</p>
-        <div class="wlp-cond"><em>🎟️</em><span>첫 <b>유료</b> 뽑기(1회 이상) 결제 시 1회 · 계정당 1회<br>무료·이벤트 뽑기와 이미 뽑은 기록은 제외됩니다.</span></div>
+        <p class="wlp-sub">지금 <b>회원가입</b>하면 첫 유료 뽑기 <b>1판을 반값</b>으로<br>즐길 수 있어요.</p>
+        <div class="wlp-cond"><em>🎟️</em><span>첫 <b>유료</b> 뽑기 1판 결제 시 자동 적용<br>무료·이벤트 포인트 결제와 이미 뽑은 기록은 제외됩니다.</span></div>
       </div>
-      <button class="wlp-cta" id="wlpJoin" type="button">회원가입하고 1+1 받기<small>가입 후 첫 유료 뽑기에서 자동 적용</small></button>
+      <button class="wlp-cta" id="wlpJoin" type="button">회원가입하고 50% 할인 받기<small>가입 후 첫 유료 뽑기에 자동 적용</small></button>
+      <div class="wlp-terms" id="wlpTerms">
+        <ul>
+          <li>동일 휴대폰 번호 기준 <em>1인 1회</em> · 첫 유료 뽑기 <em>1판 한정</em> (다연차 제외)</li>
+          <li>개봉 후 단순변심 환불 불가 · 상세 규정은 <em>메인 이용안내</em> 참고</li>
+        </ul>
+      </div>
       <div class="wlp-foot">
         <button id="wlpToday" type="button">오늘 하루 보지 않기</button>
         <span aria-hidden="true"></span>
@@ -3502,7 +4324,7 @@ body{background:#0C0E14}
     profile: { nick: "미연", phone: "010-7125-9720" },
     notis: [
       { t: "포코쿠지 오픈!", b: "4개 시리즈 · 12박스가 동시에 열렸어요.", at: "오늘", unread: true },
-      { t: "웰컴 1+1 쿠폰 도착", b: "첫 유료 뽑기에서 보너스 1판을 드려요.", at: "오늘", unread: true }
+      { t: "웰컴 50% 할인 쿠폰 도착", b: "회원가입하면 첫 유료 뽑기 1판을 반값으로 드려요.", at: "오늘", unread: true }
     ],
     ledger: [{ kind: "charge", t: "데모 시작 포인트", amt: 240000, at: "-" }],
     exchanges: [],
@@ -3513,7 +4335,7 @@ body{background:#0C0E14}
     addrId: null,
     customs: { name: "", pccc: "" },
     coupons: [
-      { id: "w11", t: "첫 유료 뽑기 1+1", sub: "웰컴 쿠폰 · 보너스 1판 증정", tag: "웰컴", use: false, exp: "2026-12-31" },
+      { id: "w11", t: "회원가입 첫 판 50% 할인", sub: "웰컴 쿠폰 · 첫 유료 뽑기 1판 반값", tag: "웰컴", use: false, exp: "2026-12-31" },
       { id: "ship0", t: "오픈 기념 무료배송", sub: "5개 미만 출고 시 배송비 3,500원 면제", tag: "오픈", use: true, exp: "2026-11-30" }
     ]
   };
@@ -3809,22 +4631,30 @@ body{background:#0C0E14}
     return { rem, tot, soldBoxes };
   }
 
+  /* 시리즈별 네온(카드 테두리·게이지) — 다크 아케이드 통일형 */
+  const SERIES_NEON = [
+    { c:"#5EE0FF", c2:"#A8F0FF", l:"rgba(94,224,255,.34)" },   /* 포니  */
+    { c:"#7FA8FF", c2:"#CFE0FF", l:"rgba(127,168,255,.34)" },  /* 스노우 */
+    { c:"#FF7A58", c2:"#FFC0A8", l:"rgba(255,122,88,.36)" },   /* 먹방  */
+    { c:"#FFC24A", c2:"#FFE6A8", l:"rgba(255,194,74,.36)" }    /* 밤만주 */
+  ];
+
   function renderHome(){
     $("#seriesGrid").innerHTML = state.series.map((s, i) => {
       const d = s.def, st = seriesStats(s);
       const pct = Math.round((1 - st.rem / st.tot) * 100);
-      return `<button class="scard" data-sid="${s.id}" style="--neon:${GC[d.featured]}" aria-label="${d.name} 열기">
+      const n = SERIES_NEON[i % SERIES_NEON.length];
+      return `<button class="scard" data-sid="${s.id}" style="--nc:${n.c};--nc2:${n.c2};--nc-l:${n.l}" aria-label="${d.name} 열기">
         <span class="sart" style="--a:${d.pal[0]};--b:${d.pal[1]}">
           <span class="sflag ${d.hot ? "hot" : ""}">${d.tag}</span>
-          <span class="shine" style="--sd:${(i * 0.9).toFixed(1)}s"></span>
           ${seriesArt(s)}
           <span class="sneon">★ ${GLABEL(d.featured)}</span>
         </span>
         <span class="sinfo">
           <strong class="sname">${d.name}</strong>
-          <span class="smeta numb">${s.boxes.length} BOX · 잔여 ${won(st.rem)}/${won(st.tot)}</span>
-          <span class="sbar"><i style="width:${pct}%"></i></span>
           <span class="sprice"><i>P</i>${won(d.price)} <em>/회</em></span>
+          <span class="smeta numb">${s.boxes.length} BOX · 잔여 <b>${won(st.rem)}</b>/${won(st.tot)}</span>
+          <span class="sbar"><i style="width:${pct}%"></i></span>
         </span>
       </button>`;
     }).join("");
@@ -4963,15 +5793,18 @@ body{background:#0C0E14}
     });
   }
   /* ============================================================
-     웰컴 이벤트 (1+1) — 비로그인 첫 접속 팝업
+     웰컴 이벤트 (회원가입 시 첫 판 50% 할인) — 게스트 로그인 직후 팝업
      ============================================================ */
   const WLP_DAY = "pokoWelcomeHideUntil";   /* '오늘 하루 보지 않기' 만료 시각 */
   const WLP_SESS = "pokoWelcomeClosed";     /* '닫기' — 이번 세션만 */
-  const WLP_ARMED = "pokoWelcomeArmed";     /* CTA로 1+1 대기 상태 표시 */
+  const WLP_ARMED = "pokoWelcomeArmed";     /* CTA로 할인 대기 상태 표시 */
 
   function wlpIsMember(){
     try{
-      return !!(window.CHII_BACKEND && window.CHII_BACKEND.enabled && window.CHII_BACKEND.currentUser());
+      const u = window.CHII_BACKEND && window.CHII_BACKEND.enabled && window.CHII_BACKEND.currentUser();
+      if (!u) return false;
+      /* 익명(게스트) 세션은 아직 회원이 아니므로 이벤트 대상 */
+      return !(u.is_anonymous || u.isAnonymous || (u.app_metadata && u.app_metadata.provider === "anonymous"));
     }catch(e){ return false; }
   }
   function wlpSnoozed(){
@@ -4996,22 +5829,22 @@ body{background:#0C0E14}
     if (!el) return false;
     el.classList.add("show");
     el.setAttribute("aria-hidden", "false");
-    const cta = $("#wlpJoin");
-    if (cta) cta.focus({ preventScroll: true });
+    try{ el.setAttribute("tabindex", "-1"); el.focus({ preventScroll: true }); }catch(e){}
     return true;
   }
-  /* 비로그인 + 닫은 기록 없음 → 팝업.
-     실서비스 모드에서 로그인 시트가 먼저 떠 있으면 그게 닫힌 뒤에 띄운다. */
-  function wlpMaybe(){
-    let waited = 0;
-    (function tick(){
+  /* 팝업 노출 규칙
+     · 게스트 로그인 직후 → 항상 (닫은 기록·오늘 하루 보지 않기가 없을 때)
+     · 이미 게스트 세션이 남아 있는 재방문 → 홈 로드 후
+     · 백엔드 없는 데모 → 첫 로드 후 (기존과 동일)
+     · 이메일 회원 → 노출 안 함 */
+  function wlpMaybe(delay){
+    const wait = typeof delay === "number" ? delay : 500;
+    setTimeout(function(){
       if (!$("#welcomePopup") || wlpIsMember() || wlpSnoozed()) return;
       const sheet = $("#authSheet");
-      if (sheet && sheet.classList.contains("show") && waited < 12000){
-        waited += 400; setTimeout(tick, 400); return;
-      }
+      if (sheet && sheet.classList.contains("show")) return;   /* 로그인 시트가 떠 있으면 그 뒤에 */
       wlpShow();
-    })();
+    }, wait);
   }
   function wlpInit(){
     const el = $("#welcomePopup");
@@ -5031,14 +5864,25 @@ body{background:#0C0E14}
       try{ localStorage.setItem(WLP_ARMED, sheet ? "member" : "demo"); }catch(e){}
       if (sheet){
         if (typeof openOverlay === "function") openOverlay("authSheet");
-        toast("가입 후 첫 유료 뽑기에서 1+1 보너스가 자동 적용돼요");
+        toast("가입 후 첫 유료 뽑기 1판에 50% 할인이 자동 적용돼요");
       } else {
-        toast("🎁 웰컴 1+1 보너스가 준비됐어요 · 첫 유료 뽑기에 적용(데모)");
+        toast("🎁 웰컴 50% 할인이 준비됐어요 · 첫 유료 뽑기 1판에 적용(데모)");
       }
     });
     window.POKO_WELCOME = { isMember: wlpIsMember, snoozed: wlpSnoozed, show: wlpShow, hide: wlpHide, maybe: wlpMaybe };
-    setTimeout(wlpMaybe, (window.CHII_BACKEND && window.CHII_BACKEND.enabled) ? 900 : 260);
+    /* 데모(실DB 미연결/?demo=1)는 첫 화면에서 바로 안내, 실서비스는 게스트 로그인 직후 */
+    if (!LIVE) wlpMaybe(260);
   }
+  /* 팝업 하단 슬림 약관 — '메인 이용안내' 탭하면 규정 섹션으로 */
+  (function wireWlpTerms(){
+    const box = $("#wlpTerms");
+    if (!box) return;
+    box.addEventListener("click", e => {
+      if (!e.target.closest("li")) return;
+      wlpHide("close");
+      if (window.POKO_RULES) window.POKO_RULES.open(1, true);
+    });
+  })();
   wlpInit();
 
   /* ============================================================
@@ -5149,6 +5993,16 @@ body{background:#0C0E14}
     attRender();
   }
   attInit();
+
+  /* 마이페이지 — 바로 처리 원탭 연결 */
+  (function wireMyOneTap(){
+    const claim = $("#myAttBtn");
+    if (claim) claim.addEventListener("click", () => { attClaim(); renderMy(); });
+    const open = $("#myAttOpen");
+    if (open) open.addEventListener("click", () => { attRender(); openOverlay("attendSheet"); });
+    const pccc = $("#myPcccBtn");
+    if (pccc) pccc.addEventListener("click", () => { if (typeof openPccc === "function") openPccc(); });
+  })();
 
   /* @@POKO-V2-JS-END@@ */
 
@@ -5371,27 +6225,17 @@ body{background:#0C0E14}
     const items = state.shelf.slice().reverse();
     const un = state.shelf.filter(i => !i.shipped);
     $("#boxCnt").textContent = un.length + "점";
-    $("#selRow").hidden = un.length === 0;
-    $("#selInfo").textContent = shipSelection.size + "점 선택";
+    const selRow = $("#selRow");
+    if (selRow) selRow.hidden = un.length === 0;
+    const selInfo = $("#selInfo");
+    if (selInfo) selInfo.textContent = shipSelection.size + "점 선택";
 
     if (!items.length){
       $("#boxArea").innerHTML = `<div class="boxempty">
         <svg viewBox="0 0 24 24"><rect x="3.4" y="8.4" width="17.2" height="7.2" rx="3.6"/><path d="M12 8.4v7.2"/><path d="M6.3 11.3h2.1"/></svg>
         진열장이 비어 있어요.<br>시리즈를 골라 첫 굿즈를 뽑아 보세요!</div>`;
     } else {
-      $("#boxArea").innerHTML = `<div class="boxlist">` + items.map(it => {
-        const s = state.series.find(x => x.id === it.sid);
-        const sel = shipSelection.has(it.id);
-        return `<button class="bitem ${sel ? "sel" : ""} ${it.shipped ? "done" : ""}" data-item="${it.id}">
-          <span class="chk ${sel ? "on" : ""}" style="${it.shipped ? "opacity:0" : ""}"></span>
-          <span class="thumb">${artHTML(it, it.sid, it.ch)}</span>
-          <span class="body">
-            <span class="top"><span class="btag" style="color:${GC[it.g]}">${GLABEL(it.g)}</span><span class="bn">${it.name}</span></span>
-            <span class="bs">${s.def.short} · ${it.boxNo}번 박스 · ${it.shipped ? "배송 신청 완료" : hhmm(it.at)}</span>
-          </span>
-          <span class="bv">P ${won(it.value)}</span>
-        </button>`;
-      }).join("") + `</div>`;
+      $("#boxArea").innerHTML = `<div class="boxlist">` + items.map(shelfItemHTML).join("") + `</div>`;
     }
 
     if (state.ships.length){
@@ -5665,6 +6509,19 @@ body{background:#0C0E14}
     const boxRow = e.target.closest("[data-box]");
     if (boxRow){ selectBox(Number(boxRow.dataset.box)); return; }
 
+    const moreTile = e.target.closest("[data-more]");
+    if (moreTile){
+      const first = state.series[0];
+      if (first) openSeries(first.id);
+      return;
+    }
+
+    const shipOne = e.target.closest("[data-ship]");
+    if (shipOne){ oneTapShip(shipOne.dataset.ship); return; }
+
+    const bmOne = e.target.closest("[data-bm]");
+    if (bmOne){ toggleBookmark(bmOne.dataset.bm); return; }
+
     const item = e.target.closest("[data-item]");
     if (item){ toggleItem(item.dataset.item); return; }
 
@@ -5749,7 +6606,8 @@ body{background:#0C0E14}
     renderBox();
   });
 
-  $("#selAll").addEventListener("click", () => {
+  const _selAllBtn = $("#selAll");
+  if (_selAllBtn) _selAllBtn.addEventListener("click", () => {
     const un = state.shelf.filter(i => !i.shipped);
     if (shipSelection.size === un.length) shipSelection = new Set();
     else shipSelection = new Set(un.map(i => i.id));
@@ -5990,32 +6848,47 @@ body{background:#0C0E14}
     });
   }
 
-  /* ── 진열장 탭 · 선택 · 교환/출고/저장 ── */
+  /* ── 진آ장 탭 · 선택 · 교환/출고/저장 ── */
   let shelfTab = "all";
+  let shelfStatus = "keep";
+  const bmItems = new Set();      /* 카드 북마크(이번 세션) */
   const isStock = it => !it.shipped && !it.stored;
   const isStored = it => !it.shipped && !!it.stored;
+  const isWaiting = it => !!it.shipped && it.status !== "delivered";
+  const isDone = it => it.status === "delivered";
+  const gradeCls = k => k === "last" ? "last" : (k === "A" || k === "B" || k === "C" || k === "K") ? k.toLowerCase() : "x";
 
   function shelfList(){
     const all = state.shelf.slice().reverse();
-    if (shelfTab === "stock") return all.filter(isStock);
-    if (shelfTab === "stored") return all.filter(isStored);
-    return all;
+    let list = all;
+    if (shelfStatus === "keep") list = list.filter(i => !i.shipped);
+    else if (shelfStatus === "wait") list = list.filter(isWaiting);
+    else list = list.filter(isDone);
+    if (shelfTab === "stock") list = list.filter(isStock);
+    else if (shelfTab === "stored") list = list.filter(isStored);
+    return list;
   }
 
+  /* 3열 경품 카드 — 등급 네온 오라 + 원탭 출고 + 북마크 */
   function shelfItemHTML(it){
-    const s = state.series.find(x => x.id === it.sid) || state.series[0];
     const sel = shipSelection.has(it.id);
-    const where = it.shipped ? "출고 완료" : it.stored ? "보관함" : hhmm(it.at);
-    return `<button class="bitem ${sel ? "sel" : ""} ${it.shipped ? "done" : ""}" data-item="${it.id}">
-      <span class="bchk ${sel ? "on" : ""}" style="${it.shipped ? "opacity:0" : ""}">${sel ? "✓" : ""}</span>
-      <span class="bqty">X1</span>
-      <span class="thumb">${artHTML(it, it.sid, it.ch)}</span>
-      <span class="body">
-        <span class="top"><span class="btag" style="color:${GC[it.g]}">${GLABEL(it.g)}</span><span class="bn">${it.name}</span></span>
-        <span class="bs">${s.def.short} · ${it.boxNo}번 박스 · ${where}</span>
+    const raw = imgOf(it.sid, it.k || it.g);
+    let art = artHTML(it, it.sid, it.ch);
+    if (/hang-(b|c|i|k)\.png$/.test(raw)) art = art.replace('class="gimg"', 'class="gimg tr"');
+    const bm = bmItems.has(String(it.id));
+    return `<div class="bitem g-${gradeCls(it.g)}${sel ? " sel" : ""}${it.shipped ? " done" : ""}" data-item="${it.id}"
+        role="button" tabindex="0" aria-pressed="${sel ? "true" : "false"}" aria-label="${it.name} 선택">
+      <span class="art"><span class="halo"></span>${art}
+        <span class="g">${GLABEL(it.g)}</span>
+        <span class="bm${bm ? " on" : ""}" data-bm="${it.id}" role="button" aria-label="북마크"><svg viewBox="0 0 24 24"><path d="M6.5 4.5h11v15l-5.5-4-5.5 4z"/></svg></span>
+        <span class="chk"></span>
       </span>
-      <span class="bv">P ${won(it.value)}</span>
-    </button>`;
+      <span class="nm">${it.name}</span>
+      <span class="pv"><b>${won(it.value)}</b><em>P</em></span>
+      ${it.shipped
+        ? `<span class="sh1" aria-disabled="true">${it.status === "delivered" ? "배송 완료" : "출고 대기"}</span>`
+        : `<span class="sh1" data-ship="${it.id}" role="button" aria-label="${it.name} 바로 출고"><svg viewBox="0 0 24 24"><path d="M4 8.5h16v11H4z"/><path d="M12 8.5v11"/></svg>출고</span>`}
+    </div>`;
   }
 
   function shelfDecorate(){
@@ -6023,6 +6896,19 @@ body{background:#0C0E14}
     const all = state.shelf;
     const stock = all.filter(isStock);
     const stored = all.filter(isStored);
+    const wait = all.filter(isWaiting);
+    const done = all.filter(isDone);
+
+    const scK = $("#scKeep"), scW = $("#scWait"), scD = $("#scDone");
+    if (scK) scK.textContent = all.filter(i => !i.shipped).length;
+    if (scW) scW.textContent = wait.length;
+    if (scD) scD.textContent = done.length;
+    $$("#shelfStatus button[data-status]").forEach(b => {
+      const on = b.dataset.status === shelfStatus;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+
     $("#stAll").textContent = all.length;
     $("#stStock").textContent = stock.length;
     $("#stStored").textContent = stored.length;
@@ -6035,27 +6921,67 @@ body{background:#0C0E14}
     const list = shelfList();
     if (all.length){
       $("#boxArea").innerHTML = `<div class="boxlist">` + (list.length
-        ? list.map(shelfItemHTML).join("")
-        : `<div class="boxempty">이 탭에는 아직 상품이 없어요.<br>${shelfTab === "stored" ? "상품을 골라 <b>저장하기</b>를 누르면 보관함에 담겨요." : "다른 탭에서 상품을 골라 보세요."}</div>`) + `</div>`;
+        ? list.map(shelfItemHTML).join("") +
+          `<div class="morecard" data-more="1" role="button" tabindex="0"><span class="plus">+</span><span class="mtx">한 판 더 뽑기</span></div>`
+        : `<div class="boxempty" style="grid-column:1/-1">이 탭에는 아직 상품이 없어요.<br>${shelfStatus === "done" ? "배송 완료된 상품이 생기면 여기에 모여요." : shelfTab === "stored" ? "상품을 골라 <b>저장</b>을 누르면 보관함에 담겨요." : "다른 탭에서 상품을 골라 보세요."}</div>`) + `</div>`;
     }
 
     const pickable = list.filter(i => !i.shipped);
     const allSel = pickable.length > 0 && pickable.every(i => shipSelection.has(i.id));
     const selAll = $("#shelfSelAll");
-    selAll.classList.toggle("on", allSel);
-    selAll.setAttribute("aria-pressed", allSel ? "true" : "false");
-    selAll.textContent = allSel ? "선택 해제" : "전체 선택";
+    if (selAll){
+      selAll.classList.toggle("on", allSel);
+      selAll.setAttribute("aria-pressed", allSel ? "true" : "false");
+      selAll.textContent = allSel ? "선택 해제" : "전체 선택";
+    }
 
     const sel = all.filter(i => shipSelection.has(i.id) && !i.shipped);
+    const sum = sel.reduce((a, i) => a + (Number(i.value) || 0), 0);
+    const info = $("#selInfo");
+    if (info) info.innerHTML = sel.length
+      ? `<b>${sel.length}점</b> 선택됨 · 전환 시 <b>+${won(sum)}P</b>`
+      : "상품을 선택해 주세요";
+    const note = $("#abNote");
+    if (note) note.textContent = sel.length ? "선택한 상품만 묶어서 받아요" : "카드의 출고 버튼으로 바로 신청";
+    const sNote = $("#shelfNote");
+    if (sNote) sNote.hidden = all.length === 0;
+
     const ex = $("#actExchange"), st = $("#actStore");
     if (ex){
       ex.disabled = sel.length === 0;
-      ex.querySelector("small").textContent = sel.length
-        ? sel.length + "점 · +" + won(sel.reduce((a, i) => a + (Number(i.value) || 0), 0)) + "P"
-        : "포인트로 교환";
+      const sm = ex.querySelector("small");
+      if (sm) sm.textContent = sel.length ? "+" + won(sum) + "P" : "포인트로 교환";
     }
     if (st) st.disabled = sel.length === 0;
   }
+
+  if ($("#shelfStatus")){
+    $("#shelfStatus").addEventListener("click", e => {
+      const b = e.target.closest("button[data-status]");
+      if (!b) return;
+      shelfStatus = b.dataset.status;
+      renderBox();
+    });
+  }
+
+  /* 카드 원탭 출고 · 북마크 */
+  function oneTapShip(id){
+    const key = String(id);
+    const it = state.shelf.find(x => String(x.id) === key);
+    if (!it || it.shipped) return;
+    shipSelection = new Set([it.id]);
+    renderBox();
+    openShip();
+  }
+
+  function toggleBookmark(id){
+    const key = String(id);
+    const it = state.shelf.find(x => String(x.id) === key);
+    if (bmItems.has(key)){ bmItems.delete(key); toast("북마크를 해제했어요"); }
+    else { bmItems.add(key); toast((it ? it.name : "상품") + " 북마크 저장"); }
+    renderBox();
+  }
+
 
   if ($("#shelfTabs")){
     $("#shelfTabs").addEventListener("click", e => {
@@ -6218,6 +7144,8 @@ body{background:#0C0E14}
       closeOverlay("authSheet");
       msg.textContent = "";
       toast("로그인했어요");
+      /* 게스트로 들어간 직후 → 회원가입 50% 할인 이벤트 팝업 */
+      if (kind === "guest" && typeof wlpMaybe === "function") wlpMaybe(560);
     } catch (e){
       msg.textContent = e.message || "실패했어요";
     }
@@ -6238,6 +7166,7 @@ body{background:#0C0E14}
       liveReady = true;
       startHomePoll();
       if (!CHII_BACKEND.currentUser()) openOverlay("authSheet");
+      else if (typeof wlpMaybe === "function") wlpMaybe(1200);   /* 게스트 세션 재방문 → 이벤트 안내 */
     } catch (e){
       liveReady = true;
       toast("백엔드 연결 실패 · " + (e.message || "설정을 확인해 주세요"));
@@ -6362,14 +7291,45 @@ body{background:#0C0E14}
   function hbPlay(){ hbStop(); hbTimer = setInterval(() => hbGo(hbIdx + 1), 4600); }
   function hbJump(i){ hbGo(i); hbPlay(); }
 
+  /* ============================================================
+     필독 이용안내 & 규정 — 4개 아코디언
+     ============================================================ */
+  function ruleSet(n, open, scroll){
+    $$("#ruleSec .rule-card").forEach(c => {
+      const on = !!open && c.id === "rule-" + n;
+      c.classList.toggle("open", on);
+      const h = c.querySelector(".rule-h");
+      if (h) h.setAttribute("aria-expanded", on ? "true" : "false");
+    });
+    if (open && scroll){
+      const el = $("#rule-" + n);
+      if (el && el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+  window.POKO_RULES = {
+    open: (n, scroll) => {
+      if (typeof showScreen === "function") showScreen("home");
+      setTimeout(() => ruleSet(n, true, scroll !== false), 80);
+    },
+    close: () => ruleSet(0, false)
+  };
+  $$("#ruleSec .rule-h").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const n = btn.dataset.rule;
+      const card = $("#rule-" + n);
+      const open = !(card && card.classList.contains("open"));
+      ruleSet(n, open);
+    });
+  });
+
   function hbAct(act){
     if (!act) return;
     /* 배너 탭(pointerup)으로 시트를 열면 같은 제스처의 click 이 배경을 눠 바로 닫히므로 한 번 삼킨다 */
     swallowOverlayClick = Date.now() + 600;
-    if (act === "shipguide") openShipGuide();
-    else if (act === "welcome") openEvent();
+    if (act === "shipguide") window.POKO_RULES.open(2, true);
+    else if (act === "welcome") window.POKO_RULES.open(4, true);
     else if (act === "attend"){ openOverlay("attendSheet"); attRender(); }
-    else if (act === "minor") openNotice();
+    else if (act === "minor") window.POKO_RULES.open(1, true);
     else if (act === "contact") openContact();
   }
 
@@ -6486,28 +7446,102 @@ body{background:#0C0E14}
     feedPauseT = setTimeout(() => { tr.style.animationPlayState = "running"; }, 3400);
   }
 
-  /* ---------- ③ 마이페이지 ---------- */
+  /* ---------- ③ 마이페이지 (PLAYER CARD · 코인 지갑 · 바로 처리) ---------- */
+  const MY_LV_STEP = 20000;
   function renderMy(){
     const pts = $("#myPts");
     if (!pts) return;
-    pts.textContent = won(state.points);
+    const P = Math.max(0, Number(state.points) || 0);
+    const evt = Math.max(0, Math.min(P, attSavedPts()));
+    const gen = Math.max(0, P - evt);
+    const lv = Math.floor(P / MY_LV_STEP) + 1;
+    const exp = P % MY_LV_STEP;
+    const pct = Math.max(P === 0 ? 2 : 4, Math.round(exp / MY_LV_STEP * 100));
+
+    pts.textContent = won(P);
     $("#myNick").textContent = state.profile.nick;
     $("#myPhone").textContent = maskPhone(state.profile.phone);
-    const waitN = state.shelf.filter(i => !i.shipped).length;
+
+    const lvTop = $("#myLvTop"), lvBadge = $("#myLv");
+    if (lvTop) lvTop.textContent = "· LV." + lv;
+    if (lvBadge) lvBadge.textContent = "LV." + lv;
+    const ava = $("#myAva");
+    if (ava) ava.style.setProperty("--expd", pct + "%");
+    const expTxt = $("#myExpTxt");
+    if (expTxt) expTxt.innerHTML = "다음 등급까지 <b>" + won(MY_LV_STEP - exp) + "P</b>";
+    const expBar = $("#myExpBar");
+    if (expBar) expBar.style.width = pct + "%";
+    const coin = $("#myCoin");
+    if (coin) coin.innerHTML = won(P) + "<s>P</s>";
+    const wallet = $("#myWallet");
+    if (wallet) wallet.innerHTML = won(P) + "<s>P</s>";
+    const genEl = $("#myGen"), evtEl = $("#myEvt");
+    if (genEl) genEl.textContent = won(gen);
+    if (evtEl) evtEl.textContent = won(evt);
+    const gb = $("#myGenBar"), eb = $("#myEvtBar");
+    if (gb) gb.style.width = (P ? Math.round(gen / P * 100) : 0) + "%";
+    if (eb) eb.style.width = (P ? Math.round(evt / P * 100) : 0) + "%";
+
+    const unN = state.shelf.filter(i => !i.shipped).length;
     const doneN = state.shelf.filter(i => i.shipped).length;
-    $("#myWait").textContent = waitN;
-    $("#myDone").textContent = doneN;
+    $("#myWait").textContent = unN;
+    const shipCnt = $("#myShipCnt");
+    if (shipCnt) shipCnt.textContent = state.ships.length;
+    const waitCnt = $("#myWaitCnt");
+    if (waitCnt) waitCnt.textContent = state.ships.length;
+    const waitSub = $("#myWaitSub");
+    if (waitSub){
+      const last = state.ships[state.ships.length - 1];
+      waitSub.textContent = last ? (last.no + " · " + last.count + "점 · " + (last.status === "ready" ? "배송 준비중" : "출고 완료")) : "아직 출고 신청이 없어요";
+    }
     $("#myAs").textContent = state.inquiries.length;
     $("#myNotiN").textContent = state.notis.filter(n => n.unread).length;
     $("#myFavN").textContent = state.favs.length;
     $("#myAddrN").textContent = state.addrs.length;
+    const dn = $("#myDone");
+    if (dn) dn.textContent = doneN;
+
     const cpn = state.coupons.filter(c => !c.use).length;
     $("#myCouponN").textContent = cpn;
-    $("#myCouponMain").textContent = cpn ? "1+1" : "없음";
+    $("#myCouponMain").textContent = cpn ? "50%" : "없음";
     const sn = $("#myShipN");
     if (sn){ sn.hidden = state.ships.length === 0; sn.textContent = state.ships.length; }
     const en = $("#myExN");
     if (en){ en.hidden = state.exchanges.length === 0; en.textContent = state.exchanges.length; }
+
+    /* 바로 처리 — 오늘 출석 · 기본 배송지 · 통관부호 */
+    const att = attLoad();
+    const doneToday = att.last === attD(0);
+    const cur = att.streak;
+    const strip = $("#myAttStrip");
+    if (strip){
+      strip.innerHTML = ATT_REW.map((r, i) => {
+        const cls = i < cur ? "on" : (!doneToday && i === cur ? "td" : "");
+        return "<div class=\"" + cls + "\"><em>D" + (i + 1) + "</em><b>" + (i === 6 ? "1K" : won(r)) + "</b></div>";
+      }).join("");
+    }
+    const attTxt = $("#myAttTxt");
+    if (attTxt) attTxt.innerHTML = doneToday
+      ? "오늘 출석 완료 · <b>" + cur + "일째 연속</b>"
+      : (cur ? cur + "일째 연속 · 7일 채우면 <b>1,000P</b>" : "아직 시작 전 · 7일 채우면 <b>1,000P</b>");
+    const attBtn = $("#myAttBtn");
+    if (attBtn){
+      attBtn.classList.toggle("done", doneToday);
+      attBtn.textContent = doneToday ? "완료" : "찍기 +" + won(ATT_REW[Math.min(cur, 6)] || 0) + "P";
+    }
+    const attOpen = $("#myAttOpen");
+    if (attOpen) attOpen.textContent = doneToday ? "출석 완료 →" : "오늘 찍기 →";
+
+    const addrTxt = $("#myAddrTxt");
+    if (addrTxt){
+      const a = state.addrs.find(x => x.def) || state.addrs[0];
+      addrTxt.textContent = a ? (a.name + " · " + a.addr) : "등록된 배송지가 없어요";
+    }
+    const pcccTxt = $("#myPcccTxt");
+    if (pcccTxt){
+      const pc = (state.customs.pccc || "").toUpperCase();
+      pcccTxt.textContent = /^P\d{12}$/.test(pc) ? (pc.slice(0, 5) + "****" + pc.slice(-4) + " · 등록 완료") : "미등록 · 출고 시 필요해요";
+    }
   }
 
   function openInfo(title, body, acts, onMount){
@@ -6521,6 +7555,16 @@ body{background:#0C0E14}
 
   function myOpen(key){
     if (key === "addrs"){ openAddr(); return; }
+    if (key === "shipguide"){ openShipGuide(); return; }
+    if (key === "rule"){
+      openInfo("개봉 풀영상 규정",
+        '<p class="info-p">랜덤 상품은 <b>수령 후 3일 이내</b>에 <b>개봉 전면이 보이는 무편집 풀영상</b>이 있어야 교환·반품을 도와드릴 수 있어요.</p>'
+        + '<p class="info-p">· 택배 박스와 상품 포장을 <b>개봉하는 순간부터 끊김 없이</b> 촬영해 주세요.<br>'
+        + '· 편집·배속·중간 컷이 있으면 확인이 어려워 접수가 제한될 수 있어요.<br>'
+        + '· 일본 직수입 상품은 미세 구김·초기 공정 하자를 양해해 주세요.</p>'
+        + '<p class="info-p">교환·반품 배송비는 단순 변심의 경우 <b>왕복 배송비</b>를 고객이 부담해요.</p>');
+      return;
+    }
     const titles = { noti: "알림", ledger: "충전·사용 내역", shiphist: "배송 내역",
       exch: "회수(포인트 교환) 기록", favs: "찜한 시리즈", coupons: "쿠폰함", as: "A/S·문의" };
     let body = "", acts = "", onMount = null;
@@ -6572,7 +7616,7 @@ body{background:#0C0E14}
       body = state.coupons.map(c => '<div class="cpn-card' + (c.use ? ' used' : '') + '"><div class="ct">'
         + c.t + '<em>' + (c.use ? "사용완료" : c.tag) + '</em></div><div class="cs">' + c.sub
         + ' · ' + c.exp + '까지</div></div>').join("")
-        + '<p class="info-p" style="margin-top:8px">첫 유료 뽑기 1+1 쿠폰은 첫 결제 시 자동 적용돼요.</p>';
+        + '<p class="info-p" style="margin-top:8px">회원가입 첫 판 50% 할인 쿠폰은 첫 유료 결제 시 자동 적용돼요.</p>';
     } else if (key === "as"){
       body = (state.inquiries.length
           ? '<div class="info-list" style="margin-bottom:8px">' + state.inquiries.map(q => '<div class="info-row"><span class="nm">'
@@ -6644,8 +7688,8 @@ body{background:#0C0E14}
 
   function openNotice(){
     openInfo("공지 · 구매 전 확인",
-      '<div class="info-tip" style="background:#fff2ec;border-color:#ffcdb8;color:#a3310f">'
-      + '<b style="color:#de3208;font-size:11px">미성년자는 구매 NO! NO!</b><br>'
+      '<div class="info-tip hot">'
+      + '<b class="hot-ttl">미성년자는 구매 NO! NO!</b><br>'
       + '본 상품은 <b>랜덤 상품</b>이며 합리적인 소비를 부탁드립니다!</div>'
       + '<p class="info-p" style="margin-top:9px"><b>진열장에 5개 이상 적립 시 무료 배송</b><br>'
       + '5개 미만은 묶음배송비 3,500원이에요.</p>'
@@ -6664,10 +7708,11 @@ body{background:#0C0E14}
   }
 
   function openEvent(){
-    openInfo("오픈 기념 1+1 웰컴 이벤트",
-      '<p class="info-p">첫 <b>유료 뽑기 1회</b>에 <b>보너스 1판</b>을 더 드려요. (6,200P 상당)</p>'
-      + '<div class="info-tip">조건 · 첫 유료 뽑기(1회 이상) 결제 시 1회 · 계정당 1회<br>무료·이벤트 뽑기와 이미 뽑은 기록은 제외</div>'
-      + '<p class="info-p" style="margin-top:8px">쿠폰은 <b>마이 &gt; 쿠폰함</b>에서 확인할 수 있어요.</p>',
+    openInfo("회원가입 시 첫 판 50% 할인",
+      '<p class="info-p">회원가입하면 첫 <b>유료 뽑기 1판</b>을 <b>50% 할인</b>된 금액으로 즐길 수 있어요.</p>'
+      + '<div class="info-tip">동일 휴대폰 번호(본인인증)·동일 배송지 기준 <b>1인 1회 한정</b><br>중복 가입·부정 이용 시 혜택 회수 및 이용 제한·주문 취소 가능</div>'
+      + '<p class="info-p" style="margin-top:8px">첫 유료 뽑기 <b>1판 한정</b>이며 다연차 합산·무료/이벤트 포인트 결제는 제외돼요.<br>확률형 랜덤 상품 특성상 <b>티켓 개봉(뽑기 완료) 후 단순 변심 취소·환불은 불가</b>해요.</p>'
+      + '<p class="info-p">쿠폰은 <b>마이 &gt; 쿠폰함</b>에서 확인할 수 있어요.</p>',
       '<button class="btn-ghost" type="button" data-close="infoSheet">닫기</button>'
       + '<button class="btn-primary" id="evGo" type="button">시리즈 보러 가기<small>뽑기 시작하기</small></button>',
       () => {
