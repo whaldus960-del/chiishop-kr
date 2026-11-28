@@ -358,8 +358,14 @@
     var u = currentUser();
     if (!u) return Promise.resolve(null);
     return request("/rest/v1/profiles?select=id,nickname,points,is_admin," +
-      "total_spent,starter_id,welcome_discount_used,phone&id=eq." + u.id)
+      "total_spent,starter_id,welcome_discount_used,app_bonus_claimed,phone&id=eq." + u.id)
       .then(function (rows) { return rows && rows[0] ? rows[0] : null; });
+  }
+
+  /* 홈 화면 앱 설치 보너스 +1,000P — 계정당 1회.
+     응답: { ok, code:'claimed'|'already_claimed'|'guest'|'no_auth', granted, points } */
+  function appBonus() {
+    return request("/rest/v1/rpc/claim_app_install_bonus", { method: "POST", body: {} });
   }
 
   function updateProfile(patch) {
@@ -497,6 +503,7 @@
     onAuth: function (fn) { listeners.push(fn); return function () { listeners = listeners.filter(function (x) { return x !== fn; }); }; },
     catalog: catalog,
     profile: profile,
+    appBonus: appBonus,
     draw: draw,
     shelf: shelf,
     shipments: shipments,
