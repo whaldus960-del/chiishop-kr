@@ -40,6 +40,7 @@
 - `verify_v18.py` **145체크**(포인트·골드 카드 / 쿠폰함 3탭·빈 상태·코드 등록·배지 갱신 / 내역 페이지 탭·빈 상태 / 출석 페이지 / 320·360·390 넘침 0 / 콘솔 0).
 - 그대로 통과: `run_verify_offline.sh` **318 + 90** · `verify_evo.py` **71**(도감 풀스크린 페이지 대응으로 갱신 — v19 이후 깨져 있던 것 복구) · `verify_v17.py` 141 · `verify_tour.py` 90 · `verify_rank.py` 34 · `verify_pwa.py` 54 · `verify_install_popup.py` 22 · `verify_jwt.py` 10 · `_dev_banner_fit.py` ALL OK · `_dev_bgm_check.py` 28 · `_dev_audio_ios_check.py` 10 · `_dev_sound_check.py` ALL OK.
 - `verify_draw.py` 는 출석을 바깥 탭으로 닫던 부분을 `← 뒤로` 로 갱신(90).
+- **라이브 검증 메모**: `verify_v18.py https://pokokuji.kr/` 는 라이브 박스의 `x5` 도전이 잠겨 있으면(재고·완판) E섹션에서 멈춥니다. 마이페이지·쿠폰함 섹션은 라이브에서 따로 **18체크** 통과했습니다(포인트·골드 카드 / 쿠폰함 풀스크린 844px · 3탭 · 빈 상태 / `← 뒤로` 복귀 / 배송 내역 4탭 / 출석 페이지 / 콘솔 0).
 
 ```bash
 python3 verify_v18.py                        # 로컬 데모(자동 기동)
