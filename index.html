@@ -7970,8 +7970,11 @@ body{background:#05050A;color:var(--tx)}
       if (me.nickname) state.profile.nick = me.nickname;
       if (me.phone) state.profile.phone = me.phone;
     }
-    /* 스타팅은 계정에 저장된 값이 우선 (다른 기기에서도 같은 캐릭터) */
-    if (me && me.starter_id){
+    /* 스타팅은 계정에 저장된 값이 우선 (다른 기기에서도 같은 캐릭터) — 단, 정식 회원만.
+       게스트는 브라우저 저장(localStorage)을 그대로 쓴다. */
+    let memberNow = false;
+    try { memberNow = !!(window.CHII_BACKEND.isMember && CHII_BACKEND.isMember()); } catch (e){}
+    if (me && me.starter_id && memberNow){
       const sk = EVO_KEY_OF_DB[me.starter_id];
       if (sk && EVO_STARTERS[sk]){
         evoStarter = sk;
