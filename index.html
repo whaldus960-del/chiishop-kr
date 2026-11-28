@@ -6234,21 +6234,23 @@ body{background:#05050A;color:var(--tx)}
     if (!b) return;
     const tab = view.rankTab === "lucky" ? "lucky" : "draws";
     const data = ensureRank(b);
+    /* 4초 잔여 수량 폴링이 같은 내용을 다시 그려 깜빡이지 않도록 동일 HTML 은 건너뛴다 */
+    const paint = html => { if (b.rankHtml === html) return; b.rankHtml = html; $("#dRank").innerHTML = html; };
     const head = `<div class="rktabs" role="tablist">` + RANK_TABS.map(t =>
       `<button class="${t.k === tab ? "on" : ""}" type="button" role="tab" data-ranktab="${t.k}" aria-selected="${t.k === tab}"><b>${t.label}</b><em>${t.sub}</em></button>`
     ).join("") + `</div>`;
 
     if (!data){
-      $("#dRank").innerHTML = `<div class="rank">${head}<div class="rkload"><i></i>순위를 불러오는 중…</div></div>`;
+      paint(`<div class="rank">${head}<div class="rkload"><i></i>순위를 불러오는 중…</div></div>`);
       return;
     }
     const rows = rankRowsSorted(data, tab);
     if (!rows.length){
-      $("#dRank").innerHTML = `<div class="rank">${head}` + emptyStateHTML({
+      paint(`<div class="rank">${head}` + emptyStateHTML({
         title: "아직 뽑기 기록이 없어요",
         body: b.no + "번 박스의 첫 뽑기가 나오면 여기에 순위가 쌓여요 🥚",
         cta: "상품 보고 첫 티켓 뜯기", act: "tab-goods"
-      }) + `</div>`;
+      }) + `</div>`);
       return;
     }
     const totalDraws = rows.reduce((a, r) => a + r.draws, 0);
@@ -6266,7 +6268,7 @@ body{background:#05050A;color:var(--tx)}
       </div>`;
     });
     html += `<div class="rktip">닉네임은 개인정보 보호를 위해 <b>일부만</b> 보여 드려요 · 이 박스의 실제 뽑기 기록 기준이에요.</div></div>`;
-    $("#dRank").innerHTML = html;
+    paint(html);
   }
 
   /* ── 기록 탭 : 실DB는 실제 최근 뽑기, 데모는 박스 시드 표본 ── */
