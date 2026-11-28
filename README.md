@@ -342,10 +342,14 @@
 
 ```bash
 export LD_LIBRARY_PATH=/workspace/.libs/usr/lib/x86_64-linux-gnu:/workspace/.apt/root/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
-python3 verify.py            # 로컬 파일 검증
-python3 verify.py https://whaldus960-del.github.io/chiishop-kr/   # 라이브 검증
-python3 shots.py https://whaldus960-del.github.io/chiishop-kr/
+bash run_verify_offline.sh        # ★ 표준: config.js 비운 오프라인 데모 사본으로 verify.py + verify_draw.py
+python3 verify.py            # (참고) 로컬 파일 = 실DB 라이브 모드 → 박스 잔여·확률 기대값이 DB 상태에 따라 달라짐
+python3 verify.py https://pokokuji.kr/   # 라이브 검증 (실DB 상태 반영)
+python3 shots.py https://pokokuji.kr/
 ```
+
+> `config.js` 가 실DB를 가리키므로 `python3 verify.py`(파일 직접)는 라이브 모드로 떠서
+> 재고·확률 고정 기대값이 어긋날 수 있습니다. 결정적 검증은 `run_verify_offline.sh` 로 하세요.
 
 ## 실제 서비스 전 확인할 것
 
