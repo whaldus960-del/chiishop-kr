@@ -5,10 +5,11 @@
 시리즈별 **3박스**(박스당 99장) 교체, `x1 / x5 / x10 / ALL` 뽑기, 진열장·묶음 배송·사장님 모드를 담았습니다.
 
 - 단일 파일(`index.html`)로 동작하며 외부 CDN·폰트·이미지에 의존하지 않습니다. (모든 일러스트는 인라인 SVG)
+- 홈 화면 앱(PWA) 설치는 `manifest.json` + `assets/icon-180/192/512.png` 3개 파일만 더 씁니다.
 - 모바일 기준 420px 프레임, 데스크톱에서는 중앙 정렬로 표시됩니다.
 - 결제·배송은 **데모로만** 동작하며 실제 청구나 발송은 없습니다.
 - 상태는 메모리에만 있고 새로고침하면 초기화됩니다.
-- 사이트 아이콘(헤더·푸터 로고·파비콘)만 `assets/poko-mascot.png` · `favicon.png` · `apple-touch-icon.png` PNG를 씁니다.
+- 사이트 아이콘(헤더·푸터 로고·파비콘)만 `assets/poko-mascot.png` · `favicon.png` · PNG를 씁니다. (`apple-touch-icon` 은 `assets/icon-180.png`)
 
 ## 2026-11-28 9차 — 📲 PWA '홈 화면에 추가' · 전체화면 앱 + 기기별 설치 안내 (v14)
 
