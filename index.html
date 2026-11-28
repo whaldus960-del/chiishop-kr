@@ -3242,6 +3242,71 @@ body{background:#05050A;color:var(--tx)}
 .adminlogs .lr,.alist .arow{background:#191424;border:1px solid #2E2740;color:#E6E0EE}
 .admin-reset{background:#191424;border:1px solid #3A3350;color:#DCD4EA}
 /* @@POKO-ARCADE-END@@ */
+
+/* @@POKO-V10-BEGIN@@ ============================================
+   v10 — 상단 그래픽 배너(카드형 비주얼 + 배지) · 하단 다이어트 · 규정 모달 · 당첨 바 썸네일
+   ============================================================ */
+/* ① 배너 */
+.hcar .hc-view{height:172px}
+.hcar .hc-slide{padding:10px 13px 30px;gap:10px;align-items:center}
+.hs-txt{justify-content:center}
+.hs-kicker{font-size:7.6px;padding:2px 6px;letter-spacing:1.2px}
+.hs-title{margin:5px 0 0;font-size:19.5px;line-height:1.15;letter-spacing:-1.05px}
+.hs-list{margin:5px 0 0;gap:1.5px}
+.hs-list li{font-size:8.5px;line-height:1.32}
+.hs-list li::before{top:3.4px}
+.hs-note{margin:5px 0 0;padding:3px 6px;font-size:8.2px;line-height:1.3}
+.hs-art{position:relative;width:100px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.hs-art svg{width:100%;height:auto;display:block;filter:drop-shadow(0 7px 12px rgba(0,0,0,.42))}
+.hb-chip{position:absolute;top:-3px;right:-1px;z-index:3;padding:2px 6px;border-radius:999px;
+  font-size:6.9px;font-weight:900;letter-spacing:-.1px;white-space:nowrap;color:#2A1B02;
+  background:linear-gradient(180deg,#FFE7A6,#FFB627);border:1px solid rgba(20,22,29,.85);
+  box-shadow:0 0 12px -3px rgba(255,194,74,.95)}
+.hb-chip.lime{background:linear-gradient(180deg,#E6FF9E,#B9F53E);box-shadow:0 0 12px -3px rgba(201,255,87,.95)}
+.hb-chip.coral{background:linear-gradient(180deg,#FFB49C,#FF5A36);color:#2A0803;box-shadow:0 0 12px -3px rgba(255,90,54,.95)}
+.hb-chip.cyan{background:linear-gradient(180deg,#C9F6FF,#5EE0FF);color:#062A33;box-shadow:0 0 12px -3px rgba(94,224,255,.95)}
+.hb-more{align-self:center;margin-top:2px;padding:1.5px 7px;border-radius:999px;
+  font-size:7px;font-weight:900;letter-spacing:-.1px;white-space:nowrap;color:#FFD9CD;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,140,110,.42)}
+.hcar .hc-slide.hs-coral .hs-title b{color:#FFF6C9;text-decoration:none;text-shadow:0 0 18px rgba(255,194,74,.9)}
+.hcar .hc-slide.hs-coral .hs-note b{color:#FFF6C9}
+@media(min-width:430px){ .hcar .hc-view{height:178px} .hs-title{font-size:20.5px} }
+@media(max-width:374px){
+  .hcar .hc-view{height:182px}
+  .hs-title{font-size:17.6px}
+  .hs-art{width:88px}
+  .hs-list li{font-size:8.1px}
+  .hs-note{font-size:7.9px}
+}
+
+/* ② 규정 모달 */
+#rulesSheet{z-index:93}
+#rulesSheet .sheet{max-height:90vh}
+#rulesSheet .sheet-body{padding:0 13px 10px}
+#rulesSheet .rs-lead{margin:2px 0 9px;font-size:9.2px;font-weight:700;color:#A49CB0;line-height:1.55;letter-spacing:-.2px}
+#rulesSheet .rule-card{margin-bottom:6px}
+#rulesSheet .rule-b p{padding:0 12px 11px 44px;font-size:9.4px}
+#rulesSheet .rs-foot{margin:10px 1px 4px;padding:9px 11px;border-radius:10px;
+  background:rgba(255,255,255,.035);border:1px dashed #2E2740;
+  font-size:8.7px;font-weight:700;color:#8E869C;line-height:1.6;letter-spacing:-.2px}
+#rulesSheet .rs-foot b{color:#E6E0EE;font-weight:900}
+#rulesSheet .sheet-actions .btn-primary{flex:1}
+
+/* ③ 사업자 푸터 링크 */
+.bizfoot{margin-top:16px}
+.bizfoot .bf-links{margin:8px 0 0;padding-top:7px;border-top:1px solid rgba(255,255,255,.055);
+  display:flex;justify-content:center}
+.bizfoot .bf-link{padding:3px 10px;border-radius:999px;font-size:7.4px;font-weight:800;letter-spacing:.1px;
+  color:#9A92A8;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12)}
+.bizfoot .bf-link:active{color:#FFB09A;border-color:rgba(255,90,54,.5)}
+
+/* ④ 실시간 당첨 바 — 굿즈 썸네일 강조 (높이 유지) */
+.wfeed .wf-th{width:20px;height:20px;border-radius:6px;background:#241E33;
+  border:1px solid rgba(255,255,255,.16);box-shadow:0 0 9px -4px rgba(255,90,54,.95)}
+.wfeed .wf-th img{width:100%;height:100%;object-fit:cover}
+.wfeed .wf-it b{color:#fff}
+.wfeed .wf-g{box-shadow:0 0 9px -2px var(--g,#FFD24A),inset 0 0 6px -3px var(--g,#FFD24A)}
+/* @@POKO-V10-END@@ */
 </style>
 </head>
 <body>
@@ -3277,125 +3342,215 @@ body{background:#05050A;color:var(--tx)}
     <section class="hcar" id="homeBanner" aria-roledescription="carousel" aria-label="포코쿠지 홈 배너">
       <div class="hc-view" id="hbView">
         <div class="hc-track" id="hbTrack">
-          <article class="hc-slide hs-dark" data-slide="0" data-hb-act="minor" role="group" aria-label="미성년자 구매 제한 및 랜덤 상품 안내">
-            <div class="hs-txt">
-              <span class="hs-kicker">BUY NOTICE</span>
-              <h3 class="hs-title">미성년자는<br>구매 <b>NO! NO!</b></h3>
-              <ul class="hs-list">
-                <li>본 상품은 <b>랜덤 상품</b>이며 합리적인 소비를 부탁드립니다!</li>
-              </ul>
-              <p class="hs-note">진열장에 <b>5개 이상</b> 적립 시 무료 배송</p>
-            </div>
-            <div class="hs-art" aria-hidden="true">
-              <svg viewBox="0 0 120 130">
-                <circle cx="60" cy="64" r="46" fill="#FF4A1E"/>
-                <circle cx="60" cy="64" r="27" fill="none" stroke="#14161D" stroke-width="10"/>
-                <path d="M40 84l40-40" stroke="#14161D" stroke-width="10" stroke-linecap="round"/>
-
-              </svg>
-            </div>
-          </article>
-
-          <article class="hc-slide hs-light" data-slide="1" data-hb-act="shipguide" role="group" aria-label="출고 및 교환·반품 주의사항">
-            <div class="hs-txt">
-              <span class="hs-kicker">출고 · 교환 안내</span>
-              <h3 class="hs-title">받기 전에 <b>꼭 확인</b></h3>
-              <ul class="hs-list">
-                <li>출고 신청은 <b>7~14일 이내</b> 순차 배송</li>
-                <li>일본 직수입은 <b>미세 구겨짐·초기 공정 하자</b> 양해</li>
-                <li>교환·반품은 <b>3일 이내 개봉 풀영상(무편집)</b></li>
-              </ul>
-              <p class="hs-note">단순 변심·<b>왕복 배송비</b>는 고객 부담</p>
-            </div>
-            <div class="hs-art" aria-hidden="true">
-              <svg viewBox="0 0 120 130">
-                <ellipse cx="60" cy="117" rx="34" ry="6" fill="rgba(20,22,29,.09)"/>
-                <path d="M39 60h42v46H39z" fill="#FFE0D4" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
-                <path d="M34 44h52v16H34z" fill="#FF4A1E" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
-                <path d="M60 44v62" stroke="#14161D" stroke-width="2.6"/>
-                <path d="M60 44c-11 0-17-5-14-10 3-5 10 0 14 10z" fill="#FF4A1E" stroke="#14161D" stroke-width="2.2" stroke-linejoin="round"/>
-                <path d="M60 44c11 0 17-5 14-10-3-5-10 0-14 10z" fill="#FF4A1E" stroke="#14161D" stroke-width="2.2" stroke-linejoin="round"/>
-                <circle cx="86" cy="96" r="15" fill="#fff" stroke="#14161D" stroke-width="2.4"/>
-                <path d="M79 96.5l5 5.5 10-11" fill="none" stroke="#FF4A1E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-          </article>
-
-          <article class="hc-slide hs-coral" data-slide="2" data-hb-act="welcome" role="group" aria-label="회원가입 시 첫 판 50% 할인">
+          <!-- 1) 웰컴 50% -->
+          <article class="hc-slide hs-coral" data-slide="0" data-hb-act="welcome" role="group" aria-label="회원가입 시 첫 판 50% 할인">
             <div class="hs-txt">
               <span class="hs-kicker">WELCOME EVENT</span>
-              <h3 class="hs-title">회원가입 시 <b>첫 판</b></h3>
-              <div class="hs-big">50%<em>할인</em></div>
+              <h3 class="hs-title">회원가입 시<br><b>첫 판 50%</b></h3>
               <ul class="hs-list">
-                <li>첫 유료 뽑기 <b>1판</b>을 반값으로</li>
-                <li>1인 1회 · 무료·이벤트 포인트 제외</li>
+                <li>첫 유료 뽑기 <b>1판</b>이 반값</li>
+                <li>동일 번호 <b>1인 1회</b> 한정</li>
               </ul>
-              <p class="hs-note hs-note-dark">탭해서 <b>웰컴 할인</b> 확인</p>
+              <p class="hs-note">탭하면 <b>웰컴 혜택</b> 안내</p>
             </div>
-            <div class="hs-art" aria-hidden="true">
-              <svg viewBox="0 0 120 130">
-                <ellipse cx="60" cy="117" rx="32" ry="6" fill="rgba(90,20,0,.18)"/>
-                <path d="M34 62h52v46H34z" fill="#fff" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
-                <path d="M29 46h62v17H29z" fill="#FFD24A" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
-                <path d="M60 46v62" stroke="#14161D" stroke-width="3"/>
-                <path d="M60 46c-12 0-19-5-16-11 3-5 12 0 16 11z" fill="#14161D" stroke="#14161D" stroke-width="2.4" stroke-linejoin="round"/>
-                <path d="M60 46c12 0 19-5 16-11-3-5-12 0-16 11z" fill="#14161D" stroke="#14161D" stroke-width="2.4" stroke-linejoin="round"/>
-                <circle cx="46" cy="82" r="3" fill="#FF4A1E"/><circle cx="74" cy="82" r="3" fill="#FF4A1E"/>
+            <div class="hs-art">
+              <span class="hb-chip gold">1인 1회</span>
+              <svg viewBox="0 0 128 124" aria-hidden="true">
+                <defs>
+                  <linearGradient id="hbGold" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#FFE7A6"/><stop offset="1" stop-color="#FFB01E"/>
+                  </linearGradient>
+                  <linearGradient id="hbPaper" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#FFFBF4"/><stop offset="1" stop-color="#FFE4CC"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="66" cy="58" r="46" fill="url(#hbGold)" opacity=".16"/>
+                <g transform="translate(92 30) rotate(13)">
+                  <rect x="-19" y="-13" width="38" height="30" rx="5" fill="url(#hbGold)" stroke="#14161D" stroke-width="2.6"/>
+                  <path d="M0-13v30" stroke="#14161D" stroke-width="2.4"/>
+                  <path d="M-19-13h38" stroke="#14161D" stroke-width="2" opacity=".45"/>
+                </g>
+                <g transform="rotate(-8 58 62)">
+                  <rect x="8" y="34" width="92" height="58" rx="11" fill="url(#hbPaper)" stroke="#14161D" stroke-width="3"/>
+                  <path d="M70 34v58" stroke="#14161D" stroke-width="1.6" stroke-dasharray="4 4" opacity=".55"/>
+                  <text x="39" y="64" text-anchor="middle" font-size="26" font-weight="900" letter-spacing="-1.2"
+                        fill="#FF3A12" font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">50%</text>
+                  <text x="38" y="78" text-anchor="middle" font-size="7" font-weight="900" letter-spacing=".8"
+                        fill="#B4642F" font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">1ST PLAY</text>
+                  <circle cx="91" cy="63" r="10.5" fill="#14161D"/>
+                  <text x="91" y="67" text-anchor="middle" font-size="10" font-weight="900"
+                        fill="#FFD24A" font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">P</text>
+                </g>
+                <path d="M21 22l3 7.2 7.2 3-7.2 3-3 7.2-3-7.2-7.2-3 7.2-3z" fill="#C9FF57"/>
+                <path d="M112 92l2.2 5.2 5.2 2.2-5.2 2.2-2.2 5.2-2.2-5.2-5.2-2.2 5.2-2.2z" fill="#FFC24A"/>
+                <circle cx="30" cy="92" r="2.6" fill="#FF8E6E"/>
+                <circle cx="108" cy="62" r="2.2" fill="#FFD9CD"/>
               </svg>
+              <span class="hb-more">혜택 보기 ›</span>
             </div>
           </article>
 
-          <article class="hc-slide hs-dark" data-slide="3" data-hb-act="attend" role="group" aria-label="7일 연속 출석 스탬프">
+          <!-- 2) 미성년자 구매 제한 -->
+          <article class="hc-slide hs-dark" data-slide="1" data-hb-act="minor" role="group" aria-label="미성년자 구매 제한 및 랜덤 상품 안내">
             <div class="hs-txt">
-              <span class="hs-kicker">DAILY BONUS</span>
-              <h3 class="hs-title">7일 연속 출석 <b>1,000P</b></h3>
-              <div class="hs-stamps" aria-hidden="true"><i class="on">1</i><i class="on">2</i><i class="on">3</i><i>4</i><i>5</i><i>6</i><i>7</i></div>
+              <span class="hs-kicker">19+ NOTICE</span>
+              <h3 class="hs-title">미성년자는<br>구매 <b>NO! NO!</b></h3>
               <ul class="hs-list">
-                <li>매일 <b>100~300P</b>, 7일 완주 <b>1,000P</b></li>
-                <li>하루 1회 · 건너뛰면 1일차부터</li>
+                <li>유료 결제는 <b>만 19세 이상</b>만</li>
+                <li>본 상품은 <b>랜덤 상품</b>입니다</li>
               </ul>
-              <p class="hs-note">탭하면 오늘 <b>출석 도장</b>을 찍어요</p>
+              <p class="hs-note">5개 이상 적립 시 <b>무료배송</b></p>
             </div>
-            <div class="hs-art" aria-hidden="true">
-              <svg viewBox="0 0 120 130">
-                <ellipse cx="60" cy="117" rx="32" ry="6" fill="rgba(0,0,0,.4)"/>
-                <path d="M35 36h50v74H35z" fill="#fff" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
-                <path d="M35 36h50v17H35z" fill="#FF4A1E" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
-                <circle cx="46" cy="44" r="3" fill="#fff"/><circle cx="74" cy="44" r="3" fill="#fff"/>
-                <g fill="#FFE0D4" stroke="#C88A6E" stroke-width="1.6">
-                  <circle cx="47" cy="66" r="6"/><circle cx="60" cy="66" r="6"/><circle cx="73" cy="66" r="6"/>
-                  <circle cx="47" cy="82" r="6"/><circle cx="60" cy="82" r="6"/>
+            <div class="hs-art">
+              <span class="hb-chip coral">만 19세 미만</span>
+              <svg viewBox="0 0 128 124" aria-hidden="true">
+                <circle cx="62" cy="58" r="44" fill="#FF4A22" opacity=".14"/>
+                <circle cx="62" cy="60" r="37" fill="#241A20" stroke="#FF3A12" stroke-width="7.5"/>
+                <path d="M36 86L88 34" stroke="#FF3A12" stroke-width="7.5" stroke-linecap="round"/>
+                <text x="62" y="72" text-anchor="middle" font-size="31" font-weight="900" letter-spacing="-.5"
+                      fill="#FFF3EC" font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">NO</text>
+                <defs>
+                  <linearGradient id="hbGold2" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#FFE7A6"/><stop offset="1" stop-color="#FFB01E"/>
+                  </linearGradient>
+                </defs>
+                <g transform="translate(101 30)">
+                  <circle r="14" fill="url(#hbGold2)" stroke="#14161D" stroke-width="2.6"/>
+                  <text y="4" text-anchor="middle" font-size="11" font-weight="900" fill="#2A1B02"
+                        font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">19</text>
                 </g>
-                <circle cx="73" cy="82" r="8.5" fill="#FFD24A" stroke="#14161D" stroke-width="2.2"/>
-                <path d="M69 82l3 3.4 5.6-6" fill="none" stroke="#14161D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M104 86l2.4 5.6 5.6 2.4-5.6 2.4-2.4 5.6-2.4-5.6-5.6-2.4 5.6-2.4z" fill="#FFD9CD"/>
+                <circle cx="24" cy="40" r="2.4" fill="#FF8E6E"/>
               </svg>
+              <span class="hb-more">규정 보기 ›</span>
             </div>
           </article>
 
-          <article class="hc-slide hs-light" data-slide="4" data-hb-act="contact" role="group" aria-label="포코쿠지 신상 및 공식 문의">
+          <!-- 3) 출고 · 교환/반품 -->
+          <article class="hc-slide hs-dark" data-slide="2" data-hb-act="ship" role="group" aria-label="출고 및 교환·반품 안내">
             <div class="hs-txt">
-              <span class="hs-kicker">NEW · CONTACT</span>
-              <h3 class="hs-title">포코쿠지 <b>신상</b> 소식</h3>
+              <span class="hs-kicker">SHIPPING GUIDE</span>
+              <h3 class="hs-title">출고 · 교환/반품<br><b>받기 전 꼭 확인</b></h3>
               <ul class="hs-list">
-                <li>4개 시리즈 · 12박스 동시 오픈</li>
-                <li>신상 시리즈는 매주 업데이트</li>
+                <li>영업일 <b>3~5일</b> 이내 출고</li>
+                <li>파손·누락 시 <b>무편집 개봉 영상</b></li>
               </ul>
-              <p class="hs-mail">pokokuji.kr@gmail.com</p>
-              <div class="hs-chips"><span>인스타그램</span><span>유튜브 룸리</span><span>카카오채널 준비중</span></div>
-              <p class="hs-note">탭하면 <b>문의 채널</b>을 안내해 드려요</p>
+              <p class="hs-note">단순 변심은 <b>왕복 배송비</b> 부담</p>
             </div>
-            <div class="hs-art" aria-hidden="true">
-              <svg viewBox="0 0 120 130">
-                <ellipse cx="60" cy="117" rx="32" ry="6" fill="rgba(20,22,29,.09)"/>
-                <path d="M31 54h58v44H31z" fill="#fff" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
-                <path d="M31 54l29 25 29-25" fill="none" stroke="#14161D" stroke-width="2.6" stroke-linejoin="round"/>
-                <path d="M31 98l24-24M89 98L65 74" fill="none" stroke="#E7B9A8" stroke-width="2.2"/>
-                <g transform="translate(86 40)">
-                  <circle cx="0" cy="0" r="16" fill="#FF4A1E" stroke="#14161D" stroke-width="2.6"/>
-                  <path d="M0 -7v9" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/>
-                  <circle cx="0" cy="6.5" r="2" fill="#fff"/>
+            <div class="hs-art">
+              <span class="hb-chip cyan">영업일 3~5일</span>
+              <svg viewBox="0 0 128 124" aria-hidden="true">
+                <defs>
+                  <linearGradient id="hbBox" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#FF9E7E"/><stop offset="1" stop-color="#F04A20"/>
+                  </linearGradient>
+                  <linearGradient id="hbGold3" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#FFE7A6"/><stop offset="1" stop-color="#FFB01E"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="64" cy="62" r="44" fill="#FF4A22" opacity=".13"/>
+                <g transform="translate(36 52) rotate(-13)">
+                  <rect x="-17" y="-13" width="34" height="27" rx="3.5" fill="#3A2A33" stroke="#FFB09A" stroke-width="1.8"/>
+                  <path d="M0-13v27" stroke="#FFB09A" stroke-width="1.4" opacity=".5"/>
+                  <path d="M-17-4h34" stroke="#FFB09A" stroke-width="1.2" opacity=".35"/>
+                </g>
+                <g transform="translate(68 78)">
+                  <rect x="-30" y="-23" width="60" height="48" rx="5" fill="url(#hbBox)" stroke="#14161D" stroke-width="3"/>
+                  <rect x="-8" y="-23" width="16" height="48" fill="#FFD24A" opacity=".92"/>
+                  <path d="M-30-9h60" stroke="#14161D" stroke-width="1.8" opacity=".35"/>
+                  <path d="M-24-23l-6 6M24-23l6 6" stroke="#14161D" stroke-width="2" opacity=".45"/>
+                  <rect x="-25" y="1" width="23" height="17" rx="2" fill="#FFF7EC" stroke="#14161D" stroke-width="1.5"/>
+                  <path d="M-21.5 6h16M-21.5 10h16M-21.5 14h8" stroke="#14161D" stroke-width="1.1" opacity=".55"/>
+                  <path d="M-9 6v8M-6 6v8M-3 6v8" stroke="#14161D" stroke-width="1" opacity=".7"/>
+                </g>
+                <g transform="translate(100 34)">
+                  <circle r="18" fill="url(#hbGold3)" stroke="#14161D" stroke-width="2.6"/>
+                  <text y="-1" text-anchor="middle" font-size="9.4" font-weight="900" fill="#2A1B02"
+                        font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">3~5</text>
+                  <text y="8.6" text-anchor="middle" font-size="6.2" font-weight="900" fill="#6B4400"
+                        font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">영업일</text>
+                </g>
+                <path d="M24 94l2.2 5.2 5.2 2.2-5.2 2.2-2.2 5.2-2.2-5.2-5.2-2.2 5.2-2.2z" fill="#FFD9CD"/>
+              </svg>
+              <span class="hb-more">규정 보기 ›</span>
+            </div>
+          </article>
+
+          <!-- 4) 포인트 전환(회수) -->
+          <article class="hc-slide hs-dark" data-slide="3" data-hb-act="point" role="group" aria-label="포인트 전환(회수) 안내">
+            <div class="hs-txt">
+              <span class="hs-kicker">POINT EXCHANGE</span>
+              <h3 class="hs-title">원치 않는 상품은<br><b>포인트로 전환</b></h3>
+              <ul class="hs-list">
+                <li>받은 굿즈 <b>회수(전환)</b> 가능</li>
+                <li>전환 포인트로 <b>재도전</b></li>
+              </ul>
+              <p class="hs-note">전환 포인트 <b>현금 환급 불가</b></p>
+            </div>
+            <div class="hs-art">
+              <span class="hb-chip lime">+P 적립</span>
+              <svg viewBox="0 0 128 124" aria-hidden="true">
+                <defs>
+                  <linearGradient id="hbGold4" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#FFE7A6"/><stop offset="1" stop-color="#FFB01E"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="62" cy="58" r="44" fill="#A98BFF" opacity=".14"/>
+                <path d="M26 46a37 37 0 0 1 62-8" stroke="#C9FF57" stroke-width="8.5" fill="none" stroke-linecap="round"/>
+                <path d="M87 25l7 17-17-3z" fill="#C9FF57"/>
+                <path d="M98 72a37 37 0 0 1-62 8" stroke="#5EE0FF" stroke-width="8.5" fill="none" stroke-linecap="round"/>
+                <path d="M37 93l-7-17 17 3z" fill="#5EE0FF"/>
+                <circle cx="62" cy="59" r="18" fill="url(#hbGold4)" stroke="#14161D" stroke-width="2.8"/>
+                <text x="62" y="65" text-anchor="middle" font-size="17" font-weight="900" fill="#2A1B02"
+                      font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">P</text>
+                <g transform="translate(96 100)">
+                  <ellipse cy="0" rx="14" ry="4.6" fill="#FFC24A" stroke="#14161D" stroke-width="1.8"/>
+                  <ellipse cy="-5" rx="14" ry="4.6" fill="#FFD87A" stroke="#14161D" stroke-width="1.8"/>
+                  <ellipse cy="-10" rx="14" ry="4.6" fill="#FFE7A6" stroke="#14161D" stroke-width="1.8"/>
+                </g>
+                <path d="M20 86l2.2 5.2 5.2 2.2-5.2 2.2-2.2 5.2-2.2-5.2-5.2-2.2 5.2-2.2z" fill="#CBB6FF"/>
+              </svg>
+              <span class="hb-more">규정 보기 ›</span>
+            </div>
+          </article>
+
+          <!-- 5) 보관 30일 · 묶음배송 -->
+          <article class="hc-slide hs-dark" data-slide="4" data-hb-act="store" role="group" aria-label="보관 30일 및 묶음배송 안내">
+            <div class="hs-txt">
+              <span class="hs-kicker">STORAGE · SHIPPING</span>
+              <h3 class="hs-title">당첨일부터 <b>30일 보관</b><br>5개 이상 <b>무료배송</b></h3>
+              <ul class="hs-list">
+                <li>30일 지나면 <b>포인트 자동 전환</b></li>
+                <li>5개 미만은 배송비 <b>3,500원</b></li>
+              </ul>
+              <p class="hs-note">모은 굿즈는 <b>묶음배송</b> 한 번에</p>
+            </div>
+            <div class="hs-art">
+              <span class="hb-chip lime">5개 이상 무료</span>
+              <svg viewBox="0 0 128 124" aria-hidden="true">
+                <circle cx="62" cy="60" r="44" fill="#FFC24A" opacity=".12"/>
+                <g transform="translate(59 59)">
+                  <rect x="-29" y="-33" width="58" height="64" rx="8" fill="#FFF7EC" stroke="#14161D" stroke-width="3"/>
+                  <path d="M-29-21h58" stroke="#14161D" stroke-width="3"/>
+                  <rect x="-29" y="-33" width="58" height="12" rx="6" fill="#FF5A36"/>
+                  <circle cx="-14" cy="-33" r="3.4" fill="#14161D"/><circle cx="14" cy="-33" r="3.4" fill="#14161D"/>
+                  <text x="0" y="16" text-anchor="middle" font-size="28" font-weight="900" letter-spacing="-1"
+                        fill="#FF3A12" font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">30</text>
+                  <text x="0" y="26" text-anchor="middle" font-size="6.2" font-weight="900" letter-spacing="1.4"
+                        fill="#B4642F" font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">DAYS</text>
+                </g>
+                <g transform="translate(103 100) rotate(8)">
+                  <rect x="-13" y="-11" width="26" height="22" rx="3.5" fill="#FFD24A" stroke="#14161D" stroke-width="2.2"/>
+                  <path d="M0-11v22" stroke="#14161D" stroke-width="1.8"/>
+                  <path d="M-13 0h26" stroke="#14161D" stroke-width="1.6" opacity=".45"/>
+                </g>
+                <g transform="translate(21 101)">
+                  <circle r="11.5" fill="#C9FF57" stroke="#14161D" stroke-width="2.4"/>
+                  <text y="3.8" text-anchor="middle" font-size="8.8" font-weight="900" fill="#16200A"
+                        font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">5+</text>
                 </g>
               </svg>
+              <span class="hb-more">규정 보기 ›</span>
             </div>
           </article>
         </div>
@@ -3425,53 +3580,7 @@ body{background:#05050A;color:var(--tx)}
       <div class="sgrid" id="seriesGrid"></div>
     </section>
 
-    <!-- ===== 필독 이용안내 & 규정 (4개 핵심 아코디언) ===== -->
-    <section class="rules" id="ruleSec" aria-label="필독 이용안내와 규정">
-      <div class="rule-head">
-        <h2><i></i><em>📋</em>필독 이용안내 <b>&amp; 규정</b></h2>
-        <span>4가지 핵심</span>
-      </div>
-      <p class="rule-lead">랜덤 상품·배송·보관·이벤트 기준이에요. 항목을 누르면 펼쳐져요.</p>
-
-      <article class="rule-card" id="rule-1">
-        <button class="rule-h" type="button" data-rule="1" aria-expanded="false" aria-controls="rule-b-1">
-          <span class="em">🎟️</span><span class="tt">뽑기 · 청약철회</span><span class="pill">필수</span><span class="ch"></span>
-        </button>
-        <div class="rule-b" id="rule-b-1"><p>확률형 랜덤 상품 특성상 <b>결과 확인 후 단순 변심 취소·환불 불가</b>(전자상거래법 제17조 제2항). 단, <b>표시·광고와 다르거나 중대한 하자</b> 시 수령일로부터 <b>3개월</b>(안 날로부터 <b>30일</b>) 내 교환·환불 가능(제17조 제3항).</p></div>
-      </article>
-
-      <article class="rule-card" id="rule-2">
-        <button class="rule-h" type="button" data-rule="2" aria-expanded="false" aria-controls="rule-b-2">
-          <span class="em">🎥</span><span class="tt">개봉 풀영상 필수</span><span class="pill">필수</span><span class="ch"></span>
-        </button>
-        <div class="rule-b" id="rule-b-2"><p>오배송·파손·누락 보상 신청 시 <b>택배 송장이 보이는 상태부터 끊김 없는 무편집 개봉 풀영상</b> 제출 필수. 대량 생산 공산품 특성상 <b>미세한 도색·봉제·마감 차이 및 촬영 조명 차이</b>는 하자로 보지 않아요.</p></div>
-      </article>
-
-      <article class="rule-card" id="rule-3">
-        <button class="rule-h" type="button" data-rule="3" aria-expanded="false" aria-controls="rule-b-3">
-          <span class="em">📦</span><span class="tt">보관 30일 · 배송 · 포인트</span><span class="ch"></span>
-        </button>
-        <div class="rule-b" id="rule-b-3"><p>진열장 보관 기간은 당첨일로부터 <b>30일</b>(기한 경과 시 안내 후 <b>포인트 자동 전환</b>). <b>5개 이상</b> 묶음배송 무료(5개 미만 <b>3,500원</b>). 당첨 상품 및 이벤트·전환 포인트는 <b>현금 환급 불가</b>.</p></div>
-      </article>
-
-      <article class="rule-card" id="rule-4">
-        <button class="rule-h" type="button" data-rule="4" aria-expanded="false" aria-controls="rule-b-4">
-          <span class="em">🛡️</span><span class="tt">이용 연령 · 50% 이벤트</span><span class="ch"></span>
-        </button>
-        <div class="rule-b" id="rule-b-4"><p>구경은 누구나 가능하나 <b>유료 결제는 만 19세 이상(성인)</b>부터 가능. 첫 판 <b>50% 할인</b>은 동일 휴대폰 번호·동일 배송지 <b>1인 1회</b> 한정이며 중복·부정 이용 시 <b>혜택 회수 및 주문 취소</b> 가능.</p></div>
-      </article>
-    </section>
-
-    <section class="how">
-      <h3>이용 방법</h3>
-      <ol>
-        <li><b>1</b><span>마음에 드는 <strong>시리즈</strong>를 골라요</span></li>
-        <li><b>2</b><span><strong>박스 교체</strong>로 잔여 수량 많은 박스를 찾아요</span></li>
-        <li><b>3</b><span><strong>x1 · x5 · x10 · ALL</strong>로 뽑고 진열장에 모아요</span></li>
-        <li><b>4</b><span>모은 굿즈는 <strong>묶음 배송</strong>으로 한 번에 받아요</span></li>
-      </ol>
-    </section>
-    <p class="foot">본 사이트는 사업 검토용 데모입니다.<br>결제·배송은 실제로 이루어지지 않으며, 모든 상태는 새로고침 시 초기화됩니다.</p>
+    <!-- v10: 홈 본문은 시리즈 카드 → 사업자 푸터로 바로 이어진다 (규정은 상단 배너·푸터 링크 모달) -->
     <!-- @@POKO-BIZFOOT-BEGIN@@ -->
     <footer class="bizfoot" id="bizFoot">
       <div class="bf-mark"><span class="bf-cap" aria-hidden="true"></span><strong>포코쿠지</strong><em>POKO KUJI</em></div>
@@ -3484,6 +3593,10 @@ body{background:#05050A;color:var(--tx)}
         <div><dt>통신판매업신고번호</dt><dd>제2026-서울마포-1412호</dd></div>
       </dl>
       <p class="bf-copy">© 2026 포코쿠지 POKO KUJI · 본 사이트는 사업 검토용 데모이며 실제 결제·배송은 이루어지지 않습니다.</p>
+      <!-- v10: PG 심사 · 재확인용 규정 접근 경로 (작은 링크 1개) -->
+      <div class="bf-links">
+        <button class="bf-link" id="bfRules" type="button">이용안내 · 규정 보기</button>
+      </div>
     </footer>
     <!-- @@POKO-BIZFOOT-END@@ -->
     </main>
@@ -3713,6 +3826,7 @@ body{background:#05050A;color:var(--tx)}
       <!-- 규정 · 안내 -->
       <section class="pn">
         <div class="mn">
+          <button class="mr" data-my="rules" type="button"><span class="t">이용안내 · 규정</span><span class="v pill">4가지</span><span class="ch"></span></button>
           <button class="mr" data-my="rule" type="button"><span class="t">개봉 풀영상 규정</span><span class="v pill">필수</span><span class="ch"></span></button>
           <button class="mr" data-my="shipguide" type="button"><span class="t">출고·통관 안내</span><span class="v">영업일 3~5일</span><span class="ch"></span></button>
           <button class="mr" data-my="as" type="button"><span class="t">1:1 문의</span><span class="v">접수 <em id="myAs">0</em></span><span class="ch"></span></button>
@@ -3847,6 +3961,48 @@ body{background:#05050A;color:var(--tx)}
       <div class="sheet-head"><h3 id="infoTtl">안내</h3><button class="x" data-close="infoSheet" aria-label="닫기">×</button></div>
       <div class="sheet-body" id="infoBody"></div>
       <div class="sheet-actions" id="infoActs" hidden></div>
+    </div>
+  </div>
+
+  <!-- v10: 이용안내 · 규정 상세 모달 (푸터 링크 · 상단 배너 탭 · 마이페이지 공용) -->
+  <div class="overlay" id="rulesSheet" role="dialog" aria-modal="true" aria-label="이용안내와 규정 상세">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head"><h3>📋 이용안내 · 규정</h3><button class="x" data-close="rulesSheet" aria-label="닫기">×</button></div>
+      <div class="sheet-body">
+        <p class="rs-lead">랜덤 상품 · 출고 · 교환/반품 · 보관 기준이에요.<br>항목을 누르면 자세히 펼쳐져요.</p>
+
+        <article class="rule-card" id="rule-1">
+          <button class="rule-h" type="button" data-rule="1" aria-expanded="false" aria-controls="rule-b-1">
+            <span class="em">🎟️</span><span class="tt">뽑기 · 청약철회</span><span class="pill">필수</span><span class="ch"></span>
+          </button>
+          <div class="rule-b" id="rule-b-1"><p>확률형 랜덤 상품 특성상 <b>결과 확인 후 단순 변심 취소·환불 불가</b>(전자상거래법 제17조 제2항). 단, <b>표시·광고와 다르거나 중대한 하자</b> 시 수령일로부터 <b>3개월</b>(안 날로부터 <b>30일</b>) 내 교환·환불 가능(제17조 제3항).</p></div>
+        </article>
+
+        <article class="rule-card" id="rule-2">
+          <button class="rule-h" type="button" data-rule="2" aria-expanded="false" aria-controls="rule-b-2">
+            <span class="em">📦</span><span class="tt">출고 · 교환/반품</span><span class="pill">필수</span><span class="ch"></span>
+          </button>
+          <div class="rule-b" id="rule-b-2"><p>출고 신청 후 <b>영업일 3~5일</b> 이내 순차 배송(일본 직수입은 통관 후 국내 배송). 오배송·파손·누락 보상은 <b>택배 송장이 보이는 상태부터 끊김 없는 무편집 개봉 풀영상</b>이 필수이며 수령 후 <b>3일 이내</b> 접수해 주세요. 단순 변심·해외 왕복 배송비는 고객 부담. 진열장 <b>5개 이상 무료배송</b>(5개 미만 <b>3,500원</b>).</p></div>
+        </article>
+
+        <article class="rule-card" id="rule-3">
+          <button class="rule-h" type="button" data-rule="3" aria-expanded="false" aria-controls="rule-b-3">
+            <span class="em">♻️</span><span class="tt">보관 30일 · 포인트 전환</span><span class="ch"></span>
+          </button>
+          <div class="rule-b" id="rule-b-3"><p>진열장 보관은 당첨일로부터 <b>30일</b>. 원치 않거나 중복인 상품은 <b>포인트로 전환(회수)</b>해 재도전할 수 있어요. 기한이 지나면 안내 후 <b>포인트 자동 전환</b>. 당첨 상품과 이벤트·전환 포인트는 <b>현금 환급 불가</b>.</p></div>
+        </article>
+
+        <article class="rule-card" id="rule-4">
+          <button class="rule-h" type="button" data-rule="4" aria-expanded="false" aria-controls="rule-b-4">
+            <span class="em">🛡️</span><span class="tt">이용 연령 · 50% 이벤트</span><span class="ch"></span>
+          </button>
+          <div class="rule-b" id="rule-b-4"><p>구경은 누구나 가능하나 <b>유료 결제는 만 19세 이상(성인)</b>부터 가능. 첫 판 <b>50% 할인</b>은 동일 휴대폰 번호·동일 배송지 <b>1인 1회</b> 한정이며 중복·부정 이용 시 <b>혜택 회수 및 주문 취소</b> 가능.</p></div>
+        </article>
+
+        <p class="rs-foot">표시·광고와 다른 상품이거나 중대한 하자가 있으면 수령일로부터 <b>3개월</b>(안 날로부터 30일) 내 교환·환불 가능해요. 문의 <b>pokokuji.kr@gmail.com</b></p>
+      </div>
+      <div class="sheet-actions"><button class="btn-primary" data-close="rulesSheet" type="button">확인했어요</button></div>
     </div>
   </div>
 
@@ -5220,28 +5376,50 @@ body{background:#05050A;color:var(--tx)}
       live.length = 0;
     }
 
-    /* ── 뜯는 소리 : 두꺼운 종이 절취선 '드르륵-탁!' ───────────────
-       점선 한 칸마다 짧은 bandpass 노이즈를 터뜨려 '드르' 마찰과
-       '륵-탁' 파열을 번갈아 낸다. (합성 전기음 없음) */
-    let ripTimer = null, ripN = 0;
-    function ripTick(){
-      const i = ripN++;
-      noise(0.045, 0.105 + Math.random() * 0.03, 1700 + Math.random() * 900, 0, "bandpass", 1.2);  /* 드르 */
-      noise(0.020, 0.090, 3000 + Math.random() * 1200, 0.022, "bandpass", 2.6);                   /* 륵-탁 */
-      if (i % 3 === 2) noise(0.05, 0.045, 5200, 0.01, "highpass");                               /* 종이 사각 */
-    }
+    /* ── 뜯는 소리 : 종이 스르륵 마찰 (연속 · 펄스 없음) ─────────────
+       점선마다 '따닥따닥' 끊기던 펄스를 없애고, 저역 위주의 부드러운
+       바람·종이 쓸림을 한 줄로 이어 낸다. (합성 전기음 없음) */
+    let ripNodes = null;
     function ripStart(){
       ripStop();
-      ripN = 0;
-      ripTick();
-      ripTimer = setInterval(ripTick, 55);
+      const c = ready(); if (!c) return;
+      try {
+        ensureNoise(c);
+        const t0 = c.currentTime;
+        const src = c.createBufferSource();
+        src.buffer = noiseBuf; src.loop = true;
+        const lp = c.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 900; lp.Q.value = 0.25;
+        const bp = c.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 200; bp.Q.value = 0.55;
+        const g = c.createGain();
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(0.104, t0 + 0.16);      /* 스르륵— 올라오는 결 */
+        /* 숨 쉬듯 아주 느린 결 (규칙적인 톡톡 아님) */
+        for (let i = 1; i <= 7; i++){
+          g.gain.setTargetAtTime(0.076 + Math.random() * 0.026, t0 + i * 0.34, 0.16);
+          bp.frequency.setTargetAtTime(170 + Math.random() * 130, t0 + i * 0.34, 0.22);
+        }
+        src.connect(lp); lp.connect(bp); bp.connect(g); g.connect(master);
+        src.start(t0); reg(src);
+        ripNodes = { src: src, g: g };
+      } catch (e){}
     }
-    function ripStop(){ if (ripTimer){ clearInterval(ripTimer); ripTimer = null; } }
+    function ripStop(){
+      const n = ripNodes; ripNodes = null;
+      if (!n) return;
+      const c = ready();
+      if (!c){ try { n.src.stop(); } catch (e){} return; }
+      try {
+        const t = c.currentTime + 0.01;
+        n.g.gain.cancelScheduledValues(t);
+        n.g.gain.setTargetAtTime(0.0001, t, 0.07);                 /* 뚝 끊지 않고 사그라듦 */
+        n.src.stop(t + 0.4);
+      } catch (e){ try { n.src.stop(); } catch (e2){} }
+    }
 
     /* 짧은 종이 '톡' — 티켓이 제자리로 돌아갈 때 */
     function snap(){
-      noise(0.03, 0.090, 1500, 0, "bandpass", 1.2);
-      noise(0.02, 0.050, 4200, 0.005, "highpass");
+      noise(0.03, 0.165, 1500, 0, "bandpass", 1.2);
+      noise(0.02, 0.060, 4200, 0.005, "highpass");
     }
     /* 티켓이 미끄러져 나오는 소리 — 종이 갈리는 마찰 + 짧은 차임 */
     function ticketIn(){
@@ -5250,22 +5428,19 @@ body{background:#05050A;color:var(--tx)}
       tone(880, 0.08, "triangle", 0.030, 0.04);
       tone(1319, 0.10, "triangle", 0.024, 0.11);
     }
-    /* 마지막 '쫙!' — 남은 절취선을 한 번에 갈라뜨린다 */
+    /* 다 뜯기는 순간 '쫙!' — 마지막 절취선이 한 번에 갈라진다 */
     function tearNow(){
       ripStop();
-      paperSweep(0.24, 0.090, 5200, 850, 0, 0.7);   /* 쫙- */
-      noise(0.10, 0.050, 480, 0, "lowpass");        /* 종이 뭉개지는 저역 */
+      paperSweep(0.22, 0.098, 5600, 820, 0, 0.62);  /* 쫙- */
+      paperSweep(0.12, 0.062, 3200, 1500, 0.02, 0.9);
+      noise(0.10, 0.052, 460, 0, "lowpass");        /* 종이 뭉개지는 저역 */
       tone(118, 0.09, "sine", 0.045, 0, 78);        /* 손끝에 남는 둔탁함 */
     }
-    /* 쫀득한 뜯기 — 0.82초 동안 이어지는 '드르르르륵—' */
+    /* 쫀득한 뜯기 — 0.82초 동안 이어지는 '스르르르륵—' (톡톡 펄스 없음) */
     function tearLong(){
-      ripStop();
-      paperSweep(0.70, 0.048, 3600, 1050, 0, 0.6);  /* 길게 갈라지는 종이 */
-      paperSweep(0.30, 0.070, 5400, 2200, 0.10, 0.9);
-      noise(0.12, 0.030, 500, 0.55, "lowpass");     /* 뜯긴 끝의 종이 울림 */
-      /* 점선이 톡톡 끊기는 잔결 */
-      for (let i = 0; i < 5; i++)
-        noise(0.018, 0.032, 1900 + Math.random() * 1200, 0.05 + i * 0.09, "bandpass", 4.5);
+      paperSweep(0.84, 0.088, 1500, 560, 0, 0.4);  /* 낮게 깔리는 종이 쓸림 */
+      paperSweep(0.70, 0.058, 3300, 1300, 0.06, 0.65);
+      noise(0.14, 0.026, 520, 0.62, "lowpass");     /* 뜯긴 끝의 종이 울림 */
     }
 
     function press(){ tone(520, 0.05, "square", 0.035, 0, 300); }
@@ -6635,6 +6810,8 @@ body{background:#05050A;color:var(--tx)}
   $("#homePts").addEventListener("click", () => toast("보유 포인트 " + won(state.points) + "P · " + (LIVE ? "실서비스 계정" : "데모 계정")));
 
   $("#noticeBtn").addEventListener("click", openNotice);
+  const bfRulesBtn = $("#bfRules");
+  if (bfRulesBtn) bfRulesBtn.addEventListener("click", () => openRules(0));
 
   $$("#tabbar button").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -7361,31 +7538,28 @@ body{background:#05050A;color:var(--tx)}
   function hbJump(i){ hbGo(i); hbPlay(); }
 
   /* ============================================================
-     필독 이용안내 & 규정 — 4개 아코디언
+     이용안내 · 규정 — 상세 규정 모달 (푸터 링크 · 상단 배너 · 마이페이지 공용)
      ============================================================ */
-  function ruleSet(n, open, scroll){
-    $$("#ruleSec .rule-card").forEach(c => {
+  function ruleSet(n, open){
+    $$("#rulesSheet .rule-card").forEach(c => {
       const on = !!open && c.id === "rule-" + n;
       c.classList.toggle("open", on);
       const h = c.querySelector(".rule-h");
       if (h) h.setAttribute("aria-expanded", on ? "true" : "false");
     });
-    if (open && scroll){
-      const el = $("#rule-" + n);
-      if (el && el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
   }
-  window.POKO_RULES = {
-    open: (n, scroll) => {
-      if (typeof showScreen === "function") showScreen("home");
-      setTimeout(() => ruleSet(n, true, scroll !== false), 80);
-    },
-    close: () => ruleSet(0, false)
-  };
-  $$("#ruleSec .rule-h").forEach(btn => {
+  function openRules(n){
+    closeAll();
+    openOverlay("rulesSheet");
+    ruleSet(n || 0, !!n);
+    const body = document.querySelector("#rulesSheet .sheet-body");
+    if (body) body.scrollTop = 0;
+  }
+  window.POKO_RULES = { open: (n) => openRules(n), close: () => closeOverlay("rulesSheet") };
+  $$("#rulesSheet .rule-h").forEach(btn => {
     btn.addEventListener("click", () => {
       const n = btn.dataset.rule;
-      const card = $("#rule-" + n);
+      const card = $("#rulesSheet #rule-" + n);
       const open = !(card && card.classList.contains("open"));
       ruleSet(n, open);
     });
@@ -7395,11 +7569,11 @@ body{background:#05050A;color:var(--tx)}
     if (!act) return;
     /* 배너 탭(pointerup)으로 시트를 열면 같은 제스처의 click 이 배경을 눠 바로 닫히므로 한 번 삼킨다 */
     swallowOverlayClick = Date.now() + 600;
-    if (act === "shipguide") window.POKO_RULES.open(2, true);
-    else if (act === "welcome") window.POKO_RULES.open(4, true);
-    else if (act === "attend"){ openOverlay("attendSheet"); attRender(); }
-    else if (act === "minor") window.POKO_RULES.open(1, true);
-    else if (act === "contact") openContact();
+    if (act === "welcome") openEvent();
+    else if (act === "minor") openRules(4);
+    else if (act === "ship") openRules(2);
+    else if (act === "point") openRules(3);
+    else if (act === "store") openRules(3);
   }
 
   function hbInit(){
@@ -7625,15 +7799,8 @@ body{background:#05050A;color:var(--tx)}
   function myOpen(key){
     if (key === "addrs"){ openAddr(); return; }
     if (key === "shipguide"){ openShipGuide(); return; }
-    if (key === "rule"){
-      openInfo("개봉 풀영상 규정",
-        '<p class="info-p">랜덤 상품은 <b>수령 후 3일 이내</b>에 <b>개봉 전면이 보이는 무편집 풀영상</b>이 있어야 교환·반품을 도와드릴 수 있어요.</p>'
-        + '<p class="info-p">· 택배 박스와 상품 포장을 <b>개봉하는 순간부터 끊김 없이</b> 촬영해 주세요.<br>'
-        + '· 편집·배속·중간 컷이 있으면 확인이 어려워 접수가 제한될 수 있어요.<br>'
-        + '· 일본 직수입 상품은 미세 구김·초기 공정 하자를 양해해 주세요.</p>'
-        + '<p class="info-p">교환·반품 배송비는 단순 변심의 경우 <b>왕복 배송비</b>를 고객이 부담해요.</p>');
-      return;
-    }
+    if (key === "rules"){ openRules(0); return; }
+    if (key === "rule"){ openRules(2); return; }
     const titles = { noti: "알림", ledger: "충전·사용 내역", shiphist: "배송 내역",
       exch: "회수(포인트 교환) 기록", favs: "찜한 시리즈", coupons: "쿠폰함", as: "A/S·문의" };
     let body = "", acts = "", onMount = null;
