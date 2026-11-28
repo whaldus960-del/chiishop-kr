@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FF4A1E">
+<!-- 🥚 시그니처 마스코트 아이콘 (알약 캡슐 로고 → 포코 알) -->
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta name="description" content="포코쿠지 (POKO KUJI) — 꽝 없는 이치방쿠지 · 치이카와 시리즈 4종. 박스별 잔여 수량과 실시간 확률을 공개하는 진열대형 온라인 뽑기.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="포코쿠지 POKO KUJI">
@@ -3319,6 +3323,19 @@ body{background:#05050A;color:var(--tx)}
 .wfeed .wf-th img{width:100%;height:100%;object-fit:cover}
 .wfeed .wf-it b{color:#fff}
 .wfeed .wf-g{box-shadow:0 0 9px -2px var(--g,#FFD24A),inset 0 0 6px -3px var(--g,#FFD24A)}
+/* ================= 🥚 v11 — 시그니처 마스코트 로고 (알약 캡슐 → 포코 알) ================= */
+.logo::before,.home-head .logo::before{display:none!important;content:none!important}
+.logo-img{flex:none;width:22px;height:22px;border-radius:7px;display:block;object-fit:cover;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14),0 0 10px -2px rgba(255,90,54,.75)}
+.home-head .brand{padding-right:9px}
+.home-head .logo{gap:6px}
+.bizfoot .bf-cap{width:15px;height:15px;border:0;border-radius:5px;background:#14111F;transform:none;
+  object-fit:cover;opacity:1;box-shadow:0 0 0 1px rgba(255,255,255,.10)}
+.bizfoot .bf-mark{gap:6px}
+@media(max-width:420px){
+  .logo-img{width:21px;height:21px;border-radius:7px}
+  .bizfoot .bf-cap{width:14px;height:14px}
+}
 /* @@POKO-V10-END@@ */
 </style>
 </head>
@@ -3330,7 +3347,7 @@ body{background:#05050A;color:var(--tx)}
     <header class="home-head">
       <div class="hh-fx" id="homeFx" aria-hidden="true"><span class="hh-ray"></span><span class="hh-glow"></span></div>
       <div class="hh-bar">
-        <div class="brand"><span class="logo">포코쿠지</span><span class="logo-sub">POKO KUJI</span></div>
+        <div class="brand"><span class="logo"><img class="logo-img" src="assets/poko-mascot.png" alt="" width="22" height="22" decoding="async">포코쿠지</span><span class="logo-sub">POKO KUJI</span></div>
         <div class="head-actions">
           <button class="acct" id="authBtn" hidden aria-label="내 계정"><i>👤</i><b id="authName">로그인</b></button>
           <button class="pts" id="homePts" aria-label="내 포인트"><i>P</i><b id="homePtsVal">240,000</b><span>+</span></button>
@@ -3596,7 +3613,7 @@ body{background:#05050A;color:var(--tx)}
     <!-- v10: 홈 본문은 시리즈 카드 → 사업자 푸터로 바로 이어진다 (규정은 상단 배너·푸터 링크 모달) -->
     <!-- @@POKO-BIZFOOT-BEGIN@@ -->
     <footer class="bizfoot" id="bizFoot">
-      <div class="bf-mark"><span class="bf-cap" aria-hidden="true"></span><strong>포코쿠지</strong><em>POKO KUJI</em></div>
+      <div class="bf-mark"><img class="bf-cap" src="assets/poko-mascot.png" alt="" width="15" height="15" loading="lazy" decoding="async"><strong>포코쿠지</strong><em>POKO KUJI</em></div>
       <dl class="bf-grid">
         <div><dt>상호</dt><dd>초연</dd></div>
         <div><dt>대표</dt><dd>조미연</dd></div>

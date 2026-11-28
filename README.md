@@ -8,6 +8,25 @@
 - 모바일 기준 420px 프레임, 데스크톱에서는 중앙 정렬로 표시됩니다.
 - 결제·배송은 **데모로만** 동작하며 실제 청구나 발송은 없습니다.
 - 상태는 메모리에만 있고 새로고침하면 초기화됩니다.
+- 사이트 아이콘(헤더·푸터 로고·파비콘)만 `assets/poko-mascot.png` · `favicon.png` · `apple-touch-icon.png` PNG를 씁니다.
+
+## 2026-11-28 6차 — 시그니처 마스코트 로고 · 파비콘 (v11)
+
+알약 캡슐 마크를 **포코쿠지 시그니처 마스코트(알 + KUJI 티켓)** 로 교체했습니다.
+원본 `downloads/poko_mascot_appicon.png`(1254²)을 배경만 분리해 마스코트만 오려내고, 어두운 남색 타일에 여백 있게 다시 앉혀 아이콘 세트를 만들었습니다 (`make_poko_mascot_assets.py`).
+
+| 파일 | 크기 | 쓰이는 곳 |
+|---|---|---|
+| `assets/poko-mascot.png` | 512² RGBA · 둥근 모서리 | 헤더 브랜드(`.logo-img` 21~22px) · 푸터 `.bf-cap` 14~15px |
+| `favicon.png` | 64² | `<link rel="icon" sizes="64x64">` |
+| `favicon-32.png` | 32² | `<link rel="icon" sizes="32x32">` |
+| `apple-touch-icon.png` | 180² 불투명 | iOS 홈 화면 추가 아이콘 |
+| `assets/poko-egg-glow.png` | 1254² | 원본 글로우 버전 보관용 (페이지에서 안 씀) |
+
+- 헤더: `.home-head .logo::before`(캡슐/글로우 원)를 없애고 `<img class="logo-img">`로 교체 — 브랜드 알약 안에서 `포코쿠지`와 **한 줄** 유지(320px까지 가로 넘침 0).
+- 푸터: 회색 캡슐 `span.bf-cap` → 같은 마스코트 `img.bf-cap`(어두운 타일 위에서도 보이게 흰 테두리 1px).
+- OG 이미지(`og-pokokuji.png?v=3`)·`config.js`·`CNAME`·DB는 그대로입니다.
+- 검증: `run_verify_offline.sh` 291 + 88 체크 통과, 콘솔 오류 0.
 
 ## 2026-11-28 5차 — 상단 그래픽 배너 · 하단 다이어트 · 당첨 바 썸네일 · 종이 마찰음 (v10)
 
