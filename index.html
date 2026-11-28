@@ -3454,10 +3454,10 @@ body{background:#05050A;color:var(--tx)}
 .evo-hero[data-lv="4"]{--evo-ac:#FFC24B;--evo-acT:rgba(255,194,75,.55);--evo-soft:rgba(255,190,70,.18)}
 .evo-hero[data-lv="5"]{--evo-ac:#FF7AC8;--evo-acT:rgba(255,154,213,.55);--evo-soft:rgba(255,140,220,.20)}
 
-.evo-stage{position:relative;z-index:2;display:grid;place-items:center;padding:30px 0 2px}
+.evo-stage{position:relative;z-index:2;display:grid;place-items:center;padding:34px 0 2px}
 .evo-stage .evo-frame{display:none}
 .evo-stage .evo-frame.on{display:block}
-.evo-stage .pfr{--pz:min(150px,40vw)}
+.evo-stage .pfr{--pz:min(164px,42vw)}
 
 .evo-id{position:relative;z-index:2;text-align:center;padding:4px 14px 14px}
 .evo-tags{display:flex;align-items:center;justify-content:center;gap:5px}
@@ -6678,6 +6678,7 @@ body{background:#05050A;color:var(--tx)}
   /* 복권 결과를 먼저 확정하고(연출 중 화면 갱신은 보류) 연출 후 모달을 연다 */
   function settleDraw(s, b, n, cost){
     state.points -= cost;
+    evoAddSpend(cost);
     evoAddSpend(cost);
     evoAddSpend(cost);
     s.rev += cost;

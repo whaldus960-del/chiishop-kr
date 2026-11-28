@@ -27,7 +27,7 @@
 - **해금 기준**: 0 → 5만 → 30만 → 70만 → 150만원. 로드맵 라벨 · 게이지 · 남은 금액이 모두 이 기준 하나(`EVO_STAGES`)를 씁니다. 뽑기 결제 때마다 누적액이 쌓이고(`evoAddSpend`), `localStorage.pokoEvoSpent` 에 남겨 새로고침해도 등급이 유지됩니다.
 - **애니메이션**: LV.3~5의 빛줄기 회전 · LV.4~5 궤도 링 회전 · LV.5 홀로그램 링 회전 · 오라 맥동 · 별빛 트윙클. 전부 `transform`/`opacity` 만 움직이고 `prefers-reduced-motion` 에서는 꺼집니다.
 - **에셋**: `assets/poko-lv1.png`(조미연 님 포코에그 원본을 512² 원형 크롭) ~ `assets/poko-lv5.png`(포코제니스). 384² 200색 PNG로 줄여 장당 39~67KB, 화면에 뜬 단계만 `loading="lazy"` 로 받습니다.
-- **프레임 구현**: `work/avatar-candidates/evolution` 의 초호화 테두리를 클래스 `p` 접두어로 이식(`_evo/build_frames.py` → `_evo/frames.html`·`frames.css`). 기존 마이페이지 클래스와 충돌하지 않게 전부 네임스페이스 처리했고, 지름은 `--pz: min(150px, 40vw)` 하나로 비례 스케일합니다.
+- **프레임 구현**: `work/avatar-candidates/evolution` 의 초호화 테두리를 클래스 `p` 접두어로 이식(`_evo/build_frames.py` → `_evo/frames.html`·`frames.css`). 기존 마이페이지 클래스와 충돌하지 않게 전부 네임스페이스 처리했고, 지름은 `--pz: min(164px, 42vw)` 하나로 비례 스케일합니다.
 - **유지**: 코인 지갑·충전, 바로 처리 4행, 이용안내·규정 모달, 7일 출석 스탬프, 내 기록, 하단 탭 — 기존 기능 그대로입니다.
 - **검증**: `python3 verify_evo.py` 신규 50개 체크(기본 LV.1 · 로드맵 5단계 · 미리보기 전환/복귀 · 해금 경계 9구간 · 게이지 계산 · 390/360px 넘침 0 · 기존 기능 유지 · 콘솔 오류 0) 통과. `run_verify_offline.sh` 291 + 88 체크도 그대로 통과.
 
