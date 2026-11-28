@@ -3807,6 +3807,103 @@ body{background:#05050A;color:var(--tx)}
   .pcard .gbadge{font-size:8.6px;padding:1px 4px}
 }
 /* @@POKO-V12-TOUR-TAB-EMPTY-END@@ */
+/* ============================================================
+   v17 — 홈 상위상(A/B) 잔여 배지 · 판 상태 필터 · 정렬
+          상세 초기%→현재% 병기 · 공정성 봉인 배지
+   ============================================================ */
+/* ---------- ① 홈 컨트롤 : 판 상태 칩 + 정렬 ---------- */
+.sec-ctrl{display:flex;flex-direction:column;gap:7px;padding:0 14px 10px}
+.pk-chips{display:flex;align-items:center;gap:6px;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.pk-chips::-webkit-scrollbar{display:none}
+.pk-chips button{flex:0 0 auto;height:29px;padding:0 12px;border-radius:999px;
+  font-family:inherit;font-size:10.5px;font-weight:900;letter-spacing:-.4px;color:#B7AEC6;
+  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);transition:transform .12s}
+.pk-chips button.on{color:#1A0B04;background:linear-gradient(180deg,#FFB59B,#FF4A22);
+  border-color:rgba(255,255,255,.30);box-shadow:0 8px 18px -12px #FF5A36,inset 0 1px 0 rgba(255,255,255,.45)}
+.pk-chips button:active{transform:translateY(1px)}
+.pk-sort{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}
+.pk-sort>label{flex:none;font-size:9.6px;font-weight:900;letter-spacing:.3px;color:#6C647A}
+.pk-sort select{flex:0 1 auto;min-width:0;max-width:230px;height:29px;padding:0 25px 0 11px;border-radius:999px;
+  appearance:none;-webkit-appearance:none;-moz-appearance:none;
+  font-family:inherit;font-size:10.2px;font-weight:900;letter-spacing:-.3px;color:#EDE6F5;
+  text-overflow:ellipsis;white-space:nowrap;cursor:pointer;
+  background:rgba(255,255,255,.055) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23B7AEC6' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 10px center;
+  border:1px solid rgba(255,255,255,.12)}
+.pk-sort select:focus-visible{outline:2px solid rgba(255,140,110,.75);outline-offset:2px}
+
+/* ---------- ② 홈 카드 : 상위상 A/B 잔여 배지 ---------- */
+.sprize{position:absolute;left:7px;bottom:7px;z-index:5;display:flex;align-items:center;gap:3px;
+  max-width:calc(100% - 54px);padding:3px 7px;border-radius:8px;
+  background:rgba(12,10,18,.86);border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 4px 12px -6px #000;font-size:8.6px;font-weight:900;letter-spacing:-.2px;
+  color:#E9E2F3;white-space:nowrap;overflow:hidden}
+.sprize .pz{display:inline-flex;align-items:baseline;gap:2px}
+.sprize .pz b{font-weight:900}
+.sprize .pz.a b{color:#FFD24A}
+.sprize .pz.b b{color:#FF7AB0}
+.sprize .pz.off{color:#6C647A}
+.sprize .pz.off b{color:#6C647A}
+.sprize .pzsep{color:#4C4461}
+
+/* ---------- ③ 오픈예정 카운트다운 카드 · 빈 상태 ---------- */
+#seriesGrid.empty{grid-template-columns:minmax(0,1fr);padding:0}
+#seriesGrid.single{grid-template-columns:minmax(0,1fr)}
+.sooncard{margin:0;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#1B1526 0%,#120E1C 100%);
+  border:1px solid rgba(255,120,170,.34);box-shadow:0 12px 30px -22px #FF5A88,inset 0 1px 0 rgba(255,255,255,.06)}
+.sc-art{position:relative;display:grid;place-items:center;gap:6px;padding:16px 12px 13px;
+  background:radial-gradient(120% 92% at 50% 0%,rgba(255,122,176,.20),rgba(255,90,54,0) 66%)}
+.sc-stamp{position:absolute;left:10px;top:10px;padding:3px 8px;border-radius:7px;
+  font-size:8.6px;font-weight:900;letter-spacing:.6px;color:#FFE1EE;
+  background:rgba(255,90,136,.20);border:1px solid rgba(255,122,176,.55)}
+.sc-mascot{width:56px;height:56px;border-radius:50%;border:2px solid rgba(255,122,176,.55);
+  box-shadow:0 10px 22px -12px #FF5A88,0 0 0 6px rgba(255,122,176,.07);animation:esFloat 3.6s ease-in-out infinite}
+.sc-cd{display:grid;place-items:center;gap:2px;margin-top:2px}
+.sc-cd i{font-style:normal;font-size:8.6px;font-weight:900;letter-spacing:.2px;color:#B7AEC6}
+.sc-cd b{font-size:17px;font-weight:900;letter-spacing:-.4px;color:#FFC3D8;text-shadow:0 0 14px rgba(255,90,136,.55)}
+.sc-body{padding:12px 13px 14px;border-top:1px solid rgba(255,255,255,.07)}
+.sc-body strong{display:block;font-size:12.6px;font-weight:900;letter-spacing:-.5px;color:#fff;line-height:1.35;word-break:keep-all}
+.sc-body p{margin:5px 0 0;font-size:9.8px;font-weight:700;line-height:1.6;color:#A49CB0;word-break:keep-all}
+.sc-btn{margin-top:11px;width:100%;height:38px;border-radius:12px;font-family:inherit;
+  font-size:11px;font-weight:900;letter-spacing:-.2px;color:#2A0714;
+  background:linear-gradient(180deg,#FFB3CE,#FF5A88);border:1px solid rgba(255,255,255,.28);
+  box-shadow:0 12px 24px -16px #FF5A88,inset 0 1px 0 rgba(255,255,255,.45)}
+.sc-btn.on{color:#FFD7E5;background:rgba(255,90,136,.16);border-color:rgba(255,122,176,.55);box-shadow:none}
+.sc-btn:active{transform:translateY(1px)}
+@media (prefers-reduced-motion:reduce){.sc-mascot{animation:none}}
+
+/* ---------- ④ 상세 : 초기% → 현재% 병기 ---------- */
+.pm-bar b em{font-style:normal;font-weight:900;color:#8CF5D2;text-shadow:0 0 6px rgba(94,224,255,.75)}
+.pm-bar b .pi{font-style:normal;font-weight:900;color:#CFC6DE}
+.pm-bar.up{border-color:rgba(94,224,255,.34);box-shadow:0 0 10px -6px #5EE0FF}
+.pm-bar.down b em{color:#FFB4A4;text-shadow:none}
+.pm-bar.flat b em{color:#F2ECF8;text-shadow:0 1px 2px rgba(0,0,0,.9)}
+.pm-bar.zero b{color:#8E869C;text-shadow:none;font-size:7px}
+
+/* ---------- ⑤ 상세 : 공정성 봉인 배지 ---------- */
+.ib-seal{display:flex;margin:0 0 8px}
+.seal-pill{display:flex;align-items:center;gap:6px;min-width:0;min-height:26px;padding:3px 9px 3px 8px;border-radius:999px;
+  font-family:inherit;text-align:left;
+  background:linear-gradient(180deg,rgba(94,224,255,.15),rgba(94,224,255,.05));
+  border:1px solid rgba(94,224,255,.36);box-shadow:0 0 16px -10px #5EE0FF,inset 0 1px 0 rgba(255,255,255,.08)}
+.seal-pill .seal-ic{flex:none;font-size:10px;line-height:1}
+.seal-pill b{flex:none;font-size:10px;font-weight:900;letter-spacing:-.3px;color:#D6F8FF;white-space:nowrap}
+.seal-pill em{flex:1 1 auto;min-width:0;font-style:normal;font-size:8.6px;font-weight:800;letter-spacing:-.2px;color:#8FB6C6;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seal-pill .seal-go{flex:none;font-size:11px;font-weight:900;color:#5EE0FF;line-height:1}
+.seal-pill:active{transform:translateY(1px)}
+.seal-steps{display:grid;gap:6px;margin:9px 0 10px}
+.seal-step{display:flex;gap:9px;align-items:flex-start;padding:9px 10px;border-radius:11px;
+  background:rgba(94,224,255,.06);border:1px solid rgba(94,224,255,.2)}
+.seal-step .sn{flex:none;display:grid;place-items:center;width:19px;height:19px;border-radius:50%;
+  font-size:9.4px;font-weight:900;color:#06212B;background:linear-gradient(180deg,#A8F0FF,#5EE0FF)}
+.seal-step .st{min-width:0;font-size:9.4px;font-weight:700;line-height:1.55;color:#B7AEC6;word-break:keep-all}
+.seal-step .st b{display:block;font-size:10.4px;font-weight:900;color:#fff;letter-spacing:-.3px;margin-bottom:1px}
+@media (max-width:340px){
+  .pk-chips button{height:27px;padding:0 10px;font-size:10px}
+  .sprize{font-size:8.2px;padding:2px 6px;left:6px;bottom:6px;max-width:calc(100% - 48px)}
+  .seal-pill em{font-size:8px}
+}
+/* @@POKO-V17-PRIZE-SORT-SEAL-END@@ */
 </style>
 </head>
 <body>
@@ -4086,6 +4183,24 @@ body{background:#05050A;color:var(--tx)}
 
     <section class="sec">
       <div class="sec-head"><h2>포코쿠지 <b>시리즈</b></h2><span id="homeSeriesCount">4개 시리즈 · 12박스</span></div>
+      <!-- v17: 판 상태 필터 + 정렬 (상위상 확률 높은순) -->
+      <div class="sec-ctrl" id="homeCtrl">
+        <div class="pk-chips" id="stateChips" role="tablist" aria-label="판 상태 필터">
+          <button type="button" class="on" data-st="all" role="tab" aria-selected="true">전체</button>
+          <button type="button" data-st="on" role="tab" aria-selected="false">판매중</button>
+          <button type="button" data-st="soon" role="tab" aria-selected="false">오픈예정</button>
+          <button type="button" data-st="out" role="tab" aria-selected="false">완판</button>
+        </div>
+        <div class="pk-sort">
+          <label for="sortSel">정렬</label>
+          <select id="sortSel" aria-label="시리즈 정렬">
+            <option value="reco" selected>추천순</option>
+            <option value="top">상위상 확률 높은순</option>
+            <option value="left">잔여 적은순</option>
+            <option value="price">가격 낮은순</option>
+          </select>
+        </div>
+      </div>
       <div class="sgrid" id="seriesGrid"></div>
     </section>
 
@@ -4148,6 +4263,15 @@ body{background:#05050A;color:var(--tx)}
         <span class="ib-swap">교체</span>
         <span class="ib-box"><b class="numb" id="dBoxNo">28</b><span class="numb" id="dBoxTotal">/3 박스</span></span>
         <span class="ib-rem"><span>잔여량</span> <b class="numb" id="dRemain">98</b><span class="numb" id="dTotal">/199</span></span>
+      </div>
+      <!-- v17: 공정성 봉인 배지 → 쉬운 말 안내 시트 -->
+      <div class="ib-seal">
+        <button class="seal-pill" id="sealBtn" type="button" aria-haspopup="dialog">
+          <span class="seal-ic" aria-hidden="true">🔐</span>
+          <b>공정성 봉인</b>
+          <em>오픈 전 잠금 · 완판 후 공개</em>
+          <span class="seal-go" aria-hidden="true">›</span>
+        </button>
       </div>
       <div class="ib-switch">
         <button class="navbtn" id="prevBox" aria-label="이전 박스"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -5435,6 +5559,154 @@ body{background:#05050A;color:var(--tx)}
     return { rem, tot, soldBoxes };
   }
 
+  /* ============================================================
+     v17 — 판 상태 필터 · 정렬 · 상위상(A/B) 잔여 배지
+       · 카드가 열리는 박스(def.cur)의 A상·B상 남은 수량을 배지로
+       · '상위상 확률 높은순' = (남은 A + B) ÷ 그 박스의 남은 티켓
+     ============================================================ */
+  const HOME_STATES = { all: "전체", on: "판매중", soon: "오픈예정", out: "완판" };
+  const homeUI = { st: "all", sort: "reco" };
+  const SOON_ALARM_KEY = "pokoSoonAlarm";
+
+  function activeBoxOf(s){
+    if (!s || !s.boxes || !s.boxes.length) return null;
+    const i = Math.max(0, Math.min(s.boxes.length - 1, (s.def.cur || 1) - 1));
+    return s.boxes[i] || s.boxes[0];
+  }
+
+  /* 상위상 2개 = A상 · B상 (라스트상은 확률에서 빠지는 보너스라 배지에 넣지 않는다) */
+  function topOf(s){
+    const b = activeBoxOf(s);
+    if (!b) return { aR: 0, aT: 0, bR: 0, bT: 0, rem: 0, no: 1 };
+    const pick = k => b.grades.find(g => g.k === k) || null;
+    const a = pick("A"), bb = pick("B");
+    return {
+      aR: a ? a.r : 0, aT: a ? a.t : 0,
+      bR: bb ? bb.r : 0, bT: bb ? bb.t : 0,
+      rem: remainOf(b), no: b.no
+    };
+  }
+  function topChance(s){
+    const t = topOf(s);
+    return t.rem > 0 ? (t.aR + t.bR) / t.rem : 0;
+  }
+  function seriesState(s){
+    let rem = 0;
+    s.boxes.forEach(b => { rem += remainOf(b); });
+    return rem > 0 ? "on" : "out";
+  }
+  function topBadge(s){
+    const t = topOf(s);
+    if (!t.aT && !t.bT) return "";
+    const one = (k, r, tot, cls) => `<span class="pz ${cls}${r ? "" : " off"}"><b>${k}</b>${r}/${tot}</span>`;
+    return `<span class="sprize" title="지금 열리는 ${t.no}번 박스 기준 · A상 ${t.aR}/${t.aT} · B상 ${t.bR}/${t.bT}">`
+      + one("A", t.aR, t.aT, "a") + `<span class="pzsep">·</span>`
+      + one("B", t.bR, t.bT, "b") + `</span>`;
+  }
+
+  function sortedSeries(){
+    const idx = s => state.series.indexOf(s);
+    let list = state.series.slice();
+    if (homeUI.st === "soon") list = [];
+    else if (homeUI.st === "on") list = list.filter(s => seriesState(s) === "on");
+    else if (homeUI.st === "out") list = list.filter(s => seriesState(s) === "out");
+    const S = homeUI.sort;
+    if (S === "top") list.sort((a, b) => (topChance(b) - topChance(a)) || (idx(a) - idx(b)));
+    else if (S === "left") list.sort((a, b) => (seriesStats(a).rem - seriesStats(b).rem) || (idx(a) - idx(b)));
+    else if (S === "price") list.sort((a, b) => (a.def.price - b.def.price) || (idx(a) - idx(b)));
+    else list.sort((a, b) => idx(a) - idx(b));
+    return list;
+  }
+
+  function seriesCardHTML(s){
+    const d = s.def, st = seriesStats(s);
+    const pct = st.tot ? Math.round((1 - st.rem / st.tot) * 100) : 100;
+    const oi = state.series.findIndex(x => x.id === s.id);
+    const n = SERIES_NEON[(oi < 0 ? 0 : oi) % SERIES_NEON.length];
+    const t = topOf(s);
+    return `<button class="scard" data-sid="${s.id}" data-state="${seriesState(s)}" data-top="${t.aR + t.bR}" data-chance="${topChance(s).toFixed(4)}" data-price="${d.price}" data-rem="${st.rem}" style="--nc:${n.c};--nc2:${n.c2};--nc-l:${n.l}" aria-label="${d.name} 열기 · A상 ${t.aR}/${t.aT} · B상 ${t.bR}/${t.bT} 남음">
+        <span class="sart" style="--a:${d.pal[0]};--b:${d.pal[1]}">
+          <span class="sflag ${d.hot ? "hot" : ""}">${d.tag}</span>
+          ${seriesArt(s)}
+          <span class="sneon">★ ${GLABEL(d.featured)}</span>
+          ${topBadge(s)}
+        </span>
+        <span class="sinfo">
+          <strong class="sname">${d.name}</strong>
+          <span class="sprice"><i>P</i>${won(d.price)} <em>/회</em></span>
+          <span class="smeta numb">${s.boxes.length} BOX · 잔여 <b>${won(st.rem)}</b>/${won(st.tot)}</span>
+          <span class="sbar"><i style="width:${pct}%"></i></span>
+        </span>
+      </button>`;
+  }
+
+  /* 오픈예정 카운트다운 — 다음 금요일 20:00(KST)을 다음 라인업 공개 예정 시각으로 둔다.
+     실제 판을 만들지 않고 티저 카드만 보여 주므로 기존 실DB 시리즈 판매에는 영향이 없다. */
+  function nextDropAt(){
+    const DAY = 86400000;
+    const now = Date.now();
+    const d = new Date(now);
+    let at = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 11, 0, 0));
+    at = new Date(at.getTime() + (((5 - at.getUTCDay()) + 7) % 7) * DAY);
+    while (at.getTime() <= now) at = new Date(at.getTime() + 7 * DAY);
+    return at;
+  }
+  function cdText(ms){
+    if (ms <= 0) return "지금 공개";
+    const s = Math.floor(ms / 1000);
+    const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600);
+    const m = Math.floor((s % 3600) / 60), sec = s % 60;
+    const p2 = v => String(v).padStart(2, "0");
+    return (d > 0 ? "D-" + d + " " : "") + p2(h) + ":" + p2(m) + ":" + p2(sec);
+  }
+  function soonCardHTML(){
+    let on = false;
+    try { on = localStorage.getItem(SOON_ALARM_KEY) === "1"; } catch (e){}
+    return `<div class="sooncard" id="soonCard" data-soon="1">
+      <div class="sc-art">
+        <span class="sc-stamp">COMING SOON</span>
+        <img class="sc-mascot" src="assets/tab-poko.png" alt="" width="56" height="56" loading="lazy" decoding="async">
+        <span class="sc-cd"><i>다음 라인업 공개까지</i><b id="soonCd" class="numb">${cdText(nextDropAt() - Date.now())}</b></span>
+      </div>
+      <div class="sc-body">
+        <strong>새 쿠지 라인업을 준비 중이에요</strong>
+        <p>오픈 시각에 맞춰 당첨 번호가 미리 봉인되고, 준비가 끝나면 이 자리에 카운트다운과 함께 올라와요.</p>
+        <button class="sc-btn${on ? " on" : ""}" id="soonAlarm" type="button">${on ? "🔔 알림 신청 완료" : "🔔 오픈 알림 신청"}</button>
+      </div>
+    </div>`;
+  }
+  let soonTimer = null;
+  function soonTick(){
+    const el = $("#soonCd");
+    if (!el) return;
+    el.textContent = cdText(nextDropAt() - Date.now());
+  }
+  function soonStart(){ soonStop(); soonTimer = setInterval(soonTick, 1000); }
+  function soonStop(){ if (soonTimer){ clearInterval(soonTimer); soonTimer = null; } }
+  function bindSoonAlarm(){
+    const b = $("#soonAlarm");
+    if (!b || b.dataset.bound === "1") return;
+    b.dataset.bound = "1";
+    b.addEventListener("click", () => {
+      let on = false;
+      try { on = localStorage.getItem(SOON_ALARM_KEY) === "1"; } catch (e){}
+      on = !on;
+      try { localStorage.setItem(SOON_ALARM_KEY, on ? "1" : "0"); } catch (e){}
+      b.classList.toggle("on", on);
+      b.textContent = on ? "🔔 알림 신청 완료" : "🔔 오픈 알림 신청";
+      toast(on ? "오픈 알림을 신청했어요. 열리면 가장 먼저 알려 드릴게요!" : "알림 신청을 취소했어요");
+    });
+  }
+  function setHomeState(st){
+    if (!HOME_STATES[st]) st = "all";
+    homeUI.st = st;
+    renderHome();
+  }
+  function setHomeSort(v){
+    homeUI.sort = ["reco", "top", "left", "price"].indexOf(v) >= 0 ? v : "reco";
+    renderHome();
+  }
+
   /* 시리즈별 네온(카드 테두리·게이지) — 다크 아케이드 통일형 */
   const SERIES_NEON = [
     { c:"#5EE0FF", c2:"#A8F0FF", l:"rgba(94,224,255,.34)" },   /* 포니  */
@@ -5444,24 +5716,43 @@ body{background:#05050A;color:var(--tx)}
   ];
 
   function renderHome(){
-    $("#seriesGrid").innerHTML = state.series.map((s, i) => {
-      const d = s.def, st = seriesStats(s);
-      const pct = Math.round((1 - st.rem / st.tot) * 100);
-      const n = SERIES_NEON[i % SERIES_NEON.length];
-      return `<button class="scard" data-sid="${s.id}" style="--nc:${n.c};--nc2:${n.c2};--nc-l:${n.l}" aria-label="${d.name} 열기">
-        <span class="sart" style="--a:${d.pal[0]};--b:${d.pal[1]}">
-          <span class="sflag ${d.hot ? "hot" : ""}">${d.tag}</span>
-          ${seriesArt(s)}
-          <span class="sneon">★ ${GLABEL(d.featured)}</span>
-        </span>
-        <span class="sinfo">
-          <strong class="sname">${d.name}</strong>
-          <span class="sprice"><i>P</i>${won(d.price)} <em>/회</em></span>
-          <span class="smeta numb">${s.boxes.length} BOX · 잔여 <b>${won(st.rem)}</b>/${won(st.tot)}</span>
-          <span class="sbar"><i style="width:${pct}%"></i></span>
-        </span>
-      </button>`;
-    }).join("");
+    const list = sortedSeries();
+    const grid = $("#seriesGrid");
+    let html = list.map(seriesCardHTML).join("");
+    let emptyHTML = "";
+    if (homeUI.st === "soon"){
+      html += soonCardHTML();
+    } else if (!list.length){
+      emptyHTML = homeUI.st === "out"
+        ? emptyStateHTML({
+            title: "지금은 완판된 시리즈가 없어요",
+            body: "판매 중인 시리즈는 모두 남아 있어요. 완판된 판이 생기면 이 탭에서 한 번에 모아 보여 드릴게요 🥚",
+            cta: "판매중 시리즈 보기", act: "st-on"
+          })
+        : emptyStateHTML({
+            title: "지금은 판매 중인 시리즈가 없어요",
+            body: "새 라인업을 준비하고 있어요. 오픈예정 탭에서 다음 오픈 소식을 확인해 보세요 🥚",
+            cta: "오픈예정 보기", act: "st-soon"
+          });
+    }
+    grid.classList.toggle("empty", !!emptyHTML);
+    grid.classList.toggle("single", !!emptyHTML || homeUI.st === "soon");
+    grid.innerHTML = html + emptyHTML;
+    const cnt = $("#homeSeriesCount");
+    if (cnt){
+      if (emptyHTML) cnt.textContent = "0개 시리즈";
+      else if (homeUI.st === "soon") cnt.textContent = "오픈예정 1개";
+      else cnt.textContent = list.length + "개 시리즈 · " + (list.length * 3) + "박스";
+    }
+    $$("#stateChips [data-st]").forEach(b => {
+      const on = b.dataset.st === homeUI.st;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    const sel = $("#sortSel");
+    if (sel && sel.value !== homeUI.sort) sel.value = homeUI.sort;
+    if (homeUI.st === "soon"){ soonStart(); } else { soonStop(); }
+    bindSoonAlarm();
     renderHeader();
   }
 
@@ -5688,14 +5979,55 @@ body{background:#05050A;color:var(--tx)}
     });
   }
 
-  function cardHTML(g, rem){
+  /* 초기% → 현재% 표기 후보 — 카드 폭에 맞는 가장 자세한 것을 고른다 (fitPmBars) */
+  function pmDeltaAt(init, cur, di, dc, label){
+    const a = init.toFixed(di) + "%", b = cur.toFixed(dc) + "%";
+    return label ? `초기 <span class="pi">${a}</span> → <em>${b}</em>` : `<span class="pi">${a}</span>→<em>${b}</em>`;
+  }
+  const PM_CANDS = [[2, 2, true], [1, 1, true], [0, 0, true], [1, 1, false], [0, 0, false]];
+  let pmProbe = null;
+  function fitPmBars(root){
+    const bars = (root || document).querySelectorAll(".pm-bar b[data-i]");
+    if (!bars.length) return;
+    if (!pmProbe){
+      pmProbe = document.createElement("span");
+      pmProbe.setAttribute("aria-hidden", "true");
+      pmProbe.style.cssText = "position:absolute;left:-9999px;top:0;visibility:hidden;white-space:nowrap;font-weight:900;pointer-events:none;";
+      document.body.appendChild(pmProbe);
+    }
+    bars.forEach(b => {
+      const bar = b.parentElement;
+      if (!bar || !bar.clientWidth) return;            /* 숨은 탭은 나중에 다시 맞춘다 */
+      const init = parseFloat(b.dataset.i), cur = parseFloat(b.dataset.c);
+      if (!isFinite(init) || !isFinite(cur)) return;
+      const avail = bar.clientWidth - 4;
+      const cs = getComputedStyle(b);
+      pmProbe.style.fontSize = cs.fontSize;
+      pmProbe.style.fontFamily = cs.fontFamily;
+      pmProbe.style.letterSpacing = cs.letterSpacing;
+      let chosen = null, last = null;
+      for (let i = 0; i < PM_CANDS.length; i++){
+        const c = PM_CANDS[i];
+        const html = pmDeltaAt(init, cur, c[0], c[1], c[2]);
+        pmProbe.textContent = html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ");
+        last = html;
+        if (pmProbe.offsetWidth <= avail){ chosen = html; break; }
+      }
+      b.innerHTML = chosen || last;
+    });
+  }
+
+  function cardHTML(g, rem, tot){
     const s = ser(), d = s.def;
     const out = g.r === 0;
     const isLast = g.k === "last";
     const pct = (!isLast && rem > 0) ? (g.r / rem * 100) : 0;
-    const pctTx = isLast ? "증정품" : (rem > 0 ? pct.toFixed(2) + "%" : "0.00%");
+    const init = (!isLast && tot > 0) ? (g.t / tot * 100) : 0;
     const barW = isLast ? 100 : Math.max(0, Math.min(100, pct));
-    return `<div class="cell ${view.grade === g.k ? "focus" : ""}" data-g="${g.k}" role="button" tabindex="0" aria-label="${GLABEL(g.k)} ${g.n} · 가치 ${won(g.v)}P · ${isLast ? "증정품" : "확률 " + pctTx} · 잔여 ${g.r}/${g.t}">
+    const mood = isLast ? "gift" : (out ? "zero" : (pct > init + 0.004 ? "up" : (pct < init - 0.004 ? "down" : "flat")));
+    const lab = isLast ? "증정품" : (out ? "0.00%" : pmDeltaAt(init, pct, 2, 2, true));
+    const a11y = isLast ? "증정품" : (out ? "확률 0%" : "초기 " + init.toFixed(2) + "% 에서 현재 " + pct.toFixed(2) + "%");
+    return `<div class="cell ${view.grade === g.k ? "focus" : ""}" data-g="${g.k}" role="button" tabindex="0" aria-label="${GLABEL(g.k)} ${g.n} · 가치 ${won(g.v)}P · ${a11y} · 잔여 ${g.r}/${g.t}">
       <div class="pcard ${out ? "out" : ""}">
         <div class="pclip">
           <span class="part">${artHTML(g, s.id, charOf(g.k))}</span>
@@ -5705,7 +6037,7 @@ body{background:#05050A;color:var(--tx)}
         <div class="pmeta">
           <span class="pname">${pnameOf(g, d)}</span>
           <span class="pm-row"><span class="pm-val"><i>P</i>${won(g.v)}</span><span class="pm-rem ${out ? "zero" : ""}">${g.r}/${g.t}</span></span>
-          <span class="pm-bar ${isLast ? "gift" : ""}${out ? " zero" : ""}"><i style="width:${barW.toFixed(1)}%"></i><b>${isLast ? "증정품" : "확률 " + pctTx}</b></span>
+          <span class="pm-bar ${mood}"><i style="width:${barW.toFixed(1)}%"></i><b${(isLast || out) ? "" : ` data-i="${init.toFixed(4)}" data-c="${pct.toFixed(4)}"`}>${lab}</b></span>
         </div>
       </div>
     </div>`;
@@ -5723,17 +6055,33 @@ body{background:#05050A;color:var(--tx)}
 
   function renderGoods(){
     const b = box();
-    const rem = remainOf(b);
+    const rem = remainOf(b), tot = totalOf(b);
     const gs = b.grades;
     let html = `<div class="shelf">`;
     for (let i = 0; i < gs.length; i += 4){
       html += `<div class="srow">`;
-      gs.slice(i, i + 4).forEach(g => { html += cardHTML(g, rem); });
+      gs.slice(i, i + 4).forEach(g => { html += cardHTML(g, rem, tot); });
       html += `</div>`;
     }
     html += `</div>`;
     html += `<div class="shelf-tip"><b>${b.no}번 박스</b> · 잔여 <b>${rem}</b>장 / ${totalOf(b)}장 · 카드를 누르면 위 진열대에 미리 보여요. 잔여 0개 등급은 <b>종료</b> 도장이 찍혀요.</div>`;
     $("#dGoods").innerHTML = html;
+    fitPmBars($("#dGoods"));
+  }
+
+  /* 공정성 봉인 — 해시·salt 같은 어려운 말 대신 한 줄로 설명 */
+  function openSeal(){
+    const b = box();
+    const rem = b ? remainOf(b) : 0, tot = b ? totalOf(b) : 99;
+    openInfo("🔐 공정성 봉인 — 이 판은 미리 잠겨 있어요",
+      '<p class="info-p">박스 오픈 시 <b>' + tot + '장 당첨 번호가 미리 봉인·잠금</b>되며, 완판 후 <b>전체 번호와 확률 검증 기록이 투명하게 공개</b>됩니다.</p>'
+      + '<div class="seal-steps">'
+      +   '<div class="seal-step"><span class="sn">1</span><span class="st"><b>판매 전에 답을 잠가 둬요</b>99장의 당첨 번호가 박스를 열 때 한 번에 정해지고 잠깁니다.</span></div>'
+      +   '<div class="seal-step"><span class="sn">2</span><span class="st"><b>파는 동안에는 바꿀 수 없어요</b>잠긴 뒤에는 번호를 고치거나 다시 뽑을 수 없습니다.</span></div>'
+      +   '<div class="seal-step"><span class="sn">3</span><span class="st"><b>완판되면 전부 공개해요</b>전체 번호와 확률 검증 기록을 이 페이지에 그대로 올려 누구나 다시 계산해 볼 수 있어요.</span></div>'
+      + '</div>'
+      + '<div class="info-tip">지금 이 박스 · 남은 <b>' + rem + '장</b> / ' + tot + '장<br>남은 티켓이 줄면 확률은 <b>자동으로 다시 계산</b>되고, 카드에는 <b>초기 % → 현재 %</b>가 같이 보여요.</div>',
+      '<button class="btn-primary" type="button" data-close="infoSheet">확인했어요</button>');
   }
 
   function renderRank(){
@@ -5829,7 +6177,16 @@ body{background:#05050A;color:var(--tx)}
   }
   /* 검증·디버깅용 얇은 핸들 (기존 POKO_BGM·POKO_WELCOME 과 동일한 방식) */
   window.POKO_DETAIL = { render: renderDetail, log: renderLog, rank: renderRank, shelf: renderBox,
-    box: box, view: view };
+    box: box, view: view, fit: () => fitPmBars($("#dGoods")), seal: openSeal };
+  /* 홈 정렬·판 상태 얇은 핸들 (검증용) */
+  window.POKO_HOME = { ui: homeUI, render: renderHome, setState: setHomeState, setSort: setHomeSort,
+    topOf: s => topOf(s), topChance: s => topChance(s), activeBoxOf: s => activeBoxOf(s),
+    stateOf: s => seriesState(s), order: () => sortedSeries().map(s => s.id), soonAt: () => nextDropAt().toISOString() };
+  let pmFitTimer = null;
+  window.addEventListener("resize", () => {
+    clearTimeout(pmFitTimer);
+    pmFitTimer = setTimeout(() => { fitPmBars($("#dGoods")); fitPmBars(document); }, 140);
+  });
 
   /* ============================================================
      navigation / box switching
@@ -8018,6 +8375,9 @@ body{background:#05050A;color:var(--tx)}
      events
      ============================================================ */
   document.addEventListener("click", e => {
+    const stChip = e.target.closest("#stateChips [data-st]");
+    if (stChip){ setHomeState(stChip.dataset.st); return; }
+
     const t = e.target.closest("[data-sid]");
     if (t){ openSeries(t.dataset.sid); return; }
 
@@ -8073,6 +8433,7 @@ body{background:#05050A;color:var(--tx)}
       $("#dGoods").hidden = view.tab !== "goods";
       $("#dRank").hidden = view.tab !== "rank";
       $("#dLog").hidden = view.tab !== "log";
+      if (view.tab === "goods") fitPmBars($("#dGoods"));
     });
   });
 
@@ -8081,6 +8442,10 @@ body{background:#05050A;color:var(--tx)}
   });
 
   $("#backBtn").addEventListener("click", () => { showScreen("home"); renderHome(); });
+  const sortSelEl = $("#sortSel");
+  if (sortSelEl) sortSelEl.addEventListener("change", () => setHomeSort(sortSelEl.value));
+  const sealBtnEl = $("#sealBtn");
+  if (sealBtnEl) sealBtnEl.addEventListener("click", openSeal);
   $("#prevBox").addEventListener("click", () => moveBox(-1));
   $("#nextBox").addEventListener("click", () => moveBox(1));
   $("#boxStrip").addEventListener("click", () => { renderBoxPicker(); openOverlay("boxPicker"); });
@@ -9936,6 +10301,8 @@ body{background:#05050A;color:var(--tx)}
       if (act === "tab-goods"){ view.tab = "goods"; renderDetail(); }
       else if (act === "next-box"){ moveBox(1); }
       else if (act === "go-home"){ showScreen("home"); renderHome(); }
+      else if (act === "st-on"){ setHomeState("on"); }
+      else if (act === "st-soon"){ setHomeState("soon"); }
     });
     window.POKO_TOUR = {
       maybe: detailTourMaybe, show: tourStart,
