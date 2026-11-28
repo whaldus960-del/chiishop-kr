@@ -3288,6 +3288,15 @@ body{background:#0C0E14}
     };
   }
   function pad2(n){ return String(n).padStart(2, "0"); }
+  /* 티켓 일련번호 뒤 4자리 — 데모(순번 숫자)든 라이브(Supabase UUID)든
+     항상 같은 값이 나오는 4자리 숫자로 만든다. (UUID 를 Number() 로 바꾸면 NaN) */
+  function serial4(id){
+    const s = String(id == null ? "" : id);
+    if (/^\d+$/.test(s)) return 1000 + (Number(s) * 7) % 9000;
+    let h = 2166136261;                       /* FNV-1a 32bit */
+    for (let i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return 1000 + ((h >>> 0) % 9000);
+  }
   function ymd(d){ return d.getFullYear() + pad2(d.getMonth()+1) + pad2(d.getDate()); }
   function hhmm(d){ return pad2(d.getHours()) + ":" + pad2(d.getMinutes()); }
   function hexA(hex, a){
@@ -4594,11 +4603,12 @@ body{background:#0C0E14}
     $("#tkGrade").classList.remove("pop");
     $("#tkGname").textContent = it.name || "";
     $("#tkGname").classList.remove("pop");
-    const serial = "No." + pad2(b.no) + "-" + String(1000 + (Number(it.id) * 7) % 9000);
+    const tail = serial4(it.id);
+    const serial = "No." + pad2(b.no) + "-" + String(tail);
     $("#tkSeries").textContent = s.def.short;
     $("#tkSerial").textContent = serial;
     $("#tkWinSerial").textContent = serial;
-    $("#tkBcNum").textContent = "2026 " + pad2(b.no) + String(1000 + (Number(it.id) * 7) % 9000);
+    $("#tkBcNum").textContent = "2026 " + pad2(b.no) + String(tail);
     $("#tkPt").textContent = won(s.def.price) + "P";
     $("#tkStampPt").textContent = won(s.def.price) + "P";
     $("#tkIdx").textContent = tear.list.length > 1 ? (i + 1) + " / " + tear.list.length : "";
@@ -6133,6 +6143,17 @@ body{background:#0C0E14}
 
   function applyCatalog(list){
     if (!list || !list.length) return;
+    /* 실DB 시리즈에는 표지(hero)·브랜드 접두어 같은 연출용 값이 DB 에 없다.
+       같은 id 의 로컬 정의에서 채워 넣어 카드 표지가 플레이스홀더로 바뀌지 않게 한다. */
+    list.forEach(s => {
+      const d = DEFS.find(x => x.id === s.id);
+      if (!d || !s.def) return;
+      if (!s.def.hero) s.def.hero = d.hero || "";
+      if (!s.def.pre) s.def.pre = d.pre || "";
+      if (!s.def.tag) s.def.tag = d.tag || "";
+      if (!s.def.curRem) s.def.curRem = d.curRem || [];
+      if (typeof s.def.hot !== "boolean") s.def.hot = !!d.hot;
+    });
     const prev = {};
     state.series.forEach(s => { prev[s.id] = s; });
     state.series = list.map(s => ({
