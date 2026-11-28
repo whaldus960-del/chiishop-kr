@@ -3454,6 +3454,24 @@ body{background:#05050A;color:var(--tx)}
 .evo-hero[data-lv="4"]{--evo-ac:#FFC24B;--evo-acT:rgba(255,194,75,.55);--evo-soft:rgba(255,190,70,.18)}
 .evo-hero[data-lv="5"]{--evo-ac:#FF7AC8;--evo-acT:rgba(255,154,213,.55);--evo-soft:rgba(255,140,220,.20)}
 
+/* 스타팅 선택 (🌸 포코링 · ⚡ 레오 · 🦊 별여우) */
+.evo-pick{position:relative;z-index:3;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:4px;padding:9px 9px 0}
+.ep-btn{display:flex;align-items:center;justify-content:center;gap:3px;min-width:0;
+  padding:7px 4px 7px;border-radius:11px;border:1px solid rgba(255,255,255,.13);
+  background:linear-gradient(180deg,rgba(40,34,58,.96),rgba(26,22,38,.96));
+  color:#B9B2C9;font-size:9.5px;font-weight:900;letter-spacing:-.4px;line-height:1;
+  transition:border-color .16s ease,background .16s ease,color .16s ease,box-shadow .16s ease}
+.ep-btn i{font-style:normal;font-size:11px;line-height:1;filter:grayscale(.9) opacity(.8)}
+.ep-btn b{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ep-btn em{font-style:normal;font-size:7px;font-weight:900;letter-spacing:.02em;color:#7E7791}
+.ep-btn.on{color:#101708;border-color:rgba(200,247,81,.9);
+  background:linear-gradient(165deg,#EAFFB4,#C8F751 58%,#9EE22F);
+  box-shadow:0 0 16px -4px rgba(200,247,81,.95),inset 0 1px 0 rgba(255,255,255,.65)}
+.ep-btn.on i{filter:none}
+.ep-btn.on em{color:rgba(16,23,8,.6)}
+.evo-pick + .evo-stage{padding-top:30px}
+
 .evo-stage{position:relative;z-index:2;display:grid;place-items:center;padding:34px 0 2px}
 .evo-stage .evo-frame{display:none}
 .evo-stage .evo-frame.on{display:block}
@@ -3516,6 +3534,8 @@ body{background:#05050A;color:var(--tx)}
 .evo-n[data-evolv="2"] .en-pic{background:conic-gradient(from 200deg,#8C5A2E,#F7C795 42%,#B87A3C 66%,#7A4A1E)}
 .evo-n[data-evolv="3"] .en-pic{background:conic-gradient(from 195deg,#8E9BB0,#FFFFFF 26%,#C9D4E6 44%,#6D788B 62%,#EAF0FA 82%,#55606F)}
 .evo-n[data-evolv="4"] .en-pic{background:conic-gradient(from 0deg,#8C6018,#FFE9A8 28%,#E4AC32 52%,#FFF6D8 70%,#C99055 88%,#8C6018)}
+.en-nm.long{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.1;font-size:7.5px;
+  text-align:center;word-break:keep-all}
 .evo-n[data-evolv="5"] .en-pic{background:conic-gradient(from 0deg,#FF7AC8,#FFD86B 22%,#C8F751 40%,#7BE8CF 58%,#57E3FF 74%,#A46BFF 88%,#FF7AC8);
   box-shadow:0 0 16px -3px rgba(255,140,220,.85)}
 .evo-n.is-mine .en-pic{box-shadow:0 0 0 1.5px rgba(200,247,81,.8),0 0 14px -4px rgba(200,247,81,.9)}
@@ -3991,7 +4011,13 @@ body{background:#05050A;color:var(--tx)}
       </div>
 
       <!-- 5단계 진화 카드 : 프레임 5개를 미리 그려두고 화면에 1개만 보여준다 -->
-      <div class="evo-hero" id="evoHero" data-lv="1">
+      <div class="evo-hero" id="evoHero" data-lv="1" data-starter="poko">
+        <!-- 스타팅 선택 : 고른 스타팅이 카드·로드맵에 바로 반영되고 브라우저에 저장된다 -->
+        <div class="evo-pick" id="evoPick" role="tablist" aria-label="스타팅 선택">
+          <button class="ep-btn on" type="button" role="tab" data-starter="poko" aria-selected="true"><i>🌸</i><b>포코링</b><em>여자</em></button>
+          <button class="ep-btn" type="button" role="tab" data-starter="boy" aria-selected="false"><i>⚡</i><b>레오</b><em>남자</em></button>
+          <button class="ep-btn" type="button" role="tab" data-starter="pet" aria-selected="false"><i>🦊</i><b>별여우</b><em>동물</em></button>
+        </div>
         <div class="evo-stage" id="myAva">
       <div class="evo-frame" data-evolv="1" data-name="포코에그" data-tier="루키" aria-hidden="true"><div class="pfr lv1" style=""><div class="paura phalo1"></div><div class="pband" style="--ir1:.450;--ir2:.5;background:conic-gradient(from 0deg,#FF6B45,#FFB79C 55deg,#FF8E6A 110deg,#FFE2D4 170deg,#FF9A76 232deg,#FFC7AE 296deg,#FF6B45)"></div><div class="pband pbevel" style="--ir1:.450;--ir2:.5;background:radial-gradient(circle at 30% 18%,rgba(255,255,255,.85),transparent 40%),radial-gradient(circle at 50% 92%,rgba(0,0,0,.5),transparent 44%)"></div><div class="pface" style="--rim:0.05;background:radial-gradient(circle at 50% 44%,#3A1626 0%,#2A1022 60%,#1A0A16 100%)"><img loading="lazy" decoding="async" src="assets/poko-lv1.png" alt=""></div><div class="phair"></div><div class="primout"></div></div></div>
       <div class="evo-frame" data-evolv="2" data-name="포코링" data-tier="브론즈" aria-hidden="true"><div class="pfr lv2" style=""><div class="paura phalo2"></div><div class="pband" style="--ir1:.420;--ir2:.5;background:conic-gradient(from 0deg,#3A2414,#8C5A2E 28deg,#F7C795 55deg,#B87A3C 80deg,#4E3018 105deg,#9A6435 138deg,#FFDDB0 168deg,#C99055 196deg,#6B4423 224deg,#A87141 252deg,#F7CD9C 282deg,#B57C40 312deg,#4A2E18 338deg,#3A2414)"></div><div class="pband pbevel" style="--ir1:.420;--ir2:.5;background:radial-gradient(circle at 30% 18%,rgba(255,255,255,.8),transparent 40%),radial-gradient(circle at 50% 94%,rgba(0,0,0,.6),transparent 44%)"></div><div class="pface" style="--rim:0.08;background:radial-gradient(circle at 50% 44%,#3A2412 0%,#28180C 60%,#150C06 100%)"><img loading="lazy" decoding="async" src="assets/poko-lv2.png" alt=""></div><div class="phair"></div><div class="primout"></div><div class="pstuds"><i class="pgem pbronze" style="left:50.00%;top:4.00%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:82.53%;top:17.47%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:96.00%;top:50.00%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:82.53%;top:82.53%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:50.00%;top:96.00%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:17.47%;top:82.53%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:4.00%;top:50.00%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:17.47%;top:17.47%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i></div><svg class="psparks" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><filter id="sg2x2" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="0" stdDeviation="2.6" flood-color="#FFD9A8" flood-opacity=".95"/></filter></defs><g filter="url(#sg2x2)"><path d="M33.8,150.6 Q35.1,155.3 39.8,156.6 Q35.1,157.9 33.8,162.6 Q32.4,157.9 27.7,156.6 Q32.4,155.3 33.8,150.6 Z" fill="#FFD9A8" opacity="0.66"/><path d="M157.7,38.1 Q159.2,43.7 164.8,45.3 Q159.2,46.8 157.7,52.4 Q156.1,46.8 150.5,45.3 Q156.1,43.7 157.7,38.1 Z" fill="#FFD9A8" opacity="0.73"/><path d="M19.6,104.1 Q20.3,106.4 22.6,107.0 Q20.3,107.7 19.6,109.9 Q19.0,107.7 16.7,107.0 Q19.0,106.4 19.6,104.1 Z" fill="#FFD9A8" opacity="0.85"/><path d="M82.7,41.0 Q83.9,45.2 88.1,46.4 Q83.9,47.6 82.7,51.8 Q81.5,47.6 77.2,46.4 Q81.5,45.2 82.7,41.0 Z" fill="#FFD9A8" opacity="0.99"/><path d="M38.8,44.5 Q40.1,49.0 44.5,50.2 Q40.1,51.5 38.8,55.9 Q37.5,51.5 33.1,50.2 Q37.5,49.0 38.8,44.5 Z" fill="#FFD9A8" opacity="0.68"/><path d="M166.2,177.7 Q167.1,180.7 170.0,181.5 Q167.1,182.3 166.2,185.3 Q165.4,182.3 162.5,181.5 Q165.4,180.7 166.2,177.7 Z" fill="#FFD9A8" opacity="0.53"/></g></svg></div></div>
@@ -6546,6 +6572,8 @@ body{background:#05050A;color:var(--tx)}
      ④ 포코 5단계 진화 (마이페이지)
         누적 구매액 0 → 5만 → 30만 → 70만 → 150만 원에서 진화.
         로드맵 단계를 누르면 내 등급 대신 그 단계를 미리 보여준다.
+        스타팅(🌸 포코링 · ⚡ 레오 · 🦊 별여우)을 고르면 같은 5단계
+        테두리 위에서 그 스타팅의 모습·이름으로 바뀐다.
      ============================================================ */
   const EVO_STAGES = [
     { lv: 1, tier: "루키",   name: "포코에그",   need: 0,       short: "0원" },
@@ -6555,7 +6583,28 @@ body{background:#05050A;color:var(--tx)}
     { lv: 5, tier: "레전드", name: "포코제니스", need: 1500000, short: "150만원+" }
   ];
   const EVO_KEY = "pokoEvoSpent";
+
+  /* 스타팅 3종 : 에셋 접두사 · 5단계 이름 · 탭 문구 */
+  const EVO_STARTERS = {
+    poko: { key: "poko", asset: "poko", emoji: "🌸", tab: "포코링", who: "여자",
+            names: ["포코에그", "포코링", "포코나이트", "포코로드", "포코제니스"] },
+    boy:  { key: "boy",  asset: "boy",  emoji: "⚡", tab: "레오",   who: "남자",
+            names: ["레오에그", "레오스콰이어", "레오나이트", "레오로드", "레오엠페러"] },
+    pet:  { key: "pet",  asset: "pet",  emoji: "🦊", tab: "별여우", who: "동물",
+            names: ["별여우알", "아기별여우", "별여우", "별빛성수", "천공 궁극신수"] }
+  };
+  const STARTER_KEY = "pokoStarter";
+  let evoStarter = "poko";                   /* 고른 스타팅 (브라우저에 저장) */
+  try {
+    const saved = localStorage.getItem(STARTER_KEY);
+    if (saved && EVO_STARTERS[saved]) evoStarter = saved;
+  } catch (e){}
+  const starter = () => EVO_STARTERS[evoStarter] || EVO_STARTERS.poko;
+  const evoName = lv => starter().names[Math.max(1, Math.min(5, lv || 1)) - 1];
+  const evoAsset = lv => "assets/" + starter().asset + "-lv" + Math.max(1, Math.min(5, lv || 1)) + ".png";
+
   let evoPreview = 0;                        /* 0 = 미리보기 아님(내 등급) */
+  const evoWarmed = {};
 
   /* 누적 구매액 = 이번 세션 뽑기 결제 합계 vs 브라우저에 남긴 합계 중 큰 값 */
   function evoSpent(){
@@ -6577,6 +6626,61 @@ body{background:#05050A;color:var(--tx)}
   }
   const evoStage = lv => EVO_STAGES[Math.max(1, Math.min(5, lv)) - 1];
 
+  /* 스타팅을 바꾸면 카드 프레임 5개 · 로드맵 5칸의 그림과 이름만 갈아 끼운다
+     (초호화 테두리 파츠는 등급별로 그대로 — 테두리는 스타팅과 무관) */
+  function applyEvoStarter(){
+    const S = starter();
+    $$("#myAva .evo-frame").forEach(f => {
+      const lv = Number(f.dataset.evolv) || 1;
+      const nm = evoName(lv), src = evoAsset(lv);
+      const img = f.querySelector("img");
+      if (img){
+        if (img.getAttribute("src") !== src) img.setAttribute("src", src);
+        if (img.getAttribute("alt") !== nm) img.setAttribute("alt", nm);
+      }
+      if (f.dataset.name !== nm) f.dataset.name = nm;
+    });
+    $$("#evoRail .evo-n").forEach(b => {
+      const lv = Number(b.dataset.evolv) || 1;
+      const nm = evoName(lv), src = evoAsset(lv);
+      const img = b.querySelector("img");
+      if (img){
+        if (img.getAttribute("src") !== src) img.setAttribute("src", src);
+        if (img.getAttribute("alt") !== nm) img.setAttribute("alt", nm);
+      }
+      const t = b.querySelector(".en-nm");
+      if (t){
+        t.textContent = nm;
+        t.classList.toggle("long", nm.length > 4);   /* 긴 이름은 두 줄 */
+      }
+    });
+    $$("#evoPick .ep-btn").forEach(b => {
+      const on = b.dataset.starter === S.key;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+  }
+
+  /* 스타팅 5단계 그림을 미리 받아 둔다 (탭 전환 시 빈 원이 보이지 않게) */
+  function evoWarmup(){
+    const S = starter();
+    for (let lv = 1; lv <= 5; lv++){
+      const src = "assets/" + S.asset + "-lv" + lv + ".png";
+      if (evoWarmed[src]) continue;
+      evoWarmed[src] = 1;
+      try { const im = new Image(); im.src = src; } catch (e){}
+    }
+  }
+
+  function evoPop(){
+    const stage = $("#myAva");
+    if (!stage) return;
+    stage.classList.remove("pop");
+    void stage.offsetWidth;
+    stage.classList.add("pop");
+    setTimeout(() => stage.classList.remove("pop"), 520);
+  }
+
   function renderEvo(){
     const hero = $("#evoHero");
     if (!hero) return;
@@ -6586,10 +6690,12 @@ body{background:#05050A;color:var(--tx)}
     const st = evoStage(show);
     const isPrev = show !== mine;
 
+    applyEvoStarter();
     $$("#myAva .evo-frame").forEach(f => {
       f.classList.toggle("on", Number(f.dataset.evolv) === show);
     });
     hero.dataset.lv = show;
+    hero.dataset.starter = starter().key;
     hero.classList.toggle("is-prev", isPrev);
 
     const rank = $("#evoRank");
@@ -6598,7 +6704,7 @@ body{background:#05050A;color:var(--tx)}
       rank.className = "evo-rank r" + show;
     }
     const nm = $("#evoName");
-    if (nm) nm.textContent = st.name;
+    if (nm) nm.textContent = evoName(show);
     const pv = $("#evoPrevTag");
     if (pv) pv.hidden = !isPrev;
     const back = $("#evoBack");
@@ -6629,7 +6735,7 @@ body{background:#05050A;color:var(--tx)}
         nx.className = "ep-next" + (maxed ? " max" : "");
       }
     } else if (maxed){
-      if (txt) txt.innerHTML = "최종 진화 완료 · <b>포코제니스</b>";
+      if (txt) txt.innerHTML = "최종 진화 완료 · <b>" + evoName(5) + "</b>";
       if (nx){ nx.textContent = "MAX LV"; nx.className = "ep-next max"; }
     } else {
       if (txt) txt.innerHTML = "다음 진화까지 <b>" + won(Math.max(0, to - spent)) + "원</b>";
@@ -6647,39 +6753,44 @@ body{background:#05050A;color:var(--tx)}
       b.setAttribute("aria-pressed", lv === show ? "true" : "false");
     });
     const mineTxt = $("#evoMyLvTxt");
-    if (mineTxt) mineTxt.textContent = "LV." + mine + " " + evoStage(mine).name;
+    if (mineTxt) mineTxt.textContent = "LV." + mine + " " + evoName(mine);
   }
 
   function evoPick(lv){
     const mine = evoLvOf(evoSpent());
     evoPreview = (lv === mine || lv === evoPreview) ? 0 : lv;
-    const stage = $("#myAva");
     renderEvo();
-    if (stage){
-      stage.classList.remove("pop");
-      void stage.offsetWidth;
-      stage.classList.add("pop");
-      setTimeout(() => stage.classList.remove("pop"), 520);
-    }
+    evoPop();
     if (evoPreview && $("#evoHero") && $("#evoHero").scrollIntoView){
       try { $("#evoHero").scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e){}
     }
   }
 
+  /* 스타팅 선택 — 고른 스타팅을 브라우저에 남겨 새로고침해도 유지 */
+  function evoSetStarter(key){
+    if (!EVO_STARTERS[key]) return;
+    evoStarter = key;
+    try { localStorage.setItem(STARTER_KEY, key); } catch (e){}
+    evoWarmup();
+    renderEvo();
+    evoPop();
+  }
+
   (function wireEvo(){
     $$("#evoRail .evo-n").forEach(b => b.addEventListener("click", () => evoPick(Number(b.dataset.evolv))));
+    $$("#evoPick .ep-btn").forEach(b => b.addEventListener("click", () => evoSetStarter(b.dataset.starter)));
     ["#evoBack", "#evoBack2"].forEach(sel => {
       const b = $(sel);
       if (b) b.addEventListener("click", () => { evoPreview = 0; renderEvo(); });
     });
+    applyEvoStarter();
+    evoWarmup();
   })();
   /* @@EVO-JS-END@@ */
 
   /* 복권 결과를 먼저 확정하고(연출 중 화면 갱신은 보류) 연출 후 모달을 연다 */
   function settleDraw(s, b, n, cost){
     state.points -= cost;
-    evoAddSpend(cost);
-    evoAddSpend(cost);
     evoAddSpend(cost);
     s.rev += cost;
     s.sold += n;
