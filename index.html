@@ -3904,6 +3904,50 @@ body{background:#05050A;color:var(--tx)}
   .seal-pill em{font-size:8px}
 }
 /* @@POKO-V17-PRIZE-SORT-SEAL-END@@ */
+/* @@POKO-RANK-BEGIN@@ */
+/* ============================================================
+   랭킹 탭 — 유저 순위 (🔥 뽑기 왕 · 🍀 금손 순위)  2026-11-28
+   ============================================================ */
+.rktabs{display:flex;gap:6px;margin:0 0 10px}
+.rktabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 6px 7px;border-radius:12px;
+  background:#171222;border:1px solid #2A2340;color:#8E869C;transition:border-color .15s,background .15s}
+.rktabs button b{font-size:11.5px;font-weight:900;letter-spacing:-.3px}
+.rktabs button em{font-style:normal;font-size:8.5px;font-weight:700;opacity:.82}
+.rktabs button.on{background:linear-gradient(180deg,#2A2036,#1A1426);border-color:rgba(255,90,54,.75);color:#FFE9DF;
+  box-shadow:0 0 14px -6px rgba(255,90,54,.95),inset 0 1px 0 rgba(255,255,255,.08)}
+.rktabs button.on em{color:#FFB59E}
+.rksum{display:flex;align-items:center;gap:6px;margin:0 0 8px;font-size:9px;font-weight:800;color:#8E869C}
+.rksum>b{color:#FFC24A}
+.rksum span b{color:#DCD4EA}
+.rksum em{margin-left:auto;font-style:normal;font-size:8.5px;font-weight:700;color:#6C647A}
+.rkrow{position:relative;display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:12px;
+  background:#151120;border:1px solid #241E33;margin-bottom:6px}
+.rkrow.r1{background:linear-gradient(100deg,#2A2010,#1A1426 62%);border-color:rgba(255,194,74,.55)}
+.rkrow.r2{background:linear-gradient(100deg,#1E2228,#1A1426 62%);border-color:rgba(200,214,230,.42)}
+.rkrow.r3{background:linear-gradient(100deg,#241A12,#1A1426 62%);border-color:rgba(226,150,102,.45)}
+.rkrow.me{box-shadow:inset 0 0 0 1.4px rgba(94,224,255,.55)}
+.rkno{flex:none;width:20px;text-align:center;font-size:11.5px;font-weight:900;font-style:italic;color:#6C647A;letter-spacing:-.5px}
+.rkno.r1{color:#FFC24A;font-size:15px;text-shadow:0 0 10px rgba(255,194,74,.55)}
+.rkno.r2{color:#D7E2EE;font-size:14px}
+.rkno.r3{color:#E29666;font-size:13.5px}
+.rkava{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(circle at 50% 30%,#2A2340,#151120);border:1px solid #342B4A}
+.rkava.lv4,.rkava.lv5{border-color:rgba(255,194,74,.6);box-shadow:0 0 10px -4px rgba(255,194,74,.9)}
+.rkava img{width:100%;height:100%;object-fit:contain}
+.rkwho{flex:1;min-width:0;display:flex;align-items:center;gap:5px}
+.rknm{font-size:11px;font-weight:800;color:#EFEAF6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.2px}
+.rkme{font-style:normal;margin-left:3px;padding:1px 4px;border-radius:4px;background:rgba(94,224,255,.16);
+  border:1px solid rgba(94,224,255,.5);color:#9BF0FF;font-size:7.5px;font-weight:900;vertical-align:1px}
+.rkbadge{flex:none;font-size:9.5px;font-weight:900;font-style:italic;letter-spacing:-.4px;
+  text-shadow:-1px -1px 0 rgba(10,8,16,.95),1px -1px 0 rgba(10,8,16,.95),-1px 1px 0 rgba(10,8,16,.95),1px 1px 0 rgba(10,8,16,.95)}
+.rkstat{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.rkstat b{font-size:10.5px;font-weight:900;color:#FFE9DF;letter-spacing:-.2px}
+.rkstat i{font-style:normal;font-size:8.5px;font-weight:800;color:#8E869C}
+.rktip{margin:10px 0 4px;font-size:8.5px;font-weight:700;color:#6C647A;line-height:1.55}
+.rktip b{color:#A49CB0}
+.rkload{display:flex;align-items:center;justify-content:center;gap:6px;padding:28px 0;font-size:10px;font-weight:800;color:#8E869C}
+.rkload i{width:7px;height:7px;border-radius:50%;background:#FF5A36;animation:pulse 1.2s infinite}
+/* @@POKO-RANK-END@@ */
 </style>
 </head>
 <body>
@@ -5268,7 +5312,7 @@ body{background:#05050A;color:var(--tx)}
     ]
   };
 
-  const view = { sid: null, idx: 0, tab: "goods", grade: null, busy: false };
+  const view = { sid: null, idx: 0, tab: "goods", grade: null, busy: false, rankTab: "draws" };
   let pendingCharge = null;
   let confirmAction = null;
   let shipSelection = new Set();
@@ -6084,38 +6128,180 @@ body{background:#05050A;color:var(--tx)}
       '<button class="btn-primary" type="button" data-close="infoSheet">확인했어요</button>');
   }
 
+  /* ============================================================
+     랭킹 탭 — 유저 순위 (뽑기 왕 · 금손 순위)  2026-11-28
+       · 데이터: 이 박스의 실제 뽑기 기록(Supabase draws)을 유저별로 집계
+         (실DB: RPC box_leaderboard · 데모: 박스 시드로 만든 결정적 표본)
+       · 닉네임은 서버에서 이미 마스킹된 값만 내려온다 (원문 미노출)
+     ============================================================ */
+  const RANK_TABS = [
+    { k: "draws", label: "🔥 뽑기 왕", sub: "많이 뽑은 순" },
+    { k: "lucky", label: "🍀 금손 순위", sub: "많이 받은 순" }
+  ];
+  const RANK_MEDAL = { 1: "r1", 2: "r2", 3: "r3" };
+  const RANK_ASSET = { poko: "poko", boy: "boy", leo: "boy", pet: "pet" };
+
+  /* 획득 가치 → 진화 아바타 단계 (1만 · 3만 · 7만 · 15만 P) */
+  function rankLvOf(v){
+    if (v >= 150000) return 5;
+    if (v >= 70000) return 4;
+    if (v >= 30000) return 3;
+    if (v >= 10000) return 2;
+    return 1;
+  }
+  function maskDemoNick(n){
+    const s = String(n || "");
+    return s.length <= 1 ? s + "…" : s.slice(0, Math.min(3, s.length - 1)) + "…";
+  }
+
+  /* 데모(오프라인·config 비움) — 박스 시드로 항상 같은 5~8명 표본 */
+  function buildDemoRank(b){
+    const rnd = mulberry((b.no || 1) * 5077 + 17);
+    const live = b.grades.filter(g => g.k !== "last");
+    const pool = live.length ? live : (b.grades.length ? b.grades : [{ k: "L", v: 0 }]);
+    const n = 5 + Math.floor(rnd() * 4);
+    const keys = ["poko", "boy", "pet"];
+    const rows = [];
+    for (let i = 0; i < n; i++){
+      const draws = Math.max(1, Math.round(2 + rnd() * 24 + (n - i) * 2));
+      const g = pool[Math.min(pool.length - 1, Math.floor(rnd() * rnd() * pool.length))] || pool[0];
+      const low = pool[pool.length - 1] || g;
+      const total = Math.round(draws * (low.v + Math.max(0, g.v - low.v) * rnd() * 0.35));
+      rows.push({
+        nick: maskDemoNick(NICKS[i % NICKS.length]),
+        starter: keys[Math.floor(rnd() * keys.length)],
+        lv: rankLvOf(total),
+        draws: draws,
+        bestGrade: g.k,
+        bestValue: g.v,
+        totalValue: total,
+        isMe: false
+      });
+    }
+    return rows;
+  }
+
+  function mapRankRow(r){
+    const total = Number(r.total_value) || 0;
+    return {
+      nick: r.nick || "손님…",
+      starter: RANK_ASSET[r.starter] || "poko",
+      lv: Math.max(1, Math.min(5, Number(r.lv) || rankLvOf(total))),
+      draws: Number(r.draws) || 0,
+      bestGrade: r.best_grade || null,
+      bestValue: Number(r.best_value) || 0,
+      totalValue: total,
+      isMe: !!r.is_me
+    };
+  }
+
+  function loadRank(b){
+    if (!LIVE || !b || !b.id || b.rankLoading) return;
+    b.rankLoading = true;
+    CHII_BACKEND.leaderboard(b.id, 200).then(rows => {
+      b.rank = { loaded: true, rows: (rows || []).map(mapRankRow), at: Date.now() };
+    }).catch(() => {
+      b.rank = { loaded: true, rows: [], at: Date.now(), error: true };
+    }).then(() => {
+      b.rankLoading = false;
+      if (box() === b && !$("#screenDetail").hidden) renderRank();
+    });
+  }
+
+  function ensureRank(b){
+    if (b.rank && b.rank.loaded){
+      if (LIVE && Date.now() - (b.rank.at || 0) > 20000) loadRank(b);   /* 20초 지나면 조용히 새로고침 */
+      return b.rank;
+    }
+    if (!LIVE){
+      b.rank = { loaded: true, rows: buildDemoRank(b), at: Date.now(), demo: true };
+      return b.rank;
+    }
+    loadRank(b);
+    return null;
+  }
+
+  function rankRowsSorted(data, tab){
+    const rows = (data && data.rows ? data.rows : []).slice();
+    rows.sort(tab === "lucky"
+      ? (x, y) => (y.totalValue - x.totalValue) || (y.bestValue - x.bestValue) || (y.draws - x.draws)
+      : (x, y) => (y.draws - x.draws) || (y.totalValue - x.totalValue) || (y.bestValue - x.bestValue));
+    return rows;
+  }
+
   function renderRank(){
-    const b = box(), s = ser();
-    const rem = remainOf(b) || 1;
-    const list = b.grades.slice().sort((x, y) => y.v - x.v);
-    if (!list.length){
-      $("#dRank").innerHTML = `<div class="rank">` + emptyStateHTML({
-        title: "아직 순위를 매길 경품이 없어요",
-        body: "이 박스의 경품이 채워지면 가치가 높은 순서로 정리해 보여 드릴게요 🥚",
-        cta: "다른 박스 보기", act: "next-box"
+    const b = box();
+    if (!b) return;
+    const tab = view.rankTab === "lucky" ? "lucky" : "draws";
+    const data = ensureRank(b);
+    const head = `<div class="rktabs" role="tablist">` + RANK_TABS.map(t =>
+      `<button class="${t.k === tab ? "on" : ""}" type="button" role="tab" data-ranktab="${t.k}" aria-selected="${t.k === tab}"><b>${t.label}</b><em>${t.sub}</em></button>`
+    ).join("") + `</div>`;
+
+    if (!data){
+      $("#dRank").innerHTML = `<div class="rank">${head}<div class="rkload"><i></i>순위를 불러오는 중…</div></div>`;
+      return;
+    }
+    const rows = rankRowsSorted(data, tab);
+    if (!rows.length){
+      $("#dRank").innerHTML = `<div class="rank">${head}` + emptyStateHTML({
+        title: "아직 뽑기 기록이 없어요",
+        body: b.no + "번 박스의 첫 뽑기가 나오면 여기에 순위가 쌓여요 🥚",
+        cta: "상품 보고 첫 티켓 뜯기", act: "tab-goods"
       }) + `</div>`;
       return;
     }
-    let html = `<div class="rank">`;
-    list.forEach((g, i) => {
-      const pct = g.k === "last" ? (g.r ? 100 : 0) : Math.round(g.r / rem * 100);
-      html += `<div class="rrow">
-        <span class="rno ${i < 3 ? "top" : ""}">${i + 1}</span>
-        <span class="rtag" style="color:${GC[g.k]}">${GLABEL(g.k)}</span>
-        <div class="rbody">
-          <div class="rname">${g.n}</div>
-          <div class="rbar"><i style="width:${pct}%"></i></div>
-          <div class="rmeta"><span>잔여 <b>${g.r}</b>/${g.t}</span><span>${g.k === "last" ? "마지막 1장 보너스" : "확률 " + (rem ? (g.r / remainOf(b) * 100).toFixed(2) : "0.00") + "%"}</span></div>
-        </div>
-        <span class="rval">P ${won(g.v)}</span>
+    const totalDraws = rows.reduce((a, r) => a + r.draws, 0);
+    let html = `<div class="rank">${head}
+      <div class="rksum"><b>${b.no}번 박스</b><span>참여 <b>${rows.length}</b>명 · 총 <b>${totalDraws}</b>회</span><em>${tab === "lucky" ? "획득 가치 높은 순" : "뽑기 횟수 많은 순"}</em></div>`;
+    rows.forEach((r, i) => {
+      const no = i + 1;
+      const medal = RANK_MEDAL[no] || "";
+      const badge = r.bestGrade ? `<span class="rkbadge" style="color:${GC[r.bestGrade] || "#fff"}">${GLABEL(r.bestGrade)}</span>` : "";
+      html += `<div class="rkrow ${medal}${r.isMe ? " me" : ""}" data-rank="${no}">
+        <span class="rkno ${medal}">${no}</span>
+        <span class="rkava lv${r.lv}"><img src="assets/${r.starter}-lv${r.lv}.png" alt="" loading="lazy" decoding="async"></span>
+        <span class="rkwho"><span class="rknm">${r.nick}${r.isMe ? `<i class="rkme">나</i>` : ""}</span>${badge}</span>
+        <span class="rkstat"><b>${r.draws}회</b><i>P ${won(r.totalValue)}</i></span>
       </div>`;
     });
-    html += `<div class="shelf-tip" style="margin:12px 0 6px">${s.def.short} ${b.no}번 박스 기준 · 포인트 가치가 높은 순서예요.</div></div>`;
+    html += `<div class="rktip">닉네임은 개인정보 보호를 위해 <b>일부만</b> 보여 드려요 · 이 박스의 실제 뽑기 기록 기준이에요.</div></div>`;
     $("#dRank").innerHTML = html;
+  }
+
+  /* ── 기록 탭 : 실DB는 실제 최근 뽑기, 데모는 박스 시드 표본 ── */
+  function relTime(iso){
+    const t = new Date(iso).getTime();
+    if (!t) return "";
+    const m = Math.max(0, Math.round((Date.now() - t) / 60000));
+    if (m < 1) return "방금 전";
+    if (m < 60) return m + "분 전";
+    const h = Math.round(m / 60);
+    if (h < 24) return h + "시간 전";
+    return Math.round(h / 24) + "일 전";
+  }
+
+  function loadLogs(b){
+    if (!LIVE || !b || !b.id || b.logsLoading) return;
+    b.logsLoading = true;
+    CHII_BACKEND.recentDraws(b.id, 20).then(rows => {
+      b.logs = (rows || []).map(r => ({
+        who: r.nick || "손님…",
+        g: r.grade,
+        name: r.prize_name,
+        time: relTime(r.at),
+        mine: !!r.is_me
+      }));
+    }).catch(() => { if (!b.logs) b.logs = []; })
+      .then(() => {
+        b.logsLoading = false;
+        if (box() === b && !$("#screenDetail").hidden) renderLog();
+      });
   }
 
   function ensureLogs(b){
     if (b.logs) return b.logs;
+    if (LIVE){ loadLogs(b); return []; }
     const rnd = mulberry(b.no * 7717 + 31);
     const sold = b.grades.slice(1).filter(g => g.r < g.t);
     const logs = [];
@@ -6134,6 +6320,12 @@ body{background:#05050A;color:var(--tx)}
 
   function renderLog(){
     const b = box();
+    if (!b) return;
+    if (LIVE && !b.logs){
+      loadLogs(b);
+      $("#dLog").innerHTML = `<div class="log"><div class="log-head"><span class="dot-live"></span>실시간 뽑기 기록 · ${b.no}번 박스</div><div class="rkload"><i></i>기록을 불러오는 중…</div></div>`;
+      return;
+    }
     const logs = ensureLogs(b);
     let html = `<div class="log"><div class="log-head"><span class="dot-live"></span>실시간 뽑기 기록 · ${b.no}번 박스 · 최근 ${logs.length}건</div>`;
     if (!logs.length){
@@ -6177,7 +6369,9 @@ body{background:#05050A;color:var(--tx)}
   }
   /* 검증·디버깅용 얇은 핸들 (기존 POKO_BGM·POKO_WELCOME 과 동일한 방식) */
   window.POKO_DETAIL = { render: renderDetail, log: renderLog, rank: renderRank, shelf: renderBox,
-    box: box, view: view, fit: () => fitPmBars($("#dGoods")), seal: openSeal };
+    box: box, view: view, fit: () => fitPmBars($("#dGoods")), seal: openSeal,
+    setRankTab: k => { view.rankTab = k === "lucky" ? "lucky" : "draws"; renderRank(); },
+    rankData: () => { const b = box(); return b && b.rank ? b.rank : null; } };
   /* 홈 정렬·판 상태 얇은 핸들 (검증용) */
   window.POKO_HOME = { ui: homeUI, render: renderHome, setState: setHomeState, setSort: setHomeSort,
     topOf: s => topOf(s), topChance: s => topChance(s), activeBoxOf: s => activeBoxOf(s),
@@ -7981,10 +8175,11 @@ body{background:#05050A;color:var(--tx)}
       items.forEach(it => state.shelf.push(it));
       if (lastItem) state.shelf.push(lastItem);
 
-      const logs = ensureLogs(b);
-      items.slice().reverse().forEach(it => logs.unshift({ who:"나", g: it.g, name: it.name, time:"방금 전", mine:true }));
-      if (lastItem) logs.unshift({ who:"나", g:"last", name: lastItem.name, time:"방금 전", mine:true });
-      b.logs = logs;
+      /* 내 기록이 바로 순위·기록에 반영되도록 다시 읽는다 */
+      b.logs = null;
+      b.rank = null;
+      if (view.tab === "rank") renderRank();
+      else if (view.tab === "log") renderLog();
 
       const best = lastItem || items.slice().sort((x, y) => gradeRank(y.g) - gradeRank(x.g))[0];
       view.grade = best.g;
@@ -8434,7 +8629,17 @@ body{background:#05050A;color:var(--tx)}
       $("#dRank").hidden = view.tab !== "rank";
       $("#dLog").hidden = view.tab !== "log";
       if (view.tab === "goods") fitPmBars($("#dGoods"));
+      if (view.tab === "rank") renderRank();
+      if (view.tab === "log") renderLog();
     });
+  });
+
+  /* 랭킹 서브탭 — 🔥 뽑기 왕 · 🍀 금손 순위 */
+  document.addEventListener("click", e => {
+    const t = e.target.closest("[data-ranktab]");
+    if (!t) return;
+    view.rankTab = t.dataset.ranktab === "lucky" ? "lucky" : "draws";
+    renderRank();
   });
 
   $$("#drawBar .dome").forEach(btn => {
@@ -9188,6 +9393,15 @@ body{background:#05050A;color:var(--tx)}
   async function bootLive(){
     state.points = 0;
     renderHeader();
+    /* 세션이 완전히 만료된 정식 회원 — 재로그인 안내 (게스트는 자동 재발급) */
+    try {
+      if (CHII_BACKEND.onSessionLost) CHII_BACKEND.onSessionLost(() => {
+        state.me = null;
+        renderHeader(); renderAuthChip();
+        toast("로그인이 만료됐어요 · 다시 로그인해 주세요");
+        openOverlay("authSheet");
+      });
+    } catch (e){}
     document.querySelectorAll(".foot").forEach(f => {
       f.innerHTML = "실서비스 모드 · 뽑기·진열장·배송 신청이 서버에 저장됩니다.";
     });

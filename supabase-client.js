@@ -24,6 +24,15 @@
  *   await CHII_BACKEND.refreshBoxes()     전체 박스 잔여 최신화
  *   await CHII_BACKEND.stats()            사장님 집계 (관리자)
  *   await CHII_BACKEND.resetSeries(sid)   재고 리셋 (관리자)
+ *   await CHII_BACKEND.leaderboard(boxId) 박스 유저 순위 (뽑기 왕 · 금손, 닉네임은 서버에서 마스킹)
+ *   await CHII_BACKEND.recentDraws(boxId) 박스 최근 뽑기 기록 (실시간 피드)
+ *
+ * 세션 자동 복구 (2026-11-28)
+ *   · 인증이 필요한 모든 REST/RPC 호출 직전에 refreshIfNeeded() 를 먼저 부른다.
+ *   · 401 / JWT expired / PGRST301 응답이면 토큰을 강제로 만료시키고 새 토큰으로 1회 자동 재시도.
+ *   · 리프레시 토큰까지 죽었을 때: 게스트(익명)는 새 익명 세션을 자동 발급(끊김 없음),
+ *     정식 회원은 onSessionLost 로 알리고 재로그인을 안내한다.
+ *   · 탭/앱 복귀(visibilitychange) 시에도 미리 갱신한다.
  *
  * 보안: 여기에 들어가는 것은 anon key 뿐입니다. service_role key 는 절대 넣지 마세요.
  * ==========================================================================*/
@@ -44,6 +53,9 @@
   var session = null;          // { access_token, refresh_token, expires_at, user }
   var refreshing = null;
   var listeners = [];
+  var lostListeners = [];      // 정식 회원 세션이 완전히 만료됐을 때 (재로그인 안내)
+  var sessionLost = null;      // 위 상황의 ApiError (한 번만 알린다)
+  var guestReseeded = false;   // 리프레시 만료 → 새 익명 게스트로 자동 재발급됨
 
   function ApiError(message, code, status) {
     var e = new Error(message || "요청에 실패했어요");
@@ -72,6 +84,21 @@
     listeners.forEach(function (fn) {
       try { fn(currentUser()); } catch (e) {}
     });
+  }
+  function emitLost(err) {
+    if (!lostListeners.length || !err) return;
+    lostListeners.forEach(function (fn) {
+      try { fn(err); } catch (e) {}
+    });
+  }
+
+  /* 토큰 만료 응답인가 — 401 · PGRST301 · 'JWT expired' */
+  function isExpiredError(err) {
+    if (!err) return false;
+    var code = String(err.code || "");
+    var msg = String(err.message || "");
+    if (code === "PGRST301" || code === "PGRST302") return true;
+    return err.status === 401 || /jwt\s*(is\s*)?expired|invalid\s*jwt|token\s*is\s*expired/i.test(msg);
   }
 
   function currentUser() {
@@ -117,7 +144,8 @@
     return ApiError(msg, code, res.status);
   }
 
-  function request(path, opts) {
+  /* 실제 HTTP 1회 — 토큰 준비·재시도 없음 */
+  function rawFetch(path, opts) {
     opts = opts || {};
     return fetch(URL_BASE + path, {
       method: opts.method || "GET",
@@ -133,9 +161,37 @@
     });
   }
 
+  /* 호출 전 토큰 준비 — 이미 유효하면 즉시 resolve, 실패해도 요청 자체는 진행 */
+  function withFreshSession(force) {
+    if (!session) return Promise.resolve(null);
+    return refreshIfNeeded(force).catch(function () { return null; });
+  }
+
+  /* 인증이 필요한 요청 — 선행 갱신 + 만료 응답 시 1회 자동 재시도 */
+  function request(path, opts) {
+    var retried = false;
+    function send(force) {
+      return withFreshSession(force).then(function () { return rawFetch(path, opts); });
+    }
+    /* 정식 회원 세션이 완전히 끝났고 서버도 거부했다면 → 재로그인 안내를 그대로 전달 */
+    function finish(err) {
+      if (sessionLost && !session && (isExpiredError(err) || err.status === 401)) return sessionLost;
+      return err;
+    }
+    return send(false).catch(function (err) {
+      if (isExpiredError(err) && !retried) {
+        retried = true;
+        if (session) { session.expires_at = 0; writeStore(session); }
+        return send(true).catch(function (err2) { throw finish(err2); });
+      }
+      throw finish(err);
+    });
+  }
+
   /* ---------------------------------------------------------------- 인증 */
   function saveAuth(payload) {
     if (!payload || !payload.access_token) return null;
+    sessionLost = null;
     session = {
       access_token: payload.access_token,
       refresh_token: payload.refresh_token || (session && session.refresh_token) || null,
@@ -191,21 +247,13 @@
     if (!session || !session.access_token) {
       return Promise.reject(ApiError("게스트 세션이 없어요. 새로고침 후 다시 시도해 주세요.", "no_session", 401));
     }
-    return fetch(URL_BASE + "/auth/v1/user", {
+    return request("/auth/v1/user", {
       method: "PUT",
-      headers: headers(),
-      body: JSON.stringify({
+      body: {
         email: email,
         password: password,
         data: { nickname: nickname || "", phone: phone || "" }
-      })
-    }).then(function (res) {
-      return res.text().then(function (text) {
-        var data = null;
-        if (text) { try { data = JSON.parse(text); } catch (e) { data = text; } }
-        if (!res.ok) throw parseError(res, data);
-        return data;
-      });
+      }
     }).then(function (data) {
       if (data && data.id) {
         if (session) {
@@ -240,6 +288,8 @@
   function signOut() {
     var token = session && session.access_token;
     session = null;
+    sessionLost = null;
+    guestReseeded = false;
     writeStore(null);
     emit();
     if (!token) return Promise.resolve();
@@ -249,14 +299,41 @@
     }).catch(function () {});
   }
 
-  function refreshIfNeeded() {
-    if (!session || !session.refresh_token) return Promise.resolve(session);
+  /* force=true 면 expires_at 이 남아 있어도 강제로 새 토큰을 받는다 (서버가 401 을 준 경우). */
+  function refreshIfNeeded(force) {
+    if (!session) return Promise.resolve(session);
     var now = Math.floor(Date.now() / 1000);
-    if (session.expires_at && session.expires_at - 60 > now) return Promise.resolve(session);
+    if (!force && session.expires_at && session.expires_at - 60 > now) return Promise.resolve(session);
     if (refreshing) return refreshing;
+    if (!session.refresh_token) {
+      if (!force) return Promise.resolve(session);
+      return Promise.reject(ApiError("로그인이 만료됐어요. 다시 로그인해 주세요.", "session_expired", 401));
+    }
+
     refreshing = authPost("/auth/v1/token?grant_type=refresh_token", { refresh_token: session.refresh_token })
       .then(function (data) { saveAuth(data); refreshing = null; return session; })
-      .catch(function (err) { refreshing = null; session = null; writeStore(null); emit(); throw err; });
+      .catch(function (err) {
+        refreshing = null;
+        var wasGuest = isGuest();          /* 세션을 지우기 전에 게스트 여부를 기억 */
+        session = null;
+        writeStore(null);
+        if (wasGuest) {
+          /* 게스트는 끊기지 않게 새 익명 세션을 자동 발급 */
+          return signInAnonymous().then(function () {
+            guestReseeded = true;
+            emit();
+            return session;
+          }).catch(function () {
+            sessionLost = ApiError("로그인이 만료됐어요. 다시 로그인해 주세요.", "session_expired", 401);
+            emit();
+            throw err;
+          });
+        }
+        sessionLost = ApiError("로그인이 만료됐어요. 다시 로그인해 주세요.", "session_expired", 401);
+        emit();
+        emitLost(sessionLost);
+        throw err;
+      });
     return refreshing;
   }
 
@@ -264,6 +341,16 @@
     session = readStore();
     if (!enabled) return Promise.resolve(null);
     return refreshIfNeeded().catch(function () { return null; });
+  }
+
+  /* 탭·앱 복귀 시 미리 토큰을 갱신 — 백그라운드에 오래 있다 돌아와도 첫 요청이 죽지 않는다 */
+  if (typeof document !== "undefined" && document.addEventListener) {
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "visible" && session) refreshIfNeeded().catch(function () {});
+    });
+    window.addEventListener("pageshow", function () {
+      if (session) refreshIfNeeded().catch(function () {});
+    });
   }
 
   /* ---------------------------------------------------------- 데이터 조회 */
@@ -476,6 +563,23 @@
     });
   }
 
+  /* ── 유저 순위 · 실시간 피드 (닉네임 마스킹은 서버에서) ── */
+  function leaderboard(boxId, limit) {
+    if (!boxId) return Promise.resolve([]);
+    return request("/rest/v1/rpc/box_leaderboard", {
+      method: "POST",
+      body: { p_box_id: boxId, p_limit: limit || 50 }
+    }).then(function (rows) { return rows || []; });
+  }
+
+  function recentDraws(boxId, limit) {
+    if (!boxId) return Promise.resolve([]);
+    return request("/rest/v1/rpc/box_recent_draws", {
+      method: "POST",
+      body: { p_box_id: boxId, p_limit: limit || 20 }
+    }).then(function (rows) { return rows || []; });
+  }
+
   function adjustPoints(userId, delta, memo) {
     return request("/rest/v1/rpc/admin_adjust_points", {
       method: "POST",
@@ -499,8 +603,13 @@
     isMember: isMember,
     updateProfile: updateProfile,
     setStarter: setStarter,
-    refresh: function () { return refreshIfNeeded(); },
+    refresh: function (force) { return refreshIfNeeded(force); },
     onAuth: function (fn) { listeners.push(fn); return function () { listeners = listeners.filter(function (x) { return x !== fn; }); }; },
+    onSessionLost: function (fn) { lostListeners.push(fn); return function () { lostListeners = lostListeners.filter(function (x) { return x !== fn; }); }; },
+    sessionLost: function () { return sessionLost; },
+    guestReseeded: function () { return guestReseeded; },
+    leaderboard: leaderboard,
+    recentDraws: recentDraws,
     catalog: catalog,
     profile: profile,
     appBonus: appBonus,
