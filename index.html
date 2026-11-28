@@ -3337,6 +3337,216 @@ body{background:#05050A;color:var(--tx)}
   .bizfoot .bf-cap{width:14px;height:14px}
 }
 /* @@POKO-V10-END@@ */
+/* @@EVO-CSS-BEGIN@@ */
+.pfr{position:relative;width:var(--pz);height:var(--pz);flex:none;z-index:2}
+.pfr .paura{position:absolute;inset:-9%;border-radius:50%;filter:blur(calc(var(--pz)*.06));pointer-events:none;z-index:0}
+.phalo1{background:radial-gradient(circle,#0000 46%,rgba(255,146,116,.85) 56%,#0000 80%)}
+.phalo2{background:radial-gradient(circle,#0000 44%,rgba(232,166,102,.85) 54%,#0000 82%)}
+.phalo3{background:radial-gradient(circle,#0000 43%,rgba(87,227,255,.85) 54%,#0000 84%)}
+.phalo4{background:radial-gradient(circle,#0000 42%,rgba(255,190,70,.95) 53%,#0000 84%)}
+.phalo5{background:radial-gradient(circle,#0000 41%,rgba(255,140,220,.9) 52%,#0000 86%)}
+
+.pfr .prays{position:absolute;inset:-17%;border-radius:50%;pointer-events:none;z-index:0}
+.prays3{background:repeating-conic-gradient(from 0deg,rgba(120,235,255,.30) 0deg 1.4deg,transparent 1.4deg 7deg);
+  -webkit-mask:radial-gradient(circle,transparent 45%,#000 58%,rgba(0,0,0,.5) 78%,transparent 95%);
+  mask:radial-gradient(circle,transparent 45%,#000 58%,rgba(0,0,0,.5) 78%,transparent 95%)}
+.prays4{background:repeating-conic-gradient(from 0deg,rgba(255,196,80,.40) 0deg 1.2deg,transparent 1.2deg 6deg);
+  -webkit-mask:radial-gradient(circle,transparent 44%,#000 57%,rgba(0,0,0,.55) 80%,transparent 96%);
+  mask:radial-gradient(circle,transparent 44%,#000 57%,rgba(0,0,0,.55) 80%,transparent 96%)}
+.prays5{background:repeating-conic-gradient(from 0deg,rgba(255,214,120,.44) 0deg 1.1deg,transparent 1.1deg 5.6deg);
+  -webkit-mask:radial-gradient(circle,transparent 43%,#000 56%,rgba(0,0,0,.6) 82%,transparent 97%);
+  mask:radial-gradient(circle,transparent 43%,#000 56%,rgba(0,0,0,.6) 82%,transparent 97%)}
+
+.pfr .pwing{position:absolute;width:var(--ww);height:var(--wh);top:var(--wt);pointer-events:none;z-index:1}
+.pfr .pwl{left:var(--wlx);transform:scaleX(-1)}
+.pfr .pwr{left:var(--wrx)}
+.pfr .pwing svg{width:100%;height:100%;overflow:visible;display:block}
+
+.pfr .pband{position:absolute;inset:0;border-radius:50%;z-index:3;
+  --ir1:0;--ir2:.5;
+  -webkit-mask:radial-gradient(circle at 50% 50%,transparent calc(var(--pz)*var(--ir1)),
+     #000 calc(var(--pz)*var(--ir1) + .8px),#000 calc(var(--pz)*var(--ir2) - .8px),
+     transparent calc(var(--pz)*var(--ir2)));
+  mask:radial-gradient(circle at 50% 50%,transparent calc(var(--pz)*var(--ir1)),
+     #000 calc(var(--pz)*var(--ir1) + .8px),#000 calc(var(--pz)*var(--ir2) - .8px),
+     transparent calc(var(--pz)*var(--ir2)))}
+.pfr .pband.pbevel{opacity:.9;mix-blend-mode:soft-light;z-index:4}
+.pfr .pband.pneon{filter:drop-shadow(0 0 calc(var(--pz)*.028) rgba(87,227,255,.95))}
+.pfr .pband.pholo{z-index:2;opacity:.9;filter:saturate(1.3) blur(calc(var(--pz)*.008))}
+.pfr .pband.pouterdark{z-index:2;background:#07060B;opacity:.85}
+.pfr .pbez{position:absolute;inset:0;border-radius:50%;z-index:4;
+  --ir1:0;--ir2:.5;
+  -webkit-mask:radial-gradient(circle at 50% 50%,transparent calc(var(--pz)*var(--ir1)),
+     #000 calc(var(--pz)*var(--ir1) + .8px),#000 calc(var(--pz)*var(--ir2) - .8px),
+     transparent calc(var(--pz)*var(--ir2)));
+  mask:radial-gradient(circle at 50% 50%,transparent calc(var(--pz)*var(--ir1)),
+     #000 calc(var(--pz)*var(--ir1) + .8px),#000 calc(var(--pz)*var(--ir2) - .8px),
+     transparent calc(var(--pz)*var(--ir2)))}
+
+.pfr .pface{position:absolute;inset:calc(var(--rim)*100%);border-radius:50%;overflow:hidden;z-index:5;
+  box-shadow:inset 0 0 calc(var(--pz)*.05) rgba(0,0,0,.55)}
+.pfr .pface img{width:100%;height:100%;object-fit:cover;display:block;
+  -webkit-mask-image:radial-gradient(circle at 50% 48%,#000 72%,rgba(0,0,0,.92) 88%,transparent 100%);
+  mask-image:radial-gradient(circle at 50% 48%,#000 72%,rgba(0,0,0,.92) 88%,transparent 100%)}
+.pfr .phair{position:absolute;inset:calc(var(--rim)*100%);border-radius:50%;z-index:6;pointer-events:none;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55),inset 0 0 calc(var(--pz)*.05) rgba(0,0,0,.6)}
+.pfr .primout{position:absolute;inset:-1px;border-radius:50%;z-index:6;pointer-events:none;
+  box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 0 2.5px rgba(255,255,255,.05)}
+
+.pfr .pstuds{position:absolute;inset:0;z-index:7;pointer-events:none}
+.pgem{position:absolute;display:block;border-radius:22%}
+.pgem.pbronze{background:linear-gradient(135deg,#FFE0B8,#C98A4A 45%,#7A4A1E);
+  box-shadow:0 0 6px rgba(255,190,120,.8),inset 0 0 3px rgba(255,255,255,.9)}
+.pgem.pchrome{background:linear-gradient(135deg,#FFFFFF,#B9C7DA 45%,#6F7C90);border-radius:50%;
+  box-shadow:0 0 8px rgba(120,230,255,.9),inset 0 0 3px #fff}
+.pgem.pruby{background:linear-gradient(135deg,#FFD3DD,#F0455F 45%,#8E1030);
+  box-shadow:0 0 10px rgba(255,70,110,.95),inset 0 0 3px rgba(255,255,255,.9)}
+.pgem.pdia{background:linear-gradient(135deg,#FFFFFF,#BFE9FF 40%,#8FC7FF 65%,#5E7FE0);border-radius:12%;
+  box-shadow:0 0 10px rgba(150,220,255,.95),inset 0 0 3px #fff}
+
+.pfr .pcrown{position:absolute;left:50%;transform:translateX(-50%);z-index:8;pointer-events:none;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
+.pfr .pcrown svg{width:100%;height:auto;overflow:visible;display:block}
+
+.pfr .psparks{position:absolute;inset:-20%;z-index:9;pointer-events:none;overflow:visible}
+.pfr .porbit{position:absolute;left:-13%;right:-13%;top:-17%;bottom:-17%;border-radius:50%;z-index:2;
+  border:1px solid rgba(255,214,120,.5);transform:rotate(-17deg);pointer-events:none;
+  box-shadow:0 0 22px rgba(255,194,75,.32),inset 0 0 22px rgba(255,194,75,.18)}
+.pfr .porbit:before,.pfr .porbit:after{content:'';position:absolute;border-radius:50%;background:#fff}
+.pfr .porbit:before{width:4.4%;height:4.4%;left:3%;top:20%;box-shadow:0 0 14px 5px rgba(255,214,120,.95)}
+.pfr .porbit:after{width:3.4%;height:3.4%;right:7%;bottom:14%;box-shadow:0 0 14px 5px rgba(255,150,220,.9)}
+
+.pfr .plvt{position:absolute;left:50%;bottom:-8%;transform:translateX(-50%);z-index:10;
+  display:flex;align-items:baseline;gap:.34em;white-space:nowrap;padding:.22em .66em .24em;
+  border-radius:999px;border:1px solid rgba(255,255,255,.16);
+  background:linear-gradient(#221E33,#0E0E14);box-shadow:0 6px 16px rgba(0,0,0,.7);
+  font-size:calc(var(--pz)*.085);line-height:1}
+.pfr .plvt b{font-family:'NBlack';letter-spacing:.01em}
+.pfr .plvt span{font-size:.86em;letter-spacing:.02em}
+.pfr .plvt1 b{color:#CFC8DE}.pfr .plvt1 span{color:#8F88A4}
+.pfr .plvt2{border-color:rgba(232,166,102,.6);background:linear-gradient(#2C1E12,#120D0A)}
+.pfr .plvt2 b{color:#FFCE9A}.pfr .plvt2 span{color:#C08A5A}
+.pfr .plvt3{border-color:rgba(160,200,235,.6);background:linear-gradient(#1B2330,#0C1118)}
+.pfr .plvt3 b{color:#DFF4FF}.pfr .plvt3 span{color:#8FB6D6}
+.pfr .plvt4{border-color:rgba(255,194,75,.8);background:linear-gradient(#2E2109,#140F04);
+  box-shadow:0 0 18px rgba(255,180,58,.55),0 6px 16px rgba(0,0,0,.6)}
+.pfr .plvt4 b{color:#FFE6A8}.pfr .plvt4 span{color:#FFC24B}
+.pfr .plvt5{border-color:rgba(255,255,255,.65);
+  background:linear-gradient(100deg,#FFE9A8,#FF9AD5 34%,#A46BFF 66%,#7BE8CF);
+  box-shadow:0 0 26px rgba(255,140,220,.85),0 6px 18px rgba(0,0,0,.6)}
+.pfr .plvt5 b,.pfr .plvt5 span{color:#1A0E22}
+
+/* ================= ④ 포코 5단계 진화 카드 (마이페이지) ================= */
+/* 프레임(.pfr …)은 _evo/frames.css — 화면에 띄울 1개만 display */
+.evo-hero{position:relative;margin-top:9px;border-radius:18px;overflow:hidden;
+  border:1px solid var(--evo-acT,rgba(255,138,102,.4));
+  background:
+    radial-gradient(120% 88% at 50% -12%,var(--evo-soft,rgba(255,140,80,.20)),transparent 62%),
+    radial-gradient(90% 70% at 50% 118%,rgba(255,194,75,.10),transparent 72%),
+    linear-gradient(158deg,#1E1533 0%,#141120 54%,#1A1226 100%);
+  box-shadow:0 16px 38px -22px rgba(0,0,0,.95),0 0 26px -16px var(--evo-ac,#FF8A66),
+    inset 0 1px 0 rgba(255,255,255,.06)}
+.evo-hero::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.34;
+  background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1px);background-size:15px 15px}
+.evo-hero[data-lv="1"]{--evo-ac:#FF8A66;--evo-acT:rgba(255,138,102,.45);--evo-soft:rgba(255,140,80,.17)}
+.evo-hero[data-lv="2"]{--evo-ac:#E8A666;--evo-acT:rgba(232,166,102,.5);--evo-soft:rgba(232,166,102,.17)}
+.evo-hero[data-lv="3"]{--evo-ac:#57E3FF;--evo-acT:rgba(87,227,255,.45);--evo-soft:rgba(87,227,255,.15)}
+.evo-hero[data-lv="4"]{--evo-ac:#FFC24B;--evo-acT:rgba(255,194,75,.55);--evo-soft:rgba(255,190,70,.18)}
+.evo-hero[data-lv="5"]{--evo-ac:#FF7AC8;--evo-acT:rgba(255,154,213,.55);--evo-soft:rgba(255,140,220,.20)}
+
+.evo-stage{position:relative;z-index:2;display:grid;place-items:center;padding:30px 0 2px}
+.evo-stage .evo-frame{display:none}
+.evo-stage .evo-frame.on{display:block}
+.evo-stage .pfr{--pz:min(150px,40vw)}
+
+.evo-id{position:relative;z-index:2;text-align:center;padding:4px 14px 14px}
+.evo-tags{display:flex;align-items:center;justify-content:center;gap:5px}
+.evo-rank{font-size:8.5px;font-weight:900;letter-spacing:.11em;padding:3px 9px 4px;border-radius:999px;
+  border:1px solid #3A3350;color:#CFC8DE;background:#141020}
+.evo-rank.r2{color:#FFCE9A;border-color:rgba(232,166,102,.6);background:#170F09}
+.evo-rank.r3{color:#DFF4FF;border-color:rgba(160,200,235,.6);background:#0C1219}
+.evo-rank.r4{color:#1A0803;border:0;background:linear-gradient(100deg,#FFE9A8,#FFC24B 58%,#FF9AD5);
+  box-shadow:0 0 14px rgba(255,180,58,.55)}
+.evo-rank.r5{color:#1A0E22;border:0;background:linear-gradient(100deg,#FFE9A8,#FF9AD5 34%,#A46BFF 66%,#7BE8CF);
+  box-shadow:0 0 18px rgba(255,140,220,.75)}
+.evo-prev-tag{font-size:8px;font-weight:900;letter-spacing:.08em;color:#1A0803;background:var(--lime);
+  padding:3px 7px 4px;border-radius:999px;box-shadow:0 0 12px -2px rgba(200,247,81,.9)}
+.evo-name{display:block;margin-top:6px;font-size:19px;font-weight:900;letter-spacing:-.8px;color:#fff;
+  line-height:1.15;text-shadow:0 0 20px var(--evo-ac,rgba(255,138,102,.6))}
+.evo-id .my-nickrow{justify-content:center;margin-top:5px}
+.evo-id .my-nickrow b{font-size:12px;font-weight:900;color:#E9E2F5;letter-spacing:-.3px}
+.evo-id .my-nickrow button{font-size:7.5px}
+.evo-id .my-phone{margin-top:2px;font-size:8.5px;text-align:center;color:#8E869C}
+.evo-back{margin-top:8px;font-size:8.5px;font-weight:900;letter-spacing:-.1px;color:#C8F751;
+  background:rgba(200,247,81,.10);border:1px solid rgba(200,247,81,.45);border-radius:8px;
+  padding:5px 10px 6px;box-shadow:0 0 14px -6px rgba(200,247,81,.9)}
+.evo-back[hidden]{display:none}
+
+/* 진행 게이지 */
+.evo-prog{margin-top:9px;border-radius:14px;padding:10px 12px 11px;
+  background:linear-gradient(180deg,#191424,#131020);border:1px solid #2A2340;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.ep-top{display:flex;align-items:baseline;justify-content:space-between;gap:6px;
+  font-size:9px;font-weight:800;color:#8E869C;letter-spacing:-.2px}
+.ep-top b{color:#FFB09A;font-weight:900}
+.ep-next{flex:none;font-size:7.5px;font-weight:900;letter-spacing:.09em;color:var(--lime)}
+.ep-next.max{color:#FFD98A}
+.evo-prog .eb{position:relative;height:8px;border-radius:99px;background:#0C0A14;margin-top:7px;
+  overflow:hidden;border:1px solid #2A2238;box-shadow:inset 0 1px 3px rgba(0,0,0,.8)}
+.evo-prog .eb i{display:block;height:100%;width:0;border-radius:99px;transition:width .4s ease;
+  background:linear-gradient(90deg,#FFC24B,#FF7AC8 55%,#A46BFF);box-shadow:0 0 12px rgba(255,150,220,.85)}
+.ep-nums{display:flex;align-items:baseline;justify-content:space-between;gap:6px;margin-top:7px;
+  font-size:8.5px;font-weight:800;color:#8A839C;letter-spacing:-.2px}
+.ep-nums b{color:#F2EAFB;font-weight:900}
+.ep-coin{flex:none;white-space:nowrap}
+.ep-coin small{font-size:7px;font-weight:900;letter-spacing:.7px;color:#8E869C;margin-right:2px}
+.ep-coin b{font-size:11.5px;letter-spacing:-.4px;color:#fff;text-shadow:0 0 12px rgba(255,194,74,.5)}
+.ep-coin b s{text-decoration:none;font-size:7.5px;color:var(--gold2);margin-left:1px}
+
+/* 진화 로드맵 */
+.evo-rail{display:flex;gap:3px;padding:9px 7px 2px}
+.evo-n{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;
+  background:none;border:0;padding:4px 0 7px;border-radius:11px;opacity:.86;
+  -webkit-tap-highlight-color:transparent}
+.evo-n.is-lock{opacity:.66}
+.evo-n.is-mine,.evo-n.is-prev{opacity:1}
+.en-pic{position:relative;display:block;width:44px;height:44px;border-radius:50%;padding:2px;
+  background:linear-gradient(160deg,#5A5068,#2A2340);box-shadow:0 4px 12px -6px rgba(0,0,0,.9)}
+.en-pic img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;background:#120E18}
+.evo-n[data-evolv="2"] .en-pic{background:conic-gradient(from 200deg,#8C5A2E,#F7C795 42%,#B87A3C 66%,#7A4A1E)}
+.evo-n[data-evolv="3"] .en-pic{background:conic-gradient(from 195deg,#8E9BB0,#FFFFFF 26%,#C9D4E6 44%,#6D788B 62%,#EAF0FA 82%,#55606F)}
+.evo-n[data-evolv="4"] .en-pic{background:conic-gradient(from 0deg,#8C6018,#FFE9A8 28%,#E4AC32 52%,#FFF6D8 70%,#C99055 88%,#8C6018)}
+.evo-n[data-evolv="5"] .en-pic{background:conic-gradient(from 0deg,#FF7AC8,#FFD86B 22%,#C8F751 40%,#7BE8CF 58%,#57E3FF 74%,#A46BFF 88%,#FF7AC8);
+  box-shadow:0 0 16px -3px rgba(255,140,220,.85)}
+.evo-n.is-mine .en-pic{box-shadow:0 0 0 1.5px rgba(200,247,81,.8),0 0 14px -4px rgba(200,247,81,.9)}
+.evo-n.is-prev .en-pic{box-shadow:0 0 0 2px #FF5A36,0 0 18px -4px rgba(255,90,54,1)}
+.en-lv{font-size:7.5px;font-weight:900;letter-spacing:.07em;color:#8E869C;margin-top:3px}
+.evo-n.is-mine .en-lv{color:#C8F751}
+.en-nm{font-size:8.5px;font-weight:900;color:#E7E0F2;letter-spacing:-.3px;white-space:nowrap;
+  max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.en-need{font-style:normal;font-size:7px;font-weight:800;color:#7E7590;letter-spacing:-.1px}
+.evo-tip{margin:0 12px 10px;font-size:7.5px;font-weight:700;color:#7E7590;text-align:center;letter-spacing:-.1px}
+.evo-tip b{color:#E7E0F2;font-weight:900}
+
+/* 프레임 애니메이션 — transform/opacity 만 움직인다 (모바일 성능) */
+@keyframes pEvoSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pEvoOrbit{from{transform:rotate(-17deg)}to{transform:rotate(343deg)}}
+@keyframes pEvoPulse{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes pEvoTwinkle{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes pEvoPop{0%{transform:scale(.88);opacity:.3}62%{transform:scale(1.045);opacity:1}100%{transform:scale(1);opacity:1}}
+.pfr .paura{animation:pEvoPulse 4.4s ease-in-out infinite}
+.pfr .psparks{animation:pEvoTwinkle 3.4s ease-in-out infinite}
+.pfr.lv3 .prays3{animation:pEvoSpin 40s linear infinite}
+.pfr.lv4 .prays4{animation:pEvoSpin 32s linear infinite}
+.pfr.lv4 .porbit{animation:pEvoOrbit 24s linear infinite}
+.pfr.lv5 .prays5{animation:pEvoSpin 26s linear infinite}
+.pfr.lv5 .porbit{animation:pEvoOrbit 19s linear infinite}
+.pfr.lv5 .pband.pholo{animation:pEvoSpin 13s linear infinite}
+.evo-stage.pop .evo-frame.on{animation:pEvoPop .42s cubic-bezier(.2,.85,.3,1)}
+@media (prefers-reduced-motion:reduce){
+  .pfr .paura,.pfr .psparks,.pfr .prays,.pfr .porbit,.pfr .pband.pholo,.evo-stage.pop .evo-frame.on{animation:none!important}
+}
+/* @@EVO-CSS-END@@ */
 </style>
 </head>
 <body>
@@ -3773,39 +3983,90 @@ body{background:#05050A;color:var(--tx)}
 
   <!-- ================= MY (마이) ================= -->
   <main class="screen subscreen myscreen" id="screenMy" hidden>
+      <!-- @@EVO-HERO-BEGIN@@ -->
     <header class="my-head">
       <div class="my-top">
-        <span class="arc-lv">PLAYER CARD <b id="myLvTop">· LV.1</b></span>
+        <span class="arc-lv">POKO CARD <b id="myLvTop">· LV.1 루키</b></span>
         <span class="arc-date" id="myDate">2026.11.28 SAT</span>
       </div>
-      <div class="my-prof">
-        <span class="my-ava" id="myAva" aria-hidden="true">
-          <svg viewBox="0 0 64 64">
-            <circle cx="32" cy="34" r="21" fill="#FFF3E2" stroke="#120E18" stroke-width="2.4"/>
-            <path d="M17 22c0-6 30-6 30 0z" fill="#FF5A36" stroke="#120E18" stroke-width="2.2" stroke-linejoin="round"/>
-            <circle cx="25" cy="33" r="2.6" fill="#120E18"/><circle cx="39" cy="33" r="2.6" fill="#120E18"/>
-            <path d="M28 41c2 2.2 6 2.2 8 0" fill="none" stroke="#120E18" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="20" cy="37" r="2.6" fill="#FFB199"/><circle cx="44" cy="37" r="2.6" fill="#FFB199"/>
-          </svg>
-          <span class="lvn" id="myLv">LV.1</span>
-        </span>
-        <div class="mid">
+
+      <!-- 5단계 진화 카드 : 프레임 5개를 미리 그려두고 화면에 1개만 보여준다 -->
+      <div class="evo-hero" id="evoHero" data-lv="1">
+        <div class="evo-stage" id="myAva">
+      <div class="evo-frame" data-evolv="1" data-name="포코에그" data-tier="루키" aria-hidden="true"><div class="pfr lv1" style=""><div class="paura phalo1"></div><div class="pband" style="--ir1:.450;--ir2:.5;background:conic-gradient(from 0deg,#FF6B45,#FFB79C 55deg,#FF8E6A 110deg,#FFE2D4 170deg,#FF9A76 232deg,#FFC7AE 296deg,#FF6B45)"></div><div class="pband pbevel" style="--ir1:.450;--ir2:.5;background:radial-gradient(circle at 30% 18%,rgba(255,255,255,.85),transparent 40%),radial-gradient(circle at 50% 92%,rgba(0,0,0,.5),transparent 44%)"></div><div class="pface" style="--rim:0.05;background:radial-gradient(circle at 50% 44%,#3A1626 0%,#2A1022 60%,#1A0A16 100%)"><img loading="lazy" decoding="async" src="assets/poko-lv1.png" alt=""></div><div class="phair"></div><div class="primout"></div></div></div>
+      <div class="evo-frame" data-evolv="2" data-name="포코링" data-tier="브론즈" aria-hidden="true"><div class="pfr lv2" style=""><div class="paura phalo2"></div><div class="pband" style="--ir1:.420;--ir2:.5;background:conic-gradient(from 0deg,#3A2414,#8C5A2E 28deg,#F7C795 55deg,#B87A3C 80deg,#4E3018 105deg,#9A6435 138deg,#FFDDB0 168deg,#C99055 196deg,#6B4423 224deg,#A87141 252deg,#F7CD9C 282deg,#B57C40 312deg,#4A2E18 338deg,#3A2414)"></div><div class="pband pbevel" style="--ir1:.420;--ir2:.5;background:radial-gradient(circle at 30% 18%,rgba(255,255,255,.8),transparent 40%),radial-gradient(circle at 50% 94%,rgba(0,0,0,.6),transparent 44%)"></div><div class="pface" style="--rim:0.08;background:radial-gradient(circle at 50% 44%,#3A2412 0%,#28180C 60%,#150C06 100%)"><img loading="lazy" decoding="async" src="assets/poko-lv2.png" alt=""></div><div class="phair"></div><div class="primout"></div><div class="pstuds"><i class="pgem pbronze" style="left:50.00%;top:4.00%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:82.53%;top:17.47%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:96.00%;top:50.00%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:82.53%;top:82.53%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:50.00%;top:96.00%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:17.47%;top:82.53%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:4.00%;top:50.00%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pbronze" style="left:17.47%;top:17.47%;width:4.6%;height:4.6%;transform:translate(-50%,-50%) rotate(45deg)"></i></div><svg class="psparks" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><filter id="sg2x2" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="0" stdDeviation="2.6" flood-color="#FFD9A8" flood-opacity=".95"/></filter></defs><g filter="url(#sg2x2)"><path d="M33.8,150.6 Q35.1,155.3 39.8,156.6 Q35.1,157.9 33.8,162.6 Q32.4,157.9 27.7,156.6 Q32.4,155.3 33.8,150.6 Z" fill="#FFD9A8" opacity="0.66"/><path d="M157.7,38.1 Q159.2,43.7 164.8,45.3 Q159.2,46.8 157.7,52.4 Q156.1,46.8 150.5,45.3 Q156.1,43.7 157.7,38.1 Z" fill="#FFD9A8" opacity="0.73"/><path d="M19.6,104.1 Q20.3,106.4 22.6,107.0 Q20.3,107.7 19.6,109.9 Q19.0,107.7 16.7,107.0 Q19.0,106.4 19.6,104.1 Z" fill="#FFD9A8" opacity="0.85"/><path d="M82.7,41.0 Q83.9,45.2 88.1,46.4 Q83.9,47.6 82.7,51.8 Q81.5,47.6 77.2,46.4 Q81.5,45.2 82.7,41.0 Z" fill="#FFD9A8" opacity="0.99"/><path d="M38.8,44.5 Q40.1,49.0 44.5,50.2 Q40.1,51.5 38.8,55.9 Q37.5,51.5 33.1,50.2 Q37.5,49.0 38.8,44.5 Z" fill="#FFD9A8" opacity="0.68"/><path d="M166.2,177.7 Q167.1,180.7 170.0,181.5 Q167.1,182.3 166.2,185.3 Q165.4,182.3 162.5,181.5 Q165.4,180.7 166.2,177.7 Z" fill="#FFD9A8" opacity="0.53"/></g></svg></div></div>
+      <div class="evo-frame" data-evolv="3" data-name="포코나이트" data-tier="실버" aria-hidden="true"><div class="pfr lv3" style="--ww:36.67%;--wh:34.38%;--wt:29.92%;--wrx:90.21%;--wlx:-26.88%"><div class="paura phalo3"></div><div class="prays prays3"></div><div class="pwing pwl"><svg viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="wg3x3" x1="0" y1="1" x2=".7" y2="0"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".38" stop-color="#EDF6FF"/><stop offset=".70" stop-color="#A9C0DE"/><stop offset="1" stop-color="#58789F"/></linearGradient><filter id="wgl3x3" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#57E3FF" flood-opacity=".95"/></filter></defs><g filter="url(#wgl3x3)"><path d="M0,0 C0.26,-0.15 0.70,-0.138 1,0 C0.70,0.12 0.26,0.15 0,0 Z" transform="translate(10.0,140.0) rotate(-98.0) scale(112.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.148 0.70,-0.13616 1,0 C0.70,0.1184 0.26,0.148 0,0 Z" transform="translate(23.8,122.6) rotate(-76.0) scale(130.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.14 0.70,-0.12880000000000003 1,0 C0.70,0.11200000000000002 0.26,0.14 0,0 Z" transform="translate(36.7,106.4) rotate(-54.0) scale(118.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.132 0.70,-0.12144 1,0 C0.70,0.10560000000000001 0.26,0.132 0,0 Z" transform="translate(48.6,91.3) rotate(-32.0) scale(92.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.12 0.70,-0.1104 1,0 C0.70,0.096 0.26,0.12 0,0 Z" transform="translate(10.0,140.0) rotate(-104.0) scale(73.9)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /><path d="M0,0 C0.26,-0.1184 0.70,-0.10892800000000001 1,0 C0.70,0.09472000000000001 0.26,0.1184 0,0 Z" transform="translate(23.8,122.6) rotate(-82.0) scale(85.8)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /><path d="M0,0 C0.26,-0.11200000000000002 0.70,-0.10304000000000002 1,0 C0.70,0.08960000000000001 0.26,0.11200000000000002 0,0 Z" transform="translate(36.7,106.4) rotate(-60.0) scale(77.9)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /><path d="M0,0 C0.26,-0.10560000000000001 0.70,-0.09715200000000002 1,0 C0.70,0.08448000000000001 0.26,0.10560000000000001 0,0 Z" transform="translate(48.6,91.3) rotate(-38.0) scale(60.7)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /></g></svg></div><div class="pwing pwr"><svg viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="wg3x3" x1="0" y1="1" x2=".7" y2="0"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".38" stop-color="#EDF6FF"/><stop offset=".70" stop-color="#A9C0DE"/><stop offset="1" stop-color="#58789F"/></linearGradient><filter id="wgl3x3" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#57E3FF" flood-opacity=".95"/></filter></defs><g filter="url(#wgl3x3)"><path d="M0,0 C0.26,-0.15 0.70,-0.138 1,0 C0.70,0.12 0.26,0.15 0,0 Z" transform="translate(10.0,140.0) rotate(-98.0) scale(112.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.148 0.70,-0.13616 1,0 C0.70,0.1184 0.26,0.148 0,0 Z" transform="translate(23.8,122.6) rotate(-76.0) scale(130.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.14 0.70,-0.12880000000000003 1,0 C0.70,0.11200000000000002 0.26,0.14 0,0 Z" transform="translate(36.7,106.4) rotate(-54.0) scale(118.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.132 0.70,-0.12144 1,0 C0.70,0.10560000000000001 0.26,0.132 0,0 Z" transform="translate(48.6,91.3) rotate(-32.0) scale(92.0)" fill="url(#wg3x3)" stroke="#7E99BA" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.12 0.70,-0.1104 1,0 C0.70,0.096 0.26,0.12 0,0 Z" transform="translate(10.0,140.0) rotate(-104.0) scale(73.9)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /><path d="M0,0 C0.26,-0.1184 0.70,-0.10892800000000001 1,0 C0.70,0.09472000000000001 0.26,0.1184 0,0 Z" transform="translate(23.8,122.6) rotate(-82.0) scale(85.8)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /><path d="M0,0 C0.26,-0.11200000000000002 0.70,-0.10304000000000002 1,0 C0.70,0.08960000000000001 0.26,0.11200000000000002 0,0 Z" transform="translate(36.7,106.4) rotate(-60.0) scale(77.9)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /><path d="M0,0 C0.26,-0.10560000000000001 0.70,-0.09715200000000002 1,0 C0.70,0.08448000000000001 0.26,0.10560000000000001 0,0 Z" transform="translate(48.6,91.3) rotate(-38.0) scale(60.7)" fill="#FFFFFF" stroke="#A8C4E2" stroke-width="0.012" opacity="0.9" /></g></svg></div><div class="pband pneon" style="--ir1:.440;--ir2:.5;background:conic-gradient(from 195deg,#2B3240,#8E9BB0 40deg,#FFFFFF 64deg,#C9D4E6 84deg,#6D788B 112deg,#EAF0FA 142deg,#FFFFFF 160deg,#93A0B4 192deg,#55606F 222deg,#DCE6F5 256deg,#FFFFFF 278deg,#8D9AB0 306deg,#3A424F 342deg,#2B3240)"></div><div class="pband pbevel" style="--ir1:.440;--ir2:.5;background:radial-gradient(circle at 28% 14%,rgba(255,255,255,.95),transparent 38%),radial-gradient(circle at 50% 94%,rgba(0,16,36,.65),transparent 44%)"></div><div class="pface" style="--rim:0.06;background:radial-gradient(circle at 50% 44%,#122A3E 0%,#0C1B2C 60%,#060E18 100%)"><img loading="lazy" decoding="async" src="assets/poko-lv3.png" alt=""></div><div class="phair"></div><div class="primout"></div><div class="pstuds"><i class="pgem pchrome" style="left:50.00%;top:3.00%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:73.50%;top:9.30%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:90.70%;top:26.50%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:97.00%;top:50.00%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:90.70%;top:73.50%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:73.50%;top:90.70%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:50.00%;top:97.00%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:26.50%;top:90.70%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:9.30%;top:73.50%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:3.00%;top:50.00%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:9.30%;top:26.50%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pchrome" style="left:26.50%;top:9.30%;width:3.2%;height:3.2%;transform:translate(-50%,-50%) rotate(45deg)"></i></div><svg class="psparks" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><filter id="sg3x3" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="0" stdDeviation="2.6" flood-color="#C8F6FF" flood-opacity=".95"/></filter></defs><g filter="url(#sg3x3)"><path d="M154.6,174.7 Q156.0,179.4 160.7,180.8 Q156.0,182.1 154.6,186.9 Q153.3,182.1 148.5,180.8 Q153.3,179.4 154.6,174.7 Z" fill="#C8F6FF" opacity="0.78"/><path d="M138.0,114.2 Q138.6,116.3 140.7,116.9 Q138.6,117.5 138.0,119.5 Q137.4,117.5 135.4,116.9 Q137.4,116.3 138.0,114.2 Z" fill="#C8F6FF" opacity="0.85"/><path d="M148.3,133.1 Q149.2,136.1 152.2,137.0 Q149.2,137.9 148.3,140.9 Q147.4,137.9 144.4,137.0 Q147.4,136.1 148.3,133.1 Z" fill="#C8F6FF" opacity="0.87"/><path d="M177.0,180.1 Q178.5,185.3 183.7,186.8 Q178.5,188.3 177.0,193.5 Q175.5,188.3 170.3,186.8 Q175.5,185.3 177.0,180.1 Z" fill="#C8F6FF" opacity="0.59"/><path d="M37.2,120.9 Q38.6,125.9 43.6,127.3 Q38.6,128.7 37.2,133.7 Q35.8,128.7 30.8,127.3 Q35.8,125.9 37.2,120.9 Z" fill="#C8F6FF" opacity="0.58"/><path d="M8.0,62.2 Q9.0,65.9 12.7,67.0 Q9.0,68.0 8.0,71.8 Q6.9,68.0 3.2,67.0 Q6.9,65.9 8.0,62.2 Z" fill="#C8F6FF" opacity="0.84"/><path d="M21.0,102.1 Q22.3,106.8 27.0,108.1 Q22.3,109.4 21.0,114.2 Q19.6,109.4 14.9,108.1 Q19.6,106.8 21.0,102.1 Z" fill="#C8F6FF" opacity="0.72"/><path d="M140.3,26.6 Q141.8,31.9 147.0,33.4 Q141.8,34.8 140.3,40.1 Q138.8,34.8 133.5,33.4 Q138.8,31.9 140.3,26.6 Z" fill="#C8F6FF" opacity="0.74"/><path d="M44.4,163.2 Q45.1,165.7 47.7,166.5 Q45.1,167.2 44.4,169.8 Q43.7,167.2 41.1,166.5 Q43.7,165.7 44.4,163.2 Z" fill="#C8F6FF" opacity="0.67"/></g></svg></div></div>
+      <div class="evo-frame" data-evolv="4" data-name="포코로드" data-tier="골드" aria-hidden="true"><div class="pfr lv4" style="--ww:39.44%;--wh:36.98%;--wt:27.99%;--wrx:90.33%;--wlx:-29.78%"><div class="paura phalo4"></div><div class="prays prays4"></div><div class="pwing pwl"><svg viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="wg4x4" x1="0" y1="1" x2=".7" y2="0"><stop offset="0" stop-color="#FFFBE8"/><stop offset=".30" stop-color="#FFE08A"/><stop offset=".62" stop-color="#E8A930"/><stop offset="1" stop-color="#A26313"/></linearGradient><filter id="wgl4x4" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#FFB43A" flood-opacity=".9"/></filter></defs><g filter="url(#wgl4x4)"><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(10.0,140.0) rotate(-100.0) scale(104.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(17.8,130.1) rotate(-86.0) scale(120.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(25.6,120.3) rotate(-72.0) scale(130.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(33.0,111.0) rotate(-58.0) scale(132.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(40.4,101.7) rotate(-44.0) scale(124.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(47.7,92.4) rotate(-30.0) scale(108.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(54.2,84.3) rotate(-18.0) scale(88.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.195 0.70,-0.1794 1,0 C0.70,0.15600000000000003 0.26,0.195 0,0 Z" transform="translate(14.6,134.2) rotate(-92.0) scale(74.0)" fill="url(#wg4x4)" stroke="#8E5C16" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.195 0.70,-0.1794 1,0 C0.70,0.15600000000000003 0.26,0.195 0,0 Z" transform="translate(22.9,123.8) rotate(-78.0) scale(84.0)" fill="url(#wg4x4)" stroke="#8E5C16" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.195 0.70,-0.1794 1,0 C0.70,0.15600000000000003 0.26,0.195 0,0 Z" transform="translate(31.2,113.3) rotate(-64.0) scale(88.0)" fill="url(#wg4x4)" stroke="#8E5C16" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.195 0.70,-0.1794 1,0 C0.70,0.15600000000000003 0.26,0.195 0,0 Z" transform="translate(39.4,102.9) rotate(-50.0) scale(84.0)" fill="url(#wg4x4)" stroke="#8E5C16" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.195 0.70,-0.1794 1,0 C0.70,0.15600000000000003 0.26,0.195 0,0 Z" transform="translate(47.7,92.4) rotate(-36.0) scale(72.0)" fill="url(#wg4x4)" stroke="#8E5C16" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.215 0.70,-0.1978 1,0 C0.70,0.17200000000000001 0.26,0.215 0,0 Z" transform="translate(20.1,127.2) rotate(-84.0) scale(46.0)" fill="#FFF2C6" stroke="#C08A2A" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.215 0.70,-0.1978 1,0 C0.70,0.17200000000000001 0.26,0.215 0,0 Z" transform="translate(28.4,116.8) rotate(-70.0) scale(52.0)" fill="#FFF2C6" stroke="#C08A2A" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.215 0.70,-0.1978 1,0 C0.70,0.17200000000000001 0.26,0.215 0,0 Z" transform="translate(36.7,106.4) rotate(-56.0) scale(52.0)" fill="#FFF2C6" stroke="#C08A2A" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.215 0.70,-0.1978 1,0 C0.70,0.17200000000000001 0.26,0.215 0,0 Z" transform="translate(45.0,95.9) rotate(-42.0) scale(44.0)" fill="#FFF2C6" stroke="#C08A2A" stroke-width="0.012" opacity="1.0" /></g></svg></div><div class="pwing pwr"><svg viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="wg4x4" x1="0" y1="1" x2=".7" y2="0"><stop offset="0" stop-color="#FFFBE8"/><stop offset=".30" stop-color="#FFE08A"/><stop offset=".62" stop-color="#E8A930"/><stop offset="1" stop-color="#A26313"/></linearGradient><filter id="wgl4x4" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#FFB43A" flood-opacity=".9"/></filter></defs><g filter="url(#wgl4x4)"><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(10.0,140.0) rotate(-100.0) scale(104.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(17.8,130.1) rotate(-86.0) scale(120.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(25.6,120.3) rotate(-72.0) scale(130.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(33.0,111.0) rotate(-58.0) scale(132.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(40.4,101.7) rotate(-44.0) scale(124.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(47.7,92.4) rotate(-30.0) scale(108.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.185 0.70,-0.17020000000000002 1,0 C0.70,0.148 0.26,0.185 0,0 Z" transform="translate(54.2,84.3) rotate(-18.0) scale(88.0)" fill="url(#wg4x4)" stroke="#7A4A0E" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.195 0.70,-0.1794 1,0 C0.70,0.15600000000000003 0.26,0.195 0,0 Z" transform="translate(14.6,134.2) rotate(-92.0) scale(74.0)" fill="url(#wg4x4)" stroke="#8E5C16" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.195 0.70,-0.1794 1,0 C0.70,0.15600000000000003 0.26,0.195 0,0 Z" transform="translate(22.9,123.8) rotate(-78.0) scale(84.0)" fill="url(#wg4x4)" stroke="#8E5C16" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.195 0.70,-0.1794 1,0 C0.70,0.15600000000000003 0.26,0.195 0,0 Z" transform="translate(31.2,113.3) rotate(-64.0) scale(88.0)" fill="url(#wg4x4)" stroke="#8E5C16" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.195 0.70,-0.1794 1,0 C0.70,0.15600000000000003 0.26,0.195 0,0 Z" transform="translate(39.4,102.9) rotate(-50.0) scale(84.0)" fill="url(#wg4x4)" stroke="#8E5C16" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.195 0.70,-0.1794 1,0 C0.70,0.15600000000000003 0.26,0.195 0,0 Z" transform="translate(47.7,92.4) rotate(-36.0) scale(72.0)" fill="url(#wg4x4)" stroke="#8E5C16" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.215 0.70,-0.1978 1,0 C0.70,0.17200000000000001 0.26,0.215 0,0 Z" transform="translate(20.1,127.2) rotate(-84.0) scale(46.0)" fill="#FFF2C6" stroke="#C08A2A" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.215 0.70,-0.1978 1,0 C0.70,0.17200000000000001 0.26,0.215 0,0 Z" transform="translate(28.4,116.8) rotate(-70.0) scale(52.0)" fill="#FFF2C6" stroke="#C08A2A" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.215 0.70,-0.1978 1,0 C0.70,0.17200000000000001 0.26,0.215 0,0 Z" transform="translate(36.7,106.4) rotate(-56.0) scale(52.0)" fill="#FFF2C6" stroke="#C08A2A" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.215 0.70,-0.1978 1,0 C0.70,0.17200000000000001 0.26,0.215 0,0 Z" transform="translate(45.0,95.9) rotate(-42.0) scale(44.0)" fill="#FFF2C6" stroke="#C08A2A" stroke-width="0.012" opacity="1.0" /></g></svg></div><div class="porbit"></div><div class="pband" style="--ir1:.400;--ir2:.5;background:conic-gradient(from 0deg,#8C6018,#CB9A34 30deg,#FFF4CE 56deg,#E4AC32 78deg,#9E6E1E 104deg,#D29A30 130deg,#FFFFEC 156deg,#EEBC48 180deg,#8A5C14 208deg,#CD9C36 242deg,#FFF6D8 270deg,#E2AA32 296deg,#A06E1C 326deg,#8C6018)"></div><div class="pband pbevel" style="--ir1:.400;--ir2:.5;background:radial-gradient(circle at 30% 16%,rgba(255,255,255,.62),transparent 40%),radial-gradient(circle at 50% 96%,rgba(50,20,0,.55),transparent 46%)"></div><div class="pbez" style="--ir1:.374;--ir2:.402;background:linear-gradient(180deg,#FFE9B4,#6B3F12 40%,#C08A34)"></div><div class="pface" style="--rim:0.122;background:radial-gradient(circle at 50% 44%,#3E2A08 0%,#2A1B05 60%,#150D02 100%)"><img loading="lazy" decoding="async" src="assets/poko-lv4.png" alt=""></div><div class="phair"></div><div class="primout"></div><div class="pstuds"><i class="pgem pruby" style="left:50.00%;top:5.00%;width:5.6%;height:5.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pruby" style="left:81.82%;top:18.18%;width:5.6%;height:5.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pruby" style="left:95.00%;top:50.00%;width:5.6%;height:5.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pruby" style="left:81.82%;top:81.82%;width:5.6%;height:5.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pruby" style="left:50.00%;top:95.00%;width:5.6%;height:5.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pruby" style="left:18.18%;top:81.82%;width:5.6%;height:5.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pruby" style="left:5.00%;top:50.00%;width:5.6%;height:5.6%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pruby" style="left:18.18%;top:18.18%;width:5.6%;height:5.6%;transform:translate(-50%,-50%) rotate(45deg)"></i></div><div class="pcrown" style="width:46%;top:-13%"><svg viewBox="0 0 104 84" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="cg" x1="0" y1="0" x2=".25" y2="1"><stop offset="0" stop-color="#FFF9E0"/><stop offset=".3" stop-color="#FFD064"/><stop offset=".7" stop-color="#E0A62C"/><stop offset="1" stop-color="#8A5A16"/></linearGradient><linearGradient id="rd" x1="0" y1="0" x2=".4" y2="1"><stop offset="0" stop-color="#FFC2D2"/><stop offset=".45" stop-color="#F0455F"/><stop offset="1" stop-color="#8E1030"/></linearGradient><linearGradient id="dp" x1="0" y1="0" x2=".5" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".3" stop-color="#C8ECFF"/><stop offset=".65" stop-color="#8FC7FF"/><stop offset="1" stop-color="#5E7FE0"/></linearGradient><filter id="cg4x4" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="2" stdDeviation="3.2" flood-color="#FFB43A" flood-opacity=".85"/></filter></defs><g filter="url(#cg4x4)"><path d="M8,74 L8,50 L20,20 L38,48 L52,10 L66,48 L84,20 L96,50 L96,74 Z" fill="url(#cg)"/><path d="M8,74 L8,50 L20,20 L38,48 L52,10 L66,48 L84,20 L96,50 L96,74 Z" fill="none" stroke="#6B4310" stroke-width="1.6"/><path d="M8,74 L96,74 L96,64 L8,64 Z" fill="#C98A1E" stroke="#6B4310" stroke-width="1.4"/><path d="M9,67 L95,67" stroke="#FFF6D0" stroke-width="2.2" opacity=".95"/><circle cx="20" cy="20" r="5" fill="url(#rd)" stroke="#FFF0BE" stroke-width="1"/><circle cx="84" cy="20" r="5" fill="url(#rd)" stroke="#FFF0BE" stroke-width="1"/><circle cx="52" cy="10" r="5.6" fill="url(#rd)" stroke="#FFF0BE" stroke-width="1"/><circle cx="52" cy="57" r="6.2" fill="url(#rd)" stroke="#FFF6D0" stroke-width="1.2"/><circle cx="33" cy="57" r="2.4" fill="#FFE9A8"/><circle cx="71" cy="57" r="2.4" fill="#FFE9A8"/></g></svg></div><svg class="psparks" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><filter id="sg4x4" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="0" stdDeviation="2.6" flood-color="#FFF0BC" flood-opacity=".95"/></filter></defs><g filter="url(#sg4x4)"><path d="M103.5,22.8 Q104.9,27.6 109.6,29.0 Q104.9,30.3 103.5,35.1 Q102.2,30.3 97.4,29.0 Q102.2,27.6 103.5,22.8 Z" fill="#FFF0BC" opacity="0.90"/><path d="M118.4,9.5 Q119.0,11.9 121.4,12.5 Q119.0,13.2 118.4,15.5 Q117.7,13.2 115.4,12.5 Q117.7,11.9 118.4,9.5 Z" fill="#FFF0BC" opacity="0.97"/><path d="M105.0,162.0 Q106.1,165.9 109.9,167.0 Q106.1,168.1 105.0,172.0 Q103.9,168.1 100.0,167.0 Q103.9,165.9 105.0,162.0 Z" fill="#FFF0BC" opacity="0.89"/><path d="M99.3,148.1 Q100.0,150.6 102.5,151.3 Q100.0,151.9 99.3,154.4 Q98.6,151.9 96.2,151.3 Q98.6,150.6 99.3,148.1 Z" fill="#FFF0BC" opacity="0.69"/><path d="M35.6,21.3 Q37.2,26.8 42.7,28.3 Q37.2,29.9 35.6,35.4 Q34.1,29.9 28.6,28.3 Q34.1,26.8 35.6,21.3 Z" fill="#FFF0BC" opacity="0.98"/><path d="M185.7,122.7 Q187.0,127.2 191.5,128.5 Q187.0,129.8 185.7,134.3 Q184.4,129.8 179.9,128.5 Q184.4,127.2 185.7,122.7 Z" fill="#FFF0BC" opacity="0.65"/><path d="M165.2,145.4 Q166.1,148.7 169.5,149.7 Q166.1,150.6 165.2,153.9 Q164.3,150.6 161.0,149.7 Q164.3,148.7 165.2,145.4 Z" fill="#FFF0BC" opacity="0.52"/><path d="M200.5,130.3 Q201.6,134.3 205.6,135.4 Q201.6,136.5 200.5,140.5 Q199.4,136.5 195.4,135.4 Q199.4,134.3 200.5,130.3 Z" fill="#FFF0BC" opacity="0.80"/><path d="M126.3,158.5 Q127.0,161.0 129.5,161.7 Q127.0,162.4 126.3,164.9 Q125.6,162.4 123.1,161.7 Q125.6,161.0 126.3,158.5 Z" fill="#FFF0BC" opacity="0.83"/><path d="M71.8,138.6 Q72.5,140.9 74.9,141.6 Q72.5,142.3 71.8,144.6 Q71.2,142.3 68.8,141.6 Q71.2,140.9 71.8,138.6 Z" fill="#FFF0BC" opacity="0.72"/><path d="M137.7,94.0 Q138.8,98.0 142.7,99.1 Q138.8,100.2 137.7,104.1 Q136.6,100.2 132.6,99.1 Q136.6,98.0 137.7,94.0 Z" fill="#FFF0BC" opacity="0.77"/><path d="M41.4,26.7 Q42.6,30.8 46.7,31.9 Q42.6,33.1 41.4,37.2 Q40.3,33.1 36.2,31.9 Q40.3,30.8 41.4,26.7 Z" fill="#FFF0BC" opacity="0.77"/></g></svg></div></div>
+      <div class="evo-frame" data-evolv="5" data-name="포코제니스" data-tier="레전드" aria-hidden="true"><div class="pfr lv5" style="--ww:45.00%;--wh:42.19%;--wt:23.63%;--wrx:90.19%;--wlx:-35.19%"><div class="paura phalo5"></div><div class="prays prays5"></div><div class="pwing pwl"><svg viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="wg5x5" x1="0" y1="1" x2=".7" y2="0"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".24" stop-color="#FFC8E8"/><stop offset=".46" stop-color="#C8F751"/><stop offset=".66" stop-color="#7BE8CF"/><stop offset=".84" stop-color="#A46BFF"/><stop offset="1" stop-color="#FFD86B"/></linearGradient><filter id="wgl5x5" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#FF9AD5" flood-opacity=".95"/></filter></defs><g filter="url(#wgl5x5)"><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(10.0,140.0) rotate(-100.0) scale(112.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(17.4,130.7) rotate(-86.0) scale(130.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(24.7,121.4) rotate(-72.0) scale(142.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(32.1,112.2) rotate(-58.0) scale(146.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(39.4,102.9) rotate(-44.0) scale(136.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(46.8,93.6) rotate(-30.0) scale(118.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(53.7,84.9) rotate(-18.0) scale(96.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.192 0.70,-0.17664000000000002 1,0 C0.70,0.15360000000000001 0.26,0.192 0,0 Z" transform="translate(14.6,134.2) rotate(-92.0) scale(80.0)" fill="#FFFFFF" stroke="#FFC8E8" stroke-width="0.012" opacity="0.96" /><path d="M0,0 C0.26,-0.192 0.70,-0.17664000000000002 1,0 C0.70,0.15360000000000001 0.26,0.192 0,0 Z" transform="translate(22.9,123.8) rotate(-78.0) scale(92.0)" fill="#FFFFFF" stroke="#FFC8E8" stroke-width="0.012" opacity="0.96" /><path d="M0,0 C0.26,-0.192 0.70,-0.17664000000000002 1,0 C0.70,0.15360000000000001 0.26,0.192 0,0 Z" transform="translate(31.2,113.3) rotate(-64.0) scale(96.0)" fill="#FFFFFF" stroke="#FFC8E8" stroke-width="0.012" opacity="0.96" /><path d="M0,0 C0.26,-0.192 0.70,-0.17664000000000002 1,0 C0.70,0.15360000000000001 0.26,0.192 0,0 Z" transform="translate(39.4,102.9) rotate(-50.0) scale(90.0)" fill="#FFFFFF" stroke="#FFC8E8" stroke-width="0.012" opacity="0.96" /><path d="M0,0 C0.26,-0.192 0.70,-0.17664000000000002 1,0 C0.70,0.15360000000000001 0.26,0.192 0,0 Z" transform="translate(47.7,92.4) rotate(-36.0) scale(76.0)" fill="#FFFFFF" stroke="#FFC8E8" stroke-width="0.012" opacity="0.96" /><path d="M0,0 C0.26,-0.205 0.70,-0.1886 1,0 C0.70,0.164 0.26,0.205 0,0 Z" transform="translate(20.1,127.2) rotate(-84.0) scale(50.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.205 0.70,-0.1886 1,0 C0.70,0.164 0.26,0.205 0,0 Z" transform="translate(28.4,116.8) rotate(-70.0) scale(57.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.205 0.70,-0.1886 1,0 C0.70,0.164 0.26,0.205 0,0 Z" transform="translate(36.7,106.4) rotate(-56.0) scale(57.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.205 0.70,-0.1886 1,0 C0.70,0.164 0.26,0.205 0,0 Z" transform="translate(45.0,95.9) rotate(-42.0) scale(48.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="1.0" /></g></svg></div><div class="pwing pwr"><svg viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="wg5x5" x1="0" y1="1" x2=".7" y2="0"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".24" stop-color="#FFC8E8"/><stop offset=".46" stop-color="#C8F751"/><stop offset=".66" stop-color="#7BE8CF"/><stop offset=".84" stop-color="#A46BFF"/><stop offset="1" stop-color="#FFD86B"/></linearGradient><filter id="wgl5x5" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#FF9AD5" flood-opacity=".95"/></filter></defs><g filter="url(#wgl5x5)"><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(10.0,140.0) rotate(-100.0) scale(112.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(17.4,130.7) rotate(-86.0) scale(130.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(24.7,121.4) rotate(-72.0) scale(142.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(32.1,112.2) rotate(-58.0) scale(146.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(39.4,102.9) rotate(-44.0) scale(136.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(46.8,93.6) rotate(-30.0) scale(118.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.18 0.70,-0.1656 1,0 C0.70,0.144 0.26,0.18 0,0 Z" transform="translate(53.7,84.9) rotate(-18.0) scale(96.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="0.92" /><path d="M0,0 C0.26,-0.192 0.70,-0.17664000000000002 1,0 C0.70,0.15360000000000001 0.26,0.192 0,0 Z" transform="translate(14.6,134.2) rotate(-92.0) scale(80.0)" fill="#FFFFFF" stroke="#FFC8E8" stroke-width="0.012" opacity="0.96" /><path d="M0,0 C0.26,-0.192 0.70,-0.17664000000000002 1,0 C0.70,0.15360000000000001 0.26,0.192 0,0 Z" transform="translate(22.9,123.8) rotate(-78.0) scale(92.0)" fill="#FFFFFF" stroke="#FFC8E8" stroke-width="0.012" opacity="0.96" /><path d="M0,0 C0.26,-0.192 0.70,-0.17664000000000002 1,0 C0.70,0.15360000000000001 0.26,0.192 0,0 Z" transform="translate(31.2,113.3) rotate(-64.0) scale(96.0)" fill="#FFFFFF" stroke="#FFC8E8" stroke-width="0.012" opacity="0.96" /><path d="M0,0 C0.26,-0.192 0.70,-0.17664000000000002 1,0 C0.70,0.15360000000000001 0.26,0.192 0,0 Z" transform="translate(39.4,102.9) rotate(-50.0) scale(90.0)" fill="#FFFFFF" stroke="#FFC8E8" stroke-width="0.012" opacity="0.96" /><path d="M0,0 C0.26,-0.192 0.70,-0.17664000000000002 1,0 C0.70,0.15360000000000001 0.26,0.192 0,0 Z" transform="translate(47.7,92.4) rotate(-36.0) scale(76.0)" fill="#FFFFFF" stroke="#FFC8E8" stroke-width="0.012" opacity="0.96" /><path d="M0,0 C0.26,-0.205 0.70,-0.1886 1,0 C0.70,0.164 0.26,0.205 0,0 Z" transform="translate(20.1,127.2) rotate(-84.0) scale(50.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.205 0.70,-0.1886 1,0 C0.70,0.164 0.26,0.205 0,0 Z" transform="translate(28.4,116.8) rotate(-70.0) scale(57.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.205 0.70,-0.1886 1,0 C0.70,0.164 0.26,0.205 0,0 Z" transform="translate(36.7,106.4) rotate(-56.0) scale(57.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="1.0" /><path d="M0,0 C0.26,-0.205 0.70,-0.1886 1,0 C0.70,0.164 0.26,0.205 0,0 Z" transform="translate(45.0,95.9) rotate(-42.0) scale(48.0)" fill="url(#wg5x5)" stroke="#FFFFFF" stroke-width="0.012" opacity="1.0" /></g></svg></div><div class="porbit"></div><div class="pband pholo" style="inset:-8%;--ir1:.500;--ir2:.578;background:conic-gradient(from 0deg,#FF7AC8,#FFD86B 50deg,#C8F751 100deg,#7BE8CF 150deg,#57E3FF 200deg,#A46BFF 250deg,#FF9AD5 300deg,#FF7AC8)"></div><div class="pband" style="--ir1:.400;--ir2:.5;background:conic-gradient(from 0deg,#8C6018,#CB9A34 30deg,#FFF4CE 56deg,#E4AC32 78deg,#9E6E1E 104deg,#D29A30 130deg,#FFFFEC 156deg,#EEBC48 180deg,#8A5C14 208deg,#CD9C36 242deg,#FFF6D8 270deg,#E2AA32 296deg,#A06E1C 326deg,#8C6018)"></div><div class="pband pbevel" style="--ir1:.400;--ir2:.5;background:radial-gradient(circle at 30% 16%,rgba(255,255,255,.66),transparent 40%),radial-gradient(circle at 50% 96%,rgba(50,20,0,.5),transparent 46%)"></div><div class="pbez" style="--ir1:.374;--ir2:.402;background:linear-gradient(180deg,#FFF6D2,#6E4216 40%,#C89238)"></div><div class="pface" style="--rim:0.122;background:radial-gradient(circle at 50% 42%,#2E1640 0%,#1E0E30 60%,#120820 100%)"><img loading="lazy" decoding="async" src="assets/poko-lv5.png" alt=""></div><div class="phair"></div><div class="primout"></div><div class="pstuds"><i class="pgem pdia" style="left:50.00%;top:5.00%;width:4.2%;height:4.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pdia" style="left:72.50%;top:11.03%;width:4.2%;height:4.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pdia" style="left:88.97%;top:27.50%;width:4.2%;height:4.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pdia" style="left:95.00%;top:50.00%;width:4.2%;height:4.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pdia" style="left:88.97%;top:72.50%;width:4.2%;height:4.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pdia" style="left:72.50%;top:88.97%;width:4.2%;height:4.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pdia" style="left:50.00%;top:95.00%;width:4.2%;height:4.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pdia" style="left:27.50%;top:88.97%;width:4.2%;height:4.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pdia" style="left:11.03%;top:72.50%;width:4.2%;height:4.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pdia" style="left:5.00%;top:50.00%;width:4.2%;height:4.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pdia" style="left:11.03%;top:27.50%;width:4.2%;height:4.2%;transform:translate(-50%,-50%) rotate(45deg)"></i><i class="pgem pdia" style="left:27.50%;top:11.03%;width:4.2%;height:4.2%;transform:translate(-50%,-50%) rotate(45deg)"></i></div><div class="pcrown" style="width:58%;top:-20%"><svg viewBox="0 0 124 92" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="cg" x1="0" y1="0" x2=".25" y2="1"><stop offset="0" stop-color="#FFF9E0"/><stop offset=".3" stop-color="#FFD064"/><stop offset=".7" stop-color="#E0A62C"/><stop offset="1" stop-color="#8A5A16"/></linearGradient><linearGradient id="rd" x1="0" y1="0" x2=".4" y2="1"><stop offset="0" stop-color="#FFC2D2"/><stop offset=".45" stop-color="#F0455F"/><stop offset="1" stop-color="#8E1030"/></linearGradient><linearGradient id="dp" x1="0" y1="0" x2=".5" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".3" stop-color="#C8ECFF"/><stop offset=".65" stop-color="#8FC7FF"/><stop offset="1" stop-color="#5E7FE0"/></linearGradient><filter id="cg5x5" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="2" stdDeviation="3.2" flood-color="#FFB43A" flood-opacity=".85"/></filter></defs><g filter="url(#cg5x5)"><path d="M4,80 L16,32 L30,60 L40,14 L52,56 L60,2 L68,56 L80,14 L90,60 L104,32 L116,80 Z" fill="url(#cg)"/><path d="M4,80 L16,32 L30,60 L40,14 L52,56 L60,2 L68,56 L80,14 L90,60 L104,32 L116,80 Z" fill="none" stroke="#6B4310" stroke-width="1.6"/><path d="M6,80 L118,80 L118,62 L6,62 Z" fill="#D9A03A" stroke="#6B4310" stroke-width="1.4"/><path d="M7,67 L117,67" stroke="#FFF6D0" stroke-width="2.4" opacity=".95"/><path d="M62,18 L80,40 L62,64 L44,40 Z" fill="url(#dp)" stroke="#FFFFFF" stroke-width="2"/><path d="M62,18 L72,40 L62,54 L52,40 Z" fill="#FFFFFF" opacity=".55"/><circle cx="24" cy="32" r="5.4" fill="url(#rd)" stroke="#FFF0BE" stroke-width="1.1"/><circle cx="100" cy="32" r="5.4" fill="url(#rd)" stroke="#FFF0BE" stroke-width="1.1"/><circle cx="40" cy="14" r="3.8" fill="#8FC7FF" stroke="#FFFFFF" stroke-width="1"/><circle cx="84" cy="14" r="3.8" fill="#8FC7FF" stroke="#FFFFFF" stroke-width="1"/><circle cx="60" cy="2" r="4.4" fill="#FFF6D0" stroke="#FFFFFF" stroke-width="1"/><circle cx="30" cy="72" r="3" fill="#FFFFFF" opacity=".92"/><circle cx="94" cy="72" r="3" fill="#FFFFFF" opacity=".92"/><circle cx="62" cy="72" r="3.6" fill="url(#dp)" stroke="#FFFFFF" stroke-width=".8"/></g></svg></div><svg class="psparks" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><filter id="sg5x5" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="0" stdDeviation="2.6" flood-color="#FFE7FA" flood-opacity=".95"/></filter></defs><g filter="url(#sg5x5)"><path d="M52.4,47.0 Q53.7,51.8 58.6,53.1 Q53.7,54.5 52.4,59.3 Q51.0,54.5 46.2,53.1 Q51.0,51.8 52.4,47.0 Z" fill="#FFE7FA" opacity="0.53"/><path d="M16.8,80.8 Q17.5,83.4 20.1,84.1 Q17.5,84.9 16.8,87.5 Q16.0,84.9 13.4,84.1 Q16.0,83.4 16.8,80.8 Z" fill="#FFE7FA" opacity="0.60"/><path d="M61.6,14.9 Q62.9,19.6 67.6,21.0 Q62.9,22.3 61.6,27.0 Q60.3,22.3 55.6,21.0 Q60.3,19.6 61.6,14.9 Z" fill="#FFE7FA" opacity="0.90"/><path d="M21.6,111.3 Q22.6,114.7 26.1,115.7 Q22.6,116.7 21.6,120.1 Q20.7,116.7 17.2,115.7 Q20.7,114.7 21.6,111.3 Z" fill="#FFE7FA" opacity="0.80"/><path d="M34.1,102.5 Q34.7,104.7 37.0,105.4 Q34.7,106.0 34.1,108.3 Q33.4,106.0 31.1,105.4 Q33.4,104.7 34.1,102.5 Z" fill="#FFE7FA" opacity="0.88"/><path d="M109.5,7.2 Q110.9,12.5 116.2,14.0 Q110.9,15.5 109.5,20.8 Q108.0,15.5 102.7,14.0 Q108.0,12.5 109.5,7.2 Z" fill="#FFE7FA" opacity="0.96"/><path d="M137.4,12.8 Q138.0,14.7 139.9,15.3 Q138.0,15.8 137.4,17.7 Q136.9,15.8 135.0,15.3 Q136.9,14.7 137.4,12.8 Z" fill="#FFE7FA" opacity="0.82"/><path d="M96.8,58.1 Q97.5,60.7 100.1,61.4 Q97.5,62.2 96.8,64.8 Q96.0,62.2 93.4,61.4 Q96.0,60.7 96.8,58.1 Z" fill="#FFE7FA" opacity="0.86"/><path d="M36.3,153.8 Q36.9,156.2 39.4,156.9 Q36.9,157.6 36.3,160.0 Q35.6,157.6 33.1,156.9 Q35.6,156.2 36.3,153.8 Z" fill="#FFE7FA" opacity="0.99"/><path d="M170.4,41.7 Q171.2,44.4 173.9,45.2 Q171.2,46.0 170.4,48.7 Q169.6,46.0 166.9,45.2 Q169.6,44.4 170.4,41.7 Z" fill="#FFE7FA" opacity="0.94"/><path d="M57.5,66.5 Q58.2,69.0 60.7,69.7 Q58.2,70.4 57.5,72.8 Q56.8,70.4 54.4,69.7 Q56.8,69.0 57.5,66.5 Z" fill="#FFE7FA" opacity="0.88"/><path d="M128.7,36.1 Q129.4,38.4 131.7,39.1 Q129.4,39.7 128.7,42.1 Q128.0,39.7 125.7,39.1 Q128.0,38.4 128.7,36.1 Z" fill="#FFE7FA" opacity="0.84"/><path d="M63.2,140.8 Q64.6,145.5 69.3,146.8 Q64.6,148.2 63.2,152.9 Q61.9,148.2 57.2,146.8 Q61.9,145.5 63.2,140.8 Z" fill="#FFE7FA" opacity="0.99"/><path d="M31.1,65.9 Q32.2,70.2 36.5,71.3 Q32.2,72.5 31.1,76.8 Q29.9,72.5 25.6,71.3 Q29.9,70.2 31.1,65.9 Z" fill="#FFE7FA" opacity="0.77"/><path d="M157.4,125.0 Q158.5,128.8 162.3,129.9 Q158.5,130.9 157.4,134.7 Q156.4,130.9 152.6,129.9 Q156.4,128.8 157.4,125.0 Z" fill="#FFE7FA" opacity="0.83"/><path d="M184.6,82.0 Q185.4,84.7 188.1,85.5 Q185.4,86.3 184.6,89.1 Q183.8,86.3 181.0,85.5 Q183.8,84.7 184.6,82.0 Z" fill="#FFE7FA" opacity="0.79"/></g></svg></div></div>
+        </div>
+        <div class="evo-id">
+          <div class="evo-tags">
+            <span class="evo-rank r1" id="evoRank">LV.1 · 루키</span>
+            <span class="evo-prev-tag" id="evoPrevTag" hidden>미리보기</span>
+          </div>
+          <b class="evo-name" id="evoName">포코에그</b>
           <div class="my-nickrow"><b id="myNick">미연</b><button id="myNickEdit" type="button">수정</button></div>
           <p class="my-phone" id="myPhone">010-****-9720</p>
-          <div class="exp"><span id="myExpTxt">다음 등급까지 <b>20,000P</b></span>
-            <div class="eb"><i id="myExpBar"></i></div>
-          </div>
+          <button class="evo-back" id="evoBack" type="button" hidden>내 등급으로 돌아가기</button>
         </div>
-        <div class="coin"><small>COIN</small><b id="myCoin">0<s>P</s></b></div>
       </div>
+
+      <!-- 다음 진화까지 -->
+      <div class="evo-prog" id="evoProg">
+        <div class="ep-top">
+          <span id="myExpTxt">다음 진화까지 <b>50,000원</b></span>
+          <span class="ep-next" id="evoNext">NEXT · LV.2</span>
+        </div>
+        <div class="eb"><i id="myExpBar"></i></div>
+        <div class="ep-nums">
+          <span id="evoSpenTxt">누적 구매 <b>0원</b></span>
+          <span class="ep-coin"><small>COIN</small><b id="myCoin">0<s>P</s></b></span>
+        </div>
+      </div>
+
       <div class="tl">
         <div><small>보유 포인트</small><b><span id="myPts">240,000</span><em>P</em></b></div>
         <div><small>보관 굿즈</small><b><span id="myWait">0</span><em>점</em></b></div>
         <div><small>진행 중 배송</small><b><span id="myShipCnt">0</span><em>건</em></b></div>
       </div>
     </header>
+      <!-- @@EVO-HERO-END@@ -->
 
     <div class="my-body">
+
+      <!-- @@EVO-ROAD-BEGIN@@ -->
+      <!-- 포코 진화 로드맵 (단계를 누르면 위 카드가 미리보기로 바뀐다) -->
+      <section class="pn evo-road" id="evoRoadPanel">
+        <div class="ph">
+          <h3><i></i>포코 진화 5단계</h3>
+          <button id="evoBack2" type="button" hidden>내 등급으로</button>
+        </div>
+        <div class="evo-rail" id="evoRail" role="group" aria-label="포코 진화 단계">
+          <button class="evo-n" type="button" data-evolv="1" aria-pressed="true">
+            <span class="en-pic"><img src="assets/poko-lv1.png" alt="포코에그" loading="lazy" decoding="async"></span>
+            <b class="en-lv">LV.1</b><span class="en-nm">포코에그</span><em class="en-need">0원</em>
+          </button>
+          <button class="evo-n" type="button" data-evolv="2" aria-pressed="false">
+            <span class="en-pic"><img src="assets/poko-lv2.png" alt="포코링" loading="lazy" decoding="async"></span>
+            <b class="en-lv">LV.2</b><span class="en-nm">포코링</span><em class="en-need">5만원+</em>
+          </button>
+          <button class="evo-n" type="button" data-evolv="3" aria-pressed="false">
+            <span class="en-pic"><img src="assets/poko-lv3.png" alt="포코나이트" loading="lazy" decoding="async"></span>
+            <b class="en-lv">LV.3</b><span class="en-nm">포코나이트</span><em class="en-need">30만원+</em>
+          </button>
+          <button class="evo-n" type="button" data-evolv="4" aria-pressed="false">
+            <span class="en-pic"><img src="assets/poko-lv4.png" alt="포코로드" loading="lazy" decoding="async"></span>
+            <b class="en-lv">LV.4</b><span class="en-nm">포코로드</span><em class="en-need">70만원+</em>
+          </button>
+          <button class="evo-n" type="button" data-evolv="5" aria-pressed="false">
+            <span class="en-pic"><img src="assets/poko-lv5.png" alt="포코제니스" loading="lazy" decoding="async"></span>
+            <b class="en-lv">LV.5</b><span class="en-nm">포코제니스</span><em class="en-need">150만원+</em>
+          </button>
+        </div>
+        <p class="evo-tip">단계를 누르면 위 카드가 그 모습으로 바뀌어요 · 내 등급 <b id="evoMyLvTxt">LV.1 포코에그</b></p>
+      </section>
+      <!-- @@EVO-ROAD-END@@ -->
+
       <!-- 코인 지갑 -->
       <section class="pn coral wa">
         <div class="ph"><h3><i></i>코인 지갑</h3><button data-my="ledger" type="button">충전·사용 내역 →</button></div>
@@ -6280,9 +6541,145 @@ body{background:#05050A;color:var(--tx)}
 
   /* @@POKO-V2-JS-END@@ */
 
+  /* @@EVO-JS-BEGIN@@ */
+  /* ============================================================
+     ④ 포코 5단계 진화 (마이페이지)
+        누적 구매액 0 → 5만 → 30만 → 70만 → 150만 원에서 진화.
+        로드맵 단계를 누르면 내 등급 대신 그 단계를 미리 보여준다.
+     ============================================================ */
+  const EVO_STAGES = [
+    { lv: 1, tier: "루키",   name: "포코에그",   need: 0,       short: "0원" },
+    { lv: 2, tier: "브론즈", name: "포코링",     need: 50000,   short: "5만원" },
+    { lv: 3, tier: "실버",   name: "포코나이트", need: 300000,  short: "30만원" },
+    { lv: 4, tier: "골드",   name: "포코로드",   need: 700000,  short: "70만원" },
+    { lv: 5, tier: "레전드", name: "포코제니스", need: 1500000, short: "150만원+" }
+  ];
+  const EVO_KEY = "pokoEvoSpent";
+  let evoPreview = 0;                        /* 0 = 미리보기 아님(내 등급) */
+
+  /* 누적 구매액 = 이번 세션 뽑기 결제 합계 vs 브라우저에 남긴 합계 중 큰 값 */
+  function evoSpent(){
+    const sum = state.series.reduce((a, s) => a + (Number(s.rev) || 0), 0);
+    let saved = 0;
+    try { saved = Number(localStorage.getItem(EVO_KEY) || 0) || 0; } catch (e){}
+    return Math.max(sum, saved);
+  }
+  function evoAddSpend(cost){
+    const c = Math.max(0, Number(cost) || 0);
+    if (!c) return;
+    const v = evoSpent() + c;
+    try { localStorage.setItem(EVO_KEY, String(v)); } catch (e){}
+  }
+  function evoLvOf(spent){
+    let lv = 1;
+    for (const s of EVO_STAGES) if (spent >= s.need) lv = s.lv;
+    return lv;
+  }
+  const evoStage = lv => EVO_STAGES[Math.max(1, Math.min(5, lv)) - 1];
+
+  function renderEvo(){
+    const hero = $("#evoHero");
+    if (!hero) return;
+    const spent = evoSpent();
+    const mine = evoLvOf(spent);
+    const show = evoPreview || mine;
+    const st = evoStage(show);
+    const isPrev = show !== mine;
+
+    $$("#myAva .evo-frame").forEach(f => {
+      f.classList.toggle("on", Number(f.dataset.evolv) === show);
+    });
+    hero.dataset.lv = show;
+    hero.classList.toggle("is-prev", isPrev);
+
+    const rank = $("#evoRank");
+    if (rank){
+      rank.textContent = "LV." + show + " · " + st.tier;
+      rank.className = "evo-rank r" + show;
+    }
+    const nm = $("#evoName");
+    if (nm) nm.textContent = st.name;
+    const pv = $("#evoPrevTag");
+    if (pv) pv.hidden = !isPrev;
+    const back = $("#evoBack");
+    if (back) back.hidden = !isPrev;
+    const back2 = $("#evoBack2");
+    if (back2) back2.hidden = !isPrev;
+
+    const lvTop = $("#myLvTop");
+    if (lvTop) lvTop.textContent = "· LV." + mine + " " + evoStage(mine).tier;
+
+    /* 진행 게이지 — 미리보기일 땐 그 단계의 해금 구간을 보여준다 */
+    const next = EVO_STAGES[show];                     /* 없으면 최종 */
+    const from = st.need;
+    const to = next ? next.need : st.need;
+    const maxed = !next;
+    const clampPct = v => Math.max(0, Math.min(100, Math.round(v)));
+    let pct;
+    if (!maxed) pct = clampPct((spent - from) / (to - from) * 100);
+    else if (isPrev) pct = clampPct(spent / st.need * 100);   /* 미리보기 LV.5 : 해금까지 얼마나 왔는지 */
+    else pct = 100;                                          /* 내 등급이 최종 */
+
+    const txt = $("#myExpTxt"), nx = $("#evoNext"), bar = $("#myExpBar"),
+          spn = $("#evoSpenTxt"), coin = $("#myCoin");
+    if (isPrev){
+      if (txt) txt.innerHTML = "미리보기 · 해금 <b>" + st.short + "</b>";
+      if (nx){
+        nx.textContent = "LV." + show + " " + st.tier;
+        nx.className = "ep-next" + (maxed ? " max" : "");
+      }
+    } else if (maxed){
+      if (txt) txt.innerHTML = "최종 진화 완료 · <b>포코제니스</b>";
+      if (nx){ nx.textContent = "MAX LV"; nx.className = "ep-next max"; }
+    } else {
+      if (txt) txt.innerHTML = "다음 진화까지 <b>" + won(Math.max(0, to - spent)) + "원</b>";
+      if (nx){ nx.textContent = "NEXT · LV." + next.lv; nx.className = "ep-next"; }
+    }
+    if (bar) bar.style.width = pct + "%";
+    if (spn) spn.innerHTML = "누적 구매 <b>" + won(spent) + "원</b>";
+    if (coin) coin.innerHTML = won(Math.max(0, Number(state.points) || 0)) + "<s>P</s>";
+
+    $$("#evoRail .evo-n").forEach(b => {
+      const lv = Number(b.dataset.evolv);
+      b.classList.toggle("is-mine", lv === mine);
+      b.classList.toggle("is-prev", lv === show && isPrev);
+      b.classList.toggle("is-lock", lv > mine);
+      b.setAttribute("aria-pressed", lv === show ? "true" : "false");
+    });
+    const mineTxt = $("#evoMyLvTxt");
+    if (mineTxt) mineTxt.textContent = "LV." + mine + " " + evoStage(mine).name;
+  }
+
+  function evoPick(lv){
+    const mine = evoLvOf(evoSpent());
+    evoPreview = (lv === mine || lv === evoPreview) ? 0 : lv;
+    const stage = $("#myAva");
+    renderEvo();
+    if (stage){
+      stage.classList.remove("pop");
+      void stage.offsetWidth;
+      stage.classList.add("pop");
+      setTimeout(() => stage.classList.remove("pop"), 520);
+    }
+    if (evoPreview && $("#evoHero") && $("#evoHero").scrollIntoView){
+      try { $("#evoHero").scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e){}
+    }
+  }
+
+  (function wireEvo(){
+    $$("#evoRail .evo-n").forEach(b => b.addEventListener("click", () => evoPick(Number(b.dataset.evolv))));
+    ["#evoBack", "#evoBack2"].forEach(sel => {
+      const b = $(sel);
+      if (b) b.addEventListener("click", () => { evoPreview = 0; renderEvo(); });
+    });
+  })();
+  /* @@EVO-JS-END@@ */
+
   /* 복권 결과를 먼저 확정하고(연출 중 화면 갱신은 보류) 연출 후 모달을 연다 */
   function settleDraw(s, b, n, cost){
     state.points -= cost;
+    evoAddSpend(cost);
+    evoAddSpend(cost);
     s.rev += cost;
     s.sold += n;
 
@@ -6367,6 +6764,7 @@ body{background:#05050A;color:var(--tx)}
       const lastItem = res.last ? liveItem(res.last, s.id, b.no) : null;
 
       state.points = res.points;
+      evoAddSpend(res.cost);
       (res.prizes || []).forEach(p => {
         const g = b.grades.find(x => x.k === p.grade);
         if (g){ g.r = p.remaining_qty; g.t = p.total_qty; g.n = p.name; g.v = p.value_p; }
@@ -7727,23 +8125,12 @@ body{background:#05050A;color:var(--tx)}
     const P = Math.max(0, Number(state.points) || 0);
     const evt = Math.max(0, Math.min(P, attSavedPts()));
     const gen = Math.max(0, P - evt);
-    const lv = Math.floor(P / MY_LV_STEP) + 1;
-    const exp = P % MY_LV_STEP;
-    const pct = Math.max(P === 0 ? 2 : 4, Math.round(exp / MY_LV_STEP * 100));
 
     pts.textContent = won(P);
     $("#myNick").textContent = state.profile.nick;
     $("#myPhone").textContent = maskPhone(state.profile.phone);
 
-    const lvTop = $("#myLvTop"), lvBadge = $("#myLv");
-    if (lvTop) lvTop.textContent = "· LV." + lv;
-    if (lvBadge) lvBadge.textContent = "LV." + lv;
-    const ava = $("#myAva");
-    if (ava) ava.style.setProperty("--expd", pct + "%");
-    const expTxt = $("#myExpTxt");
-    if (expTxt) expTxt.innerHTML = "다음 등급까지 <b>" + won(MY_LV_STEP - exp) + "P</b>";
-    const expBar = $("#myExpBar");
-    if (expBar) expBar.style.width = pct + "%";
+    renderEvo();   /* 5단계 진화 카드 · 누적 구매액 기준 */
     const coin = $("#myCoin");
     if (coin) coin.innerHTML = won(P) + "<s>P</s>";
     const wallet = $("#myWallet");
