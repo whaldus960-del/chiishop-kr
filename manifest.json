@@ -1,0 +1,27 @@
+{
+  "name": "포코쿠지 - 꽝 없는 온라인 이치방쿠지",
+  "short_name": "포코쿠지",
+  "description": "꽝 없는 온라인 이치방쿠지 · 박스별 잔여 수량과 실시간 확률을 공개하는 진열대형 뽑기",
+  "lang": "ko-KR",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0e0f17",
+  "theme_color": "#0e0f17",
+  "icons": [
+    {
+      "src": "./assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

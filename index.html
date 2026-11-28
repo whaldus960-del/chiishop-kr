@@ -7,7 +7,13 @@
 <!-- 🥚 시그니처 마스코트 아이콘 (알약 캡슐 로고 → 포코 알) -->
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./assets/icon-180.png">
+<!-- 📱 PWA — 홈 화면에 추가하면 주소창 없는 전체화면 앱으로 실행 -->
+<link rel="manifest" href="./manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="포코쿠지">
 <meta name="description" content="포코쿠지 (POKO KUJI) — 꽝 없는 이치방쿠지 · 치이카와 시리즈 4종. 박스별 잔여 수량과 실시간 확률을 공개하는 진열대형 온라인 뽑기.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="포코쿠지 POKO KUJI">
@@ -3578,6 +3584,40 @@ body{background:#05050A;color:var(--tx)}
   .pfr .paura,.pfr .psparks,.pfr .prays,.pfr .porbit,.pfr .pband.pholo,.evo-stage.pop .evo-frame.on{animation:none!important}
 }
 /* @@EVO-CSS-END@@ */
+/* ================= 📱 PWA 설치 (홈 화면에 추가) ================= */
+@media all and (display-mode:standalone){
+  body{background:#0E0E14}
+  .app{padding-top:env(safe-area-inset-top,0px)}
+}
+.pwa-home{padding:0 14px;margin-top:8px}
+.pwa-pn{padding:0 10px 10px}
+.pwa-cta{width:100%;display:flex;align-items:center;gap:10px;text-align:left;position:relative;overflow:hidden;
+  padding:11px 12px;border-radius:14px;
+  background:linear-gradient(135deg,#241A3A 0%,#1C1630 46%,#30183C 100%);
+  border:1px solid rgba(255,120,80,.34);
+  box-shadow:0 12px 26px -18px rgba(255,90,54,1),inset 0 1px 0 rgba(255,255,255,.07);
+  color:#F7F3FF}
+.pwa-cta:active{transform:translateY(1px)}
+.pwa-cta .pi{width:34px;height:34px;flex:none;border-radius:10px;display:grid;place-items:center;font-size:17px;
+  background:linear-gradient(180deg,#FF8A62,#F0431F);box-shadow:0 8px 16px -10px #FF5A36,inset 0 1px 0 rgba(255,255,255,.45)}
+.pwa-cta .pt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pwa-cta .pt b{font-size:11.5px;font-weight:900;letter-spacing:-.4px;line-height:1.25}
+.pwa-cta .pt small{font-size:8.6px;font-weight:700;color:#B3A8C8;letter-spacing:-.2px;line-height:1.35}
+.pwa-cta .pg{flex:none;font-size:8.4px;font-weight:900;color:#FFC3AD;padding:4px 7px;border-radius:8px;
+  background:rgba(255,90,54,.16);border:1px solid rgba(255,90,54,.34);letter-spacing:-.2px}
+.pwa-lead{margin:2px 0 11px;font-size:10.4px;font-weight:700;color:#C7BDD6;line-height:1.6;letter-spacing:-.2px}
+.pwa-lead b{color:#FFB59B}
+.pwa-steps{list-style:none;counter-reset:ps;margin:0 0 4px;padding:0;display:flex;flex-direction:column;gap:7px}
+.pwa-steps li{counter-increment:ps;display:grid;grid-template-columns:19px 1fr;column-gap:9px;row-gap:3px;
+  align-items:start;padding:10px 11px;border-radius:12px;background:#191424;border:1px solid #2B2440}
+.pwa-steps li::before{content:counter(ps);grid-column:1;grid-row:1;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;
+  font-size:9.5px;font-weight:900;color:#1A0803;background:linear-gradient(180deg,#FFB59B,#FF6A42);margin-top:1px}
+.pwa-steps b{grid-column:2;grid-row:1;display:block;font-size:10.6px;font-weight:900;color:#F7F3FF;line-height:1.4;letter-spacing:-.3px}
+.pwa-steps span{grid-column:2;grid-row:2;display:block;font-size:8.8px;font-weight:700;color:#9A92A8;line-height:1.5;letter-spacing:-.2px}
+.pwa-steps em{font-style:normal;color:#FFC3AD;background:rgba(255,90,54,.14);border-radius:5px;padding:0 4px}
+.pwa-note{margin:10px 1px 2px;font-size:8.6px;font-weight:700;color:#8E869C;line-height:1.6;letter-spacing:-.2px}
+.pwa-note b{color:#DCD4EA}
+@media (prefers-reduced-motion:reduce){.pwa-cta:active{transform:none}}
 </style>
 </head>
 <body>
@@ -3849,6 +3889,15 @@ body{background:#05050A;color:var(--tx)}
     <section class="sec">
       <div class="sec-head"><h2>포코쿠지 <b>시리즈</b></h2><span id="homeSeriesCount">4개 시리즈 · 12박스</span></div>
       <div class="sgrid" id="seriesGrid"></div>
+    </section>
+
+    <!-- 📱 앱 설치 — 홈 하단 푸터 근처 (standalone 실행 중이면 자동 숨김) -->
+    <section class="pwa-home" id="pwaPanelHome" data-pwa-panel hidden>
+      <button class="pwa-cta" id="pwaBtnHome" type="button" data-pwa="open">
+        <span class="pi" aria-hidden="true">📲</span>
+        <span class="pt"><b>포코쿠지를 홈 화면에 추가</b><small>주소창 없는 전체화면 앱으로 열려요</small></span>
+        <span class="pg" data-pwa-tag>설치 방법</span>
+      </button>
     </section>
 
     <!-- v10: 홈 본문은 시리즈 카드 → 사업자 푸터로 바로 이어진다 (규정은 상단 배너·푸터 링크 모달) -->
@@ -4146,6 +4195,16 @@ body{background:#05050A;color:var(--tx)}
             <button class="ac out" id="myPcccBtn" type="button">관리</button>
           </div>
         </div>
+      </section>
+
+      <!-- 📱 앱 설치 (홈 화면에 추가) — standalone 실행 중이면 자동 숨김 -->
+      <section class="pn pwa-pn" id="pwaPanelMy" data-pwa-panel hidden>
+        <div class="ph"><h3><i></i>앱으로 쓰기</h3><button type="button" data-pwa="open">설치 방법 →</button></div>
+        <button class="pwa-cta" id="pwaBtnMy" type="button" data-pwa="open">
+          <span class="pi" aria-hidden="true">📲</span>
+          <span class="pt"><b>앱으로 바로가기 (홈 화면 추가)</b><small>전체화면으로 열리고, 로그인·포인트 그대로 이어져요</small></span>
+          <span class="pg" data-pwa-tag>설치 방법</span>
+        </button>
       </section>
 
       <!-- 7일 연속 출석 -->
@@ -4551,6 +4610,16 @@ body{background:#05050A;color:var(--tx)}
         <button class="btn-primary" id="attStamp" type="button">오늘 출석 도장 찍기<small>1일 1회 · 포인트 즉시 적립</small></button>
       </div>
       <p class="att-note">출석 기록은 이 기기에 저장됩니다 · 데모에서는 실제 결제·지급이 없습니다.</p>
+    </div>
+  </div>
+
+  <!-- 📱 PWA — 기기별 홈 화면 추가 안내 시트 -->
+  <div class="overlay" id="pwaSheet" role="dialog" aria-modal="true" aria-label="홈 화면에 추가하는 방법">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head"><h3 id="pwaSheetTitle">📲 홈 화면에 추가</h3><button class="x" data-close="pwaSheet" aria-label="닫기">×</button></div>
+      <div class="sheet-body" id="pwaSheetBody"></div>
+      <div class="sheet-actions"><button class="btn-primary" data-close="pwaSheet" type="button">닫기</button></div>
     </div>
   </div>
 
@@ -8931,6 +9000,149 @@ body{background:#05050A;color:var(--tx)}
     });
     $("#favBtn").addEventListener("click", toggleFav);
   }
+
+  /* ============================================================
+     📱 PWA — 홈 화면에 추가 (전체화면 앱 설치)
+     ============================================================ */
+  const PWA = (() => {
+    const ua = navigator.userAgent || "";
+    const isKakao = /KAKAOTALK/i.test(ua);
+    const isIOS = /iPhone|iPad|iPod/i.test(ua)
+      || (/Macintosh/i.test(ua) && (navigator.maxTouchPoints || 0) > 1);
+    const isAndroid = /Android/i.test(ua);
+    let deferred = null;
+
+    const mq = (q) => { try { return !!(window.matchMedia && window.matchMedia(q).matches); } catch (e) { return false; } };
+    const standalone = () => mq("(display-mode: standalone)") || mq("(display-mode: fullscreen)")
+      || mq("(display-mode: minimal-ui)") || window.navigator.standalone === true;
+
+    const SHEETS = {
+      kakao: {
+        title: "💬 카톡에서는 바로 추가가 안 돼요",
+        body: '<p class="pwa-lead">카카오톡 안에서는 홈 화면 추가가 막혀 있어요. <b>브라우저로 한 번만 열면</b> 금방 끝나요.</p>'
+          + '<ol class="pwa-steps">'
+          + '<li><b>오른쪽 아래 <em>···</em> 메뉴를 눌러요</b><span>카톡 화면 오른쪽 아래 점 3개</span></li>'
+          + '<li><b><em>다른 브라우저로 열기</em>를 골라요</b><span>Safari · Chrome 중 하나로 열려요</span></li>'
+          + '<li><b>연 브라우저에서 <em>📲 홈 화면에 추가</em>를 다시 눌러요</b><span>그 화면에서 다음 단계를 이어서 안내해 드려요</span></li>'
+          + '</ol>'
+          + '<p class="pwa-note">이미 브라우저로 여셨다면, 이 페이지에서 버튼을 한 번 더 눌러 주세요.</p>'
+      },
+      ios: {
+        title: "📲 아이폰은 3단계면 끝나요",
+        body: '<p class="pwa-lead">아이폰은 <b>Safari 공유 버튼</b>으로 추가해요. 아래 모양 그대로 따라 하시면 돼요.</p>'
+          + '<ol class="pwa-steps">'
+          + '<li><b>아래 <em>공유 ↑</em> 버튼을 눌러요</b><span>사파리 하단(또는 상단) 가운데 공유 아이콘</span></li>'
+          + '<li><b><em>홈 화면에 추가</em>를 골라요</b><span>공유 목록을 조금 내리면 보여요</span></li>'
+          + '<li><b>오른쪽 위 <em>추가</em>를 눌러요</b><span>홈 화면에 포코쿠지 아이콘이 생겨요</span></li>'
+          + '</ol>'
+          + '<p class="pwa-note">추가한 아이콘으로 열면 <b>주소창 없이 전체화면</b>으로 실행되고, 로그인·포인트도 그대로 이어져요.</p>'
+      },
+      android: {
+        title: "📲 크롬 메뉴에서 한 번에 설치",
+        body: '<p class="pwa-lead">주소창 옆 메뉴에서 <b>앱으로 설치</b>할 수 있어요.</p>'
+          + '<ol class="pwa-steps">'
+          + '<li><b>오른쪽 위 <em>⋮</em> 메뉴를 눌러요</b><span>주소창 오른쪽 점 3개</span></li>'
+          + '<li><b><em>앱 설치</em> / <em>홈 화면에 추가</em>를 골라요</b><span>삼성 인터넷은 메뉴 → 페이지 추가 → 홈 화면</span></li>'
+          + '<li><b><em>설치</em>를 눌러요</b><span>홈 화면과 앱 서랍에 포코쿠지가 생겨요</span></li>'
+          + '</ol>'
+          + '<p class="pwa-note">설치하면 <b>주소창 없는 전체화면</b>으로 열려요.</p>'
+      },
+      pc: {
+        title: "📲 PC에서는 이렇게 설치해요",
+        body: '<p class="pwa-lead">PC에서는 주소창 오른쪽의 <b>설치 아이콘</b>으로 앱처럼 쓸 수 있어요.</p>'
+          + '<ol class="pwa-steps">'
+          + '<li><b>주소창 오른쪽 <em>설치</em> 아이콘을 눌러요</b><span>크롬·엣지는 모니터에 ↓ 표시 · 없으면 ⋮ 메뉴 → 저장 및 공유 → 설치</span></li>'
+          + '<li><b><em>설치</em>를 눌러요</b><span>바탕화면·시작 메뉴에 포코쿠지 앱이 생겨요</span></li>'
+          + '</ol>'
+          + '<p class="pwa-note">사파리·파이어폭스는 설치 대신 <b>북마크</b>로 추가할 수 있어요. 휴대폰으로 열면 홈 화면 추가가 가장 깔끔해요.</p>'
+      },
+      done: {
+        title: "✅ 이미 앱으로 열려 있어요",
+        body: '<p class="pwa-lead">지금 이 화면이 <b>설치된 앱 화면</b>이에요. 주소창 없이 전체화면으로 열리는 중이에요.</p>'
+          + '<p class="pwa-note">홈 화면 아이콘을 잃어버렸다면, 브라우저로 다시 접속해 같은 방법으로 또 추가할 수 있어요.</p>'
+      }
+    };
+
+    function tagText(){
+      if (isKakao) return "여는 방법";
+      if (isIOS) return "3단계";
+      if (isAndroid) return deferred ? "1탭 설치" : "설치 방법";
+      return "설치 방법";
+    }
+
+    function syncTags(){
+      $$("[data-pwa-tag]").forEach(el => { el.textContent = tagText(); });
+    }
+
+    function syncHidden(){
+      const on = standalone();
+      document.documentElement.classList.toggle("pwa-standalone", on);
+      $$("[data-pwa-panel]").forEach(el => { el.hidden = on; });
+    }
+
+    function open(mode){
+      const conf = SHEETS[mode] || SHEETS.pc;
+      $("#pwaSheetTitle").textContent = conf.title;
+      $("#pwaSheetBody").innerHTML = conf.body;
+      openOverlay("pwaSheet");
+    }
+
+    async function install(){
+      if (standalone()){ open("done"); return; }
+      if (isKakao){ open("kakao"); return; }
+      if (isIOS){ open("ios"); return; }
+      if (isAndroid && deferred){
+        const ev = deferred;
+        deferred = null;
+        try {
+          ev.prompt();
+          const res = await ev.userChoice;
+          if (res && res.outcome === "accepted"){
+            toast("홈 화면에 추가하는 중이에요");
+          } else {
+            open("android");
+          }
+        } catch (e) {
+          open("android");
+        }
+        syncTags();
+        return;
+      }
+      open(isAndroid ? "android" : "pc");
+    }
+
+    function init(){
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferred = e;
+        syncTags();
+      });
+      window.addEventListener("appinstalled", () => {
+        deferred = null;
+        syncTags();
+        syncHidden();
+        toast("포코쿠지가 홈 화면에 추가됐어요");
+      });
+      document.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-pwa='open']");
+        if (!b) return;
+        e.preventDefault();
+        install();
+      });
+      try {
+        const m = window.matchMedia("(display-mode: standalone)");
+        if (m && m.addEventListener) m.addEventListener("change", syncHidden);
+        else if (m && m.addListener) m.addListener(syncHidden);
+      } catch (e) {}
+      syncTags();
+      syncHidden();
+    }
+
+    return { init, install, open, syncTags, syncHidden,
+      info: () => ({ isKakao, isIOS, isAndroid, deferred: !!deferred, standalone: standalone() }) };
+  })();
+  PWA.init();
+  window.POKO_PWA = { install: PWA.install, open: PWA.open, info: PWA.info, syncHidden: PWA.syncHidden };
 
   /* ============================================================
      init
