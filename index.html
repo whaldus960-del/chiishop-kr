@@ -3303,37 +3303,39 @@ body{background:#05050A;color:var(--tx)}
 /* @@POKO-V10-BEGIN@@ ============================================
    v10 — 상단 그래픽 배너(카드형 비주얼 + 배지) · 하단 다이어트 · 규정 모달 · 당첨 바 썸네일
    ============================================================ */
-/* ① 배너 */
-.hcar .hc-view{height:172px}
-.hcar .hc-slide{padding:10px 13px 30px;gap:10px;align-items:center}
+/* ① 배너 — 글씨를 크고 굵게(시원시원) · 안쪽 여백은 컴팩트 */
+.hcar .hc-view{height:202px}
+.hcar .hc-slide{padding:8px 11px 26px;gap:8px;align-items:center}
 .hs-txt{justify-content:center}
-.hs-kicker{font-size:7.6px;padding:2px 6px;letter-spacing:1.2px}
-.hs-title{margin:5px 0 0;font-size:19.5px;line-height:1.15;letter-spacing:-1.05px}
-.hs-list{margin:5px 0 0;gap:1.5px}
-.hs-list li{font-size:8.5px;line-height:1.32}
-.hs-list li::before{top:3.4px}
-.hs-note{margin:5px 0 0;padding:3px 6px;font-size:8.2px;line-height:1.3}
-.hs-art{position:relative;width:100px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.hs-kicker{font-size:9.6px;padding:3px 9px;letter-spacing:1.1px;border-radius:7px}
+.hs-title{margin:7px 0 0;font-size:clamp(25px,7.7vw,30px);line-height:1.06;letter-spacing:-1.5px;font-weight:900;text-shadow:0 2px 10px rgba(0,0,0,.3)}
+.hcar .hc-slide.hs-light .hs-title{text-shadow:0 1px 0 rgba(255,255,255,.65)}
+.hs-list{margin:7px 0 0;gap:3px}
+.hs-list li{font-size:clamp(10px,2.85vw,11.2px);line-height:1.3;padding-left:11px;font-weight:800}
+.hs-list li b{font-weight:900}
+.hs-list li::before{top:4.4px;width:4.6px;height:4.6px}
+.hs-note{margin:7px 0 0;padding:4px 9px;font-size:clamp(9.6px,2.7vw,10.6px);line-height:1.28;font-weight:900}
+.hs-art{position:relative;width:clamp(74px,21vw,86px);display:flex;flex-direction:column;align-items:center;gap:3px}
 .hs-art svg{width:100%;height:auto;display:block;filter:drop-shadow(0 7px 12px rgba(0,0,0,.42))}
-.hb-chip{position:absolute;top:-3px;right:-1px;z-index:3;padding:2px 6px;border-radius:999px;
-  font-size:6.9px;font-weight:900;letter-spacing:-.1px;white-space:nowrap;color:#2A1B02;
+.hb-chip{position:absolute;top:-3px;right:-1px;z-index:3;padding:2.5px 7px;border-radius:999px;
+  font-size:8.4px;font-weight:900;letter-spacing:-.1px;white-space:nowrap;color:#2A1B02;
   background:linear-gradient(180deg,#FFE7A6,#FFB627);border:1px solid rgba(20,22,29,.85);
   box-shadow:0 0 12px -3px rgba(255,194,74,.95)}
 .hb-chip.lime{background:linear-gradient(180deg,#E6FF9E,#B9F53E);box-shadow:0 0 12px -3px rgba(201,255,87,.95)}
 .hb-chip.coral{background:linear-gradient(180deg,#FFB49C,#FF5A36);color:#2A0803;box-shadow:0 0 12px -3px rgba(255,90,54,.95)}
 .hb-chip.cyan{background:linear-gradient(180deg,#C9F6FF,#5EE0FF);color:#062A33;box-shadow:0 0 12px -3px rgba(94,224,255,.95)}
-.hb-more{align-self:center;margin-top:2px;padding:1.5px 7px;border-radius:999px;
-  font-size:7px;font-weight:900;letter-spacing:-.1px;white-space:nowrap;color:#FFD9CD;
+.hb-more{align-self:center;margin-top:2px;padding:2px 8px;border-radius:999px;
+  font-size:8.4px;font-weight:900;letter-spacing:-.1px;white-space:nowrap;color:#FFD9CD;
   background:rgba(255,255,255,.07);border:1px solid rgba(255,140,110,.42)}
 .hcar .hc-slide.hs-coral .hs-title b{color:#FFF6C9;text-decoration:none;text-shadow:0 0 18px rgba(255,194,74,.9)}
 .hcar .hc-slide.hs-coral .hs-note b{color:#FFF6C9}
-@media(min-width:430px){ .hcar .hc-view{height:178px} .hs-title{font-size:20.5px} }
+@media(min-width:430px){ .hcar .hc-view{height:212px} .hs-title{font-size:32px} }
 @media(max-width:374px){
-  .hcar .hc-view{height:182px}
-  .hs-title{font-size:17.6px}
-  .hs-art{width:88px}
-  .hs-list li{font-size:8.1px}
-  .hs-note{font-size:7.9px}
+  .hcar .hc-view{height:210px}
+  .hs-title{font-size:clamp(23px,7.4vw,26px)}
+  .hs-art{width:74px}
+  .hs-list li{font-size:10px}
+  .hs-note{font-size:9.6px}
 }
 
 /* ①-b 헤더 — 긴 닉네임(예: '포코쿠지 회원')에도 로고 한 줄 유지 */
@@ -3892,7 +3894,7 @@ body{background:#05050A;color:var(--tx)}
           <article class="hc-slide hs-dark" data-slide="4" data-hb-act="store" role="group" aria-label="보관 30일 및 묶음배송 안내">
             <div class="hs-txt">
               <span class="hs-kicker">STORAGE · SHIPPING</span>
-              <h3 class="hs-title">당첨일부터 <b>30일 보관</b><br>5개 이상 <b>무료배송</b></h3>
+              <h3 class="hs-title">당첨 후 <b>30일 보관</b><br>5개 이상 <b>무료배송</b></h3>
               <ul class="hs-list">
                 <li>30일 지나면 <b>포인트 자동 전환</b></li>
                 <li>5개 미만은 배송비 <b>3,500원</b></li>
@@ -5786,18 +5788,57 @@ body{background:#05050A;color:var(--tx)}
         if (!AC) return null;
         ctx = new AC();
         master = ctx.createGain();
-        master.gain.value = 0.5;
+        master.gain.value = 0.88;      /* 0.5 → 0.88 : BGM 아래에서도 손맛 효과음이 또렷이 */
         master.connect(ctx.destination);
       } catch (e){ ctx = null; }
       return ctx;
+    }
+    /* iOS Safari 는 HTML5 <audio>(BGM) 가 재생되면 AudioContext 를 "suspended"·
+       "interrupted" 로 잠글 수 있다. "running" 이 아니면 상태와 상관없이 깨운다. */
+    let resumePending = false;
+    function kick(c){
+      if (!c || c.state === "running" || resumePending) return;
+      resumePending = true;
+      try {
+        const p = c.resume();
+        if (p && p.then) p.then(() => { resumePending = false; }, () => { resumePending = false; });
+        else resumePending = false;
+      } catch (e){ resumePending = false; }
     }
     function ready(){
       if (!on) return null;
       const c = ac();
       if (!c) return null;
-      if (c.state === "suspended"){ try { c.resume(); } catch (e){} }
+      kick(c);
       return c;
     }
+    /* 🔊 iOS 오디오 세션 깨우기 — 사용자 터치(탭·드래그) 안에서 부른다.
+       · "suspended"·"interrupted" 모두 resume
+       · 무음 버퍼를 아주 짧게 흘려 iOS 가 오디오 세션을 열게 한다(BGM 과 공존) */
+    let keepBuf = null;
+    function unlock(){
+      if (!on) return;
+      const c = ac();
+      if (!c) return;
+      try {
+        kick(c);
+        if (!keepBuf){
+          const len = Math.max(1, Math.floor(c.sampleRate * 0.02));
+          keepBuf = c.createBuffer(1, len, c.sampleRate);   /* 전부 0 = 완전 무음 */
+        }
+        const s = c.createBufferSource(); s.buffer = keepBuf;
+        const g = c.createGain(); g.gain.value = 0.0001;    /* 세션만 깨우고 소리는 없다 */
+        s.connect(g); g.connect(c.destination);
+        s.start(0); s.stop(c.currentTime + 0.03);
+      } catch (e){}
+    }
+    /* BGM 이 끊고 간 오디오 세션을 다음 터치·화면 복귀에서 자동 복구 */
+    document.addEventListener("pointerdown", () => {
+      if (on && ctx && ctx.state !== "running") unlock();
+    }, true);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && on && ctx && ctx.state !== "running") unlock();
+    });
     function tone(f, dur, type, vol, delay, f2){
       const c = ready(); if (!c) return;
       try {
@@ -5876,9 +5917,10 @@ body{background:#05050A;color:var(--tx)}
       live.length = 0;
     }
 
-    /* ── 뜯는 소리 : 종이 스르륵 마찰 (연속 · 펄스 없음) ─────────────
-       점선마다 '따닥따닥' 끊기던 펄스를 없애고, 저역 위주의 부드러운
-       바람·종이 쓸림을 한 줄로 이어 낸다. (합성 전기음 없음) */
+    /* ── 손맛 ① : 드래그하는 동안 계속 갈리는 종이 마찰 ─────────────
+       200Hz 초저역만으로는 스마트폰 스피커(300Hz~)에서 거의 들리지 않는다.
+       → 1600~2400Hz 종이 결(bandpass) + 3800Hz lowpass 로 바삭한 층을 더한다.
+       (딱딱 끊기는 펄스·전기음 금지 — 숨 쉬듯 느린 결의 쫀득한 연속 마찰) */
     let ripNodes = null;
     function ripStart(){
       ripStop();
@@ -5888,19 +5930,33 @@ body{background:#05050A;color:var(--tx)}
         const t0 = c.currentTime;
         const src = c.createBufferSource();
         src.buffer = noiseBuf; src.loop = true;
+
+        /* ① 저역 — 손바닥에 남는 종이 통울림 */
         const lp = c.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 900; lp.Q.value = 0.25;
         const bp = c.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 200; bp.Q.value = 0.55;
-        const g = c.createGain();
-        g.gain.setValueAtTime(0.0001, t0);
-        g.gain.exponentialRampToValueAtTime(0.104, t0 + 0.16);      /* 스르륵— 올라오는 결 */
-        /* 숨 쉬듯 아주 느린 결 (규칙적인 톡톡 아님) */
+        const gLow = c.createGain();
+        gLow.gain.setValueAtTime(0.0001, t0);
+        gLow.gain.exponentialRampToValueAtTime(0.26, t0 + 0.14);      /* 스르륵— 올라오는 결 */
         for (let i = 1; i <= 7; i++){
-          g.gain.setTargetAtTime(0.076 + Math.random() * 0.026, t0 + i * 0.34, 0.16);
+          gLow.gain.setTargetAtTime(0.20 + Math.random() * 0.06, t0 + i * 0.34, 0.16);
           bp.frequency.setTargetAtTime(170 + Math.random() * 130, t0 + i * 0.34, 0.22);
         }
-        src.connect(lp); lp.connect(bp); bp.connect(g); g.connect(master);
+
+        /* ② 중고역 — 폰 스피커에서도 또렷한 '바스락' 종이 결 */
+        const bp2 = c.createBiquadFilter(); bp2.type = "bandpass"; bp2.frequency.value = 1900; bp2.Q.value = 0.9;
+        const lp2 = c.createBiquadFilter(); lp2.type = "lowpass"; lp2.frequency.value = 3800; lp2.Q.value = 0.4;
+        const gHi = c.createGain();
+        gHi.gain.setValueAtTime(0.0001, t0);
+        gHi.gain.exponentialRampToValueAtTime(0.24, t0 + 0.12);
+        for (let i = 1; i <= 7; i++){
+          gHi.gain.setTargetAtTime(0.17 + Math.random() * 0.08, t0 + i * 0.34, 0.14);
+          bp2.frequency.setTargetAtTime(1600 + Math.random() * 800, t0 + i * 0.34, 0.20);
+        }
+
+        src.connect(lp); lp.connect(bp); bp.connect(gLow); gLow.connect(master);
+        src.connect(bp2); bp2.connect(lp2); lp2.connect(gHi); gHi.connect(master);
         src.start(t0); reg(src);
-        ripNodes = { src: src, g: g };
+        ripNodes = { src: src, gains: [gLow, gHi] };
       } catch (e){}
     }
     function ripStop(){
@@ -5910,8 +5966,10 @@ body{background:#05050A;color:var(--tx)}
       if (!c){ try { n.src.stop(); } catch (e){} return; }
       try {
         const t = c.currentTime + 0.01;
-        n.g.gain.cancelScheduledValues(t);
-        n.g.gain.setTargetAtTime(0.0001, t, 0.07);                 /* 뚝 끊지 않고 사그라듦 */
+        n.gains.forEach(g => {
+          g.gain.cancelScheduledValues(t);
+          g.gain.setTargetAtTime(0.0001, t, 0.07);                 /* 뚝 끊지 않고 사그라듦 */
+        });
         n.src.stop(t + 0.4);
       } catch (e){ try { n.src.stop(); } catch (e2){} }
     }
@@ -5931,16 +5989,18 @@ body{background:#05050A;color:var(--tx)}
     /* 다 뜯기는 순간 '쫙!' — 마지막 절취선이 한 번에 갈라진다 */
     function tearNow(){
       ripStop();
-      paperSweep(0.22, 0.098, 5600, 820, 0, 0.62);  /* 쫙- */
-      paperSweep(0.12, 0.062, 3200, 1500, 0.02, 0.9);
-      noise(0.10, 0.052, 460, 0, "lowpass");        /* 종이 뭉개지는 저역 */
-      tone(118, 0.09, "sine", 0.045, 0, 78);        /* 손끝에 남는 둔탁함 */
+      paperSweep(0.22, 0.28, 5600, 820, 0, 0.62);  /* 쫙- */
+      paperSweep(0.12, 0.18, 3200, 1500, 0.02, 0.9);
+      noise(0.10, 0.130, 460, 0, "lowpass");       /* 종이 뭉개지는 저역 */
+      noise(0.05, 0.090, 5200, 0.010, "highpass"); /* 섬유가 끊기는 선명한 파열 */
+      tone(118, 0.09, "sine", 0.100, 0, 78);       /* 손끝에 남는 둔탁함 */
     }
     /* 쫀득한 뜯기 — 0.82초 동안 이어지는 '스르르르륵—' (톡톡 펄스 없음) */
     function tearLong(){
-      paperSweep(0.84, 0.088, 1500, 560, 0, 0.4);  /* 낮게 깔리는 종이 쓸림 */
-      paperSweep(0.70, 0.058, 3300, 1300, 0.06, 0.65);
-      noise(0.14, 0.026, 520, 0.62, "lowpass");     /* 뜯긴 끝의 종이 울림 */
+      paperSweep(0.84, 0.24, 1500, 560, 0, 0.4);   /* 낮게 깔리는 종이 쓸림 */
+      paperSweep(0.70, 0.16, 3300, 1300, 0.06, 0.65);
+      paperSweep(0.78, 0.10, 4600, 2200, 0.02, 0.85); /* 중고역 바스락 — 폰 스피커 보강 */
+      noise(0.14, 0.050, 520, 0.62, "lowpass");    /* 뜯긴 끝의 종이 울림 */
     }
 
     function press(){ tone(520, 0.05, "square", 0.035, 0, 300); }
@@ -5951,16 +6011,16 @@ body{background:#05050A;color:var(--tx)}
 
     /* ── 결과음 ① 하위상 F~L : 고무도장 '탁!' + 아케이드 코인 '띠링~' ── */
     function stamp(){
-      tone(160, 0.10, "sine", 0.075, 0, 66);          /* 도장 내리치는 둔탁한 저역 */
-      noise(0.055, 0.075, 380, 0, "lowpass");          /* 종이에 눌린 소리 */
-      noise(0.014, 0.048, 2300, 0.004, "bandpass", 3.2); /* 도장면이 닿는 '탁' */
+      tone(160, 0.10, "sine", 0.100, 0, 66);          /* 도장 내리치는 둔탁한 저역 */
+      noise(0.055, 0.100, 380, 0, "lowpass");          /* 종이에 눌린 소리 */
+      noise(0.014, 0.062, 2300, 0.004, "bandpass", 3.2); /* 도장면이 닿는 '탁' */
     }
     function coinRing(delay){
       const d = delay || 0;
-      tone(1046, 0.055, "square", 0.030, d);
-      tone(1568, 0.05, "square", 0.024, d + 0.05);
-      tone(2093, 0.16, "sine", 0.030, d + 0.07);     /* 띠이잉~ */
-      tone(2637, 0.11, "sine", 0.013, d + 0.09);
+      tone(1046, 0.055, "square", 0.040, d);
+      tone(1568, 0.05, "square", 0.032, d + 0.05);
+      tone(2093, 0.16, "sine", 0.040, d + 0.07);     /* 띠이잉~ */
+      tone(2637, 0.11, "sine", 0.017, d + 0.09);
     }
     function gradeLow(){ stamp(); coinRing(0.14); }
 
@@ -5975,18 +6035,18 @@ body{background:#05050A;color:var(--tx)}
       arcadeHit(880, 0.085);
       arcadeHit(1319, 0.17);
       [523, 659, 784, 1047].forEach((f, i) => {
-        tone(f, 0.14, "triangle", 0.044, 0.30 + i * 0.075);
-        tone(f * 2, 0.09, "sine", 0.015, 0.30 + i * 0.075);
+        tone(f, 0.14, "triangle", 0.058, 0.30 + i * 0.075);
+        tone(f * 2, 0.09, "sine", 0.020, 0.30 + i * 0.075);
       });
     }
 
     /* ── 결과음 ③ 상위상 B·A·LAST : 폭죽 '펑!' + 잭팟 화음 + 코인 샤워 ── */
     function firework(delay){
       const d = delay || 0;
-      noise(0.02, 0.09, 900, d, "bandpass", 0.9);          /* 발사 '픽' */
-      noise(0.24, 0.105, 260, d + 0.02, "lowpass");         /* 펑! 저역 */
-      noise(0.10, 0.070, 1600, d + 0.02, "bandpass", 0.7);  /* 파열 */
-      tone(64, 0.26, "sine", 0.105, d + 0.02, 38);          /* 배꼽 울림 */
+      noise(0.02, 0.110, 900, d, "bandpass", 0.9);          /* 발사 '픽' */
+      noise(0.24, 0.130, 260, d + 0.02, "lowpass");         /* 펑! 저역 */
+      noise(0.10, 0.088, 1600, d + 0.02, "bandpass", 0.7);  /* 파열 */
+      tone(64, 0.26, "sine", 0.130, d + 0.02, 38);          /* 배꼽 울림 */
       for (let i = 0; i < 7; i++)                            /* 터진 뒤 지글지글 */
         noise(0.03, 0.018, 2600 + Math.random() * 3200, d + 0.12 + i * 0.045 + Math.random() * 0.02, "highpass");
     }
@@ -6006,13 +6066,13 @@ body{background:#05050A;color:var(--tx)}
       chords.forEach((ch, i) => {
         const d = 0.16 + i * 0.13;
         ch.forEach(f => {
-          tone(f, 0.30, "triangle", 0.046, d);
-          tone(f * 2, 0.22, "sine", 0.017, d);
+          tone(f, 0.30, "triangle", 0.062, d);
+          tone(f * 2, 0.22, "sine", 0.024, d);
         });
       });
       if (tier >= 3){
-        [1047, 1319, 1568, 2093].forEach((f, i) => tone(f, 0.5, "triangle", 0.034, 0.86 + i * 0.02));
-        tone(131, 0.6, "sine", 0.05, 0.84, 65);        /* 마지막 저역 울림 */
+        [1047, 1319, 1568, 2093].forEach((f, i) => tone(f, 0.5, "triangle", 0.045, 0.86 + i * 0.02));
+        tone(131, 0.6, "sine", 0.065, 0.84, 65);        /* 마지막 저역 울림 */
       }
     }
     function gradeHigh(tier){
@@ -6029,8 +6089,8 @@ body{background:#05050A;color:var(--tx)}
       else if (k === "E" || k === "F" || k === "G" || k === "D") notes = [392, 523, 659];
       else notes = [523, 659];
       notes.forEach((f, i) => {
-        tone(f, 0.16, "triangle", 0.052, i * 0.085);
-        tone(f * 2, 0.10, "sine", 0.016, i * 0.085);
+        tone(f, 0.16, "triangle", 0.075, i * 0.085);
+        tone(f * 2, 0.10, "sine", 0.022, i * 0.085);
       });
       if (k === "last" || k === "A" || k === "B") coinShower(0.12);
     }
@@ -6048,7 +6108,7 @@ body{background:#05050A;color:var(--tx)}
       isOn: () => on,
       set(v){ on = !!v; if (!on){ ripStop(); if (ctx && ctx.state === "running") { try { ctx.suspend(); } catch(e){} } } else { ready(); } return on; },
       toggle(){ return this.set(!on); },
-      unlock(){ ready(); }
+      unlock: unlock,
     };
   })();
 
@@ -6057,7 +6117,7 @@ body{background:#05050A;color:var(--tx)}
        · 상세 진입 = 유저 터치 안에서 1곡만 로드(preload="none") 후 재생
          → 홈 첫 로딩에 mp3 를 받지 않는다 (초기 속도 영향 0)
        · 곡이 끝나면 나머지 2곡 중 다른 곡을 이어서 랜덤 재생
-       · 상세를 벗어나면 페이드 아웃 · 티켓 뜯는 동안 볼륨 다운(0.22 → 0.08)
+       · 상세를 벗어나면 페이드 아웃 · 티켓 뜯는 동안 볼륨 다운(0.22 → 0.03)
        · 🔇 음소거 상태는 localStorage["pokoBgm"] 에 유지 (없으면 켜짐)
      ============================================================ */
   const BGM = (function(){
@@ -6066,7 +6126,7 @@ body{background:#05050A;color:var(--tx)}
       "./assets/bgm/bgm_g_nightbus.mp3",
       "./assets/bgm/bgm_h_wonderland.mp3"
     ];
-    const VOL = 0.22, DUCK = 0.08, STEP = 40;
+    const VOL = 0.22, DUCK = 0.03, STEP = 40;
 
     let el = null, idx = -1, on = true, active = false, ducked = false;
     let fadeTimer = null, missCount = 0, stopTimer = null;
@@ -6258,6 +6318,7 @@ body{background:#05050A;color:var(--tx)}
   /* 손가락 이동량 → 뜯김 : 초반에 잘 안 뜯기는 미세한 저항감 */
   const tearResist = r => Math.pow(Math.max(0, Math.min(1, r)), 1.22) * 0.985;
   let pullTimers = [];
+  let duckBackTimer = 0;        /* 결과 팡파레 뒤 BGM 볼륨 복귀 타이머 */
   let tear = null;              /* { list, i, items, lastItem, mode, torn, locked, finished, shown, p } */
 
   function scatter(host, n){
@@ -6618,7 +6679,9 @@ body{background:#05050A;color:var(--tx)}
     ov.setAttribute("aria-hidden", "true");
     SND.ripStop();
     SND.stopAll();
-    BGM.duck(false);           /* 결과 모달 — BGM 볼륨 복귀 */
+    /* 결과 팡파레가 주인공이 되게 — BGM 은 조금 더 눌러 두었다가(650ms) 0.22 로 복귀 */
+    clearTimeout(duckBackTimer);
+    duckBackTimer = setTimeout(() => { duckBackTimer = 0; BGM.duck(false); }, 650);
   }
 
   /* 뜯기 연출 종료 → 결과 모달 (차감·지급은 이미 한 번만 확정됨) */
@@ -6649,7 +6712,8 @@ body{background:#05050A;color:var(--tx)}
     const ov = $("#drawOv");
     ov.classList.add("show");
     ov.setAttribute("aria-hidden", "false");
-    BGM.duck(true);            /* 티켓 뜯는 효과음에 BGM 을 눌러 둔다 (0.22 → 0.08) */
+    BGM.duck(true);            /* 티켓 뜯는 효과음에 BGM 을 눌러 둔다 (0.22 → 0.03) */
+    clearTimeout(duckBackTimer); duckBackTimer = 0;   /* 이전 결과 모달 복귀 타이머 취소 */
     showTicket(0);
     SND.ticketIn();
   }

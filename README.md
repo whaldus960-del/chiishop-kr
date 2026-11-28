@@ -11,6 +11,15 @@
 - 상태는 메모리에만 있고 새로고침하면 초기화됩니다.
 - 사이트 아이콘(헤더·푸터 로고·파비콘)만 `assets/poko-mascot.png` · `favicon.png` · PNG를 씁니다. (`apple-touch-icon` 은 `assets/icon-180.png`)
 
+## 2026-11-28 12차 — 티켓 뜯기 손맛 효과음 강화 · iOS 오디오 잠금 수정 · 상단 배너 글씨 확대
+
+- **iOS Safari `AudioContext` 잠금**: BGM(`<audio>`) 재생 중 효과음 엔진이 `suspended`/`interrupted` 로 잠기는 문제. `ready()` 가 `running` 이 아니면 항상 `resume()`(중복 방지), `unlock()` 은 무음 버퍼로 세션을 깨우고, 문서 터치·화면 복귀 시 자동 복구.
+- **손맛 볼륨/대역**: 마스터 `0.5 → 0.88`. `ripStart` 200Hz 초저역 → **1600~2400Hz 종이 결 + lowpass 3800Hz** 레이어 추가, `0.104 → 0.26`. `tearLong` `0.088/0.058 → 0.24/0.16`, `tearNow` `0.098/0.062 → 0.28/0.18` + 섬유 파열 고역, 결과음도 1.3배 안팎.
+  - 실측: `ripStart` RMS **0.0045 → 0.0375(8.3배)** · 폰 스피커 대역(2~9kHz) **0.00084 → 0.019(22.6배)** · `tearNow` 피크 0.054 → 0.233 · `fanfare` 2.5배.
+- **BGM 덕킹** `0.08 → 0.03`, 결과 팡파레 650ms 뒤 `0.22` 복귀.
+- **상단 배너**: 높이 `172 → 202px`(320~374px 210 · 430px+ 212), 패딩 `10px 13px 30px → 8px 11px 26px`, 타이틀 `19.5px → clamp(25px,7.7vw,30px)`·`900`·자간 -1.5px, 불릿 `8.5 → clamp(10px,2.85vw,11.2px)`, 뱃지·노트·칩 확대. 5번 배너 문구 `당첨일부터` → `당첨 후` 로 3줄 넘침 제거.
+- **검증**: `run_verify_offline.sh` 313+90 · `_dev_bgm_check.py` 28 · `_dev_audio_ios_check.py` 10 · `_dev_sound_check.py` 13 · `_dev_banner_fit.py` 320/360/390/430 ALL OK.
+
 ## 2026-11-28 11차 — 일본어 보컬 BGM 3곡 랜덤 · 앱 설치 +1,000P · 2연속 웰컴 팝업 (v16)
 
 상세 화면에 **일본어 보컬 BGM 3곡 랜덤 재생**을 넣고, **홈 화면 앱 설치 보너스 +1,000P**(DB 지급)와 **2연속 웰컴 팝업**을 붙였습니다.
@@ -22,7 +31,7 @@
 - **앱 설치 보너스 +1,000P**: `profiles.app_bonus_claimed` + RPC `claim_app_install_bonus()`(SECURITY DEFINER · 계정당 1회 · 정식 회원만). 앱(`standalone`)으로 열면 자동 수령 → 축하 토스트 + 포인트 즉시 반영, 게스트는 '가입하면 +1,000P' 안내. 일반 브라우저로 열면 지급되지 않습니다. 포인트 원장에 `앱 설치 보너스 +1,000P` 기록.
 - **설치 혜택 문구**: 홈 상단 설치 바 「홈 화면에 추가하면 **+1,000P**」 (34px 슬림 1줄 유지) · 마이페이지 설치 패널 small 문구 · 2차 팝업 히어로.
 - **2연속 웰컴 팝업**: 1차(회원가입 첫 판 50%)를 **닫는 순간** 2차 `#installPopup`「📲 홈 화면에 앱 추가하면 +1,000P 더!」이 이어서 뜹니다. CTA「📲 지금 바로 홈 화면에 추가하기」는 기존 PWA 설치 흐름(안드 1탭 프롬프트 · iOS/카톡 3단계 시트)을 그대로 엽니다. **앱(standalone)으로 열고 있거나 세션/일자에 이미 본 경우**에는 뜨지 않습니다(`pokoInstallNudgeSeen`·`pokoInstallNudgeUntil`).
-- **검증**: `verify.py` 313 · `verify_draw.py` 90 · `verify_evo.py` 69 · `verify_pwa.py` 54 · `verify_install_popup.py` 22(2연속 팝업·중복 방지·standalone 스킵·320/360px) · `_dev_bgm_check.py` 27(BGM 3곡·랜덤·ended 체인·덕킹·320px) · `verify_bonus_live.py` 16(실DB standalone 자동 수령·중복·게스트·브라우저 모드) · `tests/app_bonus_e2e.py` 24(DB RPC·원장·보안 가드·정리).
+- **검증**: `verify.py` 313 · `verify_draw.py` 90 · `verify_evo.py` 69 · `verify_pwa.py` 54 · `verify_install_popup.py` 22(2연속 팝업·중복 방지·standalone 스킵·320/360px) · `_dev_bgm_check.py` 28(BGM 3곡·랜덤·ended 체인·덕킹 0.03·320px) · `_dev_audio_ios_check.py` 10(iOS `interrupted` 잠금·터치 복구) · `_dev_sound_check.py` 13(효과음 렌더) · `_dev_banner_fit.py` 4폭 배너 검수 · `verify_bonus_live.py` 16(실DB standalone 자동 수령·중복·게스트·브라우저 모드) · `tests/app_bonus_e2e.py` 24(DB RPC·원장·보안 가드·정리).
 
 ## 2026-11-28 10차 — 설치 바 상단 이동 · 진열장 ✕ 닫기 (v15)
 
