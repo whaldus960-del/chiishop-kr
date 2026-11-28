@@ -5,22 +5,22 @@
 시리즈별 **3박스**(박스당 99장) 교체, `x1 / x5 / x10 / ALL` 뽑기, 진열장·묶음 배송·사장님 모드를 담았습니다.
 
 - 단일 파일(`index.html`)로 동작하며 외부 CDN·폰트·이미지에 의존하지 않습니다. (모든 일러스트는 인라인 SVG)
-- 홈 화면 앱(PWA) 설치는 `manifest.json` + `assets/icon-180/192/512.png` 3개 파일만 더 씁니다.
 - 모바일 기준 420px 프레임, 데스크톱에서는 중앙 정렬로 표시됩니다.
 - 결제·배송은 **데모로만** 동작하며 실제 청구나 발송은 없습니다.
 - 상태는 메모리에만 있고 새로고침하면 초기화됩니다.
-- 사이트 아이콘(헤더·푸터 로고·파비콘)만 `assets/poko-mascot.png` · `favicon.png` · PNG를 씁니다. (`apple-touch-icon` 은 `assets/icon-180.png`)
+- 사이트 아이콘(헤더·푸터 로고·파비콘)만 `assets/poko-mascot.png` · `favicon.png` · `apple-touch-icon.png` PNG를 씁니다.
 
-## 2026-11-28 12차 — 티켓 뜯기 손맛 효과음 강화 · iOS 오디오 잠금 수정 · 상단 배너 글씨 확대
+## 2026-11-28 11차 — 쿠지맨 분석 반영: 4단계 코치마크 투어 · 활성 탭 포코 배지 · 빈 상태 (v16)
 
-- **iOS Safari `AudioContext` 잠금**: BGM(`<audio>`) 재생 중 효과음 엔진이 `suspended`/`interrupted` 로 잠기는 문제. `ready()` 가 `running` 이 아니면 항상 `resume()`(중복 방지), `unlock()` 은 무음 버퍼로 세션을 깨우고, 문서 터치·화면 복귀 시 자동 복구.
-- **손맛 볼륨/대역**: 마스터 `0.5 → 0.88`. `ripStart` 200Hz 초저역 → **1600~2400Hz 종이 결 + lowpass 3800Hz** 레이어 추가, `0.104 → 0.26`. `tearLong` `0.088/0.058 → 0.24/0.16`, `tearNow` `0.098/0.062 → 0.28/0.18` + 섬유 파열 고역, 결과음도 1.3배 안팎.
-  - 실측: `ripStart` RMS **0.0045 → 0.0375(8.3배)** · 폰 스피커 대역(2~9kHz) **0.00084 → 0.019(22.6배)** · `tearNow` 피크 0.054 → 0.233 · `fanfare` 2.5배.
-- **BGM 덕킹** `0.08 → 0.03`, 결과 팡파레 650ms 뒤 `0.22` 복귀.
-- **상단 배너**: 높이 `172 → 202px`(320~374px 210 · 430px+ 212), 패딩 `10px 13px 30px → 8px 11px 26px`, 타이틀 `19.5px → clamp(25px,7.7vw,30px)`·`900`·자간 -1.5px, 불릿 `8.5 → clamp(10px,2.85vw,11.2px)`, 뱃지·노트·칩 확대. 5번 배너 문구 `당첨일부터` → `당첨 후` 로 3줄 넘침 제거.
-- **검증**: `run_verify_offline.sh` 313+90 · `_dev_bgm_check.py` 28 · `_dev_audio_ios_check.py` 10 · `_dev_sound_check.py` 13 · `_dev_banner_fit.py` 320/360/390/430 ALL OK.
+동그리모 님 비서의 쿠지맨 UI/UX 분석에서 뽑은 3가지를 그대로 붙였습니다.
 
-## 2026-11-28 11차 — 일본어 보컬 BGM 3곡 랜덤 · 앱 설치 +1,000P · 2연속 웰컴 팝업 (v16)
+- **상세 1회성 4단계 코치마크 투어** (`#detailTour`): 상세를 **처음 열 때 한 번만** 어두운 스포트라이트 + 말풍선 카드로 안내 — ① 박스 상태·교체(`.infobar`) ② 등급·확률·가치(`#dGoods .srow`) ③ 사운드·진열장(`.stage-tools`) ④ 도전 `x1/x5/x10/ALL`(`#drawBar`). 단계 표시 `1/4` + 진행 점 4개 · `이전/다음/완료` · 우상단 `건너뛰기` · ESC · 어두운 바깥을 톡 치면 다음 단계. 완료·건너뛰기 어느 쪽이든 `localStorage["pokoDetailTourDone"]="1"` 로 저장돼 다시 뜨지 않습니다. 웰컴/설치 팝업·뽑기 모달이 떠 있으면 닫힌 뒤로 미뤄서 겹치지 않고, 상세를 벗어나면 자동 종료. 320/360/390px 에서 말풍선·스포트라이트가 화면 밖으로 나가지 않습니다.
+- **하단 탭바 활성 탭 포코알 배지**: 활성 탭 아이콘 위에 **포코알 미니 배지(24px, `assets/tab-poko.png`)** 가 쏙 올라앉고, 탭을 바꿀 때마다 `tabPokoPop`(팝) + `tabPokoBob`(아이들 바운스)로 따라 이동합니다. 첫 탭 라벨은 `홈` → **`뽑아봐요!`** (320px에서도 한 줄 유지).
+- **빈 상태 = 포코알 안내 카드** (`.estate`): 상세 `기록`(0건) · `랭킹`(경품 0건) · `진열장`(0점)이 휑하게 비지 않도록 포코알 + 카피 + CTA 버튼(“아직 첫 주인공이 비어 있어요! 이 박스의 첫 당첨 기록을 남겨 보세요 🏆”). CTA는 상품 탭 이동 · 다른 박스 보기 · 홈 복귀로 이어집니다.
+- **경품 카드 정보 슬랩**: 카드 하단 한 덩어리(`.pmeta`)에 **이름 · 가치(P) · 잔여(n/m) · 확률 바(%)** 를 정렬했습니다. 등급 배지는 작은 알약으로, 카드 폭은 4열 균등(`minmax(0,1fr)`)으로 고정해 320px에서도 넘침이 없습니다. `증정품`(last)은 골드 바 100%.
+- **검증**: `verify_tour.py` 90개 체크(투어 4단계·1회성·건너뛰기·바깥 톡·ESC·320/360/390 화면 안 · 탭 배지 이동 · 빈 상태 3종 CTA · 카드 잘림 0) 추가. 기존 `verify.py` 313 · `verify_draw.py` 90 · `verify_evo.py` 69 · `verify_pwa.py` 54 · `_dev_bgm_check.py` 28 · `_dev_audio_ios_check.py` 10 모두 통과.
+
+## 2026-11-28 10차 — 일본어 보컬 BGM 3곡 랜덤 · 앱 설치 +1,000P · 2연속 웰컴 팝업 (v15)
 
 상세 화면에 **일본어 보컬 BGM 3곡 랜덤 재생**을 넣고, **홈 화면 앱 설치 보너스 +1,000P**(DB 지급)와 **2연속 웰컴 팝업**을 붙였습니다.
 
@@ -31,37 +31,15 @@
 - **앱 설치 보너스 +1,000P**: `profiles.app_bonus_claimed` + RPC `claim_app_install_bonus()`(SECURITY DEFINER · 계정당 1회 · 정식 회원만). 앱(`standalone`)으로 열면 자동 수령 → 축하 토스트 + 포인트 즉시 반영, 게스트는 '가입하면 +1,000P' 안내. 일반 브라우저로 열면 지급되지 않습니다. 포인트 원장에 `앱 설치 보너스 +1,000P` 기록.
 - **설치 혜택 문구**: 홈 상단 설치 바 「홈 화면에 추가하면 **+1,000P**」 (34px 슬림 1줄 유지) · 마이페이지 설치 패널 small 문구 · 2차 팝업 히어로.
 - **2연속 웰컴 팝업**: 1차(회원가입 첫 판 50%)를 **닫는 순간** 2차 `#installPopup`「📲 홈 화면에 앱 추가하면 +1,000P 더!」이 이어서 뜹니다. CTA「📲 지금 바로 홈 화면에 추가하기」는 기존 PWA 설치 흐름(안드 1탭 프롬프트 · iOS/카톡 3단계 시트)을 그대로 엽니다. **앱(standalone)으로 열고 있거나 세션/일자에 이미 본 경우**에는 뜨지 않습니다(`pokoInstallNudgeSeen`·`pokoInstallNudgeUntil`).
-- **검증**: `verify.py` 313 · `verify_draw.py` 90 · `verify_evo.py` 69 · `verify_pwa.py` 54 · `verify_install_popup.py` 22(2연속 팝업·중복 방지·standalone 스킵·320/360px) · `_dev_bgm_check.py` 28(BGM 3곡·랜덤·ended 체인·덕킹 0.03·320px) · `_dev_audio_ios_check.py` 10(iOS `interrupted` 잠금·터치 복구) · `_dev_sound_check.py` 13(효과음 렌더) · `_dev_banner_fit.py` 4폭 배너 검수 · `verify_bonus_live.py` 16(실DB standalone 자동 수령·중복·게스트·브라우저 모드) · `tests/app_bonus_e2e.py` 24(DB RPC·원장·보안 가드·정리).
+- **검증**: `verify.py` 313 · `verify_draw.py` 90 · `verify_evo.py` 69 · `verify_pwa.py` 54 · `verify_install_popup.py` 22(2연속 팝업·중복 방지·standalone 스킵·320/360px) · `_dev_bgm_check.py` 27(BGM 3곡·랜덤·ended 체인·덕킹·320px) · `verify_bonus_live.py` 16(실DB standalone 자동 수령·중복·게스트·브라우저 모드) · `tests/app_bonus_e2e.py` 24(DB RPC·원장·보안 가드·정리).
 
-## 2026-11-28 10차 — 설치 바 상단 이동 · 진열장 ✕ 닫기 (v15)
+## 2026-11-28 9차 — 설치 바 상단 이동 · 진열장 ✕ 닫기 (v14)
 
 아이폰 실기기에서 확인한 두 가지 불편을 그대로 고쳤습니다.
 
-- **`#pwaPanelHome`(홈 화면에 추가)를 홈 하단 → 상단 배너 바로 위로 이동**: 헤더(1줄 화이트 바) 바로 아래, `#homeBanner` 위에 **높이 34px 슬림 1줄 바**로 배치(아이콘 22px · 문구 10.5px 한 줄 · 오른쪽 `설치 방법` 배지). 배너가 첫 화면에서 밀리지 않고, 하단은 다시 **시리즈 카드 → 사업자 푸터**로 바로 이어집니다. `standalone` 앱 모드 자동 숨김은 그대로.
-- **진열장 우측 상단 `✕` 닫기 버튼(`#shelfClose`)**: `#screenBox` 헤더 오른쪽에 32px 원형 버튼. 누르면 **연 곳으로 되돌아갑니다** — 상세 화면에서 열었으면 상세로, 홈 헤더 알약(`#homeCart`)으로 열었으면 홈으로, 하단 진열장 탭으로 열었으면 **직전 탭(마이·사장님)** 으로.
-- **검증**: `run_verify_offline.sh` 310+88 · `verify_evo.py` 69/69 · `verify_pwa.py` 로컬/라이브 54/54.
-
-```bash
-bash run_verify_offline.sh                 # 310 + 88
-python3 verify_pwa.py                      # 로컬(데모 사본) 54
-python3 verify_pwa.py https://pokokuji.kr/ # 라이브 54
-```
-
-## 2026-11-28 9차 — 📲 PWA '홈 화면에 추가' · 전체화면 앱 + 기기별 설치 안내 (v14)
-
-포코쿠지를 **홈 화면 앱**으로 설치할 수 있게 했습니다. 설치하면 주소창 없이 전체화면(`standalone`)으로 열립니다.
-
-- **`manifest.json`**: `name` 포코쿠지 - 꽝 없는 온라인 이치방쿠지 · `short_name` 포코쿠지 · `start_url` `./` · `display` `standalone` · `background_color`/`theme_color` `#0e0f17` · 아이콘 192/512(`any maskable`).
-- **아이콘 3종**(`assets/icon-180/192/512.png`): `poko-mascot.png` 를 `#0e0f17` 풀블리드에 88%로 앉혀 마스코트가 마스커블 안전영역 안에 들어가게 생성(`make_pwa_icons.py`).
-- **head 메타**: `manifest` · `apple-touch-icon(180)` · `apple-mobile-web-app-capable=yes` · `apple-mobile-web-app-status-bar-style=black-translucent` · `apple-mobile-web-app-title=포코쿠지`. standalone 실행 시 상단 `env(safe-area-inset-top)` 만큼 `.app` 이 비켜 상태바 아래로 들어갑니다.
-- **설치 버튼 2곳**: 홈 상단(헤더 바로 아래 · 배너 위, 2026-11-28 10차에서 하단 → 상단 이동)과 마이페이지 '바로 처리' 아래 '앱으로 쓰기' 패널. 이미 `standalone`(또는 iOS `navigator.standalone`)이면 자동으로 숨습니다.
-- **기기별 동작**: `beforeinstallprompt` 를 잡아 두었다가 **안드로이드 크롬/삼성인터넷은 버튼 1탭으로 네이티브 설치창**(배지 '1탭 설치'), **iOS는 공유 ↑ → 홈 화면에 추가 → 추가 3단계**, **카카오톡 인앱은 '··· → 다른 브라우저로 열기' 3단계**, PC는 주소창 설치 아이콘 안내를 띄웁니다. 설치 후 `appinstalled` 토스트.
-- **검증**: `verify_pwa.py` 로컬 54/54(manifest·아이콘 200/규격·메타태그·버튼 노출·상단 배너 위 위치·iOS/카톡/안드/PC 시트·standalone 숨김·390px 넘침 없음·콘솔 0) · `run_verify_offline.sh` 310+88 · `verify_evo.py` 69/69.
-
-```bash
-python3 verify_pwa.py                      # 로컬(데모 사본)
-python3 verify_pwa.py https://pokokuji.kr/ # 라이브
-```
+- **`#pwaPanelHome`(홈 화면에 추가)를 홈 하단 → 상단 배너 바로 위로 이동**: 헤더(1줄 화이트 바) 바로 아래, `#homeBanner` 위에 **높이 34px 슬림 1줄 바**로 배치. 아이콘 22px · 문구 10.5px 한 줄 · 오른쪽 `설치 방법` 배지. 배너가 첫 화면에서 밀리지 않고(배너 top ~110px), 하단은 다시 **시리즈 카드 → 사업자 푸터**로 바로 이어집니다. `standalone` 앱 모드 자동 숨김(`data-pwa-panel`)은 그대로.
+- **진열장 우측 상단 `✕` 닫기 버튼(`#shelfClose`)**: `#screenBox` 헤더 `.arc-top` 오른쪽에 32px 원형 버튼. 누르면 **연 곳으로 되돌아갑니다** — 상세 화면에서 `#shelfBtn`·결과 시트 `진열장 보기`로 열었으면 상세로, 홈 헤더 알약(`#homeCart`)으로 열었으면 홈으로, 하단 진열장 탭으로 열었으면 **직전 탭(마이·사장님)** 으로(`openShelf(from)` + `shelfFrom` + `currentScreen()`).
+- **검증**: `verify.py`에 설치 바 위치(헤더 아래·배너 위·높이 ≤40px·배너 top)·하단 정합성(카드 → 푸터, 설치 바 없음)·알약 버튼 → 진열장 → ✕ 홈 복귀·✕ 위치/터치크기/연 곳 복귀(상세·마이 탭) 체크를 추가하고 기존 '홈 하단 설치 버튼' 검사를 이동에 맞게 교체 (291 → **310체크**). `verify_pwa.py`도 '홈 상단(배너 위) 설치 바' 위치 검사로 교체(54체크). 결과: `run_verify_offline.sh` 310+88 · `verify_evo.py` 69 · `verify_pwa.py` 54 모두 통과.
 
 ## 2026-11-28 8차 — 정식 이메일 회원 · 첫 판 50% 할인 실차감 · 진화/스타팅 DB 저장 (v13)
 
@@ -449,18 +427,44 @@ python3 verify_evo.py https://pokokuji.kr/   # 라이브 검증
 - `ALL`은 해당 박스의 잔여 티켓을 모두 뽑습니다(포인트 부족 시 샘플 충전 후 이어서 진행).
 - 포인트는 240,000P로 시작하며 부족하면 데모 충전(+120,000P 이상)으로 채웁니다.
 
+## 티켓 뜯기 손맛 효과음 강화 · iOS 오디오 잠금 수정 (2026-11-28 (2))
+
+- **iOS Safari `AudioContext` 잠금**: BGM(HTML5 `<audio>`)이 재생되면 효과음 엔진이 `suspended`/`interrupted` 로 잠깁니다.
+  `ready()` 가 `state !== "running"` 이면 무조건 `resume()`(중복 호출 방지 플래그)하고, `unlock()` 은 무음 버퍼를 아주 짧게 흘려
+  오디오 세션을 깨웁니다. 문서 `pointerdown`·화면 복귀(`visibilitychange`)에서도 잠겨 있으면 자동 복구합니다.
+- **손맛 볼륨/대역**: 마스터 게인 `0.5 → 0.88`.
+  - `ripStart()` — 200Hz 초저역만이라 폰 스피커에서 안 들리던 것을 **1600~2400Hz 종이 결 + lowpass 3800Hz** 레이어 추가(펄스 없음), 게인 `0.104 → 0.26`.
+  - `tearLong()` `0.088 / 0.058 → 0.24 / 0.16` + 중고역 레이어, `tearNow()` `0.098 / 0.062 → 0.28 / 0.18` + 섬유 파열 고역.
+  - 결과음(`stamp`·`coinRing`·`bigWin`·`jackpot`·`fanfare`·`firework`)도 1.3배 안팎 상향.
+  - 실측(OfflineAudioContext 렌더): `ripStart` RMS **0.0045 → 0.0375(8.3배)**, 폰 스피커 대역(2~9kHz) **0.00084 → 0.019(22.6배)**, `tearNow` 피크 **0.054 → 0.233**, `fanfare` **2.5배**.
+- **BGM 덕킹** `0.08 → 0.03` (뜯기 모달). 결과 팡파레가 끝날 때까지(650ms) 눌러 두었다가 `0.22` 복귀.
+
+## 홈 상단 배너 — 글씨 크고 굵게 (2026-11-28 (2))
+
+- `.hc-view` `172 → 202px`(320~374px: 210px, 430px+: 212px), 안쪽 패딩 `10px 13px 30px → 8px 11px 26px`, 카드 아트 `100 → 82px`.
+- 타이틀 `19.5px → clamp(25px, 7.7vw, 30px)` (390px=30px, 320px=24px) · `font-weight:900` · 자간 -1.5px · 대비용 텍스트 섀도.
+- 불릿 `8.5 → clamp(10px, 2.85vw, 11.2px)`, 뱃지/노트/칩 `7~9px → 8.4~10.6px`, 모두 900 굵기.
+- 5번 배너 문구를 `당첨일부터 30일 보관` → `당첨 후 30일 보관` 으로 다듬어 3줄 넘침을 없앴습니다(320/360/390/430px 모두 2줄).
+
 ## 검증
 
 `verify.py` — Playwright(420×900)로 홈 4시리즈(3박스 × 99장) → 상세 진입 → 박스 교체(개별 잔여) →
 `x1`/`x5` 뽑기와 포인트·확률 변동 → 교토 `ALL` 완판·라스트상 자동 지급 →
 종료 도장 → 진열장·묶음 배송 접수번호 → 사장님 집계·리셋 →
 박스 비교(총잔여·상위상·라스트까지·전략픽) → 뽑기 버튼 총 차감 포인트 → 진열장 무료배송 게이지 →
-**홈 하단 다이어트(규정 아코디언/이용 방법 제거·푸터 링크) → 상세 규정 모달(4가지) → 홈 배너 5장(자동·도트·화살표·스와이프·탭 연결·배지 겹침 없음) → 실시간 당첨 피드(마퀴·마스킹·썸네일·내 당첨 선두) →
-출고 시트(배송지·수량·통관 검증·배송비) → 마이페이지(주문 카운트·메뉴·닉네임·충전·A/S)** → 2연속 웰컴 팝업(1차 닫기 → 2차 +1,000P) → 콘솔 오류 0건까지 **313개 체크**.
+**홈 다이어트(규정 아코디언/이용 방법 제거·푸터 링크) → 홈 상단 설치 바(헤더 아래·배너 위·34px 슬림) → 상세 규정 모달(4가지) → 홈 배너 5장(자동·도트·화살표·스와이프·탭 연결·배지 겹침 없음) → 실시간 당첨 피드(마퀴·마스킹·썸네일·내 당첨 선두) →
+출고 시트(배송지·수량·통관 검증·배송비) → 진열장 ✕ 닫기(위치·터치 크기·연 곳으로 복귀) → 2연속 웰컴 팝업(1차 닫기 → 2차 +1,000P) → 마이페이지(주문 카운트·메뉴·닉네임·충전·A/S)** → 콘솔 오류 0건까지 **313개 체크**.
 `verify_draw.py [URL]` — 티켓 뜯기 연출 전용 검증 90개 체크(상위상 빛 대폭발 · 최하위상 담백 · 스포일러 방지 포함 · 스크린샷 `shots/draw-local/`, `shots/draw-live/`).
+`verify_install_popup.py` — 2연속 웰컴 팝업 검증 22개 체크(1차 닫기 → 2차 · CTA → PWA 설치 시트 · 세션/일자 중복 방지 · standalone 스킵 · 320/360px).
+`_dev_bgm_check.py` — 상세 BGM 검증 28개 체크(랜덤 3곡 · ended 이어재생 · 덕킹 0.03 · 토글 localStorage · 3곡 HTTP 200 · 320/360/390px).
+`_dev_audio_ios_check.py` — iOS 오디오 잠금 검증 10개 체크(`interrupted` 강제 → resume 호출 · 뜯는 소리 스케줄 · 터치 자동 복구).
+`_dev_sound_check.py` — 효과음 렌더 검증 13개(무음 아님 · 대역별 에너지).
+`_dev_banner_fit.py` — 배너 5장 320/360/390/430px 넘침 검수 + 스크린샷(`shots/banner-big/`).
+`verify_bonus_live.py [URL]` — 앱 설치 +1,000P 라이브 E2E 16개 체크(standalone 자동 수령 · 새로고침 중복 없음 · 게스트 안내 · 브라우저 모드 미지급 · 테스트 계정 정리).
 `shots.py` / `shots_arcade.py` — 발표용 스크린샷(`shots/`, `shots/arcade/`).
 `shots_v8.py [URL]` — 이번 4가지 화면 스크린샷(390×844, `shots/v8/`, `shots/v8-live/`).
 `verify_evo.py [URL]` — 마이페이지 5단계 진화 카드 검증 50개 체크(LV.1 기본 · 로드맵 · 미리보기 복귀 · 해금 경계 0/5만/30만/70만/150만 · 게이지 · 390/360px 넘침 · 기존 기능 · 콘솔).
+`verify_tour.py [URL]` — v12 업그레이드 검증 90개 체크(상세 4단계 코치마크 투어 1회성 · 건너뛰기/바깥 톡/ESC · 320/360/390 화면 안 · 탭바 포코알 배지 이동 · `뽑아봐요!` 한 줄 · 빈 상태 3종 + CTA · 카드 가치/확률/잔여 슬랩 잘림 0 · 콘솔).
 
 ```bash
 export LD_LIBRARY_PATH=/workspace/.libs/usr/lib/x86_64-linux-gnu:/workspace/.apt/root/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
