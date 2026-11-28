@@ -3791,9 +3791,15 @@ body{background:#05050A;color:var(--tx)}
 .pm-bar.gift i{background:linear-gradient(90deg,#FFE09A,#FFB020);box-shadow:0 0 8px -1px rgba(255,194,74,.9)}
 .pm-bar.zero i{display:none}
 .pm-bar.zero b{color:#8E869C;text-shadow:none}
-.pcard .gbadge{top:4px;left:4px;font-size:9.4px;font-style:normal;font-weight:900;letter-spacing:-.2px;
-  padding:1.5px 5px;border-radius:999px;line-height:1.3;background:rgba(9,7,14,.74);border:1px solid currentColor;
-  text-shadow:none;box-shadow:0 2px 6px rgba(0,0,0,.5)}
+/* v22 확정: 등급 글씨 = 카드 좌상단에 톡 튀어나온 스티커 (등급색 채움 + 검은 안쪽 선 + 흰 바깥 외곽선) */
+.pcard .gbadge{top:-12px;left:-4px;z-index:6;padding:0;border:0;border-radius:0;background:none;
+  font-size:19.5px;font-style:italic;font-weight:900;letter-spacing:-1px;line-height:1;white-space:nowrap;
+  transform:rotate(-3deg);transform-origin:0 100%}
+.pcard .gbadge b{position:absolute;left:0;top:0;font:inherit;font-style:italic;font-weight:900;white-space:nowrap;text-decoration:none}
+.pcard .gbadge .b1{color:#fff;-webkit-text-fill-color:#fff;-webkit-text-stroke:4.8px #fff;
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,.55))}
+.pcard .gbadge .b2{color:#12100F;-webkit-text-fill-color:#12100F;-webkit-text-stroke:2.2px #12100F}
+.pcard .gbadge .b3{color:currentColor;-webkit-text-fill-color:currentColor}
 .pcard .stamp{font-size:10.5px;letter-spacing:2px;width:78%;padding:3px 0;top:44%}
 .cell.focus .pcard{box-shadow:0 0 0 2px #FFD42A,0 6px 16px -8px rgba(0,0,0,.9)}
 .stock{display:none}
@@ -3804,7 +3810,7 @@ body{background:#05050A;color:var(--tx)}
   .pmeta .pname{font-size:7px}
   .pm-val{font-size:8px}
   .pm-rem{font-size:6.4px}
-  .pcard .gbadge{font-size:8.6px;padding:1px 4px}
+  .pcard .gbadge{font-size:15px;letter-spacing:-.8px}
 }
 /* @@POKO-V12-TOUR-TAB-EMPTY-END@@ */
 /* ============================================================
@@ -3879,18 +3885,8 @@ body{background:#05050A;color:var(--tx)}
 .pm-bar.flat b em{color:#F2ECF8;text-shadow:0 1px 2px rgba(0,0,0,.9)}
 .pm-bar.zero b{color:#8E869C;text-shadow:none;font-size:7px}
 
-/* ---------- ⑤ 상세 : 공정성 봉인 배지 ---------- */
-.ib-seal{display:flex;margin:0 0 8px}
-.seal-pill{display:flex;align-items:center;gap:6px;min-width:0;min-height:26px;padding:3px 9px 3px 8px;border-radius:999px;
-  font-family:inherit;text-align:left;
-  background:linear-gradient(180deg,rgba(94,224,255,.15),rgba(94,224,255,.05));
-  border:1px solid rgba(94,224,255,.36);box-shadow:0 0 16px -10px #5EE0FF,inset 0 1px 0 rgba(255,255,255,.08)}
-.seal-pill .seal-ic{flex:none;font-size:10px;line-height:1}
-.seal-pill b{flex:none;font-size:10px;font-weight:900;letter-spacing:-.3px;color:#D6F8FF;white-space:nowrap}
-.seal-pill em{flex:1 1 auto;min-width:0;font-style:normal;font-size:8.6px;font-weight:800;letter-spacing:-.2px;color:#8FB6C6;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.seal-pill .seal-go{flex:none;font-size:11px;font-weight:900;color:#5EE0FF;line-height:1}
-.seal-pill:active{transform:translateY(1px)}
+/* ---------- ⑤ 공정성 봉인 안내 (시트 본문 단계 카드) ----------
+   v22: 상세 본문 알약은 없애고 `박스 선택하기` 시트 머리의 #sealBtn(.bxs-seal)로 옮겼다. */
 .seal-steps{display:grid;gap:6px;margin:9px 0 10px}
 .seal-step{display:flex;gap:9px;align-items:flex-start;padding:9px 10px;border-radius:11px;
   background:rgba(94,224,255,.06);border:1px solid rgba(94,224,255,.2)}
@@ -3901,7 +3897,6 @@ body{background:#05050A;color:var(--tx)}
 @media (max-width:340px){
   .pk-chips button{height:27px;padding:0 10px;font-size:10px}
   .sprize{font-size:8.2px;padding:2px 6px;left:6px;bottom:6px;max-width:calc(100% - 48px)}
-  .seal-pill em{font-size:8px}
 }
 /* @@POKO-V17-PRIZE-SORT-SEAL-END@@ */
 /* @@POKO-RANK-BEGIN@@ */
@@ -4446,6 +4441,22 @@ body{background:#05050A;color:var(--tx)}
 .bxs-head h3{margin:0;flex:1;min-width:0;font-size:17px;font-weight:900;letter-spacing:-.7px;color:#F7F3FF}
 .bxs-head .x{flex:none;width:32px;height:32px;border-radius:50%;background:#241E33;color:#B9B0C8;
   font-size:18px;display:grid;place-items:center;line-height:1}
+/* v22: 시트 머리 컴팩트 공정성 봉인 버튼 (제목 오른쪽 · ✕ 왼쪽) */
+.bxs-seal{flex:none;display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 8px 0 7px;border-radius:999px;
+  font-family:inherit;white-space:nowrap;cursor:pointer;
+  background:linear-gradient(180deg,rgba(94,224,255,.17),rgba(94,224,255,.06));
+  border:1px solid rgba(94,224,255,.4);box-shadow:0 0 14px -10px #5EE0FF,inset 0 1px 0 rgba(255,255,255,.09)}
+.bxs-seal .seal-ic{font-size:9.5px;line-height:1}
+.bxs-seal b{font-size:9.6px;font-weight:900;letter-spacing:-.3px;color:#D6F8FF}
+.bxs-seal .seal-go{font-size:11px;font-weight:900;line-height:1;color:#5EE0FF;margin:-1px 0 0 -1px}
+.bxs-seal:active{transform:translateY(1px)}
+@media(max-width:374px){
+  .bxs-head{gap:7px;padding:12px 12px 9px}
+  .bxs-ic{width:34px;height:34px;border-radius:11px}
+  .bxs-head h3{font-size:16px}
+  .bxs-seal{height:24px;padding:0 7px 0 6px;gap:3px}
+  .bxs-seal b{font-size:9.2px}
+}
 .bxs-range{padding:1px 3px 9px;font-size:12px;font-weight:900;letter-spacing:-.2px;color:#B7AEC6}
 .bxs-list{display:grid;gap:8px;padding:0 0 calc(12px + env(safe-area-inset-bottom))}
 .bx-card{display:block;width:100%;padding:0;text-align:left;border-radius:14px;overflow:hidden;
@@ -4521,6 +4532,214 @@ body{background:#05050A;color:var(--tx)}
   .bx-g em{font-size:9.8px}
 }
 /* @@POKO-V21-END@@ */
+
+/* @@POKO-V22-BEGIN@@ ==========================================
+   v22 — ① 상세 무대: 얼룩던 다중 색 스포트라이트 → 단일 톤 네이비/블루 네온 터널
+         ② 중앙 인형 뒤 네온 삼각 프레임 + 바닥 스포트라이트
+         ③ `< 박스 교체 >` 버튼: 입체 박스 일러스트 + 회전 화살표 + `교체` 말효율
+         ④ 3분할 바 37px 슬림화 · 인포 바 숫자 22px 확대
+   ========================================================== */
+
+/* ---------- ①·② 상세 무대 — 쇼케이스 링 + 수직 스포트라이트 + 그리드 바닥 (확정안) ---------- */
+.detail .stage{height:204px;
+  background:radial-gradient(76% 60% at 50% 46%,#232D4C 0%,#19203F 38%,#0D1226 70%,#080A16 100%);
+  box-shadow:inset 0 -40px 52px rgba(3,5,16,.62)}
+/* 위에서 내려오는 은은한 필광 */
+.detail .stage::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(58% 40% at 50% 5%,rgba(192,216,255,.17),rgba(192,216,255,0) 76%)}
+/* 위아래 비네트 — 헤더·등급 가독성 */
+.detail .stage::after{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;
+  background:linear-gradient(180deg,rgba(2,3,10,.46) 0%,rgba(2,3,10,.05) 16%,rgba(2,3,10,0) 42%,
+    rgba(2,3,10,.05) 72%,rgba(2,3,10,.5) 100%)}
+.detail .stage-fx{z-index:1}
+.detail .stage-hall{position:absolute;inset:0;
+  background:radial-gradient(64% 46% at 50% 100%,rgba(120,150,255,.14),rgba(120,150,255,0) 72%)}
+/* 별빛 · 보케 — 뒤가 죽지 않게 */
+.detail .stage-stars{position:absolute;inset:0;opacity:.9;
+  background-image:
+    radial-gradient(1.7px 1.7px at 16% 28%,rgba(226,242,255,.95),transparent 62%),
+    radial-gradient(1.4px 1.4px at 27% 62%,rgba(200,225,255,.8),transparent 62%),
+    radial-gradient(1.9px 1.9px at 12% 78%,rgba(255,238,206,.85),transparent 62%),
+    radial-gradient(1.3px 1.3px at 36% 18%,rgba(220,236,255,.7),transparent 62%),
+    radial-gradient(1.6px 1.6px at 84% 26%,rgba(226,242,255,.9),transparent 62%),
+    radial-gradient(1.4px 1.4px at 72% 66%,rgba(200,225,255,.75),transparent 62%),
+    radial-gradient(1.9px 1.9px at 89% 74%,rgba(255,238,206,.85),transparent 62%),
+    radial-gradient(1.3px 1.3px at 64% 14%,rgba(220,236,255,.65),transparent 62%),
+    radial-gradient(22px 22px at 22% 46%,rgba(150,190,255,.10),transparent 70%),
+    radial-gradient(26px 26px at 79% 44%,rgba(190,160,255,.10),transparent 70%)}
+/* 원근 아케이드 그리드 바닥 */
+.detail .stage-grid{position:absolute;left:-60%;right:-60%;bottom:0;height:84px;z-index:1;
+  perspective:170px;perspective-origin:50% 0%;overflow:hidden;
+  -webkit-mask-image:radial-gradient(90% 130% at 50% 100%,#000 0%,rgba(0,0,0,.5) 58%,transparent 96%);
+  mask-image:radial-gradient(90% 130% at 50% 100%,#000 0%,rgba(0,0,0,.5) 58%,transparent 96%)}
+.detail .stage-grid::before{content:"";position:absolute;inset:0;
+  transform:rotateX(63deg);transform-origin:50% 100%;
+  background-image:
+    repeating-linear-gradient(90deg,rgba(150,124,255,.30) 0 1px,transparent 1px 30px),
+    repeating-linear-gradient(0deg,rgba(150,124,255,.20) 0 1px,transparent 1px 30px);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.35) 30%,#000 78%,#000 100%);
+  mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.35) 30%,#000 78%,#000 100%)}
+/* 유리 바닥 반사 */
+.detail .stage-glassy{position:absolute;left:0;right:0;bottom:0;height:72px;z-index:1;
+  background:linear-gradient(180deg,rgba(150,180,255,.05) 0%,rgba(120,150,220,.10) 58%,rgba(8,10,18,0) 100%);
+  border-top:1px solid rgba(190,210,255,.15)}
+/* 쇼케이스 링 (코랄·골드) — 인형 몸통 중앙에 */
+.detail .stage-ringglow{position:absolute;left:50%;top:86px;width:232px;height:232px;transform:translate(-50%,-50%);
+  border-radius:50%;z-index:1;
+  background:radial-gradient(circle,rgba(255,178,96,.30) 0%,rgba(255,150,80,.13) 44%,rgba(255,140,70,0) 68%)}
+.detail .stage-ring{position:absolute;left:50%;top:86px;width:150px;height:150px;margin:0;transform:translate(-50%,-50%);
+  border-radius:50%;z-index:1;border:2.2px solid rgba(255,206,140,.92);
+  background:none;filter:none;opacity:1;animation:none;
+  box-shadow:0 0 14px rgba(255,180,110,.9),0 0 34px rgba(255,150,80,.5),0 0 64px rgba(255,130,70,.28),
+    inset 0 0 18px rgba(255,186,120,.45),inset 0 0 38px rgba(255,150,90,.18)}
+.detail .stage-ring2{position:absolute;left:50%;top:86px;width:124px;height:124px;margin:0;transform:translate(-50%,-50%);
+  border-radius:50%;z-index:1;border:1px solid rgba(255,222,170,.46);box-shadow:0 0 10px rgba(255,190,120,.45)}
+/* 수직 스포트라이트 — 색 왜곡 없이 또렷하게 */
+.detail .stage-beam{display:block;position:absolute;left:50%;top:-4px;bottom:auto;transform:translateX(-50%);
+  width:134px;height:186px;margin:0;z-index:1;opacity:1;filter:blur(2.4px);mix-blend-mode:normal;animation:none;
+  clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);
+  background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,246,228,.12) 46%,rgba(255,236,198,.04) 78%,rgba(255,236,198,0) 100%)}
+.detail .stage-beamsoft{position:absolute;left:50%;top:-4px;transform:translateX(-50%);
+  width:196px;height:194px;z-index:1;filter:blur(9px);
+  clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);
+  background:linear-gradient(180deg,rgba(255,236,190,.10) 0%,rgba(255,220,150,.04) 60%,transparent 100%)}
+.detail .stage-ring{isolation:isolate}
+/* 아크릴 원반 스탠드 — 인형이 올라서는 발광 받침 */
+.detail .stage-spill{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);width:120px;height:42px;
+  border-radius:50%;z-index:1;filter:blur(7px);
+  background:radial-gradient(ellipse at 50% 14%,rgba(255,188,124,.42) 0%,rgba(255,160,96,.14) 48%,rgba(255,160,96,0) 76%)}
+.detail .stage-stand{position:absolute;left:50%;bottom:46px;transform:translateX(-50%);
+  width:150px;height:30px;border-radius:50%;z-index:2;
+  background:linear-gradient(180deg,rgba(255,236,206,.30) 0%,rgba(255,196,142,.28) 40%,rgba(255,158,100,.14) 72%,rgba(255,150,96,.04) 100%);
+  border:1.2px solid rgba(255,242,218,.7);
+  box-shadow:0 0 18px rgba(255,178,110,.5),0 9px 24px rgba(255,140,70,.28),
+    inset 0 1px 4px rgba(255,252,240,.85),inset 0 -7px 12px rgba(255,150,90,.2)}
+.detail .stage-stand::before{content:"";position:absolute;left:7px;right:7px;top:1px;height:13px;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 50%,rgba(255,252,240,.95) 0%,rgba(255,224,172,.7) 38%,rgba(255,186,124,.2) 72%,transparent 90%);
+  filter:blur(.6px)}
+.detail .stage-stand::after{content:"";position:absolute;left:10px;right:10px;bottom:1px;height:12px;border-radius:50%;
+  border-bottom:1.5px solid rgba(255,250,238,.95);box-shadow:0 3px 8px rgba(255,196,136,.7);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 22%,#000 78%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 22%,#000 78%,transparent 100%)}
+/* 인형은 링 중앙 · 스탠드 위에 정확히 */
+.detail .stage-car{top:28px;height:126px;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 17%,#000 83%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 17%,#000 83%,transparent 100%)}
+.detail .stage-glow{top:86px;width:172px;height:172px;opacity:.85;filter:blur(2px)}
+.detail .stage-grade{bottom:19px;letter-spacing:-2px;font-style:italic;
+  -webkit-text-stroke:1.6px #12100F;paint-order:stroke fill;
+  text-shadow:-3px -3px 0 #fff,3px -3px 0 #fff,-3px 3px 0 #fff,3px 3px 0 #fff,
+    -3px 0 0 #fff,3px 0 0 #fff,0 -3px 0 #fff,0 3px 0 #fff,
+    0 5px 12px rgba(3,8,28,.6),0 0 16px var(--gc,#ffd42a)}
+
+/* ---------- ③ `< 박스 교체 >` — 입체 박스 + 회전 화살표 ---------- */
+.ib-switch{gap:7px;margin-top:14px}
+.ib-switch .navbtn{flex:0 0 42px;height:37px;border-radius:12px}
+.ib-switch .navbtn svg{width:15px;height:15px;stroke-width:2.8}
+.boxswap{position:relative;flex:1;min-width:0;height:37px;border-radius:999px;overflow:visible;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  background:linear-gradient(180deg,#23232E 0%,#16161F 52%,#0D0D14 100%);
+  border:1px solid rgba(255,255,255,.11);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 10px 20px -14px #000}
+.boxswap::after{display:none}
+.boxswap:active{transform:translateY(1px)}
+.bsw-art{flex:none;width:26px;height:25px;display:block;
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,.55));animation:bswBob 2.9s ease-in-out infinite}
+.bsw-art svg{display:block;width:100%;height:100%}
+@keyframes bswBob{0%,100%{transform:translateY(-1.2px) rotate(-3deg)}50%{transform:translateY(1.4px) rotate(3deg)}}
+.bsw-arrow{flex:none;display:grid;place-items:center;width:21px;height:21px;border-radius:50%;
+  background:linear-gradient(180deg,#8C74FF,#5B3FE0);box-shadow:0 2px 6px -2px rgba(91,63,224,.9),inset 0 1px 0 rgba(255,255,255,.35)}
+.bsw-arrow svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.bsw-arrow.l svg{animation:bswSpin 3.4s linear infinite}
+.bsw-arrow.r{background:linear-gradient(180deg,#FF9A5E,#EE5A21);box-shadow:0 2px 6px -2px rgba(238,90,33,.9),inset 0 1px 0 rgba(255,255,255,.35)}
+.bsw-arrow.r svg{animation:bswSpin 3.4s linear infinite reverse}
+@keyframes bswSpin{to{transform:rotate(360deg)}}
+.bsw-tip{position:absolute;left:50%;top:-11px;transform:translateX(-58%);
+  padding:1.5px 7px 2px;border-radius:7px;background:#0B0B12;color:#FFF1E4;
+  font-size:9.6px;font-weight:900;letter-spacing:-.3px;line-height:1.15;white-space:nowrap;
+  border:1px solid rgba(255,255,255,.14);box-shadow:0 3px 8px -4px #000;
+  animation:bswTip 2.9s ease-in-out infinite}
+.bsw-tip::after{content:"";position:absolute;left:50%;bottom:-3.5px;margin-left:-3.5px;
+  width:7px;height:7px;background:#0B0B12;border-right:1px solid rgba(255,255,255,.14);
+  border-bottom:1px solid rgba(255,255,255,.14);transform:rotate(45deg)}
+@keyframes bswTip{0%,100%{transform:translateX(-58%) translateY(0)}50%{transform:translateX(-58%) translateY(-2.5px)}}
+@media(prefers-reduced-motion:reduce){
+  .bsw-art,.bsw-tip,.bsw-arrow svg{animation:none}
+}
+
+/* ---------- ⑤-1 마이 단일 리스트 8줄 · 단독 로그아웃 ---------- */
+#myList .my-menu .mr{min-height:46px;padding:0 12px}
+#myList .my-menu .mr + .mr{border-top:1px solid rgba(255,255,255,.055)}
+#myList .my-menu .mr .t{font-size:12.5px;font-weight:800;color:#EDE7F6}
+#myList .my-menu .mr .v{font-size:10.5px;font-weight:900;color:#FF9E84}
+#myList .my-menu .mr .v em{font-style:normal;padding:1px 6px;border-radius:999px;
+  background:rgba(255,90,54,.18);border:1px solid rgba(255,90,54,.45);color:#FFB59E;font-size:9.5px}
+.my-logout{display:block;width:calc(100% - 28px);margin:12px 14px 0;height:46px;border-radius:14px;
+  font-size:12.5px;font-weight:900;letter-spacing:-.2px;color:#CFC6DE;
+  background:linear-gradient(180deg,#221C30,#151020);border:1px solid #2E2745;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.my-logout:active{transform:translateY(1px)}
+.addr-pccc-row{display:flex;align-items:center;width:100%;margin:10px 0 0;padding:0 10px;height:44px;
+  border-radius:11px;background:rgba(255,255,255,.04);border:1px solid #2A2340;color:#DCD4EA;text-align:left}
+.addr-pccc-row .t{flex:1;font-size:11.5px;font-weight:800}
+.addr-pccc-row .t em{font-style:normal;font-size:9.5px;color:#FFB59E;margin-left:3px}
+.addr-pccc-row .ch{width:8px;height:8px;border-right:1.8px solid #8E869C;border-bottom:1.8px solid #8E869C;
+  transform:rotate(-45deg)}
+/* ---------- ⑤ 경품 카드 — 인형 크게 · 아래 글은 숨 쉬게 ---------- */
+#dGoods .pclip{height:96px}
+#dGoods .pclip .part{top:5px;bottom:1px}
+#dGoods .pclip .part img.gimg{width:108%;height:108%;max-width:108%;max-height:108%}
+#dGoods .pmeta{padding:8px 7px 9px}
+#dGoods .pmeta .pname{font-size:8px;line-height:1.3;margin-bottom:1px}
+#dGoods .pm-row{margin-top:6px}
+#dGoods .pm-val{font-size:9.8px;letter-spacing:-.5px}
+#dGoods .pm-val i{width:9px;height:9px;font-size:6px}
+#dGoods .pm-rem{font-size:7.6px;letter-spacing:-.1px;color:#CFC6DE}
+#dGoods .pm-bar{height:14px;margin-top:7px;border-radius:6px}
+#dGoods .pm-bar b{font-size:7.4px;letter-spacing:-.1px}
+@media(max-width:340px){
+  #dGoods .pclip{height:88px}
+  #dGoods .pm-val{font-size:9.2px}
+  #dGoods .pm-bar{height:13px;margin-top:6px}
+  #dGoods .pm-bar b{font-size:7px}
+}
+/* ---------- ⑥ 마이페이지 다이어트 — 담백하게, 첫 화면에 다 들어오게 ---------- */
+.myscreen .my-head{padding:8px 14px 12px}
+.myscreen .evo-stage{padding:4px 0 0}
+.myscreen .evo-stage .pfr{--pz:min(112px,30vw)}
+.myscreen .evo-id{padding:2px 10px 2px}
+.myscreen .evo-name{font-size:15px;margin-top:3px;letter-spacing:-.6px}
+.myscreen .evo-id .my-nickrow{margin-top:2px}
+.myscreen .evo-id .my-nickrow b{font-size:11px}
+.myscreen .evo-id .my-phone{font-size:8px;margin-top:1px}
+.myscreen #myMember{margin-top:3px !important;font-size:10px !important}
+.myscreen .evo-rank{font-size:7.6px;padding:2px 7px 3px}
+/* 게이지는 프로필 카드 안에 담백하게 합체 */
+.myscreen .evo-prog{margin-top:8px;padding:8px 0 0;border-radius:0;background:none;border:0;
+  border-top:1px solid rgba(255,255,255,.07);box-shadow:none}
+.myscreen .ep-top{font-size:8.4px}
+.myscreen .evo-prog .eb{margin-top:5px;height:7px}
+.myscreen .ep-reward{display:none}
+.myscreen .ep-benefits{margin-top:6px;gap:3px}
+.myscreen .ep-badge{padding:3px 2px;font-size:6.6px;border-radius:6px}
+.myscreen .ep-badge b{font-size:7.2px;margin-bottom:0}
+/* ---------- ④ 인포 바 숫자 키우기 ---------- */
+.infobar .ib-price{font-size:14px}
+.infobar .ib-price b{font-size:22px;letter-spacing:-1.1px}
+.infobar .ib-price em{font-size:14px}
+.infobar .ib-box{font-size:14.5px}
+.infobar .ib-box b{font-size:22px;letter-spacing:-.9px}
+.infobar .ib-box span{font-size:14px}
+.infobar .ib-rem{font-size:14px;gap:3px}
+.infobar .ib-rem span{font-size:13.5px}
+.infobar .ib-rem b{font-size:22px;letter-spacing:-.8px}
+.infobar .ib-rem span.numb{font-size:14px}
+@media(max-width:340px){
+  .ib-switch .navbtn{flex:0 0 38px;height:37px}
+  .boxswap{height:37px;gap:9px}
+  .detail .stage-tri{width:176px;height:150px}
+}
+/* @@POKO-V22-END@@ */
 </style>
 </head>
 <body>
@@ -4567,13 +4786,12 @@ body{background:#05050A;color:var(--tx)}
           <!-- 1) 웰컴 50% -->
           <article class="hc-slide hs-coral" data-slide="0" data-hb-act="welcome" role="group" aria-label="회원가입 시 첫 판 50% 할인">
             <div class="hs-txt">
-              <div class="hs-top"><span class="hs-kicker">WELCOME EVENT</span><span class="hb-chip gold">1인 1회</span></div>
+              <div class="hs-top"><span class="hs-kicker">WELCOME EVENT</span></div>
               <h3 class="hs-title">회원가입 시 <b>첫 판 50%</b></h3>
               <ul class="hs-list">
                 <li>첫 유료 뽑기 <b>1판</b>이 반값</li>
                 <li>동일 번호 <b>1인 1회</b> 한정</li>
               </ul>
-              <div class="hs-foot"><span class="hb-more">혜택 보기 ›</span></div>
             </div>
             <div class="hs-art">
               
@@ -4614,13 +4832,13 @@ body{background:#05050A;color:var(--tx)}
           <!-- 2) 미성년자 구매 제한 -->
           <article class="hc-slide hs-dark" data-slide="1" data-hb-act="minor" role="group" aria-label="미성년자 구매 제한 및 랜덤 상품 안내">
             <div class="hs-txt">
-              <div class="hs-top"><span class="hs-kicker">19+ NOTICE</span><span class="hb-chip coral">만 19세 미만</span></div>
+              <div class="hs-top"><span class="hs-kicker">19+ NOTICE</span></div>
               <h3 class="hs-title">미성년자는 구매 <b>NO! NO!</b></h3>
               <ul class="hs-list">
                 <li>유료 결제는 <b>만 19세 이상</b>만</li>
                 <li>본 상품은 <b>랜덤 상품</b>입니다</li>
               </ul>
-              <div class="hs-foot"><p class="hs-note">10점 이상 적립 시 <b>무료배송</b></p><span class="hb-more">규정 보기 ›</span></div>
+              <div class="hs-foot"><p class="hs-note">10점 이상 적립 시 <b>무료배송</b></p></div>
             </div>
             <div class="hs-art">
               
@@ -4649,13 +4867,13 @@ body{background:#05050A;color:var(--tx)}
           <!-- 3) 출고 · 교환/반품 -->
           <article class="hc-slide hs-dark" data-slide="2" data-hb-act="ship" role="group" aria-label="출고 및 교환·반품 안내">
             <div class="hs-txt">
-              <div class="hs-top"><span class="hs-kicker">SHIPPING GUIDE</span><span class="hb-chip cyan">영업일 3~5일</span></div>
+              <div class="hs-top"><span class="hs-kicker">SHIPPING GUIDE</span></div>
               <h3 class="hs-title">출고 · 교환/반품 <b>꼭 확인</b></h3>
               <ul class="hs-list">
                 <li>영업일 <b>3~5일</b> 이내 출고</li>
                 <li>파손·누락 시 <b>송장부터 찍은 무편집 개봉 영상 필수</b></li>
               </ul>
-              <div class="hs-foot"><p class="hs-note">단순 변심은 <b>왕복 배송비</b> 부담</p><span class="hb-more">규정 보기 ›</span></div>
+              <div class="hs-foot"><p class="hs-note">단순 변심은 <b>왕복 배송비</b> 부담</p></div>
             </div>
             <div class="hs-art">
               
@@ -4698,13 +4916,13 @@ body{background:#05050A;color:var(--tx)}
           <!-- 4) 포인트 전환(회수) -->
           <article class="hc-slide hs-dark" data-slide="3" data-hb-act="point" role="group" aria-label="포인트 전환(회수) 안내">
             <div class="hs-txt">
-              <div class="hs-top"><span class="hs-kicker">POINT EXCHANGE</span><span class="hb-chip lime">+P 적립</span></div>
+              <div class="hs-top"><span class="hs-kicker">POINT EXCHANGE</span></div>
               <h3 class="hs-title">상품 회수하고 <b>포인트로 전환</b></h3>
               <ul class="hs-list">
                 <li>받은 굿즈 <b>회수(전환)</b> 가능</li>
                 <li>전환 포인트로 <b>재도전</b></li>
               </ul>
-              <div class="hs-foot"><p class="hs-note">전환 포인트 <b>현금 환급 불가</b></p><span class="hb-more">규정 보기 ›</span></div>
+              <div class="hs-foot"><p class="hs-note">전환 포인트 <b>현금 환급 불가</b></p></div>
             </div>
             <div class="hs-art">
               
@@ -4735,13 +4953,13 @@ body{background:#05050A;color:var(--tx)}
           <!-- 5) 보관 30일 · 묶음배송 -->
           <article class="hc-slide hs-dark" data-slide="4" data-hb-act="store" role="group" aria-label="보관 30일 및 묶음배송 안내">
             <div class="hs-txt">
-              <div class="hs-top"><span class="hs-kicker">STORAGE · SHIPPING</span><span class="hb-chip lime">10점 이상 무료</span></div>
+              <div class="hs-top"><span class="hs-kicker">STORAGE · SHIPPING</span></div>
               <h3 class="hs-title"><b>30일 보관</b> · 10점 이상 <b>무료배송</b></h3>
               <ul class="hs-list">
                 <li>원치 않는 굿즈는 <b>포인트 환급</b></li>
                 <li><b>10점 모으면 무료배송</b> (미만 3,500원)</li>
               </ul>
-              <div class="hs-foot"><p class="hs-note">모은 굿즈는 <b>묶음배송</b> 한 번에</p><span class="hb-more">규정 보기 ›</span></div>
+              <div class="hs-foot"><p class="hs-note">모은 굿즈는 <b>묶음배송</b> 한 번에</p></div>
             </div>
             <div class="hs-art">
               
@@ -4765,7 +4983,7 @@ body{background:#05050A;color:var(--tx)}
                 <g transform="translate(21 101)">
                   <circle r="11.5" fill="#C9FF57" stroke="#14161D" stroke-width="2.4"/>
                   <text y="3.8" text-anchor="middle" font-size="8.8" font-weight="900" fill="#16200A"
-                        font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">5+</text>
+                        font-family="system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif">10+</text>
                 </g>
               </svg>
             </div>
@@ -4840,12 +5058,18 @@ body{background:#05050A;color:var(--tx)}
   <main class="screen detail" id="screenDetail" hidden>
     <section class="stage" id="stage">
       <div class="stage-fx" id="stageFx" aria-hidden="true">
-        <span class="stage-beam b1"></span>
-        <span class="stage-beam b2"></span>
-        <span class="stage-beam b3"></span>
+        <span class="stage-hall"></span>
+        <span class="stage-stars"></span>
+        <span class="stage-grid"></span>
+        <span class="stage-glassy"></span>
+        <span class="stage-ringglow"></span>
         <span class="stage-ring"></span>
+        <span class="stage-ring2"></span>
+        <span class="stage-beamsoft"></span>
+        <span class="stage-beam"></span>
+        <span class="stage-spill"></span>
+        <span class="stage-stand"></span>
       </div>
-      <div class="stage-tri"></div>
       <div class="stage-glow" id="stageGlow"></div>
       <div class="strap"></div>
       <div class="stage-top">
@@ -4878,28 +5102,38 @@ body{background:#05050A;color:var(--tx)}
       <!-- v21: < 박스 교체 > 3분할 바 — 가운데를 누르면 박스 선택하기 시트 -->
       <div class="ib-switch">
         <button class="navbtn" id="prevBox" aria-label="이전 박스"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <button class="boxswap" id="boxStrip" type="button" aria-haspopup="dialog" aria-label="박스 선택하기 열기">
-          <svg viewBox="0 0 24 22" aria-hidden="true">
-            <path d="M3 7.5l9-4.5 9 4.5-9 4.5z"/>
-            <path d="M3 7.5V17l9 4.5V12z"/>
-            <path d="M21 7.5V17L12 21.5V12z"/>
-          </svg>
-          <b>박스 교체</b>
-          <span class="bsw-chev" aria-hidden="true">
-            <svg viewBox="0 0 12 8"><path d="M2 6.5l4-4 4 4"/></svg>
-            <svg viewBox="0 0 12 8"><path d="M2 1.5l4 4 4-4"/></svg>
+        <button class="boxswap" id="boxStrip" type="button" aria-haspopup="dialog" aria-label="박스 교체 — 박스 선택하기 열기">
+          <span class="bsw-arrow l" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 0-2.3 6.3"/><path d="M20 5.5V12h-6"/></svg>
           </span>
+          <span class="bsw-art" aria-hidden="true">
+            <svg viewBox="0 0 40 38">
+              <defs>
+                <linearGradient id="bswTop" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#FFD9A8"/><stop offset="1" stop-color="#F7A55B"/>
+                </linearGradient>
+                <linearGradient id="bswL" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#F0873A"/><stop offset="1" stop-color="#C9551A"/>
+                </linearGradient>
+                <linearGradient id="bswR" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#FFB267"/><stop offset="1" stop-color="#E4701F"/>
+                </linearGradient>
+              </defs>
+              <path d="M20 3.5 35.5 11 20 18.5 4.5 11z" fill="url(#bswTop)"/>
+              <path d="M4.5 11 20 18.5V35L4.5 27.5z" fill="url(#bswL)"/>
+              <path d="M35.5 11 20 18.5V35l15.5-7.5z" fill="url(#bswR)"/>
+              <path d="M4.5 11 20 18.5 35.5 11" fill="none" stroke="#5C2A05" stroke-opacity=".55" stroke-width="1"/>
+              <path d="M12 7.5 27.5 15v4.6" fill="none" stroke="#7A3A08" stroke-opacity=".35" stroke-width="1.4"/>
+              <rect x="23.4" y="20.4" width="7.6" height="6.4" rx="1.1" fill="#FFF3E2" stroke="#7A3A08" stroke-opacity=".45" stroke-width=".9"/>
+              <path d="M25.3 23.4h4.1M25.3 25.4h2.4" stroke="#B4763C" stroke-width=".9"/>
+            </svg>
+          </span>
+          <span class="bsw-arrow r" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-6.3"/><path d="M4 5.5V12h6"/></svg>
+          </span>
+          <span class="bsw-tip" aria-hidden="true">교체</span>
         </button>
         <button class="navbtn" id="nextBox" aria-label="다음 박스"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
-      </div>
-      <!-- v17: 공정성 봉인 배지 → 쉬운 말 안내 시트 -->
-      <div class="ib-seal">
-        <button class="seal-pill" id="sealBtn" type="button" aria-haspopup="dialog">
-          <span class="seal-ic" aria-hidden="true">🔐</span>
-          <b>공정성 봉인</b>
-          <em>오픈 전 잠금 · 완판 후 공개</em>
-          <span class="seal-go" aria-hidden="true">›</span>
-        </button>
       </div>
       <div class="led-ticker" aria-hidden="true"><b id="ledTicker"></b></div>
     </section>
@@ -5030,13 +5264,10 @@ body{background:#05050A;color:var(--tx)}
       <!-- 다음 진화까지 -->
       <div class="evo-prog" id="evoProg">
         <div class="ep-top">
-          <span id="myExpTxt">다음 진화까지 <b>50,000원</b></span>
+          <span id="myExpTxt">다음 진화까지 <b>50,000P</b></span>
           <span class="ep-next" id="evoNext">NEXT · LV.2</span>
         </div>
         <div class="eb"><i id="myExpBar"></i></div>
-        <div class="ep-nums">
-          <span id="evoSpenTxt">누적 구매 <b>0원</b></span>
-        </div>
         <div class="ep-reward" id="epReward">🎁 다음 진화 달성 보상 <b id="epRewardTxt">무료배송 쿠폰</b></div>
         <div class="ep-benefits" id="epBenefits">
           <div class="ep-badge now" data-lv="1"><b>LV.1</b>스타트</div>
@@ -5071,85 +5302,31 @@ body{background:#05050A;color:var(--tx)}
         </div>
       </section>
 
-      <!-- ③ 주문·출고 현황 (출고 신청 통합) -->
-      <!-- 주문·출고 상태 배지 3단 (탭하면 진열장 해당 탭으로) -->
-      <section class="pn mystat" id="myStat">
-        <div class="ph"><h3><i></i>주문·출고 현황</h3><button type="button" data-shelf="keep">진열장 →</button></div>
-        <div class="ms-grid">
-          <button class="ms-card keep" type="button" data-shelf="keep" aria-label="보관 중 상품 보기">
-            <span class="ms-ic" aria-hidden="true">🎁</span><b id="myStatKeep">0</b><small>보관 중</small><span class="ms-go">보기 ›</span>
-          </button>
-          <button class="ms-card wait" type="button" data-shelf="wait" aria-label="출고 대기 상품 보기">
-            <span class="ms-ic" aria-hidden="true">🚚</span><b id="myStatWait">0</b><small>출고 대기</small><span class="ms-go">보기 ›</span>
-          </button>
-          <button class="ms-card done" type="button" data-shelf="done" aria-label="배송 완료 상품 보기">
-            <span class="ms-ic" aria-hidden="true">✅</span><b id="myStatDone">0</b><small>배송 완료</small><span class="ms-go">보기 ›</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- ④ 출석 · 배송 정보 — 7일 스트립은 접고 '한 줄'만 (누르면 풀스크린 출석 페이지) -->
-      <section class="pn care" id="carePanel">
-        <div class="mn">
-          <button class="mr" id="myAttOpen" type="button" data-my="attend">
-            <span class="ic" aria-hidden="true">📅</span>
-            <span class="t">오늘 출석 <em id="myAttTxt">7일 채우면 3,400P</em></span>
-            <span class="v pill" id="myAttPill">찍기</span><span class="ch"></span>
-          </button>
-          <button class="mr" id="myAddrRow" type="button" data-my="addrs">
-            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-9.4A4.6 4.6 0 0 1 12 8a4.6 4.6 0 0 1 7 3.6C19 16.5 12 21 12 21z"/><path d="M12 8V5"/></svg></span>
-            <span class="t">배송지 <em class="warn" id="myAddrWarn">미등록</em></span>
-            <span class="v" id="myAddrTxt">등록하기</span><span class="ch"></span>
-          </button>
-          <button class="mr" id="myPcccRow" type="button" data-my="pccc">
-            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 12h10"/></svg></span>
-            <span class="t">통관부호 PCCC <em class="warn" id="myPcccWarn">미등록</em></span>
-            <span class="v" id="myPcccTxt">미등록</span><span class="ch"></span>
-          </button>
-        </div>
-      </section>
-
-      <!-- ⑤ 내 기록 · 이용안내 -->
-      <!-- 내 기록 -->
-      <section class="pn">
-        <div class="ph"><h3><i></i>내 기록</h3></div>
-        <div class="mn">
-          <button class="mr" data-my="noti" type="button"><span class="t">알림</span><span class="v"><em id="myNotiN">0</em></span><span class="ch"></span></button>
+      <!-- v23: 마이 메뉴 — 담백한 단일 리스트 8줄 -->
+      <section class="pn" id="myList">
+        <div class="mn my-menu">
+          <button class="mr" data-my="noti" type="button"><span class="t">알림</span><span class="v" id="myNotiV" hidden><em id="myNotiN">0</em></span><span class="ch"></span></button>
           <button class="mr" data-my="ledger" type="button"><span class="t">충전·사용 내역</span><span class="ch"></span></button>
-          <button class="mr" data-my="shiphist" type="button"><span class="t">배송 내역 (출고 신청)</span><span class="v"><em id="myShipN" hidden>0</em>출고 완료 <b id="myDone">0</b></span><span class="ch"></span></button>
-          <button class="mr" data-my="exch" type="button"><span class="t">회수(포인트 교환) 기록</span><span class="v"><em id="myExN" hidden>0</em></span><span class="ch"></span></button>
-          <button class="mr" data-my="favs" type="button"><span class="t">찜한 시리즈</span><span class="v"><em id="myFavN">0</em></span><span class="ch"></span></button>
-          <button class="mr" data-my="addrs" type="button"><span class="t">배송지 주소 관리</span><span class="v"><em id="myAddrN">0</em></span><span class="ch"></span></button>
-        </div>
-                <div class="mn pwa-mn" id="pwaPanelMy" data-pwa-panel hidden>
-            <button class="mr pwa-row" id="pwaBtnMy" type="button" data-pwa="open">
-              <span class="t">앱으로 쓰기 (홈 화면 추가)</span><span class="v pill">+1,000P</span><span class="ch"></span>
-            </button>
-          </div>
-      </section>
-
-      <!-- 규정 · 안내 -->
-      <section class="pn">
-        <div class="mn">
-          <button class="mr" data-my="rules" type="button"><span class="t">이용안내 · 규정</span><span class="v pill">4가지</span><span class="ch"></span></button>
-          <button class="mr" data-my="rule" type="button"><span class="t">개봉 풀영상 규정</span><span class="v pill">필수</span><span class="ch"></span></button>
-          <button class="mr" data-my="shipguide" type="button"><span class="t">출고·통관 안내</span><span class="v">영업일 3~5일</span><span class="ch"></span></button>
-          <button class="mr" data-my="as" type="button"><span class="t">1:1 문의</span><span class="v">접수 <em id="myAs">0</em></span><span class="ch"></span></button>
+          <button class="mr" data-my="shiphist" type="button"><span class="t">배송 내역</span><span class="ch"></span></button>
+          <button class="mr" data-my="exch" type="button"><span class="t">회수 기록</span><span class="ch"></span></button>
+          <button class="mr" data-my="favs" type="button"><span class="t">찜</span><span class="ch"></span></button>
+          <button class="mr" data-my="addrs" type="button"><span class="t">배송지 · 통관부호</span><span class="ch"></span></button>
+          <button class="mr" data-my="rules" type="button"><span class="t">이용안내 · 규정</span><span class="ch"></span></button>
+          <button class="mr" data-my="as" type="button"><span class="t">1:1 문의</span><span class="ch"></span></button>
         </div>
       </section>
 
-      <!-- v19: 헤더의 계정 칩을 이 자리(마이페이지 맨 아래)로 이동 — 로그아웃 확인 시트는 그대로 연결 -->
-      <section class="pn myacct" id="myAcctPanel">
-        <div class="ph"><h3><i></i>계정 관리</h3></div>
-        <div class="ma-box">
-          <span class="ma-ic" aria-hidden="true">👤</span>
-          <div class="ma-tx">
-            <b id="authName">로그인 전</b>
-            <small id="authSub">로그인하고 뽑기·진열장을 이용해요</small>
-          </div>
-          <button class="ma-btn" id="authBtn" type="button" data-mode="in" aria-label="로그인 또는 로그아웃">로그인</button>
+      <!-- 앱 설치 유도 (standalone 실행 중이면 자동 숨김 · v23에서도 유지) -->
+      <section class="pn" id="pwaPanelMy" data-pwa-panel hidden>
+        <div class="mn pwa-mn">
+          <button class="mr pwa-row" id="pwaBtnMy" type="button" data-pwa="open">
+            <span class="t">앱으로 쓰기 (홈 화면 추가)</span><span class="v pill">+1,000P</span><span class="ch"></span>
+          </button>
         </div>
       </section>
+
+      <!-- v23: 단독 로그아웃 (데모에선 계정 시트) -->
+      <button class="my-logout" id="authBtn" type="button" data-mode="in" aria-label="로그인 또는 로그아웃">로그아웃</button>
 
       <p class="foot" style="padding:10px 20px 24px">데모 계정입니다 · 실제 결제·배송은 이루어지지 않아요</p>
     </div>
@@ -5228,6 +5405,10 @@ body{background:#05050A;color:var(--tx)}
           <svg viewBox="0 0 24 22"><path d="M3 7.5l9-4.5 9 4.5-9 4.5z"/><path d="M3 7.5V17l9 4.5V12z"/><path d="M21 7.5V17L12 21.5V12z"/></svg>
         </span>
         <h3>박스 선택하기</h3>
+        <!-- v22: 상세 본문에 있던 공정성 봉인 배지를 시트 머리로 — 누르면 기존 안내 시트 -->
+        <button class="bxs-seal" id="sealBtn" type="button" aria-haspopup="dialog" aria-label="공정성 봉인 안내 열기">
+          <span class="seal-ic" aria-hidden="true">🔐</span><b>공정성 봉인</b><span class="seal-go" aria-hidden="true">›</span>
+        </button>
         <button class="x" data-close="boxPicker" aria-label="닫기">×</button>
       </div>
       <div class="sheet-body">
@@ -5274,6 +5455,7 @@ body{background:#05050A;color:var(--tx)}
       <div class="sheet-body">
         <div class="sh-sec"><span>저장된 배송지</span><em id="addrCount">0개</em></div>
         <div id="addrList"></div>
+        <button class="mr addr-pccc-row" id="addrPcccRow" type="button"><span class="t">통관부호 PCCC <em class="warn" id="addrPcccWarn">미등록</em></span><span class="ch"></span></button>
         <div class="sh-sec" style="margin-top:10px"><span>새 배송지 입력</span><em>입력 후 저장</em></div>
         <div class="field"><label for="shipName">받는 분</label><input id="shipName" type="text" placeholder="이름" autocomplete="name"></div>
         <div class="field"><label for="shipPhone">연락처</label><input id="shipPhone" type="tel" placeholder="010-0000-0000" autocomplete="tel"></div>
@@ -5379,7 +5561,7 @@ body{background:#05050A;color:var(--tx)}
           <dl>
             <div><dt>브랜드</dt><dd id="piBrand">치이카와</dd></div>
             <div><dt>판매가</dt><dd class="p" id="piPrice">0원</dd></div>
-            <div><dt>구성</dt><dd id="piCompose">1개</dd></div>
+            <div><dt>당첨 확률</dt><dd id="piProb">-</dd></div>
             <div><dt>배송</dt><dd id="piShip">영업일 3~5일 이내 순차 출고</dd></div>
             <div><dt>이 박스 잔여</dt><dd id="piStock">-</dd></div>
           </dl>
@@ -5447,23 +5629,23 @@ body{background:#05050A;color:var(--tx)}
         <div class="evo-rail" id="evoRail" role="group" aria-label="포코 진화 단계">
           <button class="evo-n" type="button" data-evolv="1" aria-pressed="true">
             <span class="en-pic"><img src="assets/poko-lv1.png" alt="포코에그" loading="lazy" decoding="async"></span>
-            <b class="en-lv">LV.1</b><span class="en-nm">포코에그</span><em class="en-need">0원</em>
+            <b class="en-lv">LV.1</b><span class="en-nm">포코에그</span><em class="en-need">0P</em>
           </button>
           <button class="evo-n" type="button" data-evolv="2" aria-pressed="false">
             <span class="en-pic"><img src="assets/poko-lv2.png" alt="포코링" loading="lazy" decoding="async"></span>
-            <b class="en-lv">LV.2</b><span class="en-nm">포코링</span><em class="en-need">5만원+</em>
+            <b class="en-lv">LV.2</b><span class="en-nm">포코링</span><em class="en-need">5만P</em>
           </button>
           <button class="evo-n" type="button" data-evolv="3" aria-pressed="false">
             <span class="en-pic"><img src="assets/poko-lv3.png" alt="포코나이트" loading="lazy" decoding="async"></span>
-            <b class="en-lv">LV.3</b><span class="en-nm">포코나이트</span><em class="en-need">30만원+</em>
+            <b class="en-lv">LV.3</b><span class="en-nm">포코나이트</span><em class="en-need">30만P</em>
           </button>
           <button class="evo-n" type="button" data-evolv="4" aria-pressed="false">
             <span class="en-pic"><img src="assets/poko-lv4.png" alt="포코로드" loading="lazy" decoding="async"></span>
-            <b class="en-lv">LV.4</b><span class="en-nm">포코로드</span><em class="en-need">70만원+</em>
+            <b class="en-lv">LV.4</b><span class="en-nm">포코로드</span><em class="en-need">70만P</em>
           </button>
           <button class="evo-n" type="button" data-evolv="5" aria-pressed="false">
             <span class="en-pic"><img src="assets/poko-lv5.png" alt="포코제니스" loading="lazy" decoding="async"></span>
-            <b class="en-lv">LV.5</b><span class="en-nm">포코제니스</span><em class="en-need">150만원+</em>
+            <b class="en-lv">LV.5</b><span class="en-nm">포코제니스</span><em class="en-need">150만P+</em>
           </button>
         </div>
       </section>
@@ -5754,6 +5936,23 @@ body{background:#05050A;color:var(--tx)}
     const s = h.length === 3 ? h.split("").map(c => c + c).join("") : h;
     const n = parseInt(s, 16) || 0;
     return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + a + ")";
+  }
+  /* v22: 등급 배지 — 등급 고유색을 그대로 채우고, 밝기 따라 검정/흰 글자로 고대비 */
+  function toneHex(hex, p){
+    const h = String(hex || "#ffffff").replace("#", "");
+    const s = h.length === 3 ? h.split("").map(c => c + c).join("") : h;
+    const n = parseInt(s, 16) || 0;
+    const t = p >= 0 ? 255 : 0, a = Math.abs(p);
+    const ch = k => { const v = Math.round(((n >> k) & 255) + (t - ((n >> k) & 255)) * a); return v.toString(16).padStart(2, "0"); };
+    return "#" + ch(16) + ch(8) + ch(0);
+  }
+  function inkOn(hex){
+    const h = String(hex || "#ffffff").replace("#", "");
+    const s = h.length === 3 ? h.split("").map(c => c + c).join("") : h;
+    const n = parseInt(s, 16) || 0;
+    const f = c => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
+    const L = 0.2126 * f((n >> 16) & 255) + 0.7152 * f((n >> 8) & 255) + 0.0722 * f(n & 255);
+    return L > 0.4 ? "#101014" : "#FFFFFF";
   }
 
   /* ============================================================
@@ -6483,6 +6682,8 @@ body{background:#05050A;color:var(--tx)}
      가운데를 지나는 상품에 맞춰 등급 라벨이 실시간으로 바뀐다. */
   const CAR_SP = 78;            /* 상품 한 칸 간격(px) */
   const CAR_SPD = 0.30;         /* 초당 흐르는 칸 수 */
+  const CAR_DWELL = 2.6;        /* v22: 한 칸에 머무는 시간(초) */
+  let carAuto = CAR_DWELL;      /* 다음 자동 스텝까지 남은 시간 */
   let carKey = null, carPos = 0, carRaf = null, carLast = 0, carVel = 0;
   let carDrag = null, carGo = null, carSig = "", carOn = false;
 
@@ -6515,7 +6716,8 @@ body{background:#05050A;color:var(--tx)}
       lab.classList.add("swap");
     }
     const sg = $("#stageGlow");
-    if (sg) sg.style.background = "radial-gradient(circle," + hexA(GC[g.k], .5) + " 0%," + hexA(GC[g.k], .14) + " 44%,transparent 70%)";
+    /* v22: 색 얼룩 대신 하얀 중심 + 등급색을 은은히만 (배경은 네이비 단일 톤 유지) */
+    if (sg) sg.style.background = "radial-gradient(circle,rgba(255,255,255,.30) 0%," + hexA(GC[g.k], .18) + " 40%,transparent 72%)";
   }
 
   /* 상품 배치 — 등급 목록이 바뀔 때만 다시 깐다 */
@@ -6556,19 +6758,22 @@ body{background:#05050A;color:var(--tx)}
       if (off < 0) off += n;
       let d = off > n / 2 ? off - n : off;
       const ad = Math.abs(d);
-      if (ad > 2.75){
+      if (ad > 1.9){   /* v22: 중앙 + 좌우 한 칸만 — 가장자리 흔들 물건(흰 배경 스티커팩 등)은 숨김 */
         if (el.style.visibility !== "hidden"){ el.style.visibility = "hidden"; el.style.opacity = "0"; }
         el.classList.remove("p0", "p-1", "p1", "p-2", "p2");
         continue;
       }
       el.style.visibility = "visible";
       const x = d * CAR_SP;
-      const sc = ad <= 1 ? 1.05 - 0.40 * ad : Math.max(0.42, 0.65 - 0.235 * (ad - 1));
-      const op = ad <= 1 ? 1 - 0.12 * ad : Math.max(0, 0.88 - 0.32 * (ad - 1));
+      /* v22: 중앙만 100% 또렷 · 좌우는 확 작게·어둡게 눌러 센터 포커스 */
+      const sc = ad < 0.02 ? 1.06 : Math.max(0.40, 0.58 - 0.20 * (ad - 1));
+      const op = ad < 0.02 ? 1 : Math.max(0, 0.54 - 0.26 * (ad - 1));
+      const dim = Math.min(0.36, ad * 0.36);
       el.style.transform = "translateX(" + x.toFixed(2) + "px) scale(" + sc.toFixed(3) + ")";
       el.style.opacity = op.toFixed(3);
       el.style.zIndex = String(120 - Math.round(ad * 10));
-      el.style.filter = ad >= 1.7 ? "blur(" + ((ad - 1.7) * 1.2).toFixed(2) + "px)" : "none";
+      el.style.filter = ad < 0.02 ? "none"
+        : "brightness(" + (1 - dim).toFixed(2) + ") saturate(" + (1 - dim * 0.5).toFixed(2) + ") blur(" + Math.min(1.1, ad * 0.4).toFixed(2) + "px)";
       const r = Math.round(d);
       el.classList.toggle("p0", i === center);
       el.classList.toggle("p-1", r === -1 && i !== center);
@@ -6609,9 +6814,18 @@ body{background:#05050A;color:var(--tx)}
       if (Math.abs(diff) < 0.002){ carPos = carGo; carGo = null; }
       else carPos += diff * Math.min(1, dt * 9.5);
     } else if (carFlowOn()){
-      carPos += (CAR_SPD + carVel) * dt;
-      carVel *= Math.exp(-2.4 * dt);
-      if (Math.abs(carVel) < 0.004) carVel = 0;
+      /* v22: 계속 흐르지 않고 한 칸씩 '딱 멈춰' 서게 — 중앙 인형이 항상 정확히 링·스탠드 한가운데 */
+      if (Math.abs(carVel) > 0.05){
+        carPos += carVel * dt;
+        carVel *= Math.exp(-2.4 * dt);
+      } else if (carAuto > 0){
+        carVel = 0;
+        carAuto -= dt;
+      } else {
+        carVel = 0;
+        carGo = Math.round(carPos) + 1;
+        carAuto = CAR_DWELL;
+      }
     }
     carPaint();
     carRaf = requestAnimationFrame(carLoop);
@@ -6635,6 +6849,7 @@ body{background:#05050A;color:var(--tx)}
     const n = carKeys().length;
     if (!n) return;
     carGo = Math.round(carPos) + dir;
+    carAuto = CAR_DWELL;
   }
 
   function renderStage(focusKey){
@@ -6738,7 +6953,8 @@ body{background:#05050A;color:var(--tx)}
     const init = (!isLast && tot > 0) ? (g.t / tot * 100) : 0;
     const barW = isLast ? 100 : Math.max(0, Math.min(100, pct));
     const mood = isLast ? "gift" : (out ? "zero" : (pct > init + 0.004 ? "up" : (pct < init - 0.004 ? "down" : "flat")));
-    const lab = isLast ? "증정품" : (out ? "0.00%" : pmDeltaAt(init, pct, 2, 2, true));
+    /* v22: 카드에는 현재 확률만 (초기→현재 변화는 경품 상세 팝업으로 옮김) */
+    const lab = isLast ? "증정품" : (out ? "확률 0%" : "확률 " + pct.toFixed(2) + "%");
     const a11y = isLast ? "증정품" : (out ? "확률 0%" : "초기 " + init.toFixed(2) + "% 에서 현재 " + pct.toFixed(2) + "%");
     return `<div class="cell ${view.grade === g.k ? "focus" : ""}" data-g="${g.k}" role="button" tabindex="0" aria-label="${GLABEL(g.k)} ${g.n} · 가치 ${won(g.v)}P · ${a11y} · 잔여 ${g.r}/${g.t}">
       <div class="pcard ${out ? "out" : ""}">
@@ -6746,11 +6962,11 @@ body{background:#05050A;color:var(--tx)}
           <span class="part">${artHTML(g, s.id, charOf(g.k))}</span>
           ${out ? `<span class="stamp">종료</span>` : ""}
         </div>
-        <span class="gbadge" style="color:${GC[g.k]}">${GLABEL(g.k)}</span>
+        <span class="gbadge" style="color:${GC[g.k]}"><b class="b1" aria-hidden="true">${GLABEL(g.k)}</b><b class="b2" aria-hidden="true">${GLABEL(g.k)}</b><b class="b3">${GLABEL(g.k)}</b></span>
         <div class="pmeta">
           <span class="pname">${pnameOf(g, d)}</span>
           <span class="pm-row"><span class="pm-val"><i>P</i>${won(g.v)}</span><span class="pm-rem ${out ? "zero" : ""}">${g.r}/${g.t}</span></span>
-          <span class="pm-bar ${mood}"><i style="width:${barW.toFixed(1)}%"></i><b${(isLast || out) ? "" : ` data-i="${init.toFixed(4)}" data-c="${pct.toFixed(4)}"`}>${lab}</b></span>
+          <span class="pm-bar ${mood}"><i style="width:${barW.toFixed(1)}%"></i><b>${lab}</b></span>
         </div>
       </div>
     </div>`;
@@ -8521,11 +8737,11 @@ body{background:#05050A;color:var(--tx)}
         테두리 위에서 그 스타팅의 모습·이름으로 바뀐다.
      ============================================================ */
   const EVO_STAGES = [
-    { lv: 1, tier: "루키",   name: "포코에그",   need: 0,       short: "0원" },
-    { lv: 2, tier: "브론즈", name: "포코링",     need: 50000,   short: "5만원" },
-    { lv: 3, tier: "실버",   name: "포코나이트", need: 300000,  short: "30만원" },
-    { lv: 4, tier: "골드",   name: "포코로드",   need: 700000,  short: "70만원" },
-    { lv: 5, tier: "레전드", name: "포코제니스", need: 1500000, short: "150만원+" }
+    { lv: 1, tier: "루키",   name: "포코에그",   need: 0,       short: "0P" },
+    { lv: 2, tier: "브론즈", name: "포코링",     need: 50000,   short: "5만P" },
+    { lv: 3, tier: "실버",   name: "포코나이트", need: 300000,  short: "30만P" },
+    { lv: 4, tier: "골드",   name: "포코로드",   need: 700000,  short: "70만P" },
+    { lv: 5, tier: "레전드", name: "포코제니스", need: 1500000, short: "150만P+" }
   ];
   const EVO_KEY = "pokoEvoSpent";
   /* 단계별 혜택 라벨 (마이페이지 진화 게이지 배지) */
@@ -8693,11 +8909,11 @@ body{background:#05050A;color:var(--tx)}
       if (txt) txt.innerHTML = "최종 진화 완료 · <b>" + evoName(5) + "</b>";
       if (nx){ nx.textContent = "MAX LV"; nx.className = "ep-next max"; }
     } else {
-      if (txt) txt.innerHTML = "다음 진화 <b>" + won(Math.max(0, to - spent)) + "원</b> 남음";
+      if (txt) txt.innerHTML = "다음 진화 <b>" + won(Math.max(0, to - spent)) + "P</b> 남음";
       if (nx){ nx.textContent = "NEXT · LV." + next.lv; nx.className = "ep-next"; }
     }
     if (bar) bar.style.width = pct + "%";
-    if (spn) spn.innerHTML = "누적 구매 <b>" + won(spent) + "원</b>";
+    if (spn) spn.innerHTML = "진행도 <b>" + pct + "%</b>";
 
     /* v18 — 등급별 혜택 배지 + 다음 진화 보상 */
     const rwTxt = $("#epRewardTxt");
@@ -9536,6 +9752,16 @@ body{background:#05050A;color:var(--tx)}
   const pinfo = { i: 0 };
   const piCells = () => $$("#dGoods .cell[data-g]");
 
+  /* v22: 당첨 확률 — 초기 대비 현재(실시간) 변화를 팝업에서 자세히 */
+  function piProbText(g, bg, k){
+    if (k === "last") return "증정품 · 확률 계산 제외";
+    const rem = remainOf(box()), tot = totalOf(box());
+    const init = tot > 0 ? ((bg.t || g.t || 0) / tot * 100) : 0;
+    const cur = (rem > 0 && (bg.r || 0) > 0) ? ((bg.r || 0) / rem * 100) : 0;
+    if (!(bg.r || 0)) return "초기 " + init.toFixed(2) + "% → 현재 0.00% (종료)";
+    return "초기 " + init.toFixed(2) + "% → 현재 " + cur.toFixed(2) + "%";
+  }
+
   function piPaint(){
     const cells = piCells();
     if (!cells.length) return;
@@ -9553,7 +9779,7 @@ body{background:#05050A;color:var(--tx)}
     $("#piName").textContent = (g.b ? g.b + " | " : "") + (g.n || "");
     $("#piBrand").textContent = PINFO_BRAND[s.id] || "POKO KUJI";
     $("#piPrice").textContent = won(g.v || 0) + "원";
-    $("#piCompose").textContent = k === "last" ? "1개 · 라스트 원 오프 증정" : "1개" + (low ? " · 미개봉" : " · 정품 박스");
+    $("#piProb").textContent = piProbText(g, bg, k);
     $("#piShip").textContent = "영업일 3~5일 이내 순차 출고";
     $("#piStock").textContent = (bg.r || 0) + " / " + (bg.t || 0);
     $("#piPrev").disabled = pinfo.i === 0;
@@ -9588,6 +9814,7 @@ body{background:#05050A;color:var(--tx)}
       diff = ((diff + n / 2) % n + n) % n - n / 2;      /* 가장 가까운 방향 */
       carGo = carPos + diff;
       carVel = 0;
+      carAuto = CAR_DWELL;   /* v22: 탭한 뒤엔 잠시 멈춰 서 있게 */
       carPaint();
     });
     car.addEventListener("pointerdown", e => {
@@ -9596,15 +9823,17 @@ body{background:#05050A;color:var(--tx)}
       lastT = performance.now();
       moved = false;
       carVel = 0;
+      carGo = null;          /* v22: 자동 스텝 도중에 잡아도 손가락이 우선 */
       carDrag = true;
     });
     const endDrag = () => {
       if (sx === null) return;
-      const dx = lastX - sx;
       sx = null;
       carDrag = null;
-      if (moved) carVel = Math.max(-3, Math.min(3, dx * 0.02));
-      carGo = null;
+      carVel = 0;
+      /* v22: 손을 떼면 가장 가까운 상품에 또렷하게 붙는다 (중간에 어정쩡하게 서지 않게) */
+      carGo = moved ? Math.round(carPos) : null;
+      carAuto = CAR_DWELL;
     };
     car.addEventListener("pointercancel", () => { sx = null; carDrag = null; });
     document.addEventListener("pointerup", e => {
@@ -9991,8 +10220,29 @@ body{background:#05050A;color:var(--tx)}
     SND.press();
   }, true);
 
+  /* v23 — 자정 지나 다음날 첫 접속이면 출석 팝업을 자동으로 (하루 1회 · 다른 팝업과 겹치지 않게) */
+  function attAutoMaybe(){
+    const kstDay = () => new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Seoul" });
+    const today = kstDay();
+    let lastVisit = null;
+    try { lastVisit = localStorage.getItem("pokoLastVisitDay"); localStorage.setItem("pokoLastVisitDay", today); } catch (e){}
+    if (!lastVisit) return;                                    /* 첫 방문은 웰컴 팝업이 먼저 */
+    if (lastVisit === today) return;                            /* 같은 날 재접속 땐 안 띄움 */
+    try {
+      if (localStorage.getItem("pokoAutoAttendDay") === today) return;
+      if (attLoad().last === attD(0)) return;                  /* 오늘 이미 출석 */
+    } catch (e){ return; }
+    if (document.querySelector(".overlay.show")) return;        /* 웰컴·설치 팝업이 떠 있으면 양보 */
+    if (!$("#screenHome") || $("#screenHome").hidden) return;
+    try { localStorage.setItem("pokoAutoAttendDay", today); } catch (e){}
+    attRender();
+    openOverlay("attendSheet");
+  }
+
   scatter($("#homeFx"), 14);
   scatter($("#stageFx"), 12);
+  setTimeout(attAutoMaybe, 1600);
+  setTimeout(attAutoMaybe, 4200);
   const homeLedTxt = "★ POKO KUJI ARCADE ★ 4 SERIES OPEN ★ 1PLAY 9,900P~ ★ LUCKY DRAW ★ NO BLANK ★ ";
   $("#homeLed").textContent = homeLedTxt + homeLedTxt;
 
@@ -10560,6 +10810,12 @@ body{background:#05050A;color:var(--tx)}
     const goldEl = $("#myGold");
     if (goldEl) goldEl.textContent = won(evt);
     $("#myNick").textContent = state.profile.nick;
+    const dtEl = $("#myDate");
+    if (dtEl){
+      const dnow = new Date();
+      dtEl.textContent = dnow.getFullYear() + "." + pad2(dnow.getMonth() + 1) + "." + pad2(dnow.getDate())
+        + " " + ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"][dnow.getDay()];
+    }
     $("#myPhone").textContent = maskPhone(state.profile.phone);
 
     /* 정식 회원 / 게스트 상태 + 회원가입 유도 */
@@ -10574,8 +10830,7 @@ body{background:#05050A;color:var(--tx)}
       joinBtn.hidden = !guest;
       if (member){
         const fresh = state.me && state.me.welcome_discount_used === false;
-        memberRow.innerHTML = "✅ 정식 회원 · 누적 구매 <b>" + won(evoSpent()) + "원</b>"
-          + (fresh ? " · 첫 판 50% 사용 가능" : "");
+        memberRow.innerHTML = "✅ 정식 회원" + (fresh ? " · 첫 판 50% 사용 가능" : "");
       }
     }
 
@@ -10588,10 +10843,15 @@ body{background:#05050A;color:var(--tx)}
     setN("#myStatKeep", keepN);
     setN("#myStatWait", waitN);
     setN("#myStatDone", doneN);
-    $("#myAs").textContent = state.inquiries.length;
-    $("#myNotiN").textContent = state.notis.filter(n => n.unread).length;
-    $("#myFavN").textContent = state.favs.length;
-    $("#myAddrN").textContent = state.addrs.length;
+    const unreadN = state.notis.filter(n => n.unread).length;
+    setN("#myAs", state.inquiries.length);
+    setN("#myNotiN", unreadN);
+    const notiV = $("#myNotiV");
+    if (notiV) notiV.hidden = unreadN === 0;     /* v23: 안 읽은 알림이 있을 때만 숫자 */
+    setN("#myFavN", state.favs.length);
+    setN("#myAddrN", state.addrs.length);
+    const apw = $("#addrPcccWarn");
+    if (apw) apw.textContent = /^P\d{12}$/.test((state.customs.pccc || "").toUpperCase()) ? "등록됨" : "미등록";
     const dn = $("#myDone");
     if (dn) dn.textContent = doneN;
 
@@ -10696,21 +10956,14 @@ body{background:#05050A;color:var(--tx)}
 
   /* ============================================================
      v20 — 내 서브 화면 = 풀스크린 페이지 (바텀시트 ✕)
-       좌상단 ← 뒤로 · 우상단 ✕ · 상단 탭 필터 · 빈 상태 카드
+       v22: 좌상단 ← 뒤로 버튼 제거 — 제목 좌측ㆍ우상단 ✕ 하나만
      ============================================================ */
   const PAGE_BACK_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
   function pageBackBtn(o){
-    if (!o || o.dataset.pgback === "1") return;
-    const head = o.querySelector(".sheet-head");
-    if (!head) return;
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "mp-back";
-    b.setAttribute("aria-label", "뒤로 가기");
-    b.innerHTML = PAGE_BACK_SVG;
-    b.addEventListener("click", () => closeOverlay(o.id));
-    head.insertBefore(b, head.firstChild);
-    o.dataset.pgback = "1";
+    /* v22 — 사용자 요청: 뜨는 창들은 맨왼쪽 뒤로가기 없이 ✕만 남긴다 */
+    if (!o) return;
+    const old = o.querySelector(".sheet-head .mp-back");
+    if (old) old.remove();
   }
 
   let infoTabPick = null;
@@ -10923,6 +11176,13 @@ body{background:#05050A;color:var(--tx)}
     if (key === "ledger"){ openRec("ledger", arg === "gold" ? "earn" : "all"); return; }
     if (key === "noti" || key === "shiphist" || key === "exch" || key === "favs"){ openRec(key); return; }
   }
+
+  /* v23 — 배송지 시트 안 '통관부호 PCCC' 행 */
+  const addrPcccRow = $("#addrPcccRow");
+  if (addrPcccRow) addrPcccRow.addEventListener("click", () => {
+    closeOverlay("addrSheet");
+    setTimeout(() => openPccc(), 90);
+  });
 
   /* 1:1 문의 — 풀스크린 페이지 */
   function openAs(){
