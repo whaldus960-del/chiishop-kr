@@ -7504,8 +7504,15 @@ body{background:#05050A;color:var(--tx)}
   $("#boxStrip").addEventListener("click", () => { renderBoxPicker(); openOverlay("boxPicker"); });
   /* 진열장은 '어디서 열었는지' 기억했다가 ✕ 닫기로 그 화면에 돌려보낸다 (2026-11-28) */
   let shelfFrom = "home";
+  const SHELF_BACK = { detail: "detail", my: "my", admin: "admin", home: "home" };
+  function currentScreen(){
+    if (!$("#screenDetail").hidden) return "detail";
+    if (!$("#screenMy").hidden) return "my";
+    if (!$("#screenAdmin").hidden) return "admin";
+    return "home";
+  }
   function openShelf(from){
-    shelfFrom = from === "detail" ? "detail" : "home";
+    shelfFrom = SHELF_BACK[from] || "home";
     showScreen("box");
     renderBox();
   }
@@ -7513,7 +7520,10 @@ body{background:#05050A;color:var(--tx)}
   $("#homeCart").addEventListener("click", () => openShelf("home"));
   const shelfCloseBtn = $("#shelfClose");
   if (shelfCloseBtn) shelfCloseBtn.addEventListener("click", () => {
-    if (shelfFrom === "detail"){ showScreen("detail"); return; }
+    const back = shelfFrom;
+    if (back === "detail"){ showScreen("detail"); return; }
+    if (back === "my"){ showScreen("my"); return; }
+    if (back === "admin"){ showScreen("admin"); return; }
     showScreen("home");
     renderHome();
   });
@@ -7527,7 +7537,7 @@ body{background:#05050A;color:var(--tx)}
     btn.addEventListener("click", () => {
       const go = btn.dataset.go;
       if (go === "home"){ showScreen("home"); renderHome(); }
-      else if (go === "box"){ openShelf("home"); }
+      else if (go === "box"){ openShelf(currentScreen()); }
       else if (go === "my"){ showScreen("my"); renderMy(); }
       else { showScreen("admin"); renderAdmin(); }
     });
