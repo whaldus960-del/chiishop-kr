@@ -3279,6 +3279,19 @@ body{background:#05050A;color:var(--tx)}
   .hs-note{font-size:7.9px}
 }
 
+/* ①-b 헤더 — 긴 닉네임(예: '포코쿠지 회원')에도 로고 한 줄 유지 */
+@media(max-width:420px){
+  .home-head .brand{flex:none;white-space:nowrap}
+  .home-head .logo{white-space:nowrap}
+  .head-actions{flex:1 1 auto;justify-content:flex-end;min-width:0;gap:4px}
+  .acct{max-width:76px;min-width:0}
+  .acct b{display:block;max-width:52px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pts{font-size:10px;padding:3px 7px 3px 3px;letter-spacing:-.4px}
+  .pts i{width:15px;height:15px}
+  .hicon,.hcart{width:29px;height:29px}
+  .hicon svg,.hcart svg{width:15px;height:15px}
+}
+
 /* ② 규정 모달 */
 #rulesSheet{z-index:93}
 #rulesSheet .sheet{max-height:90vh}
